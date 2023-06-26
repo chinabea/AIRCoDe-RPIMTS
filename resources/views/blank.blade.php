@@ -3,7 +3,7 @@
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-    
+
 @include('layouts.topnav')
 @include('layouts.researchersidebar')
   <div class="content-wrapper">
@@ -28,7 +28,7 @@
         <!-- _____________________________________  -->
 
 
-
+        <p>Admin</p>
 
 
         <!-- _____________________________________  -->

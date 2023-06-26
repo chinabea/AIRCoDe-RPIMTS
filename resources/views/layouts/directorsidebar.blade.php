@@ -106,14 +106,15 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
               <i class="nav-icon fas fa-user-alt"></i>
-              <p>
-                Logout
-                {{-- <span class="badge badge-info right">2</span> --}}
-              </p>
+              <p>Logout</p>
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
           </li>
+
 
 
 

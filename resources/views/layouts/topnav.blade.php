@@ -136,3 +136,5 @@
     </ul>
   </nav>
   <!-- /.navbar -->
+
+  <script src="{{ asset('js/app.js') }}"></script>

@@ -9,6 +9,7 @@ use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AccessRequestController;
 use App\Http\Controllers\DraftController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +28,26 @@ use App\Http\Controllers\DraftController;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('director.dashboard');
-});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/director', function () {
+    return view('director');
+})->name('director')->middleware('director');
+
+Route::get('/staff', function () {
+    return view('staff');
+})->name('staff')->middleware('staff');
+
+Route::get('/researcher', function () {
+    return view('researcher');
+})->name('researcher')->middleware('researcher');
+
+Route::get('/reviewer', function () {
+    return view('reviewer');
+})->name('reviewer')->middleware('reviewer');
 
 // About Us
 Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts');
@@ -44,7 +57,6 @@ Route::get('/showabouts/{id}', [AboutusController::class, 'show'])->name('transp
 Route::get('/editabouts/{id}', [AboutusController::class, 'edit'])->name('transparency.aboutus.edit');
 Route::put('/editabouts/{id}', [AboutusController::class, 'update'])->name('transparency.aboutus.update');
 Route::delete('/deleteabouts/{id}', [AboutusController::class, 'destroy'])->name('transparency.aboutus.destroy');
-
 
 // Projects
 Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
@@ -64,7 +76,6 @@ Route::get('/showproposals/{id}', [ProposalsController::class, 'show'])->name('t
 Route::get('/editproposals/{id}', [ProposalsController::class, 'edit'])->name('transparency.proposals.edit');
 Route::put('/editproposals/{id}', [ProposalsController::class, 'update'])->name('transparency.proposals.update');
 Route::delete('/deleteproposals/{id}', [ProposalsController::class, 'destroy'])->name('transparency.proposals.destroy');
-
 // Reviews
 Route::get('/reviews', [ReviewsController::class, 'index'])->name('reviews');
 Route::get('/createreviews', [ReviewsController::class, 'create'])->name('reviews.create');
@@ -137,5 +148,10 @@ Route::get('/comments', function () {
     return view('comments');
 });
 
+Route::get('/indexx', function () {
+    return view('transparency.proposals.indexx');
+});
 
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
