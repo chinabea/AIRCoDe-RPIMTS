@@ -146,7 +146,18 @@ Route::get('/comments', function () {
     return view('comments');
 });
 
-Route::get('/indexx', function () {
-    return view('transparency.proposals.indexx');
+Route::get('/faqs', function () {
+    return view('faqs');
+});
+
+// mailbox
+Route::get('/compose', function () {
+    return view('mailbox.compose');
+});
+Route::get('/inbox', function () {
+    return view('mailbox.inbox');
+});
+Route::get('/read', function () {
+    return view('mailbox.read');
 });
 

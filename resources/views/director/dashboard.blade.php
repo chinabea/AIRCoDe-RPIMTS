@@ -6,7 +6,8 @@
 <div class="wrapper">
 
 @include('layouts.topnav')
-@include('director.sidebar')
+{{-- @include('director.sidebar') --}}
+@include('layouts.funcsidebar')
   <div class="content-wrapper">
     <section class="content-header">
       <div class="container-fluid">
