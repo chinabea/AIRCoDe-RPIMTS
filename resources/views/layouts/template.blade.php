@@ -32,13 +32,15 @@
 <!-- icheck bootstrap -->
 <link rel="stylesheet" href="{{ asset('../../plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
+<link rel="icon" type="image/x-icon" href="dist/img/favicon.ico">
+
 
 </head>
 <body>
 
 
     <!-- Authentication Links -->
-    @guest
+    {{-- @guest
         @if (Route::has('login'))
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -68,7 +70,7 @@
                 </form>
             </div>
         </li>
-    @endguest
+    @endguest --}}
 
 
     <main>

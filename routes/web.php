@@ -22,32 +22,42 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/director', function () {
-    return view('director');
-})->name('director')->middleware('director');
+Route::middleware(['auth', 'director'])->group(function (){
+    Route::get('director', function () {
+        return view('director.dashboard');
+    })->name('director');
 
-Route::get('/staff', function () {
-    return view('staff');
-})->name('staff')->middleware('staff');
+});
 
-Route::get('/researcher', function () {
-    return view('researcher');
-})->name('researcher')->middleware('researcher');
+Route::middleware(['auth', 'staff'])->group(function (){
+    Route::get('/staff', function () {
+        return view('staff.dashboard');
+    })->name('staff');
 
-Route::get('/reviewer', function () {
-    return view('reviewer');
-})->name('reviewer')->middleware('reviewer');
+});
+
+Route::middleware(['auth', 'researcher'])->group(function (){
+    Route::get('/researcher', function () {
+        return view('researcher.dashboard');
+    })->name('researcher');
+
+});
+
+Route::middleware(['auth', 'reviewer'])->group(function (){
+    Route::get('/reviewer', function () {
+        return view('reviewer.dashboard');
+    })->name('reviewer')->middleware('reviewer');
+
+});
+
 
 // About Us
 Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts');
@@ -132,18 +142,6 @@ Route::get('/blank', function () {
 })->name('blank');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-Route::get('/table', function () {
-    return view('table');
-});
-
-Route::get('/directordashboard', function () {
-    return view('layouts.directordashboard');
-});
-
 Route::get('/comments', function () {
     return view('comments');
 });
@@ -152,6 +150,3 @@ Route::get('/indexx', function () {
     return view('transparency.proposals.indexx');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

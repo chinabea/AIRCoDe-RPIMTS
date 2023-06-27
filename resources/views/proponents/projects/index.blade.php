@@ -10,7 +10,7 @@
 <!-- / navbar  -->
 
   <!-- Main Sidebar Container -->
-    @include('layouts.researchersidebar')
+    @include('director.sidebar')
 
 
   <!-- Content Wrapper. Contains page content -->

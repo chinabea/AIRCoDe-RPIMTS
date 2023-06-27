@@ -27,15 +27,15 @@ class Staff
         }
 
         if($user->role==1){
-            return redirect('/director');
+            return redirect('/director.dashboard');
         }
 
         if($user->role==3){
-            return redirect('/researcher');
+            return redirect('/researcher.dashboard');
         }
 
         if($user->role==4){
-            return redirect('/reviewer');
+            return redirect('/reviewer.dashboard');
         }
     }
 }
