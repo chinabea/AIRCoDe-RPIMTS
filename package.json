@@ -16,6 +16,8 @@
     "dependencies": {
         "and": "^0.0.3",
         "build": "^0.1.4",
+        "daterangepicker": "^3.1.0",
+        "moment": "^2.29.4",
         "npm": "^9.7.2",
         "run": "^1.4.0"
     }
