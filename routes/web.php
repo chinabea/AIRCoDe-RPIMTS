@@ -54,10 +54,9 @@ Route::middleware(['auth', 'researcher'])->group(function (){
 Route::middleware(['auth', 'reviewer'])->group(function (){
     Route::get('/reviewer', function () {
         return view('reviewer.dashboard');
-    })->name('reviewer')->middleware('reviewer');
+    })->name('reviewer');
 
 });
-
 
 // About Us
 Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts');
@@ -77,7 +76,6 @@ Route::get('/editprojects/{id}', [ProjectsController::class, 'edit'])->name('pro
 Route::put('/editprojects/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
 Route::delete('/deleteprojects/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
 
-
 // Proposals
 Route::get('/proposals', [ProposalsController::class, 'index'])->name('proposals');
 Route::get('/createproposals', [ProposalsController::class, 'create'])->name('transparency.proposals.create');
@@ -86,6 +84,7 @@ Route::get('/showproposals/{id}', [ProposalsController::class, 'show'])->name('t
 Route::get('/editproposals/{id}', [ProposalsController::class, 'edit'])->name('transparency.proposals.edit');
 Route::put('/editproposals/{id}', [ProposalsController::class, 'update'])->name('transparency.proposals.update');
 Route::delete('/deleteproposals/{id}', [ProposalsController::class, 'destroy'])->name('transparency.proposals.destroy');
+
 // Reviews
 Route::get('/reviews', [ReviewsController::class, 'index'])->name('reviews');
 Route::get('/createreviews', [ReviewsController::class, 'create'])->name('reviews.create');
@@ -103,7 +102,6 @@ Route::get('/showannouncements/{id}', [AnnouncementsController::class, 'show'])-
 Route::get('/editannouncements/{id}', [AnnouncementsController::class, 'edit'])->name('transparency.announcements.edit');
 Route::put('/editannouncements/{id}', [AnnouncementsController::class, 'update'])->name('transparency.announcements.update');
 Route::delete('/deleteannouncements/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
-
 
 // Announcements
 Route::get('/accessrequests', [AccessRequestController::class, 'index'])->name('accessrequests');
@@ -141,7 +139,6 @@ Route::get('/blank', function () {
     return view('blank');
 })->name('blank');
 
-
 Route::get('/comments', function () {
     return view('comments');
 });
@@ -150,7 +147,6 @@ Route::get('/faqs', function () {
     return view('faqs');
 });
 
-// mailbox
 Route::get('/compose', function () {
     return view('mailbox.compose');
 });

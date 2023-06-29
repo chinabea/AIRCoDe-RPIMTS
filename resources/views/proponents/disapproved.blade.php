@@ -5,7 +5,7 @@
 <div class="wrapper">
     
 @include('layouts.topnav')
-@include('layouts.researchersidebar')
+@include('layouts.sidebar')
   <div class="content-wrapper">
     <section class="content-header">
       <div class="container-fluid">
@@ -25,7 +25,6 @@
 
     <!-- Main content -->
     <section class="content">
-        <!-- _____________________________________  -->
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -472,18 +471,11 @@
                   </tfoot>
                 </table>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-
-        <!-- _____________________________________  -->
   </div>
   @include('layouts.footer')
   <aside class="control-sidebar control-sidebar-dark">

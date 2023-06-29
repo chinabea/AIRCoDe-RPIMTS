@@ -1,11 +1,9 @@
 @extends('layouts.template')
-@section('title', 'About Us')
+@section('title', 'Create Project')
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 @include('layouts.topnav')
-@include('director.sidebar')
-
-
+@include('layouts.sidebar')
   <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">

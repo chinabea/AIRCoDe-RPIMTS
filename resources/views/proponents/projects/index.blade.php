@@ -1,23 +1,10 @@
 @extends('layouts.template')
-
 @section('title', 'Projects')
-
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
-<!-- navbar  -->
 @include('layouts.topnav')
-<!-- / navbar  -->
-
-  <!-- Main Sidebar Container -->
-    @include('director.sidebar')
-
-
-  <!-- Content Wrapper. Contains page content -->
+@include('layouts.sidebar')
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -31,7 +18,7 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
     <!-- Main content -->
@@ -43,7 +30,6 @@
               <div class="card-header">
                 <h3 class="card-title">Project List</h3>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
                 <a href="{{ route('proponents.projects.create') }}" class="btn btn-primary">Add Project</a>
 
@@ -74,12 +60,10 @@
                                   <a href="{{ route('proponents.projects.show', $record->id) }}">{{ $record->title }}</a>
                                 </td>
                                 <td class="align-middle">{{ $record->description }}</td>
-                                <td><!-- Button trigger modal -->
+                                <td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                                   Reviewer 1
                                 </button>
-
-                                <!-- Modal -->
                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -99,7 +83,6 @@
                                     </div>
                                   </div>
                                 </div>
-                                <!-- Example single danger button -->
                                 <div class="btn-group">
                                   <button type="button" class="btn btn-secondary btn-sm  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Reviewer 2
@@ -112,7 +95,6 @@
                                     <a class="dropdown-item" href="#">Separated link</a>
                                   </div>
                                 </div>
-                                <!-- Example single danger button -->
                                 <div class="btn-group">
                                   <button type="button" class="btn btn-secondary btn-sm  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Reviewer 3
@@ -183,30 +165,15 @@
                 </table>
 
                 </div>
-                <!-- /.card-body -->
               </div>
-              <!-- /.card -->
             </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
       </section>
-
-
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
   @include('layouts.footer')
-
-<!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
-  <!-- Control sidebar content goes here -->
 </aside>
-<!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-
 </body>
 </html>

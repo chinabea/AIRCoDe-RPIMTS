@@ -1,23 +1,10 @@
 @extends('layouts.template')
-
-@section('title', 'Abouts Detail')
-
+@section('title', 'Project Detail')
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
-<!-- navbar  -->
 @include('layouts.topnav')
-<!-- / navbar  -->
-
-  <!-- Main Sidebar Container -->
-    @include('layouts.sidebar')
-
-
-  <!-- Content Wrapper. Contains page content -->
+@include('layouts.sidebar')
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -31,7 +18,7 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
 <!-- Main content -->
@@ -201,7 +188,6 @@
 
 </div>
   @include('layouts.footer')
-<!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
 </aside>
 </div>

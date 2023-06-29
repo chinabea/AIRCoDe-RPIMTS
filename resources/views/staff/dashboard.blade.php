@@ -1,10 +1,8 @@
 
 @extends('layouts.template')
 @section('title', 'Staff')
-
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-
 @include('layouts.topnav')
 @include('staff.sidebar')
   <div class="content-wrapper">
@@ -23,19 +21,8 @@
         </div>
       </div>
     </section>
-
     <!-- Main content -->
     <section class="content">
-        <!-- _____________________________________  -->
-
-
-
-
-
-
-
-
-        <!-- _____________________________________  -->
     </section>
   </div>
   @include('layouts.footer')
