@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Update Reviews')
+@section('title', 'Update Review')
 
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

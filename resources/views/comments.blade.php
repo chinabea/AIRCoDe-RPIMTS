@@ -1,21 +1,21 @@
 @extends('layouts.template')
-@section('title', 'Project Details')
+@section('title', 'Comments')
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     
 @include('layouts.topnav')
-@include('layouts.researchersidebar')
+@include('layouts.sidebar')
   <div class="content-wrapper">
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Project Details</h1>
+            <h1>Comments Details</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Project Details</a></li>
+              <li class="breadcrumb-item"><a href="#">Comments Details</a></li>
               <li class="breadcrumb-item active">Details</li>
             </ol>
           </div>
@@ -25,8 +25,6 @@
 
     <!-- Main content -->
     <section class="content">
-        <!-- _____________________________________  -->
-
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
@@ -213,16 +211,8 @@
             </div>
           </div>
         </div>
-        <!-- /.card-body -->
       </div>
-      <!-- /.card -->
-
       </section>
-
-
-
-
-        <!-- _____________________________________  -->
     </section>
   </div>
   @include('layouts.footer')

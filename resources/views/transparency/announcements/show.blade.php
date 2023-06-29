@@ -1,23 +1,10 @@
 @extends('layouts.template')
-
 @section('title', 'Announcement Detail')
-
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
-<!-- navbar  -->
 @include('layouts.topnav')
-<!-- / navbar  -->
-
-  <!-- Main Sidebar Container -->
     @include('layouts.sidebar')
-
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -31,9 +18,8 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
         <div class="col-12">
             <!-- Custom Tabs -->
             <div class="card">
@@ -63,27 +49,13 @@
                         <label class="form-label">Updated At</label>
                         <input type="text" name="updated_at" class="form-control" value="{{ $announcements->updated_at }}" readonly>
                     </div>
-
-                <!-- /.tab-content -->
-              </div><!-- /.card-body -->
+              </div>
             </div>
-            <!-- ./card -->
           </div>
-
-
-
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
   @include('layouts.footer')
-
-<!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
-  <!-- Control sidebar content goes here -->
 </aside>
-<!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-
 </body>
 </html>

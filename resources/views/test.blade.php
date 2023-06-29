@@ -25,9 +25,6 @@
 
     <!-- Main content -->
     <section class="content">
-        <!-- _____________________________________  -->
-    <!-- Main content -->
-    <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -468,18 +465,11 @@
                   </tfoot>
                 </table>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-
-        <!-- _____________________________________  -->
   </div>
   @include('layouts.footer')
   <aside class="control-sidebar control-sidebar-dark">

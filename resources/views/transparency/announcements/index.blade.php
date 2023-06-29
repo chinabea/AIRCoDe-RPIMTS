@@ -1,23 +1,10 @@
 @extends('layouts.template')
-
 @section('title', 'Announcements')
-
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
-<!-- navbar  -->
 @include('layouts.topnav')
-<!-- / navbar  -->
-
-  <!-- Main Sidebar Container -->
-    @include('layouts.researchersidebar')
-
-
-  <!-- Content Wrapper. Contains page content -->
+@include('layouts.sidebar')
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -31,9 +18,8 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -53,7 +39,6 @@
                         {{ Session::get('success') }}
                     </div>
                 @endif
-
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -90,9 +75,6 @@
                                             }
                                         }
                                         </script>
-
-
-
                                     </div>
                                 </td>
                             </tr>
@@ -112,32 +94,16 @@
                         </tr>
                     </tfoot>
                 </table>
-
                 </div>
-                <!-- /.card-body -->
               </div>
-              <!-- /.card -->
             </div>
-            <!-- /.col -->
           </div>
-          <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
       </section>
-
-
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
   @include('layouts.footer')
-
-<!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
-  <!-- Control sidebar content goes here -->
 </aside>
-<!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-
 </body>
 </html>
