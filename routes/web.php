@@ -11,6 +11,7 @@ use App\Http\Controllers\AccessRequestController;
 use App\Http\Controllers\DraftController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ProponentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +122,15 @@ Route::get('/showusers/{id}', [UsersController::class, 'show'])->name('users.sho
 Route::get('/editusers/{id}', [UsersController::class, 'edit'])->name('users.edit');
 Route::put('/editusers/{id}', [UsersController::class, 'update'])->name('users.update');
 Route::delete('/deleteusers/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+
+// Admin Proponents
+Route::get('/proponents', [ProponentsController::class, 'index'])->name('proponents');
+Route::get('/createproponents', [ProponentsController::class, 'create'])->name('proponents.admin-proponents.create');
+Route::post('/storeproponents', [ProponentsController::class, 'store'])->name('proponents.admin-proponents.store');
+Route::get('/showproponents/{id}', [ProponentsController::class, 'show'])->name('proponents.admin-proponents.show');
+Route::get('/editproponents/{id}', [ProponentsController::class, 'edit'])->name('proponents.admin-proponents.edit');
+Route::put('/editproponents/{id}', [ProponentsController::class, 'update'])->name('proponents.admin-proponents.update');
+Route::delete('/deleteproponents/{id}', [ProponentsController::class, 'destroy'])->name('proponents.admin-proponents.destroy');
 
 
 // Eloquent samples only

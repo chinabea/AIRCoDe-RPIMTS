@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('proponents', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->enum('status', ['New', 'Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved'])->default('New');
             $table->text('content');
+            $table->enum('status', ['New', 'Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved'])->default('New');
             $table->timestamps();
         });
     }

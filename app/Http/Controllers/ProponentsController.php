@@ -3,71 +3,86 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProponentsModel;
 
 class ProponentsController extends Controller
 {
 
     public function index()
     {
-        $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
+        $records = ProponentsModel::orderBy('created_at', 'ASC')->get();
 
-        return view('proponents.projects.index', compact('records'));
+        return view('proponents.admin-proponents.index', compact('records'));
     }
 
     public function create()
     {
-        return view('proponents.projects.create');
+        return view('proponents.admin-proponents.create');
     }
 
     public function store(Request $request)
-    {
+    {   // Assuming you have a form field named 'content' that contains the user input
+
         $request->merge(['status' => 'New']);
-    
-        $document = Document::create($request->all());
-    
+        
+        $this->validate($request, [
+            'content' => 'required' // Adding validation rule to ensure 'content' is not empty
+        ]);
+        
+        $proponent = ProponentsModel::create($request->all());
+        
         // Other logic...
-    
-        return redirect()->route('documents.index')->with('success', 'Data Successfully Added!');
+        
+        return redirect()->route('proponents')->with('success', 'Data Successfully Added!');
+        
+
     }
 
     public function show($id)
     {
-        $projects = ProjectsModel::findOrFail($id);
+        $proponents = ProponentsModel::findOrFail($id);
 
-        return view('proponents.projects.show', compact('projects'));
+        return view('proponents.admin-proponents.show', compact('proponents'));
     }
 
     public function edit($id)
     {
-        $projects = ProjectsModel::findOrFail($id);
+        $proponents = ProponentsModel::findOrFail($id);
 
-        return view('proponents.projects.edit', compact('projects'));
+        return view('proponents.admin-proponents.edit', compact('proponents'));
     }
 
     public function update(Request $request, $id)
     {
         // Check if the user is an admin
-        if (auth()->user()->isAdmin()) {
+        // if (auth()->user()->isAdmin()) {
             // Update the document status based on user input
-            $document->status = $request->input('status');
-            $document->save();
-        } else {
+            // $document->status = $request->input('status');
+            // $document->save();
+        // } else {
             // For regular users, only allow updating the content field
-            $document->content = $request->input('content');
-            $document->save();
-        }
-    
+        //     $document->content = $request->input('content');
+        //     $document->save();
+        // }
+
+            $proponent = ProponentsModel::find($id);
+            $proponent->title = $request->input('title');
+            $proponent->status = $request->input('status');
+            $proponent->save();
+
+            // return response()->json(['success' => true]);
+
         // Other logic...
     
-        return redirect()->route('documents.index')->with('success', 'Data Successfully Updated!');
+        return redirect()->route('proponents')->with('success', 'Data Successfully Updated!');
       
     }
 
     public function destroy($id)
     {
-        $projects = ProjectsModel::findOrFail($id);
-        $projects->delete();
+        $proponents = ProponentsModel::findOrFail($id);
+        $proponents->delete();
 
-        return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
+        return redirect()->route('proponents')->with('success', 'Data Successfully Deleted!');
     }
 }
