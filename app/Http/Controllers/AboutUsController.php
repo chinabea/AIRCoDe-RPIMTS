@@ -12,7 +12,7 @@ class AboutUsController extends Controller
     {
         // Fetch all records from the model and pass them to the view
         // $items = AboutUsModel::all();
-        $records = AboutUsModel::orderBy('created_at', 'ASC')->get();
+        $records = AboutUsModel::orderBy('created_at', 'DESC')->get();
 
         return view('transparency.aboutus.index', compact('records'));
     }

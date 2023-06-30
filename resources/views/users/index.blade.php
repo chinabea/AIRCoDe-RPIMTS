@@ -1,5 +1,6 @@
 @extends('layouts.template')
-@section('title', 'Abouts')
+@section('title', 'Users')
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 @include('layouts.topnav')
@@ -20,6 +21,7 @@
         </div>
       </div>
     </section>
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -27,11 +29,11 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Abouts List</h3>
+                <h3 class="card-title">Users List</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <a href="{{ route('transparency.aboutus.create') }}" class="btn btn-primary">Add Abouts</a>
+                <a href="{{ route('users.create') }}" class="btn btn-primary">Add User</a>
 
                 <hr />
                 @if(Session::has('success'))
@@ -43,38 +45,52 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>#</th>
-                      <th>Title</th>
-                      <th>Content</th>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Role</th>
                       <th>Action(s)</th>
                     </tr>
                     </thead>
                     <tbody>
                         @if($records->count() > 0)
-                            @foreach($records as $record)
+                            @foreach($records as $user)
                             <tr>
                                 <td class="align-middle">{{ $loop->iteration }}</td>
-                                <td class="align-middle">{{ $record->title }}</td>
-                                <td class="align-middle">{{ $record->content }}</td>
+                                <td class="align-middle">{{ $user->name }}</td>
+                                <td class="align-middle">{{ $user->email }}</td>
+                                <td class="align-middle"> 
+                                            @if ($user->role == 1)
+                                                Director
+                                            @elseif ($user->role == 2)
+                                                Staff
+                                            @elseif ($user->role == 3)
+                                                Researcher
+                                            @elseif ($user->role == 4)
+                                                Reviewer
+                                            @else
+                                                Guest
+                                            @endif 
+                                </td>
                                 <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('transparency.aboutus.show', $record->id) }}" type="button" class="btn btn-secondary">Details</a>
-                                        <a href="{{ route('transparency.aboutus.edit', $record->id) }}"  type="button" class="btn btn-warning">Edit</a>
-                                        {{-- <form action="{{ route('transparency.aboutus.destroy', $record->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
+                                        <a href="{{ route('users.show', $user->id) }}" type="button" class="btn btn-secondary">Details</a>
+                                        <a href="{{ route('users.edit', $user->id) }}"  type="button" class="btn btn-warning">Edit</a>
+                                        {{-- <form action="{{ route('users.destroy', $user->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger">Delete</button>
                                         </form> --}}
 
 
-                                        {{-- <form action="{{ route('transparency.aboutus.destroy', $record->id) }}" method="POST" class="d-inline">
+                                        {{-- <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <a type="button" class="btn btn-danger" onclick="return confirm('Delete?')">Delete</a>
                                         </form> --}}
 
 
-                                        <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('transparency.aboutus.destroy', $record->id) }}')">Delete</button>
+                                        <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('users.destroy', $user->id) }}')">Delete</button>
 
                                         <script>
                                         function confirmDelete(url) {
@@ -89,25 +105,23 @@
                                             }
                                         }
                                         </script>
-
-
-
                                     </div>
                                 </td>
                             </tr>
                             @endforeach
                             @else
                                 <tr>
-                                    <td class="text-center" colspan="5">No record found!</td>
+                                    <td class="text-center" colspan="5">Record not found!</td>
                                 </tr>
                             @endif
                     </tbody>
                     <tfoot>
                         <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Content</th>
-                        <th>Action(s)</th>
+                          <th>#</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Role</th>
+                          <th>Action(s)</th>
                         </tr>
                     </tfoot>
                 </table>

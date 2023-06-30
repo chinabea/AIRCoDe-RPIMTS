@@ -10,6 +10,7 @@ use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AccessRequestController;
 use App\Http\Controllers\DraftController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +60,7 @@ Route::middleware(['auth', 'reviewer'])->group(function (){
 });
 
 // About Us
-Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts');
+Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts')->middleware('director');
 Route::get('/createabouts', [AboutusController::class, 'create'])->name('transparency.aboutus.create');
 Route::post('/storeabouts', [AboutusController::class, 'store'])->name('transparency.aboutus.store');
 Route::get('/showabouts/{id}', [AboutusController::class, 'show'])->name('transparency.aboutus.show');
@@ -103,7 +104,7 @@ Route::get('/editannouncements/{id}', [AnnouncementsController::class, 'edit'])-
 Route::put('/editannouncements/{id}', [AnnouncementsController::class, 'update'])->name('transparency.announcements.update');
 Route::delete('/deleteannouncements/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
 
-// Announcements
+// Access Request
 Route::get('/accessrequests', [AccessRequestController::class, 'index'])->name('accessrequests');
 Route::get('/createaccessrequests', [AccessRequestController::class, 'create'])->name('transparency.accessrequests.create');
 Route::post('/storeaccessrequests', [AccessRequestController::class, 'store'])->name('transparency.accessrequests.store');
@@ -111,6 +112,20 @@ Route::get('/showaccessrequests/{id}', [AccessRequestController::class, 'show'])
 Route::get('/editaccessrequests/{id}', [AccessRequestController::class, 'edit'])->name('transparency.accessrequests.edit');
 Route::put('/editaccessrequests/{id}', [AccessRequestController::class, 'update'])->name('transparency.accessrequests.update');
 Route::delete('/deleteaccessrequests/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.accessrequests.destroy');
+
+// Users
+Route::get('/users', [UsersController::class, 'index'])->name('users');
+Route::get('/createusers', [UsersController::class, 'create'])->name('users.create');
+Route::post('/storeusers', [UsersController::class, 'store'])->name('users.store');
+Route::get('/showusers/{id}', [UsersController::class, 'show'])->name('users.show');
+Route::get('/editusers/{id}', [UsersController::class, 'edit'])->name('users.edit');
+Route::put('/editusers/{id}', [UsersController::class, 'update'])->name('users.update');
+Route::delete('/deleteusers/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+
+
+// Eloquent samples only
+// emailing
+
 
 // Proponents
 Route::get('/draft', [DraftController::class, 'index'])->name('draft');
@@ -157,3 +172,10 @@ Route::get('/read', function () {
     return view('mailbox.read');
 });
 
+Route::get('/test-error', function () {
+    abort(500);
+});
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
