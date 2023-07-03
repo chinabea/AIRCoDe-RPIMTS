@@ -77,6 +77,7 @@ Route::get('/showprojects/{id}', [ProjectsController::class, 'show'])->name('pro
 Route::get('/editprojects/{id}', [ProjectsController::class, 'edit'])->name('proponents.projects.edit');
 Route::put('/editprojects/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
 Route::delete('/deleteprojects/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
+
 Route::post('/select-reviewer', [ProjectsController::class, 'saveSelectedReviewer'])->name('save-reviewer');
 Route::post('/save-reviewer', [ProjectsController::class, 'saveSelectedReviewer'])->name('save-reviewer');
 
