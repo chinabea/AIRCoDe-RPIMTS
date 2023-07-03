@@ -13,8 +13,20 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
+            $table->text('projname');
+            $table->enum('status', ['New', 'Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved'])->default('New');
+            $table->text('researchgroup');
+            $table->text('authors');
+            $table->text('introduction');
+            $table->text('aims_and_objectives');
+            $table->text('background');
+            $table->text('expected_research_contribution');
+            $table->text('proposed_methodology');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->text('workplan');
+            $table->text('resources');
+            $table->text('references');
             $table->timestamps();
         });
     }

@@ -25,9 +25,46 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
-        ProjectsModel::create($request->all());
+        // ProjectsModel::create($request->all());
+        
+        // $proponent->status = 'under evaluation';
 
         // Redirect to the index or show view, or perform other actions
+        
+        $request->validate([
+                'projname' => 'required',
+                'researchgroup' => 'required',
+                'authors' => 'required',
+                'introduction' => 'required',
+                'aims_and_objectives' => 'required',
+                'background' => 'required',
+                'expected_research_contribution' => 'required',
+                'proposed_methodology' => 'required',
+                'start_date' => 'required',
+                'end_date' => 'required',
+                'workplan' => 'required',
+                'resources' => 'required',
+                'references' => 'required',
+        ]);
+
+        $projects = new ProjectsModel;
+        $projects->projname = $request->projname;
+        $projects->status = 'under evaluation';
+        $projects->researchgroup = $request->researchgroup;
+        $projects->authors = $request->authors;
+        $projects->introduction = $request->introduction;
+        $projects->aims_and_objectives = $request->aims_and_objectives;
+        $projects->background = $request->background;
+        $projects->expected_research_contribution = $request->expected_research_contribution;
+        $projects->proposed_methodology = $request->proposed_methodology;
+        $projects->start_date = $request->start_date;
+        $projects->end_date = $request->end_date;
+        $projects->workplan = $request->workplan;
+        $projects->resources = $request->resources;
+        $projects->references = $request->references;
+        $projects->save();
+
+        // return redirect()->route('proponents.show', $proponent->id);
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
     }
 

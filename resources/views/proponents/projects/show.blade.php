@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>About Us</h1>
+            <!-- <h1>Project</h1> -->
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -23,10 +23,11 @@
 
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid">
+
+      <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Projects Detail</h3>
+          <h3 class="card-title">Project Information</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -131,29 +132,25 @@
               </div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-              <h3 class="text-primary"><i class="fas fa-paint-brush"></i> {{ $projects->title }}</h3>
-              <p class="text-muted card-title p-3">{{ $projects->description }}</p>
-              <br> <br> <br>
+              <h3 class="text-primary"><i class="fas fa-paint-brush"></i> {{ $projects->projname }}</h3>
+              <p class="text-muted">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>
+              <br>
+
               <div class="text-muted">
-                <p class="text-sm">Client Company
-                  <b class="d-block">Deveint Inc</b>
+                <p class="text-sm">Status:
+                  <b class="d-block"> {{ $projects->status }}</b>
                 </p>
-                <p class="text-sm">Project Leader
-                  <b class="d-block">Tony Chicken</b>
+                <p class="text-sm">Research Group:
+                  <b class="d-block"> {{ $projects->researchgroup }}</b>
                 </p>
-                <p class="text-sm">Created At
-                  <b class="d-block">{{ $projects->created_at }}</b>
+                <p class="text-sm">Authors:
+                  <b class="d-block">{{ $projects->authors }}</b>
                 </p>
-                <p class="text-sm">Updated At
-                  <b class="d-block">{{ $projects->updated_at }}</b>
+                <p class="text-sm">Start Date:
+                  <b class="d-block">{{ \Carbon\Carbon::parse($projects->start_date)->format('F d, Y') }}</b>
                 </p>
-                <p class="text-sm">Reviewers
-                  <b class="d-block">Reviewer 1</b>
-                  <b class="d-block">Reviewer 2</b>
-                  <b class="d-block">Reviewer 3</b>
-                </p>
-                <p class="text-sm">Status
-                  <b class="d-block">{{ $projects->updated_at }}</b>
+                <p class="text-sm">End Date:
+                  <b class="d-block">{{ \Carbon\Carbon::parse($projects->end_date)->format('F d, Y') }}</b>
                 </p>
               </div>
 
@@ -182,14 +179,161 @@
             </div>
           </div>
         </div>
+        <!-- /.card-body -->
       </div>
-      </div>
+      <!-- /.card -->
+
     </section>
 
-</div>
+  </div>
   @include('layouts.footer')
 <aside class="control-sidebar control-sidebar-dark">
 </aside>
 </div>
 </body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Research Project Details</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="my-4">Research Project: projname</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Status: status</h4>
+                <p><strong>Research Group: </strong> researchgroup</p>
+                <p><strong>Authors: </strong> authors</p>
+                <p><strong>Start Date: </strong> start_date</p>
+                <p><strong>End Date: </strong> end_date</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <h4>Introduction</h4>
+        <p>introduction</p>
+
+        <h4>Aims and Objectives</h4>
+        <p>aims_and_objectives</p>
+
+        <h4>Background</h4>
+        <p>background</p>
+
+        <h4>Expected Research Contribution</h4>
+        <p>expected_research_contribution</p>
+
+        <h4>Proposed Methodology</h4>
+        <p>proposed_methodology</p>
+
+        <h4>Workplan</h4>
+        <p>workplan</p>
+
+        <h4>Resources</h4>
+        <p>resources</p>
+
+        <h4>References</h4>
+        <p>references</p>
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery scripts here -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Research Detail</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Add custom styles here */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Project Research Detail</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Project Information</h4>
+                            <p><strong>Project Name:</strong> {{ $projects->projname }}</p>
+                            <p><strong>Status:</strong> {{ $projects->status }}</p>
+                            <p><strong>Research Group:</strong> {{ $projects->researchgroup }}</p>
+                            <p><strong>Authors:</strong> {{ $projects->authors }}</p>
+                            <p><strong>Start Date:</strong> {{ $projects->start_date }}</p>
+                            <p><strong>End Date:</strong> {{ $projects->end_date }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Project Description</h4>
+                            <p><strong>Introduction:</strong></p>
+                            <p>{{ $projects->introduction }}</p>
+                            <p><strong>Aims and Objectives:</strong></p>
+                            <p>{{ $projects->aims_and_objectives }}</p>
+                            <p><strong>Background:</strong></p>
+                            <p>{{ $projects->background }}</p>
+                            <p><strong>Expected Research Contribution:</strong></p>
+                            <p>{{ $projects->expected_research_contribution }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Methodology</h4>
+                            <p>{{ $projects->proposed_methodology }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Workplan</h4>
+                            <p>{{$projects->workplan }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Resources</h4>
+                            <p>{{ $projects->resources }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>References</h4>
+                            <p>{{ $projects->references }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card -->
+
+        </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
 </html>

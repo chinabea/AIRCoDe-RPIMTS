@@ -33,6 +33,9 @@
 <link rel="stylesheet" href="{{ asset('../../plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <!-- daterange picker -->
   <link rel="stylesheet" href="{{ asset('../../plugins/daterangepicker/daterangepicker.css') }}">
+  
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
 
 <link rel="icon" type="image/x-icon" href="dist/img/favicon.ico">
@@ -76,10 +79,10 @@
     @endguest --}}
 
 
-    <main>
-        @yield('contents')
 
-    </main>
+    <!-- <main class="py-4"> -->
+            @yield('contents')
+    <!-- </main> -->
 
 
 

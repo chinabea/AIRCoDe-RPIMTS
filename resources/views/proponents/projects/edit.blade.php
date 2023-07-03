@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Create Project')
+@section('title', 'Create projects')
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 @include('layouts.topnav')
@@ -9,7 +9,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Create New Project</h1>
+              <h1>Create New projects</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -36,41 +36,57 @@
                       </button>
                     </div>
                   </div>
-                  <form action="{{ route('proponents.projects.store') }}" method="POST" enctype="multipart/form-data">
+                  <form action="{{ route('proponents.projects.edit', $projects->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="title">Project Name</label>
-                      <input  placeholder="Working title for the project" type="text" id="title" name="title" class="form-control">
+                      <label for="projname">Projects Name</label>
+                      <input type="text" id="projname" name="projname" class="form-control" 
+                      value="{{ $projects->projname }}">
                     </div>
                     <div class="form-group">
-                      <label for="description">Research Group</label>
-                      <input placeholder="Name of research group" type="text" id="description" name="description" class="form-control">
+                      <label for="researchgroup">Research Group</label>
+                      <input type="text" id="researchgroup" name="researchgroup" class="form-control"
+                      value="{{ $projects->researchgroup }}">
                     </div>
                     <div class="form-group">
-                      <label for="inputProjectLeader">Author(s)</label>
-                      <input placeholder="Names of Author" type="text" id="inputProjectLeader" class="form-control">
+                      <label for="authors">Author(s)</label>
+                      <input type="text" id="authors" name="authors" class="form-control"
+                      value="{{ $projects->authors }}">
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">Introduction</label>
-                      <textarea placeholder="Briefly describe the key aspects of what you will be investigating." id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="introduction">Introduction</label>
+                      <input  id="introduction" name="introduction" class="form-control" rows="4"
+                      value="{{ $projects->introduction }}">
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">Aims and Objectives</label>
-                      <textarea placeholder="What are the overall aims of the work? What objectives are necessary to meet the aims?" id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="aims_and_objectives">Aims and Objectives</label>
+                      <input  id="aims_and_objectives" name="aims_and_objectives" class="form-control" rows="4"
+                      value="{{ $projects->aims_and_objectives }}">
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">Background</label>
-                      <textarea placeholder="Brief review of literature in the area of interest. Describe what research lyas in the groundwork for your topic." id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="background">Background</label>
+                      <input  id="background" name="background" class="form-control" rows="4"
+                      value="{{ $projects->background }}">
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">Expected Research Contribution</label>
-                      <textarea placeholder="Why is the topi/creative work important? Describe how the research may be novel and it's impact on the descipline." id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="expected_research_contribution">Expected Research Contribution</label>
+                      <input  id="expected_research_contribution" name="expected_research_contribution" class="form-control" rows="4"
+                      value="{{ $projects->expected_research_contribution }}">
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">The Proposed Methodology</label>
-                      <textarea placeholder="Approach or methodology to be used in the research, the materials/equipment you intend to use, your space/laboratory/studio requirements." id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="proposed_methodology">The Proposed Methodology</label>
+                      <input  class="form-control" rows="4"
+                      value="{{ $projects->proposed_methodology }}"
+                      id="proposed_methodology" name="proposed_methodology">
                     </div>
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date"  value="{{ $projects->start_date }}">
+                    <!-- <input type="submit"> -->
+                    <label for="end_date">End Date:</label>
+                    <input type="date" id="end_date" name="end_date"  value="{{ $projects->end_date }}">
+                    <!-- <input type="submit"> -->
                     <div class="form-group">
                         <label>Work Plan:</label>
                         <div class="input-group">
@@ -79,19 +95,34 @@
                               <i class="far fa-calendar-alt"></i>
                             </span>
                           </div>
-                          <input placeholder="An initial plan for completion with annual milestones (eg. over 3 years)." type="text" class="form-control float-right" id="reservation">
+                          <input type="text" class="form-control float-right" id="reservation" name="reservation"
+                          value="{{ $projects->projname }}">
+                        </div>
+                    <div class="form-group">
+                        <label>Work Plan:</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control float-right" id="workplan" name="workplan"
+                          value="{{ $projects->workplan }}">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputDescription">Resources</label>
-                        <textarea placeholder="Provide details of major resources required for you to carry out your research project. What significant resources are required for the success of your proposed projec? (e.g travel, equipment)." id="inputDescription" class="form-control" rows="4"></textarea>
+                        <input  class="form-control" rows="4"
+                        value="{{ $projects->resources }}" 
+                        id="resources" name="resources">
                       </div>
                       <div class="form-group">
                         <label for="inputDescription">Referencences</label>
-                        <textarea placeholder="A short bibliography of the cited literature." id="inputDescription" class="form-control" rows="4"></textarea>
+                        <input  id="references"  name="references" class="form-control" rows="4"
+                        value="{{ $projects->references }}">
                       </div>
                       <a href="#" class="btn btn-secondary">Cancel</a>
-                      <input type="submit" value="Create new Project" class="btn btn-success float-right">
+                      <input type="submit" value="Update Project" class="btn btn-warning float-right">
                   </div>
             </form>
             </div>

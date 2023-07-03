@@ -11,5 +11,19 @@ class ProjectsModel extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['title','description'];
+    public $fillable = ['projname', 
+                        'status', 
+                        'researchgroup',
+                        'authors',
+                        'introduction',
+                        'aims_and_objectives',
+                        'background',
+                        'expected_research_contribution',
+                        'proposed_methodology',
+                        'start_date',
+                        'end_date',
+                        'workplan',
+                        'resources',
+                        'references'
+                    ];
 }

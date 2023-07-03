@@ -40,37 +40,52 @@
                     @csrf
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="title">Project Name</label>
-                      <input  placeholder="Working title for the project" type="text" id="title" name="title" class="form-control">
+                      <label for="projname">Project Name</label>
+                      <input type="text" id="projname" name="projname" class="form-control" 
+                      placeholder="Working title for the project">
                     </div>
                     <div class="form-group">
-                      <label for="description">Research Group</label>
-                      <input placeholder="Name of research group" type="text" id="description" name="description" class="form-control">
+                      <label for="researchgroup">Research Group</label>
+                      <input type="text" id="researchgroup" name="researchgroup" class="form-control"
+                      placeholder="Name of research group">
                     </div>
                     <div class="form-group">
-                      <label for="inputProjectLeader">Author(s)</label>
-                      <input placeholder="Names of Author" type="text" id="inputProjectLeader" class="form-control">
+                      <label for="authors">Author(s)</label>
+                      <input type="text" id="authors" name="authors" class="form-control"
+                      placeholder="Names of Author">
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">Introduction</label>
-                      <textarea placeholder="Briefly describe the key aspects of what you will be investigating." id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="introduction">Introduction</label>
+                      <textarea id="introduction" name="introduction" class="form-control" rows="4"
+                      placeholder="Briefly describe the key aspects of what you will be investigating."></textarea>
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">Aims and Objectives</label>
-                      <textarea placeholder="What are the overall aims of the work? What objectives are necessary to meet the aims?" id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="aims_and_objectives">Aims and Objectives</label>
+                      <textarea id="aims_and_objectives" name="aims_and_objectives" class="form-control" rows="4"
+                      placeholder="What are the overall aims of the work? What objectives are necessary to meet the aims?"></textarea>
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">Background</label>
-                      <textarea placeholder="Brief review of literature in the area of interest. Describe what research lyas in the groundwork for your topic." id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="background">Background</label>
+                      <textarea id="background" name="background" class="form-control" rows="4"
+                      placeholder="Brief review of literature in the area of interest. Describe what research lyas in the groundwork for your topic."></textarea>
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">Expected Research Contribution</label>
-                      <textarea placeholder="Why is the topi/creative work important? Describe how the research may be novel and it's impact on the descipline." id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="expected_research_contribution">Expected Research Contribution</label>
+                      <textarea id="expected_research_contribution" name="expected_research_contribution" class="form-control" rows="4"
+                      placeholder="Why is the topi/creative work important? Describe how the research may be novel and it's impact on the descipline."></textarea>
                     </div>
                     <div class="form-group">
-                      <label for="inputDescription">The Proposed Methodology</label>
-                      <textarea placeholder="Approach or methodology to be used in the research, the materials/equipment you intend to use, your space/laboratory/studio requirements." id="inputDescription" class="form-control" rows="4"></textarea>
+                      <label for="proposed_methodology">The Proposed Methodology</label>
+                      <textarea class="form-control" rows="4"
+                      placeholder="Approach or methodology to be used in the research, the materials/equipment you intend to use, your space/laboratory/studio requirements." 
+                      id="proposed_methodology" name="proposed_methodology"></textarea>
                     </div>
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date">
+                    <!-- <input type="submit"> -->
+                    <label for="end_date">End Date:</label>
+                    <input type="date" id="end_date" name="end_date">
+                    <!-- <input type="submit"> -->
                     <div class="form-group">
                         <label>Work Plan:</label>
                         <div class="input-group">
@@ -79,16 +94,31 @@
                               <i class="far fa-calendar-alt"></i>
                             </span>
                           </div>
-                          <input placeholder="An initial plan for completion with annual milestones (eg. over 3 years)." type="text" class="form-control float-right" id="reservation">
+                          <input type="text" class="form-control float-right" id="reservation" name="reservation"
+                          placeholder="An initial plan for completion with annual milestones (eg. over 3 years).">
+                        </div>
+                    <div class="form-group">
+                        <label>Work Plan:</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control float-right" id="workplan" name="workplan"
+                          placeholder="An initial plan for completion with annual milestones (eg. over 3 years).">
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputDescription">Resources</label>
-                        <textarea placeholder="Provide details of major resources required for you to carry out your research project. What significant resources are required for the success of your proposed projec? (e.g travel, equipment)." id="inputDescription" class="form-control" rows="4"></textarea>
+                        <textarea class="form-control" rows="4"
+                        placeholder="Provide details of major resources required for you to carry out your research project. What significant resources are required for the success of your proposed projec? (e.g travel, equipment)." 
+                        id="resources" name="resources"></textarea>
                       </div>
                       <div class="form-group">
                         <label for="inputDescription">Referencences</label>
-                        <textarea placeholder="A short bibliography of the cited literature." id="inputDescription" class="form-control" rows="4"></textarea>
+                        <textarea id="references"  name="references" class="form-control" rows="4"
+                        placeholder="A short bibliography of the cited literature."></textarea>
                       </div>
                       <a href="#" class="btn btn-secondary">Cancel</a>
                       <input type="submit" value="Create new Project" class="btn btn-success float-right">

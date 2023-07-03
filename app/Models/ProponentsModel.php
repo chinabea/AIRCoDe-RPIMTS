@@ -11,5 +11,5 @@ class ProponentsModel extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['title', 'status', 'content'];
+    public $fillable = ['title', 'content', 'status'];
 }

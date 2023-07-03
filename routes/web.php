@@ -135,6 +135,7 @@ Route::delete('/deleteproponents/{id}', [ProponentsController::class, 'destroy']
 
 // Eloquent samples only
 // emailing
+// routing with middleware
 
 
 // Proponents
@@ -181,6 +182,46 @@ Route::get('/inbox', function () {
 Route::get('/read', function () {
     return view('mailbox.read');
 });
+
+Route::resource('documents', DocumentController::class);
+
+// Admin Proponents
+// Route::get('/proponents', [ProponentsController::class, 'index'])->name('proponents');
+// Route::get('/createproponents', [ProponentsController::class, 'create'])->name('proponents.admin-proponents.create');
+// Route::post('/storeproponents', [ProponentsController::class, 'store'])->name('proponents.admin-proponents.store');
+// Route::get('/showproponents/{id}', [ProponentsController::class, 'show'])->name('proponents.admin-proponents.show');
+// Route::get('/editproponents/{id}', [ProponentsController::class, 'edit'])->name('proponents.admin-proponents.edit');
+// Route::put('/editproponents/{id}', [ProponentsController::class, 'update'])->name('proponents.admin-proponents.update');
+// Route::delete('/deleteproponents/{id}', [ProponentsController::class, 'destroy'])->name('proponents.admin-proponents.destroy');
+
+
+Route::get('/proponents', [ProponentsController::class, 'index'])->name('proponents.index');
+Route::get('/proponents/create', [ProponentsController::class, 'create'])->name('proponents.create');
+Route::post('/proponents', [ProponentsController::class, 'store'])->name('proponents.store');
+Route::get('/proponents/{proponent}', [ProponentsController::class, 'show'])->name('proponents.show');
+Route::get('/proponents/{proponent}/edit', [ProponentsController::class, 'edit'])->name('proponents.edit');
+Route::put('/proponents/{proponent}', [ProponentsController::class, 'update'])->name('proponents.update');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get('/test-error', function () {
     abort(500);

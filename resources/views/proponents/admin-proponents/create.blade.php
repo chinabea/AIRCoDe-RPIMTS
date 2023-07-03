@@ -22,7 +22,7 @@
       </section>
 
     <!-- Main content -->
-    <section class="content">
+    <!-- <section class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
@@ -56,7 +56,16 @@
         </div>
       </section>
 
-  </div>
+  </div> -->
+  <!-- resources/views/documents/create.blade.php -->
+<form action="{{ route('proponents.admin-proponents.store') }}" method="POST">
+    @csrf
+    <!-- Add other input fields for document details -->
+
+    <button type="submit">Submit</button>
+</form>
+
+
     @include('layouts.footer')
   <aside class="control-sidebar control-sidebar-dark">
   </aside>

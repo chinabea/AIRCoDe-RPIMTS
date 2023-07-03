@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <!-- <h1>DataTables</h1> -->
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li> -->
             </ol>
           </div>
         </div>
@@ -32,8 +32,7 @@
               </div>
               <div class="card-body">
                 <a href="{{ route('proponents.projects.create') }}" class="btn btn-primary">Add Project</a>
-
-                <hr />
+              <hr>
                 @if(Session::has('success'))
                     <div class="alert alert-success" role="alert">
                         {{ Session::get('success') }}
@@ -45,9 +44,11 @@
                     <tr>
                       <th>#</th>
                       <th>Project Title</th>
-                      <th>Project Details</th>
+                      <th>Research Group</th>
+                      <th>Date Submitted</th>
+                      <th>Status</th>
                       <th>Reviewers</th>
-                      <th>Summarized ? (Status)</th>
+                      <th>RSC</th>
                       <th>Action(s)</th>
                     </tr>
                     </thead>
@@ -57,12 +58,14 @@
                             <tr>
                                 <td class="align-middle">{{ $loop->iteration }}</td>
                                 <td>
-                                  <a href="{{ route('proponents.projects.show', $record->id) }}">{{ $record->title }}</a>
+                                  <a href="{{ route('proponents.projects.show', $record->id) }}">{{ $record->projname }}</a>
                                 </td>
-                                <td class="align-middle">{{ $record->description }}</td>
-                                <td>
+                                <td class="align-middle">{{ $record->researchgroup }}</td>
+                                <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
+                                <td class="align-middle">{{ $record->status }}</td>
+                              <td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                  Reviewer 1
+                                  Reviewer
                                 </button>
                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -83,32 +86,9 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="btn-group">
-                                  <button type="button" class="btn btn-secondary btn-sm  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Reviewer 2
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                  </div>
-                                </div>
-                                <div class="btn-group">
-                                  <button type="button" class="btn btn-secondary btn-sm  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Reviewer 3
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                  </div>
-                                </div>
                               </td>
-                              <td class="align-middle">Summarized : Approved / Revised / Rejected</td>
+                              
+                              <td class="align-middle">RSC</td>
                               <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{ route('proponents.projects.show', $record->id) }}" type="button" class="btn btn-secondary">Details</a>
@@ -152,7 +132,7 @@
                                 </tr>
                             @endif
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                         <tr>
                         <th>#</th>
                         <th>Project Title</th>
@@ -161,7 +141,7 @@
                         <th>Summarized ? (Status)</th>
                         <th>Action(s)</th>
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                 </table>
 
                 </div>

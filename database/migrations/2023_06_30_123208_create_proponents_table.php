@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('proponents', function (Blueprint $table) {
             $table->id();
+            // other columns..
             $table->string('title');
-            $table->text('content');
+            $table->string('content');
             $table->enum('status', ['New', 'Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved'])->default('New');
             $table->timestamps();
+
+        
         });
     }
 
