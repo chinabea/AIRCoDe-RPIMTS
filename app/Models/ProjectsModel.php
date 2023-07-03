@@ -11,8 +11,8 @@ class ProjectsModel extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['projname', 
-                        'status', 
+    public $fillable = ['projname',
+                        'status',
                         'researchgroup',
                         'authors',
                         'introduction',
@@ -26,4 +26,12 @@ class ProjectsModel extends Model
                         'resources',
                         'references'
                     ];
+
+    public function reviewers()
+    {
+        return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'user_id')
+                    ->where('users.role', '4')
+                    ->limit(3);
+    }
+
 }

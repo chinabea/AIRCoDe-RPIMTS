@@ -4,9 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProjectsModel;
+use App\Models\UsersModel;
 
 class ProjectsController extends Controller
 {
+//    public function getProjectReviewers()
+//     {
+//     $reviewers = UsersModel::where('role', 4)
+//                            ->take(3)
+//                            ->get();
+
+//     foreach ($reviewers as $reviewer) {
+//         echo $reviewer->name; // Print the reviewer's name or any other desired property
+//     }
+
+
+    public function saveSelectedReviewer(Request $request)
+    {
+        $reviewerId = $request->input('reviewer');
+
+        // Retrieve the selected interviewer by ID
+        $reviewer = UsersModel::find($reviewerId);
+
+        // Save the selected interviewer to the project or perform any other necessary actions
+
+        return redirect()->back()->with('success', 'reviewer selected successfully.');
+    }
 
     public function index()
     {
@@ -14,11 +37,30 @@ class ProjectsController extends Controller
         // $items = ProjectsModel::all();
         $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
 
+        // $project = ProjectsModel::find($projectId);
+        // $reviewers = $project->reviewers;
+
+
+        // $role = 'reviewer';
+        // $reviewers = UsersModel::where('role', $role)->limit(3)->get();
+
+        // // Access the reviewers' details
+        // foreach ($reviewers as $reviewer) {
+        //     echo $reviewer->name; // Assuming the User model has a 'name' column
+        // }
+
         return view('proponents.projects.index', compact('records'));
     }
 
     public function create()
     {
+        // $role = 'reviewer';
+        // $reviewers = UsersModel::where('role', $role)->limit(3)->get();
+
+        // // Access the reviewers' details
+        // foreach ($reviewers as $reviewer) {
+        //     echo $reviewer->name; // Assuming the User model has a 'name' column
+        // }
         // Return the view for creating a new item
         return view('proponents.projects.create');
     }
@@ -26,11 +68,11 @@ class ProjectsController extends Controller
     public function store(Request $request)
     {
         // ProjectsModel::create($request->all());
-        
+
         // $proponent->status = 'under evaluation';
 
         // Redirect to the index or show view, or perform other actions
-        
+
         $request->validate([
                 'projname' => 'required',
                 'researchgroup' => 'required',
@@ -72,6 +114,7 @@ class ProjectsController extends Controller
     {
         // Retrieve and show the specific item using the provided ID
         $projects = ProjectsModel::findOrFail($id);
+
 
         return view('proponents.projects.show', compact('projects'));
     }

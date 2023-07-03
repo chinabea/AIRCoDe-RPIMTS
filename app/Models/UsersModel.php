@@ -12,4 +12,10 @@ class UsersModel extends Model
     public $primaryKey = 'id';
 
     public $fillable = ['name','email','role'];
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_reviewers', 'user_id', 'project_id');
+    }
+
 }
