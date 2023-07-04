@@ -21,7 +21,6 @@
         </div>
       </section>
 
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -36,6 +35,8 @@
                       </button>
                     </div>
                   </div>
+    <!-- <h1>Research Project Form</h1>
+        <p>Please fill in the following information:</p> -->
                   <form action="{{ route('proponents.projects.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                   <div class="card-body">
@@ -82,10 +83,8 @@
                     </div>
                     <label for="start_date">Start Date:</label>
                     <input type="date" id="start_date" name="start_date">
-                    <!-- <input type="submit"> -->
                     <label for="end_date">End Date:</label>
                     <input type="date" id="end_date" name="end_date">
-                    <!-- <input type="submit"> -->
                     <div class="form-group">
                         <label>Work Plan:</label>
                         <div class="input-group">
@@ -136,32 +135,3 @@
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
