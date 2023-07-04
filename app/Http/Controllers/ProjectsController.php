@@ -8,49 +8,35 @@ use App\Models\UsersModel;
 
 class ProjectsController extends Controller
 {
-//    public function getProjectReviewers()
-//     {
-//     $reviewers = UsersModel::where('role', 4)
-//                            ->take(3)
-//                            ->get();
-
-//     foreach ($reviewers as $reviewer) {
-//         echo $reviewer->name; // Print the reviewer's name or any other desired property
-//     }
-
-
-    public function saveSelectedReviewer(Request $request)
+    public function selectReviewers()
     {
-        $reviewerId = $request->input('reviewer');
+    $users = UsersModel::where('role', 4)->get();
 
-        // Retrieve the selected interviewer by ID
-        $reviewer = UsersModel::find($reviewerId);
-
-        // Save the selected interviewer to the project or perform any other necessary actions
-
-        return redirect()->back()->with('success', 'reviewer selected successfully.');
+    // return redirect()->back()->with('success', 'Reviewers selected successfully!');
+    return view('proponents.projects.reviewer', compact('users'));
     }
+
+    // public function index()
+    // {
+    //     $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
+    //     $users = UsersModel::where('role', 4)->get();
+
+    //     return redirect()->back()->with('success', 'Reviewers selected successfully!');
+
+    //     return view('proponents.projects.index', compact('records'));
+    // }
 
     public function index()
     {
-        // Fetch all records from the model and pass them to the view
-        // $items = ProjectsModel::all();
+
         $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
+        $reviewers = UsersModel::where('role', 4)->get(); // Fetch users with role = 4 (assuming 4 represents reviewers)
+        $users = UsersModel::all(); // Fetch all users
 
-        // $project = ProjectsModel::find($projectId);
-        // $reviewers = $project->reviewers;
-
-
-        // $role = 'reviewer';
-        // $reviewers = UsersModel::where('role', $role)->limit(3)->get();
-
-        // // Access the reviewers' details
-        // foreach ($reviewers as $reviewer) {
-        //     echo $reviewer->name; // Assuming the User model has a 'name' column
-        // }
-
-        return view('proponents.projects.index', compact('records'));
+        return view('proponents.projects.index', compact('records', 'reviewers', 'users'));
     }
+
+
 
     public function create()
     {
@@ -67,11 +53,11 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
-        // ProjectsModel::create($request->all());
+        $selectedReviewers = $request->input('reviewers');
+        // Process the selected reviewer as needed
+        // For example, store it in the database or perform any other actions
 
-        // $proponent->status = 'under evaluation';
-
-        // Redirect to the index or show view, or perform other actions
+        // return redirect()->back()->with('success', 'Reviewer selected successfully!');
 
         $request->validate([
                 'projname' => 'required',
@@ -133,6 +119,9 @@ class ProjectsController extends Controller
         $projects = ProjectsModel::findOrFail($id);
         // Update the item properties using the request data
         $projects->update($request->all());
+
+
+
 
         // Redirect to the index or show view, or perform other actions
         return redirect()->route('projects')->with('success', 'Data Successfully Updated!');

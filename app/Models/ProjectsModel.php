@@ -27,11 +27,18 @@ class ProjectsModel extends Model
                         'references'
                     ];
 
+    // public function reviewers()
+    // {
+    //     return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'user_id')
+    //                 ->where('users.role', '4')
+    //                 ->limit(3);
+    // }
+
     public function reviewers()
     {
-        return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'user_id')
-                    ->where('users.role', '4')
-                    ->limit(3);
+    return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'reviewer_id');
     }
+
+
 
 }

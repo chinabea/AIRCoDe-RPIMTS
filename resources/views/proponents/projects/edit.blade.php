@@ -42,7 +42,7 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label for="projname">Projects Name</label>
-                      <input type="text" id="projname" name="projname" class="form-control" 
+                      <input type="text" id="projname" name="projname" class="form-control"
                       value="{{ $projects->projname }}">
                     </div>
                     <div class="form-group">
@@ -113,7 +113,7 @@
                       <div class="form-group">
                         <label for="inputDescription">Resources</label>
                         <input  class="form-control" rows="4"
-                        value="{{ $projects->resources }}" 
+                        value="{{ $projects->resources }}"
                         id="resources" name="resources">
                       </div>
                       <div class="form-group">

@@ -13,9 +13,18 @@ class UsersModel extends Model
 
     public $fillable = ['name','email','role'];
 
+    // public function projects()
+    // {
+    //     return $this->belongsToMany(Project::class, 'project_reviewers', 'user_id', 'project_id');
+    // }
+
+    // User.php
+
     public function projects()
     {
-        return $this->belongsToMany(Project::class, 'project_reviewers', 'user_id', 'project_id');
+        return $this->belongsToMany(Project::class, 'project_reviewers', 'reviewer_id', 'project_id');
     }
+
+
 
 }

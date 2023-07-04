@@ -64,30 +64,60 @@
                                 <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
                                 <td class="align-middle">{{ $record->status }}</td>
                               <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                  Reviewer
-                                </button>
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        ...
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                      </div>
+
+
+
+                                <form method="POST" action="{{ route('proponents.projects.store') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                      <label for="reviewers">Project Reviewers</label>
+                                      <select name="reviewers[]" id="reviewers" class="form-control custom-select" multiple size="3">
+                                        @foreach ($reviewers as $reviewer)
+                                          <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                                        @endforeach
+                                      </select>
                                     </div>
-                                  </div>
-                                </div>
+                                    <div class="select-custom-content">
+                                      <button class="btn-save btn btn-primary btn-sm">Save</button>
+                                    </div>
+                                  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                               </td>
-                              
+
                               <td class="align-middle">RSC</td>
                               <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -151,9 +181,13 @@
         </div>
       </section>
 </div>
+
+
   @include('layouts.footer')
 <aside class="control-sidebar control-sidebar-dark">
 </aside>
 </div>
+
+
 </body>
 </html>

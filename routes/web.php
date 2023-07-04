@@ -78,9 +78,13 @@ Route::get('/editprojects/{id}', [ProjectsController::class, 'edit'])->name('pro
 Route::put('/editprojects/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
 Route::delete('/deleteprojects/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
 
-Route::post('/select-reviewer', [ProjectsController::class, 'saveSelectedReviewer'])->name('save-reviewer');
-Route::post('/save-reviewer', [ProjectsController::class, 'saveSelectedReviewer'])->name('save-reviewer');
+// Route::post('/selectreviewer', [ProjectsController::class, 'saveSelectedReviewer'])->name('save-reviewer');
 
+// Route::get('/selectreviewer', function () {
+//     return view('proponents.projects.reviewer');
+// });
+
+Route::get('VIEW', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
 
 
 // Proposals
