@@ -211,11 +211,7 @@ Route::get('/proponents/{proponent}', [ProponentsController::class, 'show'])->na
 Route::get('/proponents/{proponent}/edit', [ProponentsController::class, 'edit'])->name('proponents.edit');
 Route::put('/proponents/{proponent}', [ProponentsController::class, 'update'])->name('proponents.update');
 
-
-
-
-
-
+Route::get('send', [HomeController::class, 'sendNotification']);
 
 
 
