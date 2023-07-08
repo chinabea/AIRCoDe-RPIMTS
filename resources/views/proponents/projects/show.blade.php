@@ -140,6 +140,19 @@
                 <p class="text-sm">Status:
                   <b class="d-block"> {{ $projects->status }}</b>
                 </p>
+                <form action="{{ route('projects.update_status', $projects->id) }}" method="POST">
+                      @csrf
+                      @method('PUT')
+                      <div class="form-group">
+                          <label for="status">Update Status:</label>
+                          <select name="status" id="status" class="form-control">
+                              <option value="pending" {{ $projects->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                              <option value="in_progress" {{ $projects->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
+                              <option value="completed" {{ $projects->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                          </select>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Update</button>
+                  </form>
                 <p class="text-sm">Research Group:
                   <b class="d-block"> {{ $projects->researchgroup }}</b>
                 </p>

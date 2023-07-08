@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Notifications\ProjectNotification;
-use Illuminate\Support\Facades\Notification;
+// use App\Notifications\ProjectNotification;
+// use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Http\Request;
 use App\Models\ProjectsModel;
@@ -22,8 +24,8 @@ class ProjectsController extends Controller
     {
 
         $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
-        $reviewers = UsersModel::where('role', 4)->get(); // Fetch users with role = 4 (assuming 4 represents reviewers)
-        $users = UsersModel::all(); // Fetch all users
+        $reviewers = UsersModel::where('role', 4)->get(); 
+        $users = UsersModel::all(); 
 
         return view('proponents.projects.index', compact('records', 'reviewers', 'users'));
     }
@@ -31,59 +33,94 @@ class ProjectsController extends Controller
 
     public function create()
     {
-        // Create the project instance
-        $project = new ProjectsModel(); // Replace with your project creation logic
+        $project = new ProjectsModel(); 
     
-        // Create an array of user instances to receive the notification
-        $users = User::all(); // Replace with your user retrieval logic
+        $users = User::all();
     
-        // Send email notification
-        Notification::send($users, new ProjectNotification($project->id));
+        // Notification::send($users, new ProjectNotification($project->id));
 
-    
-        // Return response
         return view('proponents.projects.create');
     }
 
+    // public function store(Request $request)
+    // {
+    //     $selectedReviewers = $request->input('reviewers');
+
+    //     $request->validate([
+    //             'projname' => 'required',
+    //             'researchgroup' => 'required',
+    //             'authors' => 'required',
+    //             'introduction' => 'required',
+    //             'aims_and_objectives' => 'required',
+    //             'background' => 'required',
+    //             'expected_research_contribution' => 'required',
+    //             'proposed_methodology' => 'required',
+    //             'start_date' => 'required',
+    //             'end_date' => 'required',
+    //             'workplan' => 'required',
+    //             'resources' => 'required',
+    //             'references' => 'required',
+    //     ]);
+
+    //     $projects = new ProjectsModel;
+    //     $projects->projname = $request->projname;
+    //     $projects->status = 'under evaluation';
+    //     $projects->researchgroup = $request->researchgroup;
+    //     $projects->authors = $request->authors;
+    //     $projects->introduction = $request->introduction;
+    //     $projects->aims_and_objectives = $request->aims_and_objectives;
+    //     $projects->background = $request->background;
+    //     $projects->expected_research_contribution = $request->expected_research_contribution;
+    //     $projects->proposed_methodology = $request->proposed_methodology;
+    //     $projects->start_date = $request->start_date;
+    //     $projects->end_date = $request->end_date;
+    //     $projects->workplan = $request->workplan;
+    //     $projects->resources = $request->resources;
+    //     $projects->references = $request->references;
+    //     $projects->save();
+
+    //     return redirect()->route('projects')->with('success', 'Data Successfully Added!');
+    // }
+
     public function store(Request $request)
     {
-        $selectedReviewers = $request->input('reviewers');
-
         $request->validate([
-                'projname' => 'required',
-                'researchgroup' => 'required',
-                'authors' => 'required',
-                'introduction' => 'required',
-                'aims_and_objectives' => 'required',
-                'background' => 'required',
-                'expected_research_contribution' => 'required',
-                'proposed_methodology' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required',
-                'workplan' => 'required',
-                'resources' => 'required',
-                'references' => 'required',
+            'projname' => 'required',
+            'researchgroup' => 'required',
+                        'authors' => 'required',
+                        'introduction' => 'required',
+                        'aims_and_objectives' => 'required',
+                        'background' => 'required',
+                        'expected_research_contribution' => 'required',
+                        'proposed_methodology' => 'required',
+                        'start_date' => 'required',
+                        'end_date' => 'required',
+                        'workplan' => 'required',
+                        'resources' => 'required',
+                        'references' => 'required',
         ]);
 
         $projects = new ProjectsModel;
         $projects->projname = $request->projname;
         $projects->status = 'under evaluation';
         $projects->researchgroup = $request->researchgroup;
-        $projects->authors = $request->authors;
-        $projects->introduction = $request->introduction;
-        $projects->aims_and_objectives = $request->aims_and_objectives;
-        $projects->background = $request->background;
-        $projects->expected_research_contribution = $request->expected_research_contribution;
-        $projects->proposed_methodology = $request->proposed_methodology;
-        $projects->start_date = $request->start_date;
-        $projects->end_date = $request->end_date;
-        $projects->workplan = $request->workplan;
-        $projects->resources = $request->resources;
-        $projects->references = $request->references;
+            $projects->authors = $request->authors;
+            $projects->introduction = $request->introduction;
+            $projects->aims_and_objectives = $request->aims_and_objectives;
+            $projects->background = $request->background;
+            $projects->expected_research_contribution = $request->expected_research_contribution;
+            $projects->proposed_methodology = $request->proposed_methodology;
+            $projects->start_date = $request->start_date;
+            $projects->end_date = $request->end_date;
+            $projects->workplan = $request->workplan;
+            $projects->resources = $request->resources;
+            $projects->references = $request->references;
+
         $projects->save();
 
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
     }
+
 
     public function show($id)
     {
@@ -102,11 +139,34 @@ class ProjectsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $projects = ProjectsModel::findOrFail($id);
-        $projects->update($request->all());
+        $project = ProjectsModel::findOrFail($id);
+        $project->status = $request->input('update_status');
+        $project->save();
 
         return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
+        
     }
+
+    // public function update(Request $request, $id)
+    // {
+    //     $projects = ProjectsModel::findOrFail($id);
+
+    //     // Check the user's role
+    //     $userRole = Auth::user()->role;
+
+    //     if ($userRole === 'director' || $userRole === 'staff') {
+    //         // Update all attributes except 'status'
+    //         $projects->fill($request->except('status'));
+    //     } elseif ($userRole === 'researcher') {
+    //         // Only update the 'status' attribute
+    //         $projects->status = $request->input('status');
+    //     }
+
+    //     $projects->save();
+
+    //     return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
+    // }
+
 
     public function destroy($id)
     {
@@ -115,4 +175,14 @@ class ProjectsController extends Controller
 
         return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
     }
+
+    public function updateStatus(Request $request, Project $project)
+    {
+        $project->status = $request->input('status');
+        $project->save();
+    
+        // Rest of the code
+    }
+    
+
 }

@@ -45,6 +45,24 @@
                       <input type="text" id="projname" name="projname" class="form-control"
                       value="{{ $projects->projname }}">
                     </div>
+                    <!-- ======================== -->
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <input type="text" id="status" name="status" class="form-control" value="{{ $projects->status }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="update_status">Update Status:</label>
+                        <select name="update_status" id="update_status" class="form-control">
+                            <option value="draft" {{ $projects->status == 'draft' ? 'selected' : '' }}>draft</option>
+                            <option value="under_evaluation" {{ $projects->status == 'under_evaluation' ? 'selected' : '' }}>under_evaluation</option>
+                            <option value="for_revision" {{ $projects->status == 'for_revision' ? 'selected' : '' }}>for_revision</option>
+                            <option value="approved" {{ $projects->status == 'approved' ? 'selected' : '' }}>approved</option>
+                            <option value="deferred" {{ $projects->status == 'deferred' ? 'selected' : '' }}>deferred</option>
+                            <option value="disapproved" {{ $projects->status == 'disapproved' ? 'selected' : '' }}>disapproved</option>
+                        </select>
+                    </div>
+                    
                     <div class="form-group">
                       <label for="researchgroup">Research Group</label>
                       <input type="text" id="researchgroup" name="researchgroup" class="form-control"

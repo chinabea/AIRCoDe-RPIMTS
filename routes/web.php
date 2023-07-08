@@ -85,12 +85,11 @@ Route::get('/showprojects/{id}', [ProjectsController::class, 'show'])->name('pro
 Route::get('/editprojects/{id}', [ProjectsController::class, 'edit'])->name('proponents.projects.edit');
 Route::put('/editprojects/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
 Route::delete('/deleteprojects/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
+// Route::put('/projects/{id}/status', [ProjectsController::class, 'updateStatus'])->name('projects.update_status');
+// Example route for updating project status
+Route::put('/projects/{id}', [ProjectsController::class, 'updateStatus']);
 
-// Route::post('/selectreviewer', [ProjectsController::class, 'saveSelectedReviewer'])->name('save-reviewer');
 
-// Route::get('/selectreviewer', function () {
-//     return view('proponents.projects.reviewer');
-// });
 
 Route::get('reviewer', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
 
