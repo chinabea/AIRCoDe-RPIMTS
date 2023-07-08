@@ -12,6 +12,10 @@ use App\Http\Controllers\DraftController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProponentsController;
+use App\Http\Controllers\ContactController;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Send;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +28,13 @@ use App\Http\Controllers\ProponentsController;
 |
 */
 
+
 Route::get('/', function () {
+    // Mail::send(new Send);
     return view('welcome');
 });
+
+
 
 Auth::routes();
 
@@ -84,7 +92,7 @@ Route::delete('/deleteprojects/{id}', [ProjectsController::class, 'destroy'])->n
 //     return view('proponents.projects.reviewer');
 // });
 
-Route::get('VIEW', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
+Route::get('reviewer', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
 
 
 // Proposals
@@ -217,6 +225,13 @@ Route::get('send', [HomeController::class, 'sendNotification']);
 
 
 
+Route::get('/contacts', function () {
+    return view('contact');
+});
+
+Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');
+Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
 

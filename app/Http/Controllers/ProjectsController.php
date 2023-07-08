@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Notifications\ProjectNotification;
+use Illuminate\Support\Facades\Notification;
 
 use Illuminate\Http\Request;
 use App\Models\ProjectsModel;
 use App\Models\UsersModel;
+use App\Models\User;
 
 class ProjectsController extends Controller
 {
@@ -12,19 +15,8 @@ class ProjectsController extends Controller
     {
     $users = UsersModel::where('role', 4)->get();
 
-    // return redirect()->back()->with('success', 'Reviewers selected successfully!');
     return view('proponents.projects.reviewer', compact('users'));
     }
-
-    // public function index()
-    // {
-    //     $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
-    //     $users = UsersModel::where('role', 4)->get();
-
-    //     return redirect()->back()->with('success', 'Reviewers selected successfully!');
-
-    //     return view('proponents.projects.index', compact('records'));
-    // }
 
     public function index()
     {
@@ -37,27 +29,25 @@ class ProjectsController extends Controller
     }
 
 
-
     public function create()
     {
-        // $role = 'reviewer';
-        // $reviewers = UsersModel::where('role', $role)->limit(3)->get();
+        // Create the project instance
+        $project = new ProjectsModel(); // Replace with your project creation logic
+    
+        // Create an array of user instances to receive the notification
+        $users = User::all(); // Replace with your user retrieval logic
+    
+        // Send email notification
+        Notification::send($users, new ProjectNotification($project->id));
 
-        // // Access the reviewers' details
-        // foreach ($reviewers as $reviewer) {
-        //     echo $reviewer->name; // Assuming the User model has a 'name' column
-        // }
-        // Return the view for creating a new item
+    
+        // Return response
         return view('proponents.projects.create');
     }
 
     public function store(Request $request)
     {
         $selectedReviewers = $request->input('reviewers');
-        // Process the selected reviewer as needed
-        // For example, store it in the database or perform any other actions
-
-        // return redirect()->back()->with('success', 'Reviewer selected successfully!');
 
         $request->validate([
                 'projname' => 'required',
@@ -92,13 +82,11 @@ class ProjectsController extends Controller
         $projects->references = $request->references;
         $projects->save();
 
-        // return redirect()->route('proponents.show', $proponent->id);
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
     }
 
     public function show($id)
     {
-        // Retrieve and show the specific item using the provided ID
         $projects = ProjectsModel::findOrFail($id);
 
 
@@ -107,7 +95,6 @@ class ProjectsController extends Controller
 
     public function edit($id)
     {
-        // Retrieve and show the specific item for editing
         $projects = ProjectsModel::findOrFail($id);
 
         return view('proponents.projects.edit', compact('projects'));
@@ -115,25 +102,17 @@ class ProjectsController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validate and update the item with the provided ID
         $projects = ProjectsModel::findOrFail($id);
-        // Update the item properties using the request data
         $projects->update($request->all());
 
-
-
-
-        // Redirect to the index or show view, or perform other actions
         return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
     }
 
     public function destroy($id)
     {
-        // Delete the item with the provided ID
         $projects = ProjectsModel::findOrFail($id);
         $projects->delete();
 
-        // Redirect to the index or perform other actions
         return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
     }
 }
