@@ -54,15 +54,26 @@
                     <div class="form-group">
                         <label for="update_status">Update Status:</label>
                         <select name="update_status" id="update_status" class="form-control">
-                            <option value="draft" {{ $projects->status == 'draft' ? 'selected' : '' }}>draft</option>
-                            <option value="under_evaluation" {{ $projects->status == 'under_evaluation' ? 'selected' : '' }}>under_evaluation</option>
-                            <option value="for_revision" {{ $projects->status == 'for_revision' ? 'selected' : '' }}>for_revision</option>
-                            <option value="approved" {{ $projects->status == 'approved' ? 'selected' : '' }}>approved</option>
-                            <option value="deferred" {{ $projects->status == 'deferred' ? 'selected' : '' }}>deferred</option>
-                            <option value="disapproved" {{ $projects->status == 'disapproved' ? 'selected' : '' }}>disapproved</option>
+                            <option value="draft" {{ $projects->status == 'draft' ? 'selected' : '' }}>Draft</option>
+                            <option value="under_evaluation" {{ $projects->status == 'under_evaluation' ? 'selected' : '' }}>Under Evaluation</option>
+                            <option value="for_revision" {{ $projects->status == 'for_revision' ? 'selected' : '' }}>For Revision</option>
+                            <option value="approved" {{ $projects->status == 'approved' ? 'selected' : '' }}>Approved</option>
+                            <option value="deferred" {{ $projects->status == 'deferred' ? 'selected' : '' }}>Deferred</option>
+                            <option value="disapproved" {{ $projects->status == 'disapproved' ? 'selected' : '' }}>Disapproved</option>
                         </select>
                     </div>
-                    
+
+                    <div class="form-group">
+                        <label for="reviewers">Project Reviewers</label>
+                        <select name="reviewers[]" id="reviewers" name="reviewers" class="form-control custom-select" multiple>
+                            <option disabled>Select reviewers</option>
+                            @foreach ($reviewers as $reviewer)
+                                <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
                     <div class="form-group">
                       <label for="researchgroup">Research Group</label>
                       <input type="text" id="researchgroup" name="researchgroup" class="form-control"

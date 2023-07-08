@@ -64,50 +64,7 @@
                                 <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
                                 <td class="align-middle">{{ $record->status }}</td>
                               <td>
-
-
-
-                                <form method="POST" action="{{ route('proponents.projects.store') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-group">
-                                      <label for="reviewers">Project Reviewers</label>
-                                      <select name="reviewers[]" id="reviewers" class="form-control custom-select" multiple size="3">
-                                        @foreach ($reviewers as $reviewer)
-                                          <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                                        @endforeach
-                                      </select>
-                                    </div>
-                                    <div class="select-custom-content">
-                                      <button class="btn-save btn btn-primary btn-sm">Save</button>
-                                    </div>
-                                  </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                               </td>
-
                               <td class="align-middle">RSC</td>
                               <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">

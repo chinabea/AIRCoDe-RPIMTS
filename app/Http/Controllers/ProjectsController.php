@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-// use App\Notifications\ProjectNotification;
-// use Illuminate\Support\Facades\Notification;
+use App\Notifications\ProjectNotification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -22,12 +22,8 @@ class ProjectsController extends Controller
 
     public function index()
     {
-
         $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
-        $reviewers = UsersModel::where('role', 4)->get(); 
-        $users = UsersModel::all(); 
-
-        return view('proponents.projects.index', compact('records', 'reviewers', 'users'));
+        return view('proponents.projects.index', compact('records'));
     }
 
 
@@ -37,7 +33,7 @@ class ProjectsController extends Controller
     
         $users = User::all();
     
-        // Notification::send($users, new ProjectNotification($project->id));
+        Notification::send($users, new ProjectNotification($project->id));
 
         return view('proponents.projects.create');
     }
@@ -130,12 +126,23 @@ class ProjectsController extends Controller
         return view('proponents.projects.show', compact('projects'));
     }
 
+    // public function edit($id)
+    // {
+
+    //     $reviewers = UsersModel::where('role', 4)->get(); 
+    //     $users = UsersModel::all(); 
+    //     $projects = ProjectsModel::findOrFail($id);
+
+    //     return view('proponents.projects.edit', compact('projects'));
+    // }
     public function edit($id)
     {
+        $reviewers = UsersModel::where('role', 4)->get();
         $projects = ProjectsModel::findOrFail($id);
 
-        return view('proponents.projects.edit', compact('projects'));
+        return view('proponents.projects.edit', compact('projects', 'reviewers'));
     }
+
 
     public function update(Request $request, $id)
     {
