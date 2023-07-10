@@ -13,7 +13,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProponentsController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\TaskController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -238,21 +238,12 @@ Route::get('/scheduling', function () {
     return view('scheduling');
 });
 
-Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedules.index');
-Route::get('/schedules/calendar', [ScheduleController::class, 'calendar'])->name('schedules.calendar');
-Route::get('schedules/create', [ScheduleController::class, 'create'])->name('schedules.create');
-Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedules.store');
-Route::get('/schedules/{id}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');
-Route::put('/schedules/{id}/edit', [ScheduleController::class, 'update'])->name('schedules.update');
-
-
-
-
-
-
-
-
-
+Route::get('/task', [TaskController::class, 'index'])->name('tasks.index');
+Route::get('/tasks/calendar', [TaskController::class, 'calendar'])->name('tasks.calendar');
+Route::get('tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('/task', [TaskController::class, 'store'])->name('tasks.store');
+Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::put('/tasks/{id}/edit', [TaskController::class, 'update'])->name('tasks.update');
 
 
 

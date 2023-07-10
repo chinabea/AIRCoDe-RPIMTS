@@ -44,10 +44,10 @@
     </section>
 
 
-    
+
     <div class="container">
-        <h1>Schedule Index</h1>
-        <a href="{{ route('schedules.create') }}" class="btn btn-primary">Add Task</a>
+        <h1>Task Index</h1>
+        <a href="{{ route('tasks.create') }}" class="btn btn-primary">Add Task</a>
         <div id="calendar"></div>
 
         <table class="table mt-4">
@@ -62,15 +62,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($schedules as $schedule)
+                @foreach ($tasks as $task)
                     <tr>
-                        <td>{{ $schedule->title }}</td>
-                        <td>{{ $schedule->description }}</td>
-                        <td>{{ $schedule->start_date }}</td>
-                        <td>{{ $schedule->end_date }}</td>
-                        <td>{{ $schedule->assignedTo->name }}</td>
+                        <td>{{ $task->title }}</td>
+                        <td>{{ $task->description }}</td>
+                        <td>{{ $task->start_date }}</td>
+                        <td>{{ $task->end_date }}</td>
+                        <td>{{ $task->assignedTo->name }}</td>
                         <td>
-                            <a href="{{ route('schedules.edit', $schedule) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('tasks.edit', $task) }}" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -267,13 +267,13 @@ var calendar = new Calendar(calendarEl, {
   },
   themeSystem: 'bootstrap',
   events: [
-    @foreach ($schedules as $schedule)
+    @foreach ($tasks as $task)
       {
-        title          : '{{ $schedule->title }}',
-        start          : '{{ $schedule->start_date }}',
-        end            : '{{ $schedule->end_date }}',
-        backgroundColor: '{{ $schedule->color }}',
-        borderColor    : '{{ $schedule->color }}',
+        title          : '{{ $task->title }}',
+        start          : '{{ $task->start_date }}',
+        end            : '{{ $task->end_date }}',
+        backgroundColor: '{{ $task->color }}',
+        borderColor    : '{{ $task->color }}',
       },
     @endforeach
   ],

@@ -3,28 +3,28 @@
 namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\Schedule;
+use App\Models\Task;
 use App\Models\UsersModel;
 
-class ScheduleController extends Controller
-{   
+class TaskController extends Controller
+{
     public function calendar()
     {
-        $schedules = Schedule::all();
-        return response()->json($schedules);
+        $tasks = Task::all();
+        return response()->json($tasks);
     }
-    
+
     public function index()
     {
-        $schedules = Schedule::all();
-        return view('schedules.index', compact('schedules'));
+        $tasks = Task::all();
+        return view('tasks.index', compact('tasks'));
     }
 
     public function create()
     {
         // Retrieve project members from the database and pass them to the view
         $members = UsersModel::all();
-        return view('schedules.create', compact('members'));
+        return view('tasks.create', compact('members'));
     }
 
     public function store(Request $request)
@@ -37,26 +37,26 @@ class ScheduleController extends Controller
             'assigned_to' => 'required',
         ]);
 
-        Schedule::create($validatedData);
+        Task::create($validatedData);
 
-        return redirect()->route('schedule')->with('success', 'Schedule created successfully.');
+        return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
 
     public function show($id)
     {
         // Retrieve and show the specific item using the provided ID
-        $schedules = Schedule::findOrFail($id);
+        $tasks = Task::findOrFail($id);
 
-        return view('schedules.show', compact('members'));
+        return view('tasks.show', compact('members'));
     }
     public function edit($id)
     {
-        $schedule = Schedule::findOrFail($id);
+        $task = Task::findOrFail($id);
         $members = UsersModel::all();
-        return view('schedules.edit', compact('schedule', 'members'));
+        return view('tasks.edit', compact('task', 'members'));
     }
-    
-    
+
+
 
     // public function update(Request $request, Schedule $schedule)
     // {
@@ -76,27 +76,20 @@ class ScheduleController extends Controller
 
     public function update(Request $request, $id)
     {
-        $schedule = Schedule::findOrFail($id);
+        $task = Task::findOrFail($id);
         // Update the item properties using the request data
-        $schedule->update($request->all());
-    
+        $task->update($request->all());
+
         // return redirect()->route('schedules.show', ['schedule' => $schedule->id])->with('success', 'Schedule updated successfully.');
-        
-        return redirect()->route('schedule')->with('success', 'Data Successfully Updated!');
+
+        return redirect()->route('task')->with('success', 'Data Successfully Updated!');
     }
 
 
-
-
-
-
-
-
-
-    public function destroy(Schedule $schedule)
+    public function destroy(Task $task)
     {
-        $schedule->delete();
+        $task->delete();
 
-        return redirect()->route('schedules.index')->with('success', 'Schedule deleted successfully.');
+        return redirect()->route('tasks.index')->with('success', 'Schedule deleted successfully.');
     }
 }

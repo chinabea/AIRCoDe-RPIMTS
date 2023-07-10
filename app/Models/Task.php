@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Schedule extends Model
+class Task extends Model
 {
 
-    // Define the table name if it differs from "schedules"
-    protected $table = 'schedules';
+    // Define the table name if it differs from "tasks"
+    protected $table = 'tasks';
 
     // Define the fillable attributes
     protected $fillable = [
@@ -19,7 +19,7 @@ class Schedule extends Model
         'end_date',
         'assigned_to',
     ];
-    
+
 
     protected $casts = [
         'start_date' => 'datetime',

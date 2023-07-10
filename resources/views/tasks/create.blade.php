@@ -1,4 +1,4 @@
-<!-- resources/views/schedules/create.blade.php -->
+<!-- resources/views/tasks/create.blade.php -->
 
 @extends('layouts.app')
 
@@ -8,10 +8,10 @@
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header">
-                        Create Schedule
+                        Create Task
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('schedules.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('tasks.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="title">Title</label>
@@ -42,7 +42,7 @@
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Create Schedule</button>
+                            <button type="submit" class="btn btn-primary">Create Task</button>
                         </form>
                     </div>
                 </div>
