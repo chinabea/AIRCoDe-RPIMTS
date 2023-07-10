@@ -70,7 +70,7 @@ Route::middleware(['auth', 'reviewer'])->group(function (){
 });
 
 // About Us
-Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts')->middleware('director');
+Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts');
 Route::get('/createabouts', [AboutusController::class, 'create'])->name('transparency.aboutus.create');
 Route::post('/storeabouts', [AboutusController::class, 'store'])->name('transparency.aboutus.store');
 Route::get('/showabouts/{id}', [AboutusController::class, 'show'])->name('transparency.aboutus.show');
@@ -238,12 +238,15 @@ Route::get('/scheduling', function () {
     return view('scheduling');
 });
 
-Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
+Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedules.index');
 Route::get('/schedules/calendar', [ScheduleController::class, 'calendar'])->name('schedules.calendar');
 Route::get('schedules/create', [ScheduleController::class, 'create'])->name('schedules.create');
-Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
-Route::get('/schedules/{schedules}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');
-Route::put('/schedules/{schedule}', [ScheduleController::class, 'update'])->name('schedules.update');
+Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedules.store');
+Route::get('/schedules/{id}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');
+Route::put('/schedules/{id}/edit', [ScheduleController::class, 'update'])->name('schedules.update');
+
+
+
 
 
 

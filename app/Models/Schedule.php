@@ -26,8 +26,6 @@ class Schedule extends Model
         'end_date' => 'datetime',
     ];
 
-
-    // Define the "assignedTo" relationship
     public function assignedTo()
     {
         return $this->belongsTo(User::class, 'assigned_to');

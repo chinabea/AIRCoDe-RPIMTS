@@ -30,7 +30,6 @@
                 <h3 class="card-title">Project</h3>
             </div>
             <div class="card-body">
-
             <form action="/editprojects/{{$projects->id}}" method="post">
                 @method('PUT')
                     @csrf

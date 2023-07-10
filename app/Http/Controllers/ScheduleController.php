@@ -23,7 +23,7 @@ class ScheduleController extends Controller
     public function create()
     {
         // Retrieve project members from the database and pass them to the view
-        $members = User::all();
+        $members = UsersModel::all();
         return view('schedules.create', compact('members'));
     }
 
@@ -39,7 +39,7 @@ class ScheduleController extends Controller
 
         Schedule::create($validatedData);
 
-        return redirect()->route('schedules.index')->with('success', 'Schedule created successfully.');
+        return redirect()->route('schedule')->with('success', 'Schedule created successfully.');
     }
 
     public function show($id)
@@ -49,11 +49,11 @@ class ScheduleController extends Controller
 
         return view('schedules.show', compact('members'));
     }
-    public function edit(Schedule $schedule)
+    public function edit($id)
     {
-        // $schedule = Schedule::findOrFail($id);
-        // $members = UsersModel::all();
-        return view('schedules.edit', compact('schedule'));
+        $schedule = Schedule::findOrFail($id);
+        $members = UsersModel::all();
+        return view('schedules.edit', compact('schedule', 'members'));
     }
     
     
@@ -74,23 +74,15 @@ class ScheduleController extends Controller
     // }
 
 
-    public function update(Request $request, Schedule $schedule)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'nullable',
-            'assigned_to' => 'required',
-            'end_date' => 'required|date|after_or_equal:' . Carbon::today()->format('Y-m-d'),
-        ]);
+        $schedule = Schedule::findOrFail($id);
+        // Update the item properties using the request data
+        $schedule->update($request->all());
     
-        $schedule->title = $request->input('title');
-        $schedule->description = $request->input('description');
-        $schedule->assigned_to = $request->input('assigned_to');
-        $schedule->end_date = $request->input('end_date');
-        // $schedule->save();
-        dd($schedule->save());
-    
-        return redirect()->route('schedules.show', ['schedule' => $schedule->id])->with('success', 'Schedule updated successfully.');
+        // return redirect()->route('schedules.show', ['schedule' => $schedule->id])->with('success', 'Schedule updated successfully.');
+        
+        return redirect()->route('schedule')->with('success', 'Data Successfully Updated!');
     }
 
 
