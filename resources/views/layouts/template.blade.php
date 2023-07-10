@@ -32,15 +32,13 @@
 <!-- icheck bootstrap -->
 <link rel="stylesheet" href="{{ asset('../../plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 <!-- daterange picker -->
-<link rel="stylesheet" href="{{ asset('../../plugins/daterangepicker/daterangepicker.css') }}">
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
-
+<link rel="stylesheet" href="{{ asset('../../plugins/daterangepicker/daterangepicker.css') }}">  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{{ asset('../plugins/fontawesome-free/css/all.min.css') }}">
+<!-- fullCalendar -->
+<link rel="stylesheet" href="{{ asset('../plugins/fullcalendar/main.css') }}">
+<!-- Theme style -->
+<link rel="stylesheet" href="{{ asset('../dist/css/adminlte.min.css') }}">
 
 </head>
 <body>

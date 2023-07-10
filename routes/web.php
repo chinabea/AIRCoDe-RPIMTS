@@ -13,6 +13,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProponentsController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ScheduleController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -233,6 +234,16 @@ Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.s
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
+Route::get('/scheduling', function () {
+    return view('scheduling');
+});
+
+Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
+Route::get('/schedules/calendar', [ScheduleController::class, 'calendar'])->name('schedules.calendar');
+Route::get('schedules/create', [ScheduleController::class, 'create'])->name('schedules.create');
+Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
+Route::get('/schedules/{schedules}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');
+Route::put('/schedules/{schedule}', [ScheduleController::class, 'update'])->name('schedules.update');
 
 
 

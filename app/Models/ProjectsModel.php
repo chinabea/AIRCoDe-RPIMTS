@@ -39,6 +39,11 @@ class ProjectsModel extends Model
     return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'reviewer_id');
     }
 
+    public function projectTeam()
+    {
+        return $this->hasOne(ProjectTeam::class);
+    }
+
 
 
 }
