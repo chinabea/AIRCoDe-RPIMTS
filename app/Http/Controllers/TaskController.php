@@ -29,15 +29,15 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        // return view('tasks.index', compact('tasks'));
-        return view('scheduling', compact('tasks'));
+        return view('tasks.index', compact('tasks'));
+        // return view('scheduling', compact('tasks'));
     }
 
     public function create()
     {
         // Retrieve project members from the database and pass them to the view
         $members = UsersModel::all();
-        return view('tasks.create', compact('members'));
+        return view('tasks.index', compact('members'));
     }
 
     public function store(Request $request)
@@ -51,6 +51,7 @@ class TaskController extends Controller
         ]);
 
         Task::create($validatedData);
+        // Task::create($request->all());
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
