@@ -8,6 +8,18 @@ use App\Models\UsersModel;
 
 class TaskController extends Controller
 {
+    public function getTasks(Request $request)
+    {
+        $start = $request->input('start');
+        $end = $request->input('end');
+
+        $tasks = Task::whereBetween('start_date', [$start, $end])
+            ->orWhereBetween('end_date', [$start, $end])
+            ->get();
+
+        return response()->json($tasks);
+    }
+
     public function calendar()
     {
         $tasks = Task::all();
@@ -17,7 +29,8 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        return view('tasks.index', compact('tasks'));
+        // return view('tasks.index', compact('tasks'));
+        return view('scheduling', compact('tasks'));
     }
 
     public function create()
@@ -56,8 +69,6 @@ class TaskController extends Controller
         return view('tasks.edit', compact('task', 'members'));
     }
 
-
-
     // public function update(Request $request, Schedule $schedule)
     // {
     //     $validatedData = $request->validate([
@@ -72,7 +83,6 @@ class TaskController extends Controller
 
     //     return redirect()->route('schedules.index')->with('success', 'Schedule updated successfully.');
     // }
-
 
     public function update(Request $request, $id)
     {

@@ -52,7 +52,7 @@
                   <h4 class="card-title">Draggable Events</h4>
                 </div>
                 <div class="card-body">
-                  <!-- the events -->
+                    events: [],
                   <div id="external-events">
                     <div class="external-event bg-success">Lunch</div>
                     <div class="external-event bg-warning">Go home</div>
@@ -70,20 +70,33 @@
                 <!-- /.card-body -->
               </div>
               <!-- /.card -->
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Create Task</h3>
+                </div>
+                <div class="card-body">
+                  <!-- Input for task title -->
+                  <div class="input-group">
+                    <input id="new-task-title" type="text" class="form-control" placeholder="Task Title">
+                  </div>
+
+                  <!-- Input for task date -->
+                  <div class="input-group mt-3">
+                    <input id="new-task-date" type="text" class="form-control" placeholder="Task Date">
+                  </div>
+
+                  <!-- Button to add new task -->
+                  <div class="input-group mt-3">
+                    <button id="add-new-task" type="button" class="btn btn-primary">Add Task</button>
+                  </div>
+                </div>
+              </div>
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">Create Event</h3>
                 </div>
-                <div class="card-body">
-                  <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
-                    <ul class="fc-color-picker" id="color-chooser">
-                      <li><a class="text-primary" href="#"><i class="fas fa-square"></i></a></li>
-                      <li><a class="text-warning" href="#"><i class="fas fa-square"></i></a></li>
-                      <li><a class="text-success" href="#"><i class="fas fa-square"></i></a></li>
-                      <li><a class="text-danger" href="#"><i class="fas fa-square"></i></a></li>
-                      <li><a class="text-muted" href="#"><i class="fas fa-square"></i></a></li>
-                    </ul>
-                  </div>
+
                   <!-- /btn-group -->
                   <div class="input-group">
                     <input id="new-event" type="text" class="form-control" placeholder="Event Title">
@@ -152,29 +165,7 @@
 
     /* initialize the external events
      -----------------------------------------------------------------*/
-    function ini_events(ele) {
-      ele.each(function () {
 
-        // create an Event Object (https://fullcalendar.io/docs/event-object)
-        // it doesn't need to have a start or end
-        var eventObject = {
-          title: $.trim($(this).text()) // use the element's text as the event title
-        }
-
-        // store the Event Object in the DOM element so we can get to it later
-        $(this).data('eventObject', eventObject)
-
-        // make the event draggable using jQuery UI
-        $(this).draggable({
-          zIndex        : 1070,
-          revert        : true, // will cause the event to go back to its
-          revertDuration: 0  //  original position after the drag
-        })
-
-      })
-    }
-
-    ini_events($('#external-events div.external-event'))
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
@@ -195,16 +186,14 @@
     // -----------------------------------------------------------------
 
     new Draggable(containerEl, {
-      itemSelector: '.external-event',
-      eventData: function(eventEl) {
-        return {
-          title: eventEl.innerText,
-          backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
-          borderColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
-          textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),
-        };
-      }
+    itemSelector: '.external-event',
+    eventData: function(eventEl) {
+        // Code for converting the external event to eventObject
+    },
+    // Add the following line to prevent dragging of external events
+    dragRevert: true
     });
+
 
     var calendar = new Calendar(calendarEl, {
       headerToolbar: {
@@ -214,52 +203,17 @@
       },
       themeSystem: 'bootstrap',
       //Random default events
-      events: [
-        {
-          title          : 'All Day Event',
-          start          : new Date(y, m, 1),
-          backgroundColor: '#f56954', //red
-          borderColor    : '#f56954', //red
-          allDay         : true
-        },
-        {
-          title          : 'Long Event',
-          start          : new Date(y, m, d - 5),
-          end            : new Date(y, m, d - 2),
-          backgroundColor: '#f39c12', //yellow
-          borderColor    : '#f39c12' //yellow
-        },
-        {
-          title          : 'Meeting',
-          start          : new Date(y, m, d, 10, 30),
-          allDay         : false,
-          backgroundColor: '#0073b7', //Blue
-          borderColor    : '#0073b7' //Blue
-        },
-        {
-          title          : 'Lunch',
-          start          : new Date(y, m, d, 12, 0),
-          end            : new Date(y, m, d, 14, 0),
-          allDay         : false,
-          backgroundColor: '#00c0ef', //Info (aqua)
-          borderColor    : '#00c0ef' //Info (aqua)
-        },
-        {
-          title          : 'Birthday Party',
-          start          : new Date(y, m, d + 1, 19, 0),
-          end            : new Date(y, m, d + 1, 22, 30),
-          allDay         : false,
-          backgroundColor: '#00a65a', //Success (green)
-          borderColor    : '#00a65a' //Success (green)
-        },
-        {
-          title          : 'Click for Google',
-          start          : new Date(y, m, 28),
-          end            : new Date(y, m, 29),
-          url            : 'https://www.google.com/',
-          backgroundColor: '#3c8dbc', //Primary (light-blue)
-          borderColor    : '#3c8dbc' //Primary (light-blue)
-        }
+    //   <!-- the events -->
+                  events: [
+                    @foreach($tasks as $task)
+                    {
+                        title: '{{ $task->name }}',
+                        start: '{{ $task->task_date }}',
+                        backgroundColor: '{{ $task->color }}',
+                        borderColor: '{{ $task->color }}',
+                        url: '{{ route('tasks.edit', $task->id) }}'
+                    },
+                    @endforeach
       ],
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
@@ -274,6 +228,74 @@
 
     calendar.render();
     // $('#calendar').fullCalendar()
+
+    $('#add-new-task').click(function (e) {
+  e.preventDefault();
+  var taskTitle = $('#new-task-title').val();
+  var taskDate = $('#new-task-date').val();
+
+  if (taskTitle.length == 0 || taskDate.length == 0) {
+    return;
+  }
+
+  // Make an AJAX request to create the task in Laravel
+  $.ajax({
+    url: '{{ route('tasks.store') }}',
+    type: 'POST',
+    data: {
+      title: taskTitle,
+      date: taskDate,
+      // Additional data if needed
+    },
+    success: function(response) {
+      // Handle the success response (e.g., display a success message)
+      console.log(response);
+
+        // Create an event object for the new task
+        var newTaskEvent = {
+        title: response.title,
+        start: response.date,
+        backgroundColor: response.color,
+        borderColor: response.color,
+        url: '{{ route('tasks.edit', '') }}' + '/' + response.id
+        };
+
+        // Add the new task event to the calendar
+        calendar.addEvent(newTaskEvent);
+    },
+    error: function(error) {
+      // Handle the error response (e.g., display an error message)
+      console.log(error);
+    }
+  });
+
+  // Clear the input fields
+  $('#new-task-title').val('');
+  $('#new-task-date').val('');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* ADDING EVENTS */
     var currColor = '#3c8dbc' //Red by default

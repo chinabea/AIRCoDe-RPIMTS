@@ -14,6 +14,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProponentsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\FullCalenderController;
+use App\Http\Controllers\TasksController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -86,11 +88,9 @@ Route::get('/showprojects/{id}', [ProjectsController::class, 'show'])->name('pro
 Route::get('/editprojects/{id}', [ProjectsController::class, 'edit'])->name('proponents.projects.edit');
 Route::put('/editprojects/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
 Route::delete('/deleteprojects/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
-// Route::put('/projects/{id}/status', [ProjectsController::class, 'updateStatus'])->name('projects.update_status');
-// Example route for updating project status
+
+// update project status
 Route::put('/projects/{id}', [ProjectsController::class, 'updateStatus']);
-
-
 
 Route::get('reviewer', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
 
@@ -148,12 +148,6 @@ Route::get('/showproponents/{id}', [ProponentsController::class, 'show'])->name(
 Route::get('/editproponents/{id}', [ProponentsController::class, 'edit'])->name('proponents.admin-proponents.edit');
 Route::put('/editproponents/{id}', [ProponentsController::class, 'update'])->name('proponents.admin-proponents.update');
 Route::delete('/deleteproponents/{id}', [ProponentsController::class, 'destroy'])->name('proponents.admin-proponents.destroy');
-
-
-// Eloquent samples only
-// emailing
-// routing with middleware
-
 
 // Proponents
 Route::get('/draft', [DraftController::class, 'index'])->name('draft');
@@ -222,9 +216,6 @@ Route::put('/proponents/{proponent}', [ProponentsController::class, 'update'])->
 Route::get('send', [HomeController::class, 'sendNotification']);
 
 
-
-
-
 Route::get('/contacts', function () {
     return view('contact');
 });
@@ -234,9 +225,10 @@ Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.s
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
-Route::get('/scheduling', function () {
-    return view('scheduling');
-});
+// Route::get('/scheduling', function () {
+//     return view('scheduling');
+// });
+Route::get('/scheduling', [TaskController::class, 'index']);
 
 Route::get('/task', [TaskController::class, 'index'])->name('tasks.index');
 Route::get('/tasks/calendar', [TaskController::class, 'calendar'])->name('tasks.calendar');
@@ -244,6 +236,26 @@ Route::get('tasks/create', [TaskController::class, 'create'])->name('tasks.creat
 Route::post('/task', [TaskController::class, 'store'])->name('tasks.store');
 Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::put('/tasks/{id}/edit', [TaskController::class, 'update'])->name('tasks.update');
+
+Route::get('fullcalender', [FullCalenderController::class, 'index'])->name('fullcalender');
+Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
