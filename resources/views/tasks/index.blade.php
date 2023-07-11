@@ -40,11 +40,8 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
-
-
     <div class="container">
         <h1>Task Index</h1>
         <a href="{{ route('tasks.create') }}" class="btn btn-primary">Add Task</a>
@@ -87,11 +84,6 @@
             calendar.render();
         });
     </script>
-
-
-
-
-
 
     <!-- Main content -->
     <section class="content">
