@@ -30,15 +30,15 @@ class TaskController extends Controller
     {
         $tasks = Task::all();
         return view('tasks.index', compact('tasks'));
-        // return view('scheduling', compact('tasks'));
     }
 
     public function create()
     {
-        // Retrieve project members from the database and pass them to the view
-        $members = UsersModel::all();
-        return view('tasks.index', compact('members'));
+        $tasks = Task::all();
+        $members = UsersModel::where('role', 3)->get();
+        return view('tasks.create', compact('tasks', 'members'));
     }
+
 
     public function store(Request $request)
     {
@@ -97,10 +97,12 @@ class TaskController extends Controller
     }
 
 
-    public function destroy(Task $task)
+    public function destroy($id)
     {
+        $task = Task::findOrFail($id);
         $task->delete();
 
         return redirect()->route('tasks.index')->with('success', 'Schedule deleted successfully.');
     }
+
 }
