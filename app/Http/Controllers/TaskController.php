@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Notifications\TaskDeadlineNotification;
 use App\Models\UsersModel;
+use Illuminate\Support\Facades\Notification;
 
 class TaskController extends Controller
 {
@@ -50,8 +52,16 @@ class TaskController extends Controller
             'assigned_to' => 'required',
         ]);
 
-        Task::create($validatedData);
-        // Task::create($request->all());
+        $task = Task::create($validatedData);
+
+        // Send notification if the task deadline is in the future
+        if ($task->end_date > Carbon::now()) {
+            // Retrieve the user associated with the task
+            $user = $task->assignedUser;
+
+            // Send the notification to the user
+            Notification::send($user, new TaskDeadlineNotification($task));
+        }
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
