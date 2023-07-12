@@ -9,25 +9,12 @@ use App\Models\UsersModel;
 use Illuminate\Support\Facades\Notification;
 
 class TaskController extends Controller
-{
-    public function getTasks(Request $request)
+{protected $task;
+
+    public function __construct(Task $task)
     {
-        $start = $request->input('start');
-        $end = $request->input('end');
-
-        $tasks = Task::whereBetween('start_date', [$start, $end])
-            ->orWhereBetween('end_date', [$start, $end])
-            ->get();
-
-        return response()->json($tasks);
+        $this->task = $task;
     }
-
-    public function calendar()
-    {
-        $tasks = Task::all();
-        return response()->json($tasks);
-    }
-
     public function index()
     {
         $tasks = Task::all();
