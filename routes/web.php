@@ -91,7 +91,6 @@ Route::delete('/deleteprojects/{id}', [ProjectsController::class, 'destroy'])->n
 
 // update project status
 Route::put('/projects/{id}', [ProjectsController::class, 'updateStatus']);
-
 Route::get('reviewer', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
 
 
@@ -225,9 +224,6 @@ Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.s
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
-// Route::get('/scheduling', function () {
-//     return view('scheduling');
-// });
 Route::get('/scheduling', [TaskController::class, 'index']);
 
 Route::get('/task', [TaskController::class, 'index'])->name('tasks.index');
@@ -240,6 +236,11 @@ Route::put('/tasks/{id}/edit', [TaskController::class, 'update'])->name('tasks.u
 Route::get('fullcalender', [FullCalenderController::class, 'index'])->name('fullcalender');
 Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
 
+
+
+Route::get('/sample', function () {
+    return view('sample');
+});
 
 
 
