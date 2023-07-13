@@ -45,28 +45,28 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'director'])->group(function (){
     Route::get('director', function () {
-        return view('director.dashboard');
+        return view('dashboard');
     })->name('director');
 
 });
 
 Route::middleware(['auth', 'staff'])->group(function (){
     Route::get('/staff', function () {
-        return view('staff.dashboard');
+        return view('dashboard');
     })->name('staff');
 
 });
 
 Route::middleware(['auth', 'researcher'])->group(function (){
     Route::get('/researcher', function () {
-        return view('researcher.dashboard');
+        return view('dashboard');
     })->name('researcher');
 
 });
 
 Route::middleware(['auth', 'reviewer'])->group(function (){
     Route::get('/reviewer', function () {
-        return view('reviewer.dashboard');
+        return view('dashboard');
     })->name('reviewer');
 
 });

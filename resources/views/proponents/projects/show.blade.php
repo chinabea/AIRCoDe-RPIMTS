@@ -230,53 +230,156 @@
     </div>
 
     <form id="actions-form" class="mt-4" style="display: none;">
-    <h3>Actions Form</h3>
     <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+            ACTIONS
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
 
     <form id="details-form" class="mt-4" style="display: none;">
-      <h3>Details Form</h3>
-      <!-- Form fields go here -->
+    <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+            DETAILS
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
 
     <form id="lib-form" class="mt-4" style="display: none;">
-    <h3>LIB Form</h3>
     <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+          LINE-ITEM BUDGET
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
 
     <form id="classifications-form" class="mt-4" style="display: none;">
-    <h3>Classifications Form</h3>
-    <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+                CLASSIFICATIONS
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
 
     <form id="files-form" class="mt-4" style="display: none;">
-    <h3>Files Form</h3>
-    <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+                FILES
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
 
     <form id="messages-form" class="mt-4" style="display: none;">
-    <h3>Messages Form</h3>
-    <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+                MESSAGES
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
 
     <form id="project-team-form" class="mt-4" style="display: none;">
-    <h3>Project Team Form</h3>
-    <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+                PROJECT TEAM
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
 
     <form id="status-form" class="mt-4" style="display: none;">
-      <h3>Status Form</h3>
-      <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+                STATUS
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
 
     <form id="cash-program-form" class="mt-4" style="display: none;">
-    <h3>Cash Program Form</h3>
-    <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+                CASH PROGRAM
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
 
     <form id="reprogramming-status-form" class="mt-4" style="display: none;">
-    <h3>Reprogramming Status Form</h3>
-    <!-- Form fields go here -->
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+                REPROGRAMMING STATUS
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+
+
+        </div>
+      </div>
+    </div>
     </form>
   </div>
 
