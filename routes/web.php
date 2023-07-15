@@ -16,6 +16,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\ProjectTeamController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -79,16 +80,6 @@ Route::get('/about/show/{id}', [AboutusController::class, 'show'])->name('transp
 Route::get('/about/edit/{id}', [AboutusController::class, 'edit'])->name('transparency.aboutus.edit');
 Route::put('/about/edit/{id}', [AboutusController::class, 'update'])->name('transparency.aboutus.update');
 Route::delete('/about/delete/{id}', [AboutusController::class, 'destroy'])->name('transparency.aboutus.destroy');
-
-// Projects
-Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
-Route::get('/project/create', [ProjectsController::class, 'create'])->name('proponents.projects.create');
-Route::post('/project/store', [ProjectsController::class, 'store'])->name('proponents.projects.store');
-Route::get('/project/show/{id}', [ProjectsController::class, 'show'])->name('proponents.projects.show');
-Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('proponents.projects.edit');
-Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
-Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
-
 
 Route::post('/proponents/projects/storeReviewer', [ProjectsController::class, 'storeReviewer'])->name('proponents.projects.storeReviewer');
 
@@ -229,13 +220,23 @@ Route::get('fullcalender', [FullCalenderController::class, 'index'])->name('full
 Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
 
 
-Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('projects.approved-projects.index');
-Route::get('/items/create', [ProjectTeamController::class, 'create'])->name('items.create');
-Route::post('/items', [ProjectTeamController::class, 'store'])->name('items.store');
-Route::get('/items/{id}', [ProjectTeamController::class, 'show'])->name('items.show');
-Route::get('/items/{id}/edit', [ProjectTeamController::class, 'edit'])->name('items.edit');
-Route::put('/items/{id}', [ProjectTeamController::class, 'update'])->name('items.update');
-Route::delete('/items/{id}', [ProjectTeamController::class, 'destroy'])->name('items.destroy');
+// Projects
+Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
+Route::get('/project/create', [ProjectsController::class, 'create'])->name('proponents.projects.create');
+Route::post('/project/store', [ProjectsController::class, 'store'])->name('proponents.projects.store');
+Route::get('/project/show/{id}', [ProjectsController::class, 'show'])->name('proponents.projects.show');
+Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('proponents.projects.edit');
+Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
+Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
+
+
+Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('project-teams');
+Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('proponents.projects.approved-projects.create');
+Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('proponents.projects.approved-projects.store');
+Route::get('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name('proponents.projects.approved-projects.show');
+Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('proponents.projects.approved-projects.edit');
+Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('proponents.projects.approved-projects.update');
+Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('proponents.projects.approved-projects.destroy');
 
 
 
