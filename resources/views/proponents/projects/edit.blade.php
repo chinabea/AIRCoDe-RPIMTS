@@ -1,11 +1,6 @@
 <form action="{{ route('proponents.projects.storeReviewer') }}" method="POST"  enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-        <label for="projname">Project Title</label>
-        <input type="text" name="projname" id="projname" class="form-control" readonly>
-    </div>
-
-    <div class="form-group">
         <label for="reviewers">Project Reviewers</label>
         <select name="reviewers[]" id="reviewers" class="form-control custom-select" required>
             <option disabled>Select reviewers</option>
