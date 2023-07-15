@@ -1,43 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Notifications\ProjectNotification;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
-use App\Models\ProjectsModel;
-use App\Models\UsersModel;
-use App\Models\User;
-use App\Models\ProjectReviewerModel;
 
-class ProjectsController extends Controller
+class ProjectTeamController extends Controller
 {
-    public function selectReviewers()
-    {
-    $users = UsersModel::where('role', 4)->get();
-
-    return view('proponents.projects.reviewer', compact('users'));
-    }
 
     public function index()
     {
-        $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
-        $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
+        $team = ProjectTeamModel::orderBy('created_at', 'ASC')->get();
 
-    
-        return view('proponents.projects.index', compact('records','reviewers'));
+        return view('projects.approved-projects.project-team', compact('team'));
     }
-    
     
     public function create()
     {
         $project = new ProjectsModel(); 
-    
         $users = User::all();
-    
-        // Notification::send($users, new ProjectNotification($project->id));
 
-        return view('proponents.projects.create');
+        return view('projects.approved-projects.project-team');
     }
 
     public function store(Request $request)
@@ -127,26 +109,6 @@ class ProjectsController extends Controller
         
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $projects = ProjectsModel::findOrFail($id);
-
-    //     // Check the user's role
-    //     $userRole = Auth::user()->role;
-
-    //     if ($userRole === 'director' || $userRole === 'staff') {
-    //         // Update all attributes except 'status'
-    //         $projects->fill($request->except('status'));
-    //     } elseif ($userRole === 'researcher') {
-    //         // Only update the 'status' attribute
-    //         $projects->status = $request->input('status');
-    //     }
-
-    //     $projects->save();
-
-    //     return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
-    // }
-
 
     public function destroy($id)
     {
@@ -163,6 +125,8 @@ class ProjectsController extends Controller
     
         // Rest of the code
     }
-    
+
+
+
 
 }

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('role');
             // Other project team columns...
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('user_id')->references('id')->on('users');

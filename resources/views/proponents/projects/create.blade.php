@@ -55,6 +55,8 @@
                       <input type="text" id="authors" name="authors" class="form-control"
                       placeholder="Names of Author">
                     </div>
+
+
                     <div class="form-group">
                       <label for="introduction">Introduction</label>
                       <textarea id="introduction" name="introduction" class="form-control" rows="4"

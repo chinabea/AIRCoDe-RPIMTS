@@ -90,7 +90,7 @@ Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('p
 Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
 
 
-Route::post('/proponents/projects/{project}/storeReviewer', [ProjectsController::class, 'storeReviewer'])->name('proponents.projects.storeReviewer');
+Route::post('/proponents/projects/storeReviewer', [ProjectsController::class, 'storeReviewer'])->name('proponents.projects.storeReviewer');
 
 // update project status
 Route::put('/projects/{id}', [ProjectsController::class, 'updateStatus']);
@@ -229,11 +229,13 @@ Route::get('fullcalender', [FullCalenderController::class, 'index'])->name('full
 Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
 
 
-
-Route::get('/sample', function () {
-    return view('sample');
-});
-
+Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('projects.approved-projects.index');
+Route::get('/items/create', [ProjectTeamController::class, 'create'])->name('items.create');
+Route::post('/items', [ProjectTeamController::class, 'store'])->name('items.store');
+Route::get('/items/{id}', [ProjectTeamController::class, 'show'])->name('items.show');
+Route::get('/items/{id}/edit', [ProjectTeamController::class, 'edit'])->name('items.edit');
+Route::put('/items/{id}', [ProjectTeamController::class, 'update'])->name('items.update');
+Route::delete('/items/{id}', [ProjectTeamController::class, 'destroy'])->name('items.destroy');
 
 
 

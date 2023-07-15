@@ -64,29 +64,13 @@
                                 <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
                                 <td class="align-middle">{{ $record->status }}</td>
                             
-                                @if ($record->reviewers->isEmpty())
-                                    <td class="align-middle">
-                                    <form action="{{ route('proponents.projects.storeReviewer') }}" method="POST"  enctype="multipart/form-data">
-                                      @csrf
-                                      <div class="form-group">
-                                          <label for="reviewers">Project Reviewers</label>
-                                          <select name="reviewers[]" id="reviewers" class="form-control custom-select" required>
-                                              <option disabled>Select reviewers</option>
-                                              @foreach ($reviewers as $reviewer)
-                                                  <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                                              @endforeach
-                                          </select>
-                                      </div>
-
-                                      <button type="submit" class="btn btn-primary">Create Project</button>
-                                  </form>
-                                    </td>
-                                @else
-                                    @foreach ($record->reviewers as $reviewer)
-                                        <td class="align-middle">{{ $reviewer->id }}</td>
-                                    @endforeach
-                                @endif
-
+                                <td class="align-middle">
+                                            @foreach($reviewers as $reviewer)
+                                                <p>{{ $reviewer->name }}</p>
+                                            @endforeach
+                                </td>
+                                    
+                                
                               <td class="align-middle">RSC</td>
                               <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
