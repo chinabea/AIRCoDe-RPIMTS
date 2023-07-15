@@ -223,15 +223,14 @@ Route::get('/contact/create', [ContactController::class, 'create'])->name('conta
 Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-
-Route::get('/scheduling', [TaskController::class, 'index']);
-
 Route::get('/task', [TaskController::class, 'index'])->name('tasks.index');
 Route::get('/tasks/calendar', [TaskController::class, 'calendar'])->name('tasks.calendar');
 Route::get('tasks/create', [TaskController::class, 'create'])->name('tasks.create');
 Route::post('/task', [TaskController::class, 'store'])->name('tasks.store');
 Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::put('/tasks/{id}/edit', [TaskController::class, 'update'])->name('tasks.update');
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.delete');
+
 
 Route::get('fullcalender', [FullCalenderController::class, 'index'])->name('fullcalender');
 Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);

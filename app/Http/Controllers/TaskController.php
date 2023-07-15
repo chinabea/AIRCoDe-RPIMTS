@@ -4,41 +4,30 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Notifications\TaskDeadlineNotification;
 use App\Models\UsersModel;
+use Illuminate\Support\Facades\Notification;
 
 class TaskController extends Controller
-{
-    public function getTasks(Request $request)
+{protected $task;
+
+    public function __construct(Task $task)
     {
-        $start = $request->input('start');
-        $end = $request->input('end');
-
-        $tasks = Task::whereBetween('start_date', [$start, $end])
-            ->orWhereBetween('end_date', [$start, $end])
-            ->get();
-
-        return response()->json($tasks);
+        $this->task = $task;
     }
-
-    public function calendar()
-    {
-        $tasks = Task::all();
-        return response()->json($tasks);
-    }
-
     public function index()
     {
         $tasks = Task::all();
         return view('tasks.index', compact('tasks'));
-        // return view('scheduling', compact('tasks'));
     }
 
     public function create()
     {
-        // Retrieve project members from the database and pass them to the view
-        $members = UsersModel::all();
-        return view('tasks.index', compact('members'));
+        $tasks = Task::all();
+        $members = UsersModel::where('role', 3)->get();
+        return view('tasks.create', compact('tasks', 'members'));
     }
+
 
     public function store(Request $request)
     {
@@ -50,8 +39,16 @@ class TaskController extends Controller
             'assigned_to' => 'required',
         ]);
 
-        Task::create($validatedData);
-        // Task::create($request->all());
+        $task = Task::create($validatedData);
+
+        // Send notification if the task deadline is in the future
+        if ($task->end_date > Carbon::now()) {
+            // Retrieve the user associated with the task
+            $user = $task->assignedUser;
+
+            // Send the notification to the user
+            Notification::send($user, new TaskDeadlineNotification($task));
+        }
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
@@ -97,10 +94,12 @@ class TaskController extends Controller
     }
 
 
-    public function destroy(Task $task)
+    public function destroy($id)
     {
+        $task = Task::findOrFail($id);
         $task->delete();
 
         return redirect()->route('tasks.index')->with('success', 'Schedule deleted successfully.');
     }
+
 }

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Calendar</title>
+  <title>Tasks</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -52,8 +52,8 @@
                 <tr>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
+                    <th>Date</th>
+                    <th>Deadline</th>
                     <th>Assigned To</th>
                     <th>Actions</th>
                 </tr>
@@ -68,46 +68,22 @@
                         <td>{{ $task->assignedTo->name }}</td>
                         <td>
                             <a href="{{ route('tasks.edit', $task) }}" class="btn btn-primary">Edit</a>
+                            <form action="{{ route('tasks.delete', $task->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Delete?')">Delete</button>
+                            </form>
+
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
-<script>
-    $(document).ready(function() {
-        // page is now ready, initialize the calendar...
-        $('#calendar').fullCalendar({
-            // put your options and callbacks here
-            events : [
-                @foreach($tasks as $task)
-                {
-                    title : '{{ $task->name }}',
-                    start : '{{ $task->task_date }}',
-                    url : '{{ route('tasks.edit', $task->id) }}'
-                },
-                @endforeach
-            ]
-        })
-    });
-</script>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const calendarEl = document.getElementById('calendar');
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-            });
-            calendar.render();
-        });
-    </script>
+    <div class="calendar"></div>
 
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
