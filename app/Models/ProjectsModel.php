@@ -34,15 +34,23 @@ class ProjectsModel extends Model
     //                 ->limit(3);
     // }
 
-    public function reviewers()
-    {
-    return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'reviewer_id');
-    }
+    // public function reviewers()
+    // {
+    // return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'reviewer_id');
+    // }
 
     public function projectTeam()
     {
         return $this->hasOne(ProjectTeam::class);
     }
+
+    public function reviewers()
+    {
+        return $this->belongsToMany(User::class, 'project_reviewer', 'project_id', 'user_id')
+                    ->wherePivot('role', 4)
+                    ->withPivot('role');
+    }
+
 
 
 

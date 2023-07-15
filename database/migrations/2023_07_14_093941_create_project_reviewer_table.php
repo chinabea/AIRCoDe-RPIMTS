@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('project_reviewer', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('user_id');
+            $table->integer('role');
+            // Other project team columns...
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
-
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

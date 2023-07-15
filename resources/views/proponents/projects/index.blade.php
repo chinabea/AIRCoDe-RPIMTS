@@ -39,7 +39,7 @@
                     </div>
                 @endif
 
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped table-sm">
                     <thead>
                     <tr>
                       <th>#</th>
@@ -63,27 +63,28 @@
                                 <td class="align-middle">{{ $record->researchgroup }}</td>
                                 <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
                                 <td class="align-middle">{{ $record->status }}</td>
-                              <td>
-                              </td>
+                            
+                                @if ($record->reviewers->isEmpty())
+                                    <td class="align-middle">
+                                        <select name="reviewers[]" id="reviewers" class="form-control custom-select">
+                                            <option disabled selected>Select reviewer</option>
+                                            @foreach ($reviewers as $reviewer)
+                                                <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                @else
+                                    @foreach ($record->reviewers as $reviewer)
+                                        <td class="align-middle">{{ $reviewer->id }}</td>
+                                    @endforeach
+                                @endif
+
                               <td class="align-middle">RSC</td>
                               <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{ route('proponents.projects.show', $record->id) }}" type="button" class="btn btn-secondary">Details</a>
                                         <a href="{{ route('proponents.projects.edit', $record->id) }}"  type="button" class="btn btn-warning">Edit</a>
-                                        {{-- <form action="{{ route('transparency.aboutus.destroy', $record->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger">Delete</button>
-                                        </form> --}}
-
-
-                                        {{-- <form action="{{ route('transparency.aboutus.destroy', $record->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('delete')
-                                            <a type="button" class="btn btn-danger" onclick="return confirm('Delete?')">Delete</a>
-                                        </form> --}}
-
-
+              
                                         <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('proponents.projects.destroy', $record->id) }}')">Delete</button>
 
                                         <script>
@@ -109,16 +110,6 @@
                                 </tr>
                             @endif
                     </tbody>
-                    <!-- <tfoot>
-                        <tr>
-                        <th>#</th>
-                        <th>Project Title</th>
-                        <th>Project Details</th>
-                        <th>Reviewers</th>
-                        <th>Summarized ? (Status)</th>
-                        <th>Action(s)</th>
-                        </tr>
-                    </tfoot> -->
                 </table>
 
                 </div>
