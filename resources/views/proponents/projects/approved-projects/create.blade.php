@@ -35,15 +35,16 @@
                       </button>
                     </div>
                   </div>
-                  <form action="{{ route('proponents.projects.approved-projects.create') }}" method="POST" enctype="multipart/form-data">
-                    @csrf    
+                  <form method="post" action="{{ route('proponents.projects.approved-projects.store') }}" enctype="multipart/form-data">
+                  {{ method_field('POST') }}
+                  @csrf    
                         <div class="form-group col-md-6">
                             <label for="member_name">Name:</label>
-                            <input type="text" id="member_name" name="name" required><br>
+                            <input type="text" id="member_name" name="member_name" required><br>
                         </div>
 
-                        <label for="inputPassword4">Role</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <label for="role">Role</label>
+                        <select class="form-control" name="role" id="role">
                             <option disable>Select Role</option>
                             <option>Project Leader</option>
                             <option>Database Designer</option>
