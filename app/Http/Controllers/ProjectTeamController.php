@@ -8,79 +8,91 @@ use App\Models\ProjectsModel;
 
 class ProjectTeamController extends Controller
 {
-
     public function index()
     {
-        $team = ProjectTeamModel::orderBy('created_at', 'ASC')->get();
+        $project_team = ProjectTeamModel::orderBy('created_at', 'DESC')->get();
 
-        return view('proponents.projects.approved-projects.index', compact('team'));
+        return view('project-teams.index', compact('project_team'));
     }
-    
+
     public function create()
     {
-        $project_team = new ProjectTeamModel(); 
-        return view('proponents.projects.approved-projects.create');
+        return view('project-teams.create');
     }
-
-    // public function store(Request $request)
-    // {
-    //     ProjectTeamModel::create($request->all());
-    
-    //     return redirect()->route('proponents.projects.approved-projects.create')->with('success', 'Data Successfully Added!');
-    // }
 
     public function store(Request $request)
     {
-        
-        // Get the project ID from the request or any other source
-        // $projectId = $request->input('project_id');
+        $projectId = $request->input('project_id', 1); 
+        $requestData = $request->all();
+        // dd($request->all());
+        $requestData['project_id'] = $projectId;
 
-        $projectId = 1; // Replace with the actual project ID you want to associate the reviewers with
-        $project = ProjectsModel::findOrFail($projectId);
+        ProjectTeamModel::create($requestData);
 
-        $projectTeam = ProjectTeamModel::create($request->all());
-        
-        // Associate the project ID with the project team
-        $projectTeam->project()->associate($projectId);
-        $projectTeam->save();
-
-        return redirect()->route('proponents.projects.approved-projects.index')->with('success', 'Data Successfully Added!');
+        // Redirect or perform other actions
+        return redirect()->route('project-teams')->with('success', 'Data Successfully Added!');
     }
-
-    
 
     public function show($id)
     {
-        $projectteam = ProjectTeamModel::findOrFail($id);
-
-        return view('proponents.projects.show', compact('projects','reviewers'));
+        $project_team = ProjectTeamModel::findOrFail($id);
+        return view('show', compact('project_team'));
     }
+    
 
     public function edit($id)
     {
-        $projectteam = ProjectTeamModel::findOrFail($id);
+        $project_team = ProjectTeamModel::findOrFail($id);
 
         return view('proponents.projects.edit', compact('projects', 'reviewers'));
     }
 
+    // public function update(Request $request, $id)
+    // {
+    //     $project_teams = ProjectTeamModel::findOrFail($id);
+    //     $project_teams->update($request->all());
 
+    //     return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
+        
+    // }
+
+    // public function destroy($id)
+    // {
+    //     $project_teams = ProjectTeamModel::findOrFail($id);
+    //     $project_teams->delete();
+
+    //     return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
+    // }
+
+    
+    // Update a project team member
     public function update(Request $request, $id)
     {
-        $projectteam = ProjectTeamModel::findOrFail($id);
-        $projectteam->update($request->all());
+        // Find the project team member by their ID
+        $projectTeam = ProjectTeam::find($id);
 
-        return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
-        
+        // Update the member name and role based on the form input
+        $projectTeam->member_name = $request->input('member_name');
+        $projectTeam->role = $request->input('role');
+
+        // Save the updated project team member
+        $projectTeam->save();
+
+        // Redirect the user or perform other actions as needed
+        return redirect()->back()->with('success', 'Project team member updated successfully.');
     }
 
-
+    // Delete a project team member
     public function destroy($id)
     {
-        $projectteam = AnnouncementsModel::findOrFail($id);
-        $projectteam->delete();
+        // Find the project team member by their ID
+        $projectTeam = ProjectTeam::find($id);
 
-        return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
+        // Delete the project team member
+        $projectTeam->delete();
+
+        // Redirect the user or perform other actions as needed
+        return redirect()->back()->with('success', 'Project team member deleted successfully.');
     }
-
 
 }

@@ -218,7 +218,7 @@
             </div>
           </div>
 
-  <div class="container mt-5">
+  <div class="col-md-12">
     <div class="text-center">
       <button id="actions-btn" class="btn btn-primary">Actions</button>
       <button id="details-btn" class="btn btn-primary">Details</button>
@@ -325,42 +325,41 @@
     </div>
     </form>
 
-    <form id="project-team-form" class="mt-4" style="display: none;">
-    <div class="col-md-12">
-      <div class="card card-primary card-outline">
-        <div class="card-header">
+    <div id="project-team-form" class="mt-4" style="display: none;">
+        <div class="col-md-12">
+          <div class="card card-primary card-outline">
+            <div class="card-header">
                 PROJECT TEAM
-          </h3>
-        </div>
-        <div class="card-body pad table-responsive">
-
-        <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Name</label>
-              <input type="email" class="form-control" id="inputEmail4">
             </div>
-            <div class="form-group col-md-6">
-              <label for="inputPassword4">Role</label>
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option disable>Select Role</option>
-                <option>Project Leader</option>
-                <option>Database Designer</option>
-                <option>Network Designer</option>
-                <option>UI Designer</option>
-                <option>Quality Assurance</option>
-                <option>Document Writer</option>
-              </select>
+            <div class="card-body pad table-responsive">
+            <form method="post" action="{{ route('proponents.projects.approved-projects.store') }}" enctype="multipart/form-data">
+              {{ method_field('POST') }}
+              @csrf 
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="member_name">Name</label>
+                  <input type="text" class="form-control" id="member_name" name="member_name" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="role">Role</label>
+                  <select class="form-control" id="role" name="role">
+                    <option disable>Select Role</option>
+                    <option>Project Leader</option>
+                    <option>Database Designer</option>
+                    <option>Network Designer</option>
+                    <option>UI Designer</option>
+                    <option>Quality Assurance</option>
+                    <option>Document Writer</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Add Member</button>
+            </form>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Add Member</button>
-        </form>
-
-
         </div>
-      </div>
     </div>
-    </form>
+   </div>
 
     <form id="status-form" class="mt-4" style="display: none;">
     <div class="col-md-12">

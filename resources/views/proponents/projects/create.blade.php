@@ -38,7 +38,8 @@
     <!-- <h1>Research Project Form</h1>
         <p>Please fill in the following information:</p> -->
                   <form action="{{ route('proponents.projects.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                  {{ method_field('POST') }}
+                  @csrf
                   <div class="card-body">
                     <div class="form-group">
                       <label for="projname">Project Name</label>

@@ -29,9 +29,6 @@
                 PROJECT TEAM
             </div>
             <div class="card-body pad table-responsive">
-            <form method="post" action="{{ route('proponents.projects.approved-projects.store') }}" enctype="multipart/form-data">
-              {{ method_field('POST') }}
-              @csrf 
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="member_name">Name</label>
@@ -51,7 +48,6 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Add Member</button>
-            </form>
             </div>
           </div>
         </div>

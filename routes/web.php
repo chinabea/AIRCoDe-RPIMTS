@@ -215,10 +215,8 @@ Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit
 Route::put('/task/{id}/edit', [TaskController::class, 'update'])->name('tasks.update');
 Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('tasks.delete');
 
-
 Route::get('fullcalender', [FullCalenderController::class, 'index'])->name('fullcalender');
 Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
-
 
 // Projects
 Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
@@ -229,17 +227,13 @@ Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('pro
 Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
 Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
 
-
 Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('project-teams');
-Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('proponents.projects.approved-projects.create');
-Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('proponents.projects.approved-projects.store');
-Route::get('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name('proponents.projects.approved-projects.show');
-Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('proponents.projects.approved-projects.edit');
-Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('proponents.projects.approved-projects.update');
-Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('proponents.projects.approved-projects.destroy');
-
-
-
+Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('project-teams.create');
+Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('project-teams.store');
+Route::put('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name('project-teams.show');
+Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('project-teams.edit');
+Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('project-teams.update');
+Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('project-teams.destroy');
 
 
 
