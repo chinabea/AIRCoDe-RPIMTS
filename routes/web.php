@@ -17,6 +17,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ProjectTeamController;
+use App\Http\Controllers\FileController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -199,10 +200,6 @@ Route::put('/proponent/update/{proponent}', [ProponentsController::class, 'updat
 Route::get('send', [HomeController::class, 'sendNotification']);
 
 
-Route::get('/contacts', function () {
-    return view('contact');
-});
-
 Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');
 Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -227,18 +224,24 @@ Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('pro
 Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
 Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
 
-Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('project-teams');
-Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('project-teams.create');
-Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('project-teams.store');
-Route::put('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name('project-teams.show');
-Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('project-teams.edit');
-Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('project-teams.update');
-Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('project-teams.destroy');
+Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
+Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('submission-details.project-teams.create');
+Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('submission-details.project-teams.store');
+Route::put('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name('submission-details.project-teams.show');
+Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('submission-details.project-teams.edit');
+Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
+Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
 
 
 
 
 
+// FOR SUBMISSION DETAILS
+Route::get('/load-file', [FileController::class, 'loadContent'])->name('load-file');
+Route::get('/sample', [FileController::class, 'index'])->name('submission-details.project-teams.html');
+
+
+Route::get('/path/to/another/file', 'YourController@loadContent');
 
 
 

@@ -15,7 +15,7 @@
         </li>
       </ul> -->
 
-      
+
 
       <!-- Topbar Search -->
       <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -29,8 +29,8 @@
           </div>
       </form>
 
-      
-      
+
+
       <!-- SidebarSearch Form -->
       <!-- <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
@@ -156,7 +156,7 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      
+
       <div class="topbar-divider d-none d-sm-block"></div>
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">

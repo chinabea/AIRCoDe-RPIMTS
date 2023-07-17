@@ -17,12 +17,12 @@ class ProjectTeamController extends Controller
 
     public function create()
     {
-        return view('project-teams.create');
+        return view('submission-details.project-teams.create');
     }
 
     public function store(Request $request)
     {
-        $projectId = $request->input('project_id', 1); 
+        $projectId = $request->input('project_id', 1);
         $requestData = $request->all();
         // dd($request->all());
         $requestData['project_id'] = $projectId;
@@ -36,15 +36,15 @@ class ProjectTeamController extends Controller
     public function show($id)
     {
         $project_team = ProjectTeamModel::findOrFail($id);
-        return view('show', compact('project_team'));
+        return view('submission-details.project-teams.show', compact('project_team'));
     }
-    
+
 
     public function edit($id)
     {
         $project_team = ProjectTeamModel::findOrFail($id);
 
-        return view('proponents.projects.edit', compact('projects', 'reviewers'));
+        return view('submission-details.project-teams.edit', compact('projects', 'reviewers'));
     }
 
     // public function update(Request $request, $id)
@@ -53,7 +53,7 @@ class ProjectTeamController extends Controller
     //     $project_teams->update($request->all());
 
     //     return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
-        
+
     // }
 
     // public function destroy($id)
@@ -64,12 +64,12 @@ class ProjectTeamController extends Controller
     //     return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
     // }
 
-    
+
     // Update a project team member
     public function update(Request $request, $id)
     {
         // Find the project team member by their ID
-        $projectTeam = ProjectTeam::find($id);
+        $projectTeam = ProjectTeamModel::find($id);
 
         // Update the member name and role based on the form input
         $projectTeam->member_name = $request->input('member_name');
@@ -86,7 +86,7 @@ class ProjectTeamController extends Controller
     public function destroy($id)
     {
         // Find the project team member by their ID
-        $projectTeam = ProjectTeam::find($id);
+        $projectTeam = ProjectTeamModel::find($id);
 
         // Delete the project team member
         $projectTeam->delete();
