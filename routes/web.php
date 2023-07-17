@@ -190,13 +190,6 @@ Route::get('/read', function () {
 
 Route::resource('documents', DocumentController::class);
 
-Route::get('/proponents', [ProponentsController::class, 'index'])->name('proponents.index');
-Route::get('/proponent/create', [ProponentsController::class, 'create'])->name('proponents.create');
-Route::post('/proponent/store', [ProponentsController::class, 'store'])->name('proponents.store');
-Route::get('/proponent/show/{proponent}', [ProponentsController::class, 'show'])->name('proponents.show');
-Route::get('/proponent/{proponent}/edit', [ProponentsController::class, 'edit'])->name('proponents.edit');
-Route::put('/proponent/update/{proponent}', [ProponentsController::class, 'update'])->name('proponents.update');
-
 Route::get('send', [HomeController::class, 'sendNotification']);
 
 
@@ -217,13 +210,20 @@ Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
 
 // Projects
 Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
-Route::get('/project/create', [ProjectsController::class, 'create'])->name('proponents.projects.create');
-Route::post('/project/store', [ProjectsController::class, 'store'])->name('proponents.projects.store');
-Route::get('/project/show/{id}', [ProjectsController::class, 'show'])->name('proponents.projects.show');
-Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('proponents.projects.edit');
-Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('proponents.projects.update');
-Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('proponents.projects.destroy');
+Route::get('/project/create', [ProjectsController::class, 'create'])->name('projects.create');
+Route::post('/project/store', [ProjectsController::class, 'store'])->name('projects.store');
+Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
+Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('projects.edit');
+Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('projects.update');
+Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
 
+
+Route::get('/submission-details.project-teams.create', function () {
+    return view('submission-details.project-teams.create');
+});
+// Route::get('/submission-details.project-teams.edit', function () {
+//     return view('submission-details.project-teams.edit');
+// });
 Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
 Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('submission-details.project-teams.create');
 Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('submission-details.project-teams.store');
@@ -231,17 +231,6 @@ Route::put('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name(
 Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('submission-details.project-teams.edit');
 Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
 Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
-
-
-
-
-
-// FOR SUBMISSION DETAILS
-Route::get('/load-file', [FileController::class, 'loadContent'])->name('load-file');
-Route::get('/sample', [FileController::class, 'index'])->name('submission-details.project-teams.html');
-
-
-Route::get('/path/to/another/file', 'YourController@loadContent');
 
 
 

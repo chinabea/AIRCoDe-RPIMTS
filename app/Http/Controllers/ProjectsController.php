@@ -16,7 +16,7 @@ class ProjectsController extends Controller
     {
     $users = UsersModel::where('role', 4)->get();
 
-    return view('proponents.projects.reviewer', compact('users'));
+    return view('projects.reviewer', compact('users'));
     }
 
     public function index()
@@ -25,7 +25,7 @@ class ProjectsController extends Controller
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
     
-        return view('proponents.projects.index', compact('records','reviewers'));
+        return view('projects.index', compact('records','reviewers'));
     }
     
     
@@ -37,7 +37,7 @@ class ProjectsController extends Controller
     
         // Notification::send($users, new ProjectNotification($project->id));
 
-        return view('proponents.projects.create');
+        return view('projects.create');
     }
 
     public function store(Request $request)
@@ -94,7 +94,8 @@ class ProjectsController extends Controller
         $project->reviewers()->attach($validatedData['reviewers']);
     
         // Redirect or return a response as needed
-        return redirect()->route('projects')->with('success', 'Reviewer Successfully Added!');
+        return redirect()->route('
+        ')->with('success', 'Reviewer Successfully Added!');
     }
     
 
@@ -105,7 +106,7 @@ class ProjectsController extends Controller
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
 
-        return view('proponents.projects.show', compact('projects','reviewers'));
+        return view('submission-details.show', compact('projects','reviewers'));
     }
 
     public function edit($id)
@@ -113,7 +114,7 @@ class ProjectsController extends Controller
         $reviewers = UsersModel::where('role', 4)->get();
         $projects = ProjectsModel::findOrFail($id);
 
-        return view('proponents.projects.edit', compact('projects', 'reviewers'));
+        return view('projects.edit', compact('projects', 'reviewers'));
     }
 
 

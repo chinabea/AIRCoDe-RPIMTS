@@ -31,7 +31,7 @@
                 <h3 class="card-title">Project List</h3>
               </div>
               <div class="card-body">
-                <a href="{{ route('proponents.projects.create') }}" class="btn btn-primary">Add Project</a>
+                <a href="{{ route('projects.create') }}" class="btn btn-primary">Add Project</a>
               <hr>
                 @if(Session::has('success'))
                     <div class="alert alert-success" role="alert">
@@ -58,7 +58,7 @@
                             <tr>
                                 <td class="align-middle">{{ $loop->iteration }}</td>
                                 <td>
-                                  <a href="{{ route('proponents.projects.show', $record->id) }}">{{ $record->projname }}</a>
+                                  <a href="{{ route('submission-details.show', $record->id) }}">{{ $record->projname }}</a>
                                 </td>
                                 <td class="align-middle">{{ $record->researchgroup }}</td>
                                 <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
@@ -74,10 +74,10 @@
                               <td class="align-middle">RSC</td>
                               <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('proponents.projects.show', $record->id) }}" type="button" class="btn btn-secondary">Details</a>
-                                        <a href="{{ route('proponents.projects.edit', $record->id) }}"  type="button" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('submission-details.show', $record->id) }}" type="button" class="btn btn-secondary">Details</a>
+                                        <a href="{{ route('projects.edit', $record->id) }}"  type="button" class="btn btn-warning">Edit</a>
               
-                                        <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('proponents.projects.destroy', $record->id) }}')">Delete</button>
+                                        <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">Delete</button>
 
                                         <script>
                                         function confirmDelete(url) {

@@ -1,17 +1,17 @@
-<!-- create-project-team.blade.php -->
 
-@extends('layouts.app')
 
-@section('content')
-<section class="content">
-    <div class="container-fluid">
-        <div class="col-md-12">
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                    PROJECT TEAM
-                </div>
-                <div class="card-body pad table-responsive">
-                    <form method="post" action="{{ route('project-teams.store') }}" enctype="multipart/form-data">
+                    <!-- resources/views/modal-page.blade.php -->
+<div class="modal fade" id="ProjectTeam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Project Team</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <form method="post" action="{{ route('submission-details.project-teams.store') }}" enctype="multipart/form-data">
                         <!-- {{ method_field('POST') }} -->
                         @csrf
                         <div class="form-row">
@@ -34,9 +34,11 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Add Member</button>
                     </form>
-                </div>
             </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
         </div>
     </div>
-</section>
-@endsection
+</div>
