@@ -32,13 +32,19 @@
 <!-- icheck bootstrap -->
 <link rel="stylesheet" href="{{ asset('../../plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 <!-- daterange picker -->
-<link rel="stylesheet" href="{{ asset('../../plugins/daterangepicker/daterangepicker.css') }}">  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="{{ asset('../../plugins/daterangepicker/daterangepicker.css') }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('../plugins/fontawesome-free/css/all.min.css') }}">
 <!-- fullCalendar -->
 <link rel="stylesheet" href="{{ asset('../plugins/fullcalendar/main.css') }}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('../dist/css/adminlte.min.css') }}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    </head>
+
 
 </head>
 <body>

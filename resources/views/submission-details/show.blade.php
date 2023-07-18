@@ -87,7 +87,7 @@
             ACTIONS
         </div>
         <div class="card-body pad table-responsive">
-          
+
         </div>
       </div>
     </div>
@@ -177,14 +177,17 @@
                 PROJECT TEAM
             </div>
             <div class="card-body pad table-responsive">
-              
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProjectTeam">Project Team</button>
-      @include('submission-details.project-teams.create')
-      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#EDITProjectTeam">EDIT</button>
-      <!-- @include('submission-details.project-teams.edit') -->
-      
-            
-           
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProjectTeam">Project Team</button>
+                    @include('submission-details.project-teams.create')
+                {{-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#EDITProjectTeam">EDIT</button> --}}
+
+                <button onclick="openEditUserModal('{{ $projectTeam->id }}')">Edit</button>
+                    @include('submission-details.project-teams.edit')
+
+
+
+
             </div>
             </div>
           </div>
@@ -307,5 +310,15 @@
 <aside class="control-sidebar control-sidebar-dark">
 </aside>
 </div>
+
+
+<!-- Add this at the end of your Blade template -->
+@push('scripts')
+<script src="{{ asset('dist/js/project-teams.js') }}"></script>
+@endpush
+
+
+
+
 </body>
 </html>

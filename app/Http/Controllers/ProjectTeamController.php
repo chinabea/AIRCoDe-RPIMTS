@@ -12,10 +12,10 @@ class ProjectTeamController extends Controller
     {
         $projectTeams = ProjectTeamModel::orderBy('created_at', 'DESC')->get();
         $projectTeams = ProjectTeamModel::all();
-    
+
         return view('submission-details.project-teams.index', compact('projectTeams'));
     }
-    
+
 
     public function create()
     {
@@ -47,7 +47,7 @@ class ProjectTeamController extends Controller
         $projectTeam = ProjectTeamModel::findOrFail($id);
         return view('submission-details.project-teams.edit', ['projectTeam' => $projectTeam]);
     }
-    
+
 
     // public function update(Request $request, $id)
     // {

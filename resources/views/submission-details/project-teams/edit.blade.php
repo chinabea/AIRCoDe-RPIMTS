@@ -16,6 +16,7 @@
                 <input type="text" name="role" value="{{ $projectTeam->role }}">
                 <button type="submit">Update</button>
             </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -24,17 +24,17 @@ class ProjectsController extends Controller
         $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
-    
+
         return view('projects.index', compact('records','reviewers'));
     }
-    
-    
+
+
     public function create()
     {
-        $project = new ProjectsModel(); 
-    
+        $project = new ProjectsModel();
+
         $users = User::all();
-    
+
         // Notification::send($users, new ProjectNotification($project->id));
 
         return view('projects.create');
@@ -86,23 +86,23 @@ class ProjectsController extends Controller
             'reviewers' => 'required|array',
             'reviewers.*' => 'exists:users,id',
         ]);
-    
+
         $projectId = 1; // Replace with the actual project ID you want to associate the reviewers with
-    
+
         $project = ProjectsModel::findOrFail($projectId);
-    
+
         $project->reviewers()->attach($validatedData['reviewers']);
-    
+
         // Redirect or return a response as needed
         return redirect()->route('
         ')->with('success', 'Reviewer Successfully Added!');
     }
-    
+
 
     public function show($id)
     {
         $projects = ProjectsModel::findOrFail($id);
-        
+
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
 
@@ -125,7 +125,7 @@ class ProjectsController extends Controller
         $project->save();
 
         return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
-        
+
     }
 
     // public function update(Request $request, $id)
@@ -161,9 +161,9 @@ class ProjectsController extends Controller
     {
         $project->status = $request->input('status');
         $project->save();
-    
+
         // Rest of the code
     }
-    
+
 
 }
