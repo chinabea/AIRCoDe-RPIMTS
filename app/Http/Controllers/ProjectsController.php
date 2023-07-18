@@ -9,6 +9,7 @@ use App\Models\ProjectsModel;
 use App\Models\UsersModel;
 use App\Models\User;
 use App\Models\ProjectReviewerModel;
+use App\Models\ProjectTeamModel;
 
 class ProjectsController extends Controller
 {
@@ -23,7 +24,6 @@ class ProjectsController extends Controller
     {
         $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
-
 
         return view('projects.index', compact('records','reviewers'));
     }
@@ -94,8 +94,7 @@ class ProjectsController extends Controller
         $project->reviewers()->attach($validatedData['reviewers']);
 
         // Redirect or return a response as needed
-        return redirect()->route('
-        ')->with('success', 'Reviewer Successfully Added!');
+        return redirect()->route('')->with('success', 'Reviewer Successfully Added!');
     }
 
 
@@ -113,8 +112,9 @@ class ProjectsController extends Controller
     {
         $reviewers = UsersModel::where('role', 4)->get();
         $projects = ProjectsModel::findOrFail($id);
+        $projectTeam = ProjectTeamModel::findOrFail($id);
 
-        return view('projects.edit', compact('projects', 'reviewers'));
+        return view('projects.edit', compact('projects', 'reviewers', 'projectTeam'));
     }
 
 
@@ -128,27 +128,6 @@ class ProjectsController extends Controller
 
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $projects = ProjectsModel::findOrFail($id);
-
-    //     // Check the user's role
-    //     $userRole = Auth::user()->role;
-
-    //     if ($userRole === 'director' || $userRole === 'staff') {
-    //         // Update all attributes except 'status'
-    //         $projects->fill($request->except('status'));
-    //     } elseif ($userRole === 'researcher') {
-    //         // Only update the 'status' attribute
-    //         $projects->status = $request->input('status');
-    //     }
-
-    //     $projects->save();
-
-    //     return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
-    // }
-
-
     public function destroy($id)
     {
         $projects = ProjectsModel::findOrFail($id);
@@ -157,7 +136,7 @@ class ProjectsController extends Controller
         return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
     }
 
-    public function updateStatus(Request $request, Project $project)
+    public function updateStatus(Request $request, ProjectsModel $project)
     {
         $project->status = $request->input('status');
         $project->save();

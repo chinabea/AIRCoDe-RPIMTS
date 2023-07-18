@@ -222,8 +222,9 @@ Route::get('/submission-details.project-teams.create', function () {
     return view('submission-details.project-teams.create');
 });
 Route::get('/submission-details.project-teams.edit', function () {
-    return view('submission-details.project-teams.edit');
+    return view('submission-details.project-teams.modal');
 });
+
 Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
 Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('submission-details.project-teams.create');
 Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('submission-details.project-teams.store');
@@ -233,7 +234,9 @@ Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->nam
 Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
 
 
-
+Route::get('/sample', function () {
+    return view('sample');
+});
 
 
 

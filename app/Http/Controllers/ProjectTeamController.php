@@ -42,29 +42,24 @@ class ProjectTeamController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(ProjectTeamModel $project_teams)
     {
-        $projectTeam = ProjectTeamModel::findOrFail($id);
-        return view('submission-details.project-teams.edit', ['projectTeam' => $projectTeam]);
+        // $projectTeam = ProjectTeamModel::findOrFail($id);
+        return view('submission-details.project-teams.edit', compact('project_teams'));
     }
 
 
-    // public function update(Request $request, $id)
-    // {
-    //     $project_teams = ProjectTeamModel::findOrFail($id);
-    //     $project_teams->update($request->all());
 
-    //     return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
 
-    // }
 
-    // public function destroy($id)
-    // {
-    //     $project_teams = ProjectTeamModel::findOrFail($id);
-    //     $project_teams->delete();
 
-    //     return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
-    // }
+
+
+
+
+
+
+
 
 
     // Update a project team member
