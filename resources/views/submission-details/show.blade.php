@@ -186,9 +186,6 @@
                     @include('submission-details.project-teams.modal')
 
 
-
-
-
             </div>
             </div>
           </div>

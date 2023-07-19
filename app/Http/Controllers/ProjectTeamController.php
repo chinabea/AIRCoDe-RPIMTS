@@ -10,11 +10,17 @@ class ProjectTeamController extends Controller
 {
     public function index()
     {
-        $projectTeams = ProjectTeamModel::orderBy('created_at', 'DESC')->get();
-        $projectTeams = ProjectTeamModel::all();
-
-        return view('submission-details.project-teams.index', compact('projectTeams'));
+        $project_Teams = ProjectTeamModel::all();
+        return view('submission-details.project-teams.index', compact('projectTeam'));
     }
+
+    // public function index()
+    // {
+    //     $projectTeams = ProjectTeamModel::orderBy('created_at', 'DESC')->get();
+    //     $projectTeams = ProjectTeamModel::all();
+
+    //     return view('submission-details.project-teams.index', compact('projectTeams'));
+    // }
 
 
     public function create()
@@ -42,11 +48,13 @@ class ProjectTeamController extends Controller
     }
 
 
-    public function edit(ProjectTeamModel $project_teams)
+    public function edit(ProjectTeamModel $project_Teams)
     {
         // $projectTeam = ProjectTeamModel::findOrFail($id);
-        return view('submission-details.project-teams.edit', compact('project_teams'));
+        return view('submission-details.project-teams.edit', compact('project_Teams'));
     }
+
+
 
 
 

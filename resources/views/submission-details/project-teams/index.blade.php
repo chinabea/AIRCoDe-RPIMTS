@@ -12,6 +12,7 @@
                 <table>
                     <thead>
                         <tr>
+                            {{-- edit --}}
                             <th>Name</th>
                             <th>Role</th>
                             <th>Actions</th>
