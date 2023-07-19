@@ -10,18 +10,9 @@ class ProjectTeamController extends Controller
 {
     public function index()
     {
-        $project_Teams = ProjectTeamModel::all();
-        return view('submission-details.project-teams.index', compact('projectTeam'));
+        $projectTeams = ProjectTeamModel::all();
+        return view('submission-details.project-teams.index', compact('projectTeams'));
     }
-
-    // public function index()
-    // {
-    //     $projectTeams = ProjectTeamModel::orderBy('created_at', 'DESC')->get();
-    //     $projectTeams = ProjectTeamModel::all();
-
-    //     return view('submission-details.project-teams.index', compact('projectTeams'));
-    // }
-
 
     public function create()
     {
@@ -47,11 +38,10 @@ class ProjectTeamController extends Controller
         return view('submission-details.project-teams.show', compact('projectTeam'));
     }
 
-
-    public function edit(ProjectTeamModel $project_Teams)
+    public function edit($id)
     {
-        // $projectTeam = ProjectTeamModel::findOrFail($id);
-        return view('submission-details.project-teams.edit', compact('project_Teams'));
+        $projectTeam = ProjectTeamModel::findOrFail($id);
+        return view('submission-details.project-teams.edit', compact('projectTeam'));
     }
 
 

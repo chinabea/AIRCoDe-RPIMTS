@@ -174,9 +174,12 @@ $('#daterange-btn').daterangepicker(
   }
 )
 
-
-
-
 </script>
+<!-- Add this at the end of your Blade template -->
+@push('scripts')
+<script src="{{ asset('dist/js/project-teams.js') }}"></script>
+@endpush
+
+
 </body>
 </html>

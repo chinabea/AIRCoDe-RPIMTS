@@ -233,7 +233,6 @@ Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->
 Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
 Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
 
-
 Route::get('/sample', function () {
     return view('sample');
 });

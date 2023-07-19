@@ -32,6 +32,10 @@
                 <table class="table table-bordered table-sm text-right">
                     <tbody>
                         <tr>
+                        <th scope="row" width="25%">PROJECT ID</th>
+                        <td class="text-left">{{ $projects->id }}</td>
+                        </tr>
+                        <tr>
                         <th scope="row" width="25%">PROJECT TITLE</th>
                         <td class="text-left">{{ $projects->projname }}</td>
                         </tr>
@@ -178,13 +182,11 @@
             </div>
             <div class="card-body pad table-responsive">
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProjectTeam">Project Team</button>
-                    @include('submission-details.project-teams.create')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
+                @include('submission-details.project-teams.create')
 
-                {{-- <button onclick="openEditUserModal('{{ $projectTeam->id }}')">Edit</button> --}}
-                <a class="btn btn-primary btn-sm" onclick="openEditProjectTeamModal('{{ route('submission-details.project-teams.edit', $projectTeams) }}')">Edit</a>
-                    @include('submission-details.project-teams.modal')
-
+            <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.index') }}">Edit</a>
+            @include('submission-details.project-teams.modal') 
 
             </div>
             </div>
@@ -309,11 +311,6 @@
 </aside>
 </div>
 
-
-<!-- Add this at the end of your Blade template -->
-@push('scripts')
-<script src="{{ asset('dist/js/project-teams.js') }}"></script>
-@endpush
 
 
 
