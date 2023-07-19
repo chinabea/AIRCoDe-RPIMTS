@@ -27,9 +27,14 @@ class ProjectsModel extends Model
                         'references'
                     ];
 
-    public function projectTeam()
+    // public function projectTeam()
+    // {
+    //     return $this->hasOne(ProjectTeam::class);
+    // }
+    
+    public function projectTeams()
     {
-        return $this->hasOne(ProjectTeam::class);
+        return $this->belongsToMany(ProjectTeamModel::class);
     }
 
     public function reviewers()

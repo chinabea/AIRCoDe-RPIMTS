@@ -18,4 +18,6 @@ class ProjectTeamModel extends Model
     {
         return $this->belongsTo(ProjectsModel::class);
     }
+
+    
 }

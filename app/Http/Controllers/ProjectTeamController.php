@@ -38,11 +38,29 @@ class ProjectTeamController extends Controller
         return view('submission-details.project-teams.show', compact('projectTeam'));
     }
 
+    // public function edit($id)
+    // {
+    //     $projectTeam = ProjectTeamModel::findOrFail($id);
+    //     $project = $projectTeam->project;
+    //     return view('submission-details.project-teams.edit', compact('projectTeam', 'project'));
+    // }
+    
     public function edit($id)
     {
-        $projectTeam = ProjectTeamModel::findOrFail($id);
-        return view('submission-details.project-teams.edit', compact('projectTeam'));
+        $projects = ProjectsModel::findOrFail($id);
+        $projectTeam = $projects->projectTeams;
+        return view('submission-details.project-teams.edit', compact('projectTeam', 'projects'));
     }
+
+    // public function edit($id)
+    // {
+    //     $projectTeam = ProjectTeamModel::findOrFail($id);
+    //     $projects = $projectTeam->projects;
+    //     return view('submission-details.project-teams.edit', compact('projectTeam', 'projects'));
+    // }
+
+
+
 
 
 
