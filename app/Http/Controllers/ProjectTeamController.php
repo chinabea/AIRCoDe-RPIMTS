@@ -44,13 +44,15 @@ class ProjectTeamController extends Controller
     //     $project = $projectTeam->project;
     //     return view('submission-details.project-teams.edit', compact('projectTeam', 'project'));
     // }
-    
+
     public function edit($id)
     {
-        $projects = ProjectsModel::findOrFail($id);
-        $projectTeam = $projects->projectTeams;
+        $projectTeam = ProjectTeamModel::where('id', $id)->firstOrFail();
+        $projects = $projectTeam->project;
         return view('submission-details.project-teams.edit', compact('projectTeam', 'projects'));
     }
+
+
 
     // public function edit($id)
     // {

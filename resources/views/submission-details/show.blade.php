@@ -185,19 +185,16 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
                 @include('submission-details.project-teams.create')
 
-
-                
             <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.edit', ['id' => $projects->id]) }}">Edit</a>
 
 
-
-
-
+            <button onClick="openEditUserModal('{{ $projects = $projectTeam->project }}')">Edit</button>
+            $projectTeam = ProjectTeamModel::where('id', $id)->firstOrFail();
 
 
 
             <!-- <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.index') }}">Edit</a> -->
-            @include('submission-details.project-teams.modal') 
+            @include('submission-details.project-teams.modal')
 
             </div>
             </div>

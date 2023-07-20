@@ -41,11 +41,6 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('../dist/css/adminlte.min.css') }}">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    </head>
-
-
 </head>
 <body>
 

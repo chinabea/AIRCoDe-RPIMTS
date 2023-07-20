@@ -7,17 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectTeamModel extends Model
 {
-    
+
     public $table = 'project_teams';
 
     public $primaryKey = 'id';
 
     public $fillable = ['project_id','member_name','role'];
 
+    // Assuming 'project_id' is the foreign key column in the 'project_teams' table
     public function project()
     {
-        return $this->belongsTo(ProjectsModel::class);
+        return $this->belongsTo(ProjectsModel::class, 'project_id');
     }
 
-    
+
+
 }

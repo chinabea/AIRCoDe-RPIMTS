@@ -31,11 +31,12 @@ class ProjectsModel extends Model
     // {
     //     return $this->hasOne(ProjectTeam::class);
     // }
-    
+
     public function projectTeams()
     {
-        return $this->belongsToMany(ProjectTeamModel::class);
+        return $this->hasMany(ProjectTeamModel::class, 'project_id');
     }
+
 
     public function reviewers()
     {
