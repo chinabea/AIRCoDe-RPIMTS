@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Projects Under Evaluation</h1>
+    <h1>Projects for Revision</h1>
 
     @if(count($projects) > 0)
         <ul>
