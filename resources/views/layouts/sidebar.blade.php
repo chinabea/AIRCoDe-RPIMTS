@@ -314,37 +314,37 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('draft') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Draft</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('underevaluation') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Under Evaluation</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('forrevision') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>For Revision</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('deferred') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Deferred</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('approved') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Approved</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('disapproved') }}" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Disapproved</p>
               </a>

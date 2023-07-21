@@ -216,6 +216,15 @@ Route::get('/sample', function () {
 
 
 
+// FOR STATUS
+Route::get('/status/under-evaluation', [ProjectsController::class, 'underEvaluation'])->name('status.under-evaluation');
+
+
+
+
+
+
+
 
 
 

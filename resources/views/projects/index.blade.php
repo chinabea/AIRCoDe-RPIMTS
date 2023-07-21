@@ -55,6 +55,16 @@
                     <tbody>
                         @if($records->count() > 0)
                             @foreach($records as $record)
+                            <ul>
+                                <li>
+                                    <a href="{{ route('projects') }}">All Projects</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('status.under-evaluation') }}">Projects Under Evaluation</a>
+                                </li>
+                            </ul>
+
+
                             <tr>
                                 <td class="align-middle">{{ $loop->iteration }}</td>
                                 <td>
@@ -63,20 +73,20 @@
                                 <td class="align-middle">{{ $record->researchgroup }}</td>
                                 <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
                                 <td class="align-middle">{{ $record->status }}</td>
-                            
+
                                 <td class="align-middle">
                                             @foreach($reviewers as $reviewer)
                                                 <p>{{ $reviewer->name }}</p>
                                             @endforeach
                                 </td>
-                                    
-                                
+
+
                               <td class="align-middle">RSC</td>
                               <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{ route('submission-details.show', $record->id) }}" type="button" class="btn btn-secondary">Details</a>
                                         <a href="{{ route('projects.edit', $record->id) }}"  type="button" class="btn btn-warning">Edit</a>
-              
+
                                         <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">Delete</button>
 
                                         <script>

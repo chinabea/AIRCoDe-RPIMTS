@@ -144,5 +144,13 @@ class ProjectsController extends Controller
         // Rest of the code
     }
 
+    public function underEvaluation()
+    {
+        $projects = ProjectsModel::where('status', 'Under Evaluation')->get();
+
+        return view('status.under-evaluation', compact('projects'));
+    }
+
+
 
 }
