@@ -143,29 +143,6 @@ Route::get('/editproponents/{id}', [ProponentsController::class, 'edit'])->name(
 Route::put('/editproponents/{id}', [ProponentsController::class, 'update'])->name('proponents.admin-proponents.update');
 Route::delete('/deleteproponents/{id}', [ProponentsController::class, 'destroy'])->name('proponents.admin-proponents.destroy');
 
-// Proponents
-Route::get('/draft', [DraftController::class, 'index'])->name('draft');
-
-Route::get('/underevaluation', function () {
-    return view('proponents.underevaluation');
-})->name('underevaluation');
-
-Route::get('/forrevision', function () {
-    return view('proponents.forrevision');
-})->name('forrevision');
-
-Route::get('/approved', function () {
-    return view('proponents.approved');
-})->name('approved');
-
-Route::get('/deferred', function () {
-    return view('proponents.deferred');
-})->name('deferred');
-
-Route::get('/disapproved', function () {
-    return view('proponents.disapproved');
-})->name('disapproved');
-
 Route::get('/blank', function () {
     return view('blank');
 })->name('blank');
