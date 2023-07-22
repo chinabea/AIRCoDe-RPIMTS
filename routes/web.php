@@ -88,6 +88,10 @@ Route::post('/proponents/projects/storeReviewer', [ProjectsController::class, 's
 Route::put('/projects/{id}', [ProjectsController::class, 'updateStatus']);
 Route::get('reviewer', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
 
+Route::get('/projects/{project}/edit', 'ProjectController@editStatus')->name('projects.edit');
+Route::put('/projects/{project}', 'ProjectController@updateStatus')->name('projects.update');
+
+
 
 // Proposals
 Route::get('/proposals', [ProposalsController::class, 'index'])->name('proposals');

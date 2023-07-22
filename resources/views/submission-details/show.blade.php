@@ -79,6 +79,7 @@
       <button id="messages-btn" class="btn btn-primary">Messages</button>
       <button id="project-team-btn" class="btn btn-primary">Project Team</button>
       <button id="status-btn" class="btn btn-primary">Status</button>
+      <button id="reviewer-btn" class="btn btn-primary">Reviewer</button>
       <button id="cash-program-btn" class="btn btn-primary">Cash Program</button>
       <button id="reprogramming-status-btn" class="btn btn-primary">Reprogramming Status</button>
     </div>
@@ -188,19 +189,15 @@
             <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.edit', ['id' => $projects->id]) }}">Edit</a>
 
 
-            <button onClick="openEditUserModal('{{ $projects = $projectTeam->project }}')">Edit</button>
-            $projectTeam = ProjectTeamModel::where('id', $id)->firstOrFail();
 
 
-
-            <!-- <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.index') }}">Edit</a> -->
+            <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.index') }}">Edit</a>
             @include('submission-details.project-teams.modal')
 
             </div>
             </div>
           </div>
         </div>
-    </div>
    </div>
 
     <form id="status-form" class="mt-4" style="display: none;">
@@ -208,6 +205,33 @@
       <div class="card card-primary card-outline">
         <div class="card-header">
                 STATUS
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+        <div class="container">
+            <h2>Edit Project Status</h2>
+            <form action="{{ route('projects.update', ['id' => $projects->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" class="form-control" id="status" name="status" value="{{ $projects->status }}" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Status</button>
+            </form>
+        </div>
+        </div>
+      </div>
+    </div>
+    </form>
+
+    <form id="reviewer-form" class="mt-4" style="display: none;">
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+                REVIEWER
           </h3>
         </div>
         <div class="card-body pad table-responsive">
@@ -255,63 +279,62 @@
       // Button click event handlers
       $('#details-btn').click(function() {
         $('#details-form').show();
-        $('#status-form, #files-form, #messages-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
+        $('#status-form, #reviewer-form, #files-form, #messages-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
       });
 
       $('#status-btn').click(function() {
         $('#status-form').show();
-        $('#details-form, #files-form, #messages-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
+        $('#details-form, #reviewer-form, #files-form, #messages-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
       });
+
+        $('#reviewer-btn').click(function() {
+        $('#reviewer-form').show();
+        $('#status-form, #details-form, #files-form, #messages-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
+        });
 
       $('#files-btn').click(function() {
         $('#files-form').show();
-        $('#details-form, #status-form, #messages-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
+        $('#details-form, #reviewer-form, #status-form, #messages-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
       });
 
       $('#messages-btn').click(function() {
         $('#messages-form').show();
-        $('#details-form, #status-form, #files-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
+        $('#details-form, #reviewer-form, #status-form, #files-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
       });
 
       // Add event handlers for other buttons here
 
       $('#actions-btn').click(function() {
         $('#actions-form').show();
-        $('#details-form, #status-form, #files-form, #messages-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
+        $('#details-form, #reviewer-form, #status-form, #files-form, #messages-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
       });
 
       $('#lib-btn').click(function() {
         $('#lib-form').show();
-        $('#details-form, #status-form, #files-form, #messages-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
+        $('#details-form, #reviewer-form, #status-form, #files-form, #messages-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
       });
 
       $('#classifications-btn').click(function() {
         $('#classifications-form').show();
-        $('#details-form, #status-form, #files-form, #messages-form, #actions-form, #lib-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
+        $('#details-form, #reviewer-form, #status-form, #files-form, #messages-form, #actions-form, #lib-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
       });
 
       $('#project-team-btn').click(function() {
         $('#project-team-form').show();
-        $('#details-form, #status-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #cash-program-form, #reprogramming-status-form').hide();
+        $('#details-form, #reviewer-form, #status-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #cash-program-form, #reprogramming-status-form').hide();
       });
 
       $('#cash-program-btn').click(function() {
         $('#cash-program-form').show();
-        $('#details-form, #status-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #project-team-form, #reprogramming-status-form').hide();
+        $('#details-form, #reviewer-form, #status-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #project-team-form, #reprogramming-status-form').hide();
       });
 
       $('#reprogramming-status-btn').click(function() {
         $('#reprogramming-status-form').show();
-        $('#details-form, #status-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form').hide();
+        $('#details-form, #status-form, #reviewer-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form').hide();
       });
     });
   </script>
-
-
-
-
-
-
 
   </div>
   <!-- @include('layouts.footer') -->

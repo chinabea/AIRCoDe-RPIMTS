@@ -91,12 +91,16 @@ class ProjectsController extends Controller
 
         $project = ProjectsModel::findOrFail($projectId);
 
-        $project->reviewers()->attach($validatedData['reviewers']);
+        // Filter the reviewers based on the user role column (where role = 4)
+        $filteredReviewers = User::whereIn('id', $validatedData['reviewers'])
+            ->where('role', 4)
+            ->pluck('id');
+
+        $project->reviewers()->attach($filteredReviewers);
 
         // Redirect or return a response as needed
         return redirect()->route('')->with('success', 'Reviewer Successfully Added!');
     }
-
 
     public function show($id)
     {
