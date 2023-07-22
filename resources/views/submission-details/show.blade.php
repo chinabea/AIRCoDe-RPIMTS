@@ -235,6 +235,24 @@
           </h3>
         </div>
         <div class="card-body pad table-responsive">
+        <div class="container">
+            <h2>Select Reviewers</h2>
+            <form action="{{ route('projects.storeReviewer') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="reviewers">Available Reviewers</label>
+                    <select class="form-control" id="reviewers" name="reviewers" required>
+                      <option value="">Select Reviewer</option>  
+                      @foreach($reviewers as $reviewer)
+                          <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                      @endforeach
+                  </select>
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Add Reviewers">
+            </form>
+        </div>
+
 
 
         </div>

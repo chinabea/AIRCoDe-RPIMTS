@@ -13,12 +13,6 @@ use App\Models\ProjectTeamModel;
 
 class ProjectsController extends Controller
 {
-    public function selectReviewers()
-    {
-    $users = UsersModel::where('role', 4)->get();
-
-    return view('projects.reviewer', compact('users'));
-    }
 
     public function index()
     {
@@ -80,27 +74,40 @@ class ProjectsController extends Controller
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
     }
 
-    public function storeReviewer(Request $request)
-    {
-        $validatedData = $request->validate([
-            'reviewers' => 'required|array',
-            'reviewers.*' => 'exists:users,id',
-        ]);
+    
+public function selectReviewers()
+{
+$users = UsersModel::where('role', 4)->get();
 
-        $projectId = 1; // Replace with the actual project ID you want to associate the reviewers with
+return view('projects.reviewer', compact('users'));
+}
 
-        $project = ProjectsModel::findOrFail($projectId);
+public function storeReviewer(Request $request)
+{
+    $validatedData = $request->validate([
+        'reviewers' => 'required|array',
+        'reviewers.*' => 'exists:users,id',
+    ]);
 
-        // Filter the reviewers based on the user role column (where role = 4)
-        $filteredReviewers = User::whereIn('id', $validatedData['reviewers'])
-            ->where('role', 4)
-            ->pluck('id');
+    $projectId = 1; // Replace with the actual project ID you want to associate the reviewers with
 
-        $project->reviewers()->attach($filteredReviewers);
+    $project = ProjectsModel::findOrFail($projectId);
 
-        // Redirect or return a response as needed
-        return redirect()->route('')->with('success', 'Reviewer Successfully Added!');
-    }
+    // Filter the reviewers based on the user role column (where role = 4)
+    $filteredReviewers = User::whereIn('id', $validatedData['reviewers'])
+        ->where('role', 4)
+        ->pluck('id');
+
+    $project->reviewers()->attach($filteredReviewers);
+
+    // Assuming you have the logic to fetch available reviewers, modify the next line accordingly.
+    $reviewers = User::where('role', 4)->get();
+
+    // Pass the $availableReviewers variable to the view
+    return view('', compact('reviewers'));
+}
+
+    
 
     public function show($id)
     {

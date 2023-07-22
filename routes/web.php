@@ -82,16 +82,6 @@ Route::get('/about/edit/{id}', [AboutusController::class, 'edit'])->name('transp
 Route::put('/about/edit/{id}', [AboutusController::class, 'update'])->name('transparency.aboutus.update');
 Route::delete('/about/delete/{id}', [AboutusController::class, 'destroy'])->name('transparency.aboutus.destroy');
 
-Route::post('/proponents/projects/storeReviewer', [ProjectsController::class, 'storeReviewer'])->name('proponents.projects.storeReviewer');
-
-// update project status
-Route::put('/projects/{id}', [ProjectsController::class, 'updateStatus']);
-Route::get('reviewer', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
-
-Route::get('/projects/{project}/edit', 'ProjectController@editStatus')->name('projects.edit');
-Route::put('/projects/{project}', 'ProjectController@updateStatus')->name('projects.update');
-
-
 
 // Proposals
 Route::get('/proposals', [ProposalsController::class, 'index'])->name('proposals');
@@ -231,9 +221,11 @@ Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->n
 // Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
 
 
+Route::get('reviewer', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
+Route::post('/projects/storeReviewer', [ProjectsController::class, 'storeReviewer'])->name('projects.storeReviewer');
 
-
-
+// update project status
+Route::put('/projects/{id}', [ProjectsController::class, 'updateStatus']);
 
 
 
