@@ -149,26 +149,28 @@ public function storeReviewer(Request $request)
         return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
     }
 
-    // public function updateStatus(Request $request, $id)
-    // {
-    //     // $project = ProjectsModel::findOrFail($id); // Retrieve the project with the given ID
-    //     $project = 1;
-
-    //     $project->status = $request->input('status');
-    //     $project->save();
-
-    //     return view('submission-details.show', compact('project'));
-    // }
-
     public function updateStatus(Request $request, $id)
     {
-        $project = ProjectsModel::findOrFail($id); // Retrieve the project with the given ID
-
+        // Retrieve the project by ID
+        // $project = Project::find($id);
+        // if (!$project) {
+        //     // Handle the case where the project is not found
+        //     // You may redirect back with an error message or return an error response
+        // }
+        $projectId = 1;
+        // Validate the status received from the form
+        $request->validate([
+            'status' => 'required|in:Draft,Under Evaluation,For Revision,Approved,Deferred,Disapproved',
+        ]);
+    
+        // Update the project status
         $project->status = $request->input('status');
         $project->save();
-
-        return view('submission-details.show', compact('project'));
+    
+        // Redirect back to the project details page or any other relevant page
+        return redirect()->route('projects.show', ['id' => $id])->with('success', 'Project status updated successfully.');
     }
+    
 
     public function draft()
     {
