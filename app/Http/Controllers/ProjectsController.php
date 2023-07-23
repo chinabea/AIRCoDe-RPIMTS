@@ -74,16 +74,18 @@ class ProjectsController extends Controller
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
     }
 
-    
-public function selectReviewers()
-{
-$users = UsersModel::where('role', 4)->get();
 
-return view('projects.reviewer', compact('users'));
-}
+    public function selectReviewers()
+    {
+        $users = UsersModel::where('role', 4)->get();
+
+        return view('submission-details.show', compact('users'));
+    }
+
 
 public function storeReviewer(Request $request)
 {
+    // Validate the input data
     $validatedData = $request->validate([
         'reviewers' => 'required|array',
         'reviewers.*' => 'exists:users,id',
@@ -103,11 +105,11 @@ public function storeReviewer(Request $request)
     // Assuming you have the logic to fetch available reviewers, modify the next line accordingly.
     $reviewers = User::where('role', 4)->get();
 
-    // Pass the $availableReviewers variable to the view
-    return view('', compact('reviewers'));
+    // Pass the $reviewers variable to the view (provide the correct view name as the first argument)
+    return view('submission-details.show', compact('reviewers'));
 }
 
-    
+
 
     public function show($id)
     {
@@ -147,12 +149,25 @@ public function storeReviewer(Request $request)
         return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
     }
 
-    public function updateStatus(Request $request, ProjectsModel $project)
+    // public function updateStatus(Request $request, $id)
+    // {
+    //     // $project = ProjectsModel::findOrFail($id); // Retrieve the project with the given ID
+    //     $project = 1;
+
+    //     $project->status = $request->input('status');
+    //     $project->save();
+
+    //     return view('submission-details.show', compact('project'));
+    // }
+
+    public function updateStatus(Request $request, $id)
     {
+        $project = ProjectsModel::findOrFail($id); // Retrieve the project with the given ID
+
         $project->status = $request->input('status');
         $project->save();
 
-        // Rest of the code
+        return view('submission-details.show', compact('project'));
     }
 
     public function draft()

@@ -220,12 +220,12 @@ Route::get('/status/deferred', [ProjectsController::class, 'deferred'])->name('s
 Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->name('status.disapproved');
 // Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
 
-
-Route::get('reviewer', [ProjectsController::class, 'selectReviewers'])->name('reviewer');
-Route::post('/projects/storeReviewer', [ProjectsController::class, 'storeReviewer'])->name('projects.storeReviewer');
-
 // update project status
-Route::put('/projects/{id}', [ProjectsController::class, 'updateStatus']);
+Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
+
+
+Route::get('/select-reviewers',  [ProjectsController::class, 'selectReviewers'])->name('projects.selectReviewers');
+Route::post('/store-reviewer', [ProjectsController::class, 'storeReviewer'])->name('projects.storeReviewer');
 
 
 
