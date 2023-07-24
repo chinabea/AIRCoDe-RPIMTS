@@ -208,8 +208,6 @@ Route::get('/sample', function () {
     return view('sample');
 });
 
-
-
 // FOR STATUS
 Route::get('/status/under-evaluation', [ProjectsController::class, 'underEvaluation'])->name('status.under-evaluation');
 Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
@@ -221,14 +219,11 @@ Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->n
 // Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
 
 // update project status
-Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
-
+// Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
+Route::get('/status/edit', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
 
 Route::get('/select-reviewers',  [ProjectsController::class, 'selectReviewers'])->name('projects.selectReviewers');
 Route::post('/store-reviewer', [ProjectsController::class, 'storeReviewer'])->name('projects.storeReviewer');
-
-
-
 
 
 
@@ -239,3 +234,18 @@ Route::get('/test-error', function () {
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });
+
+
+
+PUBLIC FUNCTION UPDATESTATUS(){
+    $_COOKIE
+    $_ENV
+
+
+
+
+
+
+
+
+} 

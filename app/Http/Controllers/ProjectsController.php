@@ -151,25 +151,21 @@ public function storeReviewer(Request $request)
 
     public function updateStatus(Request $request, $id)
     {
-        // Retrieve the project by ID
-        // $project = Project::find($id);
-        // if (!$project) {
-        //     // Handle the case where the project is not found
-        //     // You may redirect back with an error message or return an error response
-        // }
-        $projectId = 1;
-        // Validate the status received from the form
         $request->validate([
             'status' => 'required|in:Draft,Under Evaluation,For Revision,Approved,Deferred,Disapproved',
         ]);
     
-        // Update the project status
+        $project = Project::find($id);
+        if (!$project) {
+            return redirect()->back()->with('error', 'Project not found.');
+        }
+    
         $project->status = $request->input('status');
         $project->save();
     
-        // Redirect back to the project details page or any other relevant page
         return redirect()->route('projects.show', ['id' => $id])->with('success', 'Project status updated successfully.');
     }
+    
     
 
     public function draft()

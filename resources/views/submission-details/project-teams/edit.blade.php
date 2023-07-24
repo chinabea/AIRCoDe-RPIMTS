@@ -5,3 +5,4 @@
     <input type="text" name="role" value="{{ $projectTeam->role }}">
     <button type="submit">Update</button>
 </form>
+
