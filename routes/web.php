@@ -235,17 +235,3 @@ Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });
 
-
-
-PUBLIC FUNCTION UPDATESTATUS(){
-    $_COOKIE
-    $_ENV
-
-
-
-
-
-
-
-
-} 
