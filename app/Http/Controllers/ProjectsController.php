@@ -130,16 +130,22 @@ public function storeReviewer(Request $request)
         return view('projects.edit', compact('projects', 'reviewers', 'projectTeam'));
     }
 
-
     public function update(Request $request, $id)
     {
+        // Find the project by its ID
         $project = ProjectsModel::findOrFail($id);
-        $project->status = $request->input('update_status');
+    
+        // Update the status based on the input from the form
+        $project->status = $request->input('status');
+    
+        // Save the updated project in the database
         $project->save();
-
-        return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
-
+    
+        // Redirect back to the projects page with a success message
+        // return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
     }
+    
+    
 
     public function destroy($id)
     {

@@ -209,7 +209,8 @@
     @method('PUT')
     <div class="form-group">
         <label for="status">Status</label>
-        <select class="form-control" id="status" name="status" required>
+        <select class="form-control" id="status" name="update_status" required>
+        <!-- <select class="form-control" id="status" name="status" required> -->
             <option value="Draft" @if($projects->status === 'Draft') selected @endif>Draft</option>
             <option value="Under Evaluation" @if($projects->status === 'Under Evaluation') selected @endif>Under Evaluation</option>
             <option value="For Revision" @if($projects->status === 'For Revision') selected @endif>For Revision</option>

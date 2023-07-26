@@ -185,7 +185,7 @@ Route::get('/project/create', [ProjectsController::class, 'create'])->name('proj
 Route::post('/project/store', [ProjectsController::class, 'store'])->name('projects.store');
 Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
 Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('projects.edit');
-Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('projects.update');
+// Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('projects.update'); uncomment soon
 Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
 
 
@@ -220,7 +220,7 @@ Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->n
 
 // update project status
 // Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
-Route::get('/status/edit', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
+Route::get('/status/edit', [ProjectsController::class, 'update'])->name('projects.editstatus');
 
 Route::get('/select-reviewers',  [ProjectsController::class, 'selectReviewers'])->name('projects.selectReviewers');
 Route::post('/store-reviewer', [ProjectsController::class, 'storeReviewer'])->name('projects.storeReviewer');
