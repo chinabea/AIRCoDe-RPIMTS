@@ -82,35 +82,32 @@ class ProjectsController extends Controller
         return view('submission-details.show', compact('users'));
     }
 
+    public function storeReviewer(Request $request)
+    {
+        // Validate the input data
+        $validatedData = $request->validate([
+            'reviewers' => 'required|array',
+            'reviewers.*' => 'exists:users,id',
+        ]);
 
-public function storeReviewer(Request $request)
-{
-    // Validate the input data
-    $validatedData = $request->validate([
-        'reviewers' => 'required|array',
-        'reviewers.*' => 'exists:users,id',
-    ]);
+        $projectId = 1; // Replace with the actual project ID you want to associate the reviewers with
 
-    $projectId = 1; // Replace with the actual project ID you want to associate the reviewers with
+        $project = ProjectsModel::findOrFail($projectId);
 
-    $project = ProjectsModel::findOrFail($projectId);
+        // Filter the reviewers based on the user role column (where role = 4)
+        $filteredReviewers = User::whereIn('id', $validatedData['reviewers'])
+            ->where('role', 4)
+            ->pluck('id');
 
-    // Filter the reviewers based on the user role column (where role = 4)
-    $filteredReviewers = User::whereIn('id', $validatedData['reviewers'])
-        ->where('role', 4)
-        ->pluck('id');
+        $project->reviewers()->attach($filteredReviewers);
 
-    $project->reviewers()->attach($filteredReviewers);
+        // Assuming you have the logic to fetch available reviewers, modify the next line accordingly.
+        $reviewers = User::where('role', 4)->get();
 
-    // Assuming you have the logic to fetch available reviewers, modify the next line accordingly.
-    $reviewers = User::where('role', 4)->get();
-
-    // Pass the $reviewers variable to the view (provide the correct view name as the first argument)
-    return view('submission-details.show', compact('reviewers'));
-}
-
-
-
+        // Pass the $reviewers variable to the view (provide the correct view name as the first argument)
+        return view('submission-details.show', compact('reviewers'));
+    }
+    
     public function show($id)
     {
         $projects = ProjectsModel::findOrFail($id);
