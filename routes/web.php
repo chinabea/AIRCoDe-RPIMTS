@@ -185,7 +185,7 @@ Route::get('/project/create', [ProjectsController::class, 'create'])->name('proj
 Route::post('/project/store', [ProjectsController::class, 'store'])->name('projects.store');
 Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
 Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('projects.edit');
-// Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('projects.update'); uncomment soon
+Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('projects.update'); 
 Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
 
 

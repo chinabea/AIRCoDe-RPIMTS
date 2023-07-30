@@ -38,7 +38,6 @@
                                         enctype="multipart/form-data">
                                         {{ method_field('POST') }}
                                         @csrf
-
                                         <div class="form-group">
                                             <label for="projname">Project Name</label>
                                             <input type="text" id="projname" name="projname" class="form-control"

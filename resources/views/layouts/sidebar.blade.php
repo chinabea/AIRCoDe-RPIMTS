@@ -310,41 +310,41 @@
             <li class="nav-item">
               <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>New / Projects </p>
+                <p>New</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{ route('status.draft') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Draft</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{ route('status.under-evaluation') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Under Evaluation</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{ route('status.for-revision') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>For Revision</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{ route('status.deferred') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Deferred</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{ route('status.approved') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Approved</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{ route('status.disapproved') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Disapproved</p>
               </a>
