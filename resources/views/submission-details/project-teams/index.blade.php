@@ -21,7 +21,7 @@
                             <td>{{ $projectTeam->member_name }}</td>
                             <td>{{ $projectTeam->role }}</td>
                             <td>
-                            <a class="btn btn-primary btn-sm" onclick="openEditProjectTeamModal('{{ route('submission-details.project-teams.edit', $projectTeam) }}')">Edit</a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.edit', $projectTeam) }}">Edit</a>
                     
                                 <form action="{{ route('submission-details.project-teams.destroy', $projectTeam->id) }}" method="POST">
                                     @csrf
@@ -35,27 +35,7 @@
                     </tbody>
                 </table>
                 </div>
-    <script>
-        function openEditProjectTeamModal(editBookUrl) {
-  // Perform any additional actions before opening the modal
 
-  // Make an AJAX request to fetch the edit user content
-  $.ajax({
-      url: editBookUrl,
-      method: 'GET',
-      success: function(response) {
-          // Update the modal body with the fetched content
-          $('#EDITProjectTeam .modal-body').html(response);
-
-          // Open the modal
-          $('#EDITProjectTeam').modal('show');
-      },
-      error: function() {
-          // Handle error if needed
-      }
-  });
-}
-</script>
 
 
 

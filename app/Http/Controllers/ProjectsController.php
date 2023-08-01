@@ -16,10 +16,11 @@ class ProjectsController extends Controller
 
     public function index()
     {
+        $projectTeam = ProjectTeamModel::all();
         $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
-        return view('projects.index', compact('records','reviewers'));
+        return view('projects.index', compact('records','reviewers', 'projectTeam'));
     }
 
 
@@ -109,13 +110,14 @@ class ProjectsController extends Controller
     }
     
     public function show($id)
-    {
+    {   
+        $projectTeam = ProjectTeamModel::all();
         $projects = ProjectsModel::findOrFail($id);
 
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
 
-        return view('submission-details.show', compact('projects','reviewers'));
+        return view('submission-details.show', compact('projects','reviewers', 'projectTeam'));
     }
 
     public function edit($id)

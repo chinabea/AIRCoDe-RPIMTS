@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Http\Request;
 use App\Models\ProjectTeamModel;
@@ -8,7 +9,7 @@ use App\Models\ProjectsModel;
 
 class ProjectTeamController extends Controller
 {
-    public function index()
+    public function index(ProjectTeamModel $projectTeam)
     {
         $projectTeams = ProjectTeamModel::all();
         return view('submission-details.project-teams.index', compact('projectTeams'));
@@ -21,15 +22,10 @@ class ProjectTeamController extends Controller
 
     public function store(Request $request)
     {
-        $projectId = $request->input('project_id', 1);
-        $requestData = $request->all();
-        // dd($request->all());
-        $requestData['project_id'] = $projectId;
 
-        ProjectTeamModel::create($requestData);
-
-        // Redirect or perform other actions
-        return redirect()->route('submission-details.project-teams.index')->with('success', 'Data Successfully Added!');
+        $input = $request->all();
+        ProjectTeamModel::create($input);
+        return redirect()->back()->with('success', 'your message,here');   
     }
 
     public function show($id)
@@ -45,70 +41,29 @@ class ProjectTeamController extends Controller
     //     return view('submission-details.project-teams.edit', compact('projectTeam', 'project'));
     // }
 
-    public function edit($id)
+    public function edit(ProjectTeamModel $projectTeam)
     {
-        $projectTeam = ProjectTeamModel::where('id', $id)->firstOrFail();
-        $projects = $projectTeam->project;
-        return view('submission-details.project-teams.edit', compact('projectTeam', 'projects'));
+        return view('submission-details.project-teams.edit', compact('projectTeam'));
     }
-
-
-
-    // public function edit($id)
-    // {
-    //     $projectTeam = ProjectTeamModel::findOrFail($id);
-    //     $projects = $projectTeam->projects;
-    //     return view('submission-details.project-teams.edit', compact('projectTeam', 'projects'));
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
     // Update a project team member
-    public function update(Request $request, $id)
+    public function update(Request $request, ProjectTeamModel $projectTeam)
     {
-        // Find the project team member by their ID
-        $projectTeam = ProjectTeamModel::find($id);
+        // Validation - Example: you can modify the validation rules based on your needs
+        $validatedData = $request->validate([
+            'member_name' => 'required|string',
+            'role' => 'required|string',
+            // Add validation rules for other attributes of the ProjectTeamModel if needed
+        ]);
 
-        // Update the member name and role based on the form input
-        $projectTeam->member_name = $request->input('member_name');
-        $projectTeam->role = $request->input('role');
+        // Update the attributes of the project team based on the validated data
+        $projectTeam->update($validatedData);
 
-        // Save the updated project team member
-        $projectTeam->save();
-
-        // Redirect the user or perform other actions as needed
-        return redirect()->back()->with('success', 'Project team member updated successfully.');
+        // Redirect back to the edit page with a success message
+        return redirect()->route('submission-details.project-teams.edit', ['projectTeam' => $projectTeam->id])
+            ->with('success', 'Project team details updated successfully!');
     }
-
-    // Delete a project team member
-    // public function destroy($id)
-    // {
-    //     // Find the project team member by their ID
-    //     $projectTeam = ProjectTeamModel::find($id);
-
-    //     // Delete the project team member
-    //     $projectTeam->delete();
-
-    //     // Redirect the user or perform other actions as needed
-    //     return redirect()->route('submission-details.project-teams.index')->with('success', 'Project team member deleted successfully.');
-    // }
 
     public function destroy($id)
     {

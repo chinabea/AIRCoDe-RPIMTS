@@ -1,11 +1,10 @@
 @extends('layouts.template')
-@section('title', 'Create Project')
 
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+@section('content')
+
+
   <!-- Navbar -->
-        @include('layouts.topnav')
-        @include('layouts.sidebar')
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -37,7 +36,8 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-hover">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="example1" width="100%" cellspacing="0">
                   <thead>
                   <tr>
                     <th>Title</th>
@@ -83,51 +83,8 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0
-    </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-
-<!-- Page specific script -->
-<!-- <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script> -->
-
-<script src="{{ asset('dist/js/datatables.js') }}"></script>
+  </div>
 
 
+  @endsection
 
-<!-- 
-  <script>
-    $(document).ready(function() {
-      // Initialize DataTable
-      $('#example1').DataTable();
-    });
-  </script>  -->
-
-</body>
-</html>
