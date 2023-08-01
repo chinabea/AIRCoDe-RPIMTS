@@ -30,26 +30,6 @@
               <div class="card-header">
                 <h3 class="card-title">Project List</h3>
               </div>
-              <ul>
-                  <li>
-                      <a href="{{ route('status.draft') }}">draft</a>
-                  </li>
-                  <li>
-                      <a href="{{ route('status.under-evaluation') }}">Under Evaluation</a>
-                  </li>
-                  <li>
-                      <a href="{{ route('status.for-revision') }}">For Revision</a>
-                  </li>
-                  <li>
-                      <a href="{{ route('status.approved') }}">approved</a>
-                  </li>
-                  <li>
-                      <a href="{{ route('status.deferred') }}">deferred</a>
-                  </li>
-                  <li>
-                      <a href="{{ route('status.disapproved') }}">disapproved</a>
-                  </li>
-              </ul>
               <div class="card-body">
                 <a href="{{ route('projects.create') }}" class="btn btn-primary">Add Project</a>
               <hr>

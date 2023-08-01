@@ -216,14 +216,13 @@ Route::get('/status/for-revision', [ProjectsController::class, 'forRevision'])->
 Route::get('/status/approved', [ProjectsController::class, 'approved'])->name('status.approved');
 Route::get('/status/deferred', [ProjectsController::class, 'deferred'])->name('status.deferred');
 Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->name('status.disapproved');
-// Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
 
-// update project status
-// Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
 Route::get('/status/edit', [ProjectsController::class, 'update'])->name('projects.editstatus');
 
 Route::get('/select-reviewers',  [ProjectsController::class, 'selectReviewers'])->name('projects.selectReviewers');
 Route::post('/store-reviewer', [ProjectsController::class, 'storeReviewer'])->name('projects.storeReviewer');
+
+
 
 
 
