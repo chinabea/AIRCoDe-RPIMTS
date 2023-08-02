@@ -18,10 +18,10 @@ class ProjectsController extends Controller
     public function index()
     {
         // $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
-        $projects = ProjectsModel::all();
+        $project = ProjectsModel::all();
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
-        return view('projects.index', compact('projects','reviewers'));
+        return view('projects.index', compact('project','reviewers'));
     }
 
 

@@ -29,28 +29,28 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function sendNotification()
-    {
+    // public function sendNotification()
+    // {
 
-        $user=User::all();
+    //     $user=User::all();
 
-        $details=[
+    //     $details=[
 
-            'greeting'=>'Hi Lav Developer',
+    //         'greeting'=>'Hi Lav Developer',
 
-            'body'=>'Hi Lav Body',
+    //         'body'=>'Hi Lav Body',
 
-            'actiontext'=>'Click the link to view Project',
+    //         'actiontext'=>'Click the link to view Project',
 
-            'actionurl'=>'/',
+    //         'actionurl'=>'/',
 
-            'lastline'=>'this is the last line',
+    //         'lastline'=>'this is the last line',
 
-        ];
+    //     ];
 
-        Notification::send($user, new EmailNotification($details));
+    //     Notification::send($user, new EmailNotification($details));
 
-        dd('done');
+    //     dd('done');
 
-    }
+    // }
 }

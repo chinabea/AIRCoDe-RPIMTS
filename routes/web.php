@@ -210,14 +210,12 @@ Route::get('/sample', function () {
 // FOR STATUS
 Route::get('/status/under-evaluation', [ProjectsController::class, 'underEvaluation'])->name('status.under-evaluation');
 Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
-
 Route::get('/status/for-revision', [ProjectsController::class, 'forRevision'])->name('status.for-revision');
 Route::get('/status/approved', [ProjectsController::class, 'approved'])->name('status.approved');
 Route::get('/status/deferred', [ProjectsController::class, 'deferred'])->name('status.deferred');
 Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->name('status.disapproved');
 
-
-Route::put('/staff/for-review/{id}', [ProjectHistoryController::class, 'showHistory'])->name('staff.sidebar');
+Route::put('/staff', [ProjectHistoryController::class, 'showHistory'])->name('staff.sidebar');
 
 
 
