@@ -40,10 +40,7 @@
 <link rel="stylesheet" href="{{ asset('../plugins/fullcalendar/main.css') }}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('../dist/css/adminlte.min.css') }}">
-
-
 </head>
-
 
 <body>
 
