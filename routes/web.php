@@ -185,7 +185,7 @@ Route::get('/project/create', [ProjectsController::class, 'create'])->name('proj
 Route::post('/project/store', [ProjectsController::class, 'store'])->name('projects.store');
 Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
 Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('projects.edit');
-Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('projects.update'); 
+Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('projects.update');
 Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
 
 
@@ -217,34 +217,8 @@ Route::get('/status/approved', [ProjectsController::class, 'approved'])->name('s
 Route::get('/status/deferred', [ProjectsController::class, 'deferred'])->name('status.deferred');
 Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->name('status.disapproved');
 
-<<<<<<< HEAD
-=======
-// update project status
-<<<<<<< HEAD
-Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
->>>>>>> 4c21dfcf6f68e92c6fbf6cc33cdcc8f7bdbe7649
-=======
-// Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
->>>>>>> parent of 4c21dfc (hart hart china)
-Route::get('/status/edit', [ProjectsController::class, 'update'])->name('projects.editstatus');
-
-Route::get('/select-reviewers',  [ProjectsController::class, 'selectReviewers'])->name('projects.selectReviewers');
-Route::post('/store-reviewer', [ProjectsController::class, 'storeReviewer'])->name('projects.storeReviewer');
 
 
-
-
-
-
-
-
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 9d49ccacd847c1f24969362ed411b19360cb8002
 Route::get('/test-error', function () {
     abort(500);
 });

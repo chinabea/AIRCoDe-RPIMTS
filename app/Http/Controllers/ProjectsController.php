@@ -109,7 +109,7 @@ class ProjectsController extends Controller
         // Pass the $reviewers variable to the view (provide the correct view name as the first argument)
         return view('submission-details.show', compact('reviewers'));
     }
-    
+
     public function show($id)
     {
         $projects = ProjectsModel::findOrFail($id);
@@ -133,18 +133,18 @@ class ProjectsController extends Controller
     {
         // Find the project by its ID
         $project = ProjectsModel::findOrFail($id);
-    
+
         // Update the status based on the input from the form
         $project->status = $request->input('status');
-    
+
         // Save the updated project in the database
         $project->save();
-    
+
         // Redirect back to the projects page with a success message
         // return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
     }
-    
-    
+
+
 
     public function destroy($id)
     {
@@ -159,15 +159,15 @@ class ProjectsController extends Controller
         $request->validate([
             'status' => 'required|in:Draft,Under Evaluation,For Revision,Approved,Deferred,Disapproved',
         ]);
-    
-        $project = Project::find($id);
+
+        $project = ProjectsModel::find($id);
         if (!$project) {
             return redirect()->back()->with('error', 'Project not found.');
         }
-    
+
         $project->status = $request->input('status');
         $project->save();
-    
+
         return redirect()->route('projects.show', ['id' => $id])->with('success', 'Project status updated successfully.');
     }
 
