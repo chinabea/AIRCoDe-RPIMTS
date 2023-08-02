@@ -181,10 +181,8 @@
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
                 @include('submission-details.project-teams.create')
-
-            <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.index') }}">Edit</a>
-            @include('submission-details.project-teams.modal')
-
+            
+            
             </div>
             </div>
           </div>
@@ -350,6 +348,27 @@
         $('#details-form, #status-form, #reviewer-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form').hide();
       });
     });
+
+  function openEditProjectTeamModal(editBookUrl) {
+  // Perform any additional actions before opening the modal
+
+  // Make an AJAX request to fetch the edit user content
+  $.ajax({
+      url: editBookUrl,
+      method: 'GET',
+      success: function(response) {
+          // Update the modal body with the fetched content
+          $('#EDITProjectTeam .modal-body').html(response);
+
+          // Open the modal
+          $('#EDITProjectTeam').modal('show');
+      },
+      error: function() {
+          // Handle error if needed
+      }
+  });
+}
+
   </script>
 
   </div>

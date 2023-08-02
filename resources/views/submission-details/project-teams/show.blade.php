@@ -37,12 +37,11 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($members as $member)
+
               <tr>
-                <td>{{ $member->name }}</td>
-                <td>{{ $member->role }}</td>
+                <td>{{ $projectTeam->member_name }}</td>
+                <td>{{ $projectTeam->role }}</td>
               </tr>
-              @endforeach
             </tbody>
           </table>
           <div class="form-row">
