@@ -187,9 +187,9 @@ class ProjectsController extends Controller
 
     public function forRevision()
     {
-        $projects = ProjectsModel::where('status', 'For Revision')->get();
+        $project = ProjectsModel::where('status', 'For Revision')->get();
 
-        return view('status.for-revision', compact('projects'));
+        return view('status.for-revision', compact('project'));
     }
 
     public function approved()

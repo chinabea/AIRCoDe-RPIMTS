@@ -242,7 +242,7 @@
               <p>FOR REVIEW</p>
             </a>
             <ul class="nav nav-treeview">
-            @foreach($projects as $project)
+            @foreach($project as $projects)
                 @if($project->status === 'For Revision')
                     <li class="nav-item">
                         <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $project->id }}">
