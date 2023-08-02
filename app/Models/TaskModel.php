@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class TaskModel extends Model
+{
+
+    // Define the table name if it differs from "tasks"
+    protected $table = 'tasks';
+
+    // Define the fillable attributes
+    protected $fillable = [
+        'title',
+        'description',
+        'start_date',
+        'end_date',
+        'assigned_to',
+    ];
+
+
+    protected $casts = [
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
+    ];
+
+    public function assignedTo()
+    {
+        return $this->belongsTo(User::class, 'assigned_to');
+    }
+}
