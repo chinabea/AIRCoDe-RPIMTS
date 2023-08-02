@@ -9,19 +9,15 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <!-- <h1>Project</h1> -->
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              {{-- <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">About Us</li> --}}
             </ol>
           </div>
         </div>
       </div>
     </section>
 
-<!-- Main content -->
     <div class="col-md-12">
             <div class="card card-primary card-outline">
               <div class="card-header">
@@ -185,8 +181,10 @@
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
                 @include('submission-details.project-teams.create')
-            
-            
+
+            <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.index') }}">Edit</a>
+            @include('submission-details.project-teams.modal')
+
             </div>
             </div>
           </div>
@@ -352,27 +350,6 @@
         $('#details-form, #status-form, #reviewer-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form').hide();
       });
     });
-
-  function openEditProjectTeamModal(editBookUrl) {
-  // Perform any additional actions before opening the modal
-
-  // Make an AJAX request to fetch the edit user content
-  $.ajax({
-      url: editBookUrl,
-      method: 'GET',
-      success: function(response) {
-          // Update the modal body with the fetched content
-          $('#EDITProjectTeam .modal-body').html(response);
-
-          // Open the modal
-          $('#EDITProjectTeam').modal('show');
-      },
-      error: function() {
-          // Handle error if needed
-      }
-  });
-}
-
   </script>
 
   </div>

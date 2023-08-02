@@ -1,4 +1,3 @@
-
 @php
     $role = auth()->user()->role;
 @endphp
@@ -534,4 +533,3 @@
 @else
     @include('sidebar-guest')
 @endif
-

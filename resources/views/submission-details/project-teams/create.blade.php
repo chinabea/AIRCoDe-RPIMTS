@@ -15,11 +15,6 @@
                         <!-- {{ method_field('POST') }} -->
                         @csrf
                         <div class="form-row">
-
-                        <div class="form-group col-md-6">
-                                <label for="member_name">ID</label>
-                                <input type="text" class="form-control" id="id" name="project_id" value="{{ $projects->id }}" required>
-                            </div>
                             <div class="form-group col-md-6">
                                 <label for="member_name">Name</label>
                                 <input type="text" class="form-control" id="member_name" name="member_name" required>

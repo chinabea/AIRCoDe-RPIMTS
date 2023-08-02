@@ -36,7 +36,7 @@ use App\Mail\Send;
 
 Route::get('/', function () {
     // Mail::send(new Send);
-    return view('auth/login');
+    return view('welcome');
 });
 
 
@@ -200,8 +200,8 @@ Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('sub
 Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('submission-details.project-teams.create');
 Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('submission-details.project-teams.store');
 Route::put('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name('submission-details.project-teams.show');
-Route::get('/project-teams/{projectTeam}/edit', [ProjectTeamController::class, 'edit'])->name('submission-details.project-teams.edit');
-Route::put('/project-teams/{projectTeam}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
+Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('submission-details.project-teams.edit');
+Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
 Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
 
 Route::get('/sample', function () {
@@ -211,14 +211,21 @@ Route::get('/sample', function () {
 // FOR STATUS
 Route::get('/status/under-evaluation', [ProjectsController::class, 'underEvaluation'])->name('status.under-evaluation');
 Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
+
 Route::get('/status/for-revision', [ProjectsController::class, 'forRevision'])->name('status.for-revision');
 Route::get('/status/approved', [ProjectsController::class, 'approved'])->name('status.approved');
 Route::get('/status/deferred', [ProjectsController::class, 'deferred'])->name('status.deferred');
 Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->name('status.disapproved');
-// Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
 
+<<<<<<< HEAD
+=======
 // update project status
+<<<<<<< HEAD
 Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
+>>>>>>> 4c21dfcf6f68e92c6fbf6cc33cdcc8f7bdbe7649
+=======
+// Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
+>>>>>>> parent of 4c21dfc (hart hart china)
 Route::get('/status/edit', [ProjectsController::class, 'update'])->name('projects.editstatus');
 
 Route::get('/select-reviewers',  [ProjectsController::class, 'selectReviewers'])->name('projects.selectReviewers');
@@ -231,6 +238,13 @@ Route::post('/store-reviewer', [ProjectsController::class, 'storeReviewer'])->na
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 9d49ccacd847c1f24969362ed411b19360cb8002
 Route::get('/test-error', function () {
     abort(500);
 });
