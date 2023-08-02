@@ -1,15 +1,8 @@
 @extends('layouts.template')
-@section('title', 'Create Project')
 
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-  <!-- Navbar -->
-        @include('layouts.topnav')
-        @include('layouts.sidebar')
+@section('content')
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -23,10 +16,9 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-    
-    <!-- Main content -->
+
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -35,9 +27,9 @@
               <div class="card-header">
                 <h3 class="card-title">DataTable with default features</h3>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-hover">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="example1" width="100%" cellspacing="0">
                   <thead>
                   <tr>
                     <th>Title</th>
@@ -46,20 +38,20 @@
                     <th>End Date</th>
                   </tr>
                   </thead>
-@if(count($projects) > 0)
-                  <tbody>
-            @foreach($projects as $project)
-                  <tr>
-                    <td>{{ $project->projname }}</td>
-                    <td>{{ $project->researchgroup }}</td>
-                    <td>{{ $project->start_date }}</td>
-                    <td>{{ $project->end_date }}</td>
-                  </tr>
-            @endforeach
-                  </tbody>    
-    @else
-        <p>No projects currently under evaluation.</p>
-    @endif
+                    @if(count($projects) > 0)
+                        <tbody>
+                            @foreach($projects as $project)
+                                <tr>
+                                    <td>{{ $project->projname }}</td>
+                                    <td>{{ $project->researchgroup }}</td>
+                                    <td>{{ $project->start_date }}</td>
+                                    <td>{{ $project->end_date }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    @else
+                        <p>No projects currently under evaluation.</p>
+                    @endif
                   <tfoot>
                   <tr>
                     <th>Title</th>
@@ -70,64 +62,13 @@
                   </tfoot>
                 </table>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0
-    </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-
-<!-- Page specific script -->
-<!-- <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script> -->
-
-<script src="{{ asset('dist/js/datatables.js') }}"></script>
+  </div>
 
 
-
-<!-- 
-  <script>
-    $(document).ready(function() {
-      // Initialize DataTable
-      $('#example1').DataTable();
-    });
-  </script>  -->
-
-</body>
-</html>
+  @endsection

@@ -1,3 +1,4 @@
+
 @php
     $role = auth()->user()->role;
 @endphp
@@ -11,6 +12,27 @@
     </a>
 
     <div class="sidebar">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ asset('dist/img/user4-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+        </div>
+      </div>
+
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -88,12 +110,22 @@
               </li>
             </ul>
           </li>
+          <li class="nav-header">PROFILE</li>
+          <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <i class="nav-icon fas fa-user-alt"></i>
+              <p>Logout</p>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
+          </li>
     </div>
   </aside>
 
 
 @elseif($role === 2)
-<!-- FOR STAFF -->
+<!-- FOR STAFF --><!-- FOR STAFF -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -210,18 +242,19 @@
               <p>FOR REVIEW</p>
             </a>
             <ul class="nav nav-treeview">
-              @foreach($projects as $project)
+            @foreach($projects as $project)
                 @if($project->status === 'For Revision')
-                <li class="nav-item">
-            <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $project->id }}">
-              <i class="nav-icon fas fa-book"></i>
-              <p>{{ $project->projname }}</p>
-              <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
-              <a href="{{ route('project.history', ['id' => $project->id]) }}" class="fas fa-history history mb-4">View History...</a>
-            </a>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $project->id }}">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>{{ $project->projname }}</p>
+                            <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
+                            <a href="{{ route('project.history', ['id' => $project->id]) }}" class="fas fa-history history mb-4">View History...</a>
+                        </a>
+                    </li>
+                @endif
+            @endforeach
 
-      @endif
-    @endforeach
   </ul>
 </li>
 
@@ -229,7 +262,7 @@
 
 
 
-          
+
     </div>
   </aside>
 

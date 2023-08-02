@@ -218,6 +218,7 @@ Route::get('/status/deferred', [ProjectsController::class, 'deferred'])->name('s
 Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->name('status.disapproved');
 
 
+Route::put('/staff/for-review/{id}', [ProjectHistoryController::class, 'showHistory'])->name('staff.sidebar');
 
 
 

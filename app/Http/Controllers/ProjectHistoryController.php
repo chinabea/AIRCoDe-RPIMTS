@@ -9,10 +9,13 @@ class ProjectHistoryController extends Controller
 {
     public function showHistory($id)
     {
-        $project = ProjectsModel::findOrFail($id); // Assuming you have a ProjectsModel representing projects
-        $history = ProjectHistory::where('project_id', $id)->get();
-        $projects = ProjectsModel::all();
+        $project = ProjectsModel::findOrFail($id); // Fetch the specific project using its ID
+        $history = ProjectHistory::where('project_id', $id)->get(); // Fetch the history related to the project
 
-        return view('projects.history', compact('projects', 'project', 'history'));
+        $projects = ProjectsModel::where('status', 'For Revision')->get(); // Fetch all projects with status "For Revision"
+
+        return view('projects.history', compact('project', 'history', 'projects'));
     }
+
+
 }
