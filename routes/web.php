@@ -35,7 +35,6 @@ use App\Mail\Send;
 
 
 Route::get('/', function () {
-    // Mail::send(new Send);
     return view('welcome');
 });
 
@@ -43,7 +42,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'director'])->group(function (){
     Route::get('director', function () {
