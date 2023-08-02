@@ -10,16 +10,18 @@ use App\Models\UsersModel;
 use App\Models\User;
 use App\Models\ProjectReviewerModel;
 use App\Models\ProjectTeamModel;
+use App\Models\ProjectHistory;
 
 class ProjectsController extends Controller
 {
 
     public function index()
     {
-        $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
+        // $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
+        $projects = ProjectsModel::all();
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
-        return view('projects.index', compact('records','reviewers'));
+        return view('projects.index', compact('projects','reviewers'));
     }
 
 
@@ -168,8 +170,6 @@ class ProjectsController extends Controller
     
         return redirect()->route('projects.show', ['id' => $id])->with('success', 'Project status updated successfully.');
     }
-    
-    
 
     public function draft()
     {

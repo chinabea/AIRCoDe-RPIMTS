@@ -11,27 +11,6 @@
     </a>
 
     <div class="sidebar">
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ asset('dist/img/user4-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-        </div>
-      </div>
-
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -109,16 +88,6 @@
               </li>
             </ul>
           </li>
-          <li class="nav-header">PROFILE</li>
-          <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-user-alt"></i>
-              <p>Logout</p>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-            </form>
-          </li>
     </div>
   </aside>
 
@@ -132,33 +101,13 @@
         <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
       </a>
       <div class="sidebar">
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="{{ asset('dist/img/user4-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-              <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-          </div>
-        </div>
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-header">MAIN MENU</li>
+          <!-- <li class="nav-header">MAIN MENU</li>
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
@@ -237,25 +186,52 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-header">SETTINGS</li>
-          <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-user-alt"></i>
-              <p>Logout</p>
+          </li> -->
+          <style>
+          /* Custom styles for the project title and deadline */
+          .project-title {
+            font-weight: bold; /* Make the project title bold */
+          }
+
+          .deadline {
+            font-size: 14px; /* Adjust the font size for the deadline text */
+            margin-top: 5px; /* Add some margin between the project title and the deadline */
+          }
+
+          .history {
+            font-size: 14px; /* Adjust the font size for the deadline text */
+            margin-top: 5px; /* Add some margin between the project title and the deadline */
+          }
+
+          </style>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-angle-down"></i>
+              <p>FOR REVIEW</p>
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-            </form>
-          </li>
+            <ul class="nav nav-treeview">
+              @foreach($projects as $project)
+                @if($project->status === 'For Revision')
+                <li class="nav-item">
+            <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $project->id }}">
+              <i class="nav-icon fas fa-book"></i>
+              <p>{{ $project->projname }}</p>
+              <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
+              <a href="{{ route('project.history', ['id' => $project->id]) }}" class="fas fa-history history mb-4">View History...</a>
+            </a>
+
+      @endif
+    @endforeach
+  </ul>
+</li>
+
+
+
+
+
+          
     </div>
   </aside>
-
-
-
-
-
-
 
 @elseif($role === 3)
 <!-- FOR RESEARCHER -->

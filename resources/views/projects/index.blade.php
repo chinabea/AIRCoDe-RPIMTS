@@ -53,10 +53,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if($records->count() > 0)
-                            @foreach($records as $record)
-
-
+                        @if($projects->count() > 0)
+                            @foreach($projects as $record)
                             <tr>
                                 <td class="align-middle">{{ $loop->iteration }}</td>
                                 <td>
