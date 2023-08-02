@@ -231,8 +231,6 @@ Route::post('/store-reviewer', [ProjectsController::class, 'storeReviewer'])->na
 
 
 
-
-
 Route::get('/test-error', function () {
     abort(500);
 });
