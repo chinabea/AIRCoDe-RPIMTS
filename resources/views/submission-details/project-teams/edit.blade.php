@@ -1,4 +1,4 @@
-<form action="{{ route('submission-details.project-teams.update', $projectTeam) }}" method="POST">
+<form action="{{ route('submission-details.project-teams.update', $projectTeam->id) }}" method="POST">
     @csrf
     @method('PUT')
     <input type="text" name="member_name" value="{{ $projectTeam->member_name }}">

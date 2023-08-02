@@ -41,25 +41,68 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('../dist/css/adminlte.min.css') }}">
 
-
 </head>
-
-
 <body>
 
 
-  @include('layouts.topnav')
+    <!-- Authentication Links -->
+    {{-- @guest
+        @if (Route::has('login'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+        @endif
 
-  @include('layouts.sidebar')
+        @if (Route::has('register'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+            </li>
+        @endif
+    @else
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }}
+            </a>
 
-  @yield('content')
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
+        </li>
+    @endguest --}}
+
+
+    <div class="container">
+        @yield('contents')
+    </div>
+
+
 
 
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
@@ -69,16 +112,51 @@
 <!-- date-range-picker -->
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
 
+<!-- Include JS file for DateRangePicker -->
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+<!-- Include the required JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 
+<script>
+
+//Date range picker
+$('#reservation').daterangepicker()
+$('#reservationtime').daterangepicker({
+  timePicker: true,
+  timePickerIncrement: 30,
+  locale: {
+    format: 'MM/DD/YYYY hh:mm A'
+  }
+})
+
+//Date range as a button
+$('#daterange-btn').daterangepicker(
+  {
+    ranges   : {
+      'Today'       : [moment(), moment()],
+      'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+      'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+      'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+      'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    },
+    startDate: moment().subtract(29, 'days'),
+    endDate  : moment()
+  },
+  function (start, end) {
+    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+  }
+)
+
+</script>
+<!-- Add this at the end of your Blade template -->
+<!-- @push('scripts')
+<script src="{{ asset('dist/js/project-teams.js') }}"></script>
+@endpush -->
 
 
-    <!-- datatables-->
-    <script src="{{ asset('datatables/jquery.min.js') }}"></script>
-    <script src="{{ asset('datatables/sb-admin-2.min.js') }}"></script>
-    <script src="{{ asset('datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('datatables/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('datatables/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('datatables/datatables-demo.js') }}"></script>
 </body>
 </html>
