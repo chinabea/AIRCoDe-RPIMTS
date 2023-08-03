@@ -1,17 +1,15 @@
-@foreach($projects as $project)
-
-<li class="nav-item">
-
-    <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $project->id }}">
-
-        <i class="nav-icon fas fa-book"></i>
-
-        <p>{{ $project->projname }}</p>
-
-        <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
-
-    </a>
-
-</li>
-
-@endforeach
+@if(count($projects) > 0)
+        <ul>
+            @foreach($projects as $project)
+                <li>
+                    <strong>Project Name:</strong> {{ $project->projname }}<br>
+                    <strong>Research Group:</strong> {{ $project->researchgroup }}<br>
+                    <strong>Start Date:</strong> {{ $project->start_date }}<br>
+                    <strong>End Date:</strong> {{ $project->end_date }}<br>
+                    <!-- Display other project details as needed -->
+                </li>
+            @endforeach
+        </ul>
+    @else
+        <p>No projects currently under evaluation.</p>
+    @endif

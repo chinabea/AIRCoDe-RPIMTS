@@ -215,10 +215,11 @@ class ProjectsController extends Controller
         return view('status.disapproved', compact('projects'));
     }
 
-    public function forRevisionSidebar($id)
+    public function forRevisionSidebar()
     {
-        $projects = ProjectsModel::findOrFail($id);
-        // $revisionProjects = ProjectsModel::where('status', 'For Revision')->get();
+
+        $projects = ProjectsModel::where('status', 'For Revision')->get();
+
         return view('dashboard', compact('projects'));
     }
 
