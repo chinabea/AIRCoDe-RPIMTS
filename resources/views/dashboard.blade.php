@@ -29,6 +29,47 @@
               </div>
               <div class="card-body">
               <p>Dashboard</p>
+
+              <div class="card-body pad table-responsive">
+                <table class="table table-bordered table-sm text-right">
+                    <tbody>
+                        <tr>
+                        <th scope="row" width="25%">PROJECT ID</th>
+                        <td class="text-left">{{ $projects->id }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row" width="25%">PROJECT TITLE</th>
+                        <td class="text-left">{{ $projects->projname }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">PROJECT GROUP</th>
+                        <td class="text-left">{{ $projects->researchgroup }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">STATUS</th>
+                        <td class="text-left">{{ $projects->status }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">REVIEWERS</th>
+                        <td class="text-left">@foreach($reviewers as $reviewer)
+                                                <p>{{ $reviewer->name }}</p>
+                                            @endforeach
+                                          </td>
+                        </tr>
+                        <tr>
+                        <th scope="row">DATE SUBMITTED</th>
+                        <td class="text-left">{{ \Carbon\Carbon::parse($projects->created_at)->format('F d, Y') }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">LAST UPDATE</th>
+                        <td class="text-left">{{ \Carbon\Carbon::parse($projects->updated_at)->format('F d, Y') }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+              </div>
+
+
             </div>
           </div>
         </div>

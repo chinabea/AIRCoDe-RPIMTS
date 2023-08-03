@@ -125,114 +125,26 @@
 
 
 @elseif($role === 2)
-<!-- FOR STAFF --><!-- FOR STAFF -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
+{{-- <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="index3.html" class="brand-link">
         <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
       </a>
       <div class="sidebar">
 
-      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <!-- <li class="nav-header">MAIN MENU</li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon fas fa-user-alt"></i>
-              <p>
-                Users
-                <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Submitted Projects
-                <span class="badge badge-info right">7</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Collected Reviews
-                <span class="badge badge-info right">10</span>
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Transparency
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/examples/lockscreen.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Call for Proposals</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/legacy-user-menu.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Access Request</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/language-menu.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Announcements</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/404.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>About Us</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/examples/500.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Downloads</p>
-                </a>
-              </li>
-            </ul>
-          </li> -->
           <style>
-          /* Custom styles for the project title and deadline */
           .project-title {
-            font-weight: bold; /* Make the project title bold */
+            font-weight: bold;
           }
-
           .deadline {
-            font-size: 14px; /* Adjust the font size for the deadline text */
-            margin-top: 5px; /* Add some margin between the project title and the deadline */
+            font-size: 14px;
+            margin-top: 5px;
           }
-
           .history {
-            font-size: 14px; /* Adjust the font size for the deadline text */
-            margin-top: 5px; /* Add some margin between the project title and the deadline */
+            font-size: 14px;
+            margin-top: 5px;
           }
 
           </style>
@@ -242,29 +154,19 @@
               <p>FOR REVIEW</p>
             </a>
             <ul class="nav nav-treeview">
-            @foreach($project as $projects)
-                @if($project->status === 'For Revision')
+            @foreach($projects as $project)
                     <li class="nav-item">
                         <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $project->id }}">
                             <i class="nav-icon fas fa-book"></i>
                             <p>{{ $project->projname }}</p>
                             <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
-                            <a href="{{ route('project.history', ['id' => $project->id]) }}" class="fas fa-history history mb-4">View History...</a>
                         </a>
                     </li>
-                @endif
             @endforeach
-
-  </ul>
-</li>
-
-
-
-
-
-
-    </div>
-  </aside>
+    </ul>
+    </li>
+</div>
+</aside> --}}
 
 @elseif($role === 3)
 <!-- FOR RESEARCHER -->

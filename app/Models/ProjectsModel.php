@@ -27,11 +27,6 @@ class ProjectsModel extends Model
                         'references'
                     ];
 
-    // public function projectTeam()
-    // {
-    //     return $this->hasOne(ProjectTeam::class);
-    // }
-
     public function projectTeams()
     {
         return $this->hasMany(ProjectTeamModel::class, 'project_id');

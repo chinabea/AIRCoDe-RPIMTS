@@ -18,6 +18,7 @@ use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ProjectTeamController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ProjectHistoryController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -42,7 +43,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'director'])->group(function (){
     Route::get('director', function () {
@@ -55,6 +56,7 @@ Route::middleware(['auth', 'staff'])->group(function (){
     Route::get('/staff', function () {
         return view('dashboard');
     })->name('staff');
+
 
 });
 
@@ -203,10 +205,6 @@ Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->
 Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
 Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
 
-Route::get('/sample', function () {
-    return view('sample');
-});
-
 // FOR STATUS
 Route::get('/status/under-evaluation', [ProjectsController::class, 'underEvaluation'])->name('status.under-evaluation');
 Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
@@ -215,8 +213,7 @@ Route::get('/status/approved', [ProjectsController::class, 'approved'])->name('s
 Route::get('/status/deferred', [ProjectsController::class, 'deferred'])->name('status.deferred');
 Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->name('status.disapproved');
 
-Route::put('/staff', [ProjectHistoryController::class, 'showHistory'])->name('staff.sidebar');
-
+Route::put('/dashboard', [ProjectsController::class, 'forRevisionSidebar'])->name('dashboard');
 
 
 

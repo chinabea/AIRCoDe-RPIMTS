@@ -18,10 +18,12 @@ class ProjectsController extends Controller
     public function index()
     {
         // $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
-        $project = ProjectsModel::all();
+        $projects = ProjectsModel::all();
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
-        return view('projects.index', compact('project','reviewers'));
+        return view('projects.index', compact('projects','reviewers'));
+        // return view('layouts.sidebar', compact('projects','reviewers'));
+
     }
 
 
@@ -187,9 +189,9 @@ class ProjectsController extends Controller
 
     public function forRevision()
     {
-        $project = ProjectsModel::where('status', 'For Revision')->get();
+        $projects = ProjectsModel::where('status', 'For Revision')->get();
 
-        return view('status.for-revision', compact('project'));
+        return view('status.for-revision', compact('projects'));
     }
 
     public function approved()
@@ -213,8 +215,12 @@ class ProjectsController extends Controller
         return view('status.disapproved', compact('projects'));
     }
 
-
-
+    public function forRevisionSidebar($id)
+    {
+        $projects = ProjectsModel::findOrFail($id);
+        // $revisionProjects = ProjectsModel::where('status', 'For Revision')->get();
+        return view('dashboard', compact('projects'));
+    }
 
 
 
