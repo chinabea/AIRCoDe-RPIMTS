@@ -53,7 +53,7 @@ Route::middleware(['auth', 'director'])->group(function (){
 });
 
 Route::middleware(['auth', 'staff'])->group(function (){
-    Route::get('/staff', [ProjectsController::class, 'forRevisionSidebar'])->name('staff');
+    Route::get('/staff', [ProjectsController::class, 'forRevision'])->name('staff');
 
 });
 
@@ -211,15 +211,7 @@ Route::get('/status/deferred', [ProjectsController::class, 'deferred'])->name('s
 Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->name('status.disapproved');
 
 
-
-Route::get('/proj-revision/show/{id}', [ProjectsController::class, 'forRevisionSidebar'])->name('submission-details.show');
-
-
-
-
-
-
-
+// Route::get('/proj-revision/show', [ProjectsController::class, 'forRevisionSidebar'])->name('proj-revision.show');
 
 
 

@@ -1,27 +1,12 @@
 @extends('layouts.template')
-@section('title', 'Projects')
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-@include('layouts.topnav')
-@include('layouts.sidebar')
+@section('title', 'Dashboard')
+
+@section('content')
+
   <div class="content-wrapper">
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <!-- <h1>DataTables</h1> -->
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li> -->
-            </ol>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -29,55 +14,56 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Project List</h3>
-              </div>
+              </div> 
               <div class="card-body">
-                <a href="{{ route('projects.create') }}" class="btn btn-primary">Add Project</a>
-              <hr>
+                
                 @if(Session::has('success'))
                     <div class="alert alert-success" role="alert">
                         {{ Session::get('success') }}
                     </div>
                 @endif
 
-                <table id="example1" class="table table-bordered table-striped table-sm">
+                <div class="mb-3">
+                    <a href="{{ route('projects.create') }}" class="btn btn-info">
+                        <i class="fas fa-plus"></i> Add Project
+                    </a>
+                </div>
+
+                <table id="example1" class="table table-bordered table-hover table-sm">
                     <thead>
                     <tr>
-                      <th>#</th>
-                      <th>Project Title</th>
+                      <th>ID</th>
+                      <th>Title</th>
                       <th>Research Group</th>
                       <th>Date Submitted</th>
                       <th>Status</th>
-                      <th>Reviewers</th>
-                      <th>RSC</th>
-                      <th>Action(s)</th>
+                      <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                         @if($projects->count() > 0)
                             @foreach($projects as $record)
                             <tr>
-                                <td class="align-middle">{{ $loop->iteration }}</td>
-                                <td>
+                                <!-- <td class="align-middle">{{ $loop->iteration }}.</td> -->
+                                <td class="align-middle">{{ $record->id }}</td>
+                                <td class="align-middle">
                                   <a href="{{ route('submission-details.show', $record->id) }}">{{ $record->projname }}</a>
                                 </td>
                                 <td class="align-middle">{{ $record->researchgroup }}</td>
                                 <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
                                 <td class="align-middle">{{ $record->status }}</td>
-
-                                <td class="align-middle">
-                                            @foreach($reviewers as $reviewer)
-                                                <p>{{ $reviewer->name }}</p>
-                                            @endforeach
-                                </td>
-
-
-                              <td class="align-middle">RSC</td>
                               <td class="align-middle">
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('submission-details.show', $record->id) }}" type="button" class="btn btn-secondary">Details</a>
-                                        <a href="{{ route('projects.edit', $record->id) }}"  type="button" class="btn btn-warning">Edit</a>
+                                    <div class="btn-group align-middle" role="group" aria-label="Basic example">
+                                    <a href="{{ route('submission-details.show', $record->id) }}" type="button" class="btn btn-secondary">
+                                      <i class="fas fa-info-circle"></i> Details
+                                    </a>
+                                    <a href="{{ route('projects.edit', $record->id) }}" type="button" class="btn btn-warning">
+                                      <i class="fas fa-edit"></i> Edit
+                                    </a>
 
-                                        <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">Delete</button>
+                                    <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">
+                                      <i class="fas fa-trash"></i> Delete
+                                    </button>
 
                                         <script>
                                         function confirmDelete(url) {
@@ -103,21 +89,24 @@
                             @endif
                     </tbody>
                 </table>
-
                 </div>
+                  <div class="card-footer clearfix">
+                      <ul class="pagination pagination-sm m-0 float-right">
+                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                      </ul>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-</div>
+    </section>
+  </div>
+  </div>
 
 
-  @include('layouts.footer')
-<aside class="control-sidebar control-sidebar-dark">
-</aside>
-</div>
-
-
-</body>
-</html>
+  @endsection

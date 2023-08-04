@@ -1,21 +1,77 @@
-@extends('layouts.app')
+@extends('layouts.template')
+@section('title', 'Dashboard')
 
 @section('content')
-    <h1>Projects for Revision</h1>
 
-    @if(count($projects) > 0)
-        <ul>
-            @foreach($projects as $project)
-                <li>
-                    <strong>Project Name:</strong> {{ $project->projname }}<br>
-                    <strong>Research Group:</strong> {{ $project->researchgroup }}<br>
-                    <strong>Start Date:</strong> {{ $project->start_date }}<br>
-                    <strong>End Date:</strong> {{ $project->end_date }}<br>
-                    <!-- Display other project details as needed -->
-                </li>
-            @endforeach
-        </ul>
-    @else
-        <p>No projects currently under evaluation.</p>
-    @endif
-@endsection
+  <div class="content-wrapper">
+    <section class="content-header">
+    </section>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header clearfix">
+                <h3 class="card-title">For Review</h3>
+              </div>
+              <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="example1" width="100%" cellspacing="0">
+                  <thead>
+                  <tr>
+                    <th>Project ID</th>
+                    <th>Title</th>
+                    <th>Research Group</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                  </tr>
+                  </thead>
+                    @if(count($projects) > 0)
+                        <tbody>
+                            @foreach($projects as $project)
+                                <tr>
+                                    <td>{{ $project->id }}</td>
+                                    <td>{{ $project->projname }}</td>
+                                    <td>{{ $project->researchgroup }}</td>
+                                    <td>{{ $project->start_date }}</td>
+                                    <td>{{ $project->end_date }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    @else
+                        <p>No projects currently under evaluation.</p>
+                    @endif
+                  <tfoot>
+                  <tr>
+                    <!-- <th>Project Title</th>
+                    <th>Research Group</th>
+                    <th>Start Date</th>
+                    <th>End Date</th> -->
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </div>
+
+
+  @endsection

@@ -1,22 +1,10 @@
 @extends('layouts.template')
+@section('title', 'Dashboard')
 
 @section('content')
 
   <div class="content-wrapper">
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>DataTables</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-            </ol>
-          </div>
-        </div>
-      </div>
     </section>
 
     <section class="content">
@@ -24,53 +12,27 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+              <div class="card-header clearfix">
+                <h3 class="card-title">For Review</h3>
               </div>
               <div class="card-body">
-              <p>Dashboard</p>
-
-              <div class="card-body pad table-responsive">
-                <table class="table table-bordered table-sm text-right">
-                    <tbody>
-                        <tr>
-                        <th scope="row" width="25%">PROJECT ID</th>
-                        <td class="text-left">{{ $projects->id }}</td>
-                        </tr>
-                        <tr>
-                        <th scope="row" width="25%">PROJECT TITLE</th>
-                        <td class="text-left">{{ $projects->projname }}</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">PROJECT GROUP</th>
-                        <td class="text-left">{{ $projects->researchgroup }}</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">STATUS</th>
-                        <td class="text-left">{{ $projects->status }}</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">REVIEWERS</th>
-                        <td class="text-left">@foreach($reviewers as $reviewer)
-                                                <p>{{ $reviewer->name }}</p>
-                                            @endforeach
-                                          </td>
-                        </tr>
-                        <tr>
-                        <th scope="row">DATE SUBMITTED</th>
-                        <td class="text-left">{{ \Carbon\Carbon::parse($projects->created_at)->format('F d, Y') }}</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">LAST UPDATE</th>
-                        <td class="text-left">{{ \Carbon\Carbon::parse($projects->updated_at)->format('F d, Y') }}</td>
-                        </tr>
-
-                    </tbody>
-                </table>
+              <div class="table-responsive">
+                content
               </div>
-
-
             </div>
+
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                </ul>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </div>
