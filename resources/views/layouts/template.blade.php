@@ -44,7 +44,8 @@
 </head>
 
 
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
 
   @include('layouts.topnav')
 

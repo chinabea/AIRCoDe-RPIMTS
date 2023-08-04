@@ -195,12 +195,14 @@
             </p>
           </a>
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+          @foreach($projects as $project)
             <li class="nav-item">
-              <a href="{{ route('projects') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Project 1</p>
+              <a href="{{ route('submission-details.show, $record->id) }}" class="nav-link">
+                <i class=""></i>
+              <p>{{ $project->projname }}</p>
               </a>
             </li>
+          @endforeach
           </ul>
         </li>
         <li class="nav-item">
@@ -210,13 +212,17 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+        @foreach($projects as $project)
+          @if($project->status == 'Draft')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('projects') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Draft 1</p>
+              <i class=""></i>
+              <p>{{ $project->projname }}</p>
               </a>
             </li>
+          @endif
+          @endforeach
           </ul>
         </li>
         <li class="nav-item">
@@ -226,13 +232,17 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+        @foreach($projects as $project)
+          @if($project->status == 'Under Evaluation')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Under Evaluation 1</p>
+              <p>{{ $project->projname }}</p>
               </a>
             </li>
+          @endif
+          @endforeach
           </ul>
         </li>
         <li class="nav-item">
@@ -242,13 +252,17 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+        @foreach($projects as $project)
+          @if($project->status == 'For Revision')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>For Revision 1</p>
+              <p>{{ $project->projname }}</p>
               </a>
             </li>
+          @endif
+          @endforeach
           </ul>
         </li>
         <li class="nav-item">
@@ -258,13 +272,17 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+        @foreach($projects as $project)
+          @if($project->status == 'Deferred')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Deferred 1</p>
+              <p>{{ $project->projname }}</p>
               </a>
             </li>
+        @endif
+        @endforeach
           </ul>
         </li>
         <li class="nav-item">
@@ -274,13 +292,17 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+        @foreach($projects as $project)
+          @if($project->status == 'Approved')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Approved 1</p>
+              <p>{{ $project->projname }}</p>
               </a>
             </li>
+        @endif
+        @endforeach
           </ul>
         </li>
         <li class="nav-item">
@@ -290,13 +312,17 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+        @foreach($projects as $project)
+          @if($project->status == 'Disapproved')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Disapproved 1</p>
+              <p>{{ $project->projname }}</p>
               </a>
             </li>
+        @endif
+        @endforeach
           </ul>
         </li>
           <li class="nav-header">MAIN MENU</li>

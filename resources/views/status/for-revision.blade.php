@@ -20,7 +20,7 @@
                 <table class="table table-bordered table-hover" id="example1" width="100%" cellspacing="0">
                   <thead>
                   <tr>
-                    <th>Project ID</th>
+                    <th>ID</th>
                     <th>Title</th>
                     <th>Research Group</th>
                     <th>Start Date</th>
