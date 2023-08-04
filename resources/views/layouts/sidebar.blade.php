@@ -180,11 +180,17 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">PROPONENTS</li>
-        </li><li class="nav-item">
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('projects.create') }}" class="nav-link">
+            <i class="far fa-file nav-icon"></i>
+            <p>New Submission</p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon far fa-plus-square"></i>
-            <p>
-              Proponents
+            <i class="nav-icon fas fa-book"></i>
+            <p>Submitted Projects
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -192,43 +198,103 @@
             <li class="nav-item">
               <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>New</p>
+                <p>Project 1</p>
               </a>
             </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="far fa-file-alt nav-icon"></i>
+            <p>Draft
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('status.draft') }}" class="nav-link">
+              <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Draft</p>
+                <p>Draft 1</p>
               </a>
             </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fas fa-hourglass-half nav-icon"></i>
+            <p>Under Evaluation
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('status.under-evaluation') }}" class="nav-link">
+              <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Under Evaluation</p>
+                <p>Under Evaluation 1</p>
               </a>
             </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fas fa-edit nav-icon"></i>
+            <p>For Revision
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('status.for-revision') }}" class="nav-link">
+              <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>For Revision</p>
+                <p>For Revision 1</p>
               </a>
             </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="far fa-pause-circle nav-icon"></i>
+            <p>Deferred
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('status.deferred') }}" class="nav-link">
+              <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Deferred</p>
+                <p>Deferred 1</p>
               </a>
             </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="far fa-check-circle nav-icon"></i>
+            <p>Approved
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('status.approved') }}" class="nav-link">
+              <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Approved</p>
+                <p>Approved 1</p>
               </a>
             </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="far fa-times-circle nav-icon"></i>
+            <p>Disapproved
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('status.disapproved') }}" class="nav-link">
+              <a href="{{ route('projects') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Disapproved</p>
+                <p>Disapproved 1</p>
               </a>
             </li>
           </ul>
