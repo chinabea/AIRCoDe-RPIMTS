@@ -162,23 +162,20 @@
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
                 @include('submission-details.project-teams.create')
-          
-
-    <h2 class="mb-4"></h2>
-    @foreach($teamMembers as $member)
+                @foreach($teamMembers as $member)
     <div class="card mb-3">
         <div class="card-body">
             <div class="form-row align-items-end">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="member_name">Name:</label>
-                        <input type="text" class="form-control" id="member_name" name="member_name" value="{{ $member->member_name }}" readonly>
+                        <input type="text" class="form-control" id="member_name{{ $member->id }}" name="member_name" value="{{ $member->member_name }}" readonly>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="role">Role:</label>
-                        <select class="form-control" id="role" name="role" readonly>
+                        <select class="form-control" id="role{{ $member->id }}" name="role" readonly>
                             <option disabled>Select Role</option>
                             <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
                             <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}>Database Designer</option>
@@ -190,7 +187,7 @@
                     </div>
                 </div>
                 <div class="col-md-2 d-flex align-items-end">
-                    <button type="button" class="btn btn-primary mr-2" onclick="showEditForm()">Update</button>
+                    <button type="button" class="btn btn-primary mr-2" onclick="toggleEdit({{ $member->id }})" id="updateButton{{ $member->id }}">Update</button>
                     <form action="{{ route('submission-details.project-teams.destroy', $member->id) }}" method="post" class="d-flex">
                         @csrf
                         @method('DELETE')
@@ -200,73 +197,80 @@
             </div>
         </div>
     </div>
-    @endforeach
+@endforeach
 
-
-
-    
-<div class="card mb-3" id="editForm" style="display: none;">
-    <div class="card-body">
-        <form method="post" action="{{ route('submission-details.project-teams.update', $member->id) }}" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="form-row align-items-end">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="edit_member_name">Name:</label>
-                        <input type="text" class="form-control" id="edit_member_name" name="member_name" value="{{ $member->member_name }}" required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="edit_role">Role:</label>
-                        <select class="form-control" id="edit_role" name="role" required>
-                            <option disabled>Select Role</option>
-                            <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
-                            <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}>Database Designer</option>
-                            <option{{ $member->role === 'Network Designer' ? ' selected' : '' }}>Network Designer</option>
-                            <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}>UI Designer</option>
-                            <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}>Quality Assurance</option>
-                            <option{{ $member->role === 'Document Writer' ? ' selected' : '' }}>Document Writer</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary mr-2">Save</button>
-                    <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+<!-- The form for updating each member -->
+@foreach($teamMembers as $member)
+    <form method="post" action="{{ route('submission-details.project-teams.update', $member->id) }}" enctype="multipart/form-data" id="updateForm{{ $member->id }}" style="display: none;">
+        @csrf
+        @method('PUT')
+        <div class="form-row align-items-end">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="edit_member_name">Name:</label>
+                    <input type="text" class="form-control" id="edit_member_name" name="member_name" value="{{ $member->member_name }}" required>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="edit_role">Role:</label>
+                    <select class="form-control" id="edit_role" name="role" required>
+                        <option disabled>Select Role</option>
+                        <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
+                        <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}>Database Designer</option>
+                        <option{{ $member->role === 'Network Designer' ? ' selected' : '' }}>Network Designer</option>
+                        <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}>UI Designer</option>
+                        <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}>Quality Assurance</option>
+                        <option{{ $member->role === 'Document Writer' ? ' selected' : '' }}>Document Writer</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary mr-2">Save</button>
+                <button type="button" class="btn btn-secondary" onclick="cancelEdit({{ $member->id }})">Cancel</button>
+            </div>
+        </div>
+    </form>
+@endforeach
 
+<script>
+    function toggleEdit(memberId) {
+        const memberNameInput = document.getElementById(`member_name${memberId}`);
+        const roleSelect = document.getElementById(`role${memberId}`);
+        const updateButton = document.getElementById(`updateButton${memberId}`);
+        const form = document.getElementById(`updateForm${memberId}`);
 
-                   
-    <script>
-    function showEditForm() {
-        const displayForm = document.querySelector('.card.mb-3');
-        const editForm = document.getElementById('editForm');
+        memberNameInput.readOnly = !memberNameInput.readOnly;
+        roleSelect.disabled = !roleSelect.disabled;
 
-        displayForm.style.display = 'none';
-        editForm.style.display = 'block';
+        if (memberNameInput.readOnly) {
+            updateButton.innerText = 'Update';
+            // Show the corresponding update form
+            form.style.display = "none";
+        } else {
+            updateButton.innerText = 'Save';
+            // Hide other update forms and show the current one
+            const allUpdateForms = document.querySelectorAll('[id^="updateForm"]');
+            allUpdateForms.forEach(form => {
+                form.style.display = "none";
+            });
+            form.style.display = "block";
+        }
     }
 
-    function cancelEdit() {
-        const displayForm = document.querySelector('.card.mb-3');
-        const editForm = document.getElementById('editForm');
+    function cancelEdit(memberId) {
+        const memberNameInput = document.getElementById(`member_name${memberId}`);
+        const roleSelect = document.getElementById(`role${memberId}`);
+        const updateButton = document.getElementById(`updateButton${memberId}`);
+        const form = document.getElementById(`updateForm${memberId}`);
 
-        displayForm.style.display = 'block';
-        editForm.style.display = 'none';
+        memberNameInput.readOnly = !memberNameInput.readOnly;
+        roleSelect.disabled = !roleSelect.disabled;
+
+        updateButton.innerText = 'Update';
+        form.style.display = "none";
     }
 </script>
-
-
-
-
-
-
-
-
 
 
             

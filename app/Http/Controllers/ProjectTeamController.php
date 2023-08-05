@@ -29,7 +29,8 @@ class ProjectTeamController extends Controller
         ProjectTeamModel::create($requestData);
 
         // Redirect or perform other actions
-        return redirect()->route('submission-details.show')->with('success', 'Data Successfully Added!');
+        // return redirect()->route('submission-details.show')->with('success', 'Data Successfully Added!');
+        return redirect()->back()->with('success', 'Data Successfully Added!');
     }
 
     public function show($id)
