@@ -187,12 +187,9 @@ Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('p
 Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
 
 
-Route::get('/submission-details.project-teams.create', function () {
-    return view('submission-details.project-teams.create');
-});
-Route::get('/submission-details.project-teams.edit', function () {
-    return view('submission-details.project-teams.modal');
-});
+// Route::get('/submission-details.project-teams.create', function () {
+//     return view('submission-details.project-teams.create');
+// });
 
 Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
 Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('submission-details.project-teams.create');

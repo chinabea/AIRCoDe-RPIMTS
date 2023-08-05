@@ -6,8 +6,6 @@
 <div class="content-wrapper">
   <section class="content-header">
   </section>
-
-
     <div class="col-md-12">
             <div class="card card-primary card-outline">
               <div class="card-header">
@@ -21,7 +19,26 @@
                         <th scope="row" width="25%">PROJECT ID</th>
                         <td class="text-left">{{ $records->id }}</td>
                         </tr>
-                        
+                        <tr>
+                        <th scope="row" width="25%">PROJECT TITLE</th>
+                        <td class="text-left">{{ $records->projname }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">PROJECT GROUP</th>
+                        <td class="text-left">{{ $records->researchgroup }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">STATUS</th>
+                        <td class="text-left">{{ $records->status }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">DATE SUBMITTED</th>
+                        <td class="text-left">{{ ($records->created_at) }}</td>
+                        </tr>
+                        <tr>
+                        <th scope="row">LAST UPDATE</th>
+                        <td class="text-left">{{ ($records->updated_at) }}</td>
+                        </tr>
 
                     </tbody>
                 </table>
@@ -145,10 +162,115 @@
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
                 @include('submission-details.project-teams.create')
+          
 
-            <a class="btn btn-primary btn-sm" href="{{ route('submission-details.project-teams.index') }}">Edit</a>
-            @include('submission-details.project-teams.modal')
+    <h2 class="mb-4"></h2>
+    @foreach($teamMembers as $member)
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="form-row align-items-end">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="member_name">Name:</label>
+                        <input type="text" class="form-control" id="member_name" name="member_name" value="{{ $member->member_name }}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <select class="form-control" id="role" name="role" readonly>
+                            <option disabled>Select Role</option>
+                            <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
+                            <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}>Database Designer</option>
+                            <option{{ $member->role === 'Network Designer' ? ' selected' : '' }}>Network Designer</option>
+                            <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}>UI Designer</option>
+                            <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}>Quality Assurance</option>
+                            <option{{ $member->role === 'Document Writer' ? ' selected' : '' }}>Document Writer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary mr-2" onclick="showEditForm()">Update</button>
+                    <form action="{{ route('submission-details.project-teams.destroy', $member->id) }}" method="post" class="d-flex">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
 
+
+
+    
+<div class="card mb-3" id="editForm" style="display: none;">
+    <div class="card-body">
+        <form method="post" action="{{ route('submission-details.project-teams.update', $member->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="form-row align-items-end">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="edit_member_name">Name:</label>
+                        <input type="text" class="form-control" id="edit_member_name" name="member_name" value="{{ $member->member_name }}" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="edit_role">Role:</label>
+                        <select class="form-control" id="edit_role" name="role" required>
+                            <option disabled>Select Role</option>
+                            <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
+                            <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}>Database Designer</option>
+                            <option{{ $member->role === 'Network Designer' ? ' selected' : '' }}>Network Designer</option>
+                            <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}>UI Designer</option>
+                            <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}>Quality Assurance</option>
+                            <option{{ $member->role === 'Document Writer' ? ' selected' : '' }}>Document Writer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary mr-2">Save</button>
+                    <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+                   
+    <script>
+    function showEditForm() {
+        const displayForm = document.querySelector('.card.mb-3');
+        const editForm = document.getElementById('editForm');
+
+        displayForm.style.display = 'none';
+        editForm.style.display = 'block';
+    }
+
+    function cancelEdit() {
+        const displayForm = document.querySelector('.card.mb-3');
+        const editForm = document.getElementById('editForm');
+
+        displayForm.style.display = 'block';
+        editForm.style.display = 'none';
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+            
+            
             </div>
             </div>
           </div>
@@ -158,8 +280,15 @@
     <form id="status-form" class="mt-4" style="display: none;">
     <div class="col-md-12">
       <div class="card card-primary card-outline">
-        
-    </form>
+        <div class="card-header">
+                STATUS
+          </h3>
+        </div>
+        <div class="card-body pad table-responsive">
+        <div class="container"><h2>Edit Project Status</h2>
+
+
+
         </div>
         </div>
       </div>
@@ -176,11 +305,11 @@
         <div class="card-body pad table-responsive">
         <div class="container">
             <h2>Select Reviewers</h2>
-            
+
+
+
+
         </div>
-
-
-
         </div>
       </div>
     </div>
@@ -278,11 +407,47 @@
         $('#details-form, #status-form, #reviewer-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form').hide();
       });
     });
+
+  function openEditProjectTeamModal(editBookUrl) {
+  // Perform any additional actions before opening the modal
+
+  // Make an AJAX request to fetch the edit user content
+  $.ajax({
+      url: editBookUrl,
+      method: 'GET',
+      success: function(response) {
+          // Update the modal body with the fetched content
+          $('#EDITProjectTeam .modal-body').html(response);
+
+          // Open the modal
+          $('#EDITProjectTeam').modal('show');
+      },
+      error: function() {
+          // Handle error if needed
+      }
+  });
+}
+
   </script>
 
   </div>
-  </div>
-  </div>
+  <!-- @include('layouts.footer') -->
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
+</div>
+
+
+
+
+
+</body>
+</html>
+  
+  
+
+
+
+
 
 
   @endsection

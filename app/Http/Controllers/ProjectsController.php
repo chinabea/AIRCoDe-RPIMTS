@@ -101,32 +101,17 @@ class ProjectsController extends Controller
         return view('submission-details.show', compact('reviewers'));
     }
     
-    // public function show($id)
-    // {
-    //     $project = ProjectsModel::findOrFail($id);
-    
-    //     $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
-    
-    //     return view('submission-details.show', compact('reviewers', 'project'));
-    // }
     public function show($id)
     {
         
         try {
-            // Fetch all submitted projects
-            // $projects = ProjectsModel::all();
-            // Fetch all project team members related to the project
-            $projectTeam = ProjectTeamModel::where('project_id', $id)->get();
-    
-            // Fetch the project details for the given $id
+            $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
             $records = ProjectsModel::findOrFail($id);
-    
-            // Fetch all reviewers related to the project
             $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
     
-            return view('submission-details.show', compact('records', 'reviewers', 'projectTeam'));
+            return view('submission-details.show', compact('records', 'reviewers', 'teamMembers'));
+
         } catch (\Throwable $e) {
-            // Print any error message to debug the issue
             dd($e->getMessage());
         }
     }

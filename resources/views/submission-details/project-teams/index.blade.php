@@ -1,15 +1,14 @@
 @extends('layouts.template')
-@section('title', 'Project Detail')
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-@include('layouts.topnav')
-@include('layouts.sidebar')
+@section('title', 'Dashboard')
 
-<div class="container">
+@section('content')
+  <div class="content-wrapper">
+    <section class="content-header">
+    </section>
+        <div class="container">
                 <table>
                     <thead>
                         <tr>
-                            {{-- edit --}}
                             <th>Name</th>
                             <th>Role</th>
                             <th>Actions</th>
@@ -37,33 +36,20 @@
                 </div>
     <script>
         function openEditProjectTeamModal(editBookUrl) {
-  // Perform any additional actions before opening the modal
-
-  // Make an AJAX request to fetch the edit user content
   $.ajax({
       url: editBookUrl,
       method: 'GET',
       success: function(response) {
-          // Update the modal body with the fetched content
           $('#EDITProjectTeam .modal-body').html(response);
 
-          // Open the modal
           $('#EDITProjectTeam').modal('show');
       },
       error: function() {
-          // Handle error if needed
       }
   });
 }
 </script>
 
 
-
-
-
-</body>
-</html>
-               
-
-
+@endsection
 @include('submission-details.project-teams.modal')

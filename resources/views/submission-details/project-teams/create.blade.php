@@ -1,6 +1,4 @@
 
-
-                    <!-- resources/views/modal-page.blade.php -->
 <div class="modal fade" id="ProjectTeam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -12,7 +10,7 @@
             </div>
             <div class="modal-body">
                     <form method="post" action="{{ route('submission-details.project-teams.store') }}" enctype="multipart/form-data">
-                        <!-- {{ method_field('POST') }} -->
+                      
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -21,7 +19,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="role">Role</label>
-                                <select class="form-control" id="role" name="role">
+                                <select class="form-control" id="role" name="role" required>
                                     <option disabled selected>Select Role</option>
                                     <option>Project Leader</option>
                                     <option>Database Designer</option>
@@ -35,10 +33,6 @@
                         <button type="submit" class="btn btn-primary">Add Member</button>
                     </form>
             </div>
-            <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div> -->
         </div>
     </div>
-</div>
+</div> 
