@@ -1,22 +1,12 @@
 @extends('layouts.template')
-@section('title', 'Project Detail')
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-@include('layouts.topnav')
-@include('layouts.sidebar')
-  <div class="content-wrapper">
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
+@section('title', 'Dashboard')
+
+@section('content')
+
+<div class="content-wrapper">
+  <section class="content-header">
+  </section>
+
 
     <div class="col-md-12">
             <div class="card card-primary card-outline">
@@ -29,35 +19,9 @@
                     <tbody>
                         <tr>
                         <th scope="row" width="25%">PROJECT ID</th>
-                        <td class="text-left">{{ $projects->id }}</td>
+                        <td class="text-left">{{ $records->id }}</td>
                         </tr>
-                        <tr>
-                        <th scope="row" width="25%">PROJECT TITLE</th>
-                        <td class="text-left">{{ $projects->projname }}</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">PROJECT GROUP</th>
-                        <td class="text-left">{{ $projects->researchgroup }}</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">STATUS</th>
-                        <td class="text-left">{{ $projects->status }}</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">REVIEWERS</th>
-                        <td class="text-left">@foreach($reviewers as $reviewer)
-                                                <p>{{ $reviewer->name }}</p>
-                                            @endforeach
-                                          </td>
-                        </tr>
-                        <tr>
-                        <th scope="row">DATE SUBMITTED</th>
-                        <td class="text-left">{{ \Carbon\Carbon::parse($projects->created_at)->format('F d, Y') }}</td>
-                        </tr>
-                        <tr>
-                        <th scope="row">LAST UPDATE</th>
-                        <td class="text-left">{{ \Carbon\Carbon::parse($projects->updated_at)->format('F d, Y') }}</td>
-                        </tr>
+                        
 
                     </tbody>
                 </table>
@@ -194,31 +158,8 @@
     <form id="status-form" class="mt-4" style="display: none;">
     <div class="col-md-12">
       <div class="card card-primary card-outline">
-        <div class="card-header">
-                STATUS
-          </h3>
-        </div>
-        <div class="card-body pad table-responsive">
-        <div class="container"><h2>Edit Project Status</h2>
-<form action="{{ route('projects.updateStatus', ['id' => $projects->id]) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <div class="form-group">
-        <label for="status">Status</label>
-        <select class="form-control" id="status" name="update_status" required>
-        <!-- <select class="form-control" id="status" name="status" required> -->
-            <option value="Draft" @if($projects->status === 'Draft') selected @endif>Draft</option>
-            <option value="Under Evaluation" @if($projects->status === 'Under Evaluation') selected @endif>Under Evaluation</option>
-            <option value="For Revision" @if($projects->status === 'For Revision') selected @endif>For Revision</option>
-            <option value="Approved" @if($projects->status === 'Approved') selected @endif>Approved</option>
-            <option value="Deferred" @if($projects->status === 'Deferred') selected @endif>Deferred</option>
-            <option value="Disapproved" @if($projects->status === 'Disapproved') selected @endif>Disapproved</option>
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Update Status</button>
-</form>
-
+        
+    </form>
         </div>
         </div>
       </div>
@@ -235,20 +176,7 @@
         <div class="card-body pad table-responsive">
         <div class="container">
             <h2>Select Reviewers</h2>
-            <form action="{{ route('projects.storeReviewer') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="reviewers">Available Reviewers</label>
-                    <select class="form-control" id="reviewers" name="reviewers" required>
-                      <option value="">Select Reviewer</option>
-                      @foreach($reviewers as $reviewer)
-                          <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                      @endforeach
-                  </select>
-                </div>
-
-                <input type="submit" class="btn btn-primary" value="Add Reviewers">
-            </form>
+            
         </div>
 
 
@@ -353,14 +281,8 @@
   </script>
 
   </div>
-  <!-- @include('layouts.footer') -->
-<aside class="control-sidebar control-sidebar-dark">
-</aside>
-</div>
+  </div>
+  </div>
 
 
-
-
-
-</body>
-</html>
+  @endsection

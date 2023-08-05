@@ -17,12 +17,10 @@ class ProjectsController extends Controller
 
     public function index()
     {
-        // $records = ProjectsModel::orderBy('created_at', 'ASC')->get();
         $projects = ProjectsModel::all();
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
-
-        return view('projects.index', compact('projects','reviewers'));
-
+    
+        return view('projects.index', compact('projects', 'reviewers'));
     }
 
 
@@ -102,15 +100,40 @@ class ProjectsController extends Controller
 
         return view('submission-details.show', compact('reviewers'));
     }
-
+    
+    // public function show($id)
+    // {
+    //     $project = ProjectsModel::findOrFail($id);
+    
+    //     $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
+    
+    //     return view('submission-details.show', compact('reviewers', 'project'));
+    // }
     public function show($id)
     {
-        $projects = ProjectsModel::findOrFail($id);
-        $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
-
-        return view('submission-details.show', compact('projects','reviewers'));
+        
+        try {
+            // Fetch all submitted projects
+            // $projects = ProjectsModel::all();
+            // Fetch all project team members related to the project
+            $projectTeam = ProjectTeamModel::where('project_id', $id)->get();
+    
+            // Fetch the project details for the given $id
+            $records = ProjectsModel::findOrFail($id);
+    
+            // Fetch all reviewers related to the project
+            $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
+    
+            return view('submission-details.show', compact('records', 'reviewers', 'projectTeam'));
+        } catch (\Throwable $e) {
+            // Print any error message to debug the issue
+            dd($e->getMessage());
+        }
     }
+    
 
+    
+    
     public function edit($id)
     {
         $reviewers = UsersModel::where('role', 4)->get();

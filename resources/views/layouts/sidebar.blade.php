@@ -195,14 +195,16 @@
             </p>
           </a>
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+        @if(is_array($projects) || $projects instanceof \Traversable)
           @foreach($projects as $project)
             <li class="nav-item">
-              <a href="{{ route('submission-details.show, $record->id) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
                 <i class=""></i>
               <p>{{ $project->projname }}</p>
               </a>
             </li>
           @endforeach
+          @endif
           </ul>
         </li>
         <li class="nav-item">
@@ -212,18 +214,20 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @foreach($projects as $project)
+        @if(is_array($projects) || $projects instanceof \Traversable)
+          @foreach($projects as $project)
           @if($project->status == 'Draft')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('projects') }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
               <i class=""></i>
               <p>{{ $project->projname }}</p>
               </a>
             </li>
+          </ul>
           @endif
           @endforeach
-          </ul>
+        @endif
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -232,18 +236,20 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @foreach($projects as $project)
+        @if(is_array($projects) || $projects instanceof \Traversable)
+          @foreach($projects as $project)
           @if($project->status == 'Under Evaluation')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('projects') }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
               <p>{{ $project->projname }}</p>
               </a>
             </li>
+          </ul>
           @endif
           @endforeach
-          </ul>
+        @endif
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -252,18 +258,20 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @foreach($projects as $project)
+        @if(is_array($projects) || $projects instanceof \Traversable)
+          @foreach($projects as $project)
           @if($project->status == 'For Revision')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('projects') }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
               <p>{{ $project->projname }}</p>
               </a>
             </li>
+          </ul>
           @endif
           @endforeach
-          </ul>
+        @endif
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -272,18 +280,20 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @foreach($projects as $project)
+        @if(is_array($projects) || $projects instanceof \Traversable)
+          @foreach($projects as $project)
           @if($project->status == 'Deferred')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('projects') }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
               <p>{{ $project->projname }}</p>
               </a>
             </li>
-        @endif
-        @endforeach
           </ul>
+          @endif
+          @endforeach
+        @endif
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -292,18 +302,21 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @foreach($projects as $project)
+          </a>
+        @if(is_array($projects) || $projects instanceof \Traversable)
+          @foreach($projects as $project)
           @if($project->status == 'Approved')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('projects') }}" class="nav-link">
+              <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
               <p>{{ $project->projname }}</p>
               </a>
             </li>
-        @endif
-        @endforeach
           </ul>
+          @endif
+          @endforeach
+        @endif
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -312,18 +325,20 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @foreach($projects as $project)
+        @if(is_array($projects) || $projects instanceof \Traversable)
+          @foreach($projects as $project)
           @if($project->status == 'Disapproved')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('projects') }}" class="nav-link">
+              <a href="{{ route('status.draft') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
               <p>{{ $project->projname }}</p>
               </a>
             </li>
-        @endif
-        @endforeach
           </ul>
+          @endif
+          @endforeach
+        @endif
         </li>
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item menu-open">
