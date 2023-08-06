@@ -6,53 +6,28 @@
 @if($role === 1)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="" class="brand-link">
       <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
     </a>
 
     <div class="sidebar">
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ asset('dist/img/user4-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-        </div>
-      </div>
-
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
-                </a>
-              </li>
-            </ul>
+          
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>Dashboard</p>
+            </a>
           </li>
+              
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon fas fa-user-alt"></i>
+            <a href="" class="nav-link">
+              <i class="fas fa-users mr-2"></i>
               <p>
                 Users
                 <span class="badge badge-info right">2</span>
@@ -68,65 +43,44 @@
               </p>
             </a>
           </li>
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
-              <p>
-                Proponents
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
+          <li class="nav-header">TRANSPARENCY</li>
               <li class="nav-item">
-                <a href="pages/examples/lockscreen.html" class="nav-link">
+                <a href="{{ route('proposals') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Call for Proposals</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/legacy-user-menu.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Access Request</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/language-menu.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Announcements</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/404.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>About Us</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/500.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Downloads</p>
                 </a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-header">PROFILE</li>
-          <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-user-alt"></i>
-              <p>Logout</p>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-            </form>
-          </li>
     </div>
   </aside>
 
 
 @elseif($role === 2)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="index3.html" class="brand-link">
+    <a href="" class="brand-link">
         <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
       </a>
@@ -172,7 +126,7 @@
 <!-- FOR RESEARCHER -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="" class="brand-link">
         <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
     </a>
@@ -344,7 +298,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>
@@ -354,7 +308,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="fas fa-fw fa-search"></i>
                   <p>Track</p>
                 </a>
@@ -394,7 +348,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/examples/500.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Downloads</p>
                 </a>
@@ -402,7 +356,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
               <p>
                 FAQs
@@ -410,7 +364,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Contact Us
@@ -434,7 +388,7 @@
 <!-- FOR REVIEWER -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="" class="brand-link">
         <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
     </a>
@@ -446,21 +400,9 @@
             <img src="{{ asset('dist/img/user4-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-              <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+              <a href="#" class="d-block">Reviewer</a>
           </div>
         </div>
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -471,7 +413,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>
@@ -479,23 +421,13 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Submitted Projects
                 <span class="badge badge-info right">7</span>
               </p>
             </a>
-          </li>
-          <li class="nav-header">SETTINGS</li>
-          <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-user-alt"></i>
-              <p>Logout</p>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-            </form>
           </li>
     </div>
   </aside>

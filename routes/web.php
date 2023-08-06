@@ -118,7 +118,7 @@ Route::put('/accessrequest/edit/{id}', [AccessRequestController::class, 'update'
 Route::delete('/accessrequest/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.accessrequests.destroy');
 
 // Users
-Route::get('/users', [UsersController::class, 'index'])->name('users');
+Route::get('/users', [UsersController::class, 'index'])->name('users')->middleware('researcher');
 Route::get('/createusers', [UsersController::class, 'create'])->name('users.create');
 Route::post('/storeusers', [UsersController::class, 'store'])->name('users.store');
 Route::get('/showusers/{id}', [UsersController::class, 'show'])->name('users.show');
@@ -209,6 +209,26 @@ Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->n
 
 
 // Route::get('/proj-revision/show', [ProjectsController::class, 'forRevisionSidebar'])->name('proj-revision.show');
+
+
+
+
+
+
+Route::get('/track', function () {
+    return view('track');
+});
+
+
+
+
+
+
+
+
+
+
+
 
 
 
