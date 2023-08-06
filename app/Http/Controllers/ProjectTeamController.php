@@ -66,8 +66,7 @@ class ProjectTeamController extends Controller
     {
         $projectTeam = ProjectTeamModel::findOrFail($id);
         $projectTeam->delete();
-
-        return redirect()->route('submission-details.show')->with('success', 'Project team member deleted successfully');
+        return redirect()->back()->with('success', 'Project team member deleted successfully');
     }
 
 }

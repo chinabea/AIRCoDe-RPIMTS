@@ -41,6 +41,24 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('../dist/css/adminlte.min.css') }}">
 
+<style>
+        /* Change the dark-themed sidebar background color to blue */
+        .sidebar-dark-primary {
+            background-color: #022A44 !important;
+        }
+
+        /* If you want to change the light-themed sidebar as well, use this */
+        .sidebar-light-primary {
+            background-color: #022A44 !important;
+        }
+        .card {
+            background-color: #ffffff !important;
+        }
+        .content-wrapper {
+            background-color: #f3f4f6 !important;
+        }
+
+    </style>
 </head>
 
 
@@ -78,7 +96,6 @@
 <script src="{{ asset('datatables/pdfmake.min.js') }}"></script>
 <script src="{{ asset('datatables/vfs_fonts.js') }}"></script>
 <script src="{{ asset('datatables/datatables-demo.js') }}"></script>
-
 
 </body>
 </html>

@@ -220,7 +220,7 @@
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
-              <i class=""></i>
+              <i class="fas fa-angle-down"></i>
               <p>{{ $project->projname }}</p>
               </a>
             </li>
@@ -428,6 +428,7 @@
           </li>
     </div>
 </aside>
+
 
 @elseif($role === 4)
 <!-- FOR REVIEWER -->
