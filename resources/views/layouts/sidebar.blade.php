@@ -6,7 +6,7 @@
 @if($role === 1)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
+    <a href="{{ route('director') }}" class="brand-link">
       <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
     </a>
@@ -18,7 +18,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('director') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
@@ -26,7 +26,7 @@
               
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('users') }}" class="nav-link">
               <i class="fas fa-users mr-2"></i>
               <p>
                 Users
@@ -45,32 +45,32 @@
           </li>
           <li class="nav-header">TRANSPARENCY</li>
               <li class="nav-item">
-                <a href="{{ route('proposals') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('call-for-proposals') }}" class="nav-link">
+                  <i class="bi bi-megaphone-fill"></i>
                   <p>Call for Proposals</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('access-requests') }}" class="nav-link">
+                  <i class="bi bi-file-earmark-lock-fill"></i>
                   <p>Access Request</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('announcements') }}" class="nav-link">
+                  <i class="bi bi-megaphone"></i>
                   <p>Announcements</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('abouts') }}" class="nav-link">
+                  <i class="bi bi-info-circle-fill"></i>
                   <p>About Us</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="bi bi-cloud-download"></i>
                   <p>Downloads</p>
                 </a>
               </li>
@@ -80,7 +80,7 @@
 
 @elseif($role === 2)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="" class="brand-link">
+    <a href="{{ route('staff') }}" class="brand-link">
         <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
       </a>
@@ -126,7 +126,7 @@
 <!-- FOR RESEARCHER -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
+    <a href="{{ route('reviewer') }}" class="brand-link">
         <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
     </a>
@@ -298,7 +298,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('reviewer') }}" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>
@@ -308,7 +308,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('track') }}" class="nav-link">
                   <i class="fas fa-fw fa-search"></i>
                   <p>Track</p>
                 </a>
@@ -324,39 +324,39 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('proposals') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('call-for-proposals') }}" class="nav-link">
+                  <i class="bi bi-megaphone-fill"></i>
                   <p>Call for Proposals</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('accessrequests') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('access-requests') }}" class="nav-link">
+                  <i class="bi bi-file-earmark-lock-fill"></i>
                   <p>Access Request</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('announcements') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="bi bi-megaphone"></i>
                   <p>Announcements</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('abouts') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="bi bi-info-circle-fill"></i>
                   <p>About Us</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="bi bi-cloud-download"></i>
                   <p>Downloads</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('faqs') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
               <p>
                 FAQs
@@ -364,7 +364,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('contacts') }}" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Contact Us
@@ -388,7 +388,7 @@
 <!-- FOR REVIEWER -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
+    <a href="{{ route('reviewer') }}" class="brand-link">
         <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
     </a>
@@ -413,7 +413,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('reviewer') }}" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>
@@ -421,7 +421,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="{{ route('projects') }}" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Submitted Projects

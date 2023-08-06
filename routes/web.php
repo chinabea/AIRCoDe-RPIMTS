@@ -43,7 +43,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'director'])->group(function (){
     Route::get('director', function () {
@@ -82,13 +82,13 @@ Route::delete('/about/delete/{id}', [AboutusController::class, 'destroy'])->name
 
 
 // Proposals
-Route::get('/proposals', [ProposalsController::class, 'index'])->name('proposals');
-Route::get('/proposal/create', [ProposalsController::class, 'create'])->name('transparency.proposals.create');
-Route::post('/proposal/store', [ProposalsController::class, 'store'])->name('transparency.proposals.store');
-Route::get('/proposal/show/{id}', [ProposalsController::class, 'show'])->name('transparency.proposals.show');
-Route::get('/proposal/edit/{id}', [ProposalsController::class, 'edit'])->name('transparency.proposals.edit');
-Route::put('/proposal/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.proposals.update');
-Route::delete('/proposal/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.proposals.destroy');
+Route::get('/call-for-proposals', [ProposalsController::class, 'index'])->name('call-for-proposals');
+Route::get('/call-for-proposals/create', [ProposalsController::class, 'create'])->name('transparency.call-for-proposals.create');
+Route::post('/call-for-proposals/store', [ProposalsController::class, 'store'])->name('transparency.call-for-proposals.store');
+Route::get('/call-for-proposals/show/{id}', [ProposalsController::class, 'show'])->name('transparency.call-for-proposals.show');
+Route::get('/call-for-proposals/edit/{id}', [ProposalsController::class, 'edit'])->name('transparency.call-for-proposals.edit');
+Route::put('/call-for-proposals/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.call-for-proposals.update');
+Route::delete('/call-for-proposals/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
 
 // Reviews
 Route::get('/reviews', [ReviewsController::class, 'index'])->name('reviews');
@@ -109,16 +109,16 @@ Route::put('/announcement/edit/{id}', [AnnouncementsController::class, 'update']
 Route::delete('/announcement/delete/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
 
 // Access Request
-Route::get('/accessrequests', [AccessRequestController::class, 'index'])->name('accessrequests');
-Route::get('/accessrequest/create', [AccessRequestController::class, 'create'])->name('transparency.accessrequests.create');
-Route::post('/accessrequest/store', [AccessRequestController::class, 'store'])->name('transparency.accessrequests.store');
-Route::get('/accessrequest/show/{id}', [AccessRequestController::class, 'show'])->name('transparency.accessrequests.show');
-Route::get('/accessrequest/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.accessrequests.edit');
-Route::put('/accessrequest/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.accessrequests.update');
-Route::delete('/accessrequest/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.accessrequests.destroy');
+Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
+Route::get('/accessrequest/create', [AccessRequestController::class, 'create'])->name('transparency.access-requests.create');
+Route::post('/accessrequest/store', [AccessRequestController::class, 'store'])->name('transparency.access-requests.store');
+Route::get('/accessrequest/show/{id}', [AccessRequestController::class, 'show'])->name('transparency.access-requests.show');
+Route::get('/accessrequest/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.access-requests.edit');
+Route::put('/accessrequest/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.access-requests.update');
+Route::delete('/accessrequest/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
 
 // Users
-Route::get('/users', [UsersController::class, 'index'])->name('users')->middleware('researcher');
+Route::get('/users', [UsersController::class, 'index'])->name('users');
 Route::get('/createusers', [UsersController::class, 'create'])->name('users.create');
 Route::post('/storeusers', [UsersController::class, 'store'])->name('users.store');
 Route::get('/showusers/{id}', [UsersController::class, 'show'])->name('users.show');
@@ -162,6 +162,7 @@ Route::resource('documents', DocumentController::class);
 Route::get('send', [HomeController::class, 'sendNotification']);
 
 
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
 Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');
 Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -216,7 +217,15 @@ Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->n
 
 
 Route::get('/track', function () {
-    return view('track');
+    return view('track')->name('track');
+});
+
+Route::get('/faqs', function () {
+    return view('faqs')->name('faqs');
+});
+
+Route::get('/downloads', function () {
+    return view('transparency.downloads')->name('downloads');
 });
 
 
