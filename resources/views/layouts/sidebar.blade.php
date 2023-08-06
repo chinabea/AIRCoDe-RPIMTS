@@ -27,7 +27,7 @@
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item">
             <a href="{{ route('users') }}" class="nav-link">
-              <i class="fas fa-users mr-2"></i>
+              <i class="nav-icon fas fa-users mr-2"></i>
               <p>
                 Users
                 <span class="badge badge-info right">2</span>
@@ -46,31 +46,31 @@
           <li class="nav-header">TRANSPARENCY</li>
               <li class="nav-item">
                 <a href="{{ route('call-for-proposals') }}" class="nav-link">
-                  <i class="bi bi-megaphone-fill"></i>
+                  <i class="fas fa-megaphone-fill"></i>
                   <p>Call for Proposals</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('access-requests') }}" class="nav-link">
-                  <i class="bi bi-file-earmark-lock-fill"></i>
+                  <i class="nav-icon fas fa-file-earmark-lock-fill"></i>
                   <p>Access Request</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('announcements') }}" class="nav-link">
-                  <i class="bi bi-megaphone"></i>
+                  <i class="nav-icon fas fa-megaphone"></i>
                   <p>Announcements</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('abouts') }}" class="nav-link">
-                  <i class="bi bi-info-circle-fill"></i>
+                  <i class="nav-icon fas fa-info-circle-fill"></i>
                   <p>About Us</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
-                  <i class="bi bi-cloud-download"></i>
+                  <i class="nav-icon fas fa-cloud-download"></i>
                   <p>Downloads</p>
                 </a>
               </li>
@@ -325,31 +325,31 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('call-for-proposals') }}" class="nav-link">
-                  <i class="bi bi-megaphone-fill"></i>
+                  <i class="nav-icon fas fa-megaphone-fill"></i>
                   <p>Call for Proposals</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('access-requests') }}" class="nav-link">
-                  <i class="bi bi-file-earmark-lock-fill"></i>
+                  <i class="nav-icon fas fa-file-earmark-lock-fill"></i>
                   <p>Access Request</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('announcements') }}" class="nav-link">
-                  <i class="bi bi-megaphone"></i>
+                  <i class="nav-icon fas fa-megaphone"></i>
                   <p>Announcements</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('abouts') }}" class="nav-link">
-                  <i class="bi bi-info-circle-fill"></i>
+                  <i class="nav-icon fas fa-info-circle-fill"></i>
                   <p>About Us</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
-                  <i class="bi bi-cloud-download"></i>
+                  <i class="nav-icon fas fa-cloud-download"></i>
                   <p>Downloads</p>
                 </a>
               </li>
