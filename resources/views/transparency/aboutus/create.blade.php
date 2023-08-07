@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'For Revision')
+@section('title', 'Create Abouts')
 
 @section('content')
   <div class="content-wrapper">

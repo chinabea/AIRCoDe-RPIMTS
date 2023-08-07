@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'For Revision')
+@section('title', 'Edit Abouts')
 
 @section('content')
   <div class="content-wrapper">
@@ -13,7 +13,6 @@
                 <div class="card-header">
                     <h3 class="card-title">About Us</h3>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
 
                 <form action="{{ route('transparency.aboutus.edit', $aboutus->id) }}" method="post">
@@ -22,12 +21,12 @@
                     <br>
                     <div class="form-group">
                     <label for="title">Title</label>
-                    <textarea class="form-control" rows="2" id="title" name="title" class="form-control" value={{$aboutus->title}}></textarea>
+                    <textarea class="form-control" rows="2" id="title" name="title" class="form-control" value="{{$aboutus->title}}"></textarea>
                     </div>
                     <br><br>
                     <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea class="form-control" rows="2" id="content" name="content" class="form-control" value={{$aboutus->content}} ></textarea>
+                    <textarea class="form-control" rows="2" id="content" name="content" class="form-control" value="{{$aboutus->content}}"></textarea>
                     </div>
                     <button type="submit" class="btn btn-warning">Update</button>
                     <br>

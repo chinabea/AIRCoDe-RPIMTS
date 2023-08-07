@@ -18,6 +18,7 @@ use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ProjectTeamController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ProjectHistoryController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -35,8 +36,7 @@ use App\Mail\Send;
 
 
 Route::get('/', function () {
-    // Mail::send(new Send);
-    return view('auth/login');
+    return view('welcome');
 });
 
 
@@ -53,9 +53,7 @@ Route::middleware(['auth', 'director'])->group(function (){
 });
 
 Route::middleware(['auth', 'staff'])->group(function (){
-    Route::get('/staff', function () {
-        return view('dashboard');
-    })->name('staff');
+    Route::get('/staff', [ProjectsController::class, 'forRevision'])->name('staff');
 
 });
 
@@ -84,13 +82,13 @@ Route::delete('/about/delete/{id}', [AboutusController::class, 'destroy'])->name
 
 
 // Proposals
-Route::get('/proposals', [ProposalsController::class, 'index'])->name('proposals');
-Route::get('/proposal/create', [ProposalsController::class, 'create'])->name('transparency.proposals.create');
-Route::post('/proposal/store', [ProposalsController::class, 'store'])->name('transparency.proposals.store');
-Route::get('/proposal/show/{id}', [ProposalsController::class, 'show'])->name('transparency.proposals.show');
-Route::get('/proposal/edit/{id}', [ProposalsController::class, 'edit'])->name('transparency.proposals.edit');
-Route::put('/proposal/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.proposals.update');
-Route::delete('/proposal/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.proposals.destroy');
+Route::get('/call-for-proposals', [ProposalsController::class, 'index'])->name('call-for-proposals');
+Route::get('/call-for-proposals/create', [ProposalsController::class, 'create'])->name('transparency.call-for-proposals.create');
+Route::post('/call-for-proposals/store', [ProposalsController::class, 'store'])->name('transparency.call-for-proposals.store');
+Route::get('/call-for-proposals/show/{id}', [ProposalsController::class, 'show'])->name('transparency.call-for-proposals.show');
+Route::get('/call-for-proposals/edit/{id}', [ProposalsController::class, 'edit'])->name('transparency.call-for-proposals.edit');
+Route::put('/call-for-proposals/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.call-for-proposals.update');
+Route::delete('/call-for-proposals/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
 
 // Reviews
 Route::get('/reviews', [ReviewsController::class, 'index'])->name('reviews');
@@ -111,31 +109,31 @@ Route::put('/announcement/edit/{id}', [AnnouncementsController::class, 'update']
 Route::delete('/announcement/delete/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
 
 // Access Request
-Route::get('/accessrequests', [AccessRequestController::class, 'index'])->name('accessrequests');
-Route::get('/accessrequest/create', [AccessRequestController::class, 'create'])->name('transparency.accessrequests.create');
-Route::post('/accessrequest/store', [AccessRequestController::class, 'store'])->name('transparency.accessrequests.store');
-Route::get('/accessrequest/show/{id}', [AccessRequestController::class, 'show'])->name('transparency.accessrequests.show');
-Route::get('/accessrequest/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.accessrequests.edit');
-Route::put('/accessrequest/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.accessrequests.update');
-Route::delete('/accessrequest/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.accessrequests.destroy');
+Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
+Route::get('/access-request/create', [AccessRequestController::class, 'create'])->name('transparency.access-requests.create');
+Route::post('/access-request/store', [AccessRequestController::class, 'store'])->name('transparency.access-requests.store');
+Route::get('/access-request/show/{id}', [AccessRequestController::class, 'show'])->name('transparency.access-requests.show');
+Route::get('/access-request/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.access-requests.edit');
+Route::put('/access-request/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.access-requests.update');
+Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
 
 // Users
 Route::get('/users', [UsersController::class, 'index'])->name('users');
-Route::get('/createusers', [UsersController::class, 'create'])->name('users.create');
-Route::post('/storeusers', [UsersController::class, 'store'])->name('users.store');
-Route::get('/showusers/{id}', [UsersController::class, 'show'])->name('users.show');
-Route::get('/editusers/{id}', [UsersController::class, 'edit'])->name('users.edit');
-Route::put('/editusers/{id}', [UsersController::class, 'update'])->name('users.update');
-Route::delete('/deleteusers/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+Route::get('/create-users', [UsersController::class, 'create'])->name('users.create');
+Route::post('/store-users', [UsersController::class, 'store'])->name('users.store');
+Route::get('/show-users/{id}', [UsersController::class, 'show'])->name('users.show');
+Route::get('/edit-users/{id}', [UsersController::class, 'edit'])->name('users.edit');
+Route::put('/edit-users/{id}', [UsersController::class, 'update'])->name('users.update');
+Route::delete('/delete-users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
 
 // Admin Proponents
 Route::get('/proponents', [ProponentsController::class, 'index'])->name('proponents');
-Route::get('/createproponents', [ProponentsController::class, 'create'])->name('proponents.admin-proponents.create');
-Route::post('/storeproponents', [ProponentsController::class, 'store'])->name('proponents.admin-proponents.store');
-Route::get('/showproponents/{id}', [ProponentsController::class, 'show'])->name('proponents.admin-proponents.show');
-Route::get('/editproponents/{id}', [ProponentsController::class, 'edit'])->name('proponents.admin-proponents.edit');
-Route::put('/editproponents/{id}', [ProponentsController::class, 'update'])->name('proponents.admin-proponents.update');
-Route::delete('/deleteproponents/{id}', [ProponentsController::class, 'destroy'])->name('proponents.admin-proponents.destroy');
+Route::get('/create-proponents', [ProponentsController::class, 'create'])->name('proponents.admin-proponents.create');
+Route::post('/store-proponents', [ProponentsController::class, 'store'])->name('proponents.admin-proponents.store');
+Route::get('/show-proponents/{id}', [ProponentsController::class, 'show'])->name('proponents.admin-proponents.show');
+Route::get('/edit-proponents/{id}', [ProponentsController::class, 'edit'])->name('proponents.admin-proponents.edit');
+Route::put('/edit-proponents/{id}', [ProponentsController::class, 'update'])->name('proponents.admin-proponents.update');
+Route::delete('/delete-proponents/{id}', [ProponentsController::class, 'destroy'])->name('proponents.admin-proponents.destroy');
 
 Route::get('/blank', function () {
     return view('blank');
@@ -164,6 +162,7 @@ Route::resource('documents', DocumentController::class);
 Route::get('send', [HomeController::class, 'sendNotification']);
 
 
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
 Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');
 Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -189,24 +188,17 @@ Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('p
 Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
 
 
-Route::get('/submission-details.project-teams.create', function () {
-    return view('submission-details.project-teams.create');
-});
-Route::get('/submission-details.project-teams.edit', function () {
-    return view('submission-details.project-teams.modal');
-});
+// Route::get('/submission-details.project-teams.create', function () {
+//     return view('submission-details.project-teams.create');
+// });
 
 Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
 Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('submission-details.project-teams.create');
 Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('submission-details.project-teams.store');
 Route::put('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name('submission-details.project-teams.show');
-Route::get('/project-teams/{projectTeam}/edit', [ProjectTeamController::class, 'edit'])->name('submission-details.project-teams.edit');
-Route::put('/project-teams/{projectTeam}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
+Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('submission-details.project-teams.edit');
+Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
 Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
-
-Route::get('/sample', function () {
-    return view('sample');
-});
 
 // FOR STATUS
 Route::get('/status/under-evaluation', [ProjectsController::class, 'underEvaluation'])->name('status.under-evaluation');
@@ -215,14 +207,29 @@ Route::get('/status/for-revision', [ProjectsController::class, 'forRevision'])->
 Route::get('/status/approved', [ProjectsController::class, 'approved'])->name('status.approved');
 Route::get('/status/deferred', [ProjectsController::class, 'deferred'])->name('status.deferred');
 Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->name('status.disapproved');
-// Route::get('/status/draft', [ProjectsController::class, 'draft'])->name('status.draft');
 
-// update project status
-Route::put('/projects/{id}/update-status', [ProjectsController::class, 'updateStatus'])->name('projects.updateStatus');
-Route::get('/status/edit', [ProjectsController::class, 'update'])->name('projects.editstatus');
 
-Route::get('/select-reviewers',  [ProjectsController::class, 'selectReviewers'])->name('projects.selectReviewers');
-Route::post('/store-reviewer', [ProjectsController::class, 'storeReviewer'])->name('projects.storeReviewer');
+// Route::get('/proj-revision/show', [ProjectsController::class, 'forRevisionSidebar'])->name('proj-revision.show');
+
+
+
+
+
+
+Route::get('/track', function () {
+    return view('track')->name('track');
+});
+
+Route::get('/faqs', function () {
+    return view('faqs')->name('faqs');
+});
+
+Route::get('/downloads', function () {
+    return view('transparency.downloads')->name('downloads');
+});
+
+
+
 
 
 
