@@ -135,6 +135,7 @@ Route::get('/edit-proponents/{id}', [ProponentsController::class, 'edit'])->name
 Route::put('/edit-proponents/{id}', [ProponentsController::class, 'update'])->name('proponents.admin-proponents.update');
 Route::delete('/delete-proponents/{id}', [ProponentsController::class, 'destroy'])->name('proponents.admin-proponents.destroy');
 
+
 Route::get('/blank', function () {
     return view('blank');
 })->name('blank');
@@ -210,6 +211,8 @@ Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->n
 
 
 // Route::get('/proj-revision/show', [ProjectsController::class, 'forRevisionSidebar'])->name('proj-revision.show');
+
+
 
 
 

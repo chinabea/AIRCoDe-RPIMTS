@@ -14,13 +14,13 @@ class ProposalsController extends Controller
         // $items = ProposalsModel::all();
         $records = ProposalsModel::orderBy('created_at', 'ASC')->get();
 
-        return view('transparency.proposals.index', compact('records'));
+        return view('transparency.call-for-proposals.index', compact('records'));
     }
 
     public function create()
     {
         // Return the view for creating a new item
-        return view('transparency.proposals.create');
+        return view('transparency.call-for-proposals.create');
     }
 
     public function store(Request $request)
@@ -28,7 +28,7 @@ class ProposalsController extends Controller
         ProposalsModel::create($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('proposals')->with('success', 'Data Successfully Added!');
+        return redirect()->route('call-for-proposals')->with('success', 'Data Successfully Added!');
     }
 
     public function show($id)
@@ -36,7 +36,7 @@ class ProposalsController extends Controller
         // Retrieve and show the specific item using the provided ID
         $proposals = ProposalsModel::findOrFail($id);
 
-        return view('transparency.proposals.show', compact('proposals'));
+        return view('transparency.call-for-proposals.show', compact('proposals'));
     }
 
     public function edit($id)
@@ -44,7 +44,7 @@ class ProposalsController extends Controller
         // Retrieve and show the specific item for editing
         $proposals = ProposalsModel::findOrFail($id);
 
-        return view('transparency.proposals.edit', compact('proposals'));
+        return view('transparency.call-for-proposals.edit', compact('proposals'));
     }
 
     public function update(Request $request, $id)
@@ -55,7 +55,7 @@ class ProposalsController extends Controller
         $proposals->update($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('proposals')->with('success', 'Data Successfully Updated!');
+        return redirect()->route('call-for-proposals')->with('success', 'Data Successfully Updated!');
     }
 
     public function destroy($id)
@@ -65,6 +65,6 @@ class ProposalsController extends Controller
         $proposals->delete();
 
         // Redirect to the index or perform other actions
-        return redirect()->route('proposals')->with('success', 'Data Successfully Deleted!');
+        return redirect()->route('call-for-proposals')->with('success', 'Data Successfully Deleted!');
     }
 }

@@ -33,7 +33,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <a href="{{ route('transparency.proposals.create') }}" class="btn btn-primary">Add Proposals</a>
+                <a href="{{ route('transparency.call-for-proposals.create') }}" class="btn btn-primary">Add Proposals</a>
 
                 <hr />
                 @if(Session::has('success'))
