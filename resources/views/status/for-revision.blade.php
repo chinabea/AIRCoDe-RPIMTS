@@ -1,8 +1,7 @@
 @extends('layouts.template')
-@section('title', 'Dashboard')
+@section('title', 'For Revision')
 
 @section('content')
-
   <div class="content-wrapper">
     <section class="content-header">
     </section>
