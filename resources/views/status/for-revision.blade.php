@@ -40,14 +40,6 @@
                     @else
                         <p>No projects currently under evaluation.</p>
                     @endif
-                  <tfoot>
-                  <tr>
-                    <!-- <th>Project Title</th>
-                    <th>Research Group</th>
-                    <th>Start Date</th>
-                    <th>End Date</th> -->
-                  </tr>
-                  </tfoot>
                 </table>
               </div>
             </div>

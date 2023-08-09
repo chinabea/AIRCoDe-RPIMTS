@@ -19,19 +19,31 @@ class ProjectTeamController extends Controller
         return view('submission-details.project-teams.create');
     }
 
+    // public function store(Request $request)
+    // {
+    //     $projectId = $request->input('project_id', 1);
+    //     $requestData = $request->all();
+    //     $requestData['project_id'] = $projectId;
+    //     ProjectTeamModel::create($requestData);
+
+    //     return redirect()->back()->with('success', 'Data Successfully Added!');
+    // }
+
     public function store(Request $request)
     {
-        $projectId = $request->input('project_id', 1);
-        $requestData = $request->all();
-        // dd($request->all());
-        $requestData['project_id'] = $projectId;
+        $projectId = $request->input('project_id');
+        $teamData = [
+            'name' => $request->input('team_name'),
+            'role' => $request->input('team_role'),
+            'project_id' => $projectId,
+        ];
 
-        ProjectTeamModel::create($requestData);
+        ProjectTeamModel::create($teamData);
 
-        // Redirect or perform other actions
-        // return redirect()->route('submission-details.show')->with('success', 'Data Successfully Added!');
-        return redirect()->back()->with('success', 'Data Successfully Added!');
+        return redirect()->back()->with('success', 'Team Successfully Added to Project!');
     }
+
+
 
     public function show($id)
     {
@@ -48,17 +60,11 @@ class ProjectTeamController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Find the project team member by their ID
         $projectTeam = ProjectTeamModel::find($id);
-
-        // Update the member name and role based on the form input
         $projectTeam->member_name = $request->input('member_name');
         $projectTeam->role = $request->input('role');
-
-        // Save the updated project team member
         $projectTeam->save();
 
-        // Redirect the user or perform other actions as needed
         return redirect()->back()->with('success', 'Project team member updated successfully.');
     }
 

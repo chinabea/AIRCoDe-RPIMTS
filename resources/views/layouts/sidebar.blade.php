@@ -1,7 +1,7 @@
 
 @php
     $role = auth()->user()->role;
-@endphp
+@endphp 
 
 @if($role === 1)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -46,7 +46,7 @@
           <li class="nav-header">TRANSPARENCY</li>
               <li class="nav-item">
                 <a href="{{ route('call-for-proposals') }}" class="nav-link">
-                  <i class="fas fa-megaphone-fill"></i>
+                  <i class="fas fa-file-earmark-lock-fill"></i>
                   <p>Call for Proposals</p>
                 </a>
               </li>

@@ -14,6 +14,9 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
+                                <label for="">Project ID</label>
+                            </div>
+                            <div class="form-group col-md-6">
                                 <label for="member_name">Name</label>
                                 <input type="text" class="form-control" id="member_name" name="member_name" required>
                             </div>

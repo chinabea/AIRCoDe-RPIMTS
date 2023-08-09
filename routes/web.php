@@ -17,6 +17,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ProjectTeamController;
+use App\Http\Controllers\LineItemController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProjectHistoryController;
 
@@ -94,10 +95,16 @@ Route::middleware(['auth', 'director'])->group(function (){
     Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
     Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
+    Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
     Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
     Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
     Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
+
+    Route::fallback(function () {
+        return response()->view('errors.404', [], 404);
+    });
+    
 
 });
 
@@ -141,10 +148,6 @@ Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit
 Route::put('/task/{id}/edit', [TaskController::class, 'update'])->name('tasks.update');
 Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('tasks.delete');
 
-// Route::get('/submission-details.project-teams.create', function () {
-//     return view('submission-details.project-teams.create');
-// });
-
 
 // FOR STATUS
 Route::get('/status/under-evaluation', [ProjectsController::class, 'underEvaluation'])->name('status.under-evaluation');
@@ -182,35 +185,11 @@ Route::get('send', [HomeController::class, 'sendNotification']);
 
 
 
+Route::get('/track', [TrackController::class, 'index'])->name('track');
+Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 
-Route::get('/track', function () {
-    return view('track')->name('track');
-});
-
-
-Route::get('/faqs', function () {
-    return view('faqs')->name('faqs');
-});
-
-Route::get('/downloads', function () {
-    return view('transparency.downloads')->name('downloads');
-});
-
-
-
-
-
-
-
-
-Route::get('/faqs', function () {
-    return view('faqs');
-});
-
-
-
-
-
+Route::get('/line-item-budget/create', [LineItemController::class, 'create'])->name('submission-details.line-item-budget.create');
+Route::post('/line-item-budget/store', [LineItemController::class, 'store'])->name('submission-details.line-item-budget.store');
 
 
 

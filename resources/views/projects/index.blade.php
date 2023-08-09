@@ -52,34 +52,34 @@
                                 <td class="align-middle">{{ $record->researchgroup }}</td>
                                 <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
                                 <td class="align-middle">{{ $record->status }}</td>
-                              <td class="align-middle">
-                                    <div class="btn-group align-middle" role="group" aria-label="Basic example">
-                                    <a href="{{ route('submission-details.show', $record->id) }}" type="button" class="btn btn-secondary">
-                                      <i class="fas fa-info-circle"></i> Details
-                                    </a>
-                                    <a href="{{ route('projects.edit', $record->id) }}" type="button" class="btn btn-warning">
-                                      <i class="fas fa-edit"></i> Edit
-                                    </a>
+                                <td class="align-middle">
+                                      <div class="btn-group align-middle" role="group" aria-label="Basic example">
+                                      <a href="{{ route('submission-details.show', $record->id) }}" type="button" class="btn btn-secondary">
+                                        <i class="fas fa-info-circle"></i> Details
+                                      </a>
+                                      <a href="{{ route('projects.edit', $record->id) }}" type="button" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i> Edit
+                                      </a>
 
-                                    <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">
-                                      <i class="fas fa-trash"></i> Delete
-                                    </button>
+                                      <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">
+                                        <i class="fas fa-trash"></i> Delete
+                                      </button>
 
-                                        <script>
-                                        function confirmDelete(url) {
-                                            if (confirm('Delete?')) {
-                                            // Create a hidden form and submit it programmatically
-                                            var form = document.createElement('form');
-                                            form.action = url;
-                                            form.method = 'POST';
-                                            form.innerHTML = '@csrf @method("delete")';
-                                            document.body.appendChild(form);
-                                            form.submit();
-                                            }
-                                        }
-                                        </script>
-                                    </div>
-                              </td>
+                                          <script>
+                                          function confirmDelete(url) {
+                                              if (confirm('Delete?')) {
+                                              // Create a hidden form and submit it programmatically
+                                              var form = document.createElement('form');
+                                              form.action = url;
+                                              form.method = 'POST';
+                                              form.innerHTML = '@csrf @method("delete")';
+                                              document.body.appendChild(form);
+                                              form.submit();
+                                              }
+                                          }
+                                          </script>
+                                      </div>
+                                </td>
                             </tr>
                             @endforeach
                             @else

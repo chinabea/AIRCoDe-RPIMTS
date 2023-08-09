@@ -8,9 +8,8 @@
   </section>
     <div class="col-md-12">
             <div class="card card-primary card-outline">
-              <div class="card-header text-center">
+              <div class="card-header">
                   SUBMISSION DETAILS
-                </h3>
               </div>
               <div class="card-body pad table-responsive">
                 <table class="table table-bordered table-sm text-right">
@@ -104,10 +103,50 @@
       <div class="card card-primary card-outline">
         <div class="card-header">
             DETAILS
-          </h3>
         </div>
-        <div class="card-body pad table-responsive">
+        <div class="card-body pad table-responsive text-left">
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
+            <div>
+                <label>Project Name:</label>
+                {{ $records->projname }}
+                <br>
+                <label>Research Group:</label>
+                {{ $records->researchgroup }}
+                <br>
+                <label>Author(s):</label>
+                {{ $records->authors }}
+                <br>
+                <label>Introduction:</label>
+                {{ $records->introduction }}
+                <br>
+                <label>Aims and Objectives:</label>
+                {{ $records->aims_and_objectives }}
+                <br>
+                <label>Background:</label>
+                {{ $records->background }}
+                <br>
+                <label>Expected Research Contribution:</label>
+                {{ $records->expected_research_contribution }}
+                <br>
+                <label>The Proposed Methodology:</label>
+                {{ $records->proposed_methodology }}
+                <br>
+                <label>Start Date:</label>
+                {{ $records->start_date }}
+                <br>
+                <label>End Date:</label>
+                {{ $records->end_date }}
+                <br>
+                <label>Work Plan:</label>
+                {{ $records->workplan }}
+                <br>
+                <label>Resources:</label>
+                {{ $records->resources }}
+                <br>
+                <label>References:</label>
+                {{ $records->references }}
 
+            </div>
 
         </div>
       </div>
@@ -122,7 +161,33 @@
           LINE-ITEM BUDGET
           </h3>
         </div>
-        <div class="card-body pad table-responsive">
+        <div class="card-body pad table-responsive text-left">
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">
+              <i class="far fa-file-excel fa-sm text-white-50"></i> Export to Excel
+          </a>
+          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#LIB">Add Line-Item</button>
+              @include('submission-details.line-item-budget.create')
+                
+          <h1>Line Items</h1>
+          <table>
+              <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Quantity</th>
+                      <th>Unit Price</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  @foreach($lineItems as $lineItem)
+                      <tr>
+                          <td>{{ $lineItem->name }}</td>
+                          <td>{{ $lineItem->quantity }}</td>
+                          <td>{{ $lineItem->unit_price }}</td>
+                      </tr>
+                  @endforeach
+              </tbody>
+          </table>
+
 
 
         </div>
@@ -184,6 +249,7 @@
             <div class="card-body pad table-responsive">
             <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
                 @include('submission-details.project-teams.create')
+
               @foreach($teamMembers as $member)
                   <div class="card mb-3">
                       <div class="card-body">

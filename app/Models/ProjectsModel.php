@@ -32,6 +32,10 @@ class ProjectsModel extends Model
         return $this->hasMany(ProjectTeamModel::class, 'project_id');
     }
 
+    public function lineItems()
+    {
+        return $this->hasMany(LineItem::class, 'project_id');
+    }
 
     public function reviewers()
     {
@@ -39,6 +43,7 @@ class ProjectsModel extends Model
                     ->wherePivot('role', 4)
                     ->withPivot('role');
     }
+
 
 
 

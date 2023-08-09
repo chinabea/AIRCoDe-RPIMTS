@@ -9,7 +9,8 @@ use App\Models\UsersModel;
 use Illuminate\Support\Facades\Notification;
 
 class TaskController extends Controller
-{protected $task;
+{
+    protected $task;
 
     public function __construct(Task $task)
     {

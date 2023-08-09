@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectTeamModel extends Model
+class LineItem extends Model
 {
 
-    public $table = 'project_teams';
+    public $table = 'line_items';
 
     public $primaryKey = 'id';
 
-    public $fillable = ['project_id','member_name','role'];
+    public $fillable = ['project_id','name','quantity','unit_price'];
 
     public function project()
     {
         return $this->belongsTo(ProjectsModel::class, 'project_id');
     }
 
-
-
+    
 }
