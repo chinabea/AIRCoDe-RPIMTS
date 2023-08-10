@@ -80,6 +80,7 @@
         <button id="reprogramming-status-btn" class="btn btn-primary my-2">
             <i class="fas fa-sync-alt mr-2"></i>Reprogramming Status
         </button>
+      </div>
 
 
 
@@ -249,57 +250,46 @@
             <div class="card-body pad table-responsive">
             <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
                 @include('submission-details.project-teams.create')
-
-              @foreach($teamMembers as $member)
-                  <div class="card mb-3">
-                      <div class="card-body">
-                          <div class="form-row align-items-end">
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                      <label for="member_name">Name:</label>
-                                      <input type="text" class="form-control" id="member_name{{ $member->id }}" name="member_name" value="{{ $member->member_name }}" readonly>
-                                  </div>
-                              </div>
-                              <div class="col-md-4">
-                                  <div class="form-group">
-                                      <label for="role">Role:</label>
-                                      <select class="form-control" id="role{{ $member->id }}" name="role" readonly>
-                                          <option disabled>Select Role</option>
-                                          <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
-                                          <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}>Database Designer</option>
-                                          <option{{ $member->role === 'Network Designer' ? ' selected' : '' }}>Network Designer</option>
-                                          <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}>UI Designer</option>
-                                          <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}>Quality Assurance</option>
-                                          <option{{ $member->role === 'Document Writer' ? ' selected' : '' }}>Document Writer</option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <div class="col-md-2 d-flex align-items-end">
-                              <button type="button" class="btn btn-primary mr-2" onclick="toggleEdit({{ $member->id }})" id="updateButton{{ $member->id }}">Update</button>
-                                  <form action="{{ route('submission-details.project-teams.destroy', $member->id) }}" method="post" class="d-flex">
-                                      <!-- Existing code for the delete button -->
-                                      @csrf
-                                      @method('DELETE')
-                                      <button type="submit" class="btn btn-danger">Delete</button>
-                                  </form>
-                              </div>
-                          </div>
-                          <!-- The edit form for updating each member -->
-                          <form method="post" action="{{ route('submission-details.project-teams.update', $member->id) }}" enctype="multipart/form-data" id="updateForm{{ $member->id }}" style="display: none;">
-                              <!-- Existing code for the edit form -->
-                              @csrf
-                                @method('PUT')
-                                <div class="form-row align-items-end">
-                                    <div class="col-md-6">
+                <table id="example1" class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                @foreach($teamMembers as $member)
+                <tbody>
+                  <tr>
+                    <td class="align-middle">{{ $loop->iteration }}.</td>
+                    <td>{{ $member->member_name }}</td>
+                    <td>{{ $member->role }}</td>
+                    <td>
+                      <a href="{{ route('submission-details.project-teams.edit', $member->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $member->id }}">
+                          <i class="fas fa-edit"></i> Edit
+                      </a>
+                      <div class="modal fade" id="editModal{{ $member->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $member->id }}Label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editModal{{ $member->id }}Label">Edit Project Team Member</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="post" action="{{ route('submission-details.project-teams.update', $member->id) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-body">
+                                        <!-- Input fields for editing -->
                                         <div class="form-group">
                                             <label for="edit_member_name">Name:</label>
-                                            <input type="text" class="form-control" id="edit_member_name" name="member_name" value="{{ $member->member_name }}" required>
+                                            <input type="text" class="form-control" id="edit_member_name{{ $member->id }}" name="member_name" value="{{ $member->member_name }}" required>
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="edit_role">Role:</label>
-                                            <select class="form-control" id="edit_role" name="role" required>
+                                            <select class="form-control" id="edit_role{{ $member->id }}" name="role" required>
                                                 <option disabled>Select Role</option>
                                                 <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
                                                 <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}>Database Designer</option>
@@ -307,70 +297,48 @@
                                                 <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}>UI Designer</option>
                                                 <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}>Quality Assurance</option>
                                                 <option{{ $member->role === 'Document Writer' ? ' selected' : '' }}>Document Writer</option>
+                                                
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 d-flex align-items-end">
-                                        <button type="submit" class="btn btn-primary mr-2">Save</button>
-                                        <button type="button" class="btn btn-secondary" onclick="cancelEdit({{ $member->id }})">Cancel</button>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
                                     </div>
-                                </div>
-                          </form>
-                      </div>
-                  </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+        
 
-                  
+<button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.project-teams.destroy', $member->id) }}')">
+                                        <i class="fas fa-trash"></i> Delete
+                                      </button>
+
+                                          <script>
+                                          function confirmDelete(url) {
+                                              if (confirm('Are you sure you want to delete this project member?')) {
+                                              // Create a hidden form and submit it programmatically
+                                              var form = document.createElement('form');
+                                              form.action = url;
+                                              form.method = 'POST';
+                                              form.innerHTML = '@csrf @method("delete")';
+                                              document.body.appendChild(form);
+                                              form.submit();
+                                              }
+                                          }
+                                          </script>
+
+
+                    </td>
+                  </tr>
+                </tbody>
               @endforeach
-              <script>
-                function toggleEdit(memberId) {
-                    const memberNameInput = document.getElementById(`member_name${memberId}`);
-                    const roleSelect = document.getElementById(`role${memberId}`);
-                    const updateButton = document.getElementById(`updateButton${memberId}`);
-                    const form = document.getElementById(`updateForm${memberId}`);
+              </table>
 
-                    memberNameInput.readOnly = !memberNameInput.readOnly;
-                    roleSelect.disabled = !roleSelect.disabled;
+              <!-- Button to trigger the modal -->
 
-                    if (memberNameInput.readOnly) {
-                        updateButton.innerText = 'Update';
-                        form.style.display = "none";
-                    } else {
-                        updateButton.innerText = 'Save';
-                        // Hide other update forms and show the current one
-                        const allUpdateForms = document.querySelectorAll('[id^="updateForm"]');
-                        allUpdateForms.forEach(form => {
-                            form.style.display = "none";
-                        });
-                        form.style.display = "block";
-                        form.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll to the form
 
-                        // Hide the Save and Delete buttons for the current member
-                        const saveButton = document.getElementById(`saveButton${memberId}`);
-                        const deleteButton = document.getElementById(`deleteButton${memberId}`);
-                        saveButton.style.display = "none";
-                        deleteButton.style.display = "none";
-                    }
-                }
-
-                function cancelEdit(memberId) {
-                    const memberNameInput = document.getElementById(`member_name${memberId}`);
-                    const roleSelect = document.getElementById(`role${memberId}`);
-                    const updateButton = document.getElementById(`updateButton${memberId}`);
-                    const form = document.getElementById(`updateForm${memberId}`);
-
-                    memberNameInput.readOnly = !memberNameInput.readOnly;
-                    roleSelect.disabled = !roleSelect.disabled;
-
-                    updateButton.innerText = 'Update';
-                    form.style.display = "none";
-
-                    // Show the Save and Delete buttons for the current member
-                    const saveButton = document.getElementById(`saveButton${memberId}`);
-                    const deleteButton = document.getElementById(`deleteButton${memberId}`);
-                    saveButton.style.display = "block";
-                    deleteButton.style.display = "block";
-                }
-            </script>
 
 
             </div>

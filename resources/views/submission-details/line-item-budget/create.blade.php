@@ -12,10 +12,6 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="">Project ID</label>
-                            <input type="text" class="form-control" id="" name="" value="{{ $records->id }}" disabled>
-                        </div>
-                        <div class="form-group col-md-6">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>

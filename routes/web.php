@@ -132,10 +132,11 @@ Route::middleware(['auth', 'researcher'])->group(function (){
     Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
     Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('submission-details.project-teams.create');
-    Route::post('/project-teams/store', [ProjectTeamController::class, 'store'])->name('submission-details.project-teams.store');
+    Route::post('/project-teams/store/{id}', [ProjectTeamController::class, 'store'])->name('submission-details.project-teams.store');
     Route::put('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name('submission-details.project-teams.show');
     Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('submission-details.project-teams.edit');
     Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
+    Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
 
     
 });

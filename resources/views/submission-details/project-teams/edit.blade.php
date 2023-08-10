@@ -5,7 +5,7 @@
     <input type="text" name="role" value="{{ $projectTeam->role }}">
     <button type="submit">Update</button>
 </form> -->
-
+<!-- 
 <div class="card mb-3" id="editForm" style="display: none;">
     <div class="card-body">
         <form method="post" action="{{ route('submission-details.project-teams.update', $member->id) }}" enctype="multipart/form-data">
@@ -39,5 +39,42 @@
             </div>
         </form>
     </div>
-</div>
+</div> -->
 
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal{{ $member->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $member->id }}Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModal{{ $member->id }}Label">Edit Project Team Member</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{{ route('submission-details.project-teams.update', $member->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <!-- Input fields for editing -->
+                    <div class="form-group">
+                        <label for="edit_member_name">Name:</label>
+                        <input type="text" class="form-control" id="edit_member_name{{ $member->id }}" name="member_name" value="{{ $member->member_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_role">Role:</label>
+                        <select class="form-control" id="edit_role{{ $member->id }}" name="role" required>
+                            <option disabled>Select Role</option>
+                            <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
+                            <!-- ... other options ... -->
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

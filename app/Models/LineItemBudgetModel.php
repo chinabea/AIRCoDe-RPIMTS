@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LineItem extends Model
+class LineItemBudgetModel extends Model
 {
 
     public $table = 'line_items';
@@ -18,6 +18,4 @@ class LineItem extends Model
     {
         return $this->belongsTo(ProjectsModel::class, 'project_id');
     }
-
-    
 }

@@ -104,12 +104,12 @@ class ProjectsController extends Controller
     
     public function show($id)
     {
-            $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
-            $records = ProjectsModel::findOrFail($id);
-            $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
-            $lineItems = LineItem::where('project_id', $id)->get();
-    
-            return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems'));
+        $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
+        $records = ProjectsModel::findOrFail($id);
+        $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
+        $lineItems = LineItem::where('project_id', $id)->get();
+
+        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems'));
 
     }
     

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\ProjectTeamModel;
+use App\Models\LineItemBudgetModel;
 use App\Models\ProjectsModel;
+use Illuminate\Http\Request;
 
-class ProjectTeamController extends Controller
+class LineItemBudgetController extends Controller
 {
     public function index()
     {
@@ -59,5 +59,4 @@ class ProjectTeamController extends Controller
         $projectTeam->delete();
         return redirect()->back()->with('success', 'Project team member deleted successfully');
     }
-    
 }
