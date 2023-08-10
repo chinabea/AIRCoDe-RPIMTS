@@ -167,7 +167,7 @@
               <i class="far fa-file-excel fa-sm text-white-50"></i> Export to Excel
           </a>
           <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#LIB">Add Line-Item</button>
-              @include('submission-details.line-item-budget.create')
+              @include('submission-details.line-items-budget.create')
                 
           <h1>Line Items</h1>
           <table>
@@ -328,7 +328,6 @@
                                               }
                                           }
                                           </script>
-
 
                     </td>
                   </tr>

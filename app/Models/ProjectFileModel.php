@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LineItemBudgetModel extends Model
+class ProjectFileModel extends Model
 {
 
-    public $table = 'line_items_budget';
+    public $table = 'project_files';
 
     public $primaryKey = 'id';
 
-    public $fillable = ['project_id','name','quantity','unit_price'];
+    public $fillable = ['project_id', 'file_name', 'file_path'];
 
     public function project()
     {

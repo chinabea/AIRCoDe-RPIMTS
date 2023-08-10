@@ -10,14 +10,13 @@ class LineItemBudgetController extends Controller
 {
     public function index()
     {
-        $teamMembers = ProjectTeamModel::all();
-        return view('submission-details.project-teams.index', compact('teamMembers'));
+        $lineItemsBudget = LineItemBudgetModel::all();
+        return view('submission-details.line-items-budget.index', compact('lineItemsBudget'));
     }
 
-    public function create($project_id)
+    public function create()
     {
-        $project = Project::findOrFail($project_id);
-        return view('submission-details.project-teams.create', compact('project'));
+        return view('submission-details.line-items-budget.create');
     }
 
     public function store(Request $request)
@@ -25,38 +24,38 @@ class LineItemBudgetController extends Controller
         $projectId = $request->input('project_id');
         $requestData = $request->all();
         $requestData['project_id'] = $projectId;
-        ProjectTeamModel::create($requestData);
+        LineItemBudgetModel::create($requestData);
 
         return redirect()->back()->with('success', 'Data Successfully Added!');
     }
 
     public function show($id)
     {
-        $teamMembers = ProjectTeamModel::findOrFail($id);
-        return view('submission-details.project-teams.show', compact('teamMembers'));
+        $lineItemsBudget = LineItemBudgetModel::findOrFail($id);
+        return view('submission-details.line-items-budget.show', compact('lineItemsBudget'));
     }
 
     public function edit($id)
     {
-        $projectTeam = ProjectTeamModel::where('id', $id)->firstOrFail();
-        $projects = $projectTeam->project;
-        return view('submission-details.project-teams.edit', compact('projectTeam', 'projects'));
+        $lib = LineItemBudgetModel::where('id', $id)->firstOrFail();
+        $projects = $lib->project;
+        return view('submission-details.line-items-budget.edit', compact('lib', 'projects'));
     }
 
     public function update(Request $request, $id)
     {
-        $projectTeam = ProjectTeamModel::find($id);
-        $projectTeam->member_name = $request->input('member_name');
-        $projectTeam->role = $request->input('role');
-        $projectTeam->save();
+        $lib = LineItemBudgetModel::find($id);
+        $lib->member_name = $request->input('member_name');
+        $lib->role = $request->input('role');
+        $lib->save();
 
         return redirect()->back()->with('success', 'Project team member updated successfully.');
     }
 
     public function destroy($id)
     {
-        $projectTeam = ProjectTeamModel::findOrFail($id);
-        $projectTeam->delete();
+        $lib = LineItemBudgetModel::findOrFail($id);
+        $lib->delete();
         return redirect()->back()->with('success', 'Project team member deleted successfully');
     }
 }

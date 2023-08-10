@@ -34,7 +34,7 @@ class ProjectsModel extends Model
 
     public function lineItems()
     {
-        return $this->hasMany(LineItem::class, 'project_id');
+        return $this->hasMany(LineItemBudgetModel::class, 'project_id');
     }
 
     public function reviewers()

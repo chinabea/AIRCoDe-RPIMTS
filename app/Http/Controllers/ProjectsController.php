@@ -10,7 +10,7 @@ use App\Models\UsersModel;
 use App\Models\User;
 use App\Models\ProjectReviewerModel;
 use App\Models\ProjectTeamModel;
-use App\Models\LineItem;
+use App\Models\LineItemBudgetModel;
 use App\Models\ProjectHistory;
 
 class ProjectsController extends Controller
@@ -107,7 +107,7 @@ class ProjectsController extends Controller
         $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
         $records = ProjectsModel::findOrFail($id);
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
-        $lineItems = LineItem::where('project_id', $id)->get();
+        $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
 
         return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems'));
 

@@ -1,15 +1,19 @@
+
+
 <div class="modal fade" id="LIB" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Line-Item Budget</h4>
+                <h4 class="modal-title" id="myModalLabel">Project Team</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{ route('submission-details.line-item-budget.store') }}" enctype="multipart/form-data">
-                    @csrf
+            <form method="post" action="{{ route('submission-details.line-items-budget.store', ['id' => $records->id]) }}" enctype="multipart/form-data">
+            @csrf
+                <input type="hidden" name="project_id" value="{{ $records->id }}">
+                @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="name">Name</label>
@@ -30,4 +34,3 @@
         </div>
     </div>
 </div> 
-

@@ -17,7 +17,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ProjectTeamController;
-use App\Http\Controllers\LineItemController;
+use App\Http\Controllers\LineItemBudgetController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProjectHistoryController;
 
@@ -189,8 +189,13 @@ Route::get('send', [HomeController::class, 'sendNotification']);
 Route::get('/track', [TrackController::class, 'index'])->name('track');
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 
-Route::get('/line-item-budget/create', [LineItemController::class, 'create'])->name('submission-details.line-item-budget.create');
-Route::post('/line-item-budget/store', [LineItemController::class, 'store'])->name('submission-details.line-item-budget.store');
+Route::get('/line-items-budget/create', [LineItemBudgetController::class, 'create'])->name('submission-details.line-items-budget.create');
+Route::post('/line-items-budget/store', [LineItemBudgetController::class, 'store'])->name('submission-details.line-items-budget.store');
+
+Route::post('/projects/{project}/files', 'ProjectFileController@store')->name('project.files.store');
+Route::get('/projects/{project}/files', 'ProjectFileController@index')->name('project.files.index');
+Route::delete('/projects/{project}/files/{file}', 'ProjectFileController@destroy')->name('project.files.destroy');
+
 
 
 

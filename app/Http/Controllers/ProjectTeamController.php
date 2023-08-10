@@ -14,10 +14,10 @@ class ProjectTeamController extends Controller
         return view('submission-details.project-teams.index', compact('teamMembers'));
     }
 
-    public function create($project_id)
+    public function create()
     {
-        $project = Project::findOrFail($project_id);
-        return view('submission-details.project-teams.create', compact('project'));
+        // $project = Project::findOrFail($project_id);
+        return view('submission-details.project-teams.create');
     }
 
     public function store(Request $request)
