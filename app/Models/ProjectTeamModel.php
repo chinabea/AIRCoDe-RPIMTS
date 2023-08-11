@@ -13,11 +13,13 @@ class ProjectTeamModel extends Model
     public $primaryKey = 'id';
 
     public $fillable = ['project_id','member_name','role'];
-
+ 
     public function project()
     {
         return $this->belongsTo(ProjectsModel::class, 'project_id');
     }
+
+
 
 
 

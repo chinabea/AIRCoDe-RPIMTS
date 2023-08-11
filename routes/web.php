@@ -181,20 +181,22 @@ Route::put('/edit-proponents/{id}', [ProponentsController::class, 'update'])->na
 Route::delete('/delete-proponents/{id}', [ProponentsController::class, 'destroy'])->name('proponents.admin-proponents.destroy');
 
 Route::resource('documents', DocumentController::class);
-
 Route::get('send', [HomeController::class, 'sendNotification']);
-
-
 
 Route::get('/track', [TrackController::class, 'index'])->name('track');
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 
 Route::get('/line-items-budget/create', [LineItemBudgetController::class, 'create'])->name('submission-details.line-items-budget.create');
-Route::post('/line-items-budget/store', [LineItemBudgetController::class, 'store'])->name('submission-details.line-items-budget.store');
+Route::post('/line-items-budget/store', [LineItemBudgetController::class, 'storee'])->name('submission-details.line-items-budget.store');
 
-Route::post('/projects/{project}/files', 'ProjectFileController@store')->name('project.files.store');
-Route::get('/projects/{project}/files', 'ProjectFileController@index')->name('project.files.index');
-Route::delete('/projects/{project}/files/{file}', 'ProjectFileController@destroy')->name('project.files.destroy');
+// Route::post('/projects/{project}/files', 'ProjectFileController@store')->name('project.files.store');
+// Route::get('/projects/{project}/files', 'ProjectFileController@index')->name('project.files.index');
+// Route::delete('/projects/{project}/files/{file}', 'ProjectFileController@destroy')->name('project.files.destroy');
+
+Route::get('/projects/create', [ProjectFileController::class, 'create'])->name('submission-details.files.create');
+Route::post('/projects/files', [ProjectFileController::class, 'store'])->name('submission-details.files.store');
+
+
 
 
 

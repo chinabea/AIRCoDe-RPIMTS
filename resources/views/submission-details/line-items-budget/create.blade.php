@@ -1,6 +1,6 @@
 
 
-<div class="modal fade" id="LIB" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="lib" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,15 +11,14 @@
             </div>
             <div class="modal-body">
             <form method="post" action="{{ route('submission-details.line-items-budget.store', ['id' => $records->id]) }}" enctype="multipart/form-data">
-            @csrf
-                <input type="hidden" name="project_id" value="{{ $records->id }}">
                 @csrf
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="form-group col-md-6">
+                <input type="hidden" name="project_id" value="{{ $records->id }}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group col-md-6">
                             <label for="quantity">Quantity</label>
                             <input type="number" class="form-control" id="quantity" name="quantity" required>
                         </div>
@@ -27,9 +26,10 @@
                             <label for="unit_price">Unit Price</label>
                             <input type="number" class="form-control" id="unit_price" name="unit_price" required>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Line-Item</button>
-                </form>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Member</button>
+            </form>
+
             </div>
         </div>
     </div>

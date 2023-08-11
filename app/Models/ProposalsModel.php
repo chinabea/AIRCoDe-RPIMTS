@@ -12,5 +12,10 @@ class ProposalsModel extends Model
     public $primaryKey = 'id';
 
     public $fillable = ['proposaltitle','proposaldescription','startdate','enddate','status','remarks'];
+    
+    public function project()
+    {
+        return $this->belongsTo(ProjectsModel::class, 'project_id');
+    }
 
 }

@@ -44,7 +44,13 @@ class ProjectsModel extends Model
                     ->withPivot('role');
     }
 
+    public function callForProposal()
+    {
+        return $this->hasMany(ProposalsModel::class, 'project_id');
+    }
 
+
+    
 
 
 

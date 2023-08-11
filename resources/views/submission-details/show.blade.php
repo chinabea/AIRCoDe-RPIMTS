@@ -166,7 +166,7 @@
           <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">
               <i class="far fa-file-excel fa-sm text-white-50"></i> Export to Excel
           </a>
-          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#LIB">Add Line-Item</button>
+          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#lib">Add Line-Item</button>
               @include('submission-details.line-items-budget.create')
                 
           <h1>Line Items</h1>
@@ -219,6 +219,10 @@
           </h3>
         </div>
         <div class="card-body pad table-responsive">
+        <!-- <div class="card-body pad table-responsive text-left"> -->
+        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a> -->
+        <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#filesModal">Add Files</button>
+            @include('submission-details.files.create')
 
 
         </div>
@@ -309,41 +313,31 @@
                             </div>
                         </div>
                     </div>
-        
-
-<button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.project-teams.destroy', $member->id) }}')">
-                                        <i class="fas fa-trash"></i> Delete
-                                      </button>
-
-                                          <script>
-                                          function confirmDelete(url) {
-                                              if (confirm('Are you sure you want to delete this project member?')) {
-                                              // Create a hidden form and submit it programmatically
-                                              var form = document.createElement('form');
-                                              form.action = url;
-                                              form.method = 'POST';
-                                              form.innerHTML = '@csrf @method("delete")';
-                                              document.body.appendChild(form);
-                                              form.submit();
-                                              }
-                                          }
-                                          </script>
-
+                    <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.project-teams.destroy', $member->id) }}')">
+                      <i class="fas fa-trash"></i> Delete
+                    </button>
+                          <script>
+                          function confirmDelete(url) {
+                              if (confirm('Are you sure you want to delete this project member?')) {
+                              // Create a hidden form and submit it programmatically
+                              var form = document.createElement('form');
+                              form.action = url;
+                              form.method = 'POST';
+                              form.innerHTML = '@csrf @method("delete")';
+                              document.body.appendChild(form);
+                              form.submit();
+                              }
+                          }
+                          </script>
                     </td>
                   </tr>
                 </tbody>
               @endforeach
               </table>
-
-              <!-- Button to trigger the modal -->
-
-
-
-
-            </div>
             </div>
           </div>
         </div>
+      </div>
    </div>
 
     <form id="status-form" class="mt-4" style="display: none;">
