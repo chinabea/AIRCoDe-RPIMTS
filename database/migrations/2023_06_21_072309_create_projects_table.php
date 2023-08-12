@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->text('projname');
-            $table->enum('status', ['New', 'Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved'])->default('New');
+            $table->string('status');
+            // $table->enum('status', ['New', 'Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved'])->default('New');
             $table->text('researchgroup');
             $table->text('authors');
             $table->text('introduction');
@@ -27,6 +29,7 @@ return new class extends Migration
             $table->text('workplan');
             $table->text('resources');
             $table->text('references');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -19,20 +19,16 @@ class LineItemBudgetController extends Controller
         return view('submission-details.line-items-budget.create');
     }
 
-    public function storee(Request $request)
+    public function store(Request $request)
     {
         $projId = $request->input('project_id');
         $requestData = $request->all();
         $requestData['project_id'] = $projId;
-    
-        // Debugging: Dump the data before saving
-        dd($requestData);
-    
         LineItemBudgetModel::create($requestData);
-    
+
         return redirect()->back()->with('success', 'Data Successfully Added!');
     }
-    
+
 
     public function show($id)
     {
@@ -50,8 +46,9 @@ class LineItemBudgetController extends Controller
     public function update(Request $request, $id)
     {
         $lib = LineItemBudgetModel::find($id);
-        $lib->member_name = $request->input('member_name');
-        $lib->role = $request->input('role');
+        $lib->name = $request->input('name');
+        $lib->quantity = $request->input('quantity');
+        $lib->unit_price = $request->input('unit_price');
         $lib->save();
 
         return redirect()->back()->with('success', 'Project team member updated successfully.');

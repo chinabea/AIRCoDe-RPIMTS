@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form method="post" action="{{ route('submission-details.line-items-budget.store', ['id' => $records->id]) }}" enctype="multipart/form-data">
+            <form id="lineItemForm" method="post" action="{{ route('submission-details.line-items-budget.store') }}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="project_id" value="{{ $records->id }}">
                 <div class="form-row">

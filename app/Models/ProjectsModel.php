@@ -48,6 +48,18 @@ class ProjectsModel extends Model
     {
         return $this->hasMany(ProposalsModel::class, 'project_id');
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(UsersModel::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(StatusModel::class, 'status');
+    }
+    
+
 
 
     

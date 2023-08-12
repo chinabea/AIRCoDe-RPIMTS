@@ -54,10 +54,12 @@ class ProjectsController extends Controller
                         'resources' => 'required',
                         'references' => 'required',
         ]);
+        $userId = Auth::id();
 
         $projects = new ProjectsModel;
         $projects->projname = $request->projname;
         $projects->status = 'under evaluation';
+        $projects->user_id = $userId;
         $projects->researchgroup = $request->researchgroup;
             $projects->authors = $request->authors;
             $projects->introduction = $request->introduction;
@@ -76,39 +78,13 @@ class ProjectsController extends Controller
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
     }
 
-
-    public function selectReviewers()
-    {
-        $users = UsersModel::where('role', 4)->get();
-
-        return view('submission-details.show', compact('users'));
-    }
-
-    public function storeReviewer(Request $request)
-    {
-        $validatedData = $request->validate([
-            'reviewers' => 'required|array',
-            'reviewers.*' => 'exists:users,id',
-        ]);
-
-        $projectId = 1; 
-        $project = ProjectsModel::findOrFail($projectId);
-        $filteredReviewers = User::whereIn('id', $validatedData['reviewers'])
-            ->where('role', 4)
-            ->pluck('id');
-
-        $project->reviewers()->attach($filteredReviewers);
-        $reviewers = User::where('role', 4)->get();
-
-        return view('submission-details.show', compact('reviewers'));
-    }
-    
     public function show($id)
     {
         $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
         $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
         $files = ProjectFileModel::where('project_id', $id)->get();
-        $records = ProjectsModel::findOrFail($id);
+        // $records = ProjectsModel::findOrFail($id);
+        $records = ProjectsModel::with('user')->findOrFail($id);
         $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
 
         return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'files'));
@@ -140,65 +116,6 @@ class ProjectsController extends Controller
         $projects = ProjectsModel::findOrFail($id);
         $projects->delete();
         return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
-    }
-
-    public function updateStatus(Request $request, $id)
-    {
-        $request->validate([
-            'status' => 'required|in:Draft,Under Evaluation,For Revision,Approved,Deferred,Disapproved',
-        ]);
-
-        $project = ProjectsModel::find($id);
-        if (!$project) {
-            return redirect()->back()->with('error', 'Project not found.');
-        }
-
-        $project->status = $request->input('status');
-        $project->save();
-        return redirect()->route('projects.show', ['id' => $id])->with('success', 'Project status updated successfully.');
-    }
-
-    public function draft()
-    {
-        $projects = ProjectsModel::where('status', 'Draft')->get();
-        return view('status.draft', compact('projects'));
-    }
-
-    public function underEvaluation()
-    {
-        $projects = ProjectsModel::where('status', 'Under Evaluation')->get();
-        return view('status.under-evaluation', compact('projects'));
-    }
-
-    public function forRevision()
-    {
-        $projects = ProjectsModel::where('status', 'For Revision')->get();
-        return view('status.for-revision', compact('projects'));
-    }
-
-    public function approved()
-    {
-        $projects = ProjectsModel::where('status', 'Approved')->get();
-        return view('status.approved', compact('projects'));
-    }
-
-    public function deferred()
-    {
-        $projects = ProjectsModel::where('status', 'Deferred')->get();
-        return view('status.deferred', compact('projects'));
-    }
-
-    public function disapproved()
-    {
-        $projects = ProjectsModel::where('status', 'Disapproved')->get();
-        return view('status.disapproved', compact('projects'));
-    }
-
-    public function forRevisionSidebar()
-    {
-        // $projects = ProjectsModel::all();
-        $projects = ProjectsModel::where('status', 'For Revision')->get();
-        return view('dashboard', compact('projects'));
     }
 
 
