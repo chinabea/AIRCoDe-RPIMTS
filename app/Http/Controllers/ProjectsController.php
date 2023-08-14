@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\ProjectsModel;
 use App\Models\UsersModel;
 use App\Models\User;
-use App\Models\ProjectReviewerModel;
+use App\Models\ReviewModel;
 use App\Models\ProjectTeamModel;
 use App\Models\LineItemBudgetModel;
 use App\Models\ProjectFileModel;
@@ -20,7 +20,7 @@ class ProjectsController extends Controller
     public function index()
     {
         $projects = ProjectsModel::all();
-        $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
+        $reviewers = User::whereIn('id', ReviewModel::pluck('user_id'))->get();
     
         return view('projects.index', compact('projects', 'reviewers'));
     }
@@ -83,9 +83,9 @@ class ProjectsController extends Controller
         $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
         $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
         $files = ProjectFileModel::where('project_id', $id)->get();
-        // $records = ProjectsModel::findOrFail($id);
-        $records = ProjectsModel::with('user')->findOrFail($id);
-        $reviewers = User::whereIn('id', ProjectReviewerModel::pluck('user_id'))->get();
+        $reviewers = ReviewModel::where('user_id', $id)->get();
+        $records = ProjectsModel::findOrFail($id);
+        // $records = ProjectsModel::with('user')->findOrFail($id);
 
         return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'files'));
 

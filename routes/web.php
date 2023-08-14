@@ -19,7 +19,7 @@ use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ProjectTeamController;
 use App\Http\Controllers\LineItemBudgetController;
-use App\Http\Controllers\ReviewerController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProjectHistoryController;
 
@@ -199,12 +199,8 @@ Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStat
 Route::get('/status/edit', [StatusController::class, 'update'])->name('projects.editstatus');
 
 
-Route::get('/select-reviewers', [ReviewerController::class, 'selectReviewers'])->name('submission-details.reviewers.selectReviewers');
-Route::post('/store-reviewer', [ReviewerController::class, 'storeReviewer'])->name('submission-details.reviewers.storeReviewer');
-
-
-
-
+Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+Route::post('/store-reviewer', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
 
 
 

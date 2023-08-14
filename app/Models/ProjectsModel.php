@@ -59,7 +59,11 @@ class ProjectsModel extends Model
         return $this->belongsTo(StatusModel::class, 'status');
     }
     
-
+    public function reviews()
+    {
+        return $this->hasMany(ReviewModel::class);
+    }
+    
 
 
     

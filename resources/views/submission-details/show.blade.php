@@ -84,7 +84,7 @@
 
 
 
-    <form id="actions-form" class="mt-4" style="display: none;">
+    <div id="actions-form" class="mt-4" style="display: none;">
     <!-- Form fields go here -->
     <div class="col-md-12">
       <div class="card card-primary card-outline">
@@ -96,9 +96,9 @@
         </div>
       </div>
     </div>
-    </form>
+    </div>
 
-    <form id="details-form" class="mt-4" style="display: none;">
+    <div id="details-form" class="mt-4" style="display: none;">
     <!-- Form fields go here -->
     <div class="col-md-12">
       <div class="card card-primary card-outline">
@@ -152,7 +152,7 @@
         </div>
       </div>
     </div>
-    </form>
+    </div>
 
     <div id="lib-form" class="mt-4" style="display: none;">
     <!-- Form fields go here -->
@@ -252,7 +252,7 @@
     </div>
     </div>
 
-    <form id="classifications-form" class="mt-4" style="display: none;">
+    <div id="classifications-form" class="mt-4" style="display: none;">
     <div class="col-md-12">
       <div class="card card-primary card-outline">
         <div class="card-header">
@@ -265,7 +265,7 @@
         </div>
       </div>
     </div>
-    </form>
+    </div>
 
     <div id="files-form" class="mt-4" style="display: none;">
     <div class="col-md-12">
@@ -286,7 +286,7 @@
     </div>
   </div>
 
-    <form id="messages-form" class="mt-4" style="display: none;">
+    <div id="messages-form" class="mt-4" style="display: none;">
     <div class="col-md-12">
       <div class="card card-primary card-outline">
         <div class="card-header">
@@ -299,7 +299,7 @@
         </div>
       </div>
     </div>
-    </form>
+    </div>
 
     <div id="project-team-form" class="mt-4" style="display: none;">
         <div class="col-md-12">
@@ -441,8 +441,21 @@
         <div class="card-body pad table-responsive">
         <div class="container">
             <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
-                @include('submission-details.reviewers.select-reviewer')
-           
+                @include('submission-details.reviews.select-reviewer')
+
+                <form action="{{ route('submission-details.reviews.assignReviewers', ['id' => $records->id]) }}" method="POST">
+                  @csrf
+                  <input type="hidden" name="project_id" value="{{ $records->id }}">
+                  <div class="form-group">
+                      <label>Select Reviewers:</label>
+                      <select name="reviewer_ids[]" class="form-control" multiple>
+                          @foreach($reviewers as $reviewer)
+                              <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                          @endforeach
+                      </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Assign Reviewers</button>
+              </form>
 
 
 
@@ -453,7 +466,7 @@
     </div>
     </div>
 
-    <form id="cash-program-form" class="mt-4" style="display: none;">
+    <div id="cash-program-form" class="mt-4" style="display: none;">
     <div class="col-md-12">
       <div class="card card-primary card-outline">
         <div class="card-header">
@@ -466,9 +479,9 @@
         </div>
       </div>
     </div>
-    </form>
+    </div>
 
-    <form id="reprogramming-status-form" class="mt-4" style="display: none;">
+    <div id="reprogramming-status-form" class="mt-4" style="display: none;">
     <div class="col-md-12">
       <div class="card card-primary card-outline">
         <div class="card-header">
