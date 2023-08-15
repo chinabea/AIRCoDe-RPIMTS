@@ -32,95 +32,6 @@
     </section>
   </div> --}}
 
-  {{-- <div class="container mt-5">
-    <h2>Dashboard</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header bg-primary text-white">
-                    Draft
-                </div>
-                <div class="card-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">$records->projname</li>
-                        <li class="list-group-item">Task 2</li>
-                        <!-- Add more tasks as needed -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header bg-light">
-                    Under Evaluation
-                </div>
-                <div class="card-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Task 3</li>
-                        <li class="list-group-item">Task 4</li>
-                        <!-- Add more tasks as needed -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header bg-warning">
-                    For Revision
-                </div>
-                <div class="card-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Task 3</li>
-                        <li class="list-group-item">Task 4</li>
-                        <!-- Add more tasks as needed -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header bg-info">
-                    Approved
-                </div>
-                <div class="card-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Task 3</li>
-                        <li class="list-group-item">Task 4</li>
-                        <!-- Add more tasks as needed -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header bg-secondary">
-                    Deferred
-                </div>
-                <div class="card-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Task 3</li>
-                        <li class="list-group-item">Task 4</li>
-                        <!-- Add more tasks as needed -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-header bg-danger text-white">
-                    Disapproved
-                </div>
-                <div class="card-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Task 5</li>
-                        <!-- Add more tasks as needed -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
- --}}
 
 <div class="container mt-5">
  <div class="row">
@@ -142,7 +53,6 @@
             </div>
         </div>
     </div>
-
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-success shadow h-100 py-2">
