@@ -21,8 +21,7 @@ use App\Http\Controllers\ProjectTeamController;
 use App\Http\Controllers\LineItemBudgetController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\EmailBoxController;
-use App\Http\Controllers\TrackController;
-use App\Http\Controllers\FileController;
+use App\Http\Controllers\ProjectFileController;
 use App\Http\Controllers\ProjectHistoryController;
 
 use Illuminate\Support\Facades\Mail;
@@ -158,7 +157,6 @@ Route::delete('/delete-proponents/{id}', [ProponentsController::class, 'destroy'
 Route::resource('documents', DocumentController::class);
 Route::get('send', [HomeController::class, 'sendNotification']);
 
-Route::get('/track', [TrackController::class, 'index'])->name('track');
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 // researchers
 Route::get('/about/show/{id}', [AboutusController::class, 'show'])->name('transparency.aboutus.show');
@@ -203,9 +201,9 @@ Route::get('/status/edit', [StatusController::class, 'update'])->name('projects.
 
 Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
 Route::post('/store-reviewer', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
-
-
 Route::get('/emailbox/compose', [EmailBoxController::class, 'index'])->name('emailbox.compose');
+Route::get('/projects/track', [ProjectsController::class, 'track'])->name('projects.track'); //oks na
+Route::post('/projects/{project}/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('projects.assignReviewers');
 
 
 

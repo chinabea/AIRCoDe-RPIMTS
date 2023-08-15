@@ -11,19 +11,18 @@
             <div class="modal-body">
             <h2>Select Reviewers for Project</h2>
            <!-- select-reviewers.blade.php -->
-            <form action="{{ route('submission-details.reviews.assignReviewers') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label>Select Reviewers:</label>
-                    <select name="reviewer_ids[]" class="form-control" multiple>
-                        @foreach($reviewers as $reviewer)
-                            <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Assign Reviewers</button>
+           <form action="{{ route('projects.assignReviewers', $records->id) }}" method="POST">
+            @csrf
+            <label>Select Reviewers:</label>
+            <select name="reviewer_ids[]" class="form-control" multiple>
+                @foreach($reviewers as $reviewer)
+                    <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                @endforeach
+            </select>
+
+            <button type="submit" class="btn btn-primary">Assign Reviewers</button>
             </form>
             </div>
         </div>
     </div>
-</div> 
+</div>

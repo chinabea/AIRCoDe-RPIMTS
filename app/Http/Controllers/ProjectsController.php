@@ -21,7 +21,7 @@ class ProjectsController extends Controller
     {
         $projects = ProjectsModel::all();
         $reviewers = User::whereIn('id', ReviewModel::pluck('user_id'))->get();
-    
+
         return view('projects.index', compact('projects', 'reviewers'));
     }
 
@@ -90,8 +90,8 @@ class ProjectsController extends Controller
         return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'files'));
 
     }
-    
-    
+
+
     public function edit($id)
     {
         $reviewers = UsersModel::where('role', 4)->get();
@@ -109,8 +109,6 @@ class ProjectsController extends Controller
         // return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
     }
 
-
-
     public function destroy($id)
     {
         $projects = ProjectsModel::findOrFail($id);
@@ -118,6 +116,11 @@ class ProjectsController extends Controller
         return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
     }
 
+    public function track(Request $request)
+    {
+        $projectId = $request->input('proj_id');
+        $project = ProjectsModel::find($projectId);
 
-
+        return view('projects.track', compact('project'));
+    }
 }

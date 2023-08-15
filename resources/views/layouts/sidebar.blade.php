@@ -1,7 +1,7 @@
 
 @php
     $role = auth()->user()->role;
-@endphp 
+@endphp
 
 @if($role === 1)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -16,14 +16,14 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
+
           <li class="nav-item">
             <a href="{{ route('director') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
           </li>
-              
+
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item">
             <a href="{{ route('users') }}" class="nav-link">
@@ -120,7 +120,7 @@
     </ul>
     </li>
 </div>
-</aside> 
+</aside>
 
 @elseif($role === 3)
 <!-- FOR RESEARCHER -->
@@ -308,7 +308,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('track') }}" class="nav-link">
+                <a href="{{ route('projects.track') }}" class="nav-link">
                   <i class="fas fa-fw fa-search"></i>
                   <p>Track</p>
                 </a>

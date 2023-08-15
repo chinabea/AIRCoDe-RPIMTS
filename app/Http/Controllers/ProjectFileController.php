@@ -26,7 +26,7 @@ class ProjectFileController extends Controller
         $filePath = $file->store('project_files');
 
         // Create a new project file entry
-        ProjectFile::create([
+        ProjectFileModel::create([
             'project_id' => $request->input('project_id'),
             'file_name' => $fileName,
             'file_path' => $filePath,
@@ -36,12 +36,12 @@ class ProjectFileController extends Controller
         return redirect()->back()->with('success', 'File uploaded successfully.');
     }
 
-    public function show(ProjectFile $file)
+    public function show(ProjectFileModel $file)
     {
         // Add logic to show the file details or download the file
     }
 
-    public function destroy(ProjectFile $file)
+    public function destroy(ProjectFileModel $file)
     {
         // Delete the file and its record from the database
         $file->delete();
