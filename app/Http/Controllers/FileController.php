@@ -9,7 +9,6 @@ class FileController extends Controller
     public function index()
     {
 
-
         return view('submission-details.project-teams.teams');
     }
 

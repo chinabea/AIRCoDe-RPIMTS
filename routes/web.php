@@ -20,6 +20,8 @@ use App\Http\Controllers\TasksController;
 use App\Http\Controllers\ProjectTeamController;
 use App\Http\Controllers\LineItemBudgetController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\EmailBoxController;
+use App\Http\Controllers\TrackController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProjectHistoryController;
 
@@ -59,7 +61,7 @@ Route::middleware(['auth', 'reviewer'])->group(function (){
     Route::get('/reviewer', function () {
         return view('dashboard');
     })->name('reviewer');
-    
+
     Route::get('/reviews', [ReviewsController::class, 'index'])->name('reviews');
     Route::get('/review/create', [ReviewsController::class, 'create'])->name('reviews.create');
     Route::post('/review/store', [ReviewsController::class, 'store'])->name('reviews.store');
@@ -106,7 +108,7 @@ Route::middleware(['auth', 'director'])->group(function (){
     Route::fallback(function () {
         return response()->view('errors.404', [], 404);
     });
-    
+
 
 });
 
@@ -115,7 +117,7 @@ Route::middleware(['auth', 'researcher'])->group(function (){
         return view('dashboard');
     })->name('researcher');
 
- 
+
 });
 
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
@@ -203,6 +205,7 @@ Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->n
 Route::post('/store-reviewer', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
 
 
+Route::get('/emailbox/compose', [EmailBoxController::class, 'index'])->name('emailbox.compose');
 
 
 

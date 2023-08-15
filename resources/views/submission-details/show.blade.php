@@ -24,7 +24,14 @@
                         </tr>
                         <tr>
                         <th scope="row">PROJECT LEADER</th>
-                        <td class="text-left">{{ $records->user->name }}<i class="fa fa-envelope"></i></td>
+                        <td class="text-left">{{ $records->user->name }}
+                            {{-- <button type="button" class="btn btn-default btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Send Email">
+                                <i class="fa fa-envelope"></i>
+                            </button> --}}
+                            <a href="{{ route('emailbox.compose') }}" class="btn btn-default btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Send Email">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        </td>
                         </tr>
                         <tr>
                         <th scope="row">STATUS</th>
@@ -111,6 +118,9 @@
                 <label>Project Name:</label>
                 {{ $records->projname }}
                 <br>
+                <label>Status:</label>
+                {{ $records->status }}
+                <br>
                 <label>Research Group:</label>
                 {{ $records->researchgroup }}
                 <br>
@@ -170,7 +180,7 @@
               @include('submission-details.line-items-budget.create')
               <table id="" class="table table-hover table-bordered text-center table-sm">
                 <thead class="table-info">
-                  <tr> 
+                  <tr>
                     <th>#</th>
                     <th>Name</th>
                     <th>Quantity</th>
@@ -187,7 +197,7 @@
                     <td>{{ $lineItem->unit_price }}</td>
                     <td>
                       <a href="{{ route('submission-details.line-items-budget.edit', $lineItem->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $lineItem->id }}">
-                          <i class="fas fa-edit"></i> 
+                          <i class="fas fa-edit"></i>
                       </a>
                       <div class="modal fade" id="editModal{{ $lineItem->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $lineItem->id }}Label" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -225,7 +235,7 @@
                         </div>
                     </div>
                     <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.line-items-budget.destroy', $lineItem->id) }}')">
-                      <i class="fas fa-trash"></i> 
+                      <i class="fas fa-trash"></i>
                     </button>
                           <script>
                           function confirmDelete(url) {
@@ -245,7 +255,7 @@
                 </tbody>
               @endforeach
               </table>
-       
+
 
         </div>
       </div>
@@ -312,7 +322,7 @@
                 @include('submission-details.project-teams.create')
                 <table id="" class="table table-hover table-bordered text-center table-sm">
                 <thead class="table-info">
-                  <tr> 
+                  <tr>
                     <th>#</th>
                     <th>Name</th>
                     <th>Role</th>
@@ -327,7 +337,7 @@
                     <td>{{ $member->role }}</td>
                     <td>
                       <a href="{{ route('submission-details.project-teams.edit', $member->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $member->id }}">
-                          <i class="fas fa-edit"></i> 
+                          <i class="fas fa-edit"></i>
                       </a>
                       <div class="modal fade" id="editModal{{ $member->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $member->id }}Label" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -357,7 +367,7 @@
                                                 <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}>UI Designer</option>
                                                 <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}>Quality Assurance</option>
                                                 <option{{ $member->role === 'Document Writer' ? ' selected' : '' }}>Document Writer</option>
-                                                
+
                                             </select>
                                         </div>
                                     </div>
@@ -370,7 +380,7 @@
                         </div>
                     </div>
                     <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.project-teams.destroy', $member->id) }}')">
-                      <i class="fas fa-trash"></i> 
+                      <i class="fas fa-trash"></i>
                     </button>
                           <script>
                           function confirmDelete(url) {
@@ -497,9 +507,9 @@
     </form>
   </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
 <script src="{{ asset('submissiondetailbuttons.js') }}"></script>
- 
+
 </div>
 <aside class="control-sidebar control-sidebar-dark">
 </aside>

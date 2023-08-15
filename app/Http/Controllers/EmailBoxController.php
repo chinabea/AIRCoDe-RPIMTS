@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TrackController extends Controller
+class EmailBoxController extends Controller
 {
-
     public function index()
     {
-        return view('track');
+        return view('emailbox.compose');
     }
-
-
 }
