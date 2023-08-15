@@ -27,8 +27,10 @@ class StatusController extends Controller
 
     public function draft()
     {
-        $projects = ProjectsModel::where('status', 'Draft')->get();
-        return view('status.draft', compact('projects'));
+        $user = Auth::user(); // Get the logged-in user
+        $draftProjects = $user->projects()->where('status', 'Draft')->get();
+
+        return view('status.draft', compact('draftProjects'));
     }
 
     public function underEvaluation()

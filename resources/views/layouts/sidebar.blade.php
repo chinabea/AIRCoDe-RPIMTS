@@ -148,6 +148,7 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
+          
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
         @if(is_array($projects) || $projects instanceof \Traversable)
           @foreach($projects as $project)

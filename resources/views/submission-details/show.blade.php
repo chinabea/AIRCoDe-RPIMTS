@@ -6,7 +6,9 @@
 <div class="content-wrapper">
   <section class="content-header">
   </section>
-    <div class="col-md-12">
+    <!-- <div class="col-md-12"> -->
+      
+<div class="container mt-5">
             <div class="card card-primary card-outline">
               <div class="card-header">
                   SUBMISSION DETAILS
@@ -289,83 +291,6 @@
         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a> -->
         <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#filesModal">Add Files</button>
             @include('submission-details.files.create')
-            <table id="" class="table table-hover table-bordered text-center table-sm">
-                <thead class="table-info">
-                  <tr>
-                    <th>#</th>
-                    <th>Name / Type</th>
-                    <th>Filename</th>
-                    <th>Date Uploaded</th>
-                    <th>Action</th>{{-- preview as modal or download --}}
-                  </tr>
-                </thead>
-                  @foreach($lineItems as $lineItem)
-                <tbody>
-                  <tr>
-                    <td class="align-middle">{{ $loop->iteration }}.</td>
-                     <td>cv</td>
-                    <td>filename</td>
-                    <td>date</td>
-                    <td>
-                      <a href="{{ route('submission-details.line-items-budget.edit', $lineItem->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $lineItem->id }}">
-                          <i class="fas fa-edit"></i>
-                      </a>
-                      <div class="modal fade" id="editModal{{ $lineItem->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $lineItem->id }}Label" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="editModal{{ $lineItem->id }}Label">Edit Line-Item Budget</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form method="post" action="{{ route('submission-details.line-items-budget.update', $lineItem->id) }}" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="modal-body">
-                                        <!-- Input fields for editing -->
-                                        <div class="form-group">
-                                            <label for="edit_name">Name:</label>
-                                            <input type="text" class="form-control" id="edit_name{{ $lineItem->id }}" name="name" value="{{ $lineItem->name }}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="edit_quantity">Quantity:</label>
-                                            <input type="number" class="form-control" id="edit_quantity{{ $lineItem->id }}" name="quantity" value="{{ $lineItem->quantity }}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="edit_unit_price">Unit Price:</label>
-                                            <input type="number" class="form-control" id="edit_unit_price{{ $lineItem->id }}" name="unit_price" value="{{ $lineItem->unit_price }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.line-items-budget.destroy', $lineItem->id) }}')">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                          <script>
-                          function confirmDelete(url) {
-                              if (confirm('Are you sure you want to delete this record?')) {
-                              // Create a hidden form and submit it programmatically
-                              var form = document.createElement('form');
-                              form.action = url;
-                              form.method = 'POST';
-                              form.innerHTML = '@csrf @method("delete")';
-                              document.body.appendChild(form);
-                              form.submit();
-                              }
-                          }
-                          </script>
-                    </td>
-                  </tr>
-                </tbody>
-              @endforeach
-              </table>
 
 
         </div>
@@ -529,19 +454,20 @@
         <div class="container">
             <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
                 @include('submission-details.reviews.select-reviewer')
-                {{-- <form action="{{ route('submission-details.reviews.assignReviewers') }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label>Select Reviewers:</label>
-                        <select name="reviewer_ids[]" class="form-control" multiple>
-                            @foreach($reviewers as $reviewer)
-                                <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Assign Reviewers</button>
-                </form> --}}
 
+                <form action="{{ route('submission-details.reviews.assignReviewers', ['id' => $records->id]) }}" method="POST">
+                  @csrf
+                  <input type="hidden" name="project_id" value="{{ $records->id }}">
+                  <div class="form-group">
+                      <label>Select Reviewers:</label>
+                      <select name="reviewer_ids[]" class="form-control" multiple>
+                          @foreach($reviewers as $reviewer)
+                              <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                          @endforeach
+                      </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Assign Reviewers</button>
+              </form>
 
 
 
@@ -583,7 +509,7 @@
     </form>
   </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
 <script src="{{ asset('submissiondetailbuttons.js') }}"></script>
 
 </div>
