@@ -17,7 +17,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           <li class="nav-item">
-            <a href="{{ route('director') }}" class="nav-link">
+            <a href="{{ route('director.home') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
@@ -80,7 +80,7 @@
 @elseif($role === 2)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-    <a href="{{ route('researcher') }}" class="brand-link">
+    <a href="{{ route('researcher.home') }}" class="brand-link">
         <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
       </a>
@@ -126,7 +126,7 @@
 <!-- FOR RESEARCHER -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('researcher') }}" class="brand-link">
+    <a href="{{ route('researcher.home') }}" class="brand-link">
       <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
     </a>
@@ -142,46 +142,54 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-book"></i>
-            <p>Submitted Projects
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-            <li class="nav-item">
-              <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
-                <i class=""></i>
-              <p>{{ $project->projname }}</p>
-              </a>
-            </li>
-          @endforeach
-          @endif
-          </ul>
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>Submitted Projects
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+                @if(count($projects) > 0)
+                    @foreach($projects as $project)
+                        <li class="nav-item">
+                            <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
+                                <i class=""></i>
+                                <p>{{ $project->projname }}</p>
+                            </a>
+                        </li>
+                    @endforeach
+                @else
+                    <li class="nav-item">
+                        <p>No projects submitted.</p>
+                    </li>
+                @endif
+            </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="far fa-file-alt nav-icon"></i>
-            <p>Draft
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Draft')
-          <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
-            <li class="nav-item">
-              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
-              <i class="fas fa-angle-down"></i>
-              <p>{{ $project->projname }}</p>
-              </a>
-            </li>
-          </ul>
-          @endif
-          @endforeach
-        @endif
+            <a href="#" class="nav-link">
+                <i class="far fa-file-alt nav-icon"></i>
+                <p>Draft <i class="fas fa-angle-left right"></i></p>
+            </a>
+            @if(count($projects) > 0)
+                <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+                    @foreach($projects as $project)
+                        @if($project->status == 'Draft' && $project->user_id == auth()->id())
+                            <li class="nav-item">
+                                <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+                                    <i class="fas fa-angle-down"></i>
+                                    <p>{{ $project->projname }}</p>
+                                </a>
+                            </li>
+                        @endif
+                    @endforeach
+                </ul>
+            @else
+                <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+                    <li class="nav-item">
+                        <p>No projects submitted.</p>
+                    </li>
+                </ul>
+            @endif
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -190,21 +198,27 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Under Evaluation' && $project->user_id == auth()->id())
-          <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
-            <li class="nav-item">
-              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
-              </a>
-            </li>
+          @if(count($projects) > 0)
+            @foreach($projects as $project)
+                @if($project->status == 'Under Evaluation' && $project->user_id == auth()->id())
+                <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+                        <li class="nav-item">
+                            <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                            <p>{{ $project->projname }}</p>
+                            </a>
+                        </li>
+                    @endif
+                @endforeach
           </ul>
+          @else
+              <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+                  <li class="nav-item">
+                      <p>No projects submitted.</p>
+                  </li>
+              </ul>
           @endif
-          @endforeach
-        @endif
-        </li>
+      </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fas fa-edit nav-icon"></i>
@@ -212,9 +226,9 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
+          @if(count($projects) > 0)
           @foreach($projects as $project)
-          @if($project->status == 'For Revision')
+          @if($project->status == 'For Revision' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
@@ -222,11 +236,17 @@
               <p>{{ $project->projname }}</p>
               </a>
             </li>
+            @endif
+            @endforeach
           </ul>
+          @else
+              <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+                  <li class="nav-item">
+                      <p>No projects submitted.</p>
+                  </li>
+              </ul>
           @endif
-          @endforeach
-        @endif
-        </li>
+      </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="far fa-pause-circle nav-icon"></i>
@@ -234,9 +254,9 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
+          @if(count($projects) > 0)
           @foreach($projects as $project)
-          @if($project->status == 'Deferred')
+          @if($project->status == 'Deferred' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
@@ -244,11 +264,17 @@
               <p>{{ $project->projname }}</p>
               </a>
             </li>
+            @endif
+            @endforeach
           </ul>
+          @else
+              <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+                  <li class="nav-item">
+                      <p>No projects submitted.</p>
+                  </li>
+              </ul>
           @endif
-          @endforeach
-        @endif
-        </li>
+      </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="far fa-check-circle nav-icon"></i>
@@ -257,9 +283,9 @@
             </p>
           </a>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
+          @if(count($projects) > 0)
           @foreach($projects as $project)
-          @if($project->status == 'Approved')
+          @if($project->status == 'Approved' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
@@ -267,11 +293,17 @@
               <p>{{ $project->projname }}</p>
               </a>
             </li>
+            @endif
+            @endforeach
           </ul>
+          @else
+              <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+                  <li class="nav-item">
+                      <p>No projects submitted.</p>
+                  </li>
+              </ul>
           @endif
-          @endforeach
-        @endif
-        </li>
+      </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="far fa-times-circle nav-icon"></i>
@@ -279,9 +311,9 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
+          @if(count($projects) > 0)
           @foreach($projects as $project)
-          @if($project->status == 'Disapproved')
+          @if($project->status == 'Disapproved' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('status.draft') }}" class="nav-link">
@@ -289,16 +321,22 @@
               <p>{{ $project->projname }}</p>
               </a>
             </li>
+            @endif
+            @endforeach
           </ul>
+          @else
+              <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
+                  <li class="nav-item">
+                      <p>No projects submitted.</p>
+                  </li>
+              </ul>
           @endif
-          @endforeach
-        @endif
-        </li>
+      </li>
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('reviewer') }}" class="nav-link">
+                <a href="{{ route('reviewer.home') }}" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>
@@ -388,7 +426,7 @@
 <!-- FOR REVIEWER -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('researcher') }}" class="brand-link">
+    <a href="{{ route('researcher.home') }}" class="brand-link">
         <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
       </a>
@@ -413,7 +451,7 @@
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('reviewer') }}" class="nav-link">
+                <a href="{{ route('reviewer.home') }}" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>

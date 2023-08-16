@@ -71,7 +71,7 @@
                                         <label for="end_date">End Date:</label>
                                         <input type="date" id="end_date" name="end_date">
 
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>Work Plan:</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -80,9 +80,9 @@
                                             </span>
                                             </div>
                                             <input type="text" class="form-control float-right" id="reservation" name="reservation">
-                                            {{-- placeholder="An initial plan for completion with annual milestones (eg. over 3 years)." --}}>
+                                             placeholder="An initial plan for completion with annual milestones (eg. over 3 years).">
                                         </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="form-group">
                                             <label>Work Plan:</label>
@@ -118,8 +118,7 @@
                                         <br>
 
                                         <a href="#" class="btn btn-secondary">Cancel</a>
-                                        <input type="submit" value="Create new Project"
-                                            class="btn btn-success float-right">
+                                        <input type="submit" value="Submit Project" class="btn btn-info float-right">
                                     </form>
                                 </div>
                             </div>
