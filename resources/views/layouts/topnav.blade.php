@@ -111,7 +111,19 @@
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 ">{{ Auth::user()->name }}</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 ">
+                    @if(Auth::user()->role == 4)
+                        Reviewer: {{ Auth::user()->name }}
+                    @elseif(Auth::user()->role == 3)
+                        Researcher: {{ Auth::user()->name }}
+                    @elseif(Auth::user()->role == 2)
+                        Staff: {{ Auth::user()->name }}
+                    @elseif(Auth::user()->role == 1)
+                        Director: {{ Auth::user()->name }}
+                    @else
+                        {{ Auth::user()->name }}
+                    @endif
+                </span>
                 <!-- <img class="img-profile rounded-circle" src="dist/img/user4-128x128.jpg"> -->
             </a>
             <!-- Dropdown - User Information -->

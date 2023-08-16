@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\StatusModel;
+use App\Models\UsersModel;
+use App\Models\User;
 use App\Models\ProjectsModel;
+use Illuminate\Support\Facades\Auth;
 
 class StatusController extends Controller
 {
-    
+
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
@@ -27,9 +30,7 @@ class StatusController extends Controller
 
     public function draft()
     {
-        $user = Auth::user(); // Get the logged-in user
-        $draftProjects = $user->projects()->where('status', 'Draft')->get();
-
+        $projects = ProjectsModel::where('status', 'Draft')->get();
         return view('status.draft', compact('draftProjects'));
     }
 

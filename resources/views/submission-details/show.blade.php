@@ -6,9 +6,7 @@
 <div class="content-wrapper">
   <section class="content-header">
   </section>
-    <!-- <div class="col-md-12"> -->
-      
-<div class="container mt-5">
+    <div class="col-md-12">
             <div class="card card-primary card-outline">
               <div class="card-header">
                   SUBMISSION DETAILS
@@ -27,9 +25,6 @@
                         <tr>
                         <th scope="row">PROJECT LEADER</th>
                         <td class="text-left">{{ $records->user->name }}
-                            {{-- <button type="button" class="btn btn-default btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Send Email">
-                                <i class="fa fa-envelope"></i>
-                            </button> --}}
                             <a href="{{ route('emailbox.compose') }}" class="btn btn-default btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Send Email">
                                 <i class="fa fa-envelope"></i>
                             </a>
@@ -101,6 +96,8 @@
             ACTIONS
         </div>
         <div class="card-body pad table-responsive">
+
+
 
         </div>
       </div>
@@ -509,7 +506,7 @@
     </form>
   </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="{{ asset('submissiondetailbuttons.js') }}"></script>
 
 </div>

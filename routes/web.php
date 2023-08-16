@@ -51,7 +51,9 @@ Auth::routes();
 
 
 Route::middleware(['auth', 'staff'])->group(function (){
-    Route::get('/staff', [ProjectsController::class, 'forRevision'])->name('staff');
+    Route::get('/staff', function () {
+        return view('dashboard');
+    })->name('staff');
 
 });
 
@@ -139,11 +141,11 @@ Route::get('/status/disapproved', [ProjectsController::class, 'disapproved'])->n
 
 // Route::get('/proj-revision/show', [ProjectsController::class, 'forRevisionSidebar'])->name('proj-revision.show');
 
-// Route::get('/create-users', [UsersController::class, 'create'])->name('users.create'); this should be in a login
-// Route::post('/store-users', [UsersController::class, 'store'])->name('users.store');
-// Route::get('/show-users/{id}', [UsersController::class, 'show'])->name('users.show');
-// Route::get('/edit-users/{id}', [UsersController::class, 'edit'])->name('users.edit');
-// Route::put('/edit-users/{id}', [UsersController::class, 'update'])->name('users.update');
+Route::get('/create-users', [UsersController::class, 'create'])->name('users.create'); //this should be in a login
+Route::post('/store-users', [UsersController::class, 'store'])->name('users.store');
+Route::get('/show-users/{id}', [UsersController::class, 'show'])->name('users.show');
+Route::get('/edit-users/{id}', [UsersController::class, 'edit'])->name('users.edit');
+Route::put('/edit-users/{id}', [UsersController::class, 'update'])->name('users.update');
 
 
 Route::get('/proponents', [ProponentsController::class, 'index'])->name('proponents');

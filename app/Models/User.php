@@ -49,7 +49,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function submittedProjects()
+    {
+        return $this->hasMany(ProjectsModel::class, 'user_id');
+    }
 
-    
 
 }

@@ -6,11 +6,10 @@
 @if($role === 1)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('director') }}" class="brand-link">
-      <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
-    </a>
-
+    <a href="{{ route('researcher') }}" class="brand-link">
+        <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
+      </a>
     <div class="sidebar">
 
       <!-- Sidebar Menu -->
@@ -46,31 +45,31 @@
           <li class="nav-header">TRANSPARENCY</li>
               <li class="nav-item">
                 <a href="{{ route('call-for-proposals') }}" class="nav-link">
-                  <i class="fas fa-file-earmark-lock-fill"></i>
+                  <i class="nav-icon fas fa-file-signature"></i>
                   <p>Call for Proposals</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('access-requests') }}" class="nav-link">
-                  <i class="nav-icon fas fa-file-earmark-lock-fill"></i>
+                  <i class="nav-icon fas fa-key"></i>
                   <p>Access Request</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('announcements') }}" class="nav-link">
-                  <i class="nav-icon fas fa-megaphone"></i>
+                  <i class="nav-icon fas fa-bell"></i>
                   <p>Announcements</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('abouts') }}" class="nav-link">
-                  <i class="nav-icon fas fa-info-circle-fill"></i>
+                  <i class="nav-icon fas fa-info-circle"></i>
                   <p>About Us</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
-                  <i class="nav-icon fas fa-cloud-download"></i>
+                  <i class="nav-icon fas fa-download"></i>
                   <p>Downloads</p>
                 </a>
               </li>
@@ -80,9 +79,10 @@
 
 @elseif($role === 2)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="{{ route('staff') }}" class="brand-link">
-        <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
+
+    <a href="{{ route('researcher') }}" class="brand-link">
+        <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
       </a>
       <div class="sidebar">
 
@@ -148,7 +148,6 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
         @if(is_array($projects) || $projects instanceof \Traversable)
           @foreach($projects as $project)
@@ -193,7 +192,7 @@
           </a>
         @if(is_array($projects) || $projects instanceof \Traversable)
           @foreach($projects as $project)
-          @if($project->status == 'Under Evaluation')
+          @if($project->status == 'Under Evaluation' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
@@ -310,14 +309,14 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('projects.track') }}" class="nav-link">
-                  <i class="fas fa-fw fa-search"></i>
+                  <i class="nav-icon fas fa-bullseye"></i>
                   <p>Track</p>
                 </a>
               </li>
             </ul>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon far fa-plus-square"></i>
+              <i class="nav-icon fas fa-balance-scale"></i>
               <p>
                 Transparency
                 <i class="fas fa-angle-left right"></i>
@@ -326,31 +325,31 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('call-for-proposals') }}" class="nav-link">
-                  <i class="nav-icon fas fa-megaphone-fill"></i>
+                  <i class="nav-icon fas fa-file-signature"></i>
                   <p>Call for Proposals</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('access-requests') }}" class="nav-link">
-                  <i class="nav-icon fas fa-file-earmark-lock-fill"></i>
+                  <i class="nav-icon fas fa-key"></i>
                   <p>Access Request</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('announcements') }}" class="nav-link">
-                  <i class="nav-icon fas fa-megaphone"></i>
+                  <i class="nav-icon fas fa-bell"></i>
                   <p>Announcements</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('abouts') }}" class="nav-link">
-                  <i class="nav-icon fas fa-info-circle-fill"></i>
+                  <i class="nav-icon fas fa-info-circle"></i>
                   <p>About Us</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
-                  <i class="nav-icon fas fa-cloud-download"></i>
+                  <i class="nav-icon fas fa-download"></i>
                   <p>Downloads</p>
                 </a>
               </li>
@@ -358,7 +357,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('faqs') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="nav-icon fas fa-question-circle"></i>
               <p>
                 FAQs
               </p>
@@ -389,10 +388,10 @@
 <!-- FOR REVIEWER -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('reviewer') }}" class="brand-link">
-        <img src="{{ asset('dist/img/AIRCoDeLogo1.jpg') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AIRCoDeRPIM</span>
-    </a>
+    <a href="{{ route('researcher') }}" class="brand-link">
+        <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
+      </a>
 
     <!-- Sidebar -->
     <div class="sidebar">

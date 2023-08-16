@@ -58,10 +58,10 @@ class ProjectsModel extends Model
         return $this->belongsTo(UsersModel::class);
     }
 
-    public function status()
-    {
-        return $this->belongsTo(StatusModel::class, 'status');
-    }
+    // public function status()
+    // {
+    //     return $this->belongsTo(StatusModel::class, 'status');
+    // }
 
     public function reviews()
     {

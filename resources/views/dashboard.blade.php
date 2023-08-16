@@ -35,6 +35,7 @@
 
 
 <div class="container mt-5">
+    <h2>Dashboard</h2>
  <div class="row">
 
     <!-- Earnings (Monthly) Card Example -->
@@ -143,7 +144,7 @@
 </div>
 </div>
 
-<div class="container mt-5">
+{{-- <div class="container mt-5">
     <h2>Project Status Dashboard</h2>
     <div class="row">
         <div class="col-md-4">
@@ -228,24 +229,7 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
+</div> --}}
 
 
   @endsection

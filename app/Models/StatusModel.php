@@ -12,11 +12,11 @@ class StatusModel extends Model
     public $primaryKey = 'id';
 
     public $fillable = ['project_id', 'status',
-                        
+
                     ];
-    public function projects()
-    {
-        return $this->hasMany(Project::class, 'status');
-    }
-    
+    // public function projects()
+    // {
+    //     return $this->hasMany(Project::class, 'status');
+    // }
+
 }
