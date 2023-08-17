@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ReviewDecisionModel;
 use App\Models\ReviewModel;
 use App\Models\ProjectsModel;
 use App\Models\UsersModel;
@@ -26,6 +27,55 @@ class ReviewController extends Controller
 
         return redirect()->back()->with('success', 'Reviewers have been assigned to the project.');
     }
+
+    public function review($id)
+    {
+        $records = ProjectsModel::findOrFail($id);
+
+        return view('reviews.review-decision', compact('records'));
+    }
+
+    public function reviewDecision(Request $request, $id)
+    {
+        $reviewId = $request->input('review_id', 1);
+        $requestData = $request->all();
+        $requestData['review_id'] = $reviewId;
+        ReviewDecisionModel::create($requestData);
+
+        $request->validate([
+            'decision' => 'required|in:Accepted,Accepted with Revision,Rejected',
+        ]);
+
+        $review = ReviewDecisionModel::find($id);
+        if (!$review) {
+            return redirect()->back()->with('error', 'Project not found.');
+        }
+
+        $review->decision = $request->input('decision');
+        $review->save();
+        return redirect()->route('reviews.review-decision', ['id' => $id]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function func()
     {

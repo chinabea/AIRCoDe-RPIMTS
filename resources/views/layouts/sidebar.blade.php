@@ -6,7 +6,7 @@
 @if($role === 1)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('researcher') }}" class="brand-link">
+    <a href="{{ route('researcher.home') }}" class="brand-link">
         <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
       </a>
@@ -149,7 +149,7 @@
                 </p>
             </a>
             <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
-                @if(count($projects) > 0)
+                @if(is_array($projects) || $projects instanceof \Traversable)
                     @foreach($projects as $project)
                         <li class="nav-item">
                             <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
@@ -170,7 +170,7 @@
                 <i class="far fa-file-alt nav-icon"></i>
                 <p>Draft <i class="fas fa-angle-left right"></i></p>
             </a>
-            @if(count($projects) > 0)
+            @if(is_array($projects) || $projects instanceof \Traversable)
                 <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
                     @foreach($projects as $project)
                         @if($project->status == 'Draft' && $project->user_id == auth()->id())
@@ -180,9 +180,9 @@
                                     <p>{{ $project->projname }}</p>
                                 </a>
                             </li>
-                        @endif
-                    @endforeach
                 </ul>
+                @endif
+            @endforeach
             @else
                 <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
                     <li class="nav-item">
@@ -198,7 +198,7 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          @if(count($projects) > 0)
+          @if(is_array($projects) || $projects instanceof \Traversable)
             @foreach($projects as $project)
                 @if($project->status == 'Under Evaluation' && $project->user_id == auth()->id())
                 <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
@@ -226,7 +226,7 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          @if(count($projects) > 0)
+          @if(is_array($projects) || $projects instanceof \Traversable)
           @foreach($projects as $project)
           @if($project->status == 'For Revision' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
@@ -254,7 +254,7 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          @if(count($projects) > 0)
+          @if(is_array($projects) || $projects instanceof \Traversable)
           @foreach($projects as $project)
           @if($project->status == 'Deferred' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
@@ -283,7 +283,7 @@
             </p>
           </a>
           </a>
-          @if(count($projects) > 0)
+          @if(is_array($projects) || $projects instanceof \Traversable)
           @foreach($projects as $project)
           @if($project->status == 'Approved' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
@@ -293,9 +293,9 @@
               <p>{{ $project->projname }}</p>
               </a>
             </li>
-            @endif
-            @endforeach
           </ul>
+          @endif
+          @endforeach
           @else
               <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
                   <li class="nav-item">
@@ -311,7 +311,7 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          @if(count($projects) > 0)
+          @if(is_array($projects) || $projects instanceof \Traversable)
           @foreach($projects as $project)
           @if($project->status == 'Disapproved' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">

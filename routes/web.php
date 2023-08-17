@@ -112,6 +112,10 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
     Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
     Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
 
+    Route::get('/review/{id}', [ReviewController::class, 'review'])->name('reviews.review-decision');
+    // Route::post('/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
+    Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
+
 
 });
 

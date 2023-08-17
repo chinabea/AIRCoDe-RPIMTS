@@ -30,17 +30,11 @@ class UsersModel extends Model
                     ->withPivot('role');
     }
 
-    // public function reviewedProjects()
-    // {
-    //     return $this->belongsToMany(ProjectsModel::class, 'reviews')
-    //         ->withPivot('comment') // Pivot columns like rating and comment
-    //         ->using(ReviewModel::class); // Use the ReviewModel as the pivot model
-    // }
+    public function reviewDecisions()
+    {
+        return $this->hasMany(ReviewDecisionModel::class);
+    }
 
-    // public function projects(): HasMany
-    // {
-    //     return $this->hasMany(Project::class);
-    // }
 
 
 
