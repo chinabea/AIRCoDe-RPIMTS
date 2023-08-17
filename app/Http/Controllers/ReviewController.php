@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ReviewDecisionModel;
-use App\Models\ReviewModel;
 use App\Models\ProjectsModel;
 use App\Models\UsersModel;
 
@@ -35,6 +34,7 @@ class ReviewController extends Controller
         return view('reviews.review-decision', compact('records'));
     }
 
+    // functional na
     public function reviewDecision(Request $request, $id)
     {
         $reviewId = $request->input('review_id', 1);
