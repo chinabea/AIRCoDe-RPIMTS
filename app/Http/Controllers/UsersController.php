@@ -7,6 +7,27 @@ use App\Models\UsersModel;
 
 class UsersController extends Controller
 {
+    public function getTotalUsers()
+    {
+        $totalUsers = UsersModel::count();
+
+        return $totalUsers;
+    }
+
+    // public function showTotalUsers()
+    // {
+    //     $totalUsers = $this->getTotalUsers();
+
+    //     return view('dashboard', ['totalUsers' => $totalUsers]);
+    // }
+    public function showTotalUsers()
+    {
+        $totalUsers = $this->getTotalUsers();
+
+        return view('dashboard', compact('totalUsers'));
+    }
+
+
 
     public function index()
     {

@@ -97,6 +97,7 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
     Route::put('/announcement/edit/{id}', [AnnouncementsController::class, 'update'])->name('transparency.announcements.update');
     Route::delete('/announcement/delete/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
 
+    Route::get('/total-users', [UsersController::class, 'showTotalUsers']);
     Route::get('/create-users', [UsersController::class, 'create'])->name('users.create'); //this should be in a login
     Route::post('/store-users', [UsersController::class, 'store'])->name('users.store');
     Route::get('/show-users/{id}', [UsersController::class, 'show'])->name('users.show');
