@@ -112,50 +112,63 @@
             DETAILS
         </div>
         <div class="card-body pad table-responsive text-left">
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
-            <div>
-                <label>Project Name:</label>
+        <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}"  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
+            <div style="text-align: justify;">
+                <label>Project Name:</label><br>
                 {{ $records->projname }}
-                <br>
-                <label>Status:</label>
+                <br><br>
+
+                <label>Status:</label><br>
                 {{ $records->status }}
-                <br>
-                <label>Research Group:</label>
+                <br><br>
+
+                <label>Research Group:</label><br>
                 {{ $records->researchgroup }}
-                <br>
-                <label>Author(s):</label>
+                <br><br>
+
+                <label>Author(s):</label><br>
                 {{ $records->authors }}
-                <br>
-                <label>Introduction:</label>
+                <br><br>
+
+                <label>Introduction:</label><br>
                 {{ $records->introduction }}
-                <br>
-                <label>Aims and Objectives:</label>
+                <br><br>
+
+                <label>Aims and Objectives:</label><br>
                 {{ $records->aims_and_objectives }}
-                <br>
-                <label>Background:</label>
+                <br><br>
+
+                <label>Background:</label><br>
                 {{ $records->background }}
-                <br>
-                <label>Expected Research Contribution:</label>
+                <br><br>
+
+                <label>Expected Research Contribution:</label><br>
                 {{ $records->expected_research_contribution }}
-                <br>
-                <label>The Proposed Methodology:</label>
+                <br><br>
+
+                <label>The Proposed Methodology:</label><br>
                 {{ $records->proposed_methodology }}
-                <br>
+                <br><br>
+
                 <label>Start Date:</label>
                 {{ $records->start_date }}
-                <br>
+                <br><br>
+
                 <label>End Date:</label>
                 {{ $records->end_date }}
-                <br>
-                <label>Work Plan:</label>
-                {{ $records->workplan }}
-                <br>
-                <label>Resources:</label>
-                {{ $records->resources }}
-                <br>
-                <label>References:</label>
-                {{ $records->references }}
+                <br><br>
 
+                <label>Work Plan:</label><br>
+                {{ $records->workplan }}
+                <br><br>
+
+                <label>Resources:</label><br>
+                {{ $records->resources }}
+                <br><br>
+
+                <label>References:</label><br>
+                {{ $records->references }}
+                <br><br>
             </div>
 
         </div>

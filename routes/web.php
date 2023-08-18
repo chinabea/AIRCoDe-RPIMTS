@@ -19,6 +19,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\EmailBoxController;
 use App\Http\Controllers\ProjectFileController;
 use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\ProjectHistoryController;
 
@@ -182,6 +183,10 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
 });
 
 Route::get('/projects/track', [ProjectsController::class, 'track'])->name('projects.track'); //oks na
+Route::get('/generate-pdf/{data_id}', [PdfController::class, 'generatePDF'])->name('generate.pdf');
+
+
+
 Route::get('/emailbox/compose', [EmailBoxController::class, 'index'])->name('emailbox.compose');
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');

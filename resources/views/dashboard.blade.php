@@ -7,32 +7,6 @@
   <div class="content-wrapper">
     <section class="content-header">
     </section>
-{{--
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header clearfix">
-                <h3 class="card-title">DASHBOARD</h3>
-              </div>
-              <div class="card-body">
-              <div class="table-responsive">
-                content
-              </div>
-            </div>
-
-            <div class="card-footer clearfix">
-
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-    </section>
-  </div> --}}
-
 
 <div class="container mt-5">
     <h2>Dashboard</h2>
