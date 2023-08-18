@@ -7,6 +7,7 @@
 @php
     $role = auth()->user()->role;
 @endphp
+
 @if($role === 1)
 <div class="content-wrapper">
     <section class="content-header">
