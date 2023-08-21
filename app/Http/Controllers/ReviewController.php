@@ -56,6 +56,14 @@ class ReviewController extends Controller
         return redirect()->route('reviews.review-decision', ['id' => $id]);
     }
 
+    public function comments($data_id)
+    {
+        // Retrieve data based on the $data_id
+        $data = ProjectsModel::findOrFail($data_id);
+
+        return view('reviews.rsc', ['data' => $data]);
+    }
+
 
 
 

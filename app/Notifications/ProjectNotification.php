@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\UsersModel;
 
 class ProjectNotification extends Notification
 {
@@ -35,27 +36,27 @@ class ProjectNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        // Check if the notifiable is an admin
+        // Check if the notifiable is an admin (director)
         if ($notifiable instanceof UsersModel && $notifiable->isDirector()) {
             // Admin notification content
             return (new MailMessage)
-            ->subject('New Research Project Submission - Director Notification')
-            ->line('A new research project has been submitted.')
-            ->line('Project Details:')
-            ->line('Project ID: ' . $this->projectId)
-            ->action('View Project', url('/projects/'.$this->projectId))
-            ->line('You are receiving this notification as the director of the Research Project Information Management and Tracking System.');
+                ->subject('New Research Project Submission')
+                ->line('A new research project has been submitted.')
+                ->line('Project Details:')
+                ->line('Project ID: ' . $this->projectId)
+                ->action('View Project', url('/projects/'.$this->projectId))
+                ->line('You are receiving this notification as the director of the Research Project Information Management and Tracking System.');
+        } 
+        if ($notifiable instanceof UsersModel && $notifiable->isResearcher()) {
+            // User notification content
+            return (new MailMessage)
+                ->subject('New Research Project Submission')
+                ->line('Your research project submission has been successfully received.')
+                ->line('Project Details:')
+                ->line('Project ID: ' . $this->projectId)
+                ->action('View Project', url('/projects/'.$this->projectId))
+                ->line('Thank you for using the Research Project Information Management and Tracking System.');
         }
-
-        // User notification content
-        return (new MailMessage)
-            ->subject('New Research Project Submission')
-            ->line('Your research project submission has been successfully received.')
-            ->line('Project Details:')
-            ->line('Project ID: ' . $this->projectId)
-            ->action('View Project', url('/projects/'.$this->projectId))
-            ->line('Thank you for using the Research Project Information Management and Tracking System.');
-
     }
     
 

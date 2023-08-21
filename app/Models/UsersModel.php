@@ -18,7 +18,12 @@ class UsersModel extends Model
     
     public function isDirector()
     {
-        return $this->role === 1; // Assuming 'role' column holds the user's role
+        return $this->role === 1; 
+    }
+    
+    public function isResearcher()
+    {
+        return $this->role === 3; 
     }
 
     public function projects()

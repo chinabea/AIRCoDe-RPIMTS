@@ -42,6 +42,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/blank', function () {
+    return view('blank');
+});
 
 
 Auth::routes();
@@ -185,6 +188,7 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
 
 Route::get('/projects/track', [ProjectsController::class, 'track'])->name('projects.track'); //oks na
 Route::get('/generate-pdf/{data_id}', [PdfController::class, 'generatePDF'])->name('generate.pdf');
+Route::get('/Recommendations-Suggestions-and-Comments/{data_id}', [ReviewController::class, 'comments'])->name('reviews.rsc');
 
 
 
