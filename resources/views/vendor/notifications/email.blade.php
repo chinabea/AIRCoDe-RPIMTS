@@ -1,4 +1,10 @@
 <x-mail::message>
+{{-- Custom Logo --}}
+    <x-slot name="logo">
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="{{ config('app.name') }}" style="height: auto; max-width: 100%;">
+        </a>
+    </x-slot>
 {{-- Greeting --}}
 @if (! empty($greeting))
 # {{ $greeting }}

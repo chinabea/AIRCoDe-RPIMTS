@@ -3,6 +3,12 @@
 <head>
     <title>PDF Report</title>
     <style>
+        .header {
+            text-align: center;
+        }
+        .header img {
+            max-width: 200px; /* Adjust as needed */
+        }
         body {
             font-family: "Times New Roman", serif;
             font-size: 11pt;
@@ -31,6 +37,10 @@
 <body>
     <div>
         <div class="page-break"></div>
+        
+        <div class="header">
+            <img src="{{ asset('header.png') }}" alt="Header Image">
+        </div>
         <div style="text-align: center;">
             <h1>Chapter 2</h1>
             <h1>REVIEW OF RELATED LITERATURE AND SYSTEMS </h1>

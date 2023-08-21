@@ -35,11 +35,29 @@ class ProjectNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
-            ->line('Notification content goes here.')
+        // Check if the notifiable is an admin
+        if ($notifiable instanceof UsersModel && $notifiable->isDirector()) {
+            // Admin notification content
+            return (new MailMessage)
+            ->subject('New Research Project Submission - Director Notification')
+            ->line('A new research project has been submitted.')
+            ->line('Project Details:')
+            ->line('Project ID: ' . $this->projectId)
             ->action('View Project', url('/projects/'.$this->projectId))
-            ->line('Thank you for using our system!');
+            ->line('You are receiving this notification as the director of the Research Project Information Management and Tracking System.');
+        }
+
+        // User notification content
+        return (new MailMessage)
+            ->subject('New Research Project Submission')
+            ->line('Your research project submission has been successfully received.')
+            ->line('Project Details:')
+            ->line('Project ID: ' . $this->projectId)
+            ->action('View Project', url('/projects/'.$this->projectId))
+            ->line('Thank you for using the Research Project Information Management and Tracking System.');
+
     }
+    
 
     /**
      * Get the array representation of the notification.

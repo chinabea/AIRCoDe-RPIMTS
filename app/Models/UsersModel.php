@@ -4,14 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class UsersModel extends Model
 {
+    use Notifiable;
     public $table = 'users';
 
     public $primaryKey = 'id';
 
     public $fillable = ['name','email','role'];
+
+    
+    public function isDirector()
+    {
+        return $this->role === 1; // Assuming 'role' column holds the user's role
+    }
 
     public function projects()
     {
