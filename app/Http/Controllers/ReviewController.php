@@ -27,12 +27,12 @@ class ReviewController extends Controller
         return redirect()->back()->with('success', 'Reviewers have been assigned to the project.');
     }
 
-    public function review($id)
-    {
-        $records = ProjectsModel::findOrFail($id);
+    // public function review($id)
+    // {
+    //     $records = ProjectsModel::findOrFail($id);
 
-        return view('reviews.review-decision', compact('records'));
-    }
+    //     return view('reviews.review-decision', compact('records'));
+    // }
 
     // functional na
     public function reviewDecision(Request $request, $id)
@@ -56,12 +56,12 @@ class ReviewController extends Controller
         return redirect()->route('reviews.review-decision', ['id' => $id]);
     }
 
-    public function comments($data_id)
+    public function comments(Request $request, $data_id)
     {
         // Retrieve data based on the $data_id
         $data = ProjectsModel::findOrFail($data_id);
 
-        return view('reviews.rsc', ['data' => $data]);
+        return view('submission-details.reviews.rsc', ['data' => $data]);
     }
 
 
