@@ -1,5 +1,6 @@
 @extends('layouts.template')
 
+@section('title', 'Projects')
 @section('content')
 
   <div class="content-wrapper">
@@ -7,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <!-- <h1>DataTables</h1> -->
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li> -->
             </ol>
           </div>
         </div>
@@ -25,10 +26,10 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">Approved Projects</h3>
               </div>
               <div class="card-body">
-              <div class="table-responsive">
+              <!-- <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="example1" width="100%" cellspacing="0">
                   <thead>
                   <tr>
@@ -61,7 +62,30 @@
                   </tr>
                   </tfoot>
                 </table>
-              </div>
+              </div> -->
+              
+            <div class="card-body pad table-responsive">
+                <table id="" class="table table-hover table-bordered text-center table-sm">
+                <thead class="table-info">
+                  <tr>
+                    <th>Title</th>
+                    <th>Group</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                  </tr>
+                </thead>
+                @foreach($approvedprojs as $approvedproj)
+                <tbody>
+                  <tr>
+                    <td>{{ $approvedproj->projname }}</td>
+                    <td>{{ $approvedproj->researchgroup }}</td>
+                    <td>{{ $approvedproj->start_date }}</td>
+                    <td>{{ $approvedproj->end_date }}</td>
+                  </tr>
+                </tbody>
+              @endforeach
+              </table>
+            </div>
             </div>
           </div>
         </div>

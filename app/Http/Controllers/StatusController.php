@@ -27,16 +27,30 @@ class StatusController extends Controller
         $project->save();
         return redirect()->route('submission-details.show', ['id' => $id])->with('success', 'Project status updated successfully.');
     }
+    public function countStatuses()
+    {
+        $draftCount = ProjectsModel::where('status', 'Draft')->count();
+        $underEvaluationCount = ProjectsModel::where('status', 'Under Evaluation')->count();
+        $forRevisionCount = ProjectsModel::where('status', 'For Revision')->count();
+        $approvedCount = ProjectsModel::where('status', 'Approved')->count();
+        $deferredCount = ProjectsModel::where('status', 'Deferred')->count();
+        $disapprovedCount = ProjectsModel::where('status', 'Disapproved')->count();
+        
+        return view('dashboard', compact('draftCount','underEvaluationCount','underEvaluationCount','forRevisionCount',
+                    'approvedCount','deferredCount','disapprovedCount'));
+    }
 
     public function draft()
     {
         $projects = ProjectsModel::where('status', 'Draft')->get();
-        return view('status.draft', compact('draftProjects'));
+
+        return view('status.draft', compact('projects'));
     }
 
     public function underEvaluation()
     {
         $projects = ProjectsModel::where('status', 'Under Evaluation')->get();
+        
         return view('status.under-evaluation', compact('projects'));
     }
 
@@ -48,8 +62,8 @@ class StatusController extends Controller
 
     public function approved()
     {
-        $projects = ProjectsModel::where('status', 'Approved')->get();
-        return view('status.approved', compact('projects'));
+        $approvedprojs = ProjectsModel::where('status', 'Approved')->get();
+        return view('status.approved', compact('approvedprojs'));
     }
 
     public function deferred()

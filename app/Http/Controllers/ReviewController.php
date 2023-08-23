@@ -64,7 +64,25 @@ class ReviewController extends Controller
         return view('submission-details.reviews.rsc', ['data' => $data]);
     }
 
-
+    public function addReview(Request $request, $data_id)
+    {
+        $data = ProjectsModel::findOrFail($data_id);
+    
+        $this->validate($request, [
+            'highlighted_text' => 'required',
+            'review_text' => 'required',
+        ]);
+    
+        // Create a new review and associate it with the project
+        $review = new Review([
+            'highlighted_text' => $request->input('highlighted_text'),
+            'review_text' => $request->input('review_text'),
+        ]);
+    
+        $data->reviews()->save($review);
+    
+        return redirect()->back()->with('success', 'Review added successfully.');
+    }
 
 
 
