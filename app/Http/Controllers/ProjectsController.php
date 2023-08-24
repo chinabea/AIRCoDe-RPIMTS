@@ -78,15 +78,15 @@ class ProjectsController extends Controller
         // Send notifications
         $director = UsersModel::where('role', true)->first();
         $researcher = UsersModel::find($userId);
-    
+
         if ($director) {
             $director->notify(new ProjectNotification($projects->id));
         }
-    
+
         if ($researcher) {
             $researcher->notify(new ProjectNotification($projects->id));
         }
-    
+
 
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
     }

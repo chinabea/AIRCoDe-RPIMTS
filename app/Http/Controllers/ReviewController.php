@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\ReviewDecisionModel;
 use App\Models\ProjectsModel;
@@ -62,28 +62,25 @@ class ReviewController extends Controller
         // Retrieve data based on the $data_id
         $data = ProjectsModel::findOrFail($data_id);
 
+        // // Validate the request
+        // $request->validate([
+        //     'highlighted_text' => 'required|string',
+        //     'comment' => 'required|string',
+        // ]);
+
+        // // Create a new review
+        // $review = new ReviewModel([
+        //     'user_id' => Auth::id(),
+        //     'project_id' => $data_id,
+        //     'highlighted_text' => $request->input('highlighted_text'),
+        //     'comment' => $request->input('comment'),
+        // ]);
+        // $review->save();
+
+
         return view('submission-details.reviews.rsc', ['data' => $data]);
     }
 
-    public function addReview(Request $request, $data_id)
-    {
-        $data = ProjectsModel::findOrFail($data_id);
-
-        $this->validate($request, [
-            'highlighted_text' => 'required',
-            'review_text' => 'required',
-        ]);
-
-        // Create a new review and associate it with the project
-        $review = new ReviewModel([
-            'highlighted_text' => $request->input('highlighted_text'),
-            'review_text' => $request->input('review_text'),
-        ]);
-
-        $data->reviews()->save($review);
-
-        return redirect()->back()->with('success', 'Review added successfully.');
-    }
 
 
 
@@ -102,6 +99,42 @@ class ReviewController extends Controller
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // public function addReview(Request $request, $data_id)
+    // {
+    //     $data = ProjectsModel::findOrFail($data_id);
+
+    //     $this->validate($request, [
+    //         'highlighted_text' => 'required',
+    //         'review_text' => 'required',
+    //     ]);
+
+    //     // Create a new review and associate it with the project
+    //     $review = new ReviewModel([
+    //         'highlighted_text' => $request->input('highlighted_text'),
+    //         'review_text' => $request->input('review_text'),
+    //     ]);
+
+    //     $data->reviews()->save($review);
+
+    //     return redirect()->back()->with('success', 'Review added successfully.');
+    // }
 
 
     public function func()

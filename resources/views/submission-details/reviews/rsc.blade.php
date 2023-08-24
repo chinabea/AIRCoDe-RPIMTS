@@ -181,6 +181,19 @@
                     <div class="card">
                       <div class="card-header">
                         <h3 class="card-title">Labels</h3>
+                            <div id="reviewForm">
+                                <form action="{{ route('reviews.comments', ['data_id' => $data->id]) }}" method="POST">
+                                    @csrf
+                                    <textarea id="highlightedText" name="highlighted_text" rows="2" cols="50"></textarea>
+                                    <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+                                    <button type="submit">Submit Review</button>
+                                </form>
+                            </div>
+
+                            <script>
+                                // Implement your JavaScript code here to handle text highlighting
+                                // and showing/hiding the review form as needed
+                            </script>
 
                         <div class="card-tools">
                           <button type="button" class="btn btn-tool" data-card-widget="collapse">

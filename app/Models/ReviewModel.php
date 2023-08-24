@@ -11,11 +11,15 @@ class ReviewModel extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['project_id','user_id','review_text'];
+    public $fillable = ['user_id','project_id', 'highlighted_text', 'comment'];
 
     public function reviewer()
     {
         return $this->belongsTo(UsersModel::class, 'user_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(UsersModel::class);
     }
 
     public function project()
