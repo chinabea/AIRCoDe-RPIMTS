@@ -18,16 +18,38 @@ class LineItemBudgetController extends Controller
     {
         return view('submission-details.line-items-budget.create');
     }
-
     public function store(Request $request)
     {
         $projId = $request->input('project_id');
         $requestData = $request->all();
         $requestData['project_id'] = $projId;
-        LineItemBudgetModel::create($requestData);
+        $lineItem = LineItemBudgetModel::create($requestData);
+
+        // Update the total of existing line items
+        $allLineItems = LineItemBudgetModel::where('project_id', $projId)->get();
+        $totalAllLineItems = 0;
+        foreach ($allLineItems as $item) {
+            $totalAllLineItems += $item->quantity * $item->unit_price;
+        }
+
+        // Update the total in the project (assuming you have a project model)
+        $project = Project::find($projId);
+        $project->total_budget = $totalAllLineItems;
+        $project->save();
 
         return redirect()->back()->with('success', 'Data Successfully Added!');
     }
+
+
+    // public function store(Request $request)
+    // {
+    //     $projId = $request->input('project_id');
+    //     $requestData = $request->all();
+    //     $requestData['project_id'] = $projId;
+    //     LineItemBudgetModel::create($requestData);
+
+    //     return redirect()->back()->with('success', 'Data Successfully Added!');
+    // }
 
 
     public function show($id)
@@ -45,14 +67,26 @@ class LineItemBudgetController extends Controller
 
     public function update(Request $request, $id)
     {
-        $lib = LineItemBudgetModel::find($id);
-        $lib->name = $request->input('name');
-        $lib->quantity = $request->input('quantity');
-        $lib->unit_price = $request->input('unit_price');
-        $lib->save();
-
-        return redirect()->back()->with('success', 'Project team member updated successfully.');
+        $lineItem = LineItemBudgetModel::findOrFail($id);
+    
+        $requestData = $request->all();
+        $requestData['total'] = $request->input('quantity') * $request->input('unit_price');
+    
+        $lineItem->update($requestData);
+    
+        return redirect()->back()->with('success', 'Data Successfully Updated!');
     }
+    
+    // public function update(Request $request, $id)
+    // {
+    //     $lib = LineItemBudgetModel::find($id);
+    //     $lib->name = $request->input('name');
+    //     $lib->quantity = $request->input('quantity');
+    //     $lib->unit_price = $request->input('unit_price');
+    //     $lib->save();
+
+    //     return redirect()->back()->with('success', 'Project team member updated successfully.');
+    // }
 
     public function destroy($id)
     {

@@ -12,7 +12,7 @@ class LineItemBudgetModel extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['project_id','name','quantity','unit_price'];
+    public $fillable = ['project_id','name','quantity','unit_price', 'total_price'];
 
     public function project()
     {

@@ -91,7 +91,7 @@ class TaskController extends Controller
 
         // return redirect()->route('schedules.show', ['schedule' => $schedule->id])->with('success', 'Schedule updated successfully.');
 
-        return redirect()->route('task')->with('success', 'Data Successfully Updated!');
+        return redirect()->route('tasks.index')->with('success', 'Data Successfully Updated!');
     }
 
 

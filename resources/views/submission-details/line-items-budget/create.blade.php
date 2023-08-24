@@ -19,13 +19,13 @@
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
                     <div class="form-group col-md-6">
-                            <label for="quantity">Quantity</label>
-                            <input type="number" class="form-control" id="quantity" name="quantity" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="unit_price">Unit Price</label>
-                            <input type="number" class="form-control" id="unit_price" name="unit_price" required>
-                        </div>
+                        <label for="quantity">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="unit_price">Unit Price</label>
+                        <input type="number" class="form-control" id="unit_price" name="unit_price" required>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Add Member</button>
             </form>

@@ -225,6 +225,12 @@
                                     @method('PUT')
                                     <div class="modal-body">
                                         <!-- Input fields for editing -->
+                                        @php
+                                            $totalAllLineItems = 0;
+                                            foreach ($allLineItems as $item) {
+                                                $totalAllLineItems += $item->quantity * $item->unit_price;
+                                            }
+                                        @endphp
                                         <div class="form-group">
                                             <label for="edit_name">Name:</label>
                                             <input type="text" class="form-control" id="edit_name{{ $lineItem->id }}" name="name" value="{{ $lineItem->name }}" required>
@@ -267,8 +273,15 @@
                 </tbody>
               @endforeach
               </table>
-
-
+              <div class="form-group float-right">
+                  <label for="edit_total">Total:</label>
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">₱</span>
+                      </div>
+                      <input type="text" class="form-control bg-light text-large" id="total_all_line_items" value="{{ number_format($totalAllLineItems, 2, '.', ',') }}" readonly>
+                  </div>
+              </div>
         </div>
       </div>
     </div>

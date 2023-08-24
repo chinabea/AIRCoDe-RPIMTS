@@ -93,6 +93,7 @@ class ProjectsController extends Controller
 
     public function show($id)
     {
+        $allLineItems = LineItemBudgetModel::all();
         $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
         $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
         $files = ProjectFileModel::where('project_id', $id)->get();
@@ -100,7 +101,7 @@ class ProjectsController extends Controller
         $records = ProjectsModel::findOrFail($id);
         // $records = ProjectsModel::with('user')->findOrFail($id);
 
-        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'files'));
+        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'allLineItems', 'files'));
 
     }
 
