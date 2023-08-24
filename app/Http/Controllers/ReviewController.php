@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ReviewDecisionModel;
 use App\Models\ProjectsModel;
 use App\Models\UsersModel;
+use App\Models\ReviewModel;
 
 class ReviewController extends Controller
 {
@@ -67,20 +68,20 @@ class ReviewController extends Controller
     public function addReview(Request $request, $data_id)
     {
         $data = ProjectsModel::findOrFail($data_id);
-    
+
         $this->validate($request, [
             'highlighted_text' => 'required',
             'review_text' => 'required',
         ]);
-    
+
         // Create a new review and associate it with the project
-        $review = new Review([
+        $review = new ReviewModel([
             'highlighted_text' => $request->input('highlighted_text'),
             'review_text' => $request->input('review_text'),
         ]);
-    
+
         $data->reviews()->save($review);
-    
+
         return redirect()->back()->with('success', 'Review added successfully.');
     }
 

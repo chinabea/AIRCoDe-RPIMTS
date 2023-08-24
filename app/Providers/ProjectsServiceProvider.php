@@ -21,9 +21,9 @@ class ProjectsServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Fetch all projects from the database
-        $projects = ProjectsModel::all();
+        $recs = ProjectsModel::all();
 
         // Share the projects variable with all views
-        view()->share('projects', $projects);
+        view()->share('recs', $recs);
     }
 }

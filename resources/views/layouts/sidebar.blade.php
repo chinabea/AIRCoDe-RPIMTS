@@ -108,11 +108,11 @@
               <p>FOR REVIEW</p>
             </a>
             <ul class="nav nav-treeview">
-            @foreach($projects as $project)
+            @foreach($recs as $rec)
                     <li class="nav-item">
-                        <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $project->id }}">
+                        <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $rec->id }}">
                             <i class="nav-icon fas fa-book"></i>
-                            <p>{{ $project->projname }}</p>
+                            <p>{{ $rec->projname }}</p>
                             <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
                         </a>
                     </li>
@@ -149,12 +149,12 @@
                 </p>
             </a>
             <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
-                @if(is_array($projects) || $projects instanceof \Traversable)
-                    @foreach($projects as $project)
+                @if(is_array($recs) || $recs instanceof \Traversable)
+                    @foreach($recs as $rec)
                         <li class="nav-item">
-                            <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
+                            <a href="{{ route('submission-details.show', ['id' => $rec->id]) }}" class="nav-link">
                                 <i class=""></i>
-                                <p>{{ $project->projname }}</p>
+                                <p>{{ $rec->projname }}</p>
                             </a>
                         </li>
                     @endforeach
@@ -170,14 +170,14 @@
                 <i class="far fa-file-alt nav-icon"></i>
                 <p>Draft <i class="fas fa-angle-left right"></i></p>
             </a>
-            @if(is_array($projects) || $projects instanceof \Traversable)
+            @if(is_array($recs) || $recs instanceof \Traversable)
                 <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
-                    @foreach($projects as $project)
-                        @if($project->status == 'Draft' && $project->user_id == auth()->id())
+                    @foreach($recs as $rec)
+                        @if($rec->status == 'Draft' && $project->user_id == auth()->id())
                             <li class="nav-item">
-                                <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+                                <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
                                     <i class="fas fa-angle-down"></i>
-                                    <p>{{ $project->projname }}</p>
+                                    <p>{{ $rec->projname }}</p>
                                 </a>
                             </li>
                 </ul>
@@ -198,14 +198,14 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          @if(is_array($projects) || $projects instanceof \Traversable)
-            @foreach($projects as $project)
-                @if($project->status == 'Under Evaluation' && $project->user_id == auth()->id())
+          @if(is_array($recs) || $recs instanceof \Traversable)
+            @foreach($recs as $rec)
+                @if($rec->status == 'Under Evaluation' && $project->user_id == auth()->id())
                 <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
                         <li class="nav-item">
-                            <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+                            <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                            <p>{{ $project->projname }}</p>
+                            <p>{{ $rec->projname }}</p>
                             </a>
                         </li>
                     @endif
@@ -226,14 +226,14 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'For Revision' && $project->user_id == auth()->id())
+          @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'For Revision' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
             @endif
@@ -254,14 +254,14 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Deferred' && $project->user_id == auth()->id())
+          @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'Deferred' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
             @endif
@@ -283,14 +283,14 @@
             </p>
           </a>
           </a>
-          @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Approved' && $project->user_id == auth()->id())
+          @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'Approved' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', ['id' => $rec->id]) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
           </ul>
@@ -311,14 +311,14 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-          @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Disapproved' && $project->user_id == auth()->id())
+          @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'Disapproved' && $project->user_id == auth()->id())
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('status.draft') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
             @endif
@@ -582,11 +582,11 @@
               <p>FOR REVIEW</p>
             </a>
             <ul class="nav nav-treeview">
-            @foreach($projects as $project)
+            @foreach($recs as $rec)
                     <li class="nav-item">
-                        <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $project->id }}">
+                        <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $rec->id }}">
                             <i class="nav-icon fas fa-book"></i>
-                            <p>{{ $project->projname }}</p>
+                            <p>{{ $rec->projname }}</p>
                             <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
                         </a>
                     </li>
@@ -623,12 +623,12 @@
             </p>
           </a>
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
+        @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
             <li class="nav-item">
-              <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', ['id' => $rec->id]) }}" class="nav-link">
                 <i class=""></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
           @endforeach
@@ -642,14 +642,14 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Draft')
+        @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'Draft')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
               <i class="fas fa-angle-down"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
           </ul>
@@ -664,14 +664,14 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Under Evaluation')
+        @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'Under Evaluation')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
           </ul>
@@ -686,14 +686,14 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'For Revision')
+        @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'For Revision')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
           </ul>
@@ -708,14 +708,14 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Deferred')
+        @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'Deferred')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('submission-details.show', $project->id) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
           </ul>
@@ -731,14 +731,14 @@
             </p>
           </a>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Approved')
+        @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'Approved')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
-              <a href="{{ route('submission-details.show', ['id' => $project->id]) }}" class="nav-link">
+              <a href="{{ route('submission-details.show', ['id' => $rec->id]) }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
           </ul>
@@ -753,14 +753,14 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-        @if(is_array($projects) || $projects instanceof \Traversable)
-          @foreach($projects as $project)
-          @if($project->status == 'Disapproved')
+        @if(is_array($recs) || $recs instanceof \Traversable)
+          @foreach($recs as $rec)
+          @if($rec->status == 'Disapproved')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('status.draft') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-              <p>{{ $project->projname }}</p>
+              <p>{{ $rec->projname }}</p>
               </a>
             </li>
           </ul>
