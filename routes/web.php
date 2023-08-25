@@ -53,16 +53,14 @@ Auth::routes();
 
 
 Route::prefix('staff')->middleware(['auth', 'staff'])->group(function (){
-    Route::get('/home', function () {
-        return view('dashboard');
-    })->name('staff.home');
+
+    Route::get('/home', [StatusController::class, 'countStatuses'])->name('staff.home');
 
 });
 
 Route::prefix('reviewer')->middleware(['auth', 'reviewer'])->group(function (){
-    Route::get('/home', function () {
-        return view('dashboard');
-    })->name('reviewer.home');
+
+    Route::get('/home', [StatusController::class, 'countStatuses'])->name('reviewer.home');
 
     Route::get('/reviews', [ReviewsController::class, 'index'])->name('reviews');
     Route::get('/review/create', [ReviewsController::class, 'create'])->name('reviews.create');
@@ -75,9 +73,8 @@ Route::prefix('reviewer')->middleware(['auth', 'reviewer'])->group(function (){
 });
 
 Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
-    Route::get('home', function () {
-        return view('dashboard');
-    })->name('director.home');
+
+    Route::get('/home', [StatusController::class, 'countStatuses'])->name('director.home');
 
     Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts');
     Route::get('/about/create', [AboutusController::class, 'create'])->name('transparency.aboutus.create');
@@ -129,7 +126,7 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
     //     return view('dashboard');
     // })->name('researcher.home');
 
-    
+
     Route::get('/home', [StatusController::class, 'countStatuses'])->name('researcher.home');
 
     Route::get('/about/show/{id}', [AboutusController::class, 'show'])->name('transparency.aboutus.show');
