@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('workplan');
             $table->text('resources');
             $table->text('references');
+            $table->decimal('total_budget', 10, 2)->default(0.00);
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

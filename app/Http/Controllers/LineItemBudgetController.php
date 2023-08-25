@@ -33,7 +33,7 @@ class LineItemBudgetController extends Controller
         }
 
         // Update the total in the project (assuming you have a project model)
-        $project = Project::find($projId);
+        $project = ProjectsModel::find($projId);
         $project->total_budget = $totalAllLineItems;
         $project->save();
 
@@ -68,15 +68,15 @@ class LineItemBudgetController extends Controller
     public function update(Request $request, $id)
     {
         $lineItem = LineItemBudgetModel::findOrFail($id);
-    
+
         $requestData = $request->all();
         $requestData['total'] = $request->input('quantity') * $request->input('unit_price');
-    
+
         $lineItem->update($requestData);
-    
+
         return redirect()->back()->with('success', 'Data Successfully Updated!');
     }
-    
+
     // public function update(Request $request, $id)
     // {
     //     $lib = LineItemBudgetModel::find($id);

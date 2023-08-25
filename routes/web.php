@@ -107,7 +107,6 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
 
     Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
     Route::get('/users', [UsersController::class, 'index'])->name('users');
-    Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
     Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
     Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
@@ -141,14 +140,6 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
     Route::put('/task/{id}/edit', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('tasks.delete');
 
-    Route::get('/status/draft', [StatusController::class, 'draft'])->name('status.draft');
-    Route::get('/status/under-evaluation', [StatusController::class, 'underEvaluation'])->name('status.under-evaluation');
-    Route::get('/status/for-revision', [StatusController::class, 'forRevision'])->name('status.for-revision');
-    Route::get('/status/approved', [StatusController::class, 'approved'])->name('status.approved');
-    Route::get('/status/deferred', [StatusController::class, 'deferred'])->name('status.deferred');
-    Route::get('/status/disapproved', [StatusController::class, 'disapproved'])->name('status.disapproved');
-
-    Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
     Route::get('/access-request/create', [AccessRequestController::class, 'create'])->name('transparency.access-requests.create');
     Route::post('/access-request/store', [AccessRequestController::class, 'store'])->name('transparency.access-requests.store');
     Route::get('/access-request/show/{id}', [AccessRequestController::class, 'show'])->name('transparency.access-requests.show');
@@ -192,7 +183,14 @@ Route::get('/Recommendations-Suggestions-and-Comments/{data_id}', [ReviewControl
 Route::post('/add-review/{data_id}', [ReviewController::class, 'addReview'])->name('add.review');
 
 
-
+Route::get('/status/draft', [StatusController::class, 'draft'])->name('status.draft');
+Route::get('/status/under-evaluation', [StatusController::class, 'underEvaluation'])->name('status.under-evaluation');
+Route::get('/status/for-revision', [StatusController::class, 'forRevision'])->name('status.for-revision');
+Route::get('/status/approved', [StatusController::class, 'approved'])->name('status.approved');
+Route::get('/status/deferred', [StatusController::class, 'deferred'])->name('status.deferred');
+Route::get('/status/disapproved', [StatusController::class, 'disapproved'])->name('status.disapproved');
+Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
+Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
 
 Route::get('/emailbox/compose', [EmailBoxController::class, 'index'])->name('emailbox.compose');
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');

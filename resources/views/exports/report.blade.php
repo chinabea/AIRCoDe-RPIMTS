@@ -37,18 +37,14 @@
 <body>
     <div>
         <div class="page-break"></div>
-        
-        <div class="header">
+
+        {{-- <div class="header">
             <img src="{{ asset('header.png') }}" alt="Header Image">
-        </div>
+        </div> --}}
         <div style="text-align: center;">
-            <h1>Chapter 2</h1>
-            <h1>REVIEW OF RELATED LITERATURE AND SYSTEMS </h1>
+            <h1>Project Name</h1>
+            <h1>{{ $data->projname }}</h1>
         </div>
-
-        <h2>Project Name</h2>
-            <p>{{ $data->projname }}</p>
-
         <h2>Status</h2>
             <p>{{ $data->status }}</p>
 

@@ -24,7 +24,8 @@ class ProjectsModel extends Model
                         'end_date',
                         'workplan',
                         'resources',
-                        'references'
+                        'references',
+                        'total_budget'
                     ];
 
     public function projectTeams()

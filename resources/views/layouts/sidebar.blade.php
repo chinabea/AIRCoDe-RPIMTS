@@ -583,13 +583,20 @@
             </a>
             <ul class="nav nav-treeview">
             @foreach($recs as $rec)
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $rec->id }}">
+                    {{-- <li class="nav-item">
+                        <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $rec->id }}">
                             <i class="nav-icon fas fa-book"></i>
                             <p>{{ $rec->projname }}</p>
                             <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
                         </a>
-                    </li>
+                    </li> --}}
+                <li class="nav-item">
+                    <a href="{{ route('submission-details.show', ['id' => $rec->id]) }}" class="nav-link">
+                    <i class=""></i>
+                    <p>{{ $rec->projname }}</p>
+                    <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
+                    </a>
+                </li>
             @endforeach
     </ul>
     </li>

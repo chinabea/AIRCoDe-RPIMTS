@@ -101,7 +101,16 @@ class ProjectsController extends Controller
         $records = ProjectsModel::findOrFail($id);
         // $records = ProjectsModel::with('user')->findOrFail($id);
 
-        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'allLineItems', 'files'));
+        // return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'allLineItems', 'files'));
+
+        // Calculate the total of all line items
+        $totalAllLineItems = 0;
+        foreach ($lineItems as $item) {
+            $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudgetModel structure
+        }
+
+        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'allLineItems', 'files', 'totalAllLineItems'));
+
 
     }
 

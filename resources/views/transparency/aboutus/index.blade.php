@@ -33,7 +33,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if($records->count() > 0)
                             @foreach($records as $record)
                             <tr>
                                 <td class="align-middle">{{ $loop->iteration }}</td>
@@ -59,17 +58,10 @@
                                         }
                                         </script>
 
-
-
                                     </div>
                                 </td>
                             </tr>
                             @endforeach
-                            @else
-                                <tr>
-                                    <td class="text-center" colspan="5">No record found!</td>
-                                </tr>
-                            @endif
                     </tbody>
                     <tfoot>
                         <tr>
