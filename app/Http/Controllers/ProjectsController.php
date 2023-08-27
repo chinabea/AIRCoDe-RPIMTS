@@ -98,6 +98,7 @@ class ProjectsController extends Controller
         $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
         $files = ProjectFileModel::where('project_id', $id)->get();
         $reviewers = ReviewModel::where('user_id', $id)->get();
+        $members = UsersModel::where('role', 3)->get();
         $records = ProjectsModel::findOrFail($id);
         // $records = ProjectsModel::with('user')->findOrFail($id);
 

@@ -121,11 +121,6 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
 });
 
 Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function (){
-    // Route::get('/home', function () {
-    //     return view('dashboard');
-    // })->name('researcher.home');
-
-
     Route::get('/home', [StatusController::class, 'countStatuses'])->name('researcher.home');
 
     Route::get('/about/show/{id}', [AboutusController::class, 'show'])->name('transparency.aboutus.show');
@@ -181,7 +176,6 @@ Route::get('/projects/track', [ProjectsController::class, 'track'])->name('proje
 Route::get('/generate-pdf/{data_id}', [PdfController::class, 'generatePDF'])->name('generate.pdf');
 Route::get('/Recommendations-Suggestions-and-Comments/{data_id}', [ReviewController::class, 'comments'])->name('submission-details.reviews.rsc');
 Route::post('/add-review/{data_id}', [ReviewController::class, 'addReview'])->name('add.review');
-
 
 Route::get('/status/draft', [StatusController::class, 'draft'])->name('status.draft');
 Route::get('/status/under-evaluation', [StatusController::class, 'underEvaluation'])->name('status.under-evaluation');

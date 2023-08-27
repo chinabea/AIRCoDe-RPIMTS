@@ -41,6 +41,7 @@
         {{-- <div class="header">
             <img src="{{ asset('header.png') }}" alt="Header Image">
         </div> --}}
+        
         <div style="text-align: center;">
             <h1>Project Name</h1>
             <h1>{{ $data->projname }}</h1>

@@ -57,6 +57,9 @@
         <button id="details-btn" class="btn btn-primary my-2">
             <i class="fas fa-info-circle mr-2"></i>Details
         </button>
+        <button id="tasks-btn" class="btn btn-primary my-2">
+            <i class="fas fa-tasks mr-2"></i>Tasks
+        </button>
         <button id="lib-btn" class="btn btn-primary my-2">
             <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
         </button>
@@ -112,7 +115,7 @@
             DETAILS
         </div>
         <div class="card-body pad table-responsive text-left">
-        <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}"  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
+        <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
             <div style="text-align: justify;">
                 <label>Project Name:</label><br>
                 {{ $records->projname }}
@@ -175,6 +178,23 @@
       </div>
     </div>
     </div>
+
+<div id="tasks-form" class="mt-4" style="display: none;">
+<!-- Form fields go here -->
+<div class="col-md-12">
+  <div class="card card-primary card-outline">
+    <div class="card-header">
+        TASKS
+    </div>
+    <div class="card-body pad table-responsive text-left">
+    <!-- <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a> -->
+      <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks">Add Task</button>
+              @include('submission-details.tasks.create')
+
+    </div>
+  </div>
+</div>
+</div>
 
     <div id="lib-form" class="mt-4" style="display: none;">
     <!-- Form fields go here -->
