@@ -9,8 +9,9 @@
             </div>
             <div class="modal-body">
                 <h2>Upload Files</h2>
-                <form action="{{ route('submission-details.files.store', ['id' => $records->id]) }}" method="post" enctype="multipart/form-data">
+                <form id="" method="post" action="{{ route('submission-details.files.store') }}" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="project_id" value="{{ $records->id }}">
                     <div class="form-group">
                         <label for="file">Choose File:</label>
                         <input type="file" class="form-control-file" id="file" name="file" accept=".pdf, .doc, .docx" required>

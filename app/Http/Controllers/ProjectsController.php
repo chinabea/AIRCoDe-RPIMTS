@@ -12,7 +12,7 @@ use App\Models\ReviewModel;
 use App\Models\ProjectTeamModel;
 use App\Models\LineItemBudgetModel;
 use App\Models\TaskModel;
-use App\Models\ProjectFileModel;
+use App\Models\FileModel;
 use App\Models\ProjectHistory;
 
 class ProjectsController extends Controller
@@ -94,12 +94,11 @@ class ProjectsController extends Controller
 
     public function show($id)
     {
-        // $tasks = TaskModel::all();
         $tasks = TaskModel::with('assignedTo')->get();
         $allLineItems = LineItemBudgetModel::all();
         $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
         $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
-        $files = ProjectFileModel::where('project_id', $id)->get();
+        $files = FileModel::where('project_id', $id)->get();
         $reviewers = ReviewModel::where('user_id', $id)->get();
         $members = UsersModel::where('role', 3)->get();
         $records = ProjectsModel::findOrFail($id);

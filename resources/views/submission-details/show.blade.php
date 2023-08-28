@@ -1581,6 +1581,70 @@
       </h3>
     </div>
     <div class="card-body pad table-responsive">
+      <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#filesModal">Add File</button>
+          @include('submission-details.files.create')
+          <table id="example1" class="table table-hover table-bordered table-sm">
+            <thead class="table-info">
+              <tr>
+                <th>#</th>
+                <th>Filename</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            @foreach($files as $file)
+            <tbody>
+              <tr>
+                <td class="align-middle">{{ $loop->iteration }}.</td>
+                <td>{{ $file->file_name }}</td>
+                <td>{{ $file->created_at }}</td>
+                <td>{{ $file->updated_at }}</td>
+                <td>
+    <a href="{{ route('submission-details.files.edit', $file->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editFileModal{{ $file->id }}">
+        <i class="fas fa-edit"></i>
+    </a>
+    <div class="modal fade" id="editFileModal{{ $file->id }}" tabindex="-1" role="dialog" aria-labelledby="editFileModal{{ $file->id }}Label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editFileModal{{ $file->id }}Label">Edit File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="{{ route('submission-details.files.update', $file->id) }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <!-- Input fields for editing -->
+                        <div class="form-group">
+                            <label for="edit_file_name">File Name:</label>
+                            <input type="text" class="form-control" id="edit_file_name{{ $file->id }}" name="file_name" value="{{ $file->file_name }}" required>
+                        </div>
+                        <!-- You can add more fields here if needed -->
+                        <div class="form-group">
+                            <label for="file">Choose File:</label>
+                            <input type="file" class="form-control-file" id="file" name="file" accept=".pdf, .doc, .docx" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.files.destroy', $file->id) }}')">
+        <i class="fas fa-trash"></i>
+    </button>
+
+                </td>
+              </tr>
+            </tbody>
+          @endforeach
+          </table>
 
 
     </div>
@@ -1868,6 +1932,8 @@
       </h3>
     </div>
     <div class="card-body pad table-responsive">
+      <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#filesModal">Add Project Members</button>
+          @include('submission-details.files.create')
 
 
     </div>

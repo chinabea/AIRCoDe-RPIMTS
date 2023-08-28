@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FileModel;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -9,16 +10,84 @@ class FileController extends Controller
     public function index()
     {
 
-        return view('submission-details.project-teams.teams');
+        return view('submission-details.files');
     }
 
-
-    public function loadContent()
+    public function create()
     {
-        // Fetch the content from the file or any other data source
-        $content = file_get_contents('/path/to/your/file'); // Replace with the actual path to your file
-
-        return $content;
+        return view('submission-details.files.create');
     }
+    public function store(Request $request)
+    {
+        // Validate the uploaded file and project_id
+        $request->validate([
+            'file' => 'required|file|max:10240', // Max file size: 10MB
+            'project_id' => 'required|exists:projects,id', // Validate that the project exists
+        ]);
+    
+        // Store the uploaded file
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        $filePath = $file->store('project_files');
+    
+        try {
+            // Create a new project file entry
+            FileModel::create([
+                'project_id' => $request->input('project_id'),
+                'file_name' => $fileName,
+                'file_path' => $filePath,
+            ]);
+    
+            return redirect()->back()->with('success', 'File uploaded successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error storing file in the database.');
+        }
+    }
+    public function reupload(Request $request, $id)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'file' => 'required|file|max:10240', // Max file size: 10MB
+        ]);
+
+        // Find the existing file entry
+        $fileModel = FileModel::where('project_id', $id)->first();
+
+        if (!$fileModel) {
+            return redirect()->back()->with('error', 'File not found.');
+        }
+
+        // Delete the existing file from storage
+        Storage::delete($fileModel->file_path);
+
+        // Store the uploaded file
+        $file = $request->file('file');
+        $fileName = $file->getClientOriginalName();
+        $filePath = $file->store('project_files');
+
+        // Update the file entry in the database
+        $fileModel->update([
+            'file_name' => $fileName,
+            'file_path' => $filePath,
+        ]);
+
+        return redirect()->back()->with('success', 'File reuploaded successfully.');
+    }
+
+    
+
+    public function show(FileModel $file)
+    {
+        // Add logic to show the file details or download the file
+    }
+
+    public function destroy(FileModel $file)
+    {
+        // Delete the file and its record from the database
+        $file->delete();
+
+        return redirect()->back()->with('success', 'File deleted successfully.');
+    }
+
 
 }

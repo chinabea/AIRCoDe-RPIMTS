@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ProjectFileModel;
+use App\Models\FileModel;
 
 class ProjectFileController extends Controller
 {
@@ -26,7 +26,7 @@ class ProjectFileController extends Controller
         $filePath = $file->store('project_files');
 
         // Create a new project file entry
-        ProjectFileModel::create([
+        FileModel::create([
             'project_id' => $request->input('project_id'),
             'file_name' => $fileName,
             'file_path' => $filePath,
@@ -36,12 +36,12 @@ class ProjectFileController extends Controller
         return redirect()->back()->with('success', 'File uploaded successfully.');
     }
 
-    public function show(ProjectFileModel $file)
+    public function show(FileModel $file)
     {
         // Add logic to show the file details or download the file
     }
 
-    public function destroy(ProjectFileModel $file)
+    public function destroy(FileModel $file)
     {
         // Delete the file and its record from the database
         $file->delete();

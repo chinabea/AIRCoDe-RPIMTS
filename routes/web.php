@@ -17,7 +17,7 @@ use App\Http\Controllers\ProjectTeamController;
 use App\Http\Controllers\LineItemBudgetController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\EmailBoxController;
-use App\Http\Controllers\ProjectFileController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\FullCalenderController;
@@ -159,8 +159,19 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
     Route::put('/edit-line-items-budget/{id}', [LineItemBudgetController::class, 'update'])->name('submission-details.line-items-budget.update');
     Route::delete('/delete-line-items-budget/{id}', [LineItemBudgetController::class, 'destroy'])->name('submission-details.line-items-budget.destroy');
 
-    Route::get('/files/create', [ProjectFileController::class, 'create'])->name('submission-details.files.create');
-    Route::post('/store/files', [ProjectFileController::class, 'store'])->name('submission-details.files.store');
+    // Route::get('/files/create', [ProjectFileController::class, 'create'])->name('submission-details.files.create');
+    // Route::post('/store/files', [ProjectFileController::class, 'store'])->name('submission-details.files.store');
+
+    Route::get('/files/create', [FileController::class, 'create'])->name('submission-details.files.create');
+    Route::post('/upload', [FileController::class, 'store'])->name('submission-details.files.store');
+    Route::post('/submission-details/files/reupload/{id}', [FileController::class, 'reupload'])->name('submission-details.files.reupload');
+    // Route::delete('/files/delete/{id}', [FileController::class, 'destroy'])->name('submission-details.line-items-budget.destroy');
+
+    Route::get('/files/{file}/edit', [FileController::class, 'edit'])->name('submission-details.files.edit');
+    Route::put('/files/{file}', [FileController::class, 'update'])->name('submission-details.files.update');
+    Route::delete('/files/{file}', [FileController::class, 'destroy'])->name('submission-details.files.destroy');
+    
+
 
     Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
     Route::get('/status/edit', [StatusController::class, 'update'])->name('projects.editstatus');
