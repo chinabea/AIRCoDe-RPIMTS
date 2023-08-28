@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     $('#tasks-btn').click(function() {
       $('#tasks-form').show();
-      $('#status-form, #reviewer-form, #files-form, #messages-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
+      $('#details-form, #status-form, #reviewer-form, #files-form, #messages-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
     });
 
     $('#status-btn').click(function() {

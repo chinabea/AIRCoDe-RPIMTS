@@ -30,4 +30,14 @@ class TaskModel extends Model
     {
         return $this->belongsTo(User::class, 'assigned_to');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function routeNotificationForMail()
+    {
+        return $this->user->email;
+    }
 }

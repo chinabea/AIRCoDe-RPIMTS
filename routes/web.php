@@ -127,13 +127,13 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
     Route::get('/call-for-proposals/show/{id}', [ProposalsController::class, 'show'])->name('transparency.call-for-proposals.show'); //view all list without functions
     Route::get('/announcement/show/{id}', [AnnouncementsController::class, 'show'])->name('transparency.announcements.show'); //view all list without functions
 
-    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
-    Route::get('/task/calendar', [TaskController::class, 'calendar'])->name('tasks.calendar');
-    Route::get('task/create', [TaskController::class, 'create'])->name('tasks.create');
-    Route::post('/task', [TaskController::class, 'store'])->name('tasks.store');
-    Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-    Route::put('/task/{id}/edit', [TaskController::class, 'update'])->name('tasks.update');
-    Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('tasks.delete');
+    Route::get('/tasks', [TaskController::class, 'index'])->name('submission-details.tasks.index');
+    // Route::get('/task/calendar', [TaskController::class, 'calendar'])->name('tasks.calendar');
+    Route::get('task/create', [TaskController::class, 'create'])->name('submission-details.tasks.create');
+    Route::post('/task', [TaskController::class, 'store'])->name('submission-details.tasks.store');
+    Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('submission-details.tasks.edit');
+    Route::put('/task/{id}/edit', [TaskController::class, 'update'])->name('submission-details.tasks.update');
+    Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('submission-details.tasks.delete');
 
     Route::get('/access-request/create', [AccessRequestController::class, 'create'])->name('transparency.access-requests.create');
     Route::post('/access-request/store', [AccessRequestController::class, 'store'])->name('transparency.access-requests.store');

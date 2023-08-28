@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\ReviewModel;
 use App\Models\ProjectTeamModel;
 use App\Models\LineItemBudgetModel;
+use App\Models\TaskModel;
 use App\Models\ProjectFileModel;
 use App\Models\ProjectHistory;
 
@@ -93,6 +94,8 @@ class ProjectsController extends Controller
 
     public function show($id)
     {
+        // $tasks = TaskModel::all();
+        $tasks = TaskModel::with('assignedTo')->get();
         $allLineItems = LineItemBudgetModel::all();
         $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
         $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
@@ -110,7 +113,8 @@ class ProjectsController extends Controller
             $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudgetModel structure
         }
 
-        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'allLineItems', 'files', 'totalAllLineItems'));
+        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 
+                    'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks'));
 
 
     }
