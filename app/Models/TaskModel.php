@@ -13,14 +13,19 @@ class TaskModel extends Model
 
     // Define the fillable attributes
     protected $fillable = [
+        'project_id',
         'title',
         'description',
         'start_date',
         'end_date',
         'assigned_to',
     ];
-
-
+ 
+    public function project()
+    {
+        return $this->belongsTo(ProjectsModel::class, 'project_id');
+    }
+    
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',

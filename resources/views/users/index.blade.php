@@ -1,10 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Users')
-
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-@include('layouts.topnav')
-@include('layouts.sidebar')
+@section('content')
   <div class="content-wrapper">
     <section class="content-header">
       <div class="container-fluid">
@@ -136,5 +131,6 @@
 <aside class="control-sidebar control-sidebar-dark">
 </aside>
 </div>
-</body>
-</html>
+
+
+@endsection

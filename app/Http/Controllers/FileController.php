@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\FileModel;
 use Illuminate\Http\Request;
 
@@ -43,6 +43,14 @@ class FileController extends Controller
             return redirect()->back()->with('error', 'Error storing file in the database.');
         }
     }
+    
+    public function previewPDF($filename)
+    {
+        $filePath = storage_path('app/public/pdf/' . $filename);
+
+        return response()->file($filePath);
+    }
+
     public function reupload(Request $request, $id)
     {
         // Validate the uploaded file
@@ -73,17 +81,23 @@ class FileController extends Controller
 
         return redirect()->back()->with('success', 'File reuploaded successfully.');
     }
-
     
 
-    public function show(FileModel $file)
+    public function update(Request $request, $id)
     {
-        // Add logic to show the file details or download the file
+        $file = FileModel::findOrFail($id);
+        // Update the item properties using the request data
+        $file->update($request->all());
+
+        // return redirect()->route('schedules.show', ['schedule' => $schedule->id])->with('success', 'Schedule updated successfully.');
+
+        return redirect()->route('submission-details.files.index')->with('success', 'Data Successfully Updated!');
     }
 
-    public function destroy(FileModel $file)
+    public function delete($id)
     {
         // Delete the file and its record from the database
+        $file = FileModel::findOrFail($id);
         $file->delete();
 
         return redirect()->back()->with('success', 'File deleted successfully.');

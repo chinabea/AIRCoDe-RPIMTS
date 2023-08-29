@@ -10,8 +10,9 @@
                 </button>
             </div>
             <div class="modal-body">
-              <form action="{{ route('submission-details.tasks.store') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('submission-details.tasks.store', ['id' => $records->id]) }}" method="POST" enctype="multipart/form-data">
                   @csrf
+                    <input type="hidden" name="project_id" value="{{ $records->id }}">
                   <div class="form-group">
                       <label for="title">Task Title</label>
                       <input type="text" name="title" id="title" class="form-control" required>

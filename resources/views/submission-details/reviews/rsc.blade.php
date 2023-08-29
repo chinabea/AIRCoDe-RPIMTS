@@ -1,5 +1,4 @@
 @extends('layouts.template')
-@section('title', 'Make Recommendations, Suggestions and Comments')
 
 @section('content')
 <div class="content-wrapper">

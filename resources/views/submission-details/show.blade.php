@@ -1,5 +1,4 @@
 @extends('layouts.template')
-@section('title', 'Dashboard')
 
 @section('content')
 
@@ -1601,6 +1600,10 @@
                 <td>{{ $file->created_at }}</td>
                 <td>{{ $file->updated_at }}</td>
                 <td>
+                <a href="{{ route('pdf.preview-view') }}">View PDF</a>
+                <iframe src="{{ route('pdf.preview', ['filename' => 'your-pdf-filename.pdf']) }}" width="100%" height="600px"></iframe>
+
+
     <a href="{{ route('submission-details.files.edit', $file->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editFileModal{{ $file->id }}">
         <i class="fas fa-edit"></i>
     </a>
@@ -1613,7 +1616,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="{{ route('submission-details.files.update', $file->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('submission-details.files.reupload', $file->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
@@ -1636,9 +1639,22 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.files.destroy', $file->id) }}')">
-        <i class="fas fa-trash"></i>
+    <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.files.delete', $file->id) }}')">
+      <i class="fas fa-trash"></i>
     </button>
+      <script>
+        function confirmDelete(url) {
+            if (confirm('Are you sure you want to delete this record?')) {
+            // Create a hidden form and submit it programmatically
+            var form = document.createElement('form');
+            form.action = url;
+            form.method = 'POST';
+            form.innerHTML = '@csrf @method("delete")';
+            document.body.appendChild(form);
+            form.submit();
+            }
+        }
+      </script>
 
                 </td>
               </tr>
@@ -1650,7 +1666,7 @@
     </div>
   </div>
 </div>
-</form>
+</div>
 </div>
 
 <div id="messages-form" class="mt-4" style="display: none;">
@@ -1739,19 +1755,7 @@
                 <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.project-teams.destroy', $member->id) }}')">
                   <i class="fas fa-trash"></i>
                 </button>
-                      <script>
-                      function confirmDelete(url) {
-                          if (confirm('Are you sure you want to delete this record?')) {
-                          // Create a hidden form and submit it programmatically
-                          var form = document.createElement('form');
-                          form.action = url;
-                          form.method = 'POST';
-                          form.innerHTML = '@csrf @method("delete")';
-                          document.body.appendChild(form);
-                          form.submit();
-                          }
-                      }
-                      </script>
+
                 </td>
               </tr>
             </tbody>
@@ -1791,7 +1795,7 @@
     </div>
   </div>
 </div>
-</form>
+</div>
 </div>
 
 
@@ -1939,7 +1943,7 @@
     </div>
   </div>
 </div>
-</form>
+</div>
 </div>
 
 <div id="messages-form" class="mt-4" style="display: none;">

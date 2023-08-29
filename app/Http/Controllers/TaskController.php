@@ -31,15 +31,10 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'description' => 'nullable',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-            'assigned_to' => 'required',
-        ]);
-
-        $task = TaskModel::create($validatedData);
+        $projectId = $request->input('project_id');
+        $requestData = $request->all();
+        $requestData['project_id'] = $projectId;
+        $task = TaskModel::create($requestData);
 
         // Send notification if the task deadline is in the future
         if ($task->end_date > Carbon::now()) {

@@ -58,6 +58,7 @@ class ProjectNotification extends Notification
                 ->line('Thank you for using the Research Project Information Management and Tracking System.');
         }
     }
+ 
     
 
     /**

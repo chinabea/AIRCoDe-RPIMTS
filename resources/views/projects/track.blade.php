@@ -23,7 +23,7 @@
                         <label for="proj_id">Tracking ID:</label>
                         <input type="text" id="proj_id" name="proj_id" placeholder="Enter ID" required>
                         <small class="form-text text-muted">
-                            <b>Note:</b> Your Tracking ID was sent to your registered email upon acknowledging receipt of your proposal.
+                            <!-- <b>Note:</b> Your Tracking ID was sent to your registered email upon acknowledging receipt of your proposal. -->
                         </small>
                     </div>
                     <button type="submit" class="btn btn-primary float-right">Search</button>
@@ -33,7 +33,7 @@
                         <div>
                             <h2>Project Found:</h2>
                             <p>Project Title: {{ $project->projname }}</p>
-                            <p>Approved: approved date here...</p>
+                            <!-- <p>Approved: approved date here...</p> -->
                         </div>
                     @else
                         <p>No project found with the entered ID.</p>

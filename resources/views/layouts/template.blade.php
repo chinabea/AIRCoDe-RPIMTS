@@ -33,9 +33,7 @@
 <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 <!-- fullCalendar -->
 <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/main.css') }}">
-
 <link rel="stylesheet" href="{{ asset('plugins/simplemde/simplemde.min.css') }}">
-
 
 <style>
         /* Change the dark-themed sidebar background color to blue */
@@ -61,14 +59,13 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
+  @section('title', 'RPIMTS')
   @include('layouts.topnav')
 
   @include('layouts.sidebar')
 
   @yield('content')
-
-
-
+  
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
@@ -85,6 +82,19 @@
 <!-- Summernote -->
 <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
 
-
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+ <!-- Bootstrap 4 -->
+ <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+ <!-- AdminLTE App -->
+ <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+ <!-- Summernote -->
+ <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
+ <!-- CodeMirror -->
+ <script src="{{ asset('plugins/codemirror/codemirror.js') }}"></script>
+ <script src="{{ asset('plugins/codemirror/mode/css/css.js') }}"></script>
+ <script src="{{ asset('plugins/codemirror/mode/xml/xml.js') }}"></script>
+ <script src="{{ asset('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+ <!-- AdminLTE for demo purposes -->
+ <script src="{{ asset('dist/js/demo.js') }}"></script>
 </body>
 </html>

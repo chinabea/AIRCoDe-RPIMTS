@@ -159,18 +159,13 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
     Route::put('/edit-line-items-budget/{id}', [LineItemBudgetController::class, 'update'])->name('submission-details.line-items-budget.update');
     Route::delete('/delete-line-items-budget/{id}', [LineItemBudgetController::class, 'destroy'])->name('submission-details.line-items-budget.destroy');
 
-    // Route::get('/files/create', [ProjectFileController::class, 'create'])->name('submission-details.files.create');
-    // Route::post('/store/files', [ProjectFileController::class, 'store'])->name('submission-details.files.store');
-
     Route::get('/files/create', [FileController::class, 'create'])->name('submission-details.files.create');
     Route::post('/upload', [FileController::class, 'store'])->name('submission-details.files.store');
-    Route::post('/submission-details/files/reupload/{id}', [FileController::class, 'reupload'])->name('submission-details.files.reupload');
-    // Route::delete('/files/delete/{id}', [FileController::class, 'destroy'])->name('submission-details.line-items-budget.destroy');
+    Route::put('/files/reupload/{id}', [FileController::class, 'reupload'])->name('submission-details.files.reupload');
+    Route::get('/files/{id}/edit', [FileController::class, 'edit'])->name('submission-details.files.edit');
+    Route::delete('/files/delete/{id}', [FileController::class, 'delete'])->name('submission-details.files.delete'); // dipa nagana
+    Route::get('/pdf/preview/{filename}', [FileController::class, 'previewPDF'])->name('submission-details.files.pdf.preview');
 
-    Route::get('/files/{file}/edit', [FileController::class, 'edit'])->name('submission-details.files.edit');
-    Route::put('/files/{file}', [FileController::class, 'update'])->name('submission-details.files.update');
-    Route::delete('/files/{file}', [FileController::class, 'destroy'])->name('submission-details.files.destroy');
-    
 
 
     Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
@@ -179,7 +174,6 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
     Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
     Route::post('/store-reviewer', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
     Route::post('/projects/{project}/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('projects.assignReviewers');
-
 
 });
 
