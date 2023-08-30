@@ -46,10 +46,27 @@ class FileController extends Controller
     
     public function previewPDF($filename)
     {
-        $filePath = storage_path('app/public/pdf/' . $filename);
-
-        return response()->file($filePath);
+        $filePath = 'project_files/' . $filename;
+    
+        if (Storage::exists($filePath)) {
+            return view('submission-details.files.preview', ['filePath' => $filePath]);
+        }
+    
+        return response('File not found.', 404);
     }
+
+    public function download($id)
+    {
+        $file = FileModel::findOrFail($id);
+
+        // Assuming the 'file_name' attribute stores the desired filename in the database
+        $fileName = $file->file_name;
+        $filePath = $file->file_path;
+
+        return response()->download(storage_path('app/' . $filePath), $fileName);
+    }
+
+    
 
     public function reupload(Request $request, $id)
     {

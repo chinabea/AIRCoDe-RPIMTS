@@ -11,8 +11,9 @@
             <div class="modal-body">
             <h2>Select Reviewers for Project</h2>
            <!-- select-reviewers.blade.php -->
-           <form action="{{ route('projects.assignReviewers', $records->id) }}" method="POST">
+           <form action="{{ route('submission-details.reviews.assignReviewers', $records->id) }}" method="POST">
             @csrf
+            <input type="hidden" name="project_id" value="{{ $records->id }}">
             <label>Select Reviewers:</label>
             <select name="reviewer_ids[]" class="form-control" multiple>
                 @foreach($reviewers as $reviewer)

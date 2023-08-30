@@ -117,6 +117,10 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
     // Route::post('/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
     Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
 
+    // Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+    // Route::post('/store-reviewer', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
+    Route::post('/projects/{projectId}/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
+
 
 });
 
@@ -164,16 +168,15 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
     Route::put('/files/reupload/{id}', [FileController::class, 'reupload'])->name('submission-details.files.reupload');
     Route::get('/files/{id}/edit', [FileController::class, 'edit'])->name('submission-details.files.edit');
     Route::delete('/files/delete/{id}', [FileController::class, 'delete'])->name('submission-details.files.delete'); // dipa nagana
-    Route::get('/pdf/preview/{filename}', [FileController::class, 'previewPDF'])->name('submission-details.files.pdf.preview');
-
-
+    // Route::get('/pdf/preview/{filename}', [FileController::class, 'previewPDF'])->name('submission-details.files.pdf.preview');
+    // Route::get('/{filename}', [FileController::class, 'previewPDF'])->name('submission-details.files.pdf-preview');
+    // Route::get('/pdf/preview/{filename}',  [FileController::class, 'previewPDF'])->name('submission-details.files.preview');
+    // Route::get('/pdf/preview/{filename}', [FileController::class, 'previewPDF'])->name('submission-details.files.preview');
+    Route::get('/pdf/preview/{filename}', [FileController::class, 'previewPDF'])->name('submission-details.files.preview');
+    Route::get('/download/{id}', [FileController::class, 'download'])->name('file.download');
 
     Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
     Route::get('/status/edit', [StatusController::class, 'update'])->name('projects.editstatus');
-
-    Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
-    Route::post('/store-reviewer', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
-    Route::post('/projects/{project}/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('projects.assignReviewers');
 
 });
 

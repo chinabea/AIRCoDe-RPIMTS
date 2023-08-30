@@ -576,7 +576,7 @@
               <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
                   @include('submission-details.reviews.select-reviewer')
 
-                  <form action="{{ route('submission-details.reviews.assignReviewers', ['id' => $records->id]) }}" method="POST">
+                  <form action="{{ route('submission-details.reviews.assignReviewers') }}" method="POST">
                     @csrf
                     <input type="hidden" name="project_id" value="{{ $records->id }}">
                     <div class="form-group">
@@ -1154,7 +1154,7 @@
         <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
             @include('submission-details.reviews.select-reviewer')
 
-            <form action="{{ route('submission-details.reviews.assignReviewers', ['id' => $records->id]) }}" method="POST">
+            <form action="{{ route('submission-details.reviews.assignReviewers') }}" method="POST">
               @csrf
               <input type="hidden" name="project_id" value="{{ $records->id }}">
               <div class="form-group">
@@ -1600,74 +1600,74 @@
                 <td>{{ $file->created_at }}</td>
                 <td>{{ $file->updated_at }}</td>
                 <td>
-                <a href="{{ route('pdf.preview-view') }}">View PDF</a>
-                <iframe src="{{ route('pdf.preview', ['filename' => 'your-pdf-filename.pdf']) }}" width="100%" height="600px"></iframe>
+                <a href="{{ route('submission-details.files.preview', ['filename' => $file->file_path]) }}" class="btn btn-secondary">
+                    <i class="fas fa-eye"></i> <!-- Font Awesome eye icon -->
+                </a>
 
-
-    <a href="{{ route('submission-details.files.edit', $file->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editFileModal{{ $file->id }}">
-        <i class="fas fa-edit"></i>
-    </a>
-    <div class="modal fade" id="editFileModal{{ $file->id }}" tabindex="-1" role="dialog" aria-labelledby="editFileModal{{ $file->id }}Label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editFileModal{{ $file->id }}Label">Edit File</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <a href="{{ route('file.download', ['id' => $file->id]) }}" class="btn btn-primary">
+                    <i class="fas fa-download"></i> 
+                </a>
+                <a href="{{ route('submission-details.files.edit', $file->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editFileModal{{ $file->id }}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <div class="modal fade" id="editFileModal{{ $file->id }}" tabindex="-1" role="dialog" aria-labelledby="editFileModal{{ $file->id }}Label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editFileModal{{ $file->id }}Label">Edit File</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="post" action="{{ route('submission-details.files.reupload', $file->id) }}" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="modal-body">
+                                    <!-- Input fields for editing -->
+                                    <div class="form-group">
+                                        <label for="edit_file_name">File Name:</label>
+                                        <input type="text" class="form-control" id="edit_file_name{{ $file->id }}" name="file_name" value="{{ $file->file_name }}" required>
+                                    </div>
+                                    <!-- You can add more fields here if needed -->
+                                    <div class="form-group">
+                                        <label for="file">Choose File:</label>
+                                        <input type="file" class="form-control-file" id="file" name="file" accept=".pdf, .doc, .docx" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <form method="post" action="{{ route('submission-details.files.reupload', $file->id) }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-body">
-                        <!-- Input fields for editing -->
-                        <div class="form-group">
-                            <label for="edit_file_name">File Name:</label>
-                            <input type="text" class="form-control" id="edit_file_name{{ $file->id }}" name="file_name" value="{{ $file->file_name }}" required>
-                        </div>
-                        <!-- You can add more fields here if needed -->
-                        <div class="form-group">
-                            <label for="file">Choose File:</label>
-                            <input type="file" class="form-control-file" id="file" name="file" accept=".pdf, .doc, .docx" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.files.delete', $file->id) }}')">
-      <i class="fas fa-trash"></i>
-    </button>
-      <script>
-        function confirmDelete(url) {
-            if (confirm('Are you sure you want to delete this record?')) {
-            // Create a hidden form and submit it programmatically
-            var form = document.createElement('form');
-            form.action = url;
-            form.method = 'POST';
-            form.innerHTML = '@csrf @method("delete")';
-            document.body.appendChild(form);
-            form.submit();
-            }
-        }
-      </script>
-
+                <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.files.delete', $file->id) }}')">
+                  <i class="fas fa-trash"></i>
+                </button>
+                  <script>
+                    function confirmDelete(url) {
+                        if (confirm('Are you sure you want to delete this record?')) {
+                        // Create a hidden form and submit it programmatically
+                        var form = document.createElement('form');
+                        form.action = url;
+                        form.method = 'POST';
+                        form.innerHTML = '@csrf @method("delete")';
+                        document.body.appendChild(form);
+                        form.submit();
+                        }
+                    }
+                  </script>
                 </td>
               </tr>
             </tbody>
           @endforeach
           </table>
-
-
     </div>
   </div>
 </div>
 </div>
-</div>
+<!-- </div> -->
 
 <div id="messages-form" class="mt-4" style="display: none;">
 <div class="col-md-12">

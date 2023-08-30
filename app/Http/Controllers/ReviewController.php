@@ -11,22 +11,40 @@ use App\Models\ReviewModel;
 class ReviewController extends Controller
 {
 
+    // public function assignReviewers(Request $request, $projectId)
+    // {
+    //     $projId = $request->input('project_id');
+    //     $requestData = $request->all();
+    //     $requestData['project_id'] = $projId;
+    //     $reviewerRoleId = 4; // Replace with the actual role ID of reviewers
+
+    //     // Retrieve users with the specified role
+    //     $reviewers = UsersModel::where('role', $reviewerRoleId)->get();
+
+    //     // Find the project
+    //     $project = ProjectsModel::findOrFail($projectId);
+
+    //     // Assign selected reviewers to the project without detaching existing reviewers
+    //     $selectedReviewers = UsersModel::whereIn('id', $request->input('reviewer_ids'))->get();
+    //     $project->reviewers()->syncWithoutDetaching($selectedReviewers);
+
+    //     return redirect()->back()->with('success', 'Reviewers have been assigned to the project.');
+    // }
+    
     public function assignReviewers(Request $request, $projectId)
     {
-        $reviewerRoleId = 4; // Replace with the actual role ID of reviewers
-
-        // Retrieve users with the specified role
-        $reviewers = UsersModel::where('role', $reviewerRoleId)->get();
+        // Retrieve the selected reviewer IDs from the form
+        $selectedReviewerIds = $request->input('reviewer_ids', []);
 
         // Find the project
-        $project = ProjectsModel::findOrFail($projectId);
+        $project = Project::findOrFail($projectId);
 
-        // Assign selected reviewers to the project without detaching existing reviewers
-        $selectedReviewers = UsersModel::whereIn('id', $request->input('reviewer_ids'))->get();
-        $project->reviewers()->syncWithoutDetaching($selectedReviewers);
+        // Attach selected reviewers to the project without detaching existing reviewers
+        $project->reviewers()->syncWithoutDetaching($selectedReviewerIds);
 
         return redirect()->back()->with('success', 'Reviewers have been assigned to the project.');
     }
+
 
     // public function review($id)
     // {
