@@ -24,12 +24,12 @@ class FileController extends Controller
             'file' => 'required|file|max:10240', // Max file size: 10MB
             'project_id' => 'required|exists:projects,id', // Validate that the project exists
         ]);
-    
+
         // Store the uploaded file
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
         $filePath = $file->store('project_files');
-    
+
         try {
             // Create a new project file entry
             FileModel::create([
@@ -37,21 +37,21 @@ class FileController extends Controller
                 'file_name' => $fileName,
                 'file_path' => $filePath,
             ]);
-    
+
             return redirect()->back()->with('success', 'File uploaded successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error storing file in the database.');
         }
     }
-    
+
     public function previewPDF($filename)
     {
         $filePath = 'project_files/' . $filename;
-    
+
         if (Storage::exists($filePath)) {
             return view('submission-details.files.preview', ['filePath' => $filePath]);
         }
-    
+
         return response('File not found.', 404);
     }
 
@@ -65,8 +65,6 @@ class FileController extends Controller
 
         return response()->download(storage_path('app/' . $filePath), $fileName);
     }
-
-    
 
     public function reupload(Request $request, $id)
     {
@@ -98,7 +96,7 @@ class FileController extends Controller
 
         return redirect()->back()->with('success', 'File reuploaded successfully.');
     }
-    
+
 
     public function update(Request $request, $id)
     {

@@ -961,247 +961,247 @@
       </div>
       </div>
 
-<div id="classifications-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-            CLASSIFICATIONS
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
+        <div id="classifications-form" class="mt-4" style="display: none;">
+        <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                    CLASSIFICATIONS
+            </h3>
+            </div>
+            <div class="card-body pad table-responsive">
 
 
-    </div>
-  </div>
-</div>
-</div>
-
-<div id="files-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-            FILES
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-
-
-    </div>
-  </div>
-</div>
-</form>
-</div>
-
-<div id="messages-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-            MESSAGES
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-
-
-    </div>
-  </div>
-</div>
-</div>
-
-<div id="project-team-form" class="mt-4" style="display: none;">
-    <div class="col-md-12">
-      <div class="card card-outline">
-        <div class="card-header">
-            PROJECT TEAM
+            </div>
         </div>
-        <div class="card-body pad table-responsive">
-        <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
-            @include('submission-details.project-teams.create')
-            <table id="example1" class="table table-hover table-bordered text-center table-sm">
-            <thead class="table-info">
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            @foreach($teamMembers as $member)
-            <tbody>
-              <tr>
-                <td class="align-middle">{{ $loop->iteration }}.</td>
-                <td>{{ $member->member_name }}</td>
-                <td>{{ $member->role }}</td>
-                <td>
-                  <a href="{{ route('submission-details.project-teams.edit', $member->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $member->id }}">
-                      <i class="fas fa-edit"></i>
-                  </a>
-                  <div class="modal fade" id="editModal{{ $member->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $member->id }}Label" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editModal{{ $member->id }}Label">Edit Project Team Member</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form method="post" action="{{ route('submission-details.project-teams.update', $member->id) }}" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-body">
-                                    <!-- Input fields for editing -->
-                                    <div class="form-group">
-                                        <label for="edit_member_name">Name:</label>
-                                        <input type="text" class="form-control" id="edit_member_name{{ $member->id }}" name="member_name" value="{{ $member->member_name }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="edit_role">Role:</label>
-                                        <select class="form-control" id="edit_role{{ $member->id }}" name="role" required>
-                                            <option disabled>Select Role</option>
-                                            <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
-                                            <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}>Database Designer</option>
-                                            <option{{ $member->role === 'Network Designer' ? ' selected' : '' }}>Network Designer</option>
-                                            <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}>UI Designer</option>
-                                            <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}>Quality Assurance</option>
-                                            <option{{ $member->role === 'Document Writer' ? ' selected' : '' }}>Document Writer</option>
+        </div>
+        </div>
 
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+        <div id="files-form" class="mt-4" style="display: none;">
+        <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                    FILES
+            </h3>
+            </div>
+            <div class="card-body pad table-responsive">
+
+
+            </div>
+        </div>
+        </div>
+        </form>
+        </div>
+
+        <div id="messages-form" class="mt-4" style="display: none;">
+        <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                    MESSAGES
+            </h3>
+            </div>
+            <div class="card-body pad table-responsive">
+
+
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div id="project-team-form" class="mt-4" style="display: none;">
+            <div class="col-md-12">
+            <div class="card card-outline">
+                <div class="card-header">
+                    PROJECT TEAM
                 </div>
-                <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.project-teams.destroy', $member->id) }}')">
-                  <i class="fas fa-trash"></i>
-                </button>
-                      <script>
-                      function confirmDelete(url) {
-                          if (confirm('Are you sure you want to delete this record?')) {
-                          // Create a hidden form and submit it programmatically
-                          var form = document.createElement('form');
-                          form.action = url;
-                          form.method = 'POST';
-                          form.innerHTML = '@csrf @method("delete")';
-                          document.body.appendChild(form);
-                          form.submit();
-                          }
-                      }
-                      </script>
-                </td>
-              </tr>
-            </tbody>
-          @endforeach
-          </table>
+                <div class="card-body pad table-responsive">
+                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
+                    @include('submission-details.project-teams.create')
+                    <table id="example1" class="table table-hover table-bordered text-center table-sm">
+                    <thead class="table-info">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    @foreach($teamMembers as $member)
+                    <tbody>
+                    <tr>
+                        <td class="align-middle">{{ $loop->iteration }}.</td>
+                        <td>{{ $member->member_name }}</td>
+                        <td>{{ $member->role }}</td>
+                        <td>
+                        <a href="{{ route('submission-details.project-teams.edit', $member->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $member->id }}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <div class="modal fade" id="editModal{{ $member->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $member->id }}Label" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModal{{ $member->id }}Label">Edit Project Team Member</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post" action="{{ route('submission-details.project-teams.update', $member->id) }}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-body">
+                                            <!-- Input fields for editing -->
+                                            <div class="form-group">
+                                                <label for="edit_member_name">Name:</label>
+                                                <input type="text" class="form-control" id="edit_member_name{{ $member->id }}" name="member_name" value="{{ $member->member_name }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit_role">Role:</label>
+                                                <select class="form-control" id="edit_role{{ $member->id }}" name="role" required>
+                                                    <option disabled>Select Role</option>
+                                                    <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}>Project Leader</option>
+                                                    <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}>Database Designer</option>
+                                                    <option{{ $member->role === 'Network Designer' ? ' selected' : '' }}>Network Designer</option>
+                                                    <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}>UI Designer</option>
+                                                    <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}>Quality Assurance</option>
+                                                    <option{{ $member->role === 'Document Writer' ? ' selected' : '' }}>Document Writer</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.project-teams.destroy', $member->id) }}')">
+                        <i class="fas fa-trash"></i>
+                        </button>
+                            <script>
+                            function confirmDelete(url) {
+                                if (confirm('Are you sure you want to delete this record?')) {
+                                // Create a hidden form and submit it programmatically
+                                var form = document.createElement('form');
+                                form.action = url;
+                                form.method = 'POST';
+                                form.innerHTML = '@csrf @method("delete")';
+                                document.body.appendChild(form);
+                                form.submit();
+                                }
+                            }
+                            </script>
+                        </td>
+                    </tr>
+                    </tbody>
+                @endforeach
+                </table>
+                </div>
+            </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+        </div>
 
-<div id="status-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-outline">
-    <div class="card-header">
-            STATUS
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-    <!-- <div class="container"><h3>Edit Project Status</h3> -->
-      <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
-          @csrf
-          @method('PUT')
-          <!-- Other form fields... -->
-          <input type="hidden" name="project_id" value="{{ $records->id }}">
-          <div class="form-group">
-              <label for="status">Status</label>
-              <select class="form-control" id="status" name="status" required>
-                  <option value="New">New</option>
-                  <option value="Draft">Draft</option>
-                  <option value="Under Evaluation">Under Evaluation</option>
-                  <option value="For Revision">For Revision</option>
-                  <option value="Approved">Approved</option>
-                  <option value="Deferred">Deferred</option>
-                  <option value="Disapproved">Disapproved</option>
-              </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Update Status</button>
-      </form>
+        <div id="status-form" class="mt-4" style="display: none;">
+        <div class="col-md-12">
+        <div class="card card-outline">
+            <div class="card-header">
+                    STATUS
+            </h3>
+            </div>
+            <div class="card-body pad table-responsive">
+            <!-- <div class="container"><h3>Edit Project Status</h3> -->
+            <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <!-- Other form fields... -->
+                <input type="hidden" name="project_id" value="{{ $records->id }}">
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status" name="status" required>
+                        <option value="New">New</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Under Evaluation">Under Evaluation</option>
+                        <option value="For Revision">For Revision</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Deferred">Deferred</option>
+                        <option value="Disapproved">Disapproved</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Status</button>
+            </form>
 
-    </div>
-    </div>
-  </div>
-</div>
-</div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
 
-<div id="reviewer-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-            REVIEWER
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-    <div class="container">
-        <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
-            @include('submission-details.reviews.select-reviewer')
+        <div id="reviewer-form" class="mt-4" style="display: none;">
+        <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                    REVIEWER
+            </h3>
+            </div>
+            <div class="card-body pad table-responsive">
+            <div class="container">
+                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
+                    @include('submission-details.reviews.select-reviewer')
 
-            <form action="{{ route('submission-details.reviews.assignReviewers') }}" method="POST">
-              @csrf
-              <input type="hidden" name="project_id" value="{{ $records->id }}">
-              <div class="form-group">
-                  <label>Select Reviewers:</label>
-                  <select name="reviewer_ids[]" class="form-control" multiple>
-                      @foreach($reviewers as $reviewer)
-                          <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                      @endforeach
-                  </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Assign Reviewers</button>
-          </form>
+                    <form action="{{ route('submission-details.reviews.assignReviewers') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="project_id" value="{{ $records->id }}">
+                    <div class="form-group">
+                        <label>Select Reviewers:</label>
+                        <select name="reviewer_ids[]" class="form-control" multiple>
+                            @foreach($reviewers as $reviewer)
+                                <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Assign Reviewers</button>
+                </form>
 
 
 
 
-    </div>
-    </div>
-  </div>
-</div>
-</div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
 
-<div id="cash-program-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-            CASH PROGRAM
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-
-
-    </div>
-  </div>
-</div>
-</div>
-
-<div id="reprogramming-status-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-            REPROGRAMMING STATUS
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
+        <div id="cash-program-form" class="mt-4" style="display: none;">
+        <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                    CASH PROGRAM
+            </h3>
+            </div>
+            <div class="card-body pad table-responsive">
 
 
-    </div>
-  </div>
-</div>
-</form>
-</div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div id="reprogramming-status-form" class="mt-4" style="display: none;">
+        <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                    REPROGRAMMING STATUS
+            </h3>
+            </div>
+            <div class="card-body pad table-responsive">
+
+
+            </div>
+        </div>
+        </div>
+        </form>
+        </div>
 
 
       @endif
