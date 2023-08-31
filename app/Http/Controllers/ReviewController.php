@@ -30,14 +30,14 @@ class ReviewController extends Controller
 
     //     return redirect()->back()->with('success', 'Reviewers have been assigned to the project.');
     // }
-    
+
     public function assignReviewers(Request $request, $projectId)
     {
         // Retrieve the selected reviewer IDs from the form
         $selectedReviewerIds = $request->input('reviewer_ids', []);
 
         // Find the project
-        $project = Project::findOrFail($projectId);
+        $project = ProjectsModel::findOrFail($projectId);
 
         // Attach selected reviewers to the project without detaching existing reviewers
         $project->reviewers()->syncWithoutDetaching($selectedReviewerIds);
