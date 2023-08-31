@@ -12,17 +12,17 @@
             <h2>Select Reviewers for Project</h2>
            <!-- select-reviewers.blade.php -->
            <form action="{{ route('submission-details.reviews.assignReviewers', ['projectId' => $records->id]) }}" method="POST">
-            @csrf
-            <input type="hidden" name="project_id" value="{{ $records->id }}">
-            <label>Select Reviewers:</label>
-            <select name="reviewer_ids[]" class="form-control" multiple>
-                @foreach($reviewers as $reviewer)
-                    <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                @endforeach
-            </select>
-
-            <button type="submit" class="btn btn-primary">Assign Reviewers</button>
+                @csrf
+                <input type="hidden" name="project_id" value="{{ $records->id }}">
+                <label>Select Reviewers:</label>
+                <select name="reviewer_ids[]" class="form-control" multiple>
+                    @foreach($reviewers as $reviewer)
+                        <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                    @endforeach
+                </select>
+                <button type="submit" class="btn btn-primary">Assign Reviewers</button>
             </form>
+
             </div>
         </div>
     </div>

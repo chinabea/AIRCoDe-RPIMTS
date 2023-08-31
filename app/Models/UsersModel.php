@@ -15,15 +15,15 @@ class UsersModel extends Model
 
     public $fillable = ['name','email','role'];
 
-    
+
     public function isDirector()
     {
-        return $this->role === 1; 
+        return $this->role === 1;
     }
-    
+
     public function isResearcher()
     {
-        return $this->role === 3; 
+        return $this->role === 3;
     }
 
     public function projects()

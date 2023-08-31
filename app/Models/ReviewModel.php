@@ -13,10 +13,6 @@ class ReviewModel extends Model
 
     public $fillable = ['user_id','project_id', 'highlighted_text', 'comment'];
 
-    public function reviewer()
-    {
-        return $this->belongsTo(UsersModel::class, 'user_id');
-    }
     public function user()
     {
         return $this->belongsTo(UsersModel::class);
@@ -30,6 +26,20 @@ class ReviewModel extends Model
     public function reviewDecision()
     {
         return $this->hasOne(ReviewDecisionModel::class, 'review_id');
+    }
+
+    public function reviewer()
+    {
+        return $this->belongsTo(UsersModel::class, 'user_id');
+    }
+
+    public function scopeReviewers($query)
+    {
+        return $query->whereHas('reviewer', function ($query) {
+            $query->whereHas('roles', function ($query) {
+                $query->where('id', 4); // Assuming role ID 4
+            });
+        });
     }
 
 }

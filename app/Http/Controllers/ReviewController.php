@@ -32,11 +32,15 @@ class ReviewController extends Controller
     // }
     public function selectReviewers($projectId)
     {
-        $project = ProjectsModel::findOrFail($projectId);
-        $reviewers = ReviewModel::all(); // Assuming you have a Reviewer model
+        // Debugging code to check if the function is called and if data is retrieved
+        dd('Controller called for project ID: ' . $projectId);
 
-        return view('review.select_reviewers', compact('project', 'reviewers'));
+        $project = ProjectsModel::findOrFail($projectId);
+        $reviewers = UsersModel::where('role', 4)->get();
+
+        return view('submission-details.reviews.select_reviewers', compact('project', 'reviewers'));
     }
+
 
     public function assignReviewers(Request $request, $projectId)
     {

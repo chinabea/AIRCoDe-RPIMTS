@@ -117,7 +117,8 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
     // Route::post('/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
     Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
 
-    Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+    Route::get('/select-reviewers/{projectId}', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+    // Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
     Route::post('/projects/{projectId}/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
 
 

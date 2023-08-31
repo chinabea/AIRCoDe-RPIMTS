@@ -45,7 +45,7 @@ class ProjectsModel extends Model
         //             ->withPivot('role');
 
 
-            return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'user_id');
+            return $this->belongsToMany(User::class, 'reviews', 'project_id', 'user_id');
 
     }
 
