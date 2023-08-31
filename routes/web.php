@@ -119,7 +119,7 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
 
     // Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
     // Route::post('/store-reviewer', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
-    Route::post('/projects/{projectId}/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
+    Route::post('/projects/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
 
 
 });
