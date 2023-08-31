@@ -30,6 +30,13 @@ class ReviewController extends Controller
 
     //     return redirect()->back()->with('success', 'Reviewers have been assigned to the project.');
     // }
+    public function selectReviewers($projectId)
+    {
+        $project = ProjectsModel::findOrFail($projectId);
+        $reviewers = ReviewModel::all(); // Assuming you have a Reviewer model
+
+        return view('review.select_reviewers', compact('project', 'reviewers'));
+    }
 
     public function assignReviewers(Request $request, $projectId)
     {

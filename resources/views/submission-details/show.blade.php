@@ -537,7 +537,7 @@
             </h3>
           </div>
           <div class="card-body pad table-responsive">
-          <!-- <div class="container"><h3>Edit Project Status</h3> -->
+           <div class="container"><h3>Edit Project Status</h3>
             <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -576,7 +576,7 @@
               <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
                   @include('submission-details.reviews.select-reviewer')
 
-                  <form action="{{ route('submission-details.reviews.assignReviewers') }}" method="POST">
+                  {{-- <form action="{{ route('submission-details.reviews.assignReviewers', ['projectId' => $records->id]) }}" method="POST">
                     @csrf
                     <input type="hidden" name="project_id" value="{{ $records->id }}">
                     <div class="form-group">
@@ -588,11 +588,7 @@
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Assign Reviewers</button>
-                </form>
-
-
-
-
+                </form> --}}
           </div>
           </div>
         </div>
@@ -1605,7 +1601,7 @@
                 </a>
 
                 <a href="{{ route('file.download', ['id' => $file->id]) }}" class="btn btn-primary">
-                    <i class="fas fa-download"></i> 
+                    <i class="fas fa-download"></i>
                 </a>
                 <a href="{{ route('submission-details.files.edit', $file->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editFileModal{{ $file->id }}">
                     <i class="fas fa-edit"></i>
