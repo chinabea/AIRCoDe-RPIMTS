@@ -88,7 +88,6 @@ class ProjectsController extends Controller
             $researcher->notify(new ProjectNotification($projects->id));
         }
 
-
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
     }
 

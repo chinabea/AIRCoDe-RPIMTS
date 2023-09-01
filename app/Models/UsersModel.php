@@ -25,12 +25,11 @@ class UsersModel extends Model
     {
         return $this->role === 3;
     }
-
+    
     public function projects()
     {
-        return $this->belongsToMany(ProjectsModel::class, 'project_reviewers', 'reviewer_id', 'project_id');
+        return $this->belongsToMany(Project::class, 'project_reviewers', 'reviewer_id', 'project_id');
     }
-
     public function aprojects()
     {
         return $this->hasMany(ProjectsModel::class);

@@ -58,6 +58,45 @@ class ProjectNotification extends Notification
                 ->line('Thank you for using the Research Project Information Management and Tracking System.');
         }
     }
+   
+    // public function toDatabase($notifiable)
+    // {
+    //     return [
+    //         'subject' => 'New Research Project Submission',
+    //         'icon' => 'fa-solid fa-circle-check fa-lg text-white',
+    //         'message' => 'A new research project has been submitted.',
+    //         'project_id' => $this->projectId,
+    //         'link' => url('/projects/' . $this->projectId),
+    //         'action_url' => 'icon-circle bg-gradient-sucess',
+    //         'type' => 'project_submission',
+    //     ];
+    // }
+
+    public function toDatabase($notifiable)
+    {
+        // Check if the notifiable is an admin (director)
+        if ($notifiable->isDirector()) {
+            // Admin notification content
+            return [
+                'subject' => 'New Research Project Submission',
+                'message' => 'A new research project has been submitted.',
+                'project_id' => $this->projectId,
+                'link' => url('/projects/' . $this->projectId),
+                'role' => 'director',
+            ];
+        } elseif ($notifiable->isResearcher()) {
+            // User notification content
+            return [
+                'subject' => 'New Research Project Submission',
+                'message' => 'Your research project submission has been successfully received.',
+                'project_id' => $this->projectId,
+                'link' => url('/projects/' . $this->projectId),
+                'role' => 'researcher',
+            ];
+        }
+
+        return null; // Return null if notifiable is not an admin or researcher
+    }
  
     
 

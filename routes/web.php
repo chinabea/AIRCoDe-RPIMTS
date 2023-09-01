@@ -117,10 +117,24 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
     // Route::post('/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
     Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
 
-    Route::get('/select-reviewers/{projectId}', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+    // Route::get('/select-reviewers/{projectId}', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
     // Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
-    Route::post('/projects/{projectId}/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
+    // Route::post('/projects/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
 
+    
+
+    Route::get('/select-reviewers', [ReviewController::class, 'select'])->name('submission-details.reviews.select');
+    Route::post('/submission-details/{projectId}/assignReviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+
+    // Route::post('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('selectReviewers');
+    // Route::post('/finalize-reviewers', [ReviewController::class, 'finalizeReviewers'])->name('finalizeReviewers');
+
+    // Route::get('/line-items-budget/create', [LineItemBudgetController::class, 'create'])->name('submission-details.line-items-budget.create');
+    // Route::post('/line-items-budget/store', [LineItemBudgetController::class, 'store'])->name('submission-details.line-items-budget.store');
+    // Route::get('/show-line-items-budget/{id}', [LineItemBudgetController::class, 'show'])->name('submission-details.line-items-budget.show');
+    // Route::get('/edit-line-items-budget/{id}', [LineItemBudgetController::class, 'edit'])->name('submission-details.line-items-budget.edit');
+    // Route::put('/edit-line-items-budget/{id}', [LineItemBudgetController::class, 'update'])->name('submission-details.line-items-budget.update');
+    // Route::delete('/delete-line-items-budget/{id}', [LineItemBudgetController::class, 'destroy'])->name('submission-details.line-items-budget.destroy');
 
 
 });
@@ -181,9 +195,18 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
 
 });
 
+// NAGANA NA YAYS!
 Route::get('/projects/track', [ProjectsController::class, 'track'])->name('projects.track'); //oks na
 Route::get('/generate-pdf/{data_id}', [PdfController::class, 'generatePDF'])->name('generate.pdf');
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+
+
+// KIND OF NAGANA NA, BUT NOT FULLY! ON PROCESS! 
 Route::get('/Recommendations-Suggestions-and-Comments/{data_id}', [ReviewController::class, 'comments'])->name('submission-details.reviews.rsc');
+
+
+// MOT FUNCTIONAL YET!
 Route::post('/add-review/{data_id}', [ReviewController::class, 'addReview'])->name('add.review');
 
 Route::get('/status/draft', [StatusController::class, 'draft'])->name('status.draft');

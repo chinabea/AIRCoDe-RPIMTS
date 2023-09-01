@@ -38,15 +38,20 @@ class ProjectsModel extends Model
         return $this->hasMany(LineItemBudgetModel::class, 'project_id');
     }
 
+    // public function reviewers()
+    // {
+    //     return $this->belongsToMany(User::class, 'project_reviewer', 'project_id', 'user_id')
+    //                 ->wherePivot('role', 4)
+    //                 ->withPivot('role');
+
+
+    //         // return $this->belongsToMany(User::class, 'reviews', 'project_id', 'user_id');
+
+    // }
+    
     public function reviewers()
     {
-        // return $this->belongsToMany(User::class, 'project_reviewer', 'project_id', 'user_id')
-        //             ->wherePivot('role', 4)
-        //             ->withPivot('role');
-
-
-            return $this->belongsToMany(User::class, 'reviews', 'project_id', 'user_id');
-
+        return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'reviewer_id');
     }
 
     public function callForProposal()

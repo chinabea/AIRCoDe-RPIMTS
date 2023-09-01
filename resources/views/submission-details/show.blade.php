@@ -575,18 +575,20 @@
           <div class="container">
               <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
                   @include('submission-details.reviews.select-reviewer')
+                
 
-                  <form action="{{ route('submission-details.reviews.assignReviewers', ['projectId' => $records->id]) }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="project_id" value="{{ $records->id }}">
-                    <label>Select Reviewers:</label>
-                    <select name="reviewer_ids[]" class="form-control" multiple>
-                        @foreach($reviewers as $reviewer)
-                            <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                        @endforeach
-                    </select>
-                    <button type="submit" class="btn btn-primary">Assign Reviewers</button>
+                <form action="{{ route('submission-details.reviews.select-reviewer', ['projectId' => $records->id]) }}" method="POST">
+                  @csrf
+                  <input type="hidden" name="project_id" value="{{ $records->id }}">
+                  <label>Select Reviewers:</label>
+                  <select name="reviewer_ids[]" class="form-control" multiple>
+                      @foreach($reviewers as $reviewer)
+                          <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                      @endforeach
+                  </select>
+                  <button type="submit" class="btn btn-primary">Assign Reviewers</button>
                 </form>
+
 
           </div>
           </div>
