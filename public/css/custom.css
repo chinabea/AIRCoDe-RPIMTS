@@ -1,0 +1,11 @@
+
+    .custom-button-link {
+        text-decoration: none; /* Remove underline */
+        color: initial; /* Use default text color */
+    }
+    .custom-button-link:hover {
+        color: initial; /* Use default text color on hover */
+    }
+    .col-auto .h5 {
+        color: black; /* Use default text color for h5 elements inside col-auto */
+    }

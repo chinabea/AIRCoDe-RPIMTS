@@ -58,7 +58,7 @@
       <div class="col-md-12">
         <div class="text-center">
         <button id="review-btn" class="btn btn-primary my-2">
-            <i class="fas fa-file-signature mr-2"></i>Review 
+            <i class="fas fa-file-signature mr-2"></i>Review
         </button>
         <button id="details-btn" class="btn btn-primary my-2">
             <i class="fas fa-info-circle mr-2"></i>Details
@@ -68,9 +68,6 @@
         </button>
         <button id="lib-btn" class="btn btn-primary my-2">
             <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
-        </button>
-        <button id="classifications-btn" class="btn btn-primary my-2">
-            <i class="fas fa-tags mr-2"></i>Classifications
         </button>
         <button id="files-btn" class="btn btn-primary my-2">
             <i class="fas fa-file-alt mr-2"></i>Files
@@ -87,12 +84,6 @@
         <button id="reviewer-btn" class="btn btn-primary my-2">
             <i class="fas fa-user-check mr-2"></i>Reviewer
         </button>
-        <button id="cash-program-btn" class="btn btn-primary my-2">
-            <i class="fas fa-money-bill-wave mr-2"></i>Cash Program
-        </button>
-        <button id="reprogramming-status-btn" class="btn btn-primary my-2">
-            <i class="fas fa-sync-alt mr-2"></i>Reprogramming Status
-        </button>
 </div>
 </div>
       <div id="review-form" class="mt-4" style="display: none;">
@@ -103,7 +94,7 @@
               Review
             </div>
             <div class="card-body pad table-responsive text-left">
-              
+
 
         <div class="col-lg-12">
 
@@ -439,21 +430,6 @@
       </div>
       </div>
 
-      <div id="classifications-form" class="mt-4" style="display: none;">
-      <div class="col-md-12">
-        <div class="card card-primary card-outline">
-          <div class="card-header">
-                  CLASSIFICATIONS
-            </h3>
-          </div>
-          <div class="card-body pad table-responsive">
-
-
-          </div>
-        </div>
-      </div>
-      </div>
-
 <div id="files-form" class="mt-4" style="display: none;">
 <div class="col-md-12">
   <div class="card card-primary card-outline">
@@ -626,7 +602,7 @@
           <div class="container">
               <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
                   @include('submission-details.reviews.select-reviewer')
-                
+
 
                 <form action="{{ route('submission-details.reviews.select-reviewer', ['projectId' => $records->id]) }}" method="POST">
                   @csrf
@@ -647,37 +623,6 @@
       </div>
       </div>
 
-      <div id="cash-program-form" class="mt-4" style="display: none;">
-      <div class="col-md-12">
-        <div class="card card-primary card-outline">
-          <div class="card-header">
-                  CASH PROGRAM
-            </h3>
-          </div>
-          <div class="card-body pad table-responsive">
-
-
-          </div>
-        </div>
-      </div>
-      </div>
-
-      <div id="reprogramming-status-form" class="mt-4" style="display: none;">
-      <div class="col-md-12">
-        <div class="card card-primary card-outline">
-          <div class="card-header">
-                  REPROGRAMMING STATUS
-            </h3>
-          </div>
-          <div class="card-body pad table-responsive">
-
-
-          </div>
-        </div>
-      </div>
-      </form>
-      </div>
-
 
       @endif
 
@@ -693,9 +638,6 @@
         <button id="lib-btn" class="btn btn-primary my-2">
             <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
         </button>
-        <button id="classifications-btn" class="btn btn-primary my-2">
-            <i class="fas fa-tags mr-2"></i>Classifications
-        </button>
         <button id="files-btn" class="btn btn-primary my-2">
             <i class="fas fa-file-alt mr-2"></i>Files
         </button>
@@ -710,12 +652,6 @@
         </button>
         <button id="reviewer-btn" class="btn btn-primary my-2">
             <i class="fas fa-user-check mr-2"></i>Reviewer
-        </button>
-        <button id="cash-program-btn" class="btn btn-primary my-2">
-            <i class="fas fa-money-bill-wave mr-2"></i>Cash Program
-        </button>
-        <button id="reprogramming-status-btn" class="btn btn-primary my-2">
-            <i class="fas fa-sync-alt mr-2"></i>Reprogramming Status
         </button>
       </div>
       <div id="details-form" class="mt-4" style="display: none;">
@@ -1015,21 +951,6 @@
       </div>
       </div>
 
-        <div id="classifications-form" class="mt-4" style="display: none;">
-        <div class="col-md-12">
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                    CLASSIFICATIONS
-            </h3>
-            </div>
-            <div class="card-body pad table-responsive">
-
-
-            </div>
-        </div>
-        </div>
-        </div>
-
         <div id="files-form" class="mt-4" style="display: none;">
         <div class="col-md-12">
         <div class="card card-primary card-outline">
@@ -1226,37 +1147,6 @@
         </div>
         </div>
 
-        <div id="cash-program-form" class="mt-4" style="display: none;">
-        <div class="col-md-12">
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                    CASH PROGRAM
-            </h3>
-            </div>
-            <div class="card-body pad table-responsive">
-
-
-            </div>
-        </div>
-        </div>
-        </div>
-
-        <div id="reprogramming-status-form" class="mt-4" style="display: none;">
-        <div class="col-md-12">
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                    REPROGRAMMING STATUS
-            </h3>
-            </div>
-            <div class="card-body pad table-responsive">
-
-
-            </div>
-        </div>
-        </div>
-        </form>
-        </div>
-
 
       @endif
 
@@ -1275,9 +1165,6 @@
         <button id="lib-btn" class="btn btn-primary my-2">
             <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
         </button>
-        <button id="classifications-btn" class="btn btn-primary my-2">
-            <i class="fas fa-tags mr-2"></i>Classifications
-        </button>
         <button id="files-btn" class="btn btn-primary my-2">
             <i class="fas fa-file-alt mr-2"></i>Files
         </button>
@@ -1286,12 +1173,6 @@
         </button>
         <button id="project-team-btn" class="btn btn-primary my-2">
             <i class="fas fa-users mr-2"></i>Project Team
-        </button>
-        <button id="cash-program-btn" class="btn btn-primary my-2">
-            <i class="fas fa-money-bill-wave mr-2"></i>Cash Program
-        </button>
-        <button id="reprogramming-status-btn" class="btn btn-primary my-2">
-            <i class="fas fa-sync-alt mr-2"></i>Reprogramming Status
         </button>
       </div>
         <div id="actions-form" class="mt-4" style="display: none;">
@@ -1606,21 +1487,6 @@
       </div>
       </div>
 
-<div id="classifications-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-            CLASSIFICATIONS
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-
-
-    </div>
-  </div>
-</div>
-</div>
-
 <div id="files-form" class="mt-4" style="display: none;">
 <div class="col-md-12">
   <div class="card card-primary card-outline">
@@ -1816,37 +1682,6 @@
   </div>
 </div>
 
-<div id="cash-program-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-            CASH PROGRAM
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-
-
-    </div>
-  </div>
-</div>
-</div>
-
-<div id="reprogramming-status-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-            REPROGRAMMING STATUS
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-
-
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
 
       @endif
 
@@ -1865,9 +1700,6 @@
         <button id="lib-btn" class="btn btn-primary my-2">
             <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
         </button>
-        <button id="classifications-btn" class="btn btn-primary my-2">
-            <i class="fas fa-tags mr-2"></i>Classifications
-        </button>
         <button id="files-btn" class="btn btn-primary my-2">
             <i class="fas fa-file-alt mr-2"></i>Files
         </button>
@@ -1882,12 +1714,6 @@
         </button>
         <button id="reviewer-btn" class="btn btn-primary my-2">
             <i class="fas fa-user-check mr-2"></i>Reviewer
-        </button>
-        <button id="cash-program-btn" class="btn btn-primary my-2">
-            <i class="fas fa-money-bill-wave mr-2"></i>Cash Program
-        </button>
-        <button id="reprogramming-status-btn" class="btn btn-primary my-2">
-            <i class="fas fa-sync-alt mr-2"></i>Reprogramming Status
         </button>
       </div>
         <div id="details-form" class="mt-4" style="display: none;">
@@ -1956,21 +1782,6 @@
                     {{ $records->references }}
                     <br><br>
                 </div>
-
-            </div>
-          </div>
-        </div>
-        </div>
-
-        <div id="classifications-form" class="mt-4" style="display: none;">
-        <div class="col-md-12">
-          <div class="card card-primary card-outline">
-            <div class="card-header">
-                    CLASSIFICATIONS
-              </h3>
-            </div>
-            <div class="card-body pad table-responsive">
-
 
             </div>
           </div>
@@ -2104,18 +1915,12 @@
     </div>
   </div>
 </div>
-
-      @endif
-    @endauth
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="{{ asset('js/custom.js') }}"></script>
-
+@endif
+@endauth
 </div>
 <aside class="control-sidebar control-sidebar-dark">
 </aside>
 </div>
-
-
 @endsection
 
 

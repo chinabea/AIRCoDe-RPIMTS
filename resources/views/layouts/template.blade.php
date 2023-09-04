@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 <!-- Ionicons -->
 <link rel="stylesheet" href="{{ asset('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') }}">
 <!-- Tempusdominus Bootstrap 4 -->
@@ -65,7 +66,7 @@
   @include('layouts.sidebar')
 
   @yield('content')
-  
+
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
@@ -86,5 +87,9 @@
  <script src="{{ asset('plugins/codemirror/mode/css/css.js') }}"></script>
  <script src="{{ asset('plugins/codemirror/mode/xml/xml.js') }}"></script>
  <script src="{{ asset('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+ <!-- Custom Js -->
+ <script src="{{ asset('js/custom.js') }}"></script>
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
 </body>
 </html>

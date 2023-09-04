@@ -13,7 +13,7 @@
   <style>
     /* Your custom styles here */
     body {
-       background: url('dist/img/bg.jpg') center/cover no-repeat; 
+       background: url('dist/img/bg.jpg') center/cover no-repeat;
                /* background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 url('dist/img/bg.jpg'); */
                 backdrop-filter:blur(5px);
@@ -21,7 +21,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        position: relative; 
+        position: relative;
     }
             header{
                 position: fixed;
@@ -80,11 +80,11 @@
                 position: relative;
                 width: 400px;
                 height: 450px;
-                /* background: #d3b954; */
-                /* border: 2px solid ; */
-                /* border-radius: 20px; */
-                /* backdrop-filter:blur(5px); */
-                /* box-shadow: 0 0 30px rgba(0,0,0, .5); */
+                background: #d3b954;
+                border: 2px solid ;
+                border-radius: 20px;
+                backdrop-filter:blur(5px);
+                box-shadow: 0 0 30px rgba(0,0,0, .5);
                 display: flex;
                 justify-content: center;
                 align-items:center;
@@ -173,7 +173,7 @@
             }
 
             .btn:hover {
-            background-color: #fbc00b;
+            background-color: #162938;
             }
 
             /* Center content */
@@ -188,7 +188,7 @@
 </head>
 <body>
 
-    
+
 <div class="container">
     <header>
     <h2 class="logo">Logo</h2>
@@ -232,8 +232,8 @@
                     @enderror
                 </div>
                 <div class="remember-forgot">
-                    
-                
+
+
                 <!-- <label class="form-check-label" for="remember">
                     {{ __('Remember Me') }}
                 </label> -->

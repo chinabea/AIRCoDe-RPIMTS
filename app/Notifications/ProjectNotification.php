@@ -12,13 +12,19 @@ class ProjectNotification extends Notification
 {
     use Queueable;
     private $projectId;
+    private $researcherId;
+    private $researcherMail;
+    private $projectTitle;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($projectId)
+    public function __construct($projectId, $researcherId, $researcherMail, $projectTitle)
     {
         $this->projectId = $projectId;
+        $this->researcherId = $researcherId;
+        $this->researcherMail = $researcherMail;
+        $this->projectTitle = $projectTitle;
     }
 
     /**
@@ -41,28 +47,35 @@ class ProjectNotification extends Notification
             // Admin notification content
             return (new MailMessage)
             ->subject('New Research Project Submission')
-            ->greeting('Dear Director')
-            ->line('A new research project has been submitted.') 
-            ->line('Here are the project details:') 
-            ->line('Researcher ID: ' . $this->projectId)
+            ->greeting('Dear Director,')
+            ->line('A new research project has been submitted.')
+            ->line('Here are the Project Details:')
+            ->line('Researcher ID: ' . $this->researcherId)
+            ->line('Researcher Email: ' . $this->researcherMail)
             ->line('Project ID: ' . $this->projectId)
-            ->line('Submitt.') 
+            ->line('Project Title: ' . $this->projectTitle)
+            ->line('Submission Date: ' . now())
             ->action('View Project', url('/submission-details/show/'.$this->projectId))
             ->line('Please review the project at your earliest convenience.')
-            ->salutation('Sincerely, Your Organization Name');
-        } 
+            ->salutation('Sincerely, RPIMTS!');
+        }
         if ($notifiable instanceof UsersModel && $notifiable->isResearcher()) {
             // User notification content
             return (new MailMessage)
-                ->subject('New Research Project Submission')
-                ->line('Your research project submission has been successfully received.')
-                ->line('Project Details:')
+                ->subject('Research Project Submitted')
+                ->greeting('Dear Researcher,')
+                ->line('Your research project has been successfully submitted.')
+                ->line('Here are the Project Details:')
                 ->line('Project ID: ' . $this->projectId)
+                ->line('Project Title: ' . $this->projectTitle)
+                ->line('Submission Date: ' . now()) // Replace with the actual submission date
+                ->line('You can view the project status by visiting the link below:')
                 ->action('View Project', url('/submission-details/show/'.$this->projectId))
-                ->line('Thank you for using the RPIMTS');
+                ->line('Thank you for your submission and Please review the project at your earliest convenience.')
+                ->salutation('Sincerely, RPIMTS!');
         }
     }
-   
+
     // public function toDatabase($notifiable)
     // {
     //     return [
@@ -101,8 +114,8 @@ class ProjectNotification extends Notification
 
         return null; // Return null if notifiable is not an admin or researcher
     }
- 
-    
+
+
 
     /**
      * Get the array representation of the notification.

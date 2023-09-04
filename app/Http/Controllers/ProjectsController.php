@@ -76,16 +76,18 @@ class ProjectsController extends Controller
 
         $projects->save();
 
-        // Send notifications
-        $director = UsersModel::where('role', true)->first();
         $researcher = UsersModel::find($userId);
+        $researcherMail = $researcher->email;
+        $projectTitle = $projects->projname;
+        $director = UsersModel::where('role', true)->first();
+        // $researcher = UsersModel::find($userId);
 
         if ($director) {
-            $director->notify(new ProjectNotification($projects->id));
+            $director->notify(new ProjectNotification($projects->id, $userId, $researcherMail, $projectTitle));
         }
 
         if ($researcher) {
-            $researcher->notify(new ProjectNotification($projects->id));
+            $researcher->notify(new ProjectNotification($projects->id, $userId, $researcherMail, $projectTitle));
         }
 
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
@@ -111,7 +113,7 @@ class ProjectsController extends Controller
             $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudgetModel structure
         }
 
-        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 
+        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers',
                     'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks'));
 
 
