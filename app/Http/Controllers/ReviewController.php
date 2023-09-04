@@ -129,6 +129,14 @@ class ReviewController extends Controller
     //     return view('reviews.review-decision', compact('records'));
     // }
 
+    public function review($id)
+{
+    $records = ProjectsModel::findOrFail($id);
+
+    return view('reviews.review-decision', compact('records'));
+}
+
+
     // functional na
     public function reviewDecision(Request $request, $id)
     {

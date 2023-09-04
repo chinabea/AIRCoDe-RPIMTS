@@ -49,7 +49,7 @@
             </div>
           </div>
 
-          <div class="col-lg-12">
+        <div class="col-lg-12">
 
             <!-- Basic Card Example -->
             <div class="card shadow mb-4">

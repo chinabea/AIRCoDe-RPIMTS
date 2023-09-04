@@ -57,6 +57,9 @@
 
       <div class="col-md-12">
         <div class="text-center">
+        <button id="review-btn" class="btn btn-primary my-2">
+            <i class="fas fa-file-signature mr-2"></i>Review 
+        </button>
         <button id="details-btn" class="btn btn-primary my-2">
             <i class="fas fa-info-circle mr-2"></i>Details
         </button>
@@ -92,6 +95,54 @@
         </button>
 </div>
 </div>
+      <div id="review-form" class="mt-4" style="display: none;">
+        <!-- Form fields go here -->
+        <div class="col-md-12">
+          <div class="card card-primary card-outline">
+            <div class="card-header">
+              Review
+            </div>
+            <div class="card-body pad table-responsive text-left">
+              
+
+        <div class="col-lg-12">
+
+<!-- Basic Card Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Review Decision</h6>
+    </div>
+    <div class="card-body">
+        <h3>{{ $records->projname }}</h3>
+        <p>comments</p>
+    </div>
+</div>
+
+</div>
+
+<div class="text-center">
+<form action="{{ route('reviews.review-decision.store', ['id' => $records->id]) }}" method="POST">
+    @csrf
+    <input type="hidden" name="_method" value="PUT">
+    <!-- Other form fields... -->
+    <input type="hidden" name="project_id" value="{{ $records->id }}">
+
+    <button value="Accepted" type="submit" name="decision" class="btn btn-info">
+        <i class="fas fa-check-circle mr-2"></i>Accepted
+    </button>
+    <button value="Accepted with Revision" type="submit" name="decision" class="btn btn-warning">
+        <i class="fas fa-edit mr-2"></i>Accepted with Revision
+    </button>
+    <button value="Rejected" type="submit" name="decision" class="btn btn-danger">
+        <i class="fas fa-times-circle mr-2"></i>Rejected
+    </button>
+</form>
+</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
       <div id="details-form" class="mt-4" style="display: none;">
         <!-- Form fields go here -->
         <div class="col-md-12">
@@ -162,7 +213,7 @@
             </div>
           </div>
         </div>
-        </div>
+      </div>
 
       <div id="tasks-form" class="mt-4" style="display: none;">
       <!-- Form fields go here -->
@@ -2057,7 +2108,7 @@
       @endif
     @endauth
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="{{ asset('submissiondetailbuttons.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>
 
 </div>
 <aside class="control-sidebar control-sidebar-dark">

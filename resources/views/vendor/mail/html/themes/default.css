@@ -11,7 +11,7 @@ body *:not(html):not(style):not(br):not(tr):not(code) {
 body {
     -webkit-text-size-adjust: none;
     background-color: #ffffff;
-    color: #718096;
+    color: #022A44; /* Updated text color */
     height: 100%;
     line-height: 1.4;
     margin: 0;
@@ -38,7 +38,7 @@ a img {
 /* Typography */
 
 h1 {
-    color: #3d4852;
+    color: #022A44; /* Updated text color */
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
@@ -103,7 +103,7 @@ img {
 }
 
 .header a {
-    color: #3d4852;
+    color: #022A44; /* Updated text color */
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -266,12 +266,12 @@ img {
 
 .panel-content {
     background-color: #edf2f7;
-    color: #718096;
+    color: #022A44; /* Updated text color */
     padding: 16px;
 }
 
 .panel-content p {
-    color: #718096;
+    color: #022A44; /* Updated text color */
 }
 
 .panel-item {

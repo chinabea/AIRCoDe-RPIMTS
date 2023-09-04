@@ -40,12 +40,16 @@ class ProjectNotification extends Notification
         if ($notifiable instanceof UsersModel && $notifiable->isDirector()) {
             // Admin notification content
             return (new MailMessage)
-                ->subject('New Research Project Submission')
-                ->line('A new research project has been submitted.')
-                ->line('Project Details:')
-                ->line('Project ID: ' . $this->projectId)
-                ->action('View Project', url('/projects/'.$this->projectId))
-                ->line('You are receiving this notification as the director of the RPIMTS');
+            ->subject('New Research Project Submission')
+            ->greeting('Dear Director')
+            ->line('A new research project has been submitted.') 
+            ->line('Here are the project details:') 
+            ->line('Researcher ID: ' . $this->projectId)
+            ->line('Project ID: ' . $this->projectId)
+            ->line('Submitt.') 
+            ->action('View Project', url('/submission-details/show/'.$this->projectId))
+            ->line('Please review the project at your earliest convenience.')
+            ->salutation('Sincerely, Your Organization Name');
         } 
         if ($notifiable instanceof UsersModel && $notifiable->isResearcher()) {
             // User notification content
@@ -54,7 +58,7 @@ class ProjectNotification extends Notification
                 ->line('Your research project submission has been successfully received.')
                 ->line('Project Details:')
                 ->line('Project ID: ' . $this->projectId)
-                ->action('View Project', url('/projects/'.$this->projectId))
+                ->action('View Project', url('/submission-details/show/'.$this->projectId))
                 ->line('Thank you for using the RPIMTS');
         }
     }
@@ -81,7 +85,7 @@ class ProjectNotification extends Notification
                 'subject' => 'New Research Project Submission',
                 'message' => 'A new research project has been submitted.',
                 'project_id' => $this->projectId,
-                'link' => url('/projects/' . $this->projectId),
+                'link' => url('/submission-details/show/' . $this->projectId),
                 'role' => 'director',
             ];
         } elseif ($notifiable->isResearcher()) {
@@ -90,7 +94,7 @@ class ProjectNotification extends Notification
                 'subject' => 'New Research Project Submission',
                 'message' => 'Your research project submission has been successfully received.',
                 'project_id' => $this->projectId,
-                'link' => url('/projects/' . $this->projectId),
+                'link' => url('/submission-details/show/' . $this->projectId),
                 'role' => 'researcher',
             ];
         }
