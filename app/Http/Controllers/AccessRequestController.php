@@ -14,13 +14,13 @@ class AccessRequestController extends Controller
         // $items = AccessRequestModel::all();
         $records = AccessRequestModel::orderBy('created_at', 'ASC')->get();
 
-        return view('transparency.accessrequests.index', compact('records'));
+        return view('transparency.access-requests.index', compact('records'));
     }
 
     public function create()
     {
         // Return the view for creating a new item
-        return view('transparency.accessrequests.create');
+        return view('transparency.access-requests.create');
     }
 
     public function store(Request $request)
@@ -28,7 +28,7 @@ class AccessRequestController extends Controller
         AccessRequestModel::create($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('accessrequests')->with('success', 'Data Successfully Added!');
+        return redirect()->route('access-requests')->with('success', 'Data Successfully Added!');
     }
 
     public function show($id)
@@ -36,7 +36,7 @@ class AccessRequestController extends Controller
         // Retrieve and show the specific item using the provided ID
         $accessrequests = AccessRequestModel::findOrFail($id);
 
-        return view('transparency.accessrequests.show', compact('accessrequests'));
+        return view('transparency.access-requests.show', compact('accessrequests'));
     }
 
     public function edit($id)
@@ -44,7 +44,7 @@ class AccessRequestController extends Controller
         // Retrieve and show the specific item for editing
         $accessrequests = AccessRequestModel::findOrFail($id);
 
-        return view('transparency.accessrequests.edit', compact('accessrequests'));
+        return view('transparency.access-requests.edit', compact('accessrequests'));
     }
 
     public function update(Request $request, $id)
@@ -55,7 +55,7 @@ class AccessRequestController extends Controller
         $accessrequests->update($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('accessrequests')->with('success', 'Data Successfully Updated!');
+        return view('researcher.home', compact('accessrequests'));
     }
 
     public function destroy($id)
@@ -65,7 +65,7 @@ class AccessRequestController extends Controller
         $accessrequests->delete();
 
         // Redirect to the index or perform other actions
-        return redirect()->route('accessrequests')->with('success', 'Data Successfully Deleted!');
+        return redirect()->route('researcher.home')->with('success', 'Data Successfully Deleted!');
     }
 
 }

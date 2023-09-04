@@ -1,71 +1,51 @@
 @extends('layouts.template')
-@section('title', 'Proposals Detail')
 
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-@include('layouts.topnav')
-@include('layouts.sidebar')
+@section('content')
   <div class="content-wrapper">
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>About Us</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              {{-- <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">About Us</li> --}}
-            </ol>
-          </div>
-        </div>
-      </div>
+      <!-- Header Content Goes Here -->
     </section>
 
-        <div class="col-12">
-            <!-- Custom Tabs -->
-            <div class="card">
-              <div class="card-header d-flex p-0">
-                <h3 class="card-title p-3"></h3>
-                <input type="text" class="card-title p-3" name="proposaltitle" value="{{ $proposals->proposaltitle }}" readonly>
-              </div><!-- /.card-header -->
-              <div class="card-body">
-                <div class="tab-content">
-                    <input type="text" name="proposaldescription" value="{{ $proposals->proposaldescription }}" readonly>
-                    <br>
-                    <input type="date" name="startdate" value="{{ $proposals->startdate }}" readonly>
-                    <br>
-                    <input type="date" name="enddate" value="{{ $proposals->enddate }}" readonly>
-                    <br>
-                    <input type="text" name="status" value="{{ $proposals->status }}" readonly>
-                    <br>
-                    <input type="text" name="remarks" value="{{ $proposals->remarks }}" readonly>
-                    <br>
-                    A wonderful serenity has taken possession of my entire soul,
-                    like these sweet mornings of spring which I enjoy with my whole heart.
-                    I am alone, and feel the charm of existence in this spot,
-                    which was created for the bliss of souls like mine. I am so happy,
-                    my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-                    that I neglect my talents. I should be incapable of drawing a single stroke
-                    at the present moment; and yet I feel that I never was a greater artist than now.
-                  <!-- /.tab-pane -->
-                </div>
-                <div class="row">
-                    <div class="col mb-3">
-                        <label class="form-label">Created At</label>
-                        <input type="text" name="created_at" class="form-control" placeholder="Created At" value="{{ $proposals->created_at }}" readonly>
-                    </div>
-                    <div class="col mb-3">
-                        <label class="form-label">Updated At</label>
-                        <input type="text" name="updated_at" class="form-control" placeholder="Updated At" value="{{ $proposals->updated_at }}" readonly>
-                    </div>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h3 class="card-title">{{ $proposals->proposaltitle }}</h3>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{ $proposals->proposaldescription }}</p>
+              <div class="mb-4">
+                <strong>Start Date:</strong> {{ $proposals->startdate }}
+              </div>
+              <div class="mb-4">
+                <strong>End Date:</strong> {{ $proposals->enddate }}
+              </div>
+              <div class="mb-4">
+                <strong>Status:</strong> {{ $proposals->status }}
+              </div>
+              <div class="mb-4">
+                <strong>Remarks:</strong> {{ $proposals->remarks }}
               </div>
             </div>
           </div>
-</div>
-  @include('layouts.footer')
-<aside class="control-sidebar control-sidebar-dark">
-</aside>
-</div>
-</body>
-</html>
+        </div>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header bg-secondary text-white">
+              <h3 class="card-title">Additional Information</h3>
+            </div>
+            <div class="card-body">
+              <div class="mb-4">
+                <strong>Created At:</strong> {{ $proposals->created_at }}
+              </div>
+              <div class="mb-4">
+                <strong>Updated At:</strong> {{ $proposals->updated_at }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection

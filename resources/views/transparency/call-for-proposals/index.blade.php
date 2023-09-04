@@ -1,5 +1,4 @@
 @extends('layouts.template')
-@section('title', 'Proposals')
 
 @section('content')
   <div class="content-wrapper">
@@ -23,7 +22,7 @@
                         {{ Session::get('success') }}
                     </div>
                 @endif
-                <table id="example1" class="table table-bordered table-hover table-sm">
+                <table id="example1" class="table table-bordered table-hover text-center table-sm">
                   <thead>
                       <tr>
                           <th>#</th>
@@ -48,7 +47,7 @@
                           <td class="align-middle">{{ $proposal->status }}</td>
                           <td class="align-middle">{{ $proposal->remarks }}</td>
                           <td class="align-middle">
-                              <div class="btn-group" role="group" aria-label="Basic example">
+                              <div class="btn-group btn-sm" role="group" aria-label="Basic example">
                               <a href="{{ route('transparency.call-for-proposals.show', $proposal->id) }}" type="button" class="btn btn-secondary">
                                 <i class="fas fa-info-circle"></i> Details
                               </a>

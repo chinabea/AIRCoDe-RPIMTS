@@ -675,7 +675,8 @@
               DETAILS
           </div>
           <div class="card-body pad table-responsive text-left">
-          <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
+          <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">
+            <i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
               <div style="text-align: justify;">
                   <label>Project Name:</label><br>
                   {{ $records->projname }}

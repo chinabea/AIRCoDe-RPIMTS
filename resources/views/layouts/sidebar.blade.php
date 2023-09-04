@@ -55,18 +55,18 @@
                   <p>Access Request</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="{{ route('announcements') }}" class="nav-link">
                   <i class="nav-icon fas fa-bell"></i>
                   <p>Announcements</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="{{ route('abouts') }}" class="nav-link">
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>About Us</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="nav-icon fas fa-download"></i>
@@ -373,43 +373,43 @@
                   <p>Access Request</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="{{ route('announcements') }}" class="nav-link">
                   <i class="nav-icon fas fa-bell"></i>
                   <p>Announcements</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="{{ route('abouts') }}" class="nav-link">
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>About Us</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="nav-icon fas fa-download"></i>
                   <p>Downloads</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="{{ route('faqs') }}" class="nav-link">
                 <i class="nav-icon fas fa-question-circle"></i>
               <p>
                 FAQs
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a href="{{ route('contacts') }}" class="nav-link">
+            <a href="{{ route('contact') }}" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Contact Us
               </p>
             </a>
           </li>
-          <li class="nav-header">EXTRAS</li>
+          <!-- <li class="nav-header">EXTRAS</li>
           <li class="nav-item">
             <a href="{{ route('reviews') }}" class="nav-link">
               <i class="nav-icon fas fa-user-alt"></i>
@@ -417,7 +417,7 @@
                 Reviews
               </p>
             </a>
-          </li>
+          </li> -->
     </div>
 </aside>
 
@@ -530,24 +530,24 @@
                   <p>Access Request</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="{{ route('announcements') }}" class="nav-link">
                   <i class="nav-icon fas fa-bell"></i>
                   <p>Announcements</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="{{ route('abouts') }}" class="nav-link">
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>About Us</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="nav-icon fas fa-download"></i>
                   <p>Downloads</p>
                 </a>
-              </li>
+              </li> -->
     </div>
   </aside>
 
@@ -816,13 +816,13 @@
                   <p>Access Request</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="{{ route('announcements') }}" class="nav-link">
                   <i class="nav-icon fas fa-bell"></i>
                   <p>Announcements</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="{{ route('abouts') }}" class="nav-link">
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>About Us</p>
@@ -833,26 +833,26 @@
                   <i class="nav-icon fas fa-download"></i>
                   <p>Downloads</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="{{ route('faqs') }}" class="nav-link">
                 <i class="nav-icon fas fa-question-circle"></i>
               <p>
                 FAQs
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a href="{{ route('contacts') }}" class="nav-link">
+            <a href="{{ route('contact') }}" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Contact Us
               </p>
             </a>
           </li>
-          <li class="nav-header">EXTRAS</li>
+          <!-- <li class="nav-header">EXTRAS</li>
           <li class="nav-item">
             <a href="{{ route('reviews') }}" class="nav-link">
               <i class="nav-icon fas fa-user-alt"></i>
@@ -860,7 +860,7 @@
                 Reviews
               </p>
             </a>
-          </li>
+          </li> -->
     </div>
 </aside>
 

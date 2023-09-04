@@ -18,6 +18,7 @@ use App\Http\Controllers\LineItemBudgetController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\EmailBoxController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\FullCalenderController;
@@ -52,16 +53,32 @@ Auth::routes();
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-Route::prefix('staff')->middleware(['auth', 'staff'])->group(function (){
+Route::middleware('auth')->group(function (){
+    // Route::get('/home', [DashboardController::class, 'countAll'])->name('all.projects.users');
 
-    Route::get('/home', [StatusController::class, 'countStatuses'])->name('staff.home');
+    Route::get('/total-users', [UsersController::class, 'showTotalUsers']);
+    Route::get('/create-users', [UsersController::class, 'create'])->name('users.create'); //this should be in a login
+    Route::post('/store-users', [UsersController::class, 'store'])->name('users.store');
+    Route::get('/show-users/{id}', [UsersController::class, 'show'])->name('users.show');
+    Route::get('/edit-users/{id}', [UsersController::class, 'edit'])->name('users.edit');
+    Route::put('/edit-users/{id}', [UsersController::class, 'update'])->name('users.update');
+    Route::delete('/delete-users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+    
+});
+
+
+Route::prefix('staff')->middleware(['auth', 'staff'])->group(function (){
+    Route::get('/home', [DashboardController::class, 'countAll'])->name('staff.home');
+    
+    // Route::get('/home', function () {
+    //    return view('dashboard');
+    // })->name('staff.home');
 
 });
 
 Route::prefix('reviewer')->middleware(['auth', 'reviewer'])->group(function (){
 
-    Route::get('/home', [StatusController::class, 'countStatuses'])->name('reviewer.home');
-
+    Route::get('/home', [DashboardController::class, 'countAll'])->name('reviewer.home');
     Route::get('/reviews', [ReviewsController::class, 'index'])->name('reviews');
     Route::get('/review/create', [ReviewsController::class, 'create'])->name('reviews.create');
     Route::post('/review/store', [ReviewsController::class, 'store'])->name('reviews.store');
@@ -69,13 +86,11 @@ Route::prefix('reviewer')->middleware(['auth', 'reviewer'])->group(function (){
     Route::get('/review/edit/{id}', [ReviewsController::class, 'edit'])->name('reviews.edit');
     Route::put('/review/edit/{id}', [ReviewsController::class, 'update'])->name('reviews.update');
     Route::delete('/review/delete/{id}', [ReviewsController::class, 'destroy'])->name('reviews.destroy');
-
 });
 
 Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
 
-    Route::get('/home', [StatusController::class, 'countStatuses'])->name('director.home');
-
+    Route::get('/home', [DashboardController::class, 'countAll'])->name('director.home');
     Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts');
     Route::get('/about/create', [AboutusController::class, 'create'])->name('transparency.aboutus.create');
     Route::post('/about/store', [AboutusController::class, 'store'])->name('transparency.aboutus.store');
@@ -97,14 +112,6 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
     Route::put('/announcement/edit/{id}', [AnnouncementsController::class, 'update'])->name('transparency.announcements.update');
     Route::delete('/announcement/delete/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
 
-    Route::get('/total-users', [UsersController::class, 'showTotalUsers']);
-    Route::get('/create-users', [UsersController::class, 'create'])->name('users.create'); //this should be in a login
-    Route::post('/store-users', [UsersController::class, 'store'])->name('users.store');
-    Route::get('/show-users/{id}', [UsersController::class, 'show'])->name('users.show');
-    Route::get('/edit-users/{id}', [UsersController::class, 'edit'])->name('users.edit');
-    Route::put('/edit-users/{id}', [UsersController::class, 'update'])->name('users.update');
-    Route::delete('/delete-users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
-
     Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
     Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
@@ -121,26 +128,18 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
     // Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
     // Route::post('/projects/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
 
-    
-
     Route::get('/select-reviewers', [ReviewController::class, 'select'])->name('submission-details.reviews.select');
     Route::post('/submission-details/{projectId}/assignReviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
-
-    // Route::post('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('selectReviewers');
-    // Route::post('/finalize-reviewers', [ReviewController::class, 'finalizeReviewers'])->name('finalizeReviewers');
-
-    // Route::get('/line-items-budget/create', [LineItemBudgetController::class, 'create'])->name('submission-details.line-items-budget.create');
-    // Route::post('/line-items-budget/store', [LineItemBudgetController::class, 'store'])->name('submission-details.line-items-budget.store');
-    // Route::get('/show-line-items-budget/{id}', [LineItemBudgetController::class, 'show'])->name('submission-details.line-items-budget.show');
-    // Route::get('/edit-line-items-budget/{id}', [LineItemBudgetController::class, 'edit'])->name('submission-details.line-items-budget.edit');
-    // Route::put('/edit-line-items-budget/{id}', [LineItemBudgetController::class, 'update'])->name('submission-details.line-items-budget.update');
-    // Route::delete('/delete-line-items-budget/{id}', [LineItemBudgetController::class, 'destroy'])->name('submission-details.line-items-budget.destroy');
-
-
 });
 
 Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function (){
-    Route::get('/home', [StatusController::class, 'countStatuses'])->name('researcher.home');
+    
+
+Route::get('/home', function () {
+    return view('dashboard');
+})->name('home');
+
+    Route::get('/home', [DashboardController::class, 'countAll'])->name('researcher.home');
 
     Route::get('/about/show/{id}', [AboutusController::class, 'show'])->name('transparency.aboutus.show');
     Route::get('/call-for-proposals/show/{id}', [ProposalsController::class, 'show'])->name('transparency.call-for-proposals.show'); //view all list without functions
@@ -192,7 +191,6 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
 
     Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
     Route::get('/status/edit', [StatusController::class, 'update'])->name('projects.editstatus');
-
 });
 
 // NAGANA NA YAYS!
@@ -223,8 +221,6 @@ Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');
 Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-
 
 Route::get('/test-error', function () {
     abort(500);

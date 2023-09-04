@@ -38,9 +38,10 @@
     <div>
         <div class="page-break"></div>
 
-        {{-- <div class="header">
+        <!-- <div class="header">
             <img src="{{ asset('header.png') }}" alt="Header Image">
-        </div> --}}
+        </div>  -->
+        <!-- <img src="{{ public_path('header.png') }}" alt="Sample Image"> -->
         
         <div style="text-align: center;">
             <h1>Project Name</h1>

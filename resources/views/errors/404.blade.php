@@ -1,55 +1,32 @@
 @extends('layouts.template')
-@section('title', 'Oops! Page not found.')
 
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
-<!-- 
-@include('layouts.topnav')
-@include('layouts.sidebar') -->
-  <div class="content-wrapper">
+@section('content')
+<div class="content-wrapper">
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <!-- <h1>Blank Page</h1> -->
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Blank Page</li> -->
-            </ol>
-          </div>
-        </div>
-      </div>
     </section>
-    <!-- Main content -->
     <section class="content">
-      <div class="error-page">
-        <h2 class="headline text-warning"> 404</h2>
+        <div class="error-page">
+            <h2 class="headline text-warning">404</h2>
 
-        <div class="error-content">
-          <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Page not found.</h3>
+            <div class="error-content">
+                <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Page not found.</h3>
 
-          <p>
-            We could not find the page you were looking for.
-            Meanwhile, you may <a href="../../index.html">return to dashboard</a> or try using the search form.
-          </p>
+                <p>
+                    We could not find the page you were looking for.
+                    Meanwhile, you may <a href="{{ url('/') }}">return to the dashboard</a> or try using the search form.
+                </p>
 
-          <form class="search-form">
-            <div class="input-group">
-              <input type="text" name="search" class="form-control" placeholder="Search">
+                <form class="search-form" method="get" action="{{ url('/search') }}">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search" required>
 
-              <div class="input-group-append">
-                <button type="submit" name="submit" class="btn btn-warning"><i class="fas fa-search"></i>
-                </button>
-              </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-warning"><i class="fas fa-search"></i> Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </form>
         </div>
-      </div>
     </section>
-  </div>
-  @include('layouts.footer')
-  <aside class="control-sidebar control-sidebar-dark">
-  </aside>
 </div>
+@endsection

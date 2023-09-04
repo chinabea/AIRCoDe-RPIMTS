@@ -1,26 +1,9 @@
 @extends('layouts.template')
-@section('title', 'Requests')
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-@include('layouts.topnav')
-@include('layouts.researchersidebar')
+
+@section('content')
   <div class="content-wrapper">
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>DataTables</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-            </ol>
-          </div>
-        </div>
-      </div>
     </section>
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -29,11 +12,11 @@
               <div class="card-header">
                 <h3 class="card-title">Request List</h3>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
-                <a href="{{ route('transparency.accessrequests.create') }}" class="btn btn-primary">Add Request</a>
-
-                <hr />
+              <div class="table-responsive">
+                <a href="{{ route('transparency.access-requests.create') }}" class="btn btn-primary my-2">
+                <i class="fas fa-plus"></i> Add Request</a>
+                
                 @if(Session::has('success'))
                     <div class="alert alert-success" role="alert">
                         {{ Session::get('success') }}
@@ -62,23 +45,23 @@
                                 <td class="align-middle">{{ $requests->dateapproved }}</td>
                                 <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('transparency.accessrequests.show', $requests->id) }}" type="button" class="btn btn-secondary">Details</a>
-                                        <a href="{{ route('transparency.accessrequests.edit', $requests->id) }}"  type="button" class="btn btn-warning">Edit</a>
-                                        {{-- <form action="{{ route('transparency.accessrequests.destroy', $requests->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
+                                        <a href="{{ route('transparency.access-requests.show', $requests->id) }}" type="button" class="btn btn-secondary">Details</a>
+                                        <a href="{{ route('transparency.access-requests.edit', $requests->id) }}"  type="button" class="btn btn-warning">Edit</a>
+                                        {{-- <form action="{{ route('transparency.access-requests.destroy', $requests->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger">Delete</button>
                                         </form> --}}
 
 
-                                        {{-- <form action="{{ route('transparency.accessrequests.destroy', $requests->id) }}" method="POST" class="d-inline">
+                                        {{-- <form action="{{ route('transparency.access-requests.destroy', $requests->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <a type="button" class="btn btn-danger" onclick="return confirm('Delete?')">Delete</a>
                                         </form> --}}
 
 
-                                        <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('transparency.accessrequests.destroy', $requests->id) }}')">Delete</button>
+                                        <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('transparency.access-requests.destroy', $requests->id) }}')">Delete</button>
 
                                         <script>
                                         function confirmDelete(url) {
@@ -97,10 +80,6 @@
                                 </td>
                             </tr>
                             @endforeach
-                            @else
-                                <tr>
-                                    <td class="text-center" colspan="5">Record not found!</td>
-                                </tr>
                             @endif
                     </tbody>
                     <tfoot>
@@ -121,9 +100,4 @@
         </div>
       </section>
 </div>
-@include('layouts.footer')
-<aside class="control-sidebar control-sidebar-dark">
-</aside>
-</div>
-</body>
-</html>
+@endsection
