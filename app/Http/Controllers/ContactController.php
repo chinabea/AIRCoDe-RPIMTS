@@ -1,15 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Notifications\ContactMessageNotification;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\ContactUsModel;
 use App\Mail\ContactMail;
+use App\Models\UsersModel;
 
 class ContactController extends Controller
 {
     public function index()
     {
+        $contact_messages = ContactUsModel::all();
         return view('contacts');
     }
 
@@ -40,6 +45,12 @@ class ContactController extends Controller
             $message->to('yurfavchi@gmail.com', 'AIRCoDe RPIM')
                 ->subject('Subject: ' . $contactMessage->subject);
         });
+
+        $director = UsersModel::where('role', true)->first();
+        
+        if ($director) {
+            $director->notify(new ContactMessageNotification($contactMessage->id));
+        }
     
         // Redirect to the index or show view, or perform other actions
         return view('contact')->with('contactMessage', $contactMessage);

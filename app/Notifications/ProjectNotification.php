@@ -45,7 +45,7 @@ class ProjectNotification extends Notification
                 ->line('Project Details:')
                 ->line('Project ID: ' . $this->projectId)
                 ->action('View Project', url('/projects/'.$this->projectId))
-                ->line('You are receiving this notification as the director of the Research Project Information Management and Tracking System.');
+                ->line('You are receiving this notification as the director of the RPIMTS');
         } 
         if ($notifiable instanceof UsersModel && $notifiable->isResearcher()) {
             // User notification content
@@ -55,7 +55,7 @@ class ProjectNotification extends Notification
                 ->line('Project Details:')
                 ->line('Project ID: ' . $this->projectId)
                 ->action('View Project', url('/projects/'.$this->projectId))
-                ->line('Thank you for using the Research Project Information Management and Tracking System.');
+                ->line('Thank you for using the RPIMTS');
         }
     }
    
