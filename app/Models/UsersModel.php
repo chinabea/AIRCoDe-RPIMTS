@@ -46,6 +46,12 @@ class UsersModel extends Model
     {
         return $this->hasMany(ReviewDecisionModel::class);
     }
+    public function reviews()
+    {
+    
+        return $this->hasMany(ReviewModel::class);
+    }
+
 
 
 

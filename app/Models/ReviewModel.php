@@ -17,11 +17,11 @@ class ReviewModel extends Model
     {
         return $this->belongsTo(UsersModel::class);
     }
-
     public function project()
-    {
-        return $this->belongsTo(ProjectsModel::class);
-    }
+{
+    return $this->belongsTo(ProjectsModel::class, 'project_id'); // Specify the correct foreign key
+}
+
 
     public function reviewDecision()
     {

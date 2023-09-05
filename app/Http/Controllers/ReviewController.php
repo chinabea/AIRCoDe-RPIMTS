@@ -10,102 +10,47 @@ use App\Models\ReviewModel;
 
 class ReviewController extends Controller
 {
+    public function selectReviewers(ProjectsModel $project)
+    {
+        // Assuming you have the $role4Users variable as well
+        $roleUsers = UsersModel::where('role', 4)->get(); // Retrieve users with role 4
 
-    // public function assignReviewers(Request $request, $projectId)
-    // {
-    //     $projId = $request->input('project_id');
-    //     $requestData = $request->all();
-    //     $requestData['project_id'] = $projId;
-    //     $reviewerRoleId = 4; // Replace with the actual role ID of reviewers
+        return view('submission-details.reviews.select-reviewer', compact('project', 'roleUsers'));
+    }
 
-    //     // Retrieve users with the specified role
-    //     $reviewers = UsersModel::where('role', $reviewerRoleId)->get();
+public function store(Request $request)
+{
+    $projectId = $request->input('project_id');
+    $reviewerIds = $request->input('reviewer_ids');
 
-    //     // Find the project
-    //     $project = ProjectsModel::findOrFail($projectId);
+    foreach ($reviewerIds as $reviewerId) {
+        // Create a new review instance with the provided data
+        ReviewModel::create([
+            'project_id' => $projectId,
+            'user_id' => $reviewerId,
+            'highlighted_text' => 'highlighted text here',
+            'comment' => 'pending', // Default value
+        ]);
+    }
 
-    //     // Assign selected reviewers to the project without detaching existing reviewers
-    //     $selectedReviewers = UsersModel::whereIn('id', $request->input('reviewer_ids'))->get();
-    //     $project->reviewers()->syncWithoutDetaching($selectedReviewers);
+    return redirect()->back()->with('success', 'Reviewers assigned successfully.');
+}
 
-    //     return redirect()->back()->with('success', 'Reviewers have been assigned to the project.');
-    // }
-    // public function selectReviewers(Request $request) {
-    //     $selectedReviewers = $request->input('reviewers');
-    
-    //     $projId = $request->input('project_id', 1);
-    //     $requestData = $request->all();
-    //     $requestData['project_id'] = $projId;
+    public function showForm()
+    {
+        $projects = Project::all(); // Retrieve a list of projects
 
-    //     // Attach the selected reviewers to the project using relationships
-    //     foreach ($selectedReviewers as $reviewerId) {
-    //         $project->reviewers()->attach($reviewerId);
-    //     }
-    
-    //     // Alternatively, you can store the selected reviewers' IDs in the session
-    //     // or database to be used later in the finalization step
-    
-    //     return redirect()->route('selectReviewers')->with('success', 'Reviewers selected successfully.');
-    // }
+        // Assuming you have the $role4Users variable as well
+        $role4Users = User::where('role', 4)->get(); // Retrieve users with role 4
 
+        return view('submission-details.reviews.select-reviewer', compact('projects', 'role4Users'));
+    }
     public function select()
     {
         // $project = Project::findOrFail($project_id);
         return view('submission-details.reviews.select-reviewer');
     }
     
-    // public function selectReviewers(Request $request, $projectId)
-    // {
-    //     $reviewId = $request->input('project_id');
-    //     $requestData = $request->all();
-    //     $requestData['project_id'] = $reviewId;
-    //     ReviewModel::create($requestData);
-
-    //     // $project = ProjectsModel::findOrFail($projectId);
-    //     $reviewers = UsersModel::where('role', 4)->get();
-        
-    //     if ($request->isMethod('post')) {
-    //         $selectedReviewers = $request->input('reviewer_ids');
-            
-    //         foreach ($selectedReviewers as $reviewerId) {
-    //             $project->reviewers()->attach($reviewerId);
-    //         }
-    
-    //         return redirect()->route('submission-details.reviews.assignReviewers', ['projectId' => $projectId])
-    //             ->with('success', 'Reviewers assigned successfully.');
-    //     }
-    
-    //     return view('submission-details.reviews.select_reviewers', compact('project', 'reviewers'));
-    // }
-
-    public function selectReviewers(Request $request, $projectId)
-    {
-        // Validate the request data, if necessary
-
-        // Fetch all reviewers with role 4
-        $reviewers = UsersModel::where('role', 4)->get();
-
-        // Create a new review record
-        $review = new ReviewModel();
-        $review->project_id = $projectId; // Assuming you have a project_id column in your Review model
-        $review->save();
-
-        // Fetch the project (assuming you have a Project model)
-        $project = ProjectsModel::findOrFail($projectId);
-
-        if ($request->isMethod('post')) {
-            // Get the selected reviewer IDs from the form
-            $selectedReviewers = $request->input('reviewer_ids');
-
-            // Attach selected reviewers to the project
-            $project->reviewers()->sync($selectedReviewers);
-
-            return redirect()->route('submission-details.reviews.assignReviewers', ['projectId' => $projectId])
-                ->with('success', 'Reviewers assigned successfully.');
-        }
-
-        return view('submission-details.reviews.select_reviewers', compact('project', 'reviewers'));
-    }
 
     public function assignReviewers(Request $request, $projectId)
     {
@@ -120,14 +65,6 @@ class ReviewController extends Controller
 
         return redirect()->back()->with('success', 'Reviewers have been assigned to the project.');
     }
-
-
-    // public function review($id)
-    // {
-    //     $records = ProjectsModel::findOrFail($id);
-
-    //     return view('reviews.review-decision', compact('records'));
-    // }
 
     public function review($id)
 {

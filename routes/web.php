@@ -198,6 +198,8 @@ Route::get('/projects/track', [ProjectsController::class, 'track'])->name('proje
 Route::get('/generate-pdf/{data_id}', [PdfController::class, 'generatePDF'])->name('generate.pdf');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+Route::post('/store/project/reviewers', [ReviewController::class, 'store'])->name('store.project.reviewers');
+
 
 
 // KIND OF NAGANA NA, BUT NOT FULLY! ON PROCESS! 

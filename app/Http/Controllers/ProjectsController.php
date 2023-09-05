@@ -102,6 +102,7 @@ class ProjectsController extends Controller
         $files = FileModel::where('project_id', $id)->get();
         $reviewers = ReviewModel::where('user_id', $id)->get();
         $members = UsersModel::where('role', 3)->get();
+        $reviewersss = UsersModel::where('role', 4)->get();
         $records = ProjectsModel::findOrFail($id);
         // $records = ProjectsModel::with('user')->findOrFail($id);
 
@@ -113,7 +114,7 @@ class ProjectsController extends Controller
             $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudgetModel structure
         }
 
-        return view('submission-details.show', compact('records', 'reviewers', 'teamMembers',
+        return view('submission-details.show', compact('records', 'reviewers',  'reviewersss', 'teamMembers',
                     'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks'));
 
 

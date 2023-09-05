@@ -39,9 +39,8 @@
         <div class="page-break"></div>
 
         <!-- <div class="header">
-            <img src="{{ asset('header.png') }}" alt="Header Image">
+            <img src="{{ public_path('header.png') }}" alt="Header Image">
         </div>  -->
-        <!-- <img src="{{ public_path('header.png') }}" alt="Sample Image"> -->
         
         <div style="text-align: center;">
             <h1>Project Name</h1>

@@ -60,8 +60,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-  @section('title', 'RPIMTS')
   @include('layouts.topnav')
+  @section('title', 'RPIMTS')
 
   @include('layouts.sidebar')
 

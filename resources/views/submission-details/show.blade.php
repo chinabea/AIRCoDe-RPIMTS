@@ -49,8 +49,6 @@
           </div>
 
   <div class="col-md-12">
-    <!-- <div class="text-center"> -->
-
 
     @auth
       @if(auth()->user()->role === 1)
@@ -604,18 +602,21 @@
                   @include('submission-details.reviews.select-reviewer')
 
 
-                <form action="{{ route('submission-details.reviews.select-reviewer', ['projectId' => $records->id]) }}" method="POST">
-                  @csrf
-                  <input type="hidden" name="project_id" value="{{ $records->id }}">
-                  <label>Select Reviewers:</label>
-                  <select name="reviewer_ids[]" class="form-control" multiple>
-                      @foreach($reviewers as $reviewer)
-                          <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                      @endforeach
-                  </select>
-                  <button type="submit" class="btn btn-primary">Assign Reviewers</button>
-                </form>
+<form method="POST" action="{{ route('store.project.reviewers') }}">
+    @csrf
+    <input type="hidden" name="project_id" value="{{ $records->id }}">
 
+    <label for="reviewer_ids[]">Select Three Reviewers:</label>
+    <select name="reviewer_ids[]" id="reviewer_ids[]" multiple size="3">
+        <!-- Populate this select with users having role 4 -->
+        @foreach ($reviewersss as $reviewer)
+            <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+        @endforeach
+    </select>
+
+    <button type="submit">Assign Reviewers</button>
+</form> 
+     
 
           </div>
           </div>
@@ -1121,22 +1122,15 @@
             </div>
             <div class="card-body pad table-responsive">
             <div class="container">
-                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
-                    @include('submission-details.reviews.select-reviewer')
+                   
 
-                    <form action="{{ route('submission-details.reviews.assignReviewers') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="project_id" value="{{ $records->id }}">
-                    <div class="form-group">
-                        <label>Select Reviewers:</label>
-                        <select name="reviewer_ids[]" class="form-control" multiple>
-                            @foreach($reviewers as $reviewer)
-                                <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Assign Reviewers</button>
-                </form>
+                    <ul>
+        @foreach ($reviewers as $reviewer)
+            <li>{{ $reviewer->name }}</li>
+        @endforeach
+    </ul>
+     
+                    
 
 
 
