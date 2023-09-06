@@ -79,13 +79,13 @@ Route::prefix('staff')->middleware(['auth', 'staff'])->group(function (){
 Route::prefix('reviewer')->middleware(['auth', 'reviewer'])->group(function (){
 
     Route::get('/home', [DashboardController::class, 'countAll'])->name('reviewer.home');
-    Route::get('/reviews', [ReviewsController::class, 'index'])->name('reviews');
-    Route::get('/review/create', [ReviewsController::class, 'create'])->name('reviews.create');
-    Route::post('/review/store', [ReviewsController::class, 'store'])->name('reviews.store');
-    Route::get('/review/show/{id}', [ReviewsController::class, 'show'])->name('reviews.show');
-    Route::get('/review/edit/{id}', [ReviewsController::class, 'edit'])->name('reviews.edit');
-    Route::put('/review/edit/{id}', [ReviewsController::class, 'update'])->name('reviews.update');
-    Route::delete('/review/delete/{id}', [ReviewsController::class, 'destroy'])->name('reviews.destroy');
+    Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
+    Route::get('/review/create', [ReviewController::class, 'create'])->name('reviews.create');
+    Route::post('/review/store', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::get('/review/show/{id}', [ReviewController::class, 'show'])->name('reviews.show');
+    Route::get('/review/edit/{id}', [ReviewController::class, 'edit'])->name('reviews.edit');
+    Route::put('/review/edit/{id}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/review/delete/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
 Route::prefix('director')->middleware(['auth', 'director'])->group(function (){

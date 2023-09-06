@@ -49,8 +49,12 @@ class ProjectsController extends Controller
                         'background' => 'required',
                         'expected_research_contribution' => 'required',
                         'proposed_methodology' => 'required',
-                        'start_date' => 'required',
-                        'end_date' => 'required',
+                        'start_date' => [
+                            'required',
+                            'date',
+                            'after_or_equal:today', // Ensures the date is today or in the future
+                        ],
+                        'end_date' => 'required|date|after:start_date',
                         'workplan' => 'required',
                         'resources' => 'required',
                         'references' => 'required',
@@ -104,6 +108,7 @@ class ProjectsController extends Controller
         $members = UsersModel::where('role', 3)->get();
         $reviewersss = UsersModel::where('role', 4)->get();
         $records = ProjectsModel::findOrFail($id);
+        $data = ProjectsModel::findOrFail($id);
         // $records = ProjectsModel::with('user')->findOrFail($id);
 
         // return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'allLineItems', 'files'));
@@ -115,7 +120,7 @@ class ProjectsController extends Controller
         }
 
         return view('submission-details.show', compact('records', 'reviewers',  'reviewersss', 'teamMembers',
-                    'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks'));
+                    'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data'));
 
 
     }

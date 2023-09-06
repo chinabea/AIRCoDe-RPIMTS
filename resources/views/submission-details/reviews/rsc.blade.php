@@ -5,8 +5,6 @@
     <section class="content-header">
     </section>
         <section class="content">
-
-
             <section class="content">
                 <div class="container-fluid">
                   <div class="row">
@@ -181,12 +179,7 @@
                       <div class="card-header">
                         <h3 class="card-title">Labels</h3>
                             <div id="reviewForm">
-                                <form action="{{ route('reviews.comments', ['data_id' => $data->id]) }}" method="POST">
-                                    @csrf
-                                    <textarea id="highlightedText" name="highlighted_text" rows="2" cols="50"></textarea>
-                                    <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
-                                    <button type="submit">Submit Review</button>
-                                </form>
+                              
                             </div>
 
                             <script>
