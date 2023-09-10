@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\StatusModel;
 use App\Models\UsersModel;
 use App\Models\User;
+use App\Models\ReviewModel;
 use App\Models\ProjectsModel;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,6 +39,7 @@ class StatusController extends Controller
     public function underEvaluation()
     {
         $projects = ProjectsModel::where('status', 'Under Evaluation')->get();
+        $reviews = ReviewModel::all();
         
         return view('status.under-evaluation', compact('projects'));
     }

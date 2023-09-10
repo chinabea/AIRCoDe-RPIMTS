@@ -258,8 +258,8 @@
                     </a>
                 </li>
             @endforeach
-    </ul>
-    </li>
+          </ul>
+        </li>
 </div>
 </aside>
 
@@ -538,32 +538,31 @@
     <div class="sidebar">
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-header">MAIN MENU</li>
-          <li class="nav-item menu-open">
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('reviewer.home') }}" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>Dashboard</p>
+      <nav class="mt-2"><ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <!-- Add icons to the links using the .nav-icon class
+        with font-awesome or any other icon font library -->
+    <li class="nav-header">MAIN MENU</li>
+    <li class="nav-item">
+        <a href="{{ route('reviewer.home') }}" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Dashboard</p>
+        </a>
+    </li>
+    <li class="nav-header">FOR REVIEW</li>
+            @foreach($revs as $rev)
+            @if($rev->user_id === Auth::user()->id)
+            <li class="nav-item">
+                <a href="{{ route('submission-details.show', ['id' => $rev->id]) }}" class="nav-link">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>{{ $rev->project->projname }}</p>
+                    <p class="deadline mb-4"><br>Deadline: {{ $rev->deadline }}</p>
                 </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('projects') }}" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Submitted Projects
-                <span class="badge badge-info right">7</span>
-              </p>
-            </a>
-          </li>
-    </div>
-  </aside>
+            </li>
+            @endif
+            @endforeach
+          </ul>
+        </div>
+      </aside>
 
 @else
     @include('sidebar-guest')

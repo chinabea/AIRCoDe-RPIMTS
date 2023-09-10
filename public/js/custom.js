@@ -58,8 +58,6 @@ $(function () {
       $('#review-form, #tasks-form, #details-form, #reviewer-form, #status-form, #files-form, #lib-form, #actions-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();
     });
 
-    // Add event handlers for other buttons here
-
     $('#actions-btn').click(function() {
       $('#actions-form').show();
       $('#review-form, #tasks-form, #details-form, #reviewer-form, #status-form, #files-form, #messages-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form, #reprogramming-status-form').hide();

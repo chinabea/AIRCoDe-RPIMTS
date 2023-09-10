@@ -11,17 +11,35 @@ class ReviewModel extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['user_id','project_id', 'highlighted_text', 'comment'];
+    public $fillable = [
+        'user_id',
+        'project_id', 
+        'deadline',
+        'project_name',
+        'research_group',
+        'project_authors',
+        'project_introduction',
+        'project_aims_and_objectives',
+        'project_background',
+        'research_contribution',
+        'project_methodology',
+        'project_start_date',
+        'project_end_date',
+        'project_workplan',
+        'project_resources',
+        'project_references',
+        'project_total_budget',
+        'other_rsc'
+    ];
 
     public function user()
     {
         return $this->belongsTo(UsersModel::class);
     }
     public function project()
-{
-    return $this->belongsTo(ProjectsModel::class, 'project_id'); // Specify the correct foreign key
-}
-
+    {
+        return $this->belongsTo(ProjectsModel::class, 'project_id'); 
+    }
 
     public function reviewDecision()
     {

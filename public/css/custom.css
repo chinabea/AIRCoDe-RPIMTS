@@ -9,3 +9,11 @@
     .col-auto .h5 {
         color: black; /* Use default text color for h5 elements inside col-auto */
     }
+    
+    .document {
+        background-color: #fff;
+        border: 1px solid #dcdcdc;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+    }

@@ -51,90 +51,175 @@
           </div>  
     @elseif(Auth::user()->role == 4)
     <div class="col-md-12">
-      <div class="mb-4">
+    <div class="row">
+      <div class="col-xl-7 col-lg-7">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Project Details</h6>
+          </div>
+          <div class="card-body">
+            <label>Project Name:</label><br>
+            {{ $records->projname }}
+            <br><br>
 
-                            <!-- Dropdown Card Example -->
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Dropdown Card Example</h6>
+            <label>Status:</label><br>
+            {{ $records->status }}
+            <br><br>
+
+            <label>Research Group:</label><br>
+            {{ $records->researchgroup }}
+            <br><br>
+
+            <label>Author(s):</label><br>
+            {{ $records->authors }}
+            <br><br>
+
+            <label>Introduction:</label><br>
+            {{ $records->introduction }}
+            <br><br>
+
+            <label>Aims and Objectives:</label><br>
+            {{ $records->aims_and_objectives }}
+            <br><br>
+
+            <label>Background:</label><br>
+            {{ $records->background }}
+            <br><br>
+
+            <label>Expected Research Contribution:</label><br>
+            {{ $records->expected_research_contribution }}
+            <br><br>
+
+            <label>The Proposed Methodology:</label><br>
+            {{ $records->proposed_methodology }}
+            <br><br>
+
+            <label>Start Date:</label>
+            {{ $records->start_date }}
+            <br><br>
+
+            <label>End Date:</label>
+            {{ $records->end_date }}
+            <br><br>
+
+            <label>Work Plan:</label><br>
+            {{ $records->workplan }}
+            <br><br>
+
+            <label>Resources:</label><br>
+            {{ $records->resources }}
+            <br><br>
+
+            <label>References:</label><br>
+            {{ $records->references }}
+            <br><br>
+        </div>
+    </div>
+</div>
+<div class="col-xl-5 col-lg-5">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Recommendations, Suggestions and Comments (RSC)</h6>
+        </div>
+        <div class="card-body">
+                <form method="POST" action="{{ route('reviews.storeComments', $records->id) }}">
+                  @csrf
+                  <div class="form-group">
+                    <label for="project_name">Project Name</label>
+                    <textarea type="text" id="project_name" name="project_name" class="form-control" rows="1"></textarea>
+                  </div>
+
+                                        <div class="form-group">
+                                            <label for="research_group">Research Group</label>
+                                            <textarea type="text" id="research_group" name="research_group" class="form-control" rows="1"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="project_authors">Author(s)</label>
+                                            <textarea type="text" id="project_authors" name="project_authors" class="form-control" rows="1"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="project_introduction">Introduction</label>
+                                            <textarea id="project_introduction" name="project_introduction" class="form-control" rows="1"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="project_aims_and_objectives">Aims and Objectives</label>
+                                            <textarea id="project_aims_and_objectives" name="project_aims_and_objectives" class="form-control" rows="1"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="project_background">Background</label>
+                                            <textarea id="project_background" name="project_background" class="form-control" rows="1"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="research_contribution">Expected Research Contribution</label>
+                                            <textarea id="research_contribution" name="research_contribution" class="form-control" rows="1"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="project_methodology">The Proposed Methodology</label>
+                                            <textarea id="project_methodology" name="project_methodology" class="form-control" rows="1"></textarea>
+                                        </div>
+
+                                        <label for="project_start_date">Start Date:</label>
+                                        <input type="date" id="project_start_date" name="project_start_date" class="form-control">
+                                        <label for="project_end_date">End Date:</label>
+                                        <input type="date" id="project_end_date" name="project_end_date" class="form-control">
+
+                                        {{-- <div class="form-group">
+                                            <label>Work Plan:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                            </div>
+                                            <input type="text" class="form-control float-right" id="reservation" name="reservation">
+                                             placeholder="An initial plan for completion with annual milestones (eg. over 3 years).">
+                                        </div>
+                                        </div> --}}
+
+                                        <div class="form-group">
+                                            <label>Work Plan:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
+                                            </div>
+                                            <input type="text" class="form-control float-right" id="project_workplan" name="project_workplan">
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="project_resources">Resources</label>
+                                            <textarea class="form-control" id="project_resources" name="project_resources" rows="1"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="project_total_budget">Total Budget</label>
+                                            <textarea id="project_total_budget" name="project_total_budget" class="form-control" rows="1"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="project_references">References</label>
+                                            <textarea id="project_references" name="project_references" class="form-control" rows="1"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="other_rsc">Other Recommendation, Suggestion and Comments</label>
+                                          <textarea id="other_rsc" name="other_rsc" class="form-control" rows="1"></textarea>
+                                        </div>
+                                        <br>
+
+                                        <a href="#" class="btn btn-secondary">Cancel</a>
+                                        <input type="submit" value="Submit Review" class="btn btn-info float-right">
+                                    </form>
+                                  </div>
                                 </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                  <table class="table table-bordered">
-  <thead>
-    <tr class="text-center">
-      <th>#</th>
-      <th>PROJECT DETAILS</th>
-      <th>RECOMMENDATIONS, SUGGESTIONS AND COMMENTS (RSC)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>
-                      <label>Project Name</label>
-                                <p>{{ $data->projname }}</p>
-
-                            <label>Status</label>
-                                <p>{{ $data->status }}</p>
-
-                            <label>Research Group</label>
-                                <p>{{ $data->researchgroup }}</p>
-
-                            <label>Author(s)</label>
-                                <p>{{ $data->authors }}</p>
-
-                            <label>Introduction</label>
-                                <p>{{ $data->introduction }}</p>
-
-                            <label>Aims and Objectives</label>
-                                <p>{{ $data->aims_and_objectives }}</p>
-
-                            <label>Background</label>
-                                <p>{{ $data->background }}</p>
-
-                            <label>Expected Research Contribution</label>
-                                <p>{{ $data->expected_research_contribution }}</p>
-
-                            <label>The Proposed Methodology</label>
-                                <p>{{ $data->proposed_methodology }}</p>
-
-                            <label>Start Date</label>
-                                <p>{{ $data->start_date }}</p>
-
-                            <label>End Date</label>
-                                <p>{{ $data->end_date }}</p>
-
-                            <label>Work Plan</label>
-                                <p>{{ $data->workplan }}</p>
-
-                            <label>Resources</label>
-                                <p>{{ $data->resources }}</p>
-
-                            <label>References</label>
-                                <p>{{ $data->references }}</p>
-
-      </td>
-      <td>Otto</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-    </tr>
-  </tbody>
-</table>
-                                </div>
+                              </div>
                             </div>
-
-                        </div>
-          </div>  
-    @endif
+                          </div>  
+@endif
 
     @if(Auth::user()->role == 1)
         <div class="text-center">
@@ -232,18 +317,64 @@
 @endif
  
 <div id="actions-form" class="mt-4" style="display: none;">
-        <!-- Form fields go here -->
-        <div class="col-md-12">
-          <div class="card card-primary card-outline">
-            <div class="card-header">
-                ACTIONS
-            </div>
-            <div class="card-body pad table-responsive">
+<div class="col-md-12">
+  <div class="card card-primary card-outline">
+    <div class="card-header">ACTIONS</div>
+    <div class="card-body pad table-responsive">
+      <div class="col-md-12">
+        <div class="document">
+          @if ($toreview)
+          <p><b>Project Name: </b>{{ $records->projname }}</p>
+          <p><b>{{ $toreview->user->name }}: </b>{{ $toreview->project_name }}</p>
+                    <hr>
+                    <label>Research Group</label>
+                    <p>{{ $toreview->research_group }}</p>
+                    <hr>
+                    <label>Author(s)</label>
+                    <p>{{ $toreview->project_authors }}</p>
+                    <hr>
+                    <label>Introduction</label>
+                    <p>{{ $toreview->project_introduction }}</p>
+                    <hr>
+                    <label>Aims and Objectives</label>
+                    <p>{{ $toreview->project_introduction }}</p>
+                    <hr>
+                    <label>Background</label>
+                    <p>{{ $toreview->project_background }}</p>
+                    <hr>
+                    <label>Expected Research Contribution</label>
+                    <p>{{ $toreview->research_contribution }}</p>
+                    <hr>
+                    <label>The Proposed Methodology</label>
+                    <p>{{ $toreview->project_methodology }}</p>
+                    <hr>
+                    <label>Start Date</label>
+                    <p>{{ $toreview->project_start_date }}</p>
+                    <hr>
+                    <label>Work Plan</label>
+                    <p>{{ $toreview->project_workplan }}</p>
+                    <hr>
+                    <label>Resources</label>
+                    <p>{{ $toreview->project_resources }}</p>
+                    <hr>
+                    <label>Total Budget</label>
+                    <p>{{ $toreview->project_total_budget }}</p>
+                    <hr>
+                    <label>References</label>
+                    <p>{{ $toreview->project_references }}</p>
+                    <hr>
+                    <label>Other Recommendation, Suggestion and Comments</label>
+                    <p>{{ $toreview->other_rsc }}</p>
 
+                @else
+                <p>No review/comment available for this project.</p>
+                @endif
+              </div>
+              </div>
             </div>
           </div>
         </div>
-        </div>
+      </div>
 
 <div id="details-form" class="mt-4" style="display: none;">
 <!-- Form fields go here -->
@@ -782,18 +913,7 @@
     <div class="container">
         <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
             @include('submission-details.reviews.select-reviewer')
-            <form method="POST" action="{{ route('store.project.reviewers') }}">
-              @csrf
-              <input type="hidden" name="project_id" value="{{ $records->id }}">
-              <label for="reviewer_ids[]">Select Three Reviewers:</label>
-              <select name="reviewer_ids[]" id="reviewer_ids[]" multiple size="3">
-                <!-- Populate this select with users having role 4 -->
-                @foreach ($reviewersss as $reviewer)
-                <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                @endforeach
-              </select>
-              <button type="submit">Assign Reviewers</button>
-            </form> 
+            
     </div>
     </div>
   </div>

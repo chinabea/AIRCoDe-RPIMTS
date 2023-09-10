@@ -25,6 +25,11 @@ class UsersModel extends Model
     {
         return $this->role === 3;
     }
+
+    public function isReviewer()
+    {
+        return $this->role === 4;
+    }
     
     public function projects()
     {
@@ -48,7 +53,6 @@ class UsersModel extends Model
     }
     public function reviews()
     {
-    
         return $this->hasMany(ReviewModel::class);
     }
 

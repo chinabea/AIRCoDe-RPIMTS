@@ -43,8 +43,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/blank', function () {
-    return view('blank');
+Route::get('/sample', function () {
+    return view('sample');
 });
 
 
@@ -86,6 +86,7 @@ Route::prefix('reviewer')->middleware(['auth', 'reviewer'])->group(function (){
     Route::get('/review/edit/{id}', [ReviewController::class, 'edit'])->name('reviews.edit');
     Route::put('/review/edit/{id}', [ReviewController::class, 'update'])->name('reviews.update');
     Route::delete('/review/delete/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+    Route::post('/review/storeComments/{id}', [ReviewController::class, 'storeComments'])->name('reviews.storeComments');
 });
 
 Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
@@ -129,7 +130,7 @@ Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
     // Route::post('/projects/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
 
     Route::get('/select-reviewers', [ReviewController::class, 'select'])->name('submission-details.reviews.select');
-    Route::post('/submission-details/{projectId}/assignReviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+    // Route::post('/submission-details/{projectId}/assignReviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
 });
 
 Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function (){
@@ -198,7 +199,8 @@ Route::get('/projects/track', [ProjectsController::class, 'track'])->name('proje
 Route::get('/generate-pdf/{data_id}', [PdfController::class, 'generatePDF'])->name('generate.pdf');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
-Route::post('/store/project/reviewers', [ReviewController::class, 'store'])->name('store.project.reviewers');
+Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
+Route::post('/store/project/reviewers', [ReviewController::class, 'store'])->name('store.project.reviewers');//oks na
 
 
 
@@ -215,7 +217,6 @@ Route::get('/status/for-revision', [StatusController::class, 'forRevision'])->na
 Route::get('/status/approved', [StatusController::class, 'approved'])->name('status.approved');
 Route::get('/status/deferred', [StatusController::class, 'deferred'])->name('status.deferred');
 Route::get('/status/disapproved', [StatusController::class, 'disapproved'])->name('status.disapproved');
-Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
 Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
 
 Route::get('/emailbox/compose', [EmailBoxController::class, 'index'])->name('emailbox.compose');

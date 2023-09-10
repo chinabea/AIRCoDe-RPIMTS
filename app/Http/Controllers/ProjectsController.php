@@ -49,12 +49,8 @@ class ProjectsController extends Controller
                         'background' => 'required',
                         'expected_research_contribution' => 'required',
                         'proposed_methodology' => 'required',
-                        'start_date' => [
-                            'required',
-                            'date',
-                            'after_or_equal:today', // Ensures the date is today or in the future
-                        ],
-                        'end_date' => 'required|date|after:start_date',
+                        'start_date' => 'required',
+                        'end_date' => 'required',
                         'workplan' => 'required',
                         'resources' => 'required',
                         'references' => 'required',
@@ -105,13 +101,26 @@ class ProjectsController extends Controller
         $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
         $files = FileModel::where('project_id', $id)->get();
         $reviewers = ReviewModel::where('user_id', $id)->get();
+        $toreview = ReviewModel::where('project_id', $id)->get()->first();
         $members = UsersModel::where('role', 3)->get();
         $reviewersss = UsersModel::where('role', 4)->get();
-        $records = ProjectsModel::findOrFail($id);
         $data = ProjectsModel::findOrFail($id);
-        // $records = ProjectsModel::with('user')->findOrFail($id);
+        $records = ProjectsModel::findOrFail($id);
 
-        // return view('submission-details.show', compact('records', 'reviewers', 'teamMembers', 'lineItems', 'allLineItems', 'files'));
+        // Fetch reviews for the specific project
+        // $projectReviews = ReviewModel::where('project_id', $id)->get();
+
+        // // Initialize an array to store the user IDs who commented on the project
+        // $userIdsWhoCommented = [];
+    
+        // // Loop through the reviews to get the user who commented and store their IDs
+        // foreach ($projectReviews as $review) {
+        //     $userIdsWhoCommented[] = $review->user_id;
+        // }
+
+        // // Get the users who commented on the project
+        // $usersWhoCommented = UsersModel::whereIn('id', $userIdsWhoCommented)->get();
+    
 
         // Calculate the total of all line items
         $totalAllLineItems = 0;
@@ -119,7 +128,7 @@ class ProjectsController extends Controller
             $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudgetModel structure
         }
 
-        return view('submission-details.show', compact('records', 'reviewers',  'reviewersss', 'teamMembers',
+        return view('submission-details.show', compact('records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
                     'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data'));
 
 

@@ -66,9 +66,9 @@
                                         </div>
 
                                         <label for="start_date">Start Date:</label>
-                                        <input type="date" id="start_date" name="start_date">
+                                        <input type="date" id="start_date" name="start_date" class="form-control">
                                         <label for="end_date">End Date:</label>
-                                        <input type="date" id="end_date" name="end_date">
+                                        <input type="date" id="end_date" name="end_date" class="form-control">
 
                                         {{-- <div class="form-group">
                                             <label>Work Plan:</label>

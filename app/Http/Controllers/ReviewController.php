@@ -10,46 +10,180 @@ use App\Models\ReviewModel;
 
 class ReviewController extends Controller
 {
-    public function selectReviewers(ProjectsModel $project)
+    public function create(Request $request, $id)
     {
-        // Assuming you have the $role4Users variable as well
-        $roleUsers = UsersModel::where('role', 4)->get(); // Retrieve users with role 4
+        
+    $userId = Auth::id();
+        $project = ProjectsModel::findOrFail($id);
+        
+        $reviewersss = UsersModel::where('role', 4)->get();
 
-        return view('submission-details.reviews.select-reviewer', compact('project', 'roleUsers'));
+        // Retrieve the project ID(s) that the authenticated user is set to review
+        $reviewedProjectIds = ReviewModel::where('user_id', $userId)->pluck('project_id');
+        // $reviewerId = $project->reviewer_id;
+        
+        // Check if the user is allowed to review the specified project
+        if ($reviewedProjectIds->contains($id)) {
+            // Retrieve the existing review record based on project ID and user ID
+            $existingReview = ReviewModel::where('project_id', $id)
+            ->where('user_id', $userId)
+            ->first();
+        
+    
+        if ($existingReview) {
+            // Update only the null fields with the values from the request
+            $existingReview->project_name = $existingReview->project_name ?? $request->input('project_name');
+            $existingReview->research_group = $existingReview->research_group ?? $request->input('research_group');
+            $existingReview->project_authors = $existingReview->project_authors ?? $request->input('project_authors');
+            $existingReview->project_introduction = $existingReview->project_introduction ?? $request->input('project_introduction');
+            $existingReview->project_aims_and_objectives = $existingReview->project_aims_and_objectives ?? $request->input('project_aims_and_objectives');
+            $existingReview->project_background = $existingReview->project_background ?? $request->input('project_background');
+            $existingReview->research_contribution = $existingReview->research_contribution ?? $request->input('research_contribution');
+            $existingReview->project_methodology = $existingReview->project_methodology ?? $request->input('project_methodology');
+            $existingReview->project_start_date = $existingReview->project_start_date ?? $request->input('project_start_date');
+            $existingReview->project_end_date = $existingReview->project_end_date ?? $request->input('project_end_date');
+            $existingReview->project_workplan = $existingReview->project_workplan ?? $request->input('project_workplan');
+            $existingReview->project_resources = $existingReview->project_resources ?? $request->input('project_resources');
+            $existingReview->project_references = $existingReview->project_references ?? $request->input('project_references');
+            $existingReview->project_total_budget = $existingReview->project_total_budget ?? $request->input('project_total_budget');
+            $existingReview->other_rsc = $existingReview->other_rsc ?? $request->input('other_rsc');
+    
+            $existingReview->save();
+        } 
+    }  $individualDeadlines = $request->input('individual_deadlines');
+
+    // Check if $individualDeadlines is an array before looping through it
+    if (is_array($individualDeadlines)) {
+        foreach ($individualDeadlines as $reviewerId => $deadline) {
+            // Here, $reviewerId is the ID of the reviewer, and $deadline is the individual deadline for that reviewer
+            // You can process and save this information in your database as needed
+    
+            // Assuming you have a ReviewModel (or another appropriate model), you can create and save the records
+            $reviewerDeadline = new ReviewModel();
+            $reviewerDeadline->reviewer_id = $reviewerId;
+            $reviewerDeadline->deadline = $deadline;
+            $reviewerDeadline->save();
+    
+            // You can also perform other actions like sending notifications or logging here
+        }
+    } else {
+        // Handle the case where $individualDeadlines is not an array (e.g., display an error message)
+        // You may want to redirect the user or show an error message
     }
+    
 
-public function store(Request $request)
+
+return view('submission-details.reviews.select-reviewer', ['project' => $project, 'reviewersss' => $reviewersss]);
+    }
+    
+    // public function selectReviewers(ProjectsModel $project)
+    // {
+    //     $roleUsers = UsersModel::where('role', 4)->get(); 
+
+    //     return view('submission-details.reviews.select-reviewer', compact('project', 'roleUsers'));
+    // }
+    public function store(Request $request)
 {
+    
+    // dd($request->all());
     $projectId = $request->input('project_id');
     $reviewerIds = $request->input('reviewer_ids');
+    $individualDeadlines = $request->input('individual_deadlines');
+    $userId = Auth::id();
+    $existingReviewers = ReviewModel::where('project_id', $projectId)->pluck('user_id')->toArray();
 
-    foreach ($reviewerIds as $reviewerId) {
-        // Create a new review instance with the provided data
-        ReviewModel::create([
+        foreach ($reviewerIds as $reviewerId) {
+            // Check if the reviewer is already assigned to the project
+            if (in_array($reviewerId, $existingReviewers)) {
+                // Display a message that this reviewer is already assigned to review this project
+                return redirect()->route('submission-details.show', ['id' => $projectId])->with('error', 'Reviewer Already Assigned!');
+            } 
+            else {
+                if (isset($individualDeadlines[$reviewerId])) {
+                    $deadline = $individualDeadlines[$reviewerId];
+                }
+                
+        $newReview = ReviewModel::create([
             'project_id' => $projectId,
             'user_id' => $reviewerId,
-            'highlighted_text' => 'highlighted text here',
-            'comment' => 'pending', // Default value
+            'deadline' => $deadline,
+            'project_name' => $request->input('project_name') ?? null,
+            'research_group' => $request->input('research_group') ?? null,
+            'project_authors' => $request->input('project_authors') ?? null,
+            'project_introduction' => $request->input('project_introduction') ?? null,
+            'project_aims_and_objectives' => $request->input('project_aims_and_objectives') ?? null,
+            'project_background' => $request->input('project_background') ?? null,
+            'research_contribution' => $request->input('research_contribution') ?? null,
+            'project_methodology' => $request->input('project_methodology') ?? null,
+            'project_start_date' => $request->input('project_start_date') ?? null,
+            'project_end_date' => $request->input('project_end_date') ?? null,
+            'project_workplan' => $request->input('project_workplan') ?? null,
+            'project_resources' => $request->input('project_resources') ?? null,
+            'project_references' => $request->input('project_references') ?? null,
+            'project_total_budget' => $request->input('project_total_budget') ?? null,
+            'other_rsc' => $request->input('other_rsc') ?? null,
         ]);
-    }
 
-    return redirect()->back()->with('success', 'Reviewers assigned successfully.');
+            }
+        }
+        return redirect()->route('submission-details.show', ['id' => $projectId]);
 }
 
-    public function showForm()
+    
+    public function storeComments(Request $request, $id)
     {
-        $projects = Project::all(); // Retrieve a list of projects
+        $userId = Auth::id();
 
-        // Assuming you have the $role4Users variable as well
-        $role4Users = User::where('role', 4)->get(); // Retrieve users with role 4
+        // Retrieve the project ID(s) that the authenticated user is set to review
+        $reviewedProjectIds = ReviewModel::where('user_id', $userId)->pluck('project_id');
+        // $reviewerId = $project->reviewer_id;
+        
+        // Check if the user is allowed to review the specified project
+        if ($reviewedProjectIds->contains($id)) {
+            // Retrieve the existing review record based on project ID and user ID
+            $existingReview = ReviewModel::where('project_id', $id)
+            ->where('user_id', $userId)
+            ->first();
+    
+            if ($existingReview) {
+                // Update only the null fields with the values from the request
+                $existingReview->project_name = $existingReview->project_name ?? $request->input('project_name');
+                $existingReview->research_group = $existingReview->research_group ?? $request->input('research_group');
+                $existingReview->project_authors = $existingReview->project_authors ?? $request->input('project_authors');
+                $existingReview->project_introduction = $existingReview->project_introduction ?? $request->input('project_introduction');
+                $existingReview->project_aims_and_objectives = $existingReview->project_aims_and_objectives ?? $request->input('project_aims_and_objectives');
+                $existingReview->project_background = $existingReview->project_background ?? $request->input('project_background');
+                $existingReview->research_contribution = $existingReview->research_contribution ?? $request->input('research_contribution');
+                $existingReview->project_methodology = $existingReview->project_methodology ?? $request->input('project_methodology');
+                $existingReview->project_start_date = $existingReview->project_start_date ?? $request->input('project_start_date');
+                $existingReview->project_end_date = $existingReview->project_end_date ?? $request->input('project_end_date');
+                $existingReview->project_workplan = $existingReview->project_workplan ?? $request->input('project_workplan');
+                $existingReview->project_resources = $existingReview->project_resources ?? $request->input('project_resources');
+                $existingReview->project_references = $existingReview->project_references ?? $request->input('project_references');
+                $existingReview->project_total_budget = $existingReview->project_total_budget ?? $request->input('project_total_budget');
+                $existingReview->other_rsc = $existingReview->other_rsc ?? $request->input('other_rsc');
+        
+                $existingReview->save();
+            }       
+        }
+        
+        return redirect()->route('reviewer.home');
+    }
 
-        return view('submission-details.reviews.select-reviewer', compact('projects', 'role4Users'));
-    }
-    public function select()
-    {
-        // $project = Project::findOrFail($project_id);
-        return view('submission-details.reviews.select-reviewer');
-    }
+    // public function showForm()
+    // {
+    //     $projects = Project::all(); // Retrieve a list of projects
+
+    //     // Assuming you have the $role4Users variable as well
+    //     $role4Users = User::where('role', 4)->get(); // Retrieve users with role 4
+
+    //     return view('submission-details.reviews.select-reviewer', compact('projects', 'role4Users'));
+    // }
+    // public function select()
+    // {
+    //     // $project = Project::findOrFail($project_id);
+    //     return view('submission-details.reviews.select-reviewer');
+    // }
     
 
     public function assignReviewers(Request $request, $projectId)
@@ -67,11 +201,10 @@ public function store(Request $request)
     }
 
     public function review($id)
-{
-    $records = ProjectsModel::findOrFail($id);
-
-    return view('reviews.review-decision', compact('records'));
-}
+    {
+        $records = ProjectsModel::findOrFail($id);
+        return view('reviews.review-decision', compact('records'));
+    }
 
 
     // functional na

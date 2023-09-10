@@ -8,25 +8,41 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('store.project.reviewers') }}">
-                    @csrf
-                    <input type="hidden" name="project_id" value="{{ $records->id }}">
-
-                    <div class="form-group">
-                        <label for="reviewer_ids[]">Select Three Reviewers:</label>
-                        <select name="reviewer_ids[]" id="reviewer_ids[]" class="form-control" multiple size="4">
-                            <!-- Populate this select with users having role 4 -->
-                            @foreach ($reviewersss as $reviewer)
-                                <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                            @endforeach
-                        </select>
+            <form method="POST" action="{{ route('store.project.reviewers') }}" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="project_id" value="{{ $records->id }}">
+                <div class="form-group">
+                    <label for="reviewer_ids[]">Select Reviewers:</label>
+                    <select name="reviewer_ids[]" id="reviewer_ids[]" class="form-control" multiple size="4">
+                        <!-- Populate this select with users having role 4 -->
+                        @foreach ($reviewersss as $reviewer)
+                        <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="deadline">Review Deadline:</label>
+                    <input type="date" name="deadline" id="deadline" class="form-control">
+                </div> 
+    
+                <div class="form-group">
+                    <label for="individual_deadlines">Individual Review Deadlines:</label>
+                    @foreach ($reviewersss as $reviewer)
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">{{ $reviewer->name }}</span>
+                        </div>
+                        <input type="date" name="individual_deadlines[{{ $reviewer->id }}]" class="form-control">
                     </div>
+                    @endforeach
+                </div> 
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Assign Reviewers</button>
-                    </div>
-                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Assign Reviewers</button>
+                </div>
+            </form>
             </div>
         </div>
     </div>
