@@ -552,7 +552,7 @@
             @foreach($revs as $rev)
             @if($rev->user_id === Auth::user()->id)
             <li class="nav-item">
-                <a href="{{ route('submission-details.show', ['id' => $rev->id]) }}" class="nav-link">
+                <a href="{{ route('submission-details.show', ['id' => $rev->project_id]) }}" class="nav-link">
                     <i class="nav-icon fas fa-book"></i>
                     <p>{{ $rev->project->projname }}</p>
                     <p class="deadline mb-4"><br>Deadline: {{ $rev->deadline }}</p>

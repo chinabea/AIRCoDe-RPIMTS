@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title')</title>
+  <title>RPIMTS</title>
 
 <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}">
 
@@ -61,7 +61,7 @@
   <div class="wrapper">
 
   @include('layouts.topnav')
-  @section('title', 'RPIMTS')
+  <!-- @section('title', 'RPIMTS') -->
 
   @include('layouts.sidebar')
 

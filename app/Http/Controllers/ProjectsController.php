@@ -106,20 +106,8 @@ class ProjectsController extends Controller
         $reviewersss = UsersModel::where('role', 4)->get();
         $data = ProjectsModel::findOrFail($id);
         $records = ProjectsModel::findOrFail($id);
-
-        // Fetch reviews for the specific project
-        // $projectReviews = ReviewModel::where('project_id', $id)->get();
-
-        // // Initialize an array to store the user IDs who commented on the project
-        // $userIdsWhoCommented = [];
+        // $revs = ReviewModel::where('user_id', Auth::user()->id)->get();
     
-        // // Loop through the reviews to get the user who commented and store their IDs
-        // foreach ($projectReviews as $review) {
-        //     $userIdsWhoCommented[] = $review->user_id;
-        // }
-
-        // // Get the users who commented on the project
-        // $usersWhoCommented = UsersModel::whereIn('id', $userIdsWhoCommented)->get();
     
 
         // Calculate the total of all line items

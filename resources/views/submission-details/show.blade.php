@@ -7,7 +7,7 @@
   </section>
   
 @if(Auth::check())
-    @if(Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3)
+  @if(Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3)
     <div class="col-md-12">
             <div class="card card-primary card-outline">
               <div class="card-header">
@@ -49,7 +49,8 @@
               </div>
             </div>
           </div>  
-    @elseif(Auth::user()->role == 4)
+          
+  @elseif(Auth::user()->role == 4)
     <div class="col-md-12">
     <div class="row">
       <div class="col-xl-7 col-lg-7">
@@ -128,26 +129,22 @@
                     <label for="project_name">Project Name</label>
                     <textarea type="text" id="project_name" name="project_name" class="form-control" rows="1"></textarea>
                   </div>
-
-                                        <div class="form-group">
-                                            <label for="research_group">Research Group</label>
-                                            <textarea type="text" id="research_group" name="research_group" class="form-control" rows="1"></textarea>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="project_authors">Author(s)</label>
-                                            <textarea type="text" id="project_authors" name="project_authors" class="form-control" rows="1"></textarea>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="project_introduction">Introduction</label>
-                                            <textarea id="project_introduction" name="project_introduction" class="form-control" rows="1"></textarea>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="project_aims_and_objectives">Aims and Objectives</label>
-                                            <textarea id="project_aims_and_objectives" name="project_aims_and_objectives" class="form-control" rows="1"></textarea>
-                                        </div>
+                  <div class="form-group">
+                    <label for="research_group">Research Group</label>
+                    <textarea type="text" id="research_group" name="research_group" class="form-control" rows="1"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="project_authors">Author(s)</label>
+                    <textarea type="text" id="project_authors" name="project_authors" class="form-control" rows="1"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="project_introduction">Introduction</label>
+                    <textarea id="project_introduction" name="project_introduction" class="form-control" rows="1"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="project_aims_and_objectives">Aims and Objectives</label>
+                    <textarea id="project_aims_and_objectives" name="project_aims_and_objectives" class="form-control" rows="1"></textarea>
+                  </div>
 
                                         <div class="form-group">
                                             <label for="project_background">Background</label>
@@ -165,9 +162,9 @@
                                         </div>
 
                                         <label for="project_start_date">Start Date:</label>
-                                        <input type="date" id="project_start_date" name="project_start_date" class="form-control">
+                                        <input type="text" id="project_start_date" name="project_start_date" class="form-control">
                                         <label for="project_end_date">End Date:</label>
-                                        <input type="date" id="project_end_date" name="project_end_date" class="form-control">
+                                        <input type="text" id="project_end_date" name="project_end_date" class="form-control">
 
                                         {{-- <div class="form-group">
                                             <label>Work Plan:</label>
@@ -219,7 +216,7 @@
                               </div>
                             </div>
                           </div>  
-@endif
+  @endif
 
     @if(Auth::user()->role == 1)
         <div class="text-center">
@@ -317,62 +314,385 @@
 @endif
  
 <div id="actions-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
+<!-- <div class="col-md-12">
   <div class="card card-primary card-outline">
     <div class="card-header">ACTIONS</div>
-    <div class="card-body pad table-responsive">
+    <div class="card-body pad table-responsive"> -->
       <div class="col-md-12">
-        <div class="document">
-          @if ($toreview)
-          <p><b>Project Name: </b>{{ $records->projname }}</p>
-          <p><b>{{ $toreview->user->name }}: </b>{{ $toreview->project_name }}</p>
-                    <hr>
-                    <label>Research Group</label>
-                    <p>{{ $toreview->research_group }}</p>
-                    <hr>
-                    <label>Author(s)</label>
-                    <p>{{ $toreview->project_authors }}</p>
-                    <hr>
-                    <label>Introduction</label>
-                    <p>{{ $toreview->project_introduction }}</p>
-                    <hr>
-                    <label>Aims and Objectives</label>
-                    <p>{{ $toreview->project_introduction }}</p>
-                    <hr>
-                    <label>Background</label>
-                    <p>{{ $toreview->project_background }}</p>
-                    <hr>
-                    <label>Expected Research Contribution</label>
-                    <p>{{ $toreview->research_contribution }}</p>
-                    <hr>
-                    <label>The Proposed Methodology</label>
-                    <p>{{ $toreview->project_methodology }}</p>
-                    <hr>
-                    <label>Start Date</label>
-                    <p>{{ $toreview->project_start_date }}</p>
-                    <hr>
-                    <label>Work Plan</label>
-                    <p>{{ $toreview->project_workplan }}</p>
-                    <hr>
-                    <label>Resources</label>
-                    <p>{{ $toreview->project_resources }}</p>
-                    <hr>
-                    <label>Total Budget</label>
-                    <p>{{ $toreview->project_total_budget }}</p>
-                    <hr>
-                    <label>References</label>
-                    <p>{{ $toreview->project_references }}</p>
-                    <hr>
-                    <label>Other Recommendation, Suggestion and Comments</label>
-                    <p>{{ $toreview->other_rsc }}</p>
-
-                @else
-                <p>No review/comment available for this project.</p>
-                @endif
-              </div>
+        <div class="container mt-5">
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Project Name</h6>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{ $records->projname }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                  @foreach ($revs as $review) 
+                  @if ($review->project_name !== null)
+                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_name }}</p> 
+                  @endif
+                  @endforeach
+                </div>
               </div>
             </div>
           </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Research Group</h6>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{ $records->researchgroup }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                  @foreach ($revs as $review) 
+                  @if ($review->research_group !== null)
+                  <p><b>{{ $review->user->name }}:</b> {{ $review->research_group }}</p> 
+                  @endif
+                  @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Author(s)</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->authors }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_authors !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_authors }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Introduction</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->introduction }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_introduction !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_introduction }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Aims and Objectives</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->aims_and_objectives }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_aims_and_objectives !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_aims_and_objectives }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Background</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->background }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_background !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_background }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Expected Research Contribution</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->expected_research_contribution }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->research_contribution !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->research_contribution }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">The Proposed Methodology</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->proposed_methodology }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_methodology !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_methodology }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Start Date</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->start_date }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_start_date !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_start_date }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">End Date</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->end_date }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_end_date !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_end_date }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Work Plan</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->workplan }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_workplan !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_workplan }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Work Plan</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->workplan }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_workplan !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_workplan }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Resources</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->resources }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_resources !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_resources }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Total Budget</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->total_budget }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_total_budget !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_total_budget }}</p>
+                    @endif
+                    @endforeach  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">References</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ $records->references }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div>
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->project_references !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_references }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Other Recommendation, Suggestion and Comments</h6>
+            </div>
+            <div class="card-body">
+                <!-- <p class="card-text">{{ $records->references }}</p>
+              The styling for this basic card example is created by using default Bootstrap
+              utility classes. By using utility classes, the style of the card component can be
+              easily modified with no need for any custom CSS!
+            </div> -->
+            <div class="card-footer">
+              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
+              <div class="media mb-3">
+                <div class="card-body">
+                    @foreach ($revs as $review) 
+                    @if ($review->other_rsc !== null)
+                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->other_rsc }}</p>
+                    @endif
+                    @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
       </div>
 
