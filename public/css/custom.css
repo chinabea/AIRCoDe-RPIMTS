@@ -1,4 +1,14 @@
+  
 
+        
+  body {
+    color: #022A44 !important;
+    /* font-family: 'Sailec', sans-serif !important; */
+
+    }
+  header {
+        color: #022A44 !important;
+    }
     .custom-button-link {
         text-decoration: none; /* Remove underline */
         color: initial; /* Use default text color */
@@ -10,6 +20,22 @@
         color: black; /* Use default text color for h5 elements inside col-auto */
     }
     
+    /* Change the dark-themed sidebar background color to blue */
+    .sidebar-dark-primary {
+        background-color: #022A44 !important;
+    }
+
+    /* If you want to change the light-themed sidebar as well, use this */
+    .sidebar-light-primary {
+        background-color: #022A44 !important;
+    }
+    .card {
+        background-color: #ffffff !important;
+    }
+    .content-wrapper {
+        background-color: #f3f4f6 !important;
+    }
+    
     .document {
         background-color: #fff;
         border: 1px solid #dcdcdc;
@@ -17,3 +43,4 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin: 20px;
     }
+    

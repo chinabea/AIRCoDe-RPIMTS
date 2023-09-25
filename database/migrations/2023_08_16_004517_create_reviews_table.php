@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('project_id');
-            $table->date('deadline');
+            $table->date('deadline')->nullable();
             $table->text('project_name')->nullable();
             $table->text('research_group')->nullable();
             $table->text('project_authors')->nullable();

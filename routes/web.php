@@ -54,7 +54,6 @@ Auth::routes();
 
 
 Route::middleware('auth')->group(function (){
-    // Route::get('/home', [DashboardController::class, 'countAll'])->name('all.projects.users');
 
     Route::get('/total-users', [UsersController::class, 'showTotalUsers']);
     Route::get('/create-users', [UsersController::class, 'create'])->name('users.create'); //this should be in a login
@@ -63,83 +62,92 @@ Route::middleware('auth')->group(function (){
     Route::get('/edit-users/{id}', [UsersController::class, 'edit'])->name('users.edit');
     Route::put('/edit-users/{id}', [UsersController::class, 'update'])->name('users.update');
     Route::delete('/delete-users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+    Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
+
+
+    Route::prefix('staff')->middleware(['auth', 'staff'])->group(function (){
+        Route::get('/home', [DashboardController::class, 'countAll'])->name('staff.home');
     
-});
+    });
 
-
-Route::prefix('staff')->middleware(['auth', 'staff'])->group(function (){
-    Route::get('/home', [DashboardController::class, 'countAll'])->name('staff.home');
+    Route::prefix('reviewer')->middleware(['auth', 'reviewer'])->group(function (){
     
-    // Route::get('/home', function () {
-    //    return view('dashboard');
-    // })->name('staff.home');
+        Route::get('/home', [DashboardController::class, 'countAll'])->name('reviewer.home');
+        Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
+        Route::get('/review/create', [ReviewController::class, 'create'])->name('reviews.create');
+        Route::post('/review/store', [ReviewController::class, 'store'])->name('reviews.store');
+        Route::get('/review/show/{id}', [ReviewController::class, 'show'])->name('reviews.show');
+        Route::get('/review/edit/{id}', [ReviewController::class, 'edit'])->name('reviews.edit');
+        Route::put('/review/edit/{id}', [ReviewController::class, 'update'])->name('reviews.update');
+        Route::delete('/review/delete/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+        Route::post('/review/storeComments/{id}', [ReviewController::class, 'storeComments'])->name('reviews.storeComments');
+    });
 
-});
+    Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
+    
+        Route::get('/home', [DashboardController::class, 'countAll'])->name('director.home');
+        Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts');
+        Route::get('/about/create', [AboutusController::class, 'create'])->name('transparency.aboutus.create');
+        Route::post('/about/store', [AboutusController::class, 'store'])->name('transparency.aboutus.store');
+        Route::get('/about/edit/{id}', [AboutusController::class, 'edit'])->name('transparency.aboutus.edit');
+        Route::put('/about/edit/{id}', [AboutusController::class, 'update'])->name('transparency.aboutus.update');
+        Route::delete('/about/delete/{id}', [AboutusController::class, 'destroy'])->name('transparency.aboutus.destroy');
+    
+        Route::get('/announcements', [AnnouncementsController::class, 'index'])->name('announcements');
+        Route::get('/announcement/create', [AnnouncementsController::class, 'create'])->name('transparency.announcements.create');
+        Route::post('/announcement/store', [AnnouncementsController::class, 'store'])->name('transparency.announcements.store');
+        Route::get('/announcement/edit/{id}', [AnnouncementsController::class, 'edit'])->name('transparency.announcements.edit');
+        Route::put('/announcement/edit/{id}', [AnnouncementsController::class, 'update'])->name('transparency.announcements.update');
+        Route::delete('/announcement/delete/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
+    
+        Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
+        Route::get('/users', [UsersController::class, 'index'])->name('users');
+        Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
+        Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
+        Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
+        Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
+        Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
+    
+        Route::get('/review/{id}', [ReviewController::class, 'review'])->name('reviews.review-decision');
+        // Route::post('/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
+        Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
+    
+        // Route::get('/select-reviewers/{projectId}', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+        // Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+        // Route::post('/projects/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
+    
+        Route::get('/select-reviewers', [ReviewController::class, 'select'])->name('submission-details.reviews.select');
+        // Route::post('/submission-details/{projectId}/assignReviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+    });
 
-Route::prefix('reviewer')->middleware(['auth', 'reviewer'])->group(function (){
 
-    Route::get('/home', [DashboardController::class, 'countAll'])->name('reviewer.home');
-    Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
-    Route::get('/review/create', [ReviewController::class, 'create'])->name('reviews.create');
-    Route::post('/review/store', [ReviewController::class, 'store'])->name('reviews.store');
-    Route::get('/review/show/{id}', [ReviewController::class, 'show'])->name('reviews.show');
-    Route::get('/review/edit/{id}', [ReviewController::class, 'edit'])->name('reviews.edit');
-    Route::put('/review/edit/{id}', [ReviewController::class, 'update'])->name('reviews.update');
-    Route::delete('/review/delete/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
-    Route::post('/review/storeComments/{id}', [ReviewController::class, 'storeComments'])->name('reviews.storeComments');
-});
 
-Route::prefix('director')->middleware(['auth', 'director'])->group(function (){
 
-    Route::get('/home', [DashboardController::class, 'countAll'])->name('director.home');
-    Route::get('/abouts', [AboutusController::class, 'index'])->name('abouts');
-    Route::get('/about/create', [AboutusController::class, 'create'])->name('transparency.aboutus.create');
-    Route::post('/about/store', [AboutusController::class, 'store'])->name('transparency.aboutus.store');
-    Route::get('/about/edit/{id}', [AboutusController::class, 'edit'])->name('transparency.aboutus.edit');
-    Route::put('/about/edit/{id}', [AboutusController::class, 'update'])->name('transparency.aboutus.update');
-    Route::delete('/about/delete/{id}', [AboutusController::class, 'destroy'])->name('transparency.aboutus.destroy');
 
-    Route::get('/call-for-proposals', [ProposalsController::class, 'index'])->name('call-for-proposals');
-    Route::get('/call-for-proposals/create', [ProposalsController::class, 'create'])->name('transparency.call-for-proposals.create');
-    Route::post('/call-for-proposals/store', [ProposalsController::class, 'store'])->name('transparency.call-for-proposals.store');
-    Route::get('/call-for-proposals/edit/{id}', [ProposalsController::class, 'edit'])->name('transparency.call-for-proposals.edit');
-    Route::put('/call-for-proposals/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.call-for-proposals.update');
-    Route::delete('/call-for-proposals/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
 
-    Route::get('/announcements', [AnnouncementsController::class, 'index'])->name('announcements');
-    Route::get('/announcement/create', [AnnouncementsController::class, 'create'])->name('transparency.announcements.create');
-    Route::post('/announcement/store', [AnnouncementsController::class, 'store'])->name('transparency.announcements.store');
-    Route::get('/announcement/edit/{id}', [AnnouncementsController::class, 'edit'])->name('transparency.announcements.edit');
-    Route::put('/announcement/edit/{id}', [AnnouncementsController::class, 'update'])->name('transparency.announcements.update');
-    Route::delete('/announcement/delete/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
 
-    Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
-    Route::get('/users', [UsersController::class, 'index'])->name('users');
-    Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
-    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
-    Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
-    Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
-    Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
 
-    Route::get('/review/{id}', [ReviewController::class, 'review'])->name('reviews.review-decision');
-    // Route::post('/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
-    Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
 
-    // Route::get('/select-reviewers/{projectId}', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
-    // Route::get('/select-reviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
-    // Route::post('/projects/assign-reviewers', [ReviewController::class, 'assignReviewers'])->name('submission-details.reviews.assignReviewers');
 
-    Route::get('/select-reviewers', [ReviewController::class, 'select'])->name('submission-details.reviews.select');
-    // Route::post('/submission-details/{projectId}/assignReviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 });
 
 Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function (){
     
-
-Route::get('/home', function () {
-    return view('dashboard');
-})->name('home');
-
     Route::get('/home', [DashboardController::class, 'countAll'])->name('researcher.home');
 
     Route::get('/about/show/{id}', [AboutusController::class, 'show'])->name('transparency.aboutus.show');
@@ -199,8 +207,8 @@ Route::get('/projects/track', [ProjectsController::class, 'track'])->name('proje
 Route::get('/generate-pdf/{data_id}', [PdfController::class, 'generatePDF'])->name('generate.pdf');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
-Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
 Route::post('/store/project/reviewers', [ReviewController::class, 'store'])->name('store.project.reviewers');//oks na
+Route::post('/project/summary/reviews', [ReviewController::class, 'storeSummaryReview'])->name('store.summary.reviews');
 
 
 
@@ -224,6 +232,40 @@ Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');
 Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+
+
+
+Route::prefix('DirectorAndStaff')->middleware(['auth', 'directorOrStaff'])->group(function () {
+
+    // Call-for-proposals
+    Route::get('/call-for-proposals', [ProposalsController::class, 'index'])->name('call-for-proposals');
+    Route::get('/call-for-proposals/create', [ProposalsController::class, 'create'])->name('transparency.call-for-proposals.create');
+    Route::post('/call-for-proposals/store', [ProposalsController::class, 'store'])->name('transparency.call-for-proposals.store');
+    Route::get('/call-for-proposals/edit/{id}', [ProposalsController::class, 'edit'])->name('transparency.call-for-proposals.edit');
+    Route::put('/call-for-proposals/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.call-for-proposals.update');
+    Route::delete('/call-for-proposals/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
+    
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get('/test-error', function () {
     abort(500);

@@ -36,36 +36,12 @@
 <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/main.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/simplemde/simplemde.min.css') }}">
 
-<style>
-        /* Change the dark-themed sidebar background color to blue */
-        .sidebar-dark-primary {
-            background-color: #022A44 !important;
-        }
-
-        /* If you want to change the light-themed sidebar as well, use this */
-        .sidebar-light-primary {
-            background-color: #022A44 !important;
-        }
-        .card {
-            background-color: #ffffff !important;
-        }
-        .content-wrapper {
-            background-color: #f3f4f6 !important;
-        }
-
-    </style>
 </head>
-
-
 <body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
-
-  @include('layouts.topnav')
-  <!-- @section('title', 'RPIMTS') -->
-
-  @include('layouts.sidebar')
-
-  @yield('content')
+    <div class="wrapper">
+        @include('layouts.topnav')
+        @include('layouts.sidebar')
+        @yield('content')
 
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

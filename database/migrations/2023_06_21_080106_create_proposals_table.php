@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('proposaldescription');
             $table->date('startdate');
             $table->date('enddate');
-            $table->string('status');
-            $table->string('remarks');
+            $table->string('status')->default('Opening Soon');
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }

@@ -13,15 +13,16 @@
   <style>
     /* Your custom styles here */
     body {
-       background: url('dist/img/bg.jpg') center/cover no-repeat;
+       /* background: url('dist/img/bgg.jpg') center/cover no-repeat; */
                /* background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 url('dist/img/bg.jpg'); */
-                backdrop-filter:blur(5px);
+                /* backdrop-filter:blur(5px); */
         height: 50%;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         position: relative;
+        background-color: #022A44 !important;
     }
             header{
                 position: fixed;
@@ -188,20 +189,40 @@
 </head>
 <body>
 
+<!-- Responsive navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container px-5">
+        <!-- <a class="navbar-brand" href="#!">RPIMTS</a> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#!">Track</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!">Transparency</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                @if (Route::has('login'))
+                    @auth
+                        <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('/home') }}">Home</a></li> -->
+                    @else
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Log in</a></li>
+                        @if (Route::has('register'))
+                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                        @endif
+                    @endauth
+                @endif
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
 
 <div class="container">
     <header>
-    <h2 class="logo">Logo</h2>
+    <!-- <h2 class="logo">Logo</h2> -->
     <!-- <a href="{{ route('reviewer.home') }}">
         <img src="{{ asset('dist/img/logo.png') }}" alt="AIRCoDe Logo">
     </a> -->
-    <nav class="navigation">
-      <a href="#">Home</a>
-      <a href="#">Transparency</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Log in</a>
-      <a href="#">Register</a>
-    </nav>
     </header>
     <div class="center-content">
       <div class="wrapper">
@@ -256,15 +277,11 @@
       </div>
     </div>
   </div>
-  <script src="script.js"></script>
+
+  
+  <!-- <script src="script.js"></script> -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
- -->
 
 </body>
 </html>

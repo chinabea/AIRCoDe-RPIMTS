@@ -236,25 +236,13 @@
           }
 
           </style>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-angle-down"></i>
-              <p>FOR REVIEW</p>
-            </a>
-            <ul class="nav nav-treeview">
+          <li class="nav-header">FOR REVIEW</li>
             @foreach($recs as $rec)
-                    {{-- <li class="nav-item">
-                        <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link" data-toggle="collapse" data-target="#project-details-{{ $rec->id }}">
-                            <i class="nav-icon fas fa-book"></i>
-                            <p>{{ $rec->projname }}</p>
-                            <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
-                        </a>
-                    </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('submission-details.show', ['id' => $rec->id]) }}" class="nav-link">
-                    <i class=""></i>
+                    <i class="nav-icon fas fa-book"></i>
                     <p>{{ $rec->projname }}</p>
-                    <p class="deadline mb-4"><br>Deadline: Jul. 1, 2023</p>
+                    <!-- <p class="deadline mb-4"><br>Deadline: {{ $rec->deadline }}</p> -->
                     </a>
                 </li>
             @endforeach

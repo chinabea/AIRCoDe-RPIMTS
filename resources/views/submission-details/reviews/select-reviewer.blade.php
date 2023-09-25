@@ -26,7 +26,7 @@
                     <input type="date" name="deadline" id="deadline" class="form-control">
                 </div> 
     
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="individual_deadlines">Individual Review Deadlines:</label>
                     @foreach ($reviewersss as $reviewer)
                     <div class="input-group mb-2">
@@ -36,7 +36,7 @@
                         <input type="date" name="individual_deadlines[{{ $reviewer->id }}]" class="form-control">
                     </div>
                     @endforeach
-                </div> 
+                </div>  -->
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
