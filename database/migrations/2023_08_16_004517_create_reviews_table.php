@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('project_id');
             $table->date('deadline')->nullable();
@@ -31,6 +31,7 @@ return new class extends Migration
             $table->text('project_references')->nullable();
             $table->text('project_total_budget')->nullable();
             $table->text('other_rsc')->nullable();
+            $table->text('actions')->default('In Progress');
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('project_id')->references('id')->on('projects');

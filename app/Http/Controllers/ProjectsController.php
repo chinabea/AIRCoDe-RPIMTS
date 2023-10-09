@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Notifications\ProjectNotification;
+use App\Notifications\ResearchProposalSubmissionNotification;
+// use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Rules\DateNotBeforeToday;
+use App\Rules\NotBeforeTodaysMonthYear;
 use App\Models\ProjectsModel;
 use App\Models\UsersModel;
 use App\Models\User;
@@ -17,6 +20,34 @@ use App\Models\ProjectHistory;
 
 class ProjectsController extends Controller
 {
+    public function markAsRead(){
+        Auth::user()->unreadNotifications->markAsRead();
+        return redirect()->back();
+    }
+
+    // public function ResearchProposalSubmissionNotification($projectId, $researcherId, $researcherMail, $projectTitle){
+
+    //     // Retrieve the project data from the database based on the provided $projectId
+    //     $project = Project::find($projectId);
+    
+    //     if (!$project) {
+    //         // Handle the case where the project with the provided ID doesn't exist
+    //         return "Project not found.";
+    //     }
+    
+    //     // Pass the project data and other variables to the email view
+    //     $emailData = [
+    //         'project' => $project,
+    //         'researcherId' => $researcherId,
+    //         'researcherMail' => $researcherMail,
+    //         'projectTitle' => $projectTitle,
+    //     ];
+
+    //     // Send the email to the authenticated user who submitted the project
+    //     \Mail::to($researcherMail)->send(new ResearchProposalSubmissionNotification($emailData));
+    
+    //     return "Email sent successfully.";
+    // }
 
     public function index()
     {
@@ -40,26 +71,57 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
+        
         $request->validate([
             'projname' => 'required',
             'researchgroup' => 'required',
-                        'authors' => 'required',
-                        'introduction' => 'required',
-                        'aims_and_objectives' => 'required',
-                        'background' => 'required',
-                        'expected_research_contribution' => 'required',
-                        'proposed_methodology' => 'required',
-                        'start_date' => 'required',
-                        'end_date' => 'required',
-                        'workplan' => 'required',
-                        'resources' => 'required',
-                        'references' => 'required',
+            'authors' => 'required',
+            'introduction' => 'required',
+            'aims_and_objectives' => 'required',
+            'background' => 'required',
+            'expected_research_contribution' => 'required',
+            'proposed_methodology' => 'required',
+            // 'start_month' => ['required', 'date_format:Y-m', new NotBeforeTodaysMonthYear],
+            // 'end_month' => 'required|date_format:Y-m',
+            'start_month' => ['required', 'date_format:Y-m', 'after_or_equal:today'], // Set 'start_date' to today or a future date
+            'end_month' => [
+                'required',
+                'date_format:Y-m',
+                function ($attribute, $value, $fail) use ($request) {
+                    $start_month = $request->input('start_date');
+                    
+                    if ($value && strtotime($value) < strtotime($start_month)) {
+                        $fail('The end date must be on or after the start date.');
+                    }
+                },
+            ],
+            'resources' => 'required',
+            'references' => 'required',
         ]);
+
+        // Retrieve the input values
+        $startMonthYear = $request->input('start_month');
+        $endMonthYear = $request->input('end_month');
+    
+        // Convert the input values to Carbon instances for date calculations
+        $startDate = \Carbon\Carbon::parse($startMonthYear . '-01');
+        $endDate = \Carbon\Carbon::parse($endMonthYear . '-01');
+    
+        // Calculate the difference in months between start and end dates
+        $workplanMonths = $endDate->diffInMonths($startDate);
+        
         $userId = Auth::id();
 
         $projects = new ProjectsModel;
         $projects->projname = $request->projname;
-        $projects->status = 'under evaluation';
+        if ($request->has('draft_submit')) {
+            // Set the project status as 'draft'
+            $projects->status = 'draft';
+        } else {
+            // Set the project status as 'under evaluation' for the regular submission
+            $projects->status = 'under evaluation';
+
+        }        
         $projects->user_id = $userId;
         $projects->researchgroup = $request->researchgroup;
             $projects->authors = $request->authors;
@@ -68,26 +130,31 @@ class ProjectsController extends Controller
             $projects->background = $request->background;
             $projects->expected_research_contribution = $request->expected_research_contribution;
             $projects->proposed_methodology = $request->proposed_methodology;
-            $projects->start_date = $request->start_date;
-            $projects->end_date = $request->end_date;
-            $projects->workplan = $request->workplan;
+            $projects->start_month = $startDate;
+            $projects->end_month = $endDate;
+            $projects->workplan = $workplanMonths;
             $projects->resources = $request->resources;
             $projects->references = $request->references;
 
         $projects->save();
 
-        $researcher = UsersModel::find($userId);
+        
+        $researcher = User::find($userId);
         $researcherMail = $researcher->email;
         $projectTitle = $projects->projname;
-        $director = UsersModel::where('role', true)->first();
-        // $researcher = UsersModel::find($userId);
+        $directors = User::where('role', true)->get();
 
-        if ($director) {
-            $director->notify(new ProjectNotification($projects->id, $userId, $researcherMail, $projectTitle));
+        if ($directors) {
+            foreach ($directors as $director) {
+                $director->notify(new ResearchProposalSubmissionNotification($projects->id, $userId, $researcherMail, $projectTitle, $projects));
+            }
+            // $director->notify(new ResearchProposalSubmissionNotification($projects->id, $userId, $researcherMail, $projectTitle, $projects));
         }
 
         if ($researcher) {
-            $researcher->notify(new ProjectNotification($projects->id, $userId, $researcherMail, $projectTitle));
+            // User::find(Auth::user()->id)->notify(new ProjectNotification($projects->id, $userId, $researcherMail, $projectTitle, $projects));
+
+            $researcher->notify(new ResearchProposalSubmissionNotification($projects->id, $userId, $researcherMail, $projectTitle, $projects));
         }
 
         return redirect()->route('projects')->with('success', 'Data Successfully Added!');
@@ -96,8 +163,10 @@ class ProjectsController extends Controller
     public function show($id)
     {
         $tasks = TaskModel::with('assignedTo')->get();
+        // $tasks = TaskModel::get();
+        $teamMembers = ProjectTeamModel::all();
         $allLineItems = LineItemBudgetModel::all();
-        $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
+        // $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
         $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
         $files = FileModel::where('project_id', $id)->get();
         $reviewers = ReviewModel::where('user_id', $id)->get();
@@ -119,7 +188,6 @@ class ProjectsController extends Controller
         return view('submission-details.show', compact('records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
                     'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data'));
 
-
     }
 
 
@@ -129,15 +197,34 @@ class ProjectsController extends Controller
         $projects = ProjectsModel::findOrFail($id);
         $projectTeam = ProjectTeamModel::findOrFail($id);
 
-        return view('projects.edit', compact('projects', 'reviewers', 'projectTeam'));
+        $records = ProjectsModel::findOrFail($id);
+
+        return view('projects.edit', compact('projects', 'reviewers', 'projectTeam', 'records'));
     }
 
     public function update(Request $request, $id)
     {
-        $project = ProjectsModel::findOrFail($id);
-        $project->status = $request->input('status');
-        $project->save();
-        // return redirect()->route('projects')->with('success', 'Data Successfully Updated!');
+        $records = ProjectsModel::findOrFail($id);
+
+        // Update the project record with the new values from the form
+        $records->projname = $request->input('projname');
+        $records->researchgroup = $request->input('researchgroup');
+        $records->authors = $request->input('authors');
+        $records->introduction = $request->input('introduction');
+        $records->aims_and_objectives = $request->input('aims_and_objectives');
+        $records->background = $request->input('background');
+        $records->expected_research_contribution = $request->input('expected_research_contribution');
+        $records->proposed_methodology = $request->input('proposed_methodology');
+        $records->start_month = $request->input('start_month');
+        $records->end_month = $request->input('end_month');
+        $records->workplan = $request->input('workplan');
+        $records->resources = $request->input('resources');
+        $records->references = $request->input('references');
+    
+        // Save the updated project record
+        $records->save();
+
+        return redirect()->back();
     }
 
     public function destroy($id)
@@ -145,13 +232,5 @@ class ProjectsController extends Controller
         $projects = ProjectsModel::findOrFail($id);
         $projects->delete();
         return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
-    }
-
-    public function track(Request $request)
-    {
-        $projectId = $request->input('proj_id');
-        $project = ProjectsModel::find($projectId);
-
-        return view('projects.track', compact('project'));
     }
 }

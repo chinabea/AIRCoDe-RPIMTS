@@ -1,15 +1,12 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}">
-  <title>RPIMTS</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}">
+    <title>RPIMTS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     /* Your custom styles here */
     body {
@@ -75,13 +72,12 @@
             }
             .navigation .btnLogin-popup:hover{
                 background: #fff;
-                color: #4d4d4d;
             }
             .wrapper{
                 position: relative;
                 width: 400px;
                 height: 450px;
-                background: #d3b954;
+                /* background: #ffffff; */
                 border: 2px solid ;
                 border-radius: 20px;
                 backdrop-filter:blur(5px);
@@ -168,7 +164,7 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 1.2em;
-            color: #fff;
+            color: #fff !important;
             font-weight: 600;
             transition: background-color 0.3s;
             }
@@ -189,33 +185,83 @@
 </head>
 <body>
 
-<!-- Responsive navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container px-5">
-        <!-- <a class="navbar-brand" href="#!">RPIMTS</a> -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#!">Track</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">Transparency</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-center">
+    <!-- Navbar content... -->
+    <div class="container">
+        <div class="navigation">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
                 @if (Route::has('login'))
                     @auth
                         <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('/home') }}">Home</a></li> -->
                     @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Log in</a></li>
+            <a href="{{ route('login') }}">Log in</a>
                         @if (Route::has('register'))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+            <a href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
                 @endif
-            </ul>
         </div>
     </div>
 </nav>
+<section class="background-radial-gradient overflow-hidden">
+    <style>
+        /* Your CSS styles for the background gradient here */
+        /* ... (Your existing background gradient styles) ... */
+    /* Your CSS styles for the background gradient here */
+    .background-radial-gradient {
+      background-color: hsl(218, 41%, 15%);
+      background-image: radial-gradient(650px circle at 0% 0%,
+          hsl(218, 41%, 35%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%),
+        radial-gradient(1250px circle at 100% 100%,
+          hsl(218, 41%, 45%) 15%,
+          hsl(218, 41%, 30%) 35%,
+          hsl(218, 41%, 20%) 75%,
+          hsl(218, 41%, 19%) 80%,
+          transparent 100%);
+    }
 
+    #radius-shape-1 {
+      height: 220px;
+      width: 220px;
+      top: -60px;
+      left: -130px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
 
+    #radius-shape-2 {
+      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+      bottom: -60px;
+      right: -110px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(#44006b, #ad1fff);
+      overflow: hidden;
+    }
+
+    .bg-glass {
+      background-color: hsla(0, 0%, 100%, 0.9) !important;
+      backdrop-filter: saturate(200%) blur(25px);
+    }
+    </style>
+
+    <!-- Add the radial gradient shapes here -->
+    <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+    <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+</section>
 
 <div class="container">
     <header>
@@ -225,7 +271,7 @@
     </a> -->
     </header>
     <div class="center-content">
-      <div class="wrapper">
+      <div class="wrapper bg-glass">
         <div class="form-box login">
           <!-- Form content remains the same -->
             <h2><b>Sign in to your Account</b></h2>
@@ -254,7 +300,6 @@
                 </div>
                 <div class="remember-forgot">
 
-
                 <!-- <label class="form-check-label" for="remember">
                     {{ __('Remember Me') }}
                 </label> -->
@@ -277,7 +322,6 @@
       </div>
     </div>
   </div>
-
   
   <!-- <script src="script.js"></script> -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

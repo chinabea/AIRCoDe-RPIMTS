@@ -11,5 +11,11 @@ class AccessRequestModel extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['role','dateandtimeofaccess','purposeofaccess','dateapproved'];
+    public $fillable = ['role','dateofaccess','timeofaccess','purposeofaccess','dateapproved'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }

@@ -21,92 +21,57 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
+        <a class="nav-link" data-toggle="dropdown" href="{{ route('notifications') }}">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
+          <a href="{{ route('notifications') }}" class="dropdown-item dropdown-header bg-primary shadow-sm m-0 font-weight-bold btn">Notifications ({{ auth()->user()->unreadNotifications->count() }})</a>
+        <div class="dropdown-divider"></div>
+        <div style="max-height: 300px; overflow-y: auto;">
+        @if (Auth::check())
+        @foreach (Auth()->user()->notifications->sortByDesc('created_at') as $notification)
+        @php
+        $isUnread = !$notification->read_at;
+        $notificationClass = $isUnread ? 'unread-notification' : 'read-notification';
+        @endphp
+        <a href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}" class="dropdown-item {{ $notificationClass }}">
+          <i class="{{ $notification->data['icon'] }}"></i> {{ $notification->data['message'] }}
+          <span class="float-right text-muted text-xs">{{ $notification->created_at->diffForHumans() }}</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        @endforeach
+        @foreach (Auth::user()->readNotifications as $notification)
+        <a href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}" class="dropdown-item read-notification">
+          <i class="{{ $notification->data['icon'] }}"></i> {{ $notification->data['message'] }}
+          <span class="float-right text-muted text-xs">{{ $notification->created_at->diffForHumans() }}</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        @endforeach
+        @endif
+      </div>
+      <div class="dropdown-divider" style="margin-top: 8px; margin-bottom: 8px;"></div>
+      <form method="POST" action="{{ route('mark-all-as-read') }}">
+        @csrf
+        @method('POST')
+        <button type="submit" class="btn btn-link dropdown-item dropdown-footer">Mark All as Read</button>
+      </form>
+    </div>
+  </li>
 
+<style>
+    .unread-notification {
+        background-color: #f3f4f6; /* Bluish background color for unread messages */
+    }
+
+    /* .read-notification {
+        background-color: #f5f5f5; /* Light background color for read messages */
+    } */
+</style>
+
+      
       <div class="topbar-divider d-none d-sm-block"></div>
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">

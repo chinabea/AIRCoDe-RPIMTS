@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>RPIMTS | Home</title>
+    <title>RPIMTS</title>
     <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
@@ -33,7 +33,6 @@
             background-position: top!important;
             background-repeat: no-repeat;
             background-size: cover;
-            color: #fff;    
         }
 
         /* Customize your styles here */
@@ -84,6 +83,7 @@
                 </div>
             </div>
         </nav>
+
         <!-- Header-->
         <header class="py-5">
             <div class="container px-5">
@@ -93,17 +93,33 @@
                             <h1 class="display-5 fw-bolder text-white mb-2">Research Project Information Management and Tracking System</h1>
                             <p class="lead text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
                             <!-- <div class="d-grid gap-3 d-sm-flex justify-content-sm-center"> -->
-                                <div class="row">
-                                    <div class="col-md-12 login-section container mt-5">
-                                        <!-- <h2>Track Your Project</h2> -->
-                                        <p><b>Type your Research ID Below</b></p>
-                                        <form>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="projectID">
+                                <div class="row"><div class="container mt-5">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="login-section text-white">
+                                                <p><b>Type your Research ID Below</b></p>
+                                                <form action="{{ route('welcome') }}" method="get">
+                                                    <div class="form-group">
+                                                        <input type="text" id="proj_id" name="proj_id" class="form-control" required>
+                                                        <br>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary"> <b>Track Project</b> </button>
+                                                </form>
+                                                @if(isset($project))
+                                                <div class="card-footer">
+                                                    @if($project)
+                                                    <br>
+                                                    <h6 class="text-success">Project Found:</h6>
+                                                    <p><strong>Project Title:</strong> {{ $project->projname }}</p>
+                                                    <p><strong>Approved Date:</strong> {{ $project->approved_date }}</p>
+                                                    @else
+                                                    <br>
+                                                    <p class="text-danger">No project found with the entered ID.</p>
+                                                    @endif
+                                                </div>
+                                                @endif
                                             </div>
-                                            <br>
-                                            <button type="submit" class="btn btn-primary"> <b>Track Project</b> </button>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

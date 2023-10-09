@@ -13,9 +13,15 @@ class UsersModel extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['name','email','role'];
-
-
+    public $fillable = [
+    'name',
+    'email',
+    'role',
+    'password',
+    // 'college_department',
+    // 'research_group',
+    
+];
     public function isDirector()
     {
         return $this->role === 1;
@@ -54,6 +60,11 @@ class UsersModel extends Model
     public function reviews()
     {
         return $this->hasMany(ReviewModel::class);
+    }
+
+    public function submittedProjects()
+    {
+        return $this->hasMany(ProjectsModel::class, 'user_id');
     }
 
 

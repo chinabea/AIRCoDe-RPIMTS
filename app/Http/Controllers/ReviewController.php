@@ -97,8 +97,12 @@ class ReviewController extends Controller
 
     public function storeSummaryReview(Request $request)
     {
+        // $records = ProjectsModel::findOrFail($id);
         // dd($request->all());
         $userId = Auth::id();
+        $validatedData = $request->validate([
+            'project_id' => 'required', // Add any other validation rules as needed
+        ]);
         $projectId = $request->input('project_id');
     
         // Check if the user has already commented on the project
@@ -112,7 +116,6 @@ class ReviewController extends Controller
                 ->with('error', 'You have already summarized comments on this project.');
         }
         else {
-
             $summary = ReviewModel::create([
              'project_id' => $projectId,
              'user_id' => $userId,
@@ -132,9 +135,9 @@ class ReviewController extends Controller
              'project_references' => $request->input('project_references') ?? null,
              'project_total_budget' => $request->input('project_total_budget') ?? null,
              'other_rsc' => $request->input('other_rsc') ?? null,
+             'actions' => $request->input('actions') ?? null,
          ]); 
-
-            }   
+        }   
         
         return redirect()->route('staff.home');
     }
@@ -172,11 +175,13 @@ class ReviewController extends Controller
     public function review($id)
     {
         $records = ProjectsModel::findOrFail($id);
-        return view('reviews.review-decision', compact('records'));
+        $toreview = ReviewModel::where('project_id', $id)->get()->first();
+        $members = UsersModel::where('role', 3)->get();
+        return view('submission-details.show', compact('records','toreview','members'));
     }
 
 
-    // functional na
+    // // functional na
     public function reviewDecision(Request $request, $id)
     {
         $reviewId = $request->input('review_id', 1);
@@ -195,29 +200,63 @@ class ReviewController extends Controller
 
         $review->decision = $request->input('decision');
         $review->save();
-        return redirect()->route('reviews.review-decision', ['id' => $id]);
+        return redirect()->route('submission-details.show', ['id' => $id]);
     }
+
+    
+//     public function reviewDecision(Request $request, $id)
+//     {
+//     $request->validate([
+//         'decision' => 'required|in:Accepted,Accepted with Revision,Rejected',
+//     ]);
+
+//     // Assuming you have a ReviewModel (or similar) to represent reviews
+//     $reviewsWithoutDeadline = ReviewModel::where('user_id', 2) // Remove the comma here
+//         ->where('project_id', $id)
+//         ->whereNull('deadline') // Add this line to filter reviews without a deadline
+//         ->get(); // Use get() to retrieve a collection of matching reviews
+
+//     if ($reviewsWithoutDeadline->isEmpty()) {
+//         return redirect()->back()->with('error', 'No reviews without a deadline found.');
+//     }
+
+//     // Initialize an array to store review IDs
+//     $reviewIds = [];
+
+//     // Update the decision for each review individually
+//     foreach ($reviewsWithoutDeadline as $review) {
+//         $review->decision = $request->input('decision');
+//         $review->save();
+
+//         // Add the review ID to the array
+//         $reviewIds[] = $review->id;
+//     }
+
+//     // Now, $reviewIds contains the IDs of the reviews without a deadline that were updated
+
+//     return redirect()->route('submission-details.show', ['id' => $id]);
+// }
+
+
+    
+    
 
     public function comments(Request $request, $data_id)
     {
         // Retrieve data based on the $data_id
         $data = ProjectsModel::findOrFail($data_id);
 
-        // // Validate the request
-        // $request->validate([
-        //     'highlighted_text' => 'required|string',
-        //     'comment' => 'required|string',
-        // ]);
+        $request->validate([
+            'actions' => 'required|in:In Progress,Accomplished',
+        ]);
 
-        // // Create a new review
-        // $review = new ReviewModel([
-        //     'user_id' => Auth::id(),
-        //     'project_id' => $data_id,
-        //     'highlighted_text' => $request->input('highlighted_text'),
-        //     'comment' => $request->input('comment'),
-        // ]);
-        // $review->save();
+        $project = ProjectsModel::find($id);
+        if (!$project) {
+            return redirect()->back()->with('error', 'Project not found.');
+        }
 
+        $project->actions = $request->input('actions');
+        $project->save();
 
         return view('submission-details.reviews.rsc', ['data' => $data]);
     }

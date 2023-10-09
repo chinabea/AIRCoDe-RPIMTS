@@ -23,10 +23,10 @@
           <div class="col-7">
             <form action="{{ route('contact.store') }}" method="POST">
                 @csrf
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="inputName">Name</label>
               <input type="text" id="inputName" class="form-control" name="name"/>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="inputEmail">E-Mail</label>
               <input type="email" id="inputEmail" class="form-control" name="email" />

@@ -8,7 +8,7 @@
     <!-- Brand Logo -->
     <a href="{{ route('director.home') }}" class="brand-link">
         <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
+        <span class="brand-text font-weight-light">RPIMTS</span>
     </a>
 
     <div class="sidebar">
@@ -216,7 +216,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('staff.home') }}" class="brand-link">
         <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
+        <span class="brand-text font-weight-light">RPIMTS</span>
       </a>
       <div class="sidebar">
 
@@ -257,7 +257,7 @@
     <!-- Brand Logo -->
     <a href="{{ route('researcher.home') }}" class="brand-link">
         <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
+        <span class="brand-text font-weight-light">RPIMTS</span>
     </a>
     <div class="sidebar">
       <nav class="mt-2">
@@ -280,12 +280,14 @@
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
         @if(is_array($recs) || $recs instanceof \Traversable)
           @foreach($recs as $rec)
+          @if($rec->user_id == auth()->user()->id)
             <li class="nav-item">
               <a href="{{ route('submission-details.show', ['id' => $rec->id]) }}" class="nav-link">
                 <i class=""></i>
               <p>{{ $rec->projname }}</p>
               </a>
             </li>
+            @endif
           @endforeach
           @endif
           </ul>
@@ -299,6 +301,7 @@
           </a>
         @if(is_array($recs) || $recs instanceof \Traversable)
           @foreach($recs as $rec)
+          @if($rec->user_id == auth()->user()->id)
           @if($rec->status == 'Draft')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
@@ -308,6 +311,7 @@
               </a>
             </li>
           </ul>
+          @endif
           @endif
           @endforeach
         @endif
@@ -321,6 +325,7 @@
           </a>
         @if(is_array($recs) || $recs instanceof \Traversable)
           @foreach($recs as $rec)
+          @if($rec->user_id == auth()->user()->id)
           @if($rec->status == 'Under Evaluation')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
@@ -330,6 +335,7 @@
               </a>
             </li>
           </ul>
+          @endif
           @endif
           @endforeach
         @endif
@@ -343,6 +349,7 @@
           </a>
         @if(is_array($recs) || $recs instanceof \Traversable)
           @foreach($recs as $rec)
+          @if($rec->user_id == auth()->user()->id)
           @if($rec->status == 'For Revision')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
@@ -352,6 +359,7 @@
               </a>
             </li>
           </ul>
+          @endif
           @endif
           @endforeach
         @endif
@@ -365,6 +373,7 @@
           </a>
         @if(is_array($recs) || $recs instanceof \Traversable)
           @foreach($recs as $rec)
+          @if($rec->user_id == auth()->user()->id)
           @if($rec->status == 'Deferred')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
@@ -374,6 +383,7 @@
               </a>
             </li>
           </ul>
+          @endif
           @endif
           @endforeach
         @endif
@@ -388,6 +398,7 @@
           </a>
         @if(is_array($recs) || $recs instanceof \Traversable)
           @foreach($recs as $rec)
+          @if($rec->user_id == auth()->user()->id)
           @if($rec->status == 'Approved')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
@@ -397,6 +408,7 @@
               </a>
             </li>
           </ul>
+          @endif
           @endif
           @endforeach
         @endif
@@ -410,6 +422,7 @@
           </a>
         @if(is_array($recs) || $recs instanceof \Traversable)
           @foreach($recs as $rec)
+          @if($rec->user_id == auth()->user()->id)
           @if($rec->status == 'Disapproved')
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
@@ -419,6 +432,7 @@
               </a>
             </li>
           </ul>
+          @endif
           @endif
           @endforeach
         @endif
@@ -519,7 +533,7 @@
     <!-- Brand Logo -->
     <a href="{{ route('reviewer.home') }}" class="brand-link">
         <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AIRCoDe RPIM</span>
+        <span class="brand-text font-weight-light">RPIMTS</span>
     </a>
 
     <!-- Sidebar -->

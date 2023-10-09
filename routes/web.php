@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\StatusController;
@@ -23,6 +24,8 @@ use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\ProjectHistoryController;
+use App\Http\Controllers\TrackController;
+use App\Http\Controllers\NotificationController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -37,15 +40,13 @@ use App\Mail\Send;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/projects/track', [TrackController::class, 'track'])->name('projects.track');
+Route::get('/', [TrackController::class, 'track'])->name('welcome');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/sample', function () {
-    return view('sample');
-});
+// Route::get('/', function () {
+//     return view('welcome')->name('welcome');
+// });
 
 
 Auth::routes();
@@ -63,6 +64,7 @@ Route::middleware('auth')->group(function (){
     Route::put('/edit-users/{id}', [UsersController::class, 'update'])->name('users.update');
     Route::delete('/delete-users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
     Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
+    Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
 
 
     Route::prefix('staff')->middleware(['auth', 'staff'])->group(function (){
@@ -100,7 +102,6 @@ Route::middleware('auth')->group(function (){
         Route::put('/announcement/edit/{id}', [AnnouncementsController::class, 'update'])->name('transparency.announcements.update');
         Route::delete('/announcement/delete/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
     
-        Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
         Route::get('/users', [UsersController::class, 'index'])->name('users');
         Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
@@ -108,8 +109,7 @@ Route::middleware('auth')->group(function (){
         Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
         Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
     
-        Route::get('/review/{id}', [ReviewController::class, 'review'])->name('reviews.review-decision');
-        // Route::post('/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
+        // Route::get('/review/{id}', [ReviewController::class, 'review'])->name('reviews.review-decision');
         Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
     
         // Route::get('/select-reviewers/{projectId}', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
@@ -119,28 +119,6 @@ Route::middleware('auth')->group(function (){
         Route::get('/select-reviewers', [ReviewController::class, 'select'])->name('submission-details.reviews.select');
         // Route::post('/submission-details/{projectId}/assignReviewers', [ReviewController::class, 'selectReviewers'])->name('submission-details.reviews.select-reviewer');
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     
@@ -198,12 +176,27 @@ Route::prefix('researcher')->middleware(['auth', 'researcher'])->group(function 
     Route::get('/pdf/preview/{filename}', [FileController::class, 'previewPDF'])->name('submission-details.files.preview');
     Route::get('/download/{id}', [FileController::class, 'download'])->name('file.download');
 
-    Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
     Route::get('/status/edit', [StatusController::class, 'update'])->name('projects.editstatus');
 });
 
+
+Route::prefix('DirectorAndStaff')->middleware(['auth', 'directorOrStaff'])->group(function () {
+
+    // Call-for-proposals
+    Route::get('/call-for-proposals', [ProposalsController::class, 'index'])->name('call-for-proposals');
+    Route::get('/call-for-proposals/create', [ProposalsController::class, 'create'])->name('transparency.call-for-proposals.create');
+    Route::post('/call-for-proposals/store', [ProposalsController::class, 'store'])->name('transparency.call-for-proposals.store');
+    Route::get('/call-for-proposals/edit/{id}', [ProposalsController::class, 'edit'])->name('transparency.call-for-proposals.edit');
+    Route::put('/call-for-proposals/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.call-for-proposals.update');
+    Route::delete('/call-for-proposals/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
+
+    
+    Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
+    
+});
+
+
 // NAGANA NA YAYS!
-Route::get('/projects/track', [ProjectsController::class, 'track'])->name('projects.track'); //oks na
 Route::get('/generate-pdf/{data_id}', [PdfController::class, 'generatePDF'])->name('generate.pdf');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
@@ -234,37 +227,20 @@ Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.s
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
+// register 
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
 
-Route::prefix('DirectorAndStaff')->middleware(['auth', 'directorOrStaff'])->group(function () {
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
+Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
 
-    // Call-for-proposals
-    Route::get('/call-for-proposals', [ProposalsController::class, 'index'])->name('call-for-proposals');
-    Route::get('/call-for-proposals/create', [ProposalsController::class, 'create'])->name('transparency.call-for-proposals.create');
-    Route::post('/call-for-proposals/store', [ProposalsController::class, 'store'])->name('transparency.call-for-proposals.store');
-    Route::get('/call-for-proposals/edit/{id}', [ProposalsController::class, 'edit'])->name('transparency.call-for-proposals.edit');
-    Route::put('/call-for-proposals/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.call-for-proposals.update');
-    Route::delete('/call-for-proposals/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
-    
+
+
+Route::get('/error', function () {
+    return view('errors.errorView')->name('errors.errorView');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Route::get('/test-error', function () {

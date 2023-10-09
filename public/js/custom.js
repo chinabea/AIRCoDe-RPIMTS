@@ -77,3 +77,26 @@ $(function () {
       $('#review-form, #tasks-form, #details-form, #status-form, #reviewer-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form').hide();
     });
   });
+
+    $(document).ready(function () {
+        $(".accomplish-button").click(function () {
+            // Toggle the button status and appearance
+            if ($(this).data("status") === "in_progress") {
+                $(this).removeClass("btn-warning").addClass("btn-success");
+                $(this).html('<i class="fas fa-check"></i> Accomplished');
+                $(this).data("status", "accomplished");
+            } 
+            else {
+                $(this).removeClass("btn-success").addClass("btn-warning");
+                $(this).html('<i class="fas fa-spinner"></i> In Progress');
+                $(this).data("status", "in_progress");
+            }
+        });
+    });
+
+    if(session('error'))
+        $(document).ready(function () {
+            $('#errorModal').modal('show');
+        });
+    endif
+

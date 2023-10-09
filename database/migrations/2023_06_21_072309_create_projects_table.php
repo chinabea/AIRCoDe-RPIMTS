@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->text('projname');
-            $table->enum('status', ['New', 'Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved'])->default('New');
+            $table->enum('status', ['Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved']);
             $table->text('researchgroup');
             $table->text('authors');
             $table->text('introduction');
@@ -23,9 +23,9 @@ return new class extends Migration
             $table->text('background');
             $table->text('expected_research_contribution');
             $table->text('proposed_methodology');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->text('workplan');
+            $table->date('start_month');
+            $table->date('end_month');
+            $table->string('workplan');
             $table->text('resources');
             $table->text('references');
             $table->decimal('total_budget', 10, 2)->default(0.00);

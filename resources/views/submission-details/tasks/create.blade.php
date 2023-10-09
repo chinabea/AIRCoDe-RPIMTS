@@ -27,20 +27,38 @@
                       <label for="start_date">Start Date</label>
                       <input type="date" name="start_date" id="start_date" class="form-control" required>
                   </div>
+                      @error('start_date')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
 
                   <div class="form-group">
                       <label for="end_date">End Date</label>
                       <input type="date" name="end_date" id="end_date" class="form-control" required>
                   </div>
-
-                  <div class="form-group">
-                      <label for="assigned_to">Assigned To</label>
-                      <select name="assigned_to" id="assigned_to" class="form-control" required>
-                          @foreach ($members as $member)
-                              <option value="{{ $member->id }}">{{ $member->name }}</option>
-                          @endforeach
-                      </select>
-                  </div>
+                      @error('end_date')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
+                      
+                    <div class="form-group">
+                        <label for="assigned_to">Assigned To</label>
+                        @if ($teamMembers->isEmpty())
+                        <p>No team members available. Please add team members first.</p>
+                        @else
+                        <select name="assigned_to" id="assigned_to" class="form-control" required>
+                            @foreach ($teamMembers as $member)
+                            <option value="{{ $member->id }}">{{ $member->member_name }}</option>
+                            @endforeach
+                        </select>
+                        @endif
+                    </div>
+                      <!-- <div class="form-group">
+                        <label for="assigned_to">Assigned To</label>
+                        <select name="assigned_to" id="assigned_to" class="form-control" required>
+                            @foreach ($teamMembers as $member)
+                            <option value="{{ $member->id }}">{{ $member->member_name }}</option>
+                            @endforeach
+                        </select>
+                    </div> -->
                   <button type="submit" class="btn btn-primary">Add Task</button>
               </form>
             </div>

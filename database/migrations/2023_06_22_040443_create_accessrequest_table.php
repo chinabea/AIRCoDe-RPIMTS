@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('accessrequest', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('role');
-            $table->datetime('dateandtimeofaccess');
+            $table->date('dateofaccess');
+            $table->time('timeofaccess');
             $table->text('purposeofaccess');
-            $table->date('dateapproved');
+            $table->date('dateapproved')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

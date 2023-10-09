@@ -20,13 +20,18 @@ class ProjectsModel extends Model
                         'background',
                         'expected_research_contribution',
                         'proposed_methodology',
-                        'start_date',
-                        'end_date',
+                        'start_month',
+                        'end_month',
                         'workplan',
                         'resources',
                         'references',
                         'total_budget'
                     ];
+
+    public function callForProposal()
+    {
+        return $this->hasMany(ProposalsModel::class, 'project_id');
+    }
 
     public function projectTeams()
     {
@@ -54,16 +59,6 @@ class ProjectsModel extends Model
         return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'reviewer_id');
     }
 
-    public function callForProposal()
-    {
-        return $this->hasMany(ProposalsModel::class, 'project_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(UsersModel::class);
-    }
-
     // public function status()
     // {
     //     return $this->belongsTo(StatusModel::class, 'status');
@@ -72,6 +67,12 @@ class ProjectsModel extends Model
     public function reviews()
     {
         return $this->hasMany(ReviewModel::class);
+    }
+                    
+
+    public function user()
+    {
+        return $this->belongsTo(UsersModel::class);
     }
 
 

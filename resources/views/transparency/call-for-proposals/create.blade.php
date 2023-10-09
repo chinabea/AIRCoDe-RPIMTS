@@ -1,18 +1,14 @@
-@extends('layouts.template')
 
-@section('content')
-<div class="content-wrapper">
-    <section class="content-header">
-    </section>
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header clearfix">
-                            <h3 class="card-title">Create Call for Proposals</h3>
-                        </div>
-                        <div class="card-body">
+<div class="modal fade" id="CallforProposal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Call for Proposal</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
                             <form action="{{ route('transparency.call-for-proposals.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
@@ -29,16 +25,25 @@
                                     <label for="startdate">Start Date</label>
                                     <input type="date" class="form-control" id="startdate" name="startdate">
                                 </div>
+                                @error('startdate')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
                                 <div class="form-group">
                                     <label for="enddate">End Date</label>
                                     <input type="date" class="form-control" id="enddate" name="enddate">
                                 </div>
+                                @error('enddate')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <input type="text" class="form-control" id="status" name="status" placeholder="Status">
                                 </div>
+                                @error('status')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
                                 <div class="form-group">
                                     <label for="remarks">Remarks</label>
@@ -47,11 +52,10 @@
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </section>
-</div>
-@endsection
+    </div>
+</div> 
+
+
+

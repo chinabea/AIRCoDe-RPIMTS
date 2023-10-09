@@ -14,8 +14,9 @@
               </div>
               <div class="card-body">
               <div class="table-responsive">
-                <a href="{{ route('transparency.call-for-proposals.create') }}" class="btn btn-primary my-2">
-                <i class="fas fa-plus"></i> Add Proposals</a>
+
+                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#CallforProposal"><i class="fas fa-plus"></i> Add Call for Proposals</button>
+                @include('transparency.call-for-proposals.create')
 
                 @if(Session::has('success'))
                     <div class="alert alert-success" role="alert">
@@ -42,8 +43,8 @@
                           <td class="align-middle">{{ $loop->iteration }}</td>
                           <td class="align-middle">{{ $proposal->proposaltitle }}</td>
                           <td class="align-middle">{{ $proposal->proposaldescription }}</td>
-                          <td class="align-middle">{{ $proposal->startdate }}</td>
-                          <td class="align-middle">{{ $proposal->enddate }}</td>
+                          <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->startdate)->format('F j, Y') }}</td>
+                          <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->enddate)->format('F j, Y') }}</td>
                           <td class="align-middle">{{ $proposal->status }}</td>
                           <td class="align-middle">{{ $proposal->remarks }}</td>
                           <td class="align-middle">
@@ -80,18 +81,6 @@
                       @endforeach
                       @endif
                   </tbody>
-                  <thead>
-                      <tr>
-                          <th>#</th>
-                          <th>Proposal Title</th>
-                          <th>Proposal Description</th>
-                          <th>Start Date</th>
-                          <th>End Date</th>
-                          <th>Status</th>
-                          <th>Remarks</th>
-                          <th>Action(s)</th>
-                      </tr>
-                  </thead>
               </table>
             </div>
             </div>
@@ -102,6 +91,4 @@
   </section>
 </div>
 </div>
-
-
-  @endsection
+@endsection
