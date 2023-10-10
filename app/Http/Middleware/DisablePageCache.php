@@ -5,11 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Cache;
 
-
-
-class PageCacheMiddleware
+class DisablePageCache
 {
     /**
      * Handle an incoming request.
@@ -18,20 +15,12 @@ class PageCacheMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // return $next($request);
-        
-        $key = 'page_' . md5($request->fullUrl());
-
-        if (Cache::has($key)) {
-            return response(Cache::get($key));
-        }
-
         $response = $next($request);
 
-        // Cache the page for a specified duration (e.g., 60 minutes)
-        Cache::put($key, $response->getContent(), 60);
+        $response->headers->set('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        $response->headers->set('Pragma', 'no-cache');
+        $response->headers->set('Expires', 'Thu, 19 Nov 1981 08:52:00 GMT');
 
         return $response;
     }
-    
 }

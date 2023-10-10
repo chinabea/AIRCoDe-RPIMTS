@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Http\Middleware\DisablePageCache::class,
     ];
 
     /**
@@ -68,7 +69,8 @@ class Kernel extends HttpKernel
         'researcher' => \App\Http\Middleware\Researcher::class,
         'reviewer' => \App\Http\Middleware\Reviewer::class,
         'directorOrStaff' => \App\Http\Middleware\DirectorOrStaff::class,
-        'cache' => \App\Http\Middleware\PageCacheMiddleware::class,
+        'cache' => \App\Http\Middleware\DisablePageCache::class,
+        
 
     ];
 }
