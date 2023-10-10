@@ -5,10 +5,42 @@
 <div class="content-wrapper">
   <section class="content-header">
   </section>
-  
+
+  <!-- Tabs -->
+  <style>
+      /* Custom tab colors */
+      .nav-tabs .nav-item.show .nav-link,
+      .nav-tabs .nav-link.active {
+          background-color: #022A44;
+          color: #ffffff; /* Text color for active tab */
+      }
+
+      .nav-tabs .nav-link {
+          background-color: #ffffff; /* Inactive tab color */
+          color: #333; /* Text color for inactive tab */
+      }
+  </style>
+
+
+
+<div class="container mt-5">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-center align-items-center">
+            <i class="fas fa-cogs fa-2x text-gray-300"></i>
+            <h1 class="m-0 ml-3 font-weight-bold">Actions</h1>
+        </div>
+        <div class="card-body">
+            The styling for this basic card example is created by using default Bootstrap utility classes.
+            By using utility classes, the style of the card component can be easily modified with no need
+            for any custom CSS!
+        </div>
+    </div>
+</div>
+
+
 @if(Auth::check())
-  @if(Auth::user()->role == 1 || Auth::user()->role == 3)
-    <div class="container mt-5">
+@if(Auth::user()->role == 1 || Auth::user()->role == 3)
+    <!-- <div class="container mt-5">
             <div class="card shadow mb-4">
               <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">SUBMISSION DETAILS</h6>
@@ -48,7 +80,7 @@
                 </table>
               </div>
             </div>
-          </div>  
+          </div>   -->
           
   @elseif(Auth::user()->role == 2 || Auth::user()->role == 4)
   <div class="col-md-12">
@@ -426,39 +458,69 @@
       @endif
 
     @if(Auth::user()->role == 1)
-        <div class="text-center">
-        <button id="actions-btn" class="btn btn-primary">
-            <i class="fas fa-cogs mr-2"></i>Actions
-        </button>
-          <button id="review-btn" class="btn btn-primary my-2">
-            <i class="fas fa-file-signature mr-2"></i>Review
-          </button>
-        <button id="details-btn" class="btn btn-primary my-2">
-            <i class="fas fa-info-circle mr-2"></i>Details
-        </button>
-        <button id="tasks-btn" class="btn btn-primary my-2">
-            <i class="fas fa-tasks mr-2"></i>Tasks
-        </button>
-        <button id="lib-btn" class="btn btn-primary my-2">
-            <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
-        </button>
-        <button id="files-btn" class="btn btn-primary my-2">
-            <i class="fas fa-file-alt mr-2"></i>Files
-        </button>
-        <button id="messages-btn" class="btn btn-primary my-2">
-            <i class="fas fa-comments mr-2"></i>Messages
-        </button>
-        <button id="project-team-btn" class="btn btn-primary my-2">
-            <i class="fas fa-users mr-2"></i>Project Team
-        </button>
-        <button id="status-btn" class="btn btn-primary my-2">
-            <i class="fas fa-tasks mr-2"></i>Status
-        </button>
-        <button id="reviewer-btn" class="btn btn-primary my-2">
-            <i class="fas fa-user-check mr-2"></i>Reviewer
-        </button>
-        </div>
+        
+     
+    <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist">
+          <li class="nav-item">
+              <a class="nav-link active" id="actions-btn" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="true">
+                  <i class="fas fa-cogs mr-2"></i>Actions
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="details-btn" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">
+                  <i class="fas fa-info-circle mr-2"></i>Details
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="tasks-btn" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">
+                  <i class="fas fa-tasks mr-2"></i>Tasks
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="lib-btn" data-toggle="tab" href="#lib" role="tab" aria-controls="lib" aria-selected="false">
+                  <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="files-btn" data-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="false">
+                  <i class="fas fa-file-alt mr-2"></i>Files
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="messages-btn" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">
+                  <i class="fas fa-comments mr-2"></i>Messages
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
+                  <i class="fas fa-users mr-2"></i>Project Team
+              </a>
+          </li>
 
+
+          
+
+          <li class="nav-item">
+              <a class="nav-link" id="review-btn" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">
+            <i class="fas fa-file-signature mr-2"></i>Review
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="status-btn" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">
+            <i class="fas fa-tasks mr-2"></i>Status
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="reviewer-btn" data-toggle="tab" href="#reviewer" role="tab" aria-controls="reviewer" aria-selected="false">
+            <i class="fas fa-user-check mr-2"></i>Reviewer
+              </a>
+          </li>
+
+
+
+
+
+      </ul>
     @elseif(Auth::user()->role == 2)
         <!-- <div class="text-center">
         <button id="actions-btn" class="btn btn-primary">
@@ -496,29 +558,59 @@
       </div> -->
     
     @elseif(Auth::user()->role == 3)
-        <div class="text-center">
-        <button id="actions-btn" class="btn btn-primary">
-            <i class="fas fa-cogs mr-2"></i>Actions
-        </button>
-        <button id="details-btn" class="btn btn-primary my-2">
-            <i class="fas fa-info-circle mr-2"></i>Details
-        </button>
-        <button id="tasks-btn" class="btn btn-primary my-2">
-            <i class="fas fa-tasks mr-2"></i>Tasks
-        </button>
-        <button id="lib-btn" class="btn btn-primary my-2">
-            <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
-        </button>
-        <button id="files-btn" class="btn btn-primary my-2">
-            <i class="fas fa-file-alt mr-2"></i>Files
-        </button>
-        <button id="messages-btn" class="btn btn-primary my-2">
-            <i class="fas fa-comments mr-2"></i>Messages
-        </button>
-        <button id="project-team-btn" class="btn btn-primary my-2">
-            <i class="fas fa-users mr-2"></i>Project Team
-        </button>
-        </div>
+    
+    <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist">
+          <li class="nav-item">
+              <a class="nav-link active" id="actions-btn" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="true">
+                  <i class="fas fa-cogs mr-2"></i>Actions
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="details-btn" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">
+                  <i class="fas fa-info-circle mr-2"></i>Details
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="tasks-btn" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">
+                  <i class="fas fa-tasks mr-2"></i>Tasks
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="lib-btn" data-toggle="tab" href="#lib" role="tab" aria-controls="lib" aria-selected="false">
+                  <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="files-btn" data-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="false">
+                  <i class="fas fa-file-alt mr-2"></i>Files
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="messages-btn" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">
+                  <i class="fas fa-comments mr-2"></i>Messages
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
+                  <i class="fas fa-users mr-2"></i>Project Team
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="review-btn" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">
+                <i class="fas fa-file-signature mr-2"></i>Review
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="status-btn" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">
+                <i class="fas fa-tasks mr-2"></i>Status
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="reviewer-btn" data-toggle="tab" href="#reviewer" role="tab" aria-controls="reviewer" aria-selected="false">
+                <i class="fas fa-user-check mr-2"></i>Reviewer
+              </a>
+          </li>
+      </ul>
         @endif
         @endif
  
@@ -1630,6 +1722,12 @@
     <div class="container">
         <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
             @include('submission-details.reviews.select-reviewer')
+
+
+
+
+
+            
             
     </div>
     </div>
@@ -1678,11 +1776,6 @@
             </div>
           </div>
         </div>
-
-
-
-
-
 
 
 </div>

@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'researcher' => \App\Http\Middleware\Researcher::class,
         'reviewer' => \App\Http\Middleware\Reviewer::class,
         'directorOrStaff' => \App\Http\Middleware\DirectorOrStaff::class,
+        'cache' => \App\Http\Middleware\PageCacheMiddleware::class,
 
     ];
 }

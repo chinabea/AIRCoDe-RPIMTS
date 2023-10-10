@@ -6,14 +6,14 @@
         .header {
             text-align: center;
         }
-        .header img {
-            max-width: 200px; /* Adjust as needed */
-        }
+        /* .header img {
+            max-width: 200px; 
+        } */
         body {
             font-family: "Times New Roman", serif;
             font-size: 11pt;
             color: black;
-            margin-top: 0.5in;
+            /* margin-top: 0.5in; */
             margin-left: 0.5in;
             margin-right: 0.5in;
             margin-bottom: 0.3in;
@@ -35,13 +35,8 @@
     </style>
 </head>
 <body>
+<img id="pdfLogo" src="{{ public_path('dist/img/header.jpg') }}" alt="logo" style="width:100%; margin:0;">
     <div>
-        <div class="page-break"></div>
-
-        <!-- <div class="header">
-            <img src="{{ public_path('header.png') }}" alt="Header Image">
-        </div>  -->
-        
         <div style="text-align: center;">
             <h1>Project Name</h1>
             <h1>{{ $data->projname }}</h1>

@@ -33,10 +33,10 @@
         <div style="max-height: 300px; overflow-y: auto;">
         @if (Auth::check())
         @foreach (Auth()->user()->notifications->sortByDesc('created_at') as $notification)
-        @php
+        <!-- @php
         $isUnread = !$notification->read_at;
         $notificationClass = $isUnread ? 'unread-notification' : 'read-notification';
-        @endphp
+        @endphp -->
         <a href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}" class="dropdown-item {{ $notificationClass }}">
           <i class="{{ $notification->data['icon'] }}"></i> {{ $notification->data['message'] }}
           <span class="float-right text-muted text-xs">{{ $notification->created_at->diffForHumans() }}</span>

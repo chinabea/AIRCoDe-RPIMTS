@@ -81,20 +81,20 @@ class ProjectsController extends Controller
             'background' => 'required',
             'expected_research_contribution' => 'required',
             'proposed_methodology' => 'required',
-            // 'start_month' => ['required', 'date_format:Y-m', new NotBeforeTodaysMonthYear],
-            // 'end_month' => 'required|date_format:Y-m',
-            'start_month' => ['required', 'date_format:Y-m', 'after_or_equal:today'], // Set 'start_date' to today or a future date
-            'end_month' => [
-                'required',
-                'date_format:Y-m',
-                function ($attribute, $value, $fail) use ($request) {
-                    $start_month = $request->input('start_date');
+            'start_month' => ['required', 'date_format:Y-m', new NotBeforeTodaysMonthYear],
+            'end_month' => 'required|date_format:Y-m',
+            // 'start_month' => ['required', 'date_format:Y-m', 'after_or_equal:today'], // Set 'start_date' to today or a future date
+            // 'end_month' => [
+            //     'required',
+            //     'date_format:Y-m',
+            //     function ($attribute, $value, $fail) use ($request) {
+            //         $start_month = $request->input('start_date');
                     
-                    if ($value && strtotime($value) < strtotime($start_month)) {
-                        $fail('The end date must be on or after the start date.');
-                    }
-                },
-            ],
+            //         if ($value && strtotime($value) < strtotime($start_month)) {
+            //             $fail('The end date must be on or after the start date.');
+            //         }
+            //     },
+            // ],
             'resources' => 'required',
             'references' => 'required',
         ]);
