@@ -75,23 +75,27 @@ class ProjectsController extends Controller
         $request->validate([
             'projname' => 'required',
             'researchgroup' => 'required',
-            'authors' => 'required',
+            // 'authors' => 'required',
             'introduction' => 'required',
             'aims_and_objectives' => 'required',
             'background' => 'required',
             'expected_research_contribution' => 'required',
             'proposed_methodology' => 'required',
-            'start_month' => ['required', 'date_format:Y-m', new NotBeforeTodaysMonthYear],
-            'end_month' => 'required|date_format:Y-m',
-            // 'start_month' => ['required', 'date_format:Y-m', 'after_or_equal:today'], // Set 'start_date' to today or a future date
+            'workplan' => 'required',
+            // 'start_month' => [
+            //     'required',
+            //     'date_format:Y-m',
+            //     'after_or_equal:' . date('Y-m'),
+            // ],
             // 'end_month' => [
             //     'required',
             //     'date_format:Y-m',
             //     function ($attribute, $value, $fail) use ($request) {
-            //         $start_month = $request->input('start_date');
-                    
-            //         if ($value && strtotime($value) < strtotime($start_month)) {
-            //             $fail('The end date must be on or after the start date.');
+            //         $startMonth = $request->input('start_month');
+            //         $currentDate = date('Y-m');
+
+            //         if (strtotime($value) < strtotime($startMonth) || strtotime($value) < strtotime($currentDate)) {
+            //             $fail('The end month must be after the start month and in the future.');
             //         }
             //     },
             // ],
@@ -100,15 +104,15 @@ class ProjectsController extends Controller
         ]);
 
         // Retrieve the input values
-        $startMonthYear = $request->input('start_month');
-        $endMonthYear = $request->input('end_month');
+        // $startMonthYear = $request->input('start_month');
+        // $endMonthYear = $request->input('end_month');
     
         // Convert the input values to Carbon instances for date calculations
-        $startDate = \Carbon\Carbon::parse($startMonthYear . '-01');
-        $endDate = \Carbon\Carbon::parse($endMonthYear . '-01');
+        // $startDate = \Carbon\Carbon::parse($startMonthYear . '-01');
+        // $endDate = \Carbon\Carbon::parse($endMonthYear . '-01');
     
-        // Calculate the difference in months between start and end dates
-        $workplanMonths = $endDate->diffInMonths($startDate);
+        // // Calculate the difference in months between start and end dates
+        // $workplanMonths = $endDate->diffInMonths($startDate);
         
         $userId = Auth::id();
 
@@ -124,15 +128,15 @@ class ProjectsController extends Controller
         }        
         $projects->user_id = $userId;
         $projects->researchgroup = $request->researchgroup;
-            $projects->authors = $request->authors;
+            // $projects->authors = $request->authors;
             $projects->introduction = $request->introduction;
             $projects->aims_and_objectives = $request->aims_and_objectives;
             $projects->background = $request->background;
             $projects->expected_research_contribution = $request->expected_research_contribution;
             $projects->proposed_methodology = $request->proposed_methodology;
-            $projects->start_month = $startDate;
-            $projects->end_month = $endDate;
-            $projects->workplan = $workplanMonths;
+            // $projects->start_month = $startDate;
+            // $projects->end_month = $endDate;
+            $projects->workplan = $request->workplan;
             $projects->resources = $request->resources;
             $projects->references = $request->references;
 
@@ -162,11 +166,12 @@ class ProjectsController extends Controller
 
     public function show($id)
     {
+
         $tasks = TaskModel::with('assignedTo')->get();
         // $tasks = TaskModel::get();
         $teamMembers = ProjectTeamModel::all();
         $allLineItems = LineItemBudgetModel::all();
-        // $teamMembers = ProjectTeamModel::where('project_id', $id)->get();
+        $projMembers = ProjectTeamModel::where('project_id', $id)->get();
         $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
         $files = FileModel::where('project_id', $id)->get();
         $reviewers = ReviewModel::where('user_id', $id)->get();
@@ -175,9 +180,23 @@ class ProjectsController extends Controller
         $reviewersss = UsersModel::where('role', 4)->get();
         $data = ProjectsModel::findOrFail($id);
         $records = ProjectsModel::findOrFail($id);
-        // $revs = ReviewModel::where('user_id', Auth::user()->id)->get();
-    
-    
+
+        // $reviewerCommented = ReviewModel::where('user_id', Auth::user()->id)->get();
+        // $comments = ReviewModel::findOrFail($id);
+
+        $reviewerCommented = ReviewModel::where('user_id', Auth::user()->id)
+        ->where('project_id', $id)
+        ->count();
+
+
+        // Example logic to determine if the reviewer has commented on contribution_to_knowledge
+        // $reviewerCommented = false;
+        // foreach ($reviewsOfReviewer as $review) {
+        //     if ($review->user->role === 4 && $review->project_contribution_to_knowledge !== null && $review->project_id === $records->id) {
+        //         $reviewerCommented = true;
+        //         break; // No need to continue if one comment is found
+        //     }
+        // }
 
         // Calculate the total of all line items
         $totalAllLineItems = 0;
@@ -185,8 +204,9 @@ class ProjectsController extends Controller
             $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudgetModel structure
         }
 
-        return view('submission-details.show', compact('records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
-                    'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data'));
+        return view('submission-details.show', compact('id', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
+                    'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data', 'projMembers', 
+                    'reviewerCommented'));
 
     }
 
@@ -209,14 +229,14 @@ class ProjectsController extends Controller
         // Update the project record with the new values from the form
         $records->projname = $request->input('projname');
         $records->researchgroup = $request->input('researchgroup');
-        $records->authors = $request->input('authors');
+        // $records->authors = $request->input('authors');
         $records->introduction = $request->input('introduction');
         $records->aims_and_objectives = $request->input('aims_and_objectives');
         $records->background = $request->input('background');
         $records->expected_research_contribution = $request->input('expected_research_contribution');
         $records->proposed_methodology = $request->input('proposed_methodology');
-        $records->start_month = $request->input('start_month');
-        $records->end_month = $request->input('end_month');
+        // $records->start_month = $request->input('start_month');
+        // $records->end_month = $request->input('end_month');
         $records->workplan = $request->input('workplan');
         $records->resources = $request->input('resources');
         $records->references = $request->input('references');

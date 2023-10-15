@@ -30,7 +30,7 @@
               <i class="nav-icon fas fa-users mr-2"></i>
               <p>
                 Users
-                <span class="badge badge-info right">2</span>
+                <!-- <span class="badge badge-info right">2</span> -->
               </p>
             </a>
           </li>
@@ -39,7 +39,7 @@
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Submitted Projects
-                <span class="badge badge-info right">7</span>
+                <!-- <span class="badge badge-info right">7</span> -->
               </p>
             </a>
           </li>
@@ -79,7 +79,7 @@
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-bookmark"></i>
               <p>{{ $rec->projname }}</p>
               </a>
             </li>
@@ -242,6 +242,7 @@
                     <a href="{{ route('submission-details.show', ['id' => $rec->id]) }}" class="nav-link">
                     <i class="nav-icon fas fa-book"></i>
                     <p>{{ $rec->projname }}</p>
+
                     <!-- <p class="deadline mb-4"><br>Deadline: {{ $rec->deadline }}</p> -->
                     </a>
                 </li>
@@ -330,7 +331,7 @@
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-arrow nav-icon"></i>
               <p>{{ $rec->projname }}</p>
               </a>
             </li>

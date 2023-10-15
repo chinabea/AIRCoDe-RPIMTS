@@ -21,9 +21,7 @@
       }
   </style>
 
-
-
-<div class="container mt-5">
+<!-- <div class="container mt-5">
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-center align-items-center">
             <i class="fas fa-cogs fa-2x text-gray-300"></i>
@@ -35,47 +33,7 @@
             for any custom CSS!
         </div>
     </div>
-</div>
-
-
-<!-- Button to trigger the modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    Open Modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Select Option</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <select class="form-control select2" style="width: 100%;">
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                    <!-- Add more options here -->
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Initialize Select2
-    $(document).ready(function() {
-        $('.select2').select2();
-    });
-</script>
-
+</div> -->
 
 
 
@@ -125,281 +83,221 @@
           
   @elseif(Auth::user()->role == 2 || Auth::user()->role == 4)
   <div class="col-md-12">
-    @if ($toreview && Auth::user()->role == 2)
-      <div class="alert alert-info">
-        You have already commented on this project.
-      </div>
-      @endif
-    <div class="row">
-      <div class="col-xl-7 col-lg-7">
-        <div class="card shadow mb-4">
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Project Details</h6>
-          </div>
-          <div class="card-body">
-            <label>Project Name:</label><br>
-            {{ $records->projname }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_name !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_name }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Status:</label><br>
-            {{ $records->status }}
-            <br><br>
-
-            <label>Research Group:</label><br>
-            {{ $records->researchgroup }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->research_group !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->research_group }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Author(s):</label><br>
-            {{ $records->authors }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_authors !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_authors }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Introduction:</label><br>
-            {{ $records->introduction }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_introduction !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_introduction }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Aims and Objectives:</label><br>
-            {{ $records->aims_and_objectives }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_aims_and_objectives !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_aims_and_objectives }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Background:</label><br>
-            {{ $records->background }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_background !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_background }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Expected Research Contribution:</label><br>
-            {{ $records->expected_research_contribution }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->research_contribution !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->research_contribution }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>The Proposed Methodology:</label><br>
-            {{ $records->proposed_methodology }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_methodology !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_methodology }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Start Date:</label>
-            {{ $records->start_date }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_start_date !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_start_date }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>End Date:</label>
-            {{ $records->end_date }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_end_date !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_end_date }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Work Plan:</label><br>
-            {{ $records->workplan }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_workplan !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_workplan }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Resources:</label><br>
-            {{ $records->resources }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_resources !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_resources }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>References:</label><br>
-            {{ $records->references }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_references !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_references }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-
-            <label>Total Budget:</label><br>
-            {{ $records->references }}
-            @if(auth()->user()->role == 2)
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->total_budget !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->total_budget }}</p> 
-                  @endif
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            @endif
-            <br><br>
-        </div>
-    </div>
+@if($reviewerCommented > 0)
+<div class="alert alert-danger">
+    You have reviewed this project. Your review decision is: {{ $comments->review_decision }}
 </div>
-<div class="col-xl-5 col-lg-5">
+@endif
+<div class="row">
+<div class="col-lg-6">
+          @if(auth()->user()->role == 2)
+      <div class="card shadow mb-4">
+          <div href="#collapseCardExample1" class="card-header py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1">
+              <i class="fas fa-file-signature fa-2x text-gray-300"></i>
+              <h6 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h6>
+          </div>
+          <div class="collapse show" id="collapseCardExample1" style="">
+              <div class="card-body">
+                <label>1. Does the paper contribute to the body of knowledge?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>2.	Is this paper technically sound?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>3.	Is the subject matter presented in a comprehensive manner?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>4.	Are the references provided applicable and sufficient?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>5. Are there references that are not appropriate for the topic being discussed?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>6. Is the application comprehensive?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>7. Is the grammar and presentation poor? Although this should not be heavily waited.</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>8. If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>9. Are figures and tables clear and easy to interpret?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>10.	Are explanations adequate?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>11.	Are there any technical or methodological errors?</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>12. Other Comments</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
+                @endif
+                @endforeach
+                
+                <br>
+
+                <label>13. Review Decision</label><br>
+                @foreach ($revs as $review) 
+                @if ($review->user->role === 4 && $review->project_id === $records->id)
+                <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
+                @endif
+                @endforeach
+              </div>
+          </div>
+      </div>
+          @else
+      <div class="card shadow mb-4">
+          <div href="#collapseCardExample" class="card-header py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+              <i class="fas fa-info-circle fa-2x text-gray-300"></i>
+              <h6 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h6>
+          </div>
+          <div class="collapse show" id="collapseCardExample" style="">
+              <div class="card-body">
+                <label>Research Group</label><br>
+                {{ $records->researchgroup }}
+
+                <br><br>
+
+                <label>Author(s)</label><br>
+                {{ $records->authors }}
+                <p>{{ $data->user->name }}</p>
+                @foreach ($projMembers as $member)
+                    <p>{{ $member->member_name }}</p>
+                @endforeach
+
+                <br>
+
+                <label>Introduction</label><br>
+                {!! $records->introduction !!}
+
+                <br>
+
+                <label>Aims and Objectives</label><br>
+                {!! $records->aims_and_objectives !!}
+
+                <br>
+
+                <label>Background</label><br>
+                {!! $records->background !!}
+
+                <br>
+
+                <label>Expected Research Contribution</label><br>
+                {!! $records->expected_research_contribution !!}
+
+                <br>
+
+                <label>The Proposed Methodology</label><br>
+                {!! $records->proposed_methodology !!}
+
+                <br>
+
+                <label>Work Plan</label><br>
+                {!! $records->workplan !!}
+
+                <br>
+
+                <label>Resources</label><br>
+                {!! $records->resources !!}
+
+                <br>
+
+                <label>References</label><br>
+                {!! $records->references !!}
+
+                <br>
+
+                <label>Total Budget</label><br>
+                {!! $records->references !!}
+              </div>
+          </div>
+      </div>
+    </div>
+      @endif
+</div>
+
+<div class="col-lg-6">
     <div class="card shadow mb-4">
-      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Recommendations, Suggestions and Comments (RSC)</h6>
-        </div>
+      <div class="card-header py-3 d-flex justify-content-center align-items-center">
+          @if(auth()->user()->role == 2)
+            <i class="fas fa-file-signature fa-2x text-gray-300"></i>
+            <h5 class="m-0 ml-3 font-weight-bold">SUMMARIZE REVIEWS</h5>
+          <input type="hidden" name="project_id" value="{{ $records->id }}">
+          @else
+            <i class="fas fa-file-signature fa-2x text-gray-300"></i>
+            <h5 class="m-0 ml-3 font-weight-bold">REVIEW</h5>
+          @endif
+      </div>
         <div class="card-body">
           <form method="POST" 
           @if(auth()->user()->role == 2)
@@ -410,100 +308,210 @@
           action="{{ route('reviews.storeComments', $records->id) }}">
           @csrf
           @endif
-                <!-- <form method="POST" action="{{ route('reviews.storeComments', $records->id) }}"> -->
-                  <div class="form-group">
-                    <label for="project_name">Project Name</label>
-                    <textarea type="text" id="project_name" name="project_name" class="form-control" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="research_group">Research Group</label>
-                    <textarea type="text" id="research_group" name="research_group" class="form-control" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="project_authors">Author(s)</label>
-                    <textarea type="text" id="project_authors" name="project_authors" class="form-control" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="project_introduction">Introduction</label>
-                    <textarea id="project_introduction" name="project_introduction" class="form-control" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="project_aims_and_objectives">Aims and Objectives</label>
-                    <textarea id="project_aims_and_objectives" name="project_aims_and_objectives" class="form-control" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="project_background">Background</label>
-                    <textarea id="project_background" name="project_background" class="form-control" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="research_contribution">Expected Research Contribution</label>
-                    <textarea id="research_contribution" name="research_contribution" class="form-control" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="project_methodology">The Proposed Methodology</label>
-                    <textarea id="project_methodology" name="project_methodology" class="form-control" rows="1"></textarea>
-                  </div>
-                  <label for="project_start_date">Start Date:</label>
-                  <input type="text" id="project_start_date" name="project_start_date" class="form-control">
-                  <label for="project_end_date">End Date:</label>
-                  <input type="text" id="project_end_date" name="project_end_date" class="form-control">
-
-                  {{-- <div class="form-group">
-                    <label>Work Plan:</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="far fa-calendar-alt"></i>
-                        </span>
-                      </div>
-                      <input type="text" class="form-control float-right" id="reservation" name="reservation">
-                      placeholder="An initial plan for completion with annual milestones (eg. over 3 years).">
-                    </div>
-                  </div> --}}
-                  <div class="form-group">
-                    <label>Work Plan:</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="far fa-calendar-alt"></i>
-                        </span>
-                      </div>
-                      <input type="text" class="form-control float-right" id="project_workplan" name="project_workplan">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="project_resources">Resources</label>
-                    <textarea class="form-control" id="project_resources" name="project_resources" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="project_total_budget">Total Budget</label>
-                    <textarea id="project_total_budget" name="project_total_budget" class="form-control" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="project_references">References</label>
-                    <textarea id="project_references" name="project_references" class="form-control" rows="1"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="other_rsc">Other Recommendation, Suggestion and Comments</label>
-                    <textarea id="other_rsc" name="other_rsc" class="form-control" rows="1"></textarea>
-                  </div>
-                  <br>
-                  <a href="#" class="btn btn-secondary">Cancel</a>
-                  <input type="submit" value="Submit Review" class="btn btn-info float-right">
-                </form>
-              </div>
-            </div>
+          <div class="form-group">
+            <label for="contribution_to_knowledge">1. Does the paper contribute to the body of knowledge?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea>
+                  @endif
+              @endforeach
+            @else
+              <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" required></textarea>
+            @endif 
           </div>
-        </div>
+
+          <div class="form-group">
+            <label for="technical_soundness">2.	Is this paper technically sound?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" readonly>{{ $review->technical_soundness }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="comprehensive_subject_matter">3.	Is the subject matter presented in a comprehensive manner?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+            <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="applicable_and_sufficient_references">4.	Are the references provided applicable and sufficient?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1" readonly>{{ $review->applicable_and_sufficient_references }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+          
+          <div class="form-group">
+            <label for="inappropriate_references">5.	Are there references that are not appropriate for the topic being discussed?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1" readonly>{{ $review->inappropriate_references }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="comprehensive_application">6.	Is the application comprehensive?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1" readonly>{{ $review->comprehensive_application }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="grammar_and_presentation">7.	Is the grammar and presentation poor? Although this should not be heavily waited.</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1" readonly>{{ $review->grammar_and_presentation }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="assumption_of_reader_knowledge">8.	If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1" readonly>{{ $review->assumption_of_reader_knowledge }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="clear_figures_and_tables">9.	Are figures and tables clear and easy to interpret?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1" readonly>{{ $review->clear_figures_and_tables }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="adequate_explanations">10.	Are explanations adequate?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+            <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" readonly>{{ $review->adequate_explanations }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="technical_or_methodological_errors">11.	Are there any technical or methodological errors?</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1" readonly>{{ $review->technical_or_methodological_errors }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="other_rsc">Other Comments</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <textarea id="other_comments" name="other_comments" class="form-control" rows="1" readonly>{{ $review->other_comments }}</textarea>
+                  @endif
+              @endforeach
+            @else
+            <textarea id="other_comments" name="other_comments" class="form-control" rows="1" required></textarea>
+            @endif 
+          </div>
+
+          <!-- <div class="form-group">
+              <label for="review_decision">Review Decision</label>
+              <select class="form-control" id="review_decision" name="review_decision" required @if ($reviewerCommented) disabled @endif>
+                  <option value="">Select</option>
+                  <option value="Accepted" @if ($comments->review_decision === 'Accepted') selected @endif>Accepted</option>
+                  <option value="Accepted with Revision" @if ($comments->review_decision === 'Accepted with Revision') selected @endif>Accepted with Revision</option>
+                  <option value="Rejected" @if ($comments->review_decision === 'Rejected') selected @endif>Rejected</option>
+              </select>
+          </div> -->
+
+          <div class="form-group">
+              <label for="review_decision">Review Decision</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                    <select class="form-control" id="review_decision" name="review_decision" required @if ($reviewerCommented) disabled @endif>
+                        <option value="">Select</option>
+                        <option value="Accepted" @if ($review->review_decision === 'Accepted') selected @endif>Accepted</option>
+                        <option value="Accepted with Revision" @if ($review->review_decision === 'Accepted with Revision') selected @endif>Accepted with Revision</option>
+                        <option value="Rejected" @if ($review->review_decision === 'Rejected') selected @endif>Rejected</option>
+                    </select>
+                  @endif
+              @endforeach
+            @else
+              <select class="form-control" id="review_decision" name="review_decision" required>
+                  <option value="">Select</option>
+                  <option value="Accepted">Accepted</option>
+                  <option value="Accepted with Revision">Accepted with Revision</option>
+                  <option value="Rejected">Rejected</option>
+              </select>
+            @endif 
+          </div>
+          <br>
+          <a href="#" class="btn btn-secondary">Cancel</a>
+          <input type="submit" value="Submit Review" class="btn btn-info float-right">
+        </form>
       </div>
-      @endif
+    </div>
+  </div>
+</div>
+@endif
 
     @if(Auth::user()->role == 1)
         
      
     <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist">
           <li class="nav-item">
-              <a class="nav-link active" id="actions-btn" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="true">
+              <a class="nav-link" id="actions-btn" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="true">
                   <i class="fas fa-cogs mr-2"></i>Actions
               </a>
           </li>
@@ -529,17 +537,14 @@
           </li>
           <li class="nav-item">
               <a class="nav-link" id="messages-btn" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">
-                  <i class="fas fa-comments mr-2"></i>Messages
+                  <i class="fas fa-comments mr-2"></i>Reviews
               </a>
           </li>
           <li class="nav-item">
               <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
-                  <i class="fas fa-users mr-2"></i>Project Team
+                  <i class="fas fa-users mr-2"></i>Project Members
               </a>
           </li>
-
-
-          
 
           <li class="nav-item">
               <a class="nav-link" id="review-btn" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">
@@ -547,23 +552,18 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" id="status-btn" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">
-            <i class="fas fa-tasks mr-2"></i>Status
-              </a>
-          </li>
-          <li class="nav-item">
               <a class="nav-link" id="reviewer-btn" data-toggle="tab" href="#reviewer" role="tab" aria-controls="reviewer" aria-selected="false">
             <i class="fas fa-user-check mr-2"></i>Reviewer
               </a>
           </li>
-
-
-
-
-
+          <!-- <li class="nav-item">
+              <a class="nav-link" id="status-btn" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">
+            <i class="fas fa-tasks mr-2"></i>Status
+              </a>
+          </li> -->
       </ul>
     @elseif(Auth::user()->role == 2)
-        <!-- <div class="text-center">
+        <div class="text-center">
         <button id="actions-btn" class="btn btn-primary">
             <i class="fas fa-cogs mr-2"></i>Actions
         </button>
@@ -596,13 +596,44 @@
             <i class="fas fa-file-signature mr-2"></i>Review
           </button>
         </div>
-      </div> -->
+      </div>
     
     @elseif(Auth::user()->role == 3)
+
+        <!-- <button id="actions-btn" class="btn btn-primary">
+            <i class="fas fa-cogs mr-2"></i>Actions
+        </button>
+        <button id="details-btn" class="btn btn-primary my-2">
+            <i class="fas fa-info-circle mr-2"></i>Details
+        </button>
+        <button id="tasks-btn" class="btn btn-primary my-2">
+            <i class="fas fa-tasks mr-2"></i>Tasks
+        </button>
+        <button id="lib-btn" class="btn btn-primary my-2">
+            <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
+        </button>
+        <button id="files-btn" class="btn btn-primary my-2">
+            <i class="fas fa-file-alt mr-2"></i>Files
+        </button>
+        <button id="messages-btn" class="btn btn-primary my-2">
+            <i class="fas fa-comments mr-2"></i>Messages
+        </button>
+        <button id="project-team-btn" class="btn btn-primary my-2">
+            <i class="fas fa-users mr-2"></i>Project Team
+        </button>
+        <button id="status-btn" class="btn btn-primary my-2">
+            <i class="fas fa-tasks mr-2"></i>Status
+        </button>
+        <button id="reviewer-btn" class="btn btn-primary my-2">
+            <i class="fas fa-user-check mr-2"></i>Reviewer
+        </button>
+          <button id="review-btn" class="btn btn-primary my-2">
+            <i class="fas fa-file-signature mr-2"></i>Review
+          </button> -->
     
     <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist">
           <li class="nav-item">
-              <a class="nav-link active" id="actions-btn" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="true">
+              <a class="nav-link" id="actions-btn" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="true">
                   <i class="fas fa-cogs mr-2"></i>Actions
               </a>
           </li>
@@ -628,12 +659,12 @@
           </li>
           <li class="nav-item">
               <a class="nav-link" id="messages-btn" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">
-                  <i class="fas fa-comments mr-2"></i>Messages
+                  <i class="fas fa-comments mr-2"></i>Reviews
               </a>
           </li>
           <li class="nav-item">
               <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
-                  <i class="fas fa-users mr-2"></i>Project Team
+                  <i class="fas fa-users mr-2"></i>Project Members
               </a>
           </li>
           <li class="nav-item">
@@ -652,16 +683,22 @@
               </a>
           </li>
       </ul>
-        @endif
-        @endif
- 
+      @endif
+      @endif
+
+
+
+      
 <div id="actions-form" class="mt-4" style="display: none;">
-      <div class="col-md-12">
-        <div class="container mt-5">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Revisions</h1>
-          </div>
-          <form action="{{ route('projects.edit', $records->id) }}" method="POST">
+  <div class="container mt-5">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-center align-items-center">
+            <i class="fas fa-cogs fa-2x text-gray-300"></i>
+            <h1 class="m-0 ml-3 font-weight-bold">ACTIONS</h1>
+        </div>
+        <div class="card-body">
+        @if (Auth::user()->role == 3 && $records->status === "For Revision")
+        <form action="{{ route('projects.edit', $records->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -672,10 +709,10 @@
               <label for="" class="form-label">Research Group</label>
               <input type="text" value="{{ $records->researchgroup }}" class="form-control" id="researchgroup" name="researchgroup">
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
               <label for="" class="form-label">Author(s)</label>
               <input type="text" value="{{ $records->authors }}" class="form-control" id="authors" name="authors">
-            </div>
+            </div> -->
             <div class="mb-3">
               <label for="" class="form-label">Introduction</label>
               <input type="text" value="{{ $records->introduction }}" class="form-control" id="introduction" name="introduction">
@@ -697,16 +734,16 @@
               <input type="text" value="{{ $records->proposed_methodology }}" class="form-control" id="proposed_methodology" name="proposed_methodology">
             </div>
             <div class="mb-3">
+              <label for="" class="form-label">Work Plan</label>
+              <input type="text" value="{{ $records->workplan }}" class="form-control" id="workplan" name="workplan" readonly>
+            </div>
+            <div class="mb-3">
               <label for="" class="form-label">Start Month</label>
               <input type="date" value="{{ $records->start_month }}" class="form-control" id="start_month" name="start_month">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">End Month</label>
               <input type="date" value="{{ $records->end_month }}" class="form-control" id="end_month" name="end_month">
-            </div>
-            <div class="mb-3">
-              <label for="" class="form-label">Work Plan</label>
-              <input type="text" value="{{ $records->workplan }}" class="form-control" id="workplan" name="workplan">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Resources</label>
@@ -722,93 +759,104 @@
             </div> -->
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-          <br><br>
+        @else
+            <p>You do not have access to edit this project not until the project status is "For Revision."</p>
+        @endif
         </div>
-      </div>
-    </div>
-
-<div id="details-form" class="mt-4" style="display: none;">
-<!-- Form fields go here -->
-<div class="col-md-12">
-  <div class="container mt-5">
-    <div class="card-header">
-        DETAILS
-    </div>
-    <div class="card-body pad table-responsive text-left">
-    <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
-        <div style="text-align: justify;">
-            <label>Project Name:</label><br>
-            {{ $records->projname }}
-            <br><br>
-
-            <label>Status:</label><br>
-            {{ $records->status }}
-            <br><br>
-
-            <label>Research Group:</label><br>
-            {{ $records->researchgroup }}
-            <br><br>
-
-            <label>Author(s):</label><br>
-            {{ $records->authors }}
-            <br><br>
-
-            <label>Introduction:</label><br>
-            {{ $records->introduction }}
-            <br><br>
-
-            <label>Aims and Objectives:</label><br>
-            {{ $records->aims_and_objectives }}
-            <br><br>
-
-            <label>Background:</label><br>
-            {{ $records->background }}
-            <br><br>
-
-            <label>Expected Research Contribution:</label><br>
-            {{ $records->expected_research_contribution }}
-            <br><br>
-
-            <label>The Proposed Methodology:</label><br>
-            {{ $records->proposed_methodology }}
-            <br><br>
-
-            <label>Start Date:</label>
-            {{ $records->start_date }}
-            <br><br>
-
-            <label>End Date:</label>
-            {{ $records->end_date }}
-            <br><br>
-
-            <label>Work Plan:</label><br>
-            {{ $records->workplan }}
-            <br><br>
-
-            <label>Resources:</label><br>
-            {{ $records->resources }}
-            <br><br>
-
-            <label>References:</label><br>
-            {{ $records->references }}
-            <br><br>
-        </div>
-
     </div>
   </div>
 </div>
+
+
+<div id="details-form" class="mt-4" style="display: none;">
+  <div class="container mt-5">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-info-circle fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">DETAILS</h1>
+          </div>
+          <div class="card-body">
+            <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
+            <div style="text-align: justify;">
+                <label>Project Name:</label><br>
+                {{ $records->projname }}
+                <br>
+                <br>
+
+                <label>Status:</label><br>
+                {{ $records->status }}
+                <br>
+                <br>
+
+                <label>Research Group:</label><br>
+                {{ $records->researchgroup }}
+                <br>
+                <br>
+                
+                <label>Author(s):</label><br>
+                {{ $records->authors }}
+                <p>{{ $data->user->name }}</p>
+                @foreach ($projMembers as $member)
+                    <p>{{ $member->member_name }}</p>
+                @endforeach
+                <br>
+
+                <label>Introduction:</label><br>
+                {!! $records->introduction !!}
+                <br>
+
+                <label>Aims and Objectives:</label><br>
+                {!! $records->aims_and_objectives !!}
+                <br>
+
+                <label>Background:</label><br>
+                {!! $records->background !!}
+                <br>
+
+                <label>Expected Research Contribution:</label><br>
+                {!! $records->expected_research_contribution !!}
+                <br>
+
+                <label>The Proposed Methodology:</label><br>
+                {!! $records->proposed_methodology !!}
+                <br><br>
+
+                <!-- <label>Start Date:</label>
+                {{ $records->start_date }}
+                <br><br>
+
+                <label>End Date:</label>
+                {{ $records->end_date }}
+                <br><br> -->
+
+                <label>Work Plan:</label><br>
+                {!! $records->workplan !!}
+                <br>
+
+                <label>Resources:</label><br>
+                {!! $records->resources !!}
+                <br>
+
+                <label>References:</label><br>
+                {!! $records->references !!}
+                <br>
+            </div>
+          </div>
+      </div>
+  </div>
 </div>
 
+
 <div id="tasks-form" class="mt-4" style="display: none;">
-<!-- Form fields go here -->
-<div class="col-md-12">
   <div class="container mt-5">
-    <div class="card-header">
-        TASKS
-    </div>
-    <div class="card-body pad table-responsive text-left">
-    <!-- <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a> -->
-      <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks">Add Task</button>
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-tasks fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">TASKS</h1>
+          </div>
+          <div class="card-body">
+            <!-- <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a> -->
+          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks">Add Task</button>
         @include('submission-details.tasks.create')
         <table id="example1" class="table table-hover table-bordered text-center table-sm">
           <thead class="table-info">
@@ -825,6 +873,7 @@
           </thead>
           <tbody>
             @foreach($tasks as $task)
+            @if($task->user_id === auth()->user()->id)
             <tr>
               <td class="align-middle">{{ $loop->iteration }}.</td>
               <td>{{ $task->title }}</td>
@@ -904,26 +953,27 @@
                     </script>
               </td>
             </tr>
+            @endif
         @endforeach
           </tbody>
         </table>
-    </div>
+          </div>
+      </div>
   </div>
 </div>
-</div>
+
 
 <div id="lib-form" class="mt-4" style="display: none;">
-<!-- Form fields go here -->
-<div class="col-md-12">
   <div class="container mt-5">
-    <div class="card-header">
-      LINE-ITEM BUDGET
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive text-left">
-      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-list-alt fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">LINE-ITEM BUDGET</h1>
+          </div>
+          <div class="card-body">
+      <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">
           <i class="far fa-file-excel fa-sm text-white-50"></i> Export to Excel
-      </a>
+      </a> -->
       <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#lib">Add Line-Item</button>
           @include('submission-details.line-items-budget.create')
           <table id="" class="table table-hover table-bordered text-center table-sm">
@@ -937,6 +987,7 @@
               </tr>
             </thead>
               @foreach($lineItems as $lineItem)
+              @if($lineItem->user_id === auth()->user()->id)
             <tbody>
               <tr>
                 <td class="align-middle">{{ $loop->iteration }}.</td>
@@ -1007,6 +1058,7 @@
                 </td>
               </tr>
             </tbody>
+            @endif
           @endforeach
           </table>
           <div class="form-group float-right">
@@ -1018,19 +1070,21 @@
                   <input type="text" class="form-control bg-light text-large" id="total_all_line_items" value="{{ number_format($totalAllLineItems, 2, '.', ',') }}" readonly>
               </div>
           </div>
-    </div>
+          </div>
+      </div>
   </div>
 </div>
-</div>
+
+
 
 <div id="files-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
   <div class="container mt-5">
-    <div class="card-header">
-            FILES
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-file-alt fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">FILES</h1>
+          </div>
+          <div class="card-body">
       <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#filesModal">Add File</button>
           @include('submission-details.files.create')
           <table id="example1" class="table table-hover table-bordered table-sm">
@@ -1044,6 +1098,7 @@
               </tr>
             </thead>
             @foreach($files as $file)
+            @if($file->user_id === auth()->user()->id)
             <tbody>
               <tr>
                 <td class="align-middle">{{ $loop->iteration }}.</td>
@@ -1112,499 +1167,102 @@
                 </td>
               </tr>
             </tbody>
+            @endif
           @endforeach
           </table>
-    </div>
+          </div>
+      </div>
   </div>
 </div>
-</div>
-<!-- </div> -->
+
 
 <div id="messages-form" class="mt-4" style="display: none;">
-      <div class="col-md-12">
-        <div class="container mt-5">
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">MESSAGES</h1>
-            <a href="{{ route('submission-details.reviews.rsc', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i> View RSC</a>
+  <div class="container mt-5">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-comments fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">REVIEWS</h1>
           </div>
-          @if($toreview)
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Project Name</h6>
-            </div>
-            <div class="card-body">
-              <p class="card-text">{{ $records->projname }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->project_name !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->project_name }}</p> 
-                  @endif
-                  @endforeach
-                </div>
+          <div class="card-body">
+          <!-- @if ($reviewerCommented === 0)
+              <div class="alert alert-danger">
+                  Review Summary not available yet.
               </div>
-              @if(auth()->user()->role == 2)
-              <form method="POST" action="{{ route('store.summary.reviews') }}" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="project_id" value="{{ $records->id }}">
-                <div class="form-group">
-                  <h6 for="project_name" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" id="project_name" name="project_name" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> --> 
-              <!-- </form> -->
-              @endif
-            </div>
+          @endif -->
+            @foreach ($revs as $review) 
+            @if ($review->user->role === 2 && $review->project_id === $records->id)
+      <div class="card shadow mb-4">
+          <div href="#collapseCardExample1" class="card-header py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1">
+              <i class="fas fa-file-signature fa-2x text-gray-300"></i>
+              <h6 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h6>
           </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Research Group</h6>
-            </div>
-            <div class="card-body">
-              <p class="card-text">{{ $records->researchgroup }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                  @foreach ($revs as $review) 
-                  @if ($review->user->role === 4 && $review->research_group !== null && $review->project_id === $records->id)
-                  <p><b>{{ $review->user->name }}:</b> {{ $review->research_group }}</p> 
-                  @endif
-                  @endforeach
-                </div>
+          <div class="collapse show" id="collapseCardExample1" style="">
+              <div class="card-body">
+                <label>1. Does the paper contribute to the body of knowledge?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p> 
+                
+                <br>
+
+                <label>2.	Is this paper technically sound?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
+                
+                <br>
+
+                <label>3.	Is the subject matter presented in a comprehensive manner?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
+                
+                <br>
+
+                <label>4.	Are the references provided applicable and sufficient?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
+                
+                <br>
+
+                <label>5. Are there references that are not appropriate for the topic being discussed?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
+                
+                <br>
+
+                <label>6. Is the application comprehensive?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
+                
+                <br>
+
+                <label>7. Is the grammar and presentation poor? Although this should not be heavily waited.</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
+                
+                <br>
+
+                <label>8. If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
+                
+                <br>
+
+                <label>9. Are figures and tables clear and easy to interpret?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
+                
+                <br>
+
+                <label>10.	Are explanations adequate?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
+                
+                <br>
+
+                <label>11.	Are there any technical or methodological errors?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
+                
+                <br>
+
+                <label>12. Other Comments</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
+                
+                <br>
+
+                <label>13. Review Decision</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
               </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="research_group" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> --> 
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Author(s)</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->authors }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_authors !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_authors }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_authors" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> --> 
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Introduction</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->introduction }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_introduction !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_introduction }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_introduction" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Aims and Objectives</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->aims_and_objectives }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_aims_and_objectives !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_aims_and_objectives }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_aims_and_objectives" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Background</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->background }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_background !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_background }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_background" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Expected Research Contribution</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->expected_research_contribution }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->research_contribution !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->research_contribution }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="research_contribution" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">The Proposed Methodology</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->proposed_methodology }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_methodology !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_methodology }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_methodology" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Start Date</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->start_date }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_start_date !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_start_date }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_start_date" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">End Date</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->end_date }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_end_date !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_end_date }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_end_date" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Work Plan</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->workplan }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_workplan !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_workplan }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_workplan" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Work Plan</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->workplan }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_workplan !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_workplan }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_workplan" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Resources</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->resources }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_resources !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_resources }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_resources" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Total Budget</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->total_budget }}</p>
-               
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_total_budget !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_total_budget }}</p>
-                    @endif
-                    @endforeach  
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_total_budget" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">References</h6>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ $records->references }}</p>
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->project_references !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->project_references }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="project_references" id="commentText" rows="3"></textarea>
-                </div>
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              <!-- </form> -->
-              @endif
-            </div>
-          </div>
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Other Recommendation, Suggestion and Comments</h6>
-            </div>
-            <div class="card-footer">
-              <h6 class="card-text m-0 font-weight-bold text-primary">Comments:</h6>
-              <div class="media mb-3">
-                <div class="card-body">
-                    @foreach ($revs as $review) 
-                    @if ($review->user->role === 4 && $review->other_rsc !== null && $review->project_id === $records->id)
-                    <p class="mt-0"><b>{{ $review->user->name }}:</b> {{ $review->other_rsc }}</p>
-                    @endif
-                    @endforeach
-                </div>
-              </div>
-              @if(auth()->user()->role == 2)
-              <!-- <form> -->
-                <div class="form-group">
-                  <h6 for="commentText" class="card-text font-weight-bold text-primary">Add a Comment:</h6>
-                  <textarea class="form-control" name="other_rsc" id="commentText" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-              @endif
-            </div>
-          </div>
+
+
           @if(auth()->user()->role == 1)
           <h6 class="m-0 font-weight-bold text-primary">Review Decision</h6>
           <div class="text-center">
@@ -1626,22 +1284,27 @@
             </form>
             <br><br>
             @endif
-          @else
-          <h6 class="card-text m-0 font-weight-bold text-primary">Review not available yet!</h6>
           @endif
-        </div>
-      </div>
-    </div>
+            <!-- Message when the review is null or does not meet the conditions -->
+            <h6 class="card-text m-0 font-weight-bold text-primary">Review not available yet!</h6>
+        
+          @endforeach
 
+          </div>
+      </div>
+  </div>
+</div>
 
 
 <div id="project-team-form" class="mt-4" style="display: none;">
-    <div class="col-md-12">
-      <div class="container mt-5">
-        <div class="card-header">
-            PROJECT TEAM
-        </div>
-        <div class="card-body pad table-responsive">
+  <div class="container mt-5">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-users fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">PROJECT MEMBERS</h1>
+          </div>
+          <div class="card-body">
+            
         <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
             @include('submission-details.project-teams.create')
             <table id="example1" class="table table-hover table-bordered table-sm">
@@ -1654,6 +1317,7 @@
               </tr>
             </thead>
             @foreach($teamMembers as $member)
+            @if($member->user_id === auth()->user()->id)
             <tbody>
               <tr>
                 <td class="align-middle">{{ $loop->iteration }}.</td>
@@ -1710,80 +1374,74 @@
                 </td>
               </tr>
             </tbody>
+            @endif
           @endforeach
           </table>
-        </div>
+          </div>
       </div>
-    </div>
   </div>
-<!-- </div> -->
+</div>
+
 
 <div id="status-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
   <div class="container mt-5">
-    <div class="card-header">
-            STATUS
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-     <div class="container"><h3>Edit Project Status</h3>
-      <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
-          @csrf
-          @method('PUT')
-          <!-- Other form fields... -->
-          <input type="hidden" name="project_id" value="{{ $records->id }}">
-          <div class="form-group">
-              <label for="status">Status</label>
-              <select class="form-control" id="status" name="status" required>
-                  <option value="New">New</option>
-                  <option value="Draft">Draft</option>
-                  <option value="Under Evaluation">Under Evaluation</option>
-                  <option value="For Revision">For Revision</option>
-                  <option value="Approved">Approved</option>
-                  <option value="Deferred">Deferred</option>
-                  <option value="Disapproved">Disapproved</option>
-              </select>
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-tasks fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">STATUS</h1>
           </div>
-          <button type="submit" class="btn btn-primary">Update Status</button>
-      </form>
-    </div>
-    </div>
+          <div class="card-body">
+            <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <!-- Other form fields... -->
+                <input type="hidden" name="project_id" value="{{ $records->id }}">
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status" name="status" required>
+                        <option value="New">New</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Under Evaluation">Under Evaluation</option>
+                        <option value="For Revision">For Revision</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Deferred">Deferred</option>
+                        <option value="Disapproved">Disapproved</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Status</button>
+            </form>
+          </div>
+      </div>
   </div>
 </div>
-</div>
+
 
 <div id="reviewer-form" class="mt-4" style="display: none;">
-<div class="col-md-12">
   <div class="container mt-5">
-    <div class="card-header">
-            REVIEWER
-      </h3>
-    </div>
-    <div class="card-body pad table-responsive">
-    <div class="container">
-        <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
-            @include('submission-details.reviews.select-reviewer')
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-user-check fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">REVIEWER</h1>
+          </div>
+          <div class="card-body">
+          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
+              @include('submission-details.reviews.select-reviewer')
 
-
-
-
-
-            
-            
-    </div>
-    </div>
+          </div>
+      </div>
   </div>
 </div>
-</div>
-        
-        <div id="review-form" class="mt-4" style="display: none;">
-          <!-- Form fields go here -->
-          <div class="col-md-12">
-            <div class="container mt-5">
-              <div class="card-header">
-                Review
-              </div>
-              <div class="card-body pad table-responsive text-left">
+
+
+<div id="review-form" class="mt-4" style="display: none;">
+  <div class="container mt-5">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-file-signature fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">REVIEW</h1>
+          </div>
+          <div class="card-body">
+          <div class="card-body pad table-responsive text-left">
                 <div class="col-lg-12">
                   <div class="card shadow mb-4">
                       <div class="card-header py-3">
@@ -1813,11 +1471,11 @@
                     </button>
                 </form>
                 </div>
-              </div>
-            </div>
           </div>
-        </div>
-
-
+      </div>
+  </div>
 </div>
+
+<!-- </div> -->
+
 @endsection

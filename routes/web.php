@@ -43,10 +43,9 @@ use App\Mail\Send;
 Route::get('/projects/track', [TrackController::class, 'track'])->name('projects.track');
 Route::get('/', [TrackController::class, 'track'])->name('welcome');
 
-
-// Route::get('/', function () {
-//     return view('welcome')->name('welcome');
-// });
+Route::get('/textinput', function () {
+    return view('textinput');
+})->name('textinput');
 
 
 Auth::routes();

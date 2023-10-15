@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\ReviewDecisionModel;
 use App\Models\ProjectsModel;
 use App\Models\UsersModel;
@@ -10,6 +11,17 @@ use App\Models\ReviewModel;
 
 class ReviewController extends Controller
 {
+    // public function create()
+    // {
+    //     $projectId = $request->input('project_id');
+    //     $existingReviewers = ReviewModel::where('project_id', $projectId)->pluck('user_id')->toArray();
+
+    //     // Fetch reviewers that are not already assigned to the project
+    //     $reviewers = Reviewer::whereNotIn('id', $existingReviewers)->get();
+
+    //     return view('your_view', compact('reviewers'));
+    // }
+
     public function store(Request $request)
     {
     
@@ -19,6 +31,24 @@ class ReviewController extends Controller
     $individualDeadlines = $request->input('individual_deadlines');
     $userId = Auth::id();
     $existingReviewers = ReviewModel::where('project_id', $projectId)->pluck('user_id')->toArray();
+
+
+    // Define validation rules
+    $rules = [
+        'project_id' => 'required|exists:projects,id', // Replace 'projects' with your actual project table name
+        'reviews' => 'required|array',
+        'reviews.*' => 'exists:reviews,user_id', // Replace 'reviewers' with your actual reviewers table name
+        'individual_deadlines' => 'array', // Adjust as needed
+        'deadline' => ['required', 'date', 'after_or_equal:today'], // Adjust as needed 
+    ];
+
+    // Define custom error messages
+    $messages = [
+        'reviews.*.exists' => 'One or more selected reviewers do not exist.', // Custom message for reviewers
+        'deadline.required' => 'The deadline field is required.', // Custom message for required deadline
+        'deadline.date' => 'The deadline must be a valid date.', // Custom message for date validation
+        'deadline.after_or_equal' => 'The deadline must be on or after today.', // Custom message for after_or_equal validation
+    ];
 
     // Set a single deadline for all reviewers
     $deadline = $request->input('deadline');
@@ -34,25 +64,23 @@ class ReviewController extends Controller
             'project_id' => $projectId,
             'user_id' => $reviewerId,
             'deadline' => $deadline,
-            'project_name' => $request->input('project_name') ?? null,
-            'research_group' => $request->input('research_group') ?? null,
-            'project_authors' => $request->input('project_authors') ?? null,
-            'project_introduction' => $request->input('project_introduction') ?? null,
-            'project_aims_and_objectives' => $request->input('project_aims_and_objectives') ?? null,
-            'project_background' => $request->input('project_background') ?? null,
-            'research_contribution' => $request->input('research_contribution') ?? null,
-            'project_methodology' => $request->input('project_methodology') ?? null,
-            'project_start_date' => $request->input('project_start_date') ?? null,
-            'project_end_date' => $request->input('project_end_date') ?? null,
-            'project_workplan' => $request->input('project_workplan') ?? null,
-            'project_resources' => $request->input('project_resources') ?? null,
-            'project_references' => $request->input('project_references') ?? null,
-            'project_total_budget' => $request->input('project_total_budget') ?? null,
-            'other_rsc' => $request->input('other_rsc') ?? null,
+            'contribution_to_knowledge' => $request->input('contribution_to_knowledge'),
+            'technical_soundness' => $request->input('technical_soundness'),
+            'comprehensive_subject_matter' => $request->input('comprehensive_subject_matter'),
+            'applicable_and_sufficient_references' => $request->input('applicable_and_sufficient_references'),
+            'inappropriate_references' => $request->input('inappropriate_references'),
+            'comprehensive_application' => $request->input('comprehensive_application'),
+            'grammar_and_presentation' => $request->input('grammar_and_presentation'),
+            'assumption_of_reader_knowledge' => $request->input('assumption_of_reader_knowledge'),
+            'clear_figures_and_tables' => $request->input('clear_figures_and_tables'),
+            'adequate_explanations' => $request->input('adequate_explanations'),
+            'technical_or_methodological_errors' => $request->input('technical_or_methodological_errors'),
+            'other_comments' => $request->input('other_comments'),
+            'review_decision' => $request->input('review_decision'),
         ]);
         
         }
-        return redirect()->route('submission-details.show', ['id' => $projectId]);
+        return redirect()->route('submission-details.show', ['id' => $projectId])->with('existingReviewers', $existingReviewers); 
     }
 
     public function storeComments(Request $request, $id)
@@ -72,21 +100,20 @@ class ReviewController extends Controller
     
             if ($existingReview) {
                 // Update only the null fields with the values from the request
-                $existingReview->project_name = $existingReview->project_name ?? $request->input('project_name');
-                $existingReview->research_group = $existingReview->research_group ?? $request->input('research_group');
-                $existingReview->project_authors = $existingReview->project_authors ?? $request->input('project_authors');
-                $existingReview->project_introduction = $existingReview->project_introduction ?? $request->input('project_introduction');
-                $existingReview->project_aims_and_objectives = $existingReview->project_aims_and_objectives ?? $request->input('project_aims_and_objectives');
-                $existingReview->project_background = $existingReview->project_background ?? $request->input('project_background');
-                $existingReview->research_contribution = $existingReview->research_contribution ?? $request->input('research_contribution');
-                $existingReview->project_methodology = $existingReview->project_methodology ?? $request->input('project_methodology');
-                $existingReview->project_start_date = $existingReview->project_start_date ?? $request->input('project_start_date');
-                $existingReview->project_end_date = $existingReview->project_end_date ?? $request->input('project_end_date');
-                $existingReview->project_workplan = $existingReview->project_workplan ?? $request->input('project_workplan');
-                $existingReview->project_resources = $existingReview->project_resources ?? $request->input('project_resources');
-                $existingReview->project_references = $existingReview->project_references ?? $request->input('project_references');
-                $existingReview->project_total_budget = $existingReview->project_total_budget ?? $request->input('project_total_budget');
-                $existingReview->other_rsc = $existingReview->other_rsc ?? $request->input('other_rsc');
+                $existingReview->contribution_to_knowledge = $existingReview->contribution_to_knowledge ?? $request->input('contribution_to_knowledge');
+                $existingReview->technical_soundness = $existingReview->technical_soundness ?? $request->input('technical_soundness');
+                $existingReview->comprehensive_subject_matter = $existingReview->comprehensive_subject_matter ?? $request->input('comprehensive_subject_matter');
+                $existingReview->applicable_and_sufficient_references = $existingReview->applicable_and_sufficient_references ?? $request->input('applicable_and_sufficient_references');
+                $existingReview->inappropriate_references = $existingReview->inappropriate_references ?? $request->input('inappropriate_references');
+                $existingReview->comprehensive_application = $existingReview->comprehensive_application ?? $request->input('comprehensive_application');
+                $existingReview->grammar_and_presentation = $existingReview->grammar_and_presentation ?? $request->input('grammar_and_presentation');
+                $existingReview->assumption_of_reader_knowledge = $existingReview->assumption_of_reader_knowledge ?? $request->input('assumption_of_reader_knowledge');
+                $existingReview->clear_figures_and_tables = $existingReview->clear_figures_and_tables ?? $request->input('clear_figures_and_tables');
+                $existingReview->adequate_explanations = $existingReview->adequate_explanations ?? $request->input('adequate_explanations');
+                $existingReview->technical_or_methodological_errors = $existingReview->technical_or_methodological_errors ?? $request->input('technical_or_methodological_errors');
+                $existingReview->other_comments = $existingReview->other_comments ?? $request->input('other_comments');
+                $existingReview->review_decision = $existingReview->review_decision ?? $request->input('review_decision');
+                
         
                 $existingReview->save();
             }       
@@ -120,22 +147,19 @@ class ReviewController extends Controller
              'project_id' => $projectId,
              'user_id' => $userId,
              'deadline' => $request->input('deadline') ?? null,
-             'project_name' => $request->input('project_name') ?? null,
-             'research_group' => $request->input('research_group') ?? null,
-             'project_authors' => $request->input('project_authors') ?? null,
-             'project_introduction' => $request->input('project_introduction') ?? null,
-             'project_aims_and_objectives' => $request->input('project_aims_and_objectives') ?? null,
-             'project_background' => $request->input('project_background') ?? null,
-             'research_contribution' => $request->input('research_contribution') ?? null,
-             'project_methodology' => $request->input('project_methodology') ?? null,
-             'project_start_date' => $request->input('project_start_date') ?? null,
-             'project_end_date' => $request->input('project_end_date') ?? null,
-             'project_workplan' => $request->input('project_workplan') ?? null,
-             'project_resources' => $request->input('project_resources') ?? null,
-             'project_references' => $request->input('project_references') ?? null,
-             'project_total_budget' => $request->input('project_total_budget') ?? null,
-             'other_rsc' => $request->input('other_rsc') ?? null,
-             'actions' => $request->input('actions') ?? null,
+             'contribution_to_knowledge' => $request->input('contribution_to_knowledge') ?? null,
+             'technical_soundness' => $request->input('technical_soundness') ?? null,
+             'comprehensive_subject_matter' => $request->input('comprehensive_subject_matter') ?? null,
+             'applicable_and_sufficient_references' => $request->input('applicable_and_sufficient_references') ?? null,
+             'inappropriate_references' => $request->input('inappropriate_references') ?? null,
+             'comprehensive_application' => $request->input('comprehensive_application') ?? null,
+             'grammar_and_presentation' => $request->input('grammar_and_presentation') ?? null,
+             'assumption_of_reader_knowledge' => $request->input('assumption_of_reader_knowledge') ?? null,
+             'clear_figures_and_tables' => $request->input('clear_figures_and_tables') ?? null,
+             'adequate_explanations' => $request->input('adequate_explanations') ?? null,
+             'technical_or_methodological_errors' => $request->input('technical_or_methodological_errors') ?? null,
+             'other_comments' => $request->input('other_comments') ?? null,
+             'review_decision' => $request->input('review_decision') ?? null,
          ]); 
         }   
         
