@@ -464,16 +464,6 @@
             @endif 
           </div>
 
-          <!-- <div class="form-group">
-              <label for="review_decision">Review Decision</label>
-              <select class="form-control" id="review_decision" name="review_decision" required @if ($reviewerCommented) disabled @endif>
-                  <option value="">Select</option>
-                  <option value="Accepted" @if ($comments->review_decision === 'Accepted') selected @endif>Accepted</option>
-                  <option value="Accepted with Revision" @if ($comments->review_decision === 'Accepted with Revision') selected @endif>Accepted with Revision</option>
-                  <option value="Rejected" @if ($comments->review_decision === 'Rejected') selected @endif>Rejected</option>
-              </select>
-          </div> -->
-
           <div class="form-group">
               <label for="review_decision">Review Decision</label>
             @if($reviewerCommented > 0)
