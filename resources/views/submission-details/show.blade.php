@@ -1184,19 +1184,16 @@
               <h1 class="m-0 ml-3 font-weight-bold">REVIEWS</h1>
           </div>
           <div class="card-body">
-          <!-- @if ($reviewerCommented === 0)
-              <div class="alert alert-danger">
-                  Review Summary not available yet.
-              </div>
-          @endif -->
+            @php
+                $reviewAvailable = false; // Initialize a flag
+            @endphp
+
             @foreach ($revs as $review) 
             @if ($review->user->role === 2 && $review->project_id === $records->id)
-      <div class="card shadow mb-4">
-          <div href="#collapseCardExample1" class="card-header py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1">
-              <i class="fas fa-file-signature fa-2x text-gray-300"></i>
-              <h6 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h6>
+          <div class="py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1"> 
+               <i class="fas fa-info-circle fa-2x text-gray-300"></i>
+              <h3 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h3> 
           </div>
-          <div class="collapse show" id="collapseCardExample1" style="">
               <div class="card-body">
                 <label>1. Does the paper contribute to the body of knowledge?</label><br>
                 <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p> 
@@ -1283,12 +1280,16 @@
               </div>
             </form>
             <br><br>
+                @php
+                    $reviewAvailable = true; // Set the flag to true if a review matches the conditions
+                @endphp
             @endif
           @endif
-            <!-- Message when the review is null or does not meet the conditions -->
-            <h6 class="card-text m-0 font-weight-bold text-primary">Review not available yet!</h6>
-        
           @endforeach
+
+          @if (!$reviewAvailable)
+            <p>Review not available yet!</p>
+          @endif
 
           </div>
       </div>
