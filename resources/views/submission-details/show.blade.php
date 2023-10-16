@@ -536,11 +536,11 @@
               </a>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
               <a class="nav-link" id="review-btn" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">
             <i class="fas fa-file-signature mr-2"></i>Review
               </a>
-          </li>
+          </li> -->
           <li class="nav-item">
               <a class="nav-link" id="reviewer-btn" data-toggle="tab" href="#reviewer" role="tab" aria-controls="reviewer" aria-selected="false">
             <i class="fas fa-user-check mr-2"></i>Reviewer
@@ -553,7 +553,7 @@
           </li> -->
       </ul>
     @elseif(Auth::user()->role == 2)
-        <div class="text-center">
+        <!-- <div class="text-center">
         <button id="actions-btn" class="btn btn-primary">
             <i class="fas fa-cogs mr-2"></i>Actions
         </button>
@@ -586,7 +586,7 @@
             <i class="fas fa-file-signature mr-2"></i>Review
           </button>
         </div>
-      </div>
+      </div> -->
     
     @elseif(Auth::user()->role == 3)
 
@@ -657,16 +657,16 @@
                   <i class="fas fa-users mr-2"></i>Project Members
               </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
               <a class="nav-link" id="review-btn" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">
                 <i class="fas fa-file-signature mr-2"></i>Review
               </a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
               <a class="nav-link" id="status-btn" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">
                 <i class="fas fa-tasks mr-2"></i>Status
               </a>
-          </li>
+          </li> -->
           <li class="nav-item">
               <a class="nav-link" id="reviewer-btn" data-toggle="tab" href="#reviewer" role="tab" aria-controls="reviewer" aria-selected="false">
                 <i class="fas fa-user-check mr-2"></i>Reviewer
@@ -1165,7 +1165,129 @@
   </div>
 </div>
 
+<div id="messages-form" class="mt-4" style="display: none;">
+    <div class="container mt-5">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex justify-content-center align-items-center">
+                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                <h1 class="m-0 ml-3 font-weight-bold">REVIEWS</h1>
+            </div>
+            <div class="card-body">
+                @php
+                    $reviewAvailable = false; // Initialize a flag
+                @endphp
 
+                @foreach ($revs as $review)
+                    @if ($review->user->role === 2 && $review->project_id === $records->id)
+                        <div class="py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1">
+                            <i class="fas fa-info-circle fa-2x text-gray-300"></i>
+                            <h3 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h3>
+                            
+                        </div>
+                        @if (auth()->user()->role == 1)
+                                <!-- Review Decision for administrators -->
+                                <h6 class="m-0 font-weight-bold text-primary text-center">Review Decision</h6>
+                                <br>
+                                <!-- Decision form -->
+                                <div class="text-center">
+                                    <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="project_id" value="{{ $records->id }}">
+                                        <div class="form-group">
+                                            <!-- Buttons for different decisions -->
+                                            <button value="Approved" type="submit" id="status" name="status" class="btn btn-info">
+                                                <i class="fas fa-check-circle mr-2"></i>Accepted
+                                            </button>
+                                            <button value="For Revision" type="submit" id="status" name="status" class="btn btn-warning">
+                                                <i class="fas fa-edit mr-2"></i>Accepted with Revision
+                                            </button>
+                                            <button value="Disapproved" type"submit" id="status" name="status" class="btn btn-danger">
+                                                <i class="fas fa-times-circle mr-2"></i>Rejected
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
+                        <div class="card-body">
+                            <label>1. Does the paper contribute to the body of knowledge?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p>
+                
+                            <br>
+
+                            <label>2.	Is this paper technically sound?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
+                            
+                            <br>
+
+                            <label>3.	Is the subject matter presented in a comprehensive manner?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
+                            
+                            <br>
+
+                            <label>4.	Are the references provided applicable and sufficient?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
+                            
+                            <br>
+
+                            <label>5. Are there references that are not appropriate for the topic being discussed?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
+                            
+                            <br>
+
+                            <label>6. Is the application comprehensive?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
+                            
+                            <br>
+
+                            <label>7. Is the grammar and presentation poor? Although this should not be heavily waited.</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
+                            
+                            <br>
+
+                            <label>8. If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
+                            
+                            <br>
+
+                            <label>9. Are figures and tables clear and easy to interpret?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
+                            
+                            <br>
+
+                            <label>10.	Are explanations adequate?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
+                            
+                            <br>
+
+                            <label>11.	Are there any technical or methodological errors?</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
+                            
+                            <br>
+
+                            <label>12. Other Comments</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
+                            
+                            <br>
+
+                            <label>13. Review Decision</label><br>
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
+                          </div>
+                                @php
+                                    $reviewAvailable = true; // Set the flag to true if a review matches the conditions
+                                @endphp
+                    @endif
+                @endforeach
+
+                @if (!$reviewAvailable)
+                    <p>Review not available yet!</p>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
 <div id="messages-form" class="mt-4" style="display: none;">
   <div class="container mt-5">
       <div class="card shadow mb-4">
@@ -1284,7 +1406,7 @@
           </div>
       </div>
   </div>
-</div>
+</div> -->
 
 
 <div id="project-team-form" class="mt-4" style="display: none;">
@@ -1374,7 +1496,7 @@
 </div>
 
 
-<div id="status-form" class="mt-4" style="display: none;">
+<!-- <div id="status-form" class="mt-4" style="display: none;">
   <div class="container mt-5">
       <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex justify-content-center align-items-center">
@@ -1385,7 +1507,6 @@
             <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <!-- Other form fields... -->
                 <input type="hidden" name="project_id" value="{{ $records->id }}">
                 <div class="form-group">
                     <label for="status">Status</label>
@@ -1404,7 +1525,7 @@
           </div>
       </div>
   </div>
-</div>
+</div> -->
 
 
 <div id="reviewer-form" class="mt-4" style="display: none;">
@@ -1424,7 +1545,7 @@
 </div>
 
 
-<div id="review-form" class="mt-4" style="display: none;">
+<!-- <div id="review-form" class="mt-4" style="display: none;">
   <div class="container mt-5">
       <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex justify-content-center align-items-center">
@@ -1448,7 +1569,6 @@
                 <form action="{{ route('reviews.review-decision.store', ['id' => $records->id]) }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
-                    <!-- Other form fields... -->
                     <input type="hidden" name="project_id" value="{{ $records->id }}">
   
                     <button value="Accepted" type="submit" name="decision" class="btn btn-info">
@@ -1465,7 +1585,7 @@
           </div>
       </div>
   </div>
-</div>
+</div> -->
 
 <!-- </div> -->
 

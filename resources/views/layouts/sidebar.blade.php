@@ -79,7 +79,7 @@
           <ul class="nav nav-treeview bg-black py-2 collapse-inner rounded">
             <li class="nav-item">
               <a href="{{ route('submission-details.show', $rec->id) }}" class="nav-link">
-                <i class="far fa-bookmark"></i>
+                <!-- <i class="far fa-bookmark"></i>  -->
               <p>{{ $rec->projname }}</p>
               </a>
             </li>
