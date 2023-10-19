@@ -83,11 +83,15 @@
           
   @elseif(Auth::user()->role == 2 || Auth::user()->role == 4)
   <div class="col-md-12">
-@if($reviewerCommented > 0)
-<div class="alert alert-danger">
-    You have reviewed this project. Your review decision is: {{ $comments->review_decision }}
-</div>
-@endif
+    
+  @foreach ($revs as $review) 
+    @if ($review->user->id === Auth::user()->id &&  $review->contribution_to_knowledge !== null && $review->project_id === $records->id)
+    <div class="alert alert-danger">
+        You have reviewed this project. 
+    </div>
+    @endif
+  @endforeach
+
 <div class="row">
 <div class="col-lg-6">
           @if(auth()->user()->role == 2)
@@ -284,7 +288,7 @@
       </div>
     </div>
       @endif
-</div>
+<!-- </div> -->
 
 <div class="col-lg-6">
     <div class="card shadow mb-4">
@@ -312,12 +316,13 @@
             <label for="contribution_to_knowledge">1. Does the paper contribute to the body of knowledge?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge !== null && $review->project_id === $records->id)
                     <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge === null && $review->project_id === $records->id)
+                    <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-              <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -325,12 +330,13 @@
             <label for="technical_soundness">2.	Is this paper technically sound?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->technical_soundness !== null && $review->project_id === $records->id)
                     <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" readonly>{{ $review->technical_soundness }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->technical_soundness === null && $review->project_id === $records->id)
+                    <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-            <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -338,12 +344,13 @@
             <label for="comprehensive_subject_matter">3.	Is the subject matter presented in a comprehensive manner?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
-            <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
+                  @if ($review->user->id === Auth::user()->id && $review->comprehensive_subject_matter !== null && $review->project_id === $records->id)
+                    <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->comprehensive_subject_matter === null && $review->project_id === $records->id)
+                    <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @else
-            <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -351,12 +358,13 @@
             <label for="applicable_and_sufficient_references">4.	Are the references provided applicable and sufficient?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->applicable_and_sufficient_references !== null && $review->project_id === $records->id)
                     <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1" readonly>{{ $review->applicable_and_sufficient_references }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->applicable_and_sufficient_references === null && $review->project_id === $records->id)
+                    <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-            <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
           
@@ -364,12 +372,13 @@
             <label for="inappropriate_references">5.	Are there references that are not appropriate for the topic being discussed?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->inappropriate_references !== null && $review->project_id === $records->id)
                     <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1" readonly>{{ $review->inappropriate_references }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->inappropriate_references === null && $review->project_id === $records->id)
+                    <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-            <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -377,12 +386,13 @@
             <label for="comprehensive_application">6.	Is the application comprehensive?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->comprehensive_application !== null && $review->project_id === $records->id)
                     <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1" readonly>{{ $review->comprehensive_application }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->comprehensive_application === null && $review->project_id === $records->id)
+                    <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-            <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -390,12 +400,13 @@
             <label for="grammar_and_presentation">7.	Is the grammar and presentation poor? Although this should not be heavily waited.</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->grammar_and_presentation !== null && $review->project_id === $records->id)
                     <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1" readonly>{{ $review->grammar_and_presentation }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->grammar_and_presentation === null && $review->project_id === $records->id)
+                    <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-            <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -403,12 +414,13 @@
             <label for="assumption_of_reader_knowledge">8.	If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->assumption_of_reader_knowledge !== null && $review->project_id === $records->id)
                     <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1" readonly>{{ $review->assumption_of_reader_knowledge }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->assumption_of_reader_knowledge === null && $review->project_id === $records->id)
+                    <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-            <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -416,12 +428,13 @@
             <label for="clear_figures_and_tables">9.	Are figures and tables clear and easy to interpret?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->clear_figures_and_tables !== null && $review->project_id === $records->id)
                     <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1" readonly>{{ $review->clear_figures_and_tables }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->clear_figures_and_tables === null && $review->project_id === $records->id)
+                    <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-            <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -429,12 +442,13 @@
             <label for="adequate_explanations">10.	Are explanations adequate?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
-            <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" readonly>{{ $review->adequate_explanations }}</textarea>
+                  @if ($review->user->id === Auth::user()->id && $review->adequate_explanations !== null && $review->project_id === $records->id)
+                    <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" readonly>{{ $review->adequate_explanations }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->adequate_explanations === null && $review->project_id === $records->id)
+                    <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @else
-            <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -442,12 +456,13 @@
             <label for="technical_or_methodological_errors">11.	Are there any technical or methodological errors?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->technical_or_methodological_errors !== null && $review->project_id === $records->id)
                     <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1" readonly>{{ $review->technical_or_methodological_errors }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->technical_or_methodological_errors === null && $review->project_id === $records->id)
+                    <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-            <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -455,12 +470,13 @@
             <label for="other_rsc">Other Comments</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->other_comments !== null && $review->project_id === $records->id)
                     <textarea id="other_comments" name="other_comments" class="form-control" rows="1" readonly>{{ $review->other_comments }}</textarea>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->other_comments === null && $review->project_id === $records->id)
+                    <textarea id="other_comments" name="other_comments" class="form-control" rows="1"></textarea>
+                  @endif
               @endforeach
-            @else
-            <textarea id="other_comments" name="other_comments" class="form-control" rows="1" required></textarea>
             @endif 
           </div>
 
@@ -468,7 +484,7 @@
               <label for="review_decision">Review Decision</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
-                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->review_decision !== null && $review->project_id === $records->id)
                     <select class="form-control" id="review_decision" name="review_decision" required @if ($reviewerCommented) disabled @endif>
                         <option value="">Select</option>
                         <option value="Accepted" @if ($review->review_decision === 'Accepted') selected @endif>Accepted</option>
@@ -476,14 +492,15 @@
                         <option value="Rejected" @if ($review->review_decision === 'Rejected') selected @endif>Rejected</option>
                     </select>
                   @endif
+                  @if ($review->user->id === Auth::user()->id && $review->review_decision === null && $review->project_id === $records->id)
+                    <select class="form-control" id="review_decision" name="review_decision" required>
+                        <option value="">Select</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Accepted with Revision">Accepted with Revision</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                  @endif
               @endforeach
-            @else
-              <select class="form-control" id="review_decision" name="review_decision" required>
-                  <option value="">Select</option>
-                  <option value="Accepted">Accepted</option>
-                  <option value="Accepted with Revision">Accepted with Revision</option>
-                  <option value="Rejected">Rejected</option>
-              </select>
             @endif 
           </div>
           <br>
@@ -846,7 +863,7 @@
           </div>
           <div class="card-body">
             <!-- <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a> -->
-          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks">Add Task</button>
+          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks" data-backdrop="static" data-keyboard="false">Add Task</button>
         @include('submission-details.tasks.create')
         <table id="example1" class="table table-hover table-bordered text-center table-sm">
           <thead class="table-info">
@@ -873,7 +890,7 @@
               <td>{{ $task->assignedTo->name }}</td>
               <td>{{ $task->updated_at }}</td>
               <td>
-                <a href="{{ route('submission-details.tasks.edit', $task->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $task->id }}">
+                <a href="{{ route('submission-details.tasks.edit', $task->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#editModal{{ $task->id }}">
                     <i class="fas fa-edit"></i>
                 </a>
                 <div class="modal fade" id="editModal{{ $task->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $task->id }}Label" aria-hidden="true">
@@ -964,7 +981,7 @@
       <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">
           <i class="far fa-file-excel fa-sm text-white-50"></i> Export to Excel
       </a> -->
-      <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#lib">Add Line-Item</button>
+      <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#lib">Add Line-Item</button>
           @include('submission-details.line-items-budget.create')
           <table id="" class="table table-hover table-bordered text-center table-sm">
             <thead class="table-info">
@@ -985,7 +1002,7 @@
                 <td>{{ $lineItem->quantity }}</td>
                 <td>{{ $lineItem->unit_price }}</td>
                 <td>
-                  <a href="{{ route('submission-details.line-items-budget.edit', $lineItem->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $lineItem->id }}">
+                  <a href="{{ route('submission-details.line-items-budget.edit', $lineItem->id) }}" type="button" class="btn btn-warning" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#editModal{{ $lineItem->id }}">
                       <i class="fas fa-edit"></i>
                   </a>
                   <div class="modal fade" id="editModal{{ $lineItem->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $lineItem->id }}Label" aria-hidden="true">
@@ -1075,7 +1092,7 @@
               <h1 class="m-0 ml-3 font-weight-bold">FILES</h1>
           </div>
           <div class="card-body">
-      <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#filesModal">Add File</button>
+      <button type="button" class="btn btn-primary my-2" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#filesModal">Add File</button>
           @include('submission-details.files.create')
           <table id="example1" class="table table-hover table-bordered table-sm">
             <thead class="table-info">
@@ -1103,7 +1120,7 @@
                 <a href="{{ route('file.download', ['id' => $file->id]) }}" class="btn btn-primary">
                     <i class="fas fa-download"></i>
                 </a>
-                <a href="{{ route('submission-details.files.edit', $file->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editFileModal{{ $file->id }}">
+                <a href="{{ route('submission-details.files.edit', $file->id) }}" type="button" class="btn btn-warning" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#editFileModal{{ $file->id }}">
                     <i class="fas fa-edit"></i>
                 </a>
                 <div class="modal fade" id="editFileModal{{ $file->id }}" tabindex="-1" role="dialog" aria-labelledby="editFileModal{{ $file->id }}Label" aria-hidden="true">
@@ -1418,7 +1435,7 @@
           </div>
           <div class="card-body">
             
-        <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ProjectTeam">Add Project Members</button>
+        <button type="button" class="btn btn-primary my-2" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">Add Project Members</button>
             @include('submission-details.project-teams.create')
             <table id="example1" class="table table-hover table-bordered table-sm">
             <thead class="table-info">
@@ -1437,7 +1454,7 @@
                 <td>{{ $member->member_name }}</td>
                 <td>{{ $member->role }}</td>
                 <td>
-                  <a href="{{ route('submission-details.project-teams.edit', $member->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $member->id }}">
+                  <a href="{{ route('submission-details.project-teams.edit', $member->id) }}" type="button" class="btn btn-warning" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#editModal{{ $member->id }}">
                       <i class="fas fa-edit"></i>
                   </a>
                   <div class="modal fade" id="editModal{{ $member->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $member->id }}Label" aria-hidden="true">
@@ -1536,7 +1553,7 @@
               <h1 class="m-0 ml-3 font-weight-bold">REVIEWER</h1>
           </div>
           <div class="card-body">
-          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal">Select Reviewer</button>
+          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal" data-backdrop="static" data-keyboard="false">Select Reviewer</button>
               @include('submission-details.reviews.select-reviewer')
 
           </div>
@@ -1588,5 +1605,17 @@
 </div> -->
 
 <!-- </div> -->
+<script>
+    // auto-expand-textarea.js
+  // Function to automatically resize the textarea based on its content
+  function autoResizeTextarea() {
+  var textarea = document.getElementById('contribution_to_knowledge');
+  textarea.style.height = 'auto'; // Reset the height
+  textarea.style.height = (textarea.scrollHeight) + 'px'; // Set the height to the scrollHeight
+  }
 
+  // Run the autoResizeTextarea function when the page loads and whenever the textarea content changes
+  window.addEventListener('load', autoResizeTextarea);
+  document.getElementById('contribution_to_knowledge').addEventListener('input', autoResizeTextarea);
+</script>
 @endsection

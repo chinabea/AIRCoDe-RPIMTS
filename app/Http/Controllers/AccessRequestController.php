@@ -62,15 +62,16 @@ class AccessRequestController extends Controller
     
     
             // Redirect to the index or show view, or perform other actions
-            return redirect()->back()->with('success', 'Data Successfully Added!');
+            return redirect()->back()->with('success', 'Access Requests Successfully Submitted!');
         } catch (QueryException $e) {
             // If an exception is thrown, it means there was a database error
             // You can handle this error by returning an error response
             // You can pass the error message to the view for the modal
             $errorMessage = 'Error: Unable to create access-requests. Please try again later.';
-    
-            // Return a response, passing the error message to the view
-            return view('errors.errorView')->with('error', $errorMessage);
+            // return view('errors.errorView')->with('error', $errorMessage);
+            // Redirect back with the error message 
+            return redirect()->back()->with('error', $errorMessage);
+
         }
     }
     
@@ -107,7 +108,7 @@ class AccessRequestController extends Controller
         $accessrequests->update($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->back()->with('success', 'Data Successfully Updated!');
+        return redirect()->back()->with('success', 'Access Requests Successfully Updated!');
     }
 
     public function destroy($id)
@@ -117,7 +118,7 @@ class AccessRequestController extends Controller
         $accessrequests->delete();
 
         // Redirect to the index or perform other actions
-        return redirect()->route('researcher.home')->with('success', 'Data Successfully Deleted!');
+        return redirect()->route('researcher.home')->with('success', 'Access Requests Successfully Deleted!');
     }
 
 }

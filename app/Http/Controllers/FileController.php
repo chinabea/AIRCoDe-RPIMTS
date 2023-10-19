@@ -105,7 +105,7 @@ class FileController extends Controller
 
         // return redirect()->route('schedules.show', ['schedule' => $schedule->id])->with('success', 'Schedule updated successfully.');
 
-        return redirect()->route('submission-details.files.index')->with('success', 'Data Successfully Updated!');
+        return redirect()->route('submission-details.files.index')->with('success', 'File Successfully Updated!');
     }
 
     public function delete($id)

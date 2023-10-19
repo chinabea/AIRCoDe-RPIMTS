@@ -161,7 +161,7 @@ class ProjectsController extends Controller
             $researcher->notify(new ResearchProposalSubmissionNotification($projects->id, $userId, $researcherMail, $projectTitle, $projects));
         }
 
-        return redirect()->route('projects')->with('success', 'Data Successfully Added!');
+        return redirect()->route('projects')->with('success', 'Research Proposal Successfully Submmitted!');
     }
 
     public function show($id)
@@ -244,13 +244,13 @@ class ProjectsController extends Controller
         // Save the updated project record
         $records->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Reseach Proposal Successfully Deleted!');
     }
 
     public function destroy($id)
     {
         $projects = ProjectsModel::findOrFail($id);
         $projects->delete();
-        return redirect()->route('projects')->with('success', 'Data Successfully Deleted!');
+        return redirect()->route('projects')->with('success', 'Reseach Proposal Successfully Deleted!');
     }
 }

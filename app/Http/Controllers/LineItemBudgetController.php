@@ -37,7 +37,7 @@ class LineItemBudgetController extends Controller
         $project->total_budget = $totalAllLineItems;
         $project->save();
 
-        return redirect()->back()->with('success', 'Data Successfully Added!');
+        return redirect()->back()->with('success', 'LIB Successfully Added!');
     }
 
 
@@ -74,7 +74,7 @@ class LineItemBudgetController extends Controller
 
         $lineItem->update($requestData);
 
-        return redirect()->back()->with('success', 'Data Successfully Updated!');
+        return redirect()->back()->with('success', 'LIB Successfully Updated!');
     }
 
     // public function update(Request $request, $id)
@@ -92,6 +92,6 @@ class LineItemBudgetController extends Controller
     {
         $lib = LineItemBudgetModel::findOrFail($id);
         $lib->delete();
-        return redirect()->back()->with('success', 'Project team member deleted successfully');
+        return redirect()->back()->with('success', 'LIB deleted successfully');
     }
 }

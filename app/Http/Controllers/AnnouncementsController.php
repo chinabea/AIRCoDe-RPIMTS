@@ -28,7 +28,7 @@ class AnnouncementsController extends Controller
         AnnouncementsModel::create($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('announcements')->with('success', 'Data Successfully Added!');
+        return redirect()->route('announcements')->with('success', 'Announcement Successfully Added!');
     }
 
     public function show($id)
@@ -55,7 +55,7 @@ class AnnouncementsController extends Controller
         $announcements->update($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('announcements')->with('success', 'Data Successfully Updated!');
+        return redirect()->route('announcements')->with('success', 'Announcement Successfully Updated!');
     }
 
     public function destroy($id)
@@ -65,6 +65,6 @@ class AnnouncementsController extends Controller
         $announcements->delete();
 
         // Redirect to the index or perform other actions
-        return redirect()->route('announcements')->with('success', 'Data Successfully Deleted!');
+        return redirect()->route('announcements')->with('success', 'Announcement Successfully Deleted!');
     }
 }

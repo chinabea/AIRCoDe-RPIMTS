@@ -7,24 +7,6 @@
 
 <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}">
 
-
-
-<!-- DO NOT REMOVE THIS  -->
-<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('js/tinymce/skins/ui/oxide/skin.min.css') }}">
-
-<!-- Bootstrap Select CSS -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css" rel="stylesheet"> -->
-<!-- jQuery -->
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>  -->
-<!-- Bootstrap JS -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script> -->
-<!-- Bootstrap Select JS -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/bootstrap-select.min.js"></script> -->
-
-
-
-
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
 <!-- Font Awesome -->
@@ -53,6 +35,25 @@
 <!-- fullCalendar -->
 <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/main.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/simplemde/simplemde.min.css') }}">
+
+<!-- DO NOT REMOVE THIS  -->
+<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('js/tinymce/skins/ui/oxide/skin.min.css') }}">
+
+<!-- Bootstrap Select CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css" rel="stylesheet">
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<!-- Bootstrap Select JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/js/bootstrap-select.min.js"></script>
+
+<!-- Toastr -->
+<!-- <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -84,6 +85,8 @@
  <!-- Custom Js -->
  <script src="{{ asset('js/custom.js') }}"></script>
  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Toastr -->
+<!-- <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script> -->
 
 </body>
 </html>

@@ -84,7 +84,7 @@ class TaskController extends Controller
     $errorMessage = 'Error: Unable to create the task. Please try again later.';
 
     // Return a response, passing the error message to the view
-    return view('errors.errorView')->with('error', $errorMessage);
+        return redirect()->back()->with('error', $errorMessage);
    }
    }
 
@@ -146,7 +146,7 @@ class TaskController extends Controller
 
         // return redirect()->route('schedules.show', ['schedule' => $schedule->id])->with('success', 'Schedule updated successfully.');
 
-        return redirect()->route('submission-details.tasks.index')->with('success', 'Data Successfully Updated!');
+        return redirect()->route('submission-details.tasks.index')->with('success', 'Task Successfully Updated!');
     }
 
 
@@ -155,7 +155,7 @@ class TaskController extends Controller
         $task = TaskModel::findOrFail($id);
         $task->delete();
 
-        return redirect()->route('submission-details.tasks.index')->with('success', 'Schedule deleted successfully.');
+        return redirect()->route('submission-details.tasks.index')->with('success', 'Task deleted successfully.');
     }
 
 }

@@ -14,11 +14,11 @@
                /* background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 url('dist/img/bg.jpg'); */
                 /* backdrop-filter:blur(5px); */
-        height: 50%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        position: relative;
+        /* height: 50%; */
+        /* background-position: center; */
+        /* background-repeat: no-repeat; */
+        /* background-size: cover; */
+        /* position: relative; */
         background-color: #022A44 !important;
     }
             header{
@@ -195,10 +195,10 @@
             <a href="#"></a>
             <a href="#"></a>
             <a href="#"></a>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
+            <a href="{{ route('welcome') }}">Home</a>
+            <!-- <a href="#">About</a> -->
+            <!-- <a href="#">Services</a> -->
+            <a href="{{ route('contact') }}">Contact</a>
                 @if (Route::has('login'))
                     @auth
                         <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('/home') }}">Home</a></li> -->
@@ -217,46 +217,49 @@
         /* Your CSS styles for the background gradient here */
         /* ... (Your existing background gradient styles) ... */
     /* Your CSS styles for the background gradient here */
-    .background-radial-gradient {
-      background-color: hsl(218, 41%, 15%);
-      background-image: radial-gradient(650px circle at 0% 0%,
-          hsl(218, 41%, 35%) 15%,
-          hsl(218, 41%, 30%) 35%,
-          hsl(218, 41%, 20%) 75%,
-          hsl(218, 41%, 19%) 80%,
-          transparent 100%),
-        radial-gradient(1250px circle at 100% 100%,
-          hsl(218, 41%, 45%) 15%,
-          hsl(218, 41%, 30%) 35%,
-          hsl(218, 41%, 20%) 75%,
-          hsl(218, 41%, 19%) 80%,
-          transparent 100%);
-    }
 
-    #radius-shape-1 {
-      height: 220px;
-      width: 220px;
-      top: -60px;
-      left: -130px;
-      background: radial-gradient(#44006b, #ad1fff);
-      overflow: hidden;
-    }
 
-    #radius-shape-2 {
-      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
-      bottom: -60px;
-      right: -110px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(#44006b, #ad1fff);
-      overflow: hidden;
-    }
+    
+    <style>
+        /* Your custom styles here */
+        .background-container {
+            position: relative;
+            background-color: hsl(218, 41%, 15%);
+        }
 
+        #radius-shape-1, #radius-shape-2 {
+            position: absolute;
+            overflow: hidden;
+            background: radial-gradient(#44006b, #ad1fff);
+        }
+
+        #radius-shape-1 {
+            height: 220px;
+            width: 220px;
+            top: -60px;
+            left: -130px;
+        }
+
+        #radius-shape-2 {
+            bottom: -30px;
+            right: -110px;
+            width: 300px;
+            height: 300px;
+            border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+           
+        }
     .bg-glass {
       background-color: hsla(0, 0%, 100%, 0.9) !important;
       backdrop-filter: saturate(200%) blur(25px);
     }
     </style>
+
+
+
+
+
+
+
 
     <!-- Add the radial gradient shapes here -->
     <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>

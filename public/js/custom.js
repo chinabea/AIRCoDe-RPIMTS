@@ -1,14 +1,3 @@
-  // auto-expand-textarea.js
-  // Function to automatically resize the textarea based on its content
-  // function autoResizeTextarea() {
-  // var textarea = document.getElementById('contribution_to_knowledge');
-  // textarea.style.height = 'auto'; // Reset the height
-  // textarea.style.height = (textarea.scrollHeight) + 'px'; // Set the height to the scrollHeight
-  // }
-
-  // // Run the autoResizeTextarea function when the page loads and whenever the textarea content changes
-  // window.addEventListener('load', autoResizeTextarea);
-  // document.getElementById('contribution_to_knowledge').addEventListener('input', autoResizeTextarea);
 
 
     tinymce.init({

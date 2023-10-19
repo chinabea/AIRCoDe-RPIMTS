@@ -43,9 +43,9 @@ use App\Mail\Send;
 Route::get('/projects/track', [TrackController::class, 'track'])->name('projects.track');
 Route::get('/', [TrackController::class, 'track'])->name('welcome');
 
-Route::get('/textinput', function () {
-    return view('textinput');
-})->name('textinput');
+Route::get('/test', function () {
+    return view('test');
+})->name('test');
 
 
 Auth::routes();
@@ -105,7 +105,6 @@ Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(func
 
     Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
-    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
     Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
     Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
     Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
@@ -218,15 +217,6 @@ Route::middleware(['auth', 'cache'])->group(function (){
 
     Route::get('/emailbox/compose', [EmailBoxController::class, 'index'])->name('emailbox.compose');
     Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
-    Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');
-    Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
-    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-
-    // register 
-    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
-
 
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
@@ -247,6 +237,14 @@ Route::middleware(['auth', 'cache'])->group(function (){
         return response()->view('errors.404', [], 404);
     });
 
-
-
 });
+
+
+
+// register 
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');

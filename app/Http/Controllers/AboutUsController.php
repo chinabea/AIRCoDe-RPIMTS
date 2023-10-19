@@ -28,7 +28,7 @@ class AboutUsController extends Controller
         AboutUsModel::create($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('abouts')->with('success', 'Data Successfully Added!');
+        return redirect()->route('abouts')->with('success', 'Abouts Successfully Added!');
     }
 
     public function show($id)
@@ -55,7 +55,7 @@ class AboutUsController extends Controller
         $aboutus->update($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('abouts')->with('success', 'Data Successfully Updated!');
+        return redirect()->route('abouts')->with('success', 'Abouts Successfully Updated!');
     }
 
     public function destroy($id)
@@ -65,7 +65,7 @@ class AboutUsController extends Controller
         $aboutus->delete();
 
         // Redirect to the index or perform other actions
-        return redirect()->route('abouts')->with('success', 'Data Successfully Deleted!');
+        return redirect()->route('abouts')->with('success', 'Abouts Successfully Deleted!');
     }
 
 

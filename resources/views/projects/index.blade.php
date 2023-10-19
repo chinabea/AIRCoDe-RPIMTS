@@ -11,8 +11,9 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-center align-items-center">
               <i class="fas fa-file-alt fa-2x text-gray-300"></i>
-                <h1 class="m-0 ml-3 font-weight-bold">SUBMITTED</h1>
+                <h1 class="m-0 ml-3 font-weight-bold">PROPOSALS</h1>
             </div>
+
             <div class="card-body">
               <table id="example1" class="table table-bordered table-hover table-sm">
                   <thead>
@@ -68,9 +69,30 @@
                           @endforeach
                   </tbody>
               </table>
+
+            @if(session('success'))
+                <script>
+                    toastr.success('{{ session('success') }}');
+                </script>
+            @elseif(session('delete'))
+            @elseif(session('error'))
+            <div id="popupModal" class="modal fade">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content bg-gradient-warning">
+                        <div class="modal-header"></div>
+                        <div class="modal-body">
+                            <div class="alert alert-warning text-center">
+                            <i class="fa-xl fa-solid fa-triangle-exclamation"></i>
+                                {{ session('error') }}
+                            </div>
+                        </div>
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
             </div>
+            @endif
         </div>
     </div>
-
+</div>
 </div>
 @endsection

@@ -42,7 +42,7 @@ class ContactController extends Controller
         $contactMessage = ContactUsModel::create($request->all());
     
         Mail::send('emails.contact', ['contactMessage' => $contactMessage], function ($message) use ($contactMessage) {
-            $message->to('yurfavchi@gmail.com', 'AIRCoDe RPIM')
+            $message->to('yurfavchi@gmail.com', 'RPIMTS')
                 ->subject('Subject: ' . $contactMessage->subject);
         });
 

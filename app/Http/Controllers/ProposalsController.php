@@ -101,7 +101,7 @@ class ProposalsController extends Controller
         ProposalsModel::create($validatedData);
     
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('call-for-proposals')->with('success', 'Data Successfully Added!');
+        return redirect()->route('call-for-proposals')->with('success', 'Call for Proposal Successfully Added!');
     }catch (QueryException $e) {
         // If an exception is thrown, it means there was a database error
         // You can handle this error by returning an error response
@@ -109,7 +109,10 @@ class ProposalsController extends Controller
         $errorMessage = 'Error: Unable to create call for proposals. Please try again later.';
     
         // Return a response, passing the error message to the view
-        return view('errors.errorView')->with('error', $errorMessage);
+        // return view('errors.errorView')->with('error', $errorMessage);
+        // Redirect back with the error message
+        return redirect()->back()->with('error', $errorMessage);
+
     }
     }
     
@@ -149,7 +152,7 @@ class ProposalsController extends Controller
         $proposals->update($request->all());
 
         // Redirect to the index or show view, or perform other actions
-        return redirect()->route('call-for-proposals')->with('success', 'Data Successfully Updated!');
+        return redirect()->route('call-for-proposals')->with('success', 'Call for Proposal Successfully Updated!');
     }
 
     public function destroy($id)
@@ -159,6 +162,6 @@ class ProposalsController extends Controller
         $proposals->delete();
 
         // Redirect to the index or perform other actions
-        return redirect()->route('call-for-proposals')->with('success', 'Data Successfully Deleted!');
+        return redirect()->route('call-for-proposals')->with('success', 'Call for Proposal Successfully Deleted!');
     }
 }

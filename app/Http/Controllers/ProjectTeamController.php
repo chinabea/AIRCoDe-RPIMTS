@@ -27,7 +27,7 @@ class ProjectTeamController extends Controller
         $requestData['project_id'] = $projectId;
         ProjectTeamModel::create($requestData);
 
-        return redirect()->back()->with('success', 'Data Successfully Added!');
+        return redirect()->back()->with('success', 'Team Member Successfully Added!');
     }
 
     public function show($id)

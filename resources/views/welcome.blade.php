@@ -110,8 +110,8 @@
                                                     @if($project)
                                                     <br>
                                                     <h6 class="text-success">Project Found:</h6>
-                                                    <p><strong>Project Title:</strong> {{ $project->projname }}</p>
-                                                    <p><strong>Approved Date:</strong> {{ $project->approved_date }}</p>
+                                                    <p><strong>Research:</strong> {{ $project->projname }}</p>
+                                                    <p><strong>Status:</strong> {{ $project->status }}</p>
                                                     @else
                                                     <br>
                                                     <p class="text-danger">No project found with the entered ID.</p>
