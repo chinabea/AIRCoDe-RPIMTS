@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -76,4 +78,44 @@ class LoginController extends Controller
         }
 
     }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $socialiteUser = Socialite::driver('google')->user();
+        } catch (\Exception $e) {
+            // Handle any exceptions that may occur during the OAuth process
+            return redirect('/login')->with('error', 'Unable to authenticate with Google.');
+        }
+
+        // You can create a new user or log in an existing user based on $socialiteUser data
+        $user = User::where('email', $socialiteUser->getEmail())->first();
+
+        if (!$user) {
+            // If the user doesn't exist, display a message and prompt them to register
+            return redirect('/login')->with('error', 'Please register an account first.');
+        }
+
+        Auth::login($user);
+
+        // Check the user's role and redirect accordingly
+        if ($user->role === 1) {
+            return redirect()->route('director.home');
+        } elseif ($user->role === 2) {
+            return redirect()->route('staff.home');
+        } elseif ($user->role === 3) {
+            return redirect()->route('researcher.home');
+        } elseif ($user->role === 4) {
+            return redirect()->route('reviewer.home');
+        } else {
+            // Handle other roles or a default redirection here
+            return redirect('/home');
+        }
+    }
+
 }

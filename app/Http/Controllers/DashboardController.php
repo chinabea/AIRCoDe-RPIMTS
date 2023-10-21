@@ -5,10 +5,11 @@ use App\Notifications\ProjectNotification;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
 use App\Models\ProjectsModel;
 use App\Models\UsersModel;
+use App\Models\ReviewModel;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -24,37 +25,31 @@ class DashboardController extends Controller
         $approvedCount = ProjectsModel::where('status', 'Approved')->where('user_id', $authenticatedUserId)->count();
         $deferredCount = ProjectsModel::where('status', 'Deferred')->where('user_id', $authenticatedUserId)->count();
         $disapprovedCount = ProjectsModel::where('status', 'Disapproved')->where('user_id', $authenticatedUserId)->count();
+
+        $reviews = ReviewModel::all();
         
+        $currentDate = now(); // Get the current date and time
+
+        $deadlines = ReviewModel::where('deadline', '<', $currentDate)
+            ->whereNull('contribution_to_knowledge')
+            ->whereNotIn('user_id', function ($subQuery) {
+                $subQuery->select('user_id')
+                    ->from('reviews')
+                    ->whereNotNull('project_id');
+            })
+            ->get();
+
+           
         return view('dashboard', compact('allUsersCount','allProjectsCount','projectCount','draftCount','underEvaluationCount','underEvaluationCount','forRevisionCount',
-                    'approvedCount','deferredCount','disapprovedCount'));
+                    'approvedCount','deferredCount','disapprovedCount','reviews','deadlines'));
     }
 
-    // public function notify()
-    // {
-    //     if (auth()->user()) {
-            
 
-        
-    //         $userId = User::first();
-            
-    //         $researcher = UsersModel::find($userId);
-    //         // $researcherMail = $researcher->email;
-    //         // $projectTitle = $projects->projname;
-    //         $director = UsersModel::where('role', true)->first();
-    
-    //         auth()->user()->notify()(new ProjectNotification($projectId, $researcher, $researcherMail, $projectTitle, $projects));
-    //     }
-    //     dd('done');
-
-
+    // public function showDeadlines() {
+    //     $deadlines = ReviewModel::all();
+    //     return view('dashboard', compact('deadlines'));
     // }
     
     
-    // public function index()
-    // {
-    //     $notifications = Auth::user()->unreadNotifications;
-    //     return view('/home', compact('notifications'));
 
-    //     // return view('notifications', compact('unreadNotifications', 'readNotifications', 'notifications'));
-    // }
 }

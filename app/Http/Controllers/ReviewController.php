@@ -11,17 +11,6 @@ use App\Models\ReviewModel;
 
 class ReviewController extends Controller
 {
-    // public function create()
-    // {
-    //     $projectId = $request->input('project_id');
-    //     $existingReviewers = ReviewModel::where('project_id', $projectId)->pluck('user_id')->toArray();
-
-    //     // Fetch reviewers that are not already assigned to the project
-    //     $reviewers = Reviewer::whereNotIn('id', $existingReviewers)->get();
-
-    //     return view('your_view', compact('reviewers'));
-    // }
-
     public function store(Request $request)
     {
     
@@ -165,21 +154,6 @@ class ReviewController extends Controller
         
         return redirect()->route('staff.home');
     }
-
-    // public function showForm()
-    // {
-    //     $projects = Project::all(); // Retrieve a list of projects
-
-    //     // Assuming you have the $role4Users variable as well
-    //     $role4Users = User::where('role', 4)->get(); // Retrieve users with role 4
-
-    //     return view('submission-details.reviews.select-reviewer', compact('projects', 'role4Users'));
-    // }
-    // public function select()
-    // {
-    //     // $project = Project::findOrFail($project_id);
-    //     return view('submission-details.reviews.select-reviewer');
-    // }
     
 
     public function assignReviewers(Request $request, $projectId)
@@ -226,43 +200,6 @@ class ReviewController extends Controller
         $review->save();
         return redirect()->route('submission-details.show', ['id' => $id]);
     }
-
-    
-//     public function reviewDecision(Request $request, $id)
-//     {
-//     $request->validate([
-//         'decision' => 'required|in:Accepted,Accepted with Revision,Rejected',
-//     ]);
-
-//     // Assuming you have a ReviewModel (or similar) to represent reviews
-//     $reviewsWithoutDeadline = ReviewModel::where('user_id', 2) // Remove the comma here
-//         ->where('project_id', $id)
-//         ->whereNull('deadline') // Add this line to filter reviews without a deadline
-//         ->get(); // Use get() to retrieve a collection of matching reviews
-
-//     if ($reviewsWithoutDeadline->isEmpty()) {
-//         return redirect()->back()->with('error', 'No reviews without a deadline found.');
-//     }
-
-//     // Initialize an array to store review IDs
-//     $reviewIds = [];
-
-//     // Update the decision for each review individually
-//     foreach ($reviewsWithoutDeadline as $review) {
-//         $review->decision = $request->input('decision');
-//         $review->save();
-
-//         // Add the review ID to the array
-//         $reviewIds[] = $review->id;
-//     }
-
-//     // Now, $reviewIds contains the IDs of the reviews without a deadline that were updated
-
-//     return redirect()->route('submission-details.show', ['id' => $id]);
-// }
-
-
-    
     
 
     public function comments(Request $request, $data_id)
@@ -288,81 +225,5 @@ class ReviewController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // public function addReview(Request $request, $data_id)
-    // {
-    //     $data = ProjectsModel::findOrFail($data_id);
-
-    //     $this->validate($request, [
-    //         'highlighted_text' => 'required',
-    //         'review_text' => 'required',
-    //     ]);
-
-    //     // Create a new review and associate it with the project
-    //     $review = new ReviewModel([
-    //         'highlighted_text' => $request->input('highlighted_text'),
-    //         'review_text' => $request->input('review_text'),
-    //     ]);
-
-    //     $data->reviews()->save($review);
-
-    //     return redirect()->back()->with('success', 'Review added successfully.');
-    // }
-
-
-    public function func()
-    {
-        // // Retrieve reviews for a project:
-        // $project = ProjectsModel::find($projectId);
-        // $reviews = $project->reviews;
-
-        // // Retrieve projects a reviewer has reviewed:
-        // $reviewer = UsersModel::find($reviewerId);
-        // $reviewedProjects = $reviewer->reviewedProjects;
-
-        // // Create a new review for a project by a reviewer:
-        // $project = ProjectsModel::find($projectId);
-        // $reviewer = UsersModel::find($reviewerId);
-
-        // $review = new ReviewModel([
-        //     'rating' => $rating,
-        //     'comment' => $comment,
-        // ]);
-
-        // $project->reviews()->save($review, ['user_id' => $reviewer->id]);
-
-
-    }
 
 }

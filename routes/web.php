@@ -26,6 +26,7 @@ use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\ProjectHistoryController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Auth\LoginController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -40,6 +41,11 @@ use App\Mail\Send;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+Route::get('login/google', [LoginController::class, 'redirectToGoogle']);
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
 Route::get('/projects/track', [TrackController::class, 'track'])->name('projects.track');
 Route::get('/', [TrackController::class, 'track'])->name('welcome');
 
@@ -67,9 +73,9 @@ Route::middleware(['auth', 'cache'])->group(function (){
     
 });
 
-
 Route::prefix('staff')->middleware(['auth', 'cache', 'staff'])->group(function (){
     Route::get('/home', [DashboardController::class, 'countAll'])->name('staff.home');
+
 
 });
 

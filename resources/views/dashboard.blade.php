@@ -567,6 +567,28 @@
     <div class="container mt-5">
         <h2>Dashboard</h2>
      <div class="row">
+        <style>
+            @keyframes blink {
+            0% { color: red; }
+            50% { color: transparent; }
+            100% { color: red; }
+            }
+
+            .blinking-alert {
+            animation: blink 1s infinite;
+            }
+        </style>
+
+@foreach ($deadlines as $deadline)
+            <li>
+                <strong>Reviewer ID:</strong> {{ $deadline->user_id }}<br>
+                <strong>Project ID:</strong> {{ $deadline->project_id }}<br>
+                <strong>Deadline:</strong> {{ $deadline->deadline }}<br>
+            </li>
+        @endforeach
+
+
+        
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <a href="{{ route('status.under-evaluation') }}" class="card border-left-success shadow h-100 py-2">

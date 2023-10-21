@@ -7,6 +7,10 @@
     <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}">
     <title>RPIMTS</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
   <style>
     /* Your custom styles here */
     body {
@@ -195,6 +199,8 @@
             <a href="#"></a>
             <a href="#"></a>
             <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
             <a href="{{ route('welcome') }}">Home</a>
             <!-- <a href="#">About</a> -->
             <!-- <a href="#">Services</a> -->
@@ -254,13 +260,6 @@
     }
     </style>
 
-
-
-
-
-
-
-
     <!-- Add the radial gradient shapes here -->
     <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
     <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
@@ -274,7 +273,7 @@
     </a> -->
     </header>
     <div class="center-content">
-      <div class="wrapper bg-glass">
+      <div class="wrapper bg-glass"  style="width: 500px; height: 550px;">
         <div class="form-box login">
           <!-- Form content remains the same -->
             <h2><b>Sign in to your Account</b></h2>
@@ -316,17 +315,27 @@
                     @endif
                     <br><br>
                 </div>
-                <!-- <button type="submit" class="btn">Login</button> -->
                 <button type="submit" class="btn">
                     {{ __('Login') }}
                 </button>
             </form>
+            <hr>
+            <h6 class="text-center m-t-1">Log in using your account on:</h6>
+            <div class="potentialidplist row p-0">
+                <div class="potentialidp col-sm-12 col-md">
+                    <a href="{{ url('login/google') }}" title="Google Mail" class="btn btn-secondary m-t-1 w-100 d-flex align-items-center">
+                        <div class="mx-auto">
+                            <img src="https://accounts.google.com/favicon.ico" alt="" width="25" class="mr-2">
+                            <span>Google Mail</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
       </div>
     </div>
   </div>
   
-  <!-- <script src="script.js"></script> -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 

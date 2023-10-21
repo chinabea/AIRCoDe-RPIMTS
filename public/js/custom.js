@@ -11,17 +11,6 @@
   });
 
 
-// $(function () {
-//     // Summernote
-//     $('#summernote').summernote()
-
-//     // CodeMirror
-//     CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-//       mode: "htmlmixed",
-//       theme: "monokai"
-//     });
-//   })
-
     // $(document).ready(function () {
     //     $(".accomplish-button").click(function () {
     //         // Toggle the button status and appearance

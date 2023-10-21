@@ -57,5 +57,11 @@ class ReviewModel extends Model
             });
         });
     }
+  
+    public function deadlineExceeded()
+    {
+        $currentDate = now();
+        return $this->deadline < $currentDate;
+    }
 
 }
