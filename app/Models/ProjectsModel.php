@@ -23,7 +23,8 @@ class ProjectsModel extends Model
                         'workplan',
                         'resources',
                         'references',
-                        'total_budget'
+                        'total_budget',
+                        'approval_date',
                     ];
 
     public function callForProposal()

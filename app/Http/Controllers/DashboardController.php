@@ -18,6 +18,11 @@ class DashboardController extends Controller
         $authenticatedUserId = auth()->user()->id;
         $allUsersCount = UsersModel::count();
         $allProjectsCount = ProjectsModel::count();
+        $allUnderEvaluationCount = ProjectsModel::where('status', 'Under Evaluation')->count();
+        $allForRevisionCount = ProjectsModel::where('status', 'For Revision')->count();
+        $allApprovedCount = ProjectsModel::where('status', 'Approved')->count();
+        $allDeferredCount = ProjectsModel::where('status', 'Deferred')->count();
+        $allDisapprovedCount = ProjectsModel::where('status', 'Disapproved')->count();
         $projectCount = ProjectsModel::where('user_id', $authenticatedUserId)->count();
         $draftCount = ProjectsModel::where('status', 'Draft')->where('user_id', $authenticatedUserId)->count();
         $underEvaluationCount = ProjectsModel::where('status', 'Under Evaluation')->where('user_id', $authenticatedUserId)->count();
@@ -26,30 +31,47 @@ class DashboardController extends Controller
         $deferredCount = ProjectsModel::where('status', 'Deferred')->where('user_id', $authenticatedUserId)->count();
         $disapprovedCount = ProjectsModel::where('status', 'Disapproved')->where('user_id', $authenticatedUserId)->count();
 
-        $reviews = ReviewModel::all();
+        $deadlines = ReviewModel::all();
+        $exceededDeadlines = $deadlines->filter(function ($deadline) use ($authenticatedUserId) {
+            return $deadline->deadlineExceeded() && empty($deadline->contribution_to_knowledge) && $deadline->user_id === $authenticatedUserId;
+        });
+
+        $countOfUnreviewedProjects = $exceededDeadlines->count();
+        $assignedAndReviewedCount = $deadlines->filter(function ($deadline) use ($authenticatedUserId) {
+            return !empty($deadline->contribution_to_knowledge) && $deadline->user_id === $authenticatedUserId;
+        })->count();
         
-        $currentDate = now(); // Get the current date and time
+        $staffForReview = $deadlines->filter(function ($deadline) {
+            // Split the contribution_to_knowledge by a comma and count the elements
+            $deadline->project_id && $comments = explode(',', $deadline->contribution_to_knowledge);
+            // Remove any empty comments
+            $comments = array_filter($comments);
+            return count($comments) === 1;
+        });
 
-        $deadlines = ReviewModel::where('deadline', '<', $currentDate)
-            ->whereNull('contribution_to_knowledge')
-            ->whereNotIn('user_id', function ($subQuery) {
-                $subQuery->select('user_id')
-                    ->from('reviews')
-                    ->whereNotNull('project_id');
-            })
-            ->get();
+        $projectCommentsCount = [];
+        $staffForReview = $deadlines->filter(function ($deadline) use (&$projectCommentsCount) {
+            $projectID = $deadline->project_id;
+            $comments = explode(',', $deadline->contribution_to_knowledge);
+            // Remove any empty comments
+            $comments = array_filter($comments);
 
-           
-        return view('dashboard', compact('allUsersCount','allProjectsCount','projectCount','draftCount','underEvaluationCount','underEvaluationCount','forRevisionCount',
-                    'approvedCount','deferredCount','disapprovedCount','reviews','deadlines'));
+            // Track the comment count for each project
+            if (!isset($projectCommentsCount[$projectID])) {
+                $projectCommentsCount[$projectID] = 0;
+            }
+
+            $projectCommentsCount[$projectID] += count($comments);
+
+            // Keep only the deadlines where the project has more than one comment
+            return $projectCommentsCount[$projectID] > 1;
+        });
+
+        $countOfReviewsWithTwoComments = $staffForReview->count();
+        
+
+        return view('dashboard', compact('allDisapprovedCount','allDeferredCount','allApprovedCount','allForRevisionCount','allUnderEvaluationCount','allUsersCount','allProjectsCount','projectCount','draftCount','underEvaluationCount','underEvaluationCount',
+                                'forRevisionCount','approvedCount','deferredCount','disapprovedCount','exceededDeadlines','countOfUnreviewedProjects',
+                                'assignedAndReviewedCount','countOfReviewsWithTwoComments'));
     }
-
-
-    // public function showDeadlines() {
-    //     $deadlines = ReviewModel::all();
-    //     return view('dashboard', compact('deadlines'));
-    // }
-    
-    
-
 }

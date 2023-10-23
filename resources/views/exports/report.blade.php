@@ -79,16 +79,16 @@
         <br>
 
         <h2>Work Plan</h2>
-        <p>{{ $data->workplan }}</p>
+        <p>{!! $data->workplan !!}</p>
         <br>
 
-        <h2>Start Month</h2>
+        <!-- <h2>Start Month</h2>
         <p>{{ $data->start_month }}</p>
         <br>
 
         <h2>End Month</h2>
         <p>{{ $data->end_month }}</p>
-        <br>
+        <br> -->
 
         <h2>Resources</h2>
         <p>{!! $data->resources !!}</p>

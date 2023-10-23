@@ -30,22 +30,49 @@
                                     <label for="startdate">Start Date</label>
                                     <input type="date" class="form-control" id="startdate" name="startdate" value="{{$proposals->startdate}}">
                                 </div>
+                                @error('startdate')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <div class="form-group">
                                     <label for="enddate">End Date</label>
                                     <input type="date" class="form-control" id="enddate" name="enddate" value="{{$proposals->enddate}}">
                                 </div>
-                                <div class="form-group">
+                                @error('enddate')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <!-- <div class="form-group">
                                     <label for="status">Status</label>
                                     <input type="text" class="form-control" id="status" name="status" placeholder="Status" value="{{$proposals->status}}">
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="remarks">Remarks</label>
                                     <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks" value="{{$proposals->remarks}}">
                                 </div>
+                                <!-- <div class="form-group">
+                                    <button type="submit" class="btn btn-warning float-right">Update</button>
+                                </div> -->
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-warning float-right">Update</button>
+                                    <a href="{{ route('call-for-proposals') }}" class="btn btn-secondary float-left ml-2">Cancel</a>
                                 </div>
                             </form>
+                            @if(session('success'))
+                                <script>
+                                    toastr.success('{{ session('success') }}');
+                                </script>
+                            @elseif(session('delete'))
+                                <script>
+                                    toastr.delete('{{ session('delete') }}');
+                                </script>
+                            @elseif(session('message'))
+                                <script>
+                                    toastr.message('{{ session('message') }}');
+                                </script>
+                            @elseif(session('error'))
+                                <script>
+                                    toastr.error('{{ session('error') }}');
+                                </script>
+                            @endif
                         </div>
                     </div>
                 </div>

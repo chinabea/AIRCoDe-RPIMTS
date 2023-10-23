@@ -242,8 +242,6 @@
                     <a href="{{ route('submission-details.show', ['id' => $rec->id]) }}" class="nav-link">
                     <i class="nav-icon fas fa-book"></i>
                     <p>{{ $rec->projname }}</p>
-
-                    <!-- <p class="deadline mb-4"><br>Deadline: {{ $rec->deadline }}</p> -->
                     </a>
                 </li>
             @endforeach

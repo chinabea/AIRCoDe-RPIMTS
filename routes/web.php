@@ -49,6 +49,8 @@ Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallba
 Route::get('/projects/track', [TrackController::class, 'track'])->name('projects.track');
 Route::get('/', [TrackController::class, 'track'])->name('welcome');
 
+Route::get('/Available-Call-for-Proposals', [ProposalsController::class, 'viewCallforProposals'])->name('view.call-for-proposals');
+
 Route::get('/test', function () {
     return view('test');
 })->name('test');
@@ -61,7 +63,7 @@ Auth::routes();
 Route::middleware(['auth', 'cache'])->group(function (){
 
     Route::get('/total-users', [UsersController::class, 'showTotalUsers']);
-    Route::get('/create-users', [UsersController::class, 'create'])->name('users.create'); //this should be in a login
+    Route::get('/create-users', [UsersController::class, 'create'])->name('users.create');
     Route::post('/store-users', [UsersController::class, 'store'])->name('users.store');
     Route::get('/show-users/{id}', [UsersController::class, 'show'])->name('users.show');
     Route::get('/edit-users/{id}', [UsersController::class, 'edit'])->name('users.edit');
@@ -192,7 +194,6 @@ Route::prefix('DirectorAndStaff')->middleware(['auth', 'cache', 'directorOrStaff
     Route::put('/call-for-proposals/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.call-for-proposals.update');
     Route::delete('/call-for-proposals/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
 
-    
     Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
     
 });

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\ReviewModel;
 use App\Models\ProjectsModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class StatusController extends Controller
 {
@@ -24,7 +25,26 @@ class StatusController extends Controller
             return redirect()->back()->with('error', 'Project not found.');
         }
 
-        $project->status = $request->input('status');
+        // $project->status = $request->input('status');
+            
+        // // Check if the new status is 'Approved' and the current status is not 'Approved'
+        // if ($newStatus === 'Approved' && $project->status !== 'Approved') {
+        //     // Set the approval_date to the current date and time
+        //     $project->approval_date = Carbon::now();
+        // }
+
+        
+
+        $newStatus = $request->input('status');
+        
+        // Check if the new status is 'Approved' and the current status is not 'Approved'
+        if ($newStatus === 'Approved' && $project->status !== 'Approved') {
+            // Set the approval_date to the current date and time
+            $project->approval_date = Carbon::now();
+        }
+        
+        $project->status = $newStatus;
+
         $project->save();
         return redirect()->route('submission-details.show', ['id' => $id])->with('success', 'Project status updated successfully.');
     }
@@ -53,6 +73,12 @@ class StatusController extends Controller
     public function approved()
     {
         $approvedprojs = ProjectsModel::where('status', 'Approved')->get();
+
+        // Fetch the approval date for each approved project
+        foreach ($approvedprojs as $project) {
+            $project->approvalDate = $project->approval_date;
+        }
+
         return view('status.approved', compact('approvedprojs'));
     }
 

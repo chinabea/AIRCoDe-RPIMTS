@@ -6,7 +6,7 @@
 <div class="content-wrapper">
   <section class="content-header">
   </section>
-    <div class="container mt-5">
+    <div class="container mt-3">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-center align-items-center">
                 <i class="fas fa-file-signature fa-2x text-gray-300"></i>
@@ -96,8 +96,11 @@
                     </div>
                     
                     <!-- <a href="#" class="btn btn-secondary">Cancel</a> -->
-                    <button type="submit" class="btn btn-warning" name="draft_submit">
+                    <button type="submit" class="btn btn-primary" name="draft_submit">
                         <i class="fas fa-save"></i> Save as Draft
+                    </button>
+                    <button type="cancel" class="btn btn-seconday" name="cancel">
+                        <i class=""></i> Cancel
                     </button>
                     <button type="submit" class="btn btn-info float-right" name="submit_project">
                         <i class="fas fa-check"></i> Submit Project

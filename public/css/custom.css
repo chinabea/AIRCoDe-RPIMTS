@@ -1,4 +1,12 @@
+@keyframes blink {
+    0% { color: red; }
+    50% { color: transparent; }
+    100% { color: red; }
+}
 
+.blinking-alert {
+    animation: blink 1s infinite;
+}
 
   body {
     color: #022A44 !important;

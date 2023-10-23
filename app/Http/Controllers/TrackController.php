@@ -12,6 +12,13 @@ class TrackController extends Controller
         $projectId = $request->input('proj_id');
         $project = ProjectsModel::find($projectId);
 
-        return view('welcome', compact('project'));
+        // Initialize approvalDate
+        $approvalDate = null;
+
+        if (!is_null($project) && $project->status === 'Approved' && $project->approval_date) {
+            $approvalDate = $project->approval_date;
+        }
+
+        return view('welcome', compact('project','approvalDate'));
     }
 }

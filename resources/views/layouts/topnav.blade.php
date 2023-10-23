@@ -25,10 +25,15 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="{{ route('notifications') }}">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
+          @if(auth()->check())
+              <span class="badge badge-warning navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
+          @endif
+
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        @if(auth()->check())
           <a href="{{ route('notifications') }}" class="dropdown-item dropdown-header bg-primary shadow-sm m-0 font-weight-bold btn">Notifications ({{ auth()->user()->unreadNotifications->count() }})</a>
+        @endif
         <div class="dropdown-divider"></div>
         <div style="max-height: 300px; overflow-y: auto;">
         @if (Auth::check())
@@ -120,3 +125,5 @@
     </ul>
   </nav>
   <!-- /.navbar -->
+
+  

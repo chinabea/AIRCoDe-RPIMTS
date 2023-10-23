@@ -319,7 +319,7 @@
                   @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge !== null && $review->project_id === $records->id)
                     <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea>
                   @endif
-                  @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge === null && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
                     <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
@@ -1219,7 +1219,7 @@
                                             <button value="For Revision" type="submit" id="status" name="status" class="btn btn-warning">
                                                 <i class="fas fa-edit mr-2"></i>Accepted with Revision
                                             </button>
-                                            <button value="Disapproved" type"submit" id="status" name="status" class="btn btn-danger">
+                                            <button value="Disapproved" type="submit" id="status" name="status" class="btn btn-danger">
                                                 <i class="fas fa-times-circle mr-2"></i>Rejected
                                             </button>
                                         </div>

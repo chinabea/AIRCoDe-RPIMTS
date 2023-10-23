@@ -15,14 +15,10 @@
               <div class="card-body">
               <div class="table-responsive">
 
-                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#CallforProposal"><i class="fas fa-plus"></i> Add Call for Proposals</button>
+                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#CallforProposal" data-backdrop="static" data-keyboard="false">
+                  <i class="fas fa-plus"></i> Add Call for Proposals</button>
                 @include('transparency.call-for-proposals.create')
 
-                @if(Session::has('success'))
-                    <div class="alert alert-success" role="alert">
-                        {{ Session::get('success') }}
-                    </div>
-                @endif
                 <table id="example1" class="table table-bordered table-hover text-center table-sm">
                   <thead>
                       <tr>
@@ -45,20 +41,34 @@
                           <td class="align-middle">{{ $proposal->proposaldescription }}</td>
                           <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->startdate)->format('F j, Y') }}</td>
                           <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->enddate)->format('F j, Y') }}</td>
-                          <td class="align-middle">{{ $proposal->status }}</td>
+                          <td class="align-middle">
+                            @php
+                                $currentDate = now();
+                                $startDate = \Carbon\Carbon::parse($proposal->startdate);
+                                $endDate = \Carbon\Carbon::parse($proposal->enddate);
+
+                                if ($currentDate >= $startDate && $currentDate <= $endDate) {
+                                    echo 'Open';
+                                } elseif ($currentDate < $startDate) {
+                                    echo 'Opening Soon';
+                                } else {
+                                    echo 'Closed';
+                                }
+                            @endphp
+                          </td>
                           <td class="align-middle">{{ $proposal->remarks }}</td>
                           <td class="align-middle">
                               <div class="btn-group btn-sm" role="group" aria-label="Basic example">
-                              <a href="{{ route('transparency.call-for-proposals.show', $proposal->id) }}" type="button" class="btn btn-secondary">
-                                <i class="fas fa-info-circle"></i> Details
-                              </a>
+                              <!-- <a href="{{ route('transparency.call-for-proposals.show', $proposal->id) }}" type="button" class="btn btn-secondary">
+                                <i class="fas fa-info-circle"></i> 
+                              </a> -->
 
                               <a href="{{ route('transparency.call-for-proposals.edit', $proposal->id) }}" type="button" class="btn btn-warning">
-                                <i class="fas fa-edit"></i> Edit
+                                <i class="fas fa-edit"></i> 
                               </a>
 
                               <button class="btn btn-danger" onclick="confirmDelete('{{ route('transparency.call-for-proposals.destroy', $proposal->id) }}')">
-                                <i class="fas fa-trash"></i> Delete
+                                <i class="fas fa-trash"></i> 
                               </button>
 
 
@@ -82,6 +92,23 @@
                       @endif
                   </tbody>
               </table>
+            @if(session('success'))
+                <script>
+                    toastr.success('{{ session('success') }}');
+                </script>
+            @elseif(session('delete'))
+                <script>
+                    toastr.delete('{{ session('delete') }}');
+                </script>
+            @elseif(session('message'))
+                <script>
+                    toastr.message('{{ session('message') }}');
+                </script>
+            @elseif(session('error'))
+                <script>
+                    toastr.error('{{ session('error') }}');
+                </script>
+            @endif
             </div>
             </div>
           </div>

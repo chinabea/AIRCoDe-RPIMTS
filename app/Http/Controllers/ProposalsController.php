@@ -8,6 +8,15 @@ use App\Models\ProposalsModel;
 class ProposalsController extends Controller
 {
 
+    public function viewCallforProposals()
+    {
+        // Fetch all records from the model and pass them to the view
+        // $items = ProposalsModel::all();
+        $records = ProposalsModel::orderBy('created_at', 'ASC')->get();
+
+        return view('transparency.call-for-proposals.call-for-proposals', compact('records'));
+    }
+
     public function index()
     {
         // Fetch all records from the model and pass them to the view
@@ -29,7 +38,8 @@ class ProposalsController extends Controller
         $rules = [
             'proposaltitle' => 'required|string',
             'proposaldescription' => 'required|string',
-            'startdate' => ['required', 'date', 'after_or_equal:today'],
+            'startdate' => ['required', 'date', 'after_or_equal:yesterday'],
+
             'enddate' => [
                 'required',
                 'date',
@@ -45,32 +55,42 @@ class ProposalsController extends Controller
             'status' => [
                 'nullable',
                 'string',
-                function ($attribute, $value, $fail) use ($request) {
-                    $startDate = $request->input('start_date');
-                    $endDate = $request->input('end_date');
-        
-                    // Check if the status is 'Open' if the current date is between start and end dates
-                    if ($value === 'Open' && now() >= $startDate && now() <= $endDate) {
-                        return;
-                    }
-        
-                    // Check if the status is 'Closed' if the current date is past the end date
-                    if ($value === 'Closed' && now() > $endDate) {
-                        return;
-                    }
-        
-                    // Check if the status is 'Opening Soon!' if the current date is before the start date
-                    if ($value === 'Opening Soon!' && now() < $startDate) {
-                        return;
-                    }
-        
-                    $fail('Invalid status based on start and end dates.');
-                },
-            ],
+            //     function ($attribute, $value, $fail) use ($request) {
+
+            //         $startDate = $request->input('start_date');
+            //         $endDate = $request->input('end_date');
+            //         $now = now();
             
+            //         // Check if the current date is before the start date
+            //         if ($now < $startDate) {
+            //             if ($value !== 'Opening Soon!') {
+            //                 $fail('Invalid status based on start and end dates.');
+            //             }
+            //         }
+            //         // Check if the current date is the same as the start date (today)
+            //         elseif ($now->isSameDay($startDate)) {
+            //             if ($value !== 'Open') {
+            //                 $fail('Invalid status based on start and end dates.');
+            //             }
+            //         }
+            //         // Check if the current date is between start and end dates
+            //         elseif ($now >= $startDate && $now <= $endDate) {
+            //             if ($value !== 'Open') {
+            //                 $fail('Invalid status based on start and end dates.');
+            //             }
+            //         }
+            //         // Check if the current date is past the end date
+            //         elseif ($now > $endDate) {
+            //             if ($value !== 'Closed') {
+            //                 $fail('Invalid status based on start and end dates.');
+            //             }
+            //         }
+            //     },
+            ],
             
             'remarks' => 'nullable|string',
         ];
+
 
         // Define custom error messages
         $customMessages = [
@@ -82,21 +102,7 @@ class ProposalsController extends Controller
     
         // Validate the request data against the defined rules
         $validatedData = $request->validate($rules, $customMessages);
-        // Set a default value for 'status' based on the conditions
-        if (!isset($validatedData['status'])) {
-            $startDate = $request->input('start_date');
-            $endDate = $request->input('end_date');
         
-            if (now() >= $startDate && now() <= $endDate) {
-                $validatedData['status'] = 'Open';
-            } elseif (now() > $endDate) {
-                $validatedData['status'] = 'Closed';
-            } elseif (now() < $startDate) {
-                $validatedData['status'] = 'Opening Soon!';
-            }
-        }
-        
-    
         // Create the proposal using the validated data
         ProposalsModel::create($validatedData);
     
@@ -144,16 +150,88 @@ class ProposalsController extends Controller
         return view('transparency.call-for-proposals.edit', compact('proposals'));
     }
 
+    // public function update(Request $request, $id)
+    // {
+    //     // Validate and update the item with the provided ID
+    //     $proposals = ProposalsModel::findOrFail($id);
+    //     // Update the item properties using the request data
+    //     $proposals->update($request->all());
+
+    //     // Redirect to the index or show view, or perform other actions
+    //     return redirect()->route('call-for-proposals')->with('success', 'Call for Proposal Successfully Updated!');
+    // }
     public function update(Request $request, $id)
     {
-        // Validate and update the item with the provided ID
-        $proposals = ProposalsModel::findOrFail($id);
-        // Update the item properties using the request data
-        $proposals->update($request->all());
+        // Define validation rules for the incoming request data
+        $rules = [
+            'proposaltitle' => 'required|string',
+            'proposaldescription' => 'required|string',
+            'startdate' => ['required', 'date', 'after_or_equal:today'],
+            'enddate' => [
+                'required',
+                'date',
+                function ($attribute, $value, $fail) use ($request) {
+                    $startdate = $request->input('startdate');
+                    
+                    if ($value && strtotime($value) < strtotime($startdate)) {
+                        $fail('The end date must be on or after the start date.');
+                    }
+                },
+            ],
+            'status' => [
+                'nullable',
+                'string',
+                function ($attribute, $value, $fail) use ($request) {
+                    $startDate = $request->input('startdate');
+                    $endDate = $request->input('enddate');
+        
+                    // Check if the status is 'Open' if the current date is between start and end dates
+                    if ($value === 'Open' && now() >= $startDate && now() <= $endDate) {
+                        return;
+                    }
+        
+                    // Check if the status is 'Closed' if the current date is past the end date
+                    if ($value === 'Closed' && now() > $endDate) {
+                        return;
+                    }
+        
+                    // Check if the status is 'Opening Soon!' if the current date is before the start date
+                    if ($value === 'Opening Soon!' && now() < $startDate) {
+                        return;
+                    }
+        
+                    $fail('Invalid status based on start and end dates.');
+                },
+            ],
+            'remarks' => 'nullable|string',
+        ];
 
-        // Redirect to the index or show view, or perform other actions
-        return redirect()->route('call-for-proposals')->with('success', 'Call for Proposal Successfully Updated!');
+        // Define custom error messages
+        $customMessages = [
+            'startdate.after_or_equal' => 'The start date must be today or a future date.',
+            'enddate.after' => 'The end date must be after the start date.',
+        ];
+
+        try {
+            // Validate the request data against the defined rules
+            $validatedData = $request->validate($rules, $customMessages);
+
+            // Update the item with the provided ID using the validated data
+            $proposals = ProposalsModel::findOrFail($id);
+            $proposals->update($validatedData);
+
+            // Redirect to the index or show view, or perform other actions
+            return redirect()->route('call-for-proposals')->with('success', 'Call for Proposal Successfully Updated!');
+        } catch (\Exception $e) {
+            // Handle any exceptions that occur during the update process
+            // You can customize the error message based on the specific exception or database error.
+            $errorMessage = 'Error updating the proposal: ' . $e->getMessage();
+            
+            // Redirect back with the error message
+            return redirect()->back()->with('error', $errorMessage);
+        }
     }
+
 
     public function destroy($id)
     {
