@@ -1,3 +1,4 @@
+
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -72,11 +73,11 @@
     }
 
     /* .read-notification {
-        background-color: #f5f5f5; 
+        background-color: #f5f5f5;
     } */
 </style>
 
-      
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
       <div class="topbar-divider d-none d-sm-block"></div>
         <!-- Nav Item - User Information -->
@@ -126,4 +127,4 @@
   </nav>
   <!-- /.navbar -->
 
-  
+

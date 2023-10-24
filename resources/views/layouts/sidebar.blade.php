@@ -43,7 +43,7 @@
               </p>
             </a>
           </li>
-          
+
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="far fa-file-alt nav-icon"></i>
@@ -567,4 +567,5 @@
 
 @else
     @include('sidebar-guest')
+
 @endif

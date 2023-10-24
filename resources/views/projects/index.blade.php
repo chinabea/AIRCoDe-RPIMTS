@@ -1,12 +1,11 @@
 @extends('layouts.template')
-@section('title', 'Dashboard')
 
 @section('content')
 
   <div class="content-wrapper">
     <section class="content-header">
     </section>
-    
+
     <div class="container">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-center align-items-center">
@@ -40,16 +39,16 @@
                               <td class="align-middle">
                                   <div class="btn-group align-middle" role="group" aria-label="Basic example">
                                   <a href="{{ route('submission-details.show', $record->id) }}" type="button" class="btn btn-secondary">
-                                  <i class="fas fa-info-circle"></i> 
+                                  <i class="fas fa-info-circle"></i>
                                   </a>
                                   <a href="{{ route('projects.edit', $record->id) }}" type="button" class="btn btn-warning">
                                   <i class="fas fa-edit"></i>
                                   </a>
 
                                   <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">
-                                  <i class="fas fa-trash"></i> 
+                                  <i class="fas fa-trash"></i>
                                   </button>
-                                  
+
                                   <script>
                                       function confirmDelete(url) {
                                           if (confirm('Delete?')) {
