@@ -1,13 +1,10 @@
 
-<!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
+
+<nav class="main-header navbar navbar-expand navbar-white navbar-light shadow">
     <ul class="navbar-nav ">
       <li class="nav-item ">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-
-      <!-- Topbar Search -->
       <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
           <div class="input-group">
               <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
@@ -20,16 +17,13 @@
       </form>
     </ul>
 
-    <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="{{ route('notifications') }}">
+        <a class="nav-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{{ route('notifications') }}">
           <i class="far fa-bell"></i>
           @if(auth()->check())
               <span class="badge badge-warning navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
           @endif
-
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         @if(auth()->check())
@@ -69,45 +63,38 @@
 
 <style>
     .unread-notification {
-        background-color: #f3f4f6; /* Bluish background color for unread messages */
+        background-color: #f3f4f6;
     }
 
-    /* .read-notification {
-        background-color: #f5f5f5;
-    } */
 </style>
-
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
       <div class="topbar-divider d-none d-sm-block"></div>
-        <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 ">{{ Auth::user()->name }}
-                    {{-- @if(Auth::user()->role == 4)
-                        Reviewer: {{ Auth::user()->name }}
+                <span class="mr-2 d-none d-lg-inline text-gray-600">
+                    @if(Auth::user()->role == 4)
+                        <i class="fa-solid fa-user-gear"></i>
+                        <span class="text-xs">Reviewer</span><br>
+                        <b>{{ Auth::user()->name }}</b>
                     @elseif(Auth::user()->role == 3)
-                        Researcher: {{ Auth::user()->name }}
+                       <i class="fa-solid fa-user-gear"></i>
+                       <span class="text-xs">Researcher</span><br>
+                       <b>{{ Auth::user()->name }}</b>
                     @elseif(Auth::user()->role == 2)
-                        Staff: {{ Auth::user()->name }}
+                        <i class="fa-solid fa-user-gear"></i>
+                        <span class="text-xs">Staff</span><br>
+                        <b>{{ Auth::user()->name }}</b>
                     @elseif(Auth::user()->role == 1)
-                        Director: {{ Auth::user()->name }}
+                        <i class="fa-solid fa-user-gear"></i>
+                        <span class="text-xs">Director</span><br>
+                        <b>{{ Auth::user()->name }}</b>
                     @else
                         {{ Auth::user()->name }}
-                    @endif --}}
+                    @endif
                 </span>
-                <!-- <img class="img-profile rounded-circle" src="dist/img/user4-128x128.jpg"> -->
             </a>
-            <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <!-- <a class="dropdown-item" href="#">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
-                </a> -->
+
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     Activity Log
@@ -124,7 +111,5 @@
             </div>
         </li>
     </ul>
-  </nav>
-  <!-- /.navbar -->
-
+</nav>
 

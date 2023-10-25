@@ -10,9 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}">
-    {{-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> --}}
-
+        <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -28,7 +26,7 @@
 <body>
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{ route('welcome') }}" class="logo d-flex align-items-center">
         <img src="{{ asset('dist/img/systemAIRCoDeLogo.png') }}" alt="AIRCoDe Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span style="color: white">RPIMTS</span>
       </a>

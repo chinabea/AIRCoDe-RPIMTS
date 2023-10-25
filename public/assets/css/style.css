@@ -65,7 +65,7 @@ section {
   font-size: 38px;
   line-height: 42px;
   font-weight: 700;
-  color: #012970;
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -196,7 +196,7 @@ section {
   font-size: 30px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #012970;
+  color: #ffffff;
   font-family: "Nunito", sans-serif;
   margin-top: 3px;
 }
@@ -205,7 +205,7 @@ section {
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 .navbar {
   padding: 0;
@@ -232,7 +232,7 @@ section {
   font-family: "Nunito", sans-serif;
   font-size: 16px;
   font-weight: 700;
-  color: #013289;
+  color: #ffffff;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -248,7 +248,7 @@ section {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #4154f1;
+  color: #ffffff;
 }
 
 .navbar .getstarted,
@@ -359,7 +359,7 @@ section {
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 .mobile-nav-toggle {
   color: #012970;
@@ -481,11 +481,11 @@ section {
   margin: 0;
   font-size: 48px;
   font-weight: 700;
-  color: #012970;
+  color: #ffffff;
 }
 
 .hero h2 {
-  color: #444444;
+  color: #ffffff;
   margin: 15px 0 0 0;
   font-size: 26px;
 }
