@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProposalsModel extends Model
+class CallForProposal extends Model
 {
-    public $table = 'proposals';
+    use HasFactory;
 
     public $primaryKey = 'id';
 
@@ -15,7 +15,6 @@ class ProposalsModel extends Model
     
     public function project()
     {
-        return $this->belongsTo(ProjectsModel::class, 'project_id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
-
 }

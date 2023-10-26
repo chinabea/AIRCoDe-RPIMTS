@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('accessrequest', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('project_id');
+            $table->string('member_name');
             $table->string('role');
-            $table->date('dateofaccess');
-            $table->time('timeofaccess');
-            $table->text('purposeofaccess');
-            $table->date('dateapproved')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+
+            $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('accessrequest');
+        Schema::dropIfExists('members');
     }
 };

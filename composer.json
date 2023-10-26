@@ -16,6 +16,7 @@
         "laravel/ui": "^4.2",
         "nesbot/carbon": "^2.67",
         "ramsey/uuid": "^4.7",
+        "rorecek/laravel-ulid": "*",
         "spatie/laravel-permission": "^5.10",
         "tinymce/tinymce": "^6.7"
     },

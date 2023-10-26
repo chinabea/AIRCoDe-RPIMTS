@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectTeamModel extends Model
+class Member extends Model
 {
-
-    public $table = 'project_teams';
+    use HasFactory;
 
     public $primaryKey = 'id';
 
@@ -16,11 +15,7 @@ class ProjectTeamModel extends Model
  
     public function project()
     {
-        return $this->belongsTo(ProjectsModel::class, 'project_id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
-
-
-
-
 
 }

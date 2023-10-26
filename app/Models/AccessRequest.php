@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AccessRequestModel extends Model
+class AccessRequest extends Model
 {
-    public $table = 'accessrequest';
+    use HasFactory;
 
     public $primaryKey = 'id';
 
@@ -17,5 +17,4 @@ class AccessRequestModel extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
 }

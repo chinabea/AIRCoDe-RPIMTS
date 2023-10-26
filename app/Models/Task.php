@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TaskModel extends Model
+class Task extends Model
 {
-
-    // Define the table name if it differs from "tasks"
-    protected $table = 'tasks';
+    use HasFactory;
 
     // Define the fillable attributes
     protected $fillable = [
@@ -23,7 +21,7 @@ class TaskModel extends Model
  
     public function project()
     {
-        return $this->belongsTo(ProjectsModel::class, 'project_id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
     
     protected $casts = [
@@ -33,14 +31,14 @@ class TaskModel extends Model
 
     public function assignedTo()
     {
-        return $this->belongsTo(ProjectTeamModel::class, 'assigned_to');
+        return $this->belongsTo(Member::class, 'assigned_to');
     }
+
     // public function assignedTo()
     // {
     //     return $this->hasMany(ProjectTeamModel::class, 'assigned_to');
     // }
     
-
     public function user()
     {
         return $this->belongsTo(User::class);

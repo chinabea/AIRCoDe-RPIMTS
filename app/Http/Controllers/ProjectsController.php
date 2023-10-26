@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Rules\DateNotBeforeToday;
 use App\Rules\NotBeforeTodaysMonthYear;
-use App\Models\ProjectsModel;
-use App\Models\UsersModel;
+use App\Models\Project;
 use App\Models\User;
-use App\Models\ReviewModel;
-use App\Models\ProjectTeamModel;
-use App\Models\LineItemBudgetModel;
-use App\Models\TaskModel;
-use App\Models\FileModel;
+use App\Models\Review;
+use App\Models\ProjectTeam;
+use App\Models\LineItemBudget;
+use App\Models\Task;
+use App\Models\File;
 use App\Models\ProjectHistory;
+use rorecek\Ulid\Ulid;
 
 class ProjectsController extends Controller
 {
@@ -51,8 +51,8 @@ class ProjectsController extends Controller
 
     public function index()
     {
-        $projects = ProjectsModel::all();
-        $reviewers = User::whereIn('id', ReviewModel::pluck('user_id'))->get();
+        $projects = Project::all();
+        $reviewers = User::whereIn('id', Review::pluck('user_id'))->get();
 
         return view('projects.index', compact('projects', 'reviewers'));
     }
@@ -60,7 +60,7 @@ class ProjectsController extends Controller
 
     public function create()
     {
-        $project = new ProjectsModel();
+        $project = new Project();
 
         $users = User::all();
 
@@ -71,52 +71,23 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'projname' => 'required',
             'researchgroup' => 'required',
-            // 'authors' => 'required',
             'introduction' => 'required',
             'aims_and_objectives' => 'required',
             'background' => 'required',
             'expected_research_contribution' => 'required',
             'proposed_methodology' => 'required',
             'workplan' => 'required',
-            // 'start_month' => [
-            //     'required',
-            //     'date_format:Y-m',
-            //     'after_or_equal:' . date('Y-m'),
-            // ],
-            // 'end_month' => [
-            //     'required',
-            //     'date_format:Y-m',
-            //     function ($attribute, $value, $fail) use ($request) {
-            //         $startMonth = $request->input('start_month');
-            //         $currentDate = date('Y-m');
-
-            //         if (strtotime($value) < strtotime($startMonth) || strtotime($value) < strtotime($currentDate)) {
-            //             $fail('The end month must be after the start month and in the future.');
-            //         }
-            //     },
-            // ],
             'resources' => 'required',
             'references' => 'required',
         ]);
 
-        // Retrieve the input values
-        // $startMonthYear = $request->input('start_month');
-        // $endMonthYear = $request->input('end_month');
-    
-        // Convert the input values to Carbon instances for date calculations
-        // $startDate = \Carbon\Carbon::parse($startMonthYear . '-01');
-        // $endDate = \Carbon\Carbon::parse($endMonthYear . '-01');
-    
-        // // Calculate the difference in months between start and end dates
-        // $workplanMonths = $endDate->diffInMonths($startDate);
-        
         $userId = Auth::id();
 
-        $projects = new ProjectsModel;
+        $projects = new Project;
         $projects->projname = $request->projname;
         if ($request->has('draft_submit')) {
             // Set the project status as 'draft'
@@ -126,9 +97,8 @@ class ProjectsController extends Controller
             $projects->status = 'under evaluation';
 
         }        
-        $projects->user_id = $userId;
-        $projects->researchgroup = $request->researchgroup;
-            // $projects->authors = $request->authors;
+            $projects->user_id = $userId;
+            $projects->researchgroup = $request->researchgroup;    
             $projects->introduction = $request->introduction;
             $projects->aims_and_objectives = $request->aims_and_objectives;
             $projects->background = $request->background;
@@ -141,7 +111,9 @@ class ProjectsController extends Controller
             $projects->references = $request->references;
 
         $projects->save();
-
+        
+        $ulid = Ulid::generate();
+        Project::create(['tracking_code' => $ulid]);
         
         $researcher = User::find($userId);
         $researcherMail = $researcher->email;
@@ -167,24 +139,24 @@ class ProjectsController extends Controller
     public function show($id)
     {
 
-        $tasks = TaskModel::with('assignedTo')->get();
-        // $tasks = TaskModel::get();
-        $teamMembers = ProjectTeamModel::all();
-        $allLineItems = LineItemBudgetModel::all();
-        $projMembers = ProjectTeamModel::where('project_id', $id)->get();
-        $lineItems = LineItemBudgetModel::where('project_id', $id)->get();
-        $files = FileModel::where('project_id', $id)->get();
-        $reviewers = ReviewModel::where('user_id', $id)->get();
-        $toreview = ReviewModel::where('project_id', $id)->get()->first();
-        $members = UsersModel::where('role', 3)->get();
-        $reviewersss = UsersModel::where('role', 4)->get();
-        $data = ProjectsModel::findOrFail($id);
-        $records = ProjectsModel::findOrFail($id);
+        $tasks = Task::with('assignedTo')->get();
+        // $tasks = Task::get();
+        $teamMembers = ProjectTeam::all();
+        $allLineItems = LineItemBudget::all();
+        $projMembers = ProjectTeam::where('project_id', $id)->get();
+        $lineItems = LineItemBudget::where('project_id', $id)->get();
+        $files = File::where('project_id', $id)->get();
+        $reviewers = Review::where('user_id', $id)->get();
+        $toreview = Review::where('project_id', $id)->get()->first();
+        $members = User::where('role', 3)->get();
+        $reviewersss = User::where('role', 4)->get();
+        $data = Project::findOrFail($id);
+        $records = Project::findOrFail($id);
 
-        // $reviewerCommented = ReviewModel::where('user_id', Auth::user()->id)->get();
-        // $comments = ReviewModel::findOrFail($id);
+        // $reviewerCommented = Review::where('user_id', Auth::user()->id)->get();
+        // $comments = Review::findOrFail($id);
 
-        $reviewerCommented = ReviewModel::where('user_id', Auth::user()->id)
+        $reviewerCommented = Review::where('user_id', Auth::user()->id)
         ->where('project_id', $id)
         ->count();
 
@@ -201,7 +173,7 @@ class ProjectsController extends Controller
         // Calculate the total of all line items
         $totalAllLineItems = 0;
         foreach ($lineItems as $item) {
-            $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudgetModel structure
+            $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudget structure
         }
 
         return view('submission-details.show', compact('id', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
@@ -213,18 +185,18 @@ class ProjectsController extends Controller
 
     public function edit($id)
     {
-        $reviewers = UsersModel::where('role', 4)->get();
-        $projects = ProjectsModel::findOrFail($id);
-        $projectTeam = ProjectTeamModel::findOrFail($id);
+        $reviewers = User::where('role', 4)->get();
+        $projects = Project::findOrFail($id);
+        $projectTeam = ProjectTeam::findOrFail($id);
 
-        $records = ProjectsModel::findOrFail($id);
+        $records = Project::findOrFail($id);
 
         return view('projects.edit', compact('projects', 'reviewers', 'projectTeam', 'records'));
     }
 
     public function update(Request $request, $id)
     {
-        $records = ProjectsModel::findOrFail($id);
+        $records = Project::findOrFail($id);
 
         // Update the project record with the new values from the form
         $records->projname = $request->input('projname');
@@ -249,7 +221,7 @@ class ProjectsController extends Controller
 
     public function destroy($id)
     {
-        $projects = ProjectsModel::findOrFail($id);
+        $projects = Project::findOrFail($id);
         $projects->delete();
         return redirect()->route('projects')->with('success', 'Reseach Proposal Successfully Deleted!');
     }

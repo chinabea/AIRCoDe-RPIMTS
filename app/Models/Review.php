@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ReviewModel extends Model
+class Review extends Model
 {
-    public $table = 'reviews';
+    use HasFactory;
 
     public $primaryKey = 'id';
 
@@ -32,21 +32,21 @@ class ReviewModel extends Model
 
     public function user()
     {
-        return $this->belongsTo(UsersModel::class);
+        return $this->belongsTo(User::class);
     }
     public function project()
     {
-        return $this->belongsTo(ProjectsModel::class, 'project_id'); 
+        return $this->belongsTo(Project::class, 'project_id'); 
     }
 
-    public function reviewDecision()
-    {
-        return $this->hasOne(ReviewDecisionModel::class, 'review_id');
-    }
+    // public function reviewDecision()
+    // {
+    //     return $this->hasOne(ReviewDecision::class, 'review_id');
+    // }
 
     public function reviewer()
     {
-        return $this->belongsTo(UsersModel::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function scopeReviewers($query)

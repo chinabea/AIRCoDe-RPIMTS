@@ -13,18 +13,16 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->ulid('tracking_code');
             $table->unsignedBigInteger('user_id');
             $table->text('projname');
             $table->enum('status', ['Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved']);
             $table->text('researchgroup');
-            // $table->text('authors');
             $table->text('introduction');
             $table->text('aims_and_objectives');
             $table->text('background');
             $table->text('expected_research_contribution');
             $table->text('proposed_methodology');
-            // $table->date('start_month');
-            // $table->date('end_month');
             $table->text('workplan');
             $table->text('resources');
             $table->text('references');
@@ -40,7 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::table('projects')->delete();
         Schema::dropIfExists('projects');
     }
 };

@@ -50,10 +50,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    
-
-
     public function isDirector()
     {
         return $this->role === 1;
@@ -98,9 +94,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProjectsModel::class, 'user_id');
     }
-
-
-
-
 
 }

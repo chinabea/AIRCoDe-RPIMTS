@@ -5,33 +5,35 @@ use App\Notifications\ProjectNotification;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\ProjectsModel;
-use App\Models\UsersModel;
-use App\Models\ReviewModel;
+use App\Models\Project;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Ulid\Ulid;
+// use rorecek\Ulid\Ulid;
+
 
 class DashboardController extends Controller
 {
     public function countAll()
     {
         $authenticatedUserId = auth()->user()->id;
-        $allUsersCount = UsersModel::count();
-        $allProjectsCount = ProjectsModel::count();
-        $allUnderEvaluationCount = ProjectsModel::where('status', 'Under Evaluation')->count();
-        $allForRevisionCount = ProjectsModel::where('status', 'For Revision')->count();
-        $allApprovedCount = ProjectsModel::where('status', 'Approved')->count();
-        $allDeferredCount = ProjectsModel::where('status', 'Deferred')->count();
-        $allDisapprovedCount = ProjectsModel::where('status', 'Disapproved')->count();
-        $projectCount = ProjectsModel::where('user_id', $authenticatedUserId)->count();
-        $draftCount = ProjectsModel::where('status', 'Draft')->where('user_id', $authenticatedUserId)->count();
-        $underEvaluationCount = ProjectsModel::where('status', 'Under Evaluation')->where('user_id', $authenticatedUserId)->count();
-        $forRevisionCount = ProjectsModel::where('status', 'For Revision')->where('user_id', $authenticatedUserId)->count();
-        $approvedCount = ProjectsModel::where('status', 'Approved')->where('user_id', $authenticatedUserId)->count();
-        $deferredCount = ProjectsModel::where('status', 'Deferred')->where('user_id', $authenticatedUserId)->count();
-        $disapprovedCount = ProjectsModel::where('status', 'Disapproved')->where('user_id', $authenticatedUserId)->count();
+        $allUsersCount = User::count();
+        $allProjectsCount = Project::count();
+        $allUnderEvaluationCount = Project::where('status', 'Under Evaluation')->count();
+        $allForRevisionCount = Project::where('status', 'For Revision')->count();
+        $allApprovedCount = Project::where('status', 'Approved')->count();
+        $allDeferredCount = Project::where('status', 'Deferred')->count();
+        $allDisapprovedCount = Project::where('status', 'Disapproved')->count();
+        $projectCount = Project::where('user_id', $authenticatedUserId)->count();
+        $draftCount = Project::where('status', 'Draft')->where('user_id', $authenticatedUserId)->count();
+        $underEvaluationCount = Project::where('status', 'Under Evaluation')->where('user_id', $authenticatedUserId)->count();
+        $forRevisionCount = Project::where('status', 'For Revision')->where('user_id', $authenticatedUserId)->count();
+        $approvedCount = Project::where('status', 'Approved')->where('user_id', $authenticatedUserId)->count();
+        $deferredCount = Project::where('status', 'Deferred')->where('user_id', $authenticatedUserId)->count();
+        $disapprovedCount = Project::where('status', 'Disapproved')->where('user_id', $authenticatedUserId)->count();
 
-        $deadlines = ReviewModel::all();
+        $deadlines = Review::all();
         $exceededDeadlines = $deadlines->filter(function ($deadline) use ($authenticatedUserId) {
             return $deadline->deadlineExceeded() && empty($deadline->contribution_to_knowledge) && $deadline->user_id === $authenticatedUserId;
         });

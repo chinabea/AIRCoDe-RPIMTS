@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('line_items_budget', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('line_item_budgets', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('project_id');
             $table->string('name');
             $table->integer('quantity');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('line_items_budget');
+        Schema::dropIfExists('line_item_budgets');
     }
 };

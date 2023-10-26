@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LineItemBudgetModel extends Model
+class LineItemBudget extends Model
 {
-
-    public $table = 'line_items_budget';
+    use HasFactory;
 
     public $primaryKey = 'id';
 
@@ -16,6 +15,6 @@ class LineItemBudgetModel extends Model
 
     public function project()
     {
-        return $this->belongsTo(ProjectsModel::class, 'project_id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
 }

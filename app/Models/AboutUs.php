@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AboutUsModel extends Model
+class AboutUs extends Model
 {
-    public $table = 'aboutus';
+    use HasFactory;
 
     public $primaryKey = 'id';
 

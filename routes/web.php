@@ -246,8 +246,6 @@ Route::middleware(['auth', 'cache'])->group(function (){
 
 });
 
-
-
 // register 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');

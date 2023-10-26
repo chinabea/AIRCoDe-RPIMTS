@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ProjectsModel;
+use App\Models\Project;
 
 class TrackController extends Controller
 {
     public function track(Request $request)
     {
         $projectId = $request->input('proj_id');
-        $project = ProjectsModel::find($projectId);
+        $project = Project::find($projectId);
 
         // Initialize approvalDate
         $approvalDate = null;
