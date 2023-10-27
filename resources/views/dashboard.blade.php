@@ -39,7 +39,7 @@
                         <div class="col mr-2">
                             <div class="font-weight-bold text-warning text-uppercase mb-1">
                                 For Revision</div>
-                            <div class="badge badge-warning text-sm">{{ $allForRevisionCount }}</div> 
+                            <div class="badge badge-warning text-sm">{{ $allForRevisionCount }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-edit fa-3x text-gray-300 custom-button-link"></i>
@@ -145,6 +145,24 @@
         <h2 class="m-0 font-weight-bold">Dashboard</h2>
         <br>
      <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="{{ route('projects') }}" class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="font-weight-bold text-info text-uppercase mb-1">
+                                Submitted Projects</div>
+                            <div class="badge badge-info text-sm">{{ $allProjectsCount }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-book fa-3x text-gray-300 custom-button-link"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <a href="{{ route('status.under-evaluation') }}" class="card border-left-success shadow h-100 py-2">
@@ -163,24 +181,22 @@
             </a>
         </div>
         <!-- Earnings (Monthly) Card Example -->
-<div class="col-xl-3 col-md-6 mb-4">
-    <a href="{{ route('status.for-revision') }}" class="card border-left-success shadow h-100 py-2">
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                    <div class="text-sm font-weight-bold text-warning text-uppercase mb-1">
-                        For Review Summary</div>
-                        <span class="badge badge-warning text-sm">{{ $countOfReviewsWithTwoComments }} </span>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="{{ route('status.for-revision') }}" class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-sm font-weight-bold text-warning text-uppercase mb-1">
+                                For Review Summary</div>
+                                <span class="badge badge-warning text-sm">{{ $countOfReviewsWithTwoComments }} </span>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-edit fa-3x text-gray-300 custom-button-link"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <i class="fas fa-edit fa-3x text-gray-300 custom-button-link"></i>
-                </div>
-            </div>
+            </a>
         </div>
-    </a>
-</div>
-
-
         <!-- Pending Requests Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <a href="{{ route('status.approved') }}" class="card border-left-warning shadow h-100 py-2">
@@ -215,24 +231,23 @@
                 </div>
             </a>
         </div>
-
-    <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <a href="{{ route('status.disapproved') }}" class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="font-weight-bold text-danger text-uppercase mb-1">
-                            Disapproved</div>
-                        <div class="badge badge-danger text-sm">{{ $allDisapprovedCount }}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-times-circle fa-3x text-gray-300 custom-button-link"></i>
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <a href="{{ route('status.disapproved') }}" class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="font-weight-bold text-danger text-uppercase mb-1">
+                                Disapproved</div>
+                            <div class="badge badge-danger text-sm">{{ $allDisapprovedCount }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-times-circle fa-3x text-gray-300 custom-button-link"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
-    </div>
+            </a>
+        </div>
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <a href="{{ route('users') }}" class="card border-left-primary shadow h-100 py-2">
@@ -250,23 +265,6 @@
                 </div>
             </a>
         </div>
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <a href="{{ route('projects') }}" class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-info text-uppercase mb-1">
-                                Submitted Projects</div>
-                            <div class="badge badge-info text-sm">{{ $allProjectsCount }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-book fa-3x text-gray-300 custom-button-link"></i>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
     </div>
 
 @elseif($role === 3)
@@ -277,7 +275,7 @@
     <div class="container mt-3">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h2 class="m-0 font-weight-bold">Dashboard</h2>
-            
+
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
      <div class="row">
@@ -415,7 +413,7 @@
 
 <div class="col-xl-3 col-md-6 mb-4">
     <div class="callout callout-warning shadow h-100 py-2">
-        <a href="{{ route('status.under-evaluation') }}" class="text-decoration-none">
+        <a href="" class="text-decoration-none">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">

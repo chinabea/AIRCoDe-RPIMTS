@@ -107,7 +107,6 @@ Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(func
     Route::put('/announcement/edit/{id}', [AnnouncementsController::class, 'update'])->name('transparency.announcements.update');
     Route::delete('/announcement/delete/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
 
-    Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::delete('/project/delete/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('/project-teams', [MemberController::class, 'index'])->name('submission-details.project-teams.index');
     Route::delete('/project-teams/{id}', [MemberController::class, 'destroy'])->name('submission-details.project-teams.destroy');
@@ -191,6 +190,8 @@ Route::prefix('DirectorAndStaff')->middleware(['auth', 'cache', 'directorOrStaff
     Route::delete('/call-for-proposals/delete/{id}', [CallForProposalController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
 
     Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users');
 
 });
 

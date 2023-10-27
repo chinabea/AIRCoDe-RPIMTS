@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->ulid('tracking_code');
+            $table->unsignedBigInteger('call_for_proposal_id');
             $table->unsignedBigInteger('user_id');
-            $table->text('projname');
+            $table->text('project_name');
             $table->enum('status', ['Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved']);
-            $table->text('researchgroup');
+            $table->text('research_group');
             $table->text('introduction');
             $table->text('aims_and_objectives');
             $table->text('background');
@@ -29,6 +30,11 @@ return new class extends Migration
             $table->decimal('total_budget', 10, 2)->default(0.00);
             $table->date('approval_date')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('call_for_proposal_id')->references('id')->on('call_for_proposals');
+            $table->foreign('call_for_proposal_id')
+                  ->references('id')
+                  ->on('call_for_proposals')
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -5,7 +5,6 @@
   <div class="content-wrapper">
     <section class="content-header">
     </section>
-
     <div class="container">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-center align-items-center">
@@ -28,7 +27,7 @@
                   </thead>
                   <tbody>
                           @foreach($projects as $record)
-                          @if($record->user_id === auth()->user()->id)
+                          @if(auth()->user()->role == 1 || auth()->user()->role == 2 || $record->user_id === auth()->user()->id)
                           <tr>
                               <td class="align-middle">{{ $record->id }}</td>
                               <td class="align-middle">{{ $record->tracking_code }}</td>
@@ -70,27 +69,22 @@
                           @endforeach
                   </tbody>
               </table>
-
             @if(session('success'))
                 <script>
                     toastr.success('{{ session('success') }}');
                 </script>
             @elseif(session('delete'))
+                <script>
+                    toastr.delete('{{ session('delete') }}');
+                </script>
+            @elseif(session('message'))
+                <script>
+                    toastr.message('{{ session('message') }}');
+                </script>
             @elseif(session('error'))
-            <div id="popupModal" class="modal fade">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content bg-gradient-warning">
-                        <div class="modal-header"></div>
-                        <div class="modal-body">
-                            <div class="alert alert-warning text-center">
-                            <i class="fa-xl fa-solid fa-triangle-exclamation"></i>
-                                {{ session('error') }}
-                            </div>
-                        </div>
-                        <div class="modal-footer"></div>
-                    </div>
-                </div>
-            </div>
+                <script>
+                    toastr.error('{{ session('error') }}');
+                </script>
             @endif
         </div>
     </div>

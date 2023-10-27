@@ -6,7 +6,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Models\CallForProposal;
 
-class ProposalsController extends Controller
+class CallForProposalController extends Controller
 {
 
     public function viewCallforProposals()
@@ -37,17 +37,17 @@ class ProposalsController extends Controller
     {
         // Define validation rules for the incoming request data
         $rules = [
-            'proposaltitle' => 'required|string',
-            'proposaldescription' => 'required|string',
-            'startdate' => ['required', 'date', 'after_or_equal:yesterday'],
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'start_date' => ['required', 'date', 'after_or_equal:yesterday'],
 
-            'enddate' => [
+            'end_date' => [
                 'required',
                 'date',
                 function ($attribute, $value, $fail) use ($request) {
-                    $startdate = $request->input('startdate');
+                    $start_date = $request->input('start_date');
 
-                    if ($value && strtotime($value) < strtotime($startdate)) {
+                    if ($value && strtotime($value) < strtotime($start_date)) {
                         $fail('The end date must be on or after the start date.');
                     }
                 },
@@ -95,8 +95,8 @@ class ProposalsController extends Controller
 
         // Define custom error messages
         $customMessages = [
-            'startdate.after_or_equal' => 'The start date must be today or a future date.',
-            'enddate.after' => 'The end date must be after the start date.',
+            'start_date.after_or_equal' => 'The start date must be today or a future date.',
+            'end_date.after' => 'The end date must be after the start date.',
         ];
 
         try {
@@ -165,16 +165,16 @@ class ProposalsController extends Controller
     {
         // Define validation rules for the incoming request data
         $rules = [
-            'proposaltitle' => 'required|string',
-            'proposaldescription' => 'required|string',
-            'startdate' => ['required', 'date', 'after_or_equal:today'],
-            'enddate' => [
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'start_date' => ['required', 'date', 'after_or_equal:today'],
+            'end_date' => [
                 'required',
                 'date',
                 function ($attribute, $value, $fail) use ($request) {
-                    $startdate = $request->input('startdate');
+                    $start_date = $request->input('start_date');
 
-                    if ($value && strtotime($value) < strtotime($startdate)) {
+                    if ($value && strtotime($value) < strtotime($start_date)) {
                         $fail('The end date must be on or after the start date.');
                     }
                 },
@@ -183,8 +183,8 @@ class ProposalsController extends Controller
                 'nullable',
                 'string',
                 function ($attribute, $value, $fail) use ($request) {
-                    $startDate = $request->input('startdate');
-                    $endDate = $request->input('enddate');
+                    $startDate = $request->input('start_date');
+                    $endDate = $request->input('end_date');
 
                     // Check if the status is 'Open' if the current date is between start and end dates
                     if ($value === 'Open' && now() >= $startDate && now() <= $endDate) {
@@ -209,8 +209,8 @@ class ProposalsController extends Controller
 
         // Define custom error messages
         $customMessages = [
-            'startdate.after_or_equal' => 'The start date must be today or a future date.',
-            'enddate.after' => 'The end date must be after the start date.',
+            'start_date.after_or_equal' => 'The start date must be today or a future date.',
+            'end_date.after' => 'The end date must be after the start date.',
         ];
 
         try {

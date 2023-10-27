@@ -5,14 +5,6 @@
 
   <div class="content-wrapper">
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            </ol>
-          </div>
-        </div>
-      </div>
     </section>
 
     <section class="content">
@@ -28,22 +20,28 @@
                     <table id="example1" class="table table-hover table-bordered text-center table-sm">
                         <thead class="table-info">
                             <tr>
-                                <th>#</th>
+                                <th>Tracking Code</th>
                                 <th>Title</th>
                                 <th>Group</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
+                                <th>Call for Proposal</th>
+                                <th>Date Submitted</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($projects as $index => $project)
+                            @if(auth()->user()->role == 1 || auth()->user()->role == 2 || $project->user_id === auth()->user()->id)
                             <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $project->projname }}</td>
+                                <td>{{ $project->tracking_code }}</td>
+                                <td class="align-middle">
+                                  <a href="{{ route('submission-details.show', $project->id) }}">{{ $project->projname }}</a>
+                                </td>
                                 <td>{{ $project->researchgroup }}</td>
                                 <td>{{ $project->start_date }}</td>
                                 <td>{{ $project->end_date }}</td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

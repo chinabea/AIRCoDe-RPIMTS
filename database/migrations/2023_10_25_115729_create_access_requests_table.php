@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('role');
-            $table->date('dateofaccess');
-            $table->time('timeofaccess');
-            $table->text('purposeofaccess');
-            $table->date('dateapproved')->nullable();
+            $table->date('date_of_access');
+            $table->time('time_of_access');
+            $table->text('purpose_of_access');
+            $table->date('date_approved')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

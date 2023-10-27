@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('call_for_proposals', function (Blueprint $table) {
             $table->id();
-            $table->string('proposaltitle');
-            $table->text('proposaldescription');
-            $table->date('startdate');
-            $table->date('enddate');
+            $table->string('title');
+            $table->text('description');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('status')->default('Opening Soon');
             $table->string('remarks')->nullable();
             $table->timestamps();

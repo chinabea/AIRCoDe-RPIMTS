@@ -30,7 +30,6 @@
               <i class="nav-icon fas fa-users mr-2"></i>
               <p>
                 Users
-                <!-- <span class="badge badge-info right">2</span> -->
               </p>
             </a>
           </li>
@@ -39,12 +38,47 @@
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Submitted Projects
-                <!-- <span class="badge badge-info right">7</span> -->
               </p>
             </a>
           </li>
+          {{-- <li class="nav-item">
+            <a href="{{ route('status.draft') }}" class="nav-link">
+              <i class="nav-icon fas fa-file-signature"></i>
+              <p>Draft</p>
+            </a>
+          </li> --}}
+          <li class="nav-item">
+            <a href="{{ route('status.under-evaluation') }}" class="nav-link">
+                <i class="fas fa-hourglass-half nav-icon"></i>
+                <p>Under Evaluation</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('status.for-revision') }}" class="nav-link">
+                <i class="fas fa-edit nav-icon"></i>
+                <p>For Revision</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('status.deferred') }}" class="nav-link">
+                <i class="far fa-pause-circle nav-icon"></i>
+                <p>Deferred</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('status.approved') }}" class="nav-link">
+                <i class="far fa-check-circle nav-icon"></i>
+                <p>Approved</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('status.disapproved') }}" class="nav-link">
+                <i class="far fa-times-circle nav-icon"></i>
+                <p>Disapproved</p>
+            </a>
+          </li>
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="far fa-file-alt nav-icon"></i>
             <p>Draft
@@ -175,7 +209,7 @@
           </ul>
           @endif
           @endforeach
-        @endif
+        @endif --}}
         </li>
           <li class="nav-header">TRANSPARENCY</li>
               <li class="nav-item">
@@ -269,7 +303,7 @@
             <p>New Submission</p>
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-book"></i>
             <p>Submitted Projects
@@ -290,8 +324,51 @@
           @endforeach
           @endif
           </ul>
+        </li> --}}
+        <li class="nav-item">
+          <a href="{{ route('projects') }}" class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+            <p>Submitted Projects</p>
+          </a>
         </li>
         <li class="nav-item">
+          <a href="{{ route('status.draft') }}" class="nav-link">
+            <i class="nav-icon fas fa-file-signature"></i>
+            <p>Draft</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('status.under-evaluation') }}" class="nav-link">
+              <i class="fas fa-hourglass-half nav-icon"></i>
+              <p>Under Evaluation</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('status.for-revision') }}" class="nav-link">
+              <i class="fas fa-edit nav-icon"></i>
+              <p>For Revision</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('status.deferred') }}" class="nav-link">
+              <i class="far fa-pause-circle nav-icon"></i>
+              <p>Deferred</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('status.approved') }}" class="nav-link">
+              <i class="far fa-check-circle nav-icon"></i>
+              <p>Approved</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('status.disapproved') }}" class="nav-link">
+              <i class="far fa-times-circle nav-icon"></i>
+              <p>Disapproved</p>
+          </a>
+        </li>
+
+        {{-- <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="far fa-file-alt nav-icon"></i>
             <p>Draft
@@ -435,7 +512,7 @@
           @endif
           @endforeach
         @endif
-        </li>
+        </li> --}}
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item menu-open">
             <ul class="nav nav-treeview">

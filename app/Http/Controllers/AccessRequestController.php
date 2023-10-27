@@ -34,23 +34,23 @@ class AccessRequestController extends Controller
             // Define validation rules for the incoming request data
             $rules = [
                 'role' => 'required|string',
-                'dateofaccess' => 'required|date_format:Y-m-d|after_or_equal:today',
-                'timeofaccess' => [
+                'date_of_access' => 'required|date_format:Y-m-d|after_or_equal:today',
+                'time_of_access' => [
                     'required',
                     'after_or_equal:07:00:00', // After or equal to 7 am
                     'before_or_equal:17:00:00', // Before or equal to 5 pm
                 ],
                 'purposeofaccess' => 'required|string',
-                'dateapproved' => ['nullable', 'date', 'after_or_equal:today'],
+                'date_approved' => ['nullable', 'date', 'after_or_equal:today'],
             ];
 
             // Define custom validation error messages if needed
             $messages = [
-                'dateofaccess.date_format' => 'The date of access field must be in the format Y-m-d.',
-                'dateofaccess.after_or_equal' => 'The date of access must be equal to or after today.',
-                'timeofaccess.after_or_equal' => 'The time of access must be after or equal to 07:00 (7 am).',
-                'timeofaccess.before_or_equal' => 'The time of access must be before or equal to 17:00 (5 pm).',
-                'dateapproved.after_or_equal' => 'The date approved must be equal to or after today.',
+                'date_of_access.date_format' => 'The date of access field must be in the format Y-m-d.',
+                'date_of_access.after_or_equal' => 'The date of access must be equal to or after today.',
+                'time_of_access.after_or_equal' => 'The time of access must be after or equal to 07:00 (7 am).',
+                'time_of_access.before_or_equal' => 'The time of access must be before or equal to 17:00 (5 pm).',
+                'date_approved.after_or_equal' => 'The date approved must be equal to or after today.',
             ];
 
             // Validate the request data against the defined rules

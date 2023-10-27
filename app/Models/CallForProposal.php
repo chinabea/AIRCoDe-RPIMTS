@@ -11,10 +11,15 @@ class CallForProposal extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['proposaltitle','proposaldescription','startdate','enddate','status','remarks'];
-    
+    public $fillable = ['title','description','start_date','end_date','status','remarks'];
+
     public function project()
     {
         return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
 }

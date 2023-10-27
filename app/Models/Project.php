@@ -12,9 +12,9 @@ class Project extends Model
     public $primaryKey = 'id';
 
     public $fillable = ['tracking_code',
-                        'projname',
+                        'project_name',
                         'status',
-                        'researchgroup',
+                        'research_group',
                         'introduction',
                         'aims_and_objectives',
                         'background',
@@ -29,7 +29,7 @@ class Project extends Model
 
     public function callForProposal()
     {
-        return $this->hasMany(CallForProposal::class, 'project_id');
+        return $this->belongsTo(CallForProposal::class, 'project_id');
     }
 
     // public function projectTeams()
@@ -61,4 +61,9 @@ class Project extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // public function callForProposal()
+    // {
+    //     return $this->belongsTo(CallForProposal::class);
+    // }
 }

@@ -10,44 +10,26 @@
         </button>
       </div>
       <div class="modal-body">
-                
         <form method="POST" action="{{ route('store.project.reviewers') }}" enctype="multipart/form-data">
-                @csrf
+            @csrf
                 <input type="hidden" name="project_id" value="{{ $records->id }}">
                 <div class="form-group">
                     <label for="reviewer_ids[]">Reviewers:</label>
                     <select name="reviewer_ids[]" id="reviewer_ids[]" class="selectpicker form-control" data-live-search="true" multiple>
-                        
-                        <!-- @if(isset($existingReviewers)) -->
-                            <!-- @foreach ($reviewersss as $reviewer)
-                                @if (!in_array($reviewer->id, $existingReviewers))
-                                    <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
-                                @endif
-                            @endforeach -->
-                        <!-- @endif -->
-
                         @foreach ($reviewersss as $reviewer)
                         <option value="{{ $reviewer->id }}">{{ $reviewer->name }}</option>
                         @endforeach
                     </select>
                 </div>
-    
                 <div class="form-group">
                     <label for="deadline">Deadline:</label>
                     <input type="date" name="deadline" id="deadline" class="form-control">
-                </div> 
-                
-
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Assign Reviewers</button>
-                </div> -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Assign Reviewers</button>
-      </div>
-      </form>
+                </div>
+        </form>
     </div>
   </div>
 </div>

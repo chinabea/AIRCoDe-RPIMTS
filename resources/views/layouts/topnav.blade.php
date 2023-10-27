@@ -71,18 +71,15 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @if(Auth::user()->role == 4)
-                        <i class="fa-solid fa-user-gear"></i>
-                        <p class="text-xs">Reviewer</p><br>
+                    <span class="text-xs">Researcher</span><br>
                         <b>{{ Auth::user()->name }}</b>
                     @elseif(Auth::user()->role == 3)
                        <span class="text-xs">Researcher</span><br>
                        <b>{{ Auth::user()->name }}</b>
                     @elseif(Auth::user()->role == 2)
-                        <i class="fa-solid fa-user-gear"></i>
                         <span class="text-xs">Staff</span><br>
                         <b>{{ Auth::user()->name }}</b>
                     @elseif(Auth::user()->role == 1)
-                        <i class="fa-solid fa-user"></i>
                         <span class="text-xs">Director</span><br>
                         <b>{{ Auth::user()->name }}</b>
                     @else

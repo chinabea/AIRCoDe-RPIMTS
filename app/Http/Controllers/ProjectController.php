@@ -49,8 +49,8 @@ class ProjectController extends Controller
     {
 
         $request->validate([
-            'projname' => 'required',
-            'researchgroup' => 'required',
+            'project_name' => 'required',
+            'research_group' => 'required',
             'introduction' => 'required',
             'aims_and_objectives' => 'required',
             'background' => 'required',
@@ -82,7 +82,7 @@ class ProjectController extends Controller
         $projects = new Project(['tracking_code' => $ulidValue]);
 
         // $projects = new Project;
-        $projects->projname = $request->projname;
+        $projects->project_name = $request->project_name;
         if ($request->has('draft_submit')) {
             // Set the project status as 'draft'
             $projects->status = 'draft';
@@ -92,7 +92,7 @@ class ProjectController extends Controller
 
         }
         $projects->user_id = $userId;
-        $projects->researchgroup = $request->researchgroup;
+        $projects->research_group = $request->research_group;
         $projects->introduction = $request->introduction;
         $projects->aims_and_objectives = $request->aims_and_objectives;
         $projects->background = $request->background;
@@ -106,7 +106,7 @@ class ProjectController extends Controller
 
         $researcher = User::find($userId);
         $researcherMail = $researcher->email;
-        $projectTitle = $projects->projname;
+        $projectTitle = $projects->project_name;
         $trackingCode = $projects->tracking_code;
         $createdAt = $projects->created_at;
         $directors = User::where('role', true)->get();
@@ -177,8 +177,8 @@ class ProjectController extends Controller
         $records = Project::findOrFail($id);
 
         // Update the project record with the new values from the form
-        $records->projname = $request->input('projname');
-        $records->researchgroup = $request->input('researchgroup');
+        $records->project_name = $request->input('project_name');
+        $records->research_group = $request->input('research_group');
         // $records->authors = $request->input('authors');
         $records->introduction = $request->input('introduction');
         $records->aims_and_objectives = $request->input('aims_and_objectives');
