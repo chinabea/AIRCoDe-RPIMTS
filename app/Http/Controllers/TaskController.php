@@ -3,31 +3,32 @@
 namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\TaskModel;
+use App\Models\Task;
 use App\Notifications\TaskDeadlineNotification;
-use App\Models\UsersModel;
-use App\Models\ProjectTeamModel;
+use App\Models\User;
+use App\Models\Member;
 use Illuminate\Support\Facades\Notification;
 use App\Rules\DateNotBeforeToday;
+use Illuminate\Database\QueryException;
 
 class TaskController extends Controller
 {
     protected $task;
 
-    public function __construct(TaskModel $task)
+    public function __construct(Task $task)
     {
         $this->task = $task;
     }
     public function index()
     {
-        $tasks = TaskModel::all();
+        $tasks = Task::all();
         return view('submission-details.tasks.index', compact('tasks'));
     }
 
     public function create()
     {
-        $tasks = TaskModel::all();
-        $teamMembers = ProjectTeamModel::all();
+        $tasks = Task::all();
+        $teamMembers = Member::all();
         return view('submission-details.tasks.create', compact('tasks', 'teamMembers'));
     }
 
@@ -44,7 +45,7 @@ class TaskController extends Controller
             'date',
             function ($attribute, $value, $fail) use ($request) {
                 $start_date = $request->input('start_date');
-                
+
                 if ($value && strtotime($value) < strtotime($start_date)) {
                     $fail('The end date must be on or after the start date.');
                 }
@@ -65,7 +66,7 @@ class TaskController extends Controller
     $validatedData = $request->validate($rules, $customMessages);
 
     // Create the task using the validated data
-    $task = TaskModel::create($validatedData);
+    $task = Task::create($validatedData);
 
     // Send notification if the task deadline is in the future
     if ($task->end_date > Carbon::now()) {
@@ -94,7 +95,7 @@ class TaskController extends Controller
     //     $projectId = $request->input('project_id');
     //     $requestData = $request->all();
     //     $requestData['project_id'] = $projectId;
-    //     $task = TaskModel::create($requestData);
+    //     $task = Task::create($requestData);
 
     //     // Send notification if the task deadline is in the future
     //     if ($task->end_date > Carbon::now()) {
@@ -111,15 +112,15 @@ class TaskController extends Controller
     public function show($id)
     {
         // Retrieve and show the specific item using the provided ID
-        $tasks = TaskModel::findOrFail($id);
+        $tasks = Task::findOrFail($id);
 
         return view('tasks.show', compact('members'));
     }
     public function edit($id)
     {
-        $task = TaskModel::findOrFail($id);
-        // $members = UsersModel::all();
-        $members = UsersModel::where('role', 3)->get();
+        $task = Task::findOrFail($id);
+        // $members = User::all();
+        $members = User::where('role', 3)->get();
         return view('submission-details.tasks.edit', compact('task', 'members'));
     }
 
@@ -140,7 +141,7 @@ class TaskController extends Controller
 
     public function update(Request $request, $id)
     {
-        $task = TaskModel::findOrFail($id);
+        $task = Task::findOrFail($id);
         // Update the item properties using the request data
         $task->update($request->all());
 
@@ -152,7 +153,7 @@ class TaskController extends Controller
 
     public function destroy($id)
     {
-        $task = TaskModel::findOrFail($id);
+        $task = Task::findOrFail($id);
         $task->delete();
 
         return redirect()->route('submission-details.tasks.index')->with('success', 'Task deleted successfully.');

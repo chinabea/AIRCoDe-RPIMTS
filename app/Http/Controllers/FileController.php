@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
-use App\Models\FileModel;
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -31,7 +31,7 @@ class FileController extends Controller
 
         try {
             // Create a new project file entry
-            FileModel::create([
+            File::create([
                 'project_id' => $request->input('project_id'),
                 'file_name' => $fileName,
                 'file_path' => $filePath,
@@ -56,7 +56,7 @@ class FileController extends Controller
 
     public function download($id)
     {
-        $file = FileModel::findOrFail($id);
+        $file = File::findOrFail($id);
 
         // Assuming the 'file_name' attribute stores the desired filename in the database
         $fileName = $file->file_name;
@@ -73,7 +73,7 @@ class FileController extends Controller
         ]);
 
         // Find the existing file entry
-        $fileModel = FileModel::where('project_id', $id)->first();
+        $fileModel = File::where('project_id', $id)->first();
 
         if (!$fileModel) {
             return redirect()->back()->with('error', 'File not found.');
@@ -99,7 +99,7 @@ class FileController extends Controller
 
     public function update(Request $request, $id)
     {
-        $file = FileModel::findOrFail($id);
+        $file = File::findOrFail($id);
         // Update the item properties using the request data
         $file->update($request->all());
 
@@ -111,7 +111,7 @@ class FileController extends Controller
     public function delete($id)
     {
         // Delete the file and its record from the database
-        $file = FileModel::findOrFail($id);
+        $file = File::findOrFail($id);
         $file->delete();
 
         return redirect()->back()->with('success', 'File deleted successfully.');

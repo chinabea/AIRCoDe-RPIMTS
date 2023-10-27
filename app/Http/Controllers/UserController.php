@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\UsersModel;
+use App\Models\User;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function getTotalUsers()
     {
-        $totalUsers = UsersModel::count();
+        $totalUsers = User::count();
 
         return $totalUsers;
     }
@@ -32,8 +32,8 @@ class UsersController extends Controller
     public function index()
     {
         // Fetch all records from the model and pass them to the view
-        // $items = UsersModel::all();
-        $records = UsersModel::orderBy('created_at', 'ASC')->get();
+        // $items = User::all();
+        $records = User::orderBy('created_at', 'ASC')->get();
 
         return view('users.index', compact('records'));
     }
@@ -46,7 +46,7 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        UsersModel::create($request->all());
+        User::create($request->all());
 
         // Redirect to the index or show view, or perform other actions
         return redirect()->route('users')->with('success', 'Users Successfully Added!');
@@ -55,7 +55,7 @@ class UsersController extends Controller
     public function show($id)
     {
         // Retrieve and show the specific item using the provided ID
-        $users = UsersModel::findOrFail($id);
+        $users = User::findOrFail($id);
 
         return view('users.show', compact('users'));
     }
@@ -63,7 +63,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         // Retrieve and show the specific item for editing
-        $users = UsersModel::findOrFail($id);
+        $users = User::findOrFail($id);
 
         return view('users.edit', compact('users'));
     }
@@ -71,7 +71,7 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         // Validate and update the item with the provided ID
-        $users = UsersModel::findOrFail($id);
+        $users = User::findOrFail($id);
         // Update the item properties using the request data
         $users->update($request->all());
 
@@ -82,7 +82,7 @@ class UsersController extends Controller
     public function destroy($id)
     {
         // Delete the item with the provided ID
-        $users = UsersModel::findOrFail($id);
+        $users = User::findOrFail($id);
         $users->delete();
 
         // Redirect to the index or perform other actions

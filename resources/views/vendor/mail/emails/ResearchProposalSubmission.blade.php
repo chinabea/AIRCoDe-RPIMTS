@@ -94,10 +94,10 @@
                                 <!-- rct -->
                                 <td style="line-height: 24px; font-size: 16px; width: 100%; border-radius: 24px; margin: 0; padding: 40px;" bgcolor="#ffffff">
                                 <h1 class="text-center h3 fw-700" style="padding-top: 0; padding-bottom: 0; font-weight: 700 !important; vertical-align: baseline; font-size: 28px; line-height: 33.6px; margin: 0; text-align: center;">{{ $projectTitle }}</h1>
-                                <!-- <p class="text-center text-muted" style="line-height: 24px; font-size: 16px; color: #718096; width: 100%; margin: 0; text-align: center;" align="center">Project Code: {{ $projectId }}</p> -->
-                                
-                                <!-- <p class="text-center fw-700 border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="center" width="100%">Project Code: {{ $projectId }}</p> -->
-                              
+                                <!-- <p class="text-center text-muted" style="line-height: 24px; font-size: 16px; color: #718096; width: 100%; margin: 0; text-align: center;" align="center">Project Code: {{ $trackingCode }}</p> -->
+
+                                <!-- <p class="text-center fw-700 border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="center" width="100%">Project Code: {{ $trackingCode }}</p> -->
+
                                     <table class="p-2 w-full" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                       <tbody>
                                         <!-- <tr>
@@ -106,16 +106,16 @@
                                         </tr> -->
                                         <!-- <tr>
                                           <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="left" width="100%">Project Code:</td>
-                                          <td class="text-right" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="right" width="100%">{{ $projectId }}</td>
+                                          <td class="text-right" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 8px;" align="right" width="100%">{{ $trackingCode }}</td>
                                         </tr> -->
                                         <br>
                                         <tr>
                                           <td class="fw-700 border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="left" width="100%">Project Code:</td>
-                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="right" width="100%">{{ $projectId }}</td>
+                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="right" width="100%">{{ $trackingCode }}</td>
                                         </tr>
                                         <tr>
                                           <td class="fw-700 border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="left" width="100%">Submission Date</td>
-                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px;" align="right" width="100%"></td>
+                                          <td class="fw-700 text-right border-top" style="line-height: 24px; font-size: 16px; border-top-width: 1px !important; border-top-color: #e2e8f0 !important; border-top-style: solid !important; width: 100%; font-weight: 700 !important; margin: 0; padding: 8px; white-space: nowrap;" align="right" width="100%">{{ $createdAt->format('F j, Y') }}</td>
                                         </tr>
                                       </tbody>
                                     </table>
@@ -145,7 +145,7 @@
                                         </tr>
                                         <tr>
                                           <td style="line-height: 24px; font-size: 16px; border-radius: 6px; font-weight: 700 !important; margin: 0;" align="center" bgcolor="#0d6efd">
-                                          <a href="http://127.0.0.1:8000/submission-details/show/{{ $projectId }}" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: 700 !important; white-space: nowrap; background-color: #022A44 !important; padding: 12px; border: 1px solid #022A44;">View Project</a>
+                                          <a href="http://127.0.0.1:8000/submission-details/show/{{ $trackingCode }}" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: 700 !important; white-space: nowrap; background-color: #022A44 !important; padding: 12px; border: 1px solid #022A44;">View Project</a>
                                           </td>
                                         </tr>
                                       </tbody>
@@ -184,8 +184,8 @@
                                       <tbody>
                                         <tr>
                                           <td style="line-height: 24px; font-size: 16px; border-radius: 6px; font-weight: 700 !important; margin: 0;" align="center" bgcolor="#0d6efd">
-                                        
-                                            <a href="http://127.0.0.1:8000/submission-details/show/{{ $projectId }}" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: 700 !important; white-space: nowrap; background-color: #022A44 !important; padding: 12px; border: 1px solid #022A44;">View Project</a>
+
+                                            <a href="http://127.0.0.1:8000/submission-details/show/{{ $trackingCode }}" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: 700 !important; white-space: nowrap; background-color: #022A44 !important; padding: 12px; border: 1px solid #022A44;">View Project</a>
                                           </td>
                                         </tr>
                                       </tbody>

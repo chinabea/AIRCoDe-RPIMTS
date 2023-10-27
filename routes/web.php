@@ -4,17 +4,15 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StatusController;
-use App\Http\Controllers\ProposalsController;
-use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\CallForProposalController;
 use App\Http\Controllers\AnnouncementsController;
 use App\Http\Controllers\AccessRequestController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\ProjectTeamController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LineItemBudgetController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\EmailBoxController;
@@ -22,8 +20,6 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\PDFController;
-use App\Http\Controllers\FullCalenderController;
-use App\Http\Controllers\ProjectHistoryController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Auth\LoginController;
@@ -49,7 +45,7 @@ Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallba
 Route::get('/projects/track', [TrackController::class, 'track'])->name('projects.track');
 Route::get('/', [TrackController::class, 'track'])->name('welcome');
 
-Route::get('/Available-Call-for-Proposals', [ProposalsController::class, 'viewCallforProposals'])->name('view.call-for-proposals');
+Route::get('/Available-Call-for-Proposals', [CallForProposalController::class, 'viewCallforProposals'])->name('view.call-for-proposals');
 
 Route::get('/test', function () {
     return view('test');
@@ -62,17 +58,17 @@ Auth::routes();
 
 Route::middleware(['auth', 'cache'])->group(function (){
 
-    Route::get('/total-users', [UsersController::class, 'showTotalUsers']);
-    Route::get('/create-users', [UsersController::class, 'create'])->name('users.create');
-    Route::post('/store-users', [UsersController::class, 'store'])->name('users.store');
-    Route::get('/show-users/{id}', [UsersController::class, 'show'])->name('users.show');
-    Route::get('/edit-users/{id}', [UsersController::class, 'edit'])->name('users.edit');
-    Route::put('/edit-users/{id}', [UsersController::class, 'update'])->name('users.update');
-    Route::delete('/delete-users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
-    Route::get('/submission-details/show/{id}', [ProjectsController::class, 'show'])->name('submission-details.show');
+    Route::get('/total-users', [UserController::class, 'showTotalUsers']);
+    Route::get('/create-users', [UserController::class, 'create'])->name('users.create');
+    Route::post('/store-users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/show-users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/edit-users/{id}', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/edit-users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/delete-users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/submission-details/show/{id}', [ProjectController::class, 'show'])->name('submission-details.show');
     Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
 
-    
+
 });
 
 Route::prefix('staff')->middleware(['auth', 'cache', 'staff'])->group(function (){
@@ -111,10 +107,10 @@ Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(func
     Route::put('/announcement/edit/{id}', [AnnouncementsController::class, 'update'])->name('transparency.announcements.update');
     Route::delete('/announcement/delete/{id}', [AnnouncementsController::class, 'destroy'])->name('transparency.announcements.destroy');
 
-    Route::get('/users', [UsersController::class, 'index'])->name('users');
-    Route::delete('/project/delete/{id}', [ProjectsController::class, 'destroy'])->name('projects.destroy');
-    Route::get('/project-teams', [ProjectTeamController::class, 'index'])->name('submission-details.project-teams.index');
-    Route::delete('/project-teams/{id}', [ProjectTeamController::class, 'destroy'])->name('submission-details.project-teams.destroy');
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::delete('/project/delete/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    Route::get('/project-teams', [MemberController::class, 'index'])->name('submission-details.project-teams.index');
+    Route::delete('/project-teams/{id}', [MemberController::class, 'destroy'])->name('submission-details.project-teams.destroy');
     Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
 
     // Route::get('/review/{id}', [ReviewController::class, 'review'])->name('reviews.review-decision');
@@ -129,11 +125,11 @@ Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(func
 });
 
 Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(function (){
-    
+
     Route::get('/home', [DashboardController::class, 'countAll'])->name('researcher.home');
 
     Route::get('/about/show/{id}', [AboutusController::class, 'show'])->name('transparency.aboutus.show');
-    Route::get('/call-for-proposals/show/{id}', [ProposalsController::class, 'show'])->name('transparency.call-for-proposals.show'); //view all list without functions
+    Route::get('/call-for-proposals/show/{id}', [CallForProposalController::class, 'show'])->name('transparency.call-for-proposals.show'); //view all list without functions
     Route::get('/announcement/show/{id}', [AnnouncementsController::class, 'show'])->name('transparency.announcements.show'); //view all list without functions
 
     Route::get('/tasks', [TaskController::class, 'index'])->name('submission-details.tasks.index');
@@ -150,16 +146,16 @@ Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(
     Route::get('/access-request/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.access-requests.edit');
     Route::put('/access-request/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.access-requests.update');
 
-    Route::get('/project/create', [ProjectsController::class, 'create'])->name('projects.create');
-    Route::post('/project/store', [ProjectsController::class, 'store'])->name('projects.store');
-    Route::get('/project/edit/{id}', [ProjectsController::class, 'edit'])->name('projects.edit');
-    Route::put('/project/edit/{id}', [ProjectsController::class, 'update'])->name('projects.update');
+    Route::get('/project/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('/project/store', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::put('/project/edit/{id}', [ProjectController::class, 'update'])->name('projects.update');
 
-    Route::get('/project-teams/create', [ProjectTeamController::class, 'create'])->name('submission-details.project-teams.create');
-    Route::post('/project-teams/store/{id}', [ProjectTeamController::class, 'store'])->name('submission-details.project-teams.store');
-    Route::put('/project-teams/{id}', [ProjectTeamController::class, 'show'])->name('submission-details.project-teams.show');
-    Route::get('/project-teams/{id}/edit', [ProjectTeamController::class, 'edit'])->name('submission-details.project-teams.edit');
-    Route::put('/project-teams/{id}', [ProjectTeamController::class, 'update'])->name('submission-details.project-teams.update');
+    Route::get('/project-teams/create', [MemberController::class, 'create'])->name('submission-details.project-teams.create');
+    Route::post('/project-teams/store/{id}', [MemberController::class, 'store'])->name('submission-details.project-teams.store');
+    Route::put('/project-teams/{id}', [MemberController::class, 'show'])->name('submission-details.project-teams.show');
+    Route::get('/project-teams/{id}/edit', [MemberController::class, 'edit'])->name('submission-details.project-teams.edit');
+    Route::put('/project-teams/{id}', [MemberController::class, 'update'])->name('submission-details.project-teams.update');
 
     Route::get('/line-items-budget/create', [LineItemBudgetController::class, 'create'])->name('submission-details.line-items-budget.create');
     Route::post('/line-items-budget/store', [LineItemBudgetController::class, 'store'])->name('submission-details.line-items-budget.store');
@@ -187,15 +183,15 @@ Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(
 Route::prefix('DirectorAndStaff')->middleware(['auth', 'cache', 'directorOrStaff'])->group(function () {
 
     // Call-for-proposals
-    Route::get('/call-for-proposals', [ProposalsController::class, 'index'])->name('call-for-proposals');
-    Route::get('/call-for-proposals/create', [ProposalsController::class, 'create'])->name('transparency.call-for-proposals.create');
-    Route::post('/call-for-proposals/store', [ProposalsController::class, 'store'])->name('transparency.call-for-proposals.store');
-    Route::get('/call-for-proposals/edit/{id}', [ProposalsController::class, 'edit'])->name('transparency.call-for-proposals.edit');
-    Route::put('/call-for-proposals/edit/{id}', [ProposalsController::class, 'update'])->name('transparency.call-for-proposals.update');
-    Route::delete('/call-for-proposals/delete/{id}', [ProposalsController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
+    Route::get('/call-for-proposals', [CallForProposalController::class, 'index'])->name('call-for-proposals');
+    Route::get('/call-for-proposals/create', [CallForProposalController::class, 'create'])->name('transparency.call-for-proposals.create');
+    Route::post('/call-for-proposals/store', [CallForProposalController::class, 'store'])->name('transparency.call-for-proposals.store');
+    Route::get('/call-for-proposals/edit/{id}', [CallForProposalController::class, 'edit'])->name('transparency.call-for-proposals.edit');
+    Route::put('/call-for-proposals/edit/{id}', [CallForProposalController::class, 'update'])->name('transparency.call-for-proposals.update');
+    Route::delete('/call-for-proposals/delete/{id}', [CallForProposalController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
 
     Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
-    
+
 });
 
 
@@ -208,7 +204,7 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::post('/store/project/reviewers', [ReviewController::class, 'store'])->name('store.project.reviewers');//oks na
     Route::post('/project/summary/reviews', [ReviewController::class, 'storeSummaryReview'])->name('store.summary.reviews');
 
-    // KIND OF NAGANA NA, BUT NOT FULLY! ON PROCESS! 
+    // KIND OF NAGANA NA, BUT NOT FULLY! ON PROCESS!
     Route::get('/Recommendations-Suggestions-and-Comments/{data_id}', [ReviewController::class, 'comments'])->name('submission-details.reviews.rsc');
 
     // MOT FUNCTIONAL YET!
@@ -220,7 +216,7 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/status/approved', [StatusController::class, 'approved'])->name('status.approved');
     Route::get('/status/deferred', [StatusController::class, 'deferred'])->name('status.deferred');
     Route::get('/status/disapproved', [StatusController::class, 'disapproved'])->name('status.disapproved');
-    Route::get('/projects', [ProjectsController::class, 'index'])->name('projects');
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
 
     Route::get('/emailbox/compose', [EmailBoxController::class, 'index'])->name('emailbox.compose');
     Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
@@ -246,7 +242,7 @@ Route::middleware(['auth', 'cache'])->group(function (){
 
 });
 
-// register 
+// register
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');

@@ -79,7 +79,7 @@
                 <span style="color: white">Type your Tracking ID Below</span><br>
                     <form action="{{ route('welcome') }}" method="get">
                         <div class="form-group">
-                            <input type="text" id="proj_id" name="proj_id" class="form-control" required>
+                            <input type="text" id="tracking_code" name="tracking_code" class="form-control" required>
                             <br>
                         </div>
                         <button type="submit" class="btn btn-primary">Track Project</button>
@@ -88,9 +88,9 @@
                     <div class="card-footer">
                         @if($project)
                         <br>
-                        <h6 class="text-success">PROJECT FOUND</h6>
-                        <p>TITLE: {{ $project->projname }}</p>
-                        <p>STATUS: {{ $project->status }}</p>
+                        <h6 class="text-success font-weight-bold">PROJECT FOUND!</h6>
+                        <p class="text-white font-weight-bold">TITLE: {{ $project->projname }}</p>
+                        <p class="text-white font-weight-bold">STATUS: {{ $project->status }}</p>
                         @else
                         <br>
                         <p class="text-danger">No project found with the entered ID.</p>

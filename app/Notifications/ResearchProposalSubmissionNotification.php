@@ -14,20 +14,24 @@ class ResearchProposalSubmissionNotification extends Notification
 {
     use Queueable;
     private $projectId;
+    private $trackingCode;
     private $researcherId;
     private $researcherMail;
     private $projectTitle;
+    private $createdAt;
     public $projects;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($projectId, $researcherId, $researcherMail, $projectTitle, $projects)
+    public function __construct($projectId, $trackingCode, $createdAt, $researcherId, $researcherMail, $projectTitle, $projects)
     {
             $this->projectId = $projectId;
+            $this->trackingCode = $trackingCode;
             $this->researcherId = $researcherId;
             $this->researcherMail = $researcherMail;
             $this->projectTitle = $projectTitle;
+            $this->createdAt = $createdAt;
             $this->projects = $projects;
     }
 
@@ -49,6 +53,7 @@ class ResearchProposalSubmissionNotification extends Notification
     if ($notifiable instanceof User && $notifiable->isDirector()) {
         // Admin notification content
         return (new MailMessage)
+            ->replyTo('noreply@rpimtsmail.com', 'No Reply')
             ->subject('New Research Proposal Submission')
             ->greeting('A new research project has been submitted')
             ->line('A new research project has been submitted.' . "\n\n" .
@@ -63,31 +68,36 @@ class ResearchProposalSubmissionNotification extends Notification
             ->salutation('Regards, AIRCoDe RPIMTS')
             ->markdown('vendor.mail.emails.ResearchProposalSubmission', [
                 'researcherId' => $this->researcherId,
+                'trackingCode' => $this->trackingCode,
                 'researcherMail' => $this->researcherMail,
                 'projectId' => $this->projectId,
                 'projectTitle' => $this->projectTitle,
+                'createdAt' => $this->createdAt,
             ]);
     }
     if ($notifiable instanceof User && $notifiable->isResearcher()) {
         // User notification content
         return (new MailMessage)
+            ->replyTo('noreply@rpimtsmail.com', 'No Reply')
             ->subject('Research Project Submitted')
             ->greeting('Your research project has been successfully submitted')
             ->line('Your research project has been successfully submitted.' . "\n\n" .
             'Here are the Project Details:' . "\n\n" .
             'Project ID: ' . $this->projectId . "\n" .
-            'Project Title: ' . $this->projectTitle . "\n" . 
+            'Project Title: ' . $this->projectTitle . "\n" .
             'Submission Date: ' . now())
             ->action('View Project', url('/submission-details/show/'.$this->projectId))
             ->salutation('Regards, AIRCoDe RPIMTS')
             ->markdown('vendor.mail.emails.ResearchProposalSubmission', [
                 'researcherId' => $this->researcherId,
+                'trackingCode' => $this->trackingCode,
                 'researcherMail' => $this->researcherMail,
                 'projectId' => $this->projectId,
                 'projectTitle' => $this->projectTitle,
+                'createdAt' => $this->createdAt,
             ]);
     }
-    
+
     // Remove the following line, as it's not needed
     // return null;
     return (new MailMessage)
@@ -106,7 +116,7 @@ class ResearchProposalSubmissionNotification extends Notification
                 // 'icon' => 'fa-solid fa-circle-check fa-lg text-white',
                 'icon' => 'fas fa-file-alt mr-2',
                 'action_url' => route('submission-details.show', [
-                    'id' => $this->projectId, 
+                    'id' => $this->projectId,
                     'researcherId' => $this->researcherId,
                     'notificationId' => $this->id
                 ]),
@@ -118,9 +128,9 @@ class ResearchProposalSubmissionNotification extends Notification
             return [
                 'message' => 'Research Submitted Successfully.',
                 'icon' => 'fas fa-check mr-2 mx-auto',
-                // fa-solid fa-circle-check fa-lg text-white   
+                // fa-solid fa-circle-check fa-lg text-white
                 'action_url' => route('submission-details.show', [
-                    'id' => $this->projectId, 
+                    'id' => $this->projectId,
                     'researcherId' => $this->researcherId,
                     'notificationId' => $this->id
                 ]),

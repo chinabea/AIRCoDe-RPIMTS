@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-    
-    protected $primaryKey = 'id';
-    public $incrementing = false;
-    
-    public $fillable = ['projname',
+
+    public $primaryKey = 'id';
+
+    public $fillable = ['tracking_code',
+                        'projname',
                         'status',
                         'researchgroup',
                         'introduction',
@@ -36,7 +36,7 @@ class Project extends Model
     // {
     //     return $this->hasMany(ProjectTeamModel::class, 'project_id');
     // }
-    
+
     public function members()
     {
         return $this->hasMany(Member::class, 'project_id');
@@ -46,7 +46,7 @@ class Project extends Model
     {
         return $this->hasMany(LineItemBudget::class, 'project_id');
     }
-    
+
     public function reviewers()
     {
         return $this->belongsToMany(User::class, 'project_reviewers', 'project_id', 'reviewer_id');
@@ -56,7 +56,7 @@ class Project extends Model
     {
         return $this->hasMany(Review::class);
     }
-                    
+
     public function user()
     {
         return $this->belongsTo(User::class);

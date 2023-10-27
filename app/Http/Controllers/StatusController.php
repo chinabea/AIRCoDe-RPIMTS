@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\StatusModel;
 use App\Models\UsersModel;
 use App\Models\User;
-use App\Models\ReviewModel;
-use App\Models\ProjectsModel;
+use App\Models\Review;
+use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
@@ -20,29 +20,29 @@ class StatusController extends Controller
             'status' => 'required|in:Draft,Under Evaluation,For Revision,Approved,Deferred,Disapproved',
         ]);
 
-        $project = ProjectsModel::find($id);
+        $project = Project::find($id);
         if (!$project) {
             return redirect()->back()->with('error', 'Project not found.');
         }
 
         // $project->status = $request->input('status');
-            
+
         // // Check if the new status is 'Approved' and the current status is not 'Approved'
         // if ($newStatus === 'Approved' && $project->status !== 'Approved') {
         //     // Set the approval_date to the current date and time
         //     $project->approval_date = Carbon::now();
         // }
 
-        
+
 
         $newStatus = $request->input('status');
-        
+
         // Check if the new status is 'Approved' and the current status is not 'Approved'
         if ($newStatus === 'Approved' && $project->status !== 'Approved') {
             // Set the approval_date to the current date and time
             $project->approval_date = Carbon::now();
         }
-        
+
         $project->status = $newStatus;
 
         $project->save();
@@ -51,28 +51,28 @@ class StatusController extends Controller
 
     public function draft()
     {
-        $projects = ProjectsModel::where('status', 'Draft')->get();
+        $projects = Project::where('status', 'Draft')->get();
 
         return view('status.draft', compact('projects'));
     }
 
     public function underEvaluation()
     {
-        $projects = ProjectsModel::where('status', 'Under Evaluation')->get();
-        $reviews = ReviewModel::all();
-        
+        $projects = Project::where('status', 'Under Evaluation')->get();
+        $reviews = Review::all();
+
         return view('status.under-evaluation', compact('projects'));
     }
 
     public function forRevision()
     {
-        $projects = ProjectsModel::where('status', 'For Revision')->get();
+        $projects = Project::where('status', 'For Revision')->get();
         return view('status.for-revision', compact('projects'));
     }
 
     public function approved()
     {
-        $approvedprojs = ProjectsModel::where('status', 'Approved')->get();
+        $approvedprojs = Project::where('status', 'Approved')->get();
 
         // Fetch the approval date for each approved project
         foreach ($approvedprojs as $project) {
@@ -84,20 +84,20 @@ class StatusController extends Controller
 
     public function deferred()
     {
-        $projects = ProjectsModel::where('status', 'Deferred')->get();
+        $projects = Project::where('status', 'Deferred')->get();
         return view('status.deferred', compact('projects'));
     }
 
     public function disapproved()
     {
-        $projects = ProjectsModel::where('status', 'Disapproved')->get();
+        $projects = Project::where('status', 'Disapproved')->get();
         return view('status.disapproved', compact('projects'));
     }
 
     public function forRevisionSidebar()
     {
-        // $projects = ProjectsModel::all();
-        $projects = ProjectsModel::where('status', 'For Revision')->get();
+        // $projects = Project::all();
+        $projects = Project::where('status', 'For Revision')->get();
         return view('dashboard', compact('projects'));
     }
 

@@ -9,8 +9,8 @@ class TrackController extends Controller
 {
     public function track(Request $request)
     {
-        $projectId = $request->input('proj_id');
-        $project = Project::find($projectId);
+        $trackingCode = $request->input('tracking_code');
+        $project = Project::where('tracking_code', $trackingCode)->first();
 
         // Initialize approvalDate
         $approvalDate = null;
@@ -21,4 +21,5 @@ class TrackController extends Controller
 
         return view('welcome', compact('project','approvalDate'));
     }
+
 }

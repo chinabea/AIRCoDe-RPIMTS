@@ -1,17 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\ProjectHistory;
-use App\Models\ProjectsModel;
+use App\Models\History;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ProjectHistoryController extends Controller
 {
     public function showHistory($id)
     {
-        $project = ProjectsModel::all();
-        $history = ProjectHistory::where('project_id', $id)->get();
-        $projects = ProjectsModel::where('status', 'For Revision')->select('*')->get();
+        $project = Project::all();
+        $history = History::where('project_id', $id)->get();
+        $projects = Project::where('status', 'For Revision')->select('*')->get();
         return view('projects.history', compact('project', 'history', 'projects'));
     }
 

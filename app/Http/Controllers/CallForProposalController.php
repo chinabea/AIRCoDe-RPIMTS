@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use App\Models\ProposalsModel;
+use App\Models\CallForProposal;
 
 class ProposalsController extends Controller
 {
@@ -11,8 +12,8 @@ class ProposalsController extends Controller
     public function viewCallforProposals()
     {
         // Fetch all records from the model and pass them to the view
-        // $items = ProposalsModel::all();
-        $records = ProposalsModel::orderBy('created_at', 'ASC')->get();
+        // $items = CallForProposal::all();
+        $records = CallForProposal::orderBy('created_at', 'ASC')->get();
 
         return view('transparency.call-for-proposals.call-for-proposals', compact('records'));
     }
@@ -20,8 +21,8 @@ class ProposalsController extends Controller
     public function index()
     {
         // Fetch all records from the model and pass them to the view
-        // $items = ProposalsModel::all();
-        $records = ProposalsModel::orderBy('created_at', 'ASC')->get();
+        // $items = CallForProposal::all();
+        $records = CallForProposal::orderBy('created_at', 'ASC')->get();
 
         return view('transparency.call-for-proposals.index', compact('records'));
     }
@@ -45,13 +46,13 @@ class ProposalsController extends Controller
                 'date',
                 function ($attribute, $value, $fail) use ($request) {
                     $startdate = $request->input('startdate');
-                    
+
                     if ($value && strtotime($value) < strtotime($startdate)) {
                         $fail('The end date must be on or after the start date.');
                     }
                 },
             ],
-            // 'status' => 'string', // You may add specific rules for 'status' 
+            // 'status' => 'string', // You may add specific rules for 'status'
             'status' => [
                 'nullable',
                 'string',
@@ -60,7 +61,7 @@ class ProposalsController extends Controller
             //         $startDate = $request->input('start_date');
             //         $endDate = $request->input('end_date');
             //         $now = now();
-            
+
             //         // Check if the current date is before the start date
             //         if ($now < $startDate) {
             //             if ($value !== 'Opening Soon!') {
@@ -87,7 +88,7 @@ class ProposalsController extends Controller
             //         }
             //     },
             ],
-            
+
             'remarks' => 'nullable|string',
         ];
 
@@ -99,13 +100,13 @@ class ProposalsController extends Controller
         ];
 
         try {
-    
+
         // Validate the request data against the defined rules
         $validatedData = $request->validate($rules, $customMessages);
-        
+
         // Create the proposal using the validated data
-        ProposalsModel::create($validatedData);
-    
+        CallForProposal::create($validatedData);
+
         // Redirect to the index or show view, or perform other actions
         return redirect()->route('call-for-proposals')->with('success', 'Call for Proposal Successfully Added!');
     }catch (QueryException $e) {
@@ -113,7 +114,7 @@ class ProposalsController extends Controller
         // You can handle this error by returning an error response
         // You can pass the error message to the view for the modal
         $errorMessage = 'Error: Unable to create call for proposals. Please try again later.';
-    
+
         // Return a response, passing the error message to the view
         // return view('errors.errorView')->with('error', $errorMessage);
         // Redirect back with the error message
@@ -121,14 +122,14 @@ class ProposalsController extends Controller
 
     }
     }
-    
-    
+
+
 
 
 
     // public function store(Request $request)
     // {
-    //     ProposalsModel::create($request->all());
+    //     CallForProposal::create($request->all());
 
     //     // Redirect to the index or show view, or perform other actions
     //     return redirect()->route('call-for-proposals')->with('success', 'Data Successfully Added!');
@@ -137,7 +138,7 @@ class ProposalsController extends Controller
     public function show($id)
     {
         // Retrieve and show the specific item using the provided ID
-        $proposals = ProposalsModel::findOrFail($id);
+        $proposals = CallForProposal::findOrFail($id);
 
         return view('transparency.call-for-proposals.show', compact('proposals'));
     }
@@ -145,7 +146,7 @@ class ProposalsController extends Controller
     public function edit($id)
     {
         // Retrieve and show the specific item for editing
-        $proposals = ProposalsModel::findOrFail($id);
+        $proposals = CallForProposal::findOrFail($id);
 
         return view('transparency.call-for-proposals.edit', compact('proposals'));
     }
@@ -153,7 +154,7 @@ class ProposalsController extends Controller
     // public function update(Request $request, $id)
     // {
     //     // Validate and update the item with the provided ID
-    //     $proposals = ProposalsModel::findOrFail($id);
+    //     $proposals = CallForProposal::findOrFail($id);
     //     // Update the item properties using the request data
     //     $proposals->update($request->all());
 
@@ -172,7 +173,7 @@ class ProposalsController extends Controller
                 'date',
                 function ($attribute, $value, $fail) use ($request) {
                     $startdate = $request->input('startdate');
-                    
+
                     if ($value && strtotime($value) < strtotime($startdate)) {
                         $fail('The end date must be on or after the start date.');
                     }
@@ -184,22 +185,22 @@ class ProposalsController extends Controller
                 function ($attribute, $value, $fail) use ($request) {
                     $startDate = $request->input('startdate');
                     $endDate = $request->input('enddate');
-        
+
                     // Check if the status is 'Open' if the current date is between start and end dates
                     if ($value === 'Open' && now() >= $startDate && now() <= $endDate) {
                         return;
                     }
-        
+
                     // Check if the status is 'Closed' if the current date is past the end date
                     if ($value === 'Closed' && now() > $endDate) {
                         return;
                     }
-        
+
                     // Check if the status is 'Opening Soon!' if the current date is before the start date
                     if ($value === 'Opening Soon!' && now() < $startDate) {
                         return;
                     }
-        
+
                     $fail('Invalid status based on start and end dates.');
                 },
             ],
@@ -217,7 +218,7 @@ class ProposalsController extends Controller
             $validatedData = $request->validate($rules, $customMessages);
 
             // Update the item with the provided ID using the validated data
-            $proposals = ProposalsModel::findOrFail($id);
+            $proposals = CallForProposal::findOrFail($id);
             $proposals->update($validatedData);
 
             // Redirect to the index or show view, or perform other actions
@@ -226,7 +227,7 @@ class ProposalsController extends Controller
             // Handle any exceptions that occur during the update process
             // You can customize the error message based on the specific exception or database error.
             $errorMessage = 'Error updating the proposal: ' . $e->getMessage();
-            
+
             // Redirect back with the error message
             return redirect()->back()->with('error', $errorMessage);
         }
@@ -236,7 +237,7 @@ class ProposalsController extends Controller
     public function destroy($id)
     {
         // Delete the item with the provided ID
-        $proposals = ProposalsModel::findOrFail($id);
+        $proposals = CallForProposal::findOrFail($id);
         $proposals->delete();
 
         // Redirect to the index or perform other actions

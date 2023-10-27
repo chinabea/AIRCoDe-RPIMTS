@@ -18,6 +18,7 @@
                   <thead>
                       <tr>
                           <th>ID</th>
+                          <th>Tracking Code</th>
                           <th>Title</th>
                           <th>Research Group</th>
                           <th>Date Submitted</th>
@@ -30,6 +31,7 @@
                           @if($record->user_id === auth()->user()->id)
                           <tr>
                               <td class="align-middle">{{ $record->id }}</td>
+                              <td class="align-middle">{{ $record->tracking_code }}</td>
                               <td class="align-middle">
                                 <a href="{{ route('submission-details.show', $record->id) }}">{{ $record->projname }}</a>
                               </td>

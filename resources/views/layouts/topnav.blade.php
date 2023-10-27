@@ -68,16 +68,13 @@
 
 </style>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-      <div class="topbar-divider d-none d-sm-block"></div>
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600">
                     @if(Auth::user()->role == 4)
                         <i class="fa-solid fa-user-gear"></i>
-                        <span class="text-xs">Reviewer</span><br>
+                        <p class="text-xs">Reviewer</p><br>
                         <b>{{ Auth::user()->name }}</b>
                     @elseif(Auth::user()->role == 3)
-                       <i class="fa-solid fa-user-gear"></i>
                        <span class="text-xs">Researcher</span><br>
                        <b>{{ Auth::user()->name }}</b>
                     @elseif(Auth::user()->role == 2)
@@ -85,7 +82,7 @@
                         <span class="text-xs">Staff</span><br>
                         <b>{{ Auth::user()->name }}</b>
                     @elseif(Auth::user()->role == 1)
-                        <i class="fa-solid fa-user-gear"></i>
+                        <i class="fa-solid fa-user"></i>
                         <span class="text-xs">Director</span><br>
                         <b>{{ Auth::user()->name }}</b>
                     @else
@@ -94,7 +91,6 @@
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     Activity Log
