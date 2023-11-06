@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Notifications\ResearchProposalSubmissionNotification;
+use Exception;
 // use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Rules\DateNotBeforeToday;
-use App\Rules\NotBeforeTodaysMonthYear;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\Review;
@@ -15,7 +14,6 @@ use App\Models\Member;
 use App\Models\LineItemBudget;
 use App\Models\Task;
 use App\Models\File;
-use App\Models\ProjectHistory;
 use App\Models\CallForProposal;
 use Rorecek\Ulid\Ulid;
 
@@ -28,7 +26,7 @@ class ProjectController extends Controller
             // Fetch records and related data from the database
             $projects = Project::all();
             $reviewers = User::whereIn('id', Review::pluck('user_id'))->get();
-            $call_for_proposals = CallForProposal::all(); 
+            $call_for_proposals = CallForProposal::all();
 
             return view('projects.index', compact('projects', 'reviewers', 'call_for_proposals'));
         } catch (Exception $e) {
@@ -37,13 +35,13 @@ class ProjectController extends Controller
         }
     }
 
-    
+
     public function create()
     {
         try {
             $project = new Project();
             $users = User::all();
-            $call_for_proposals = CallForProposal::all(); 
+            $call_for_proposals = CallForProposal::all();
 
             return view('projects.create', ['call_for_proposals' => $call_for_proposals]);
         } catch (Exception $e) {
@@ -51,7 +49,7 @@ class ProjectController extends Controller
             return redirect()->route('projects.create')->with('error', 'An error occurred while creating the project: ' . $e->getMessage());
         }
     }
-    
+
 
     public function store(Request $request)
     {

@@ -14,7 +14,7 @@
             </div>
 
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-hover table-sm">
+              <table id="example1" class="table table-bordered table-hover text-center table-sm">
                   <thead>
                       <tr>
                           <th>#</th>
@@ -46,7 +46,7 @@
                               </td>
                               <td class="align-middle">{{ $project->research_group }}</td>
                               <td class="align-middle">{{ $project->created_at->format('F j, Y') }}</td>
-                              <td class="align-middle">{{ $project->status }}</td>
+                              <td class="align-middle"><span class="badge badge-warning text-sm">{{ $project->status }}</span></td>
                               <td class="align-middle">
                                   <div class="btn-group align-middle" role="group" aria-label="Basic example">
                                   <a href="{{ route('submission-details.show', $project->id) }}" type="button" class="btn btn-secondary">

@@ -48,21 +48,21 @@
                               <td class="align-middle">{{ $record->research_group }}</td>
                               <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
                               <td class="align-middle">
-                                
+
                                 @if ($record->status === 'Draft')
-                                    <span class="badge badge-primary">Draft</span>
+                                    <span class="badge badge-primary text-sm">Draft</span>
                                 @elseif ($record->status === 'Under Evaluation')
-                                    <span class="badge badge-info">Under Evaluation</span>
+                                    <span class="badge badge-info text-sm">Under Evaluation</span>
                                 @elseif ($record->status === 'For Revision')
-                                    <span class="badge badge-warning">For Revision</span>
+                                    <span class="badge badge-warning text-sm">For Revision</span>
                                 @elseif ($record->status === 'Deferred')
-                                    <span class="badge badge-secondary">Deferred</span>
+                                    <span class="badge badge-secondary text-sm">Deferred</span>
                                 @elseif ($record->status === 'Approved')
-                                    <span class="badge badge-success">Approved</span>
+                                    <span class="badge badge-success text-sm">Approved</span>
                                 @elseif ($record->status === 'Disapproved')
-                                    <span class="badge badge-danger">Disapproved</span>
+                                    <span class="badge badge-danger text-sm">Disapproved</span>
                                 @endif
-                                
+
                               </td>
                               <td class="align-middle">
                                   <div class="btn-group align-middle" role="group" aria-label="Basic example">

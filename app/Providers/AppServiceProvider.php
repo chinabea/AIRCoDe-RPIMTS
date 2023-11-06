@@ -22,10 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $recs = Project::all();
         $revs = Review::all();
+        // $recs = Project::all();
 
+        // view()->share('recs', $recs);
         view()->share('revs', $revs);
-        view()->share('recs', $recs);
     }
 }

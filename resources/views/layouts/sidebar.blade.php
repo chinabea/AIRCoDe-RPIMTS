@@ -113,7 +113,7 @@
           }
 
           </style> -->
-         
+
 
           <li class="nav-item">
             <a href="{{ route('staff.home') }}" class="nav-link {{ Route::currentRouteName() == 'staff.home' ? 'active' : '' }}">
@@ -185,7 +185,7 @@
     <div class="sidebar">
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
+
         <li class="nav-header">MAIN MENU</li>
           <li class="nav-item menu-open">
             <!-- <ul class="nav nav-treeview"> -->
@@ -483,10 +483,6 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2"><ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-    <!-- Add icons to the links using the .nav-icon class
-        with font-awesome or any other icon font library -->
-        
-    <button id="theme-toggle" class="btn btn-primary">Toggle Theme</button>
     <li class="nav-header">MAIN MENU</li>
     <li class="nav-item">
         <a href="{{ route('reviewer.home') }}" class="nav-link {{ Route::currentRouteName() == 'reviewer.home' ? 'active' : '' }}">
@@ -510,14 +506,17 @@
       @else
           <p>No items assigned for review</p>
       @endif
+      <button id="theme-toggle" class="btn btn-primary">Toggle Theme</button>
           </ul>
+
         </div>
-        
-    <button id="theme-toggle" class="btn btn-primary"> <i class="nav-icon fas fa-contrast-outline"></i>Toggle Theme</button>
-    <!-- {{ Route::currentRouteName() == 'review.for-review-project' ? 'active' : '' }} -->
       </aside>
 
 @else
     @include('sidebar-guest')
 
 @endif
+
+
+
+    <!-- {{ Route::currentRouteName() == 'review.for-review-project' ? 'active' : '' }} -->

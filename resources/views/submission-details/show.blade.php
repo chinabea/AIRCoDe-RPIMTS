@@ -40,15 +40,15 @@
 
 @if(Auth::check())
 @if(Auth::user()->role == 1 || Auth::user()->role == 3)
-  
-          
+
+
   @elseif(Auth::user()->role == 2 || Auth::user()->role == 4)
   <div class="col-md-12">
-    
-  @foreach ($revs as $review) 
+
+  @foreach ($revs as $review)
     @if ($review->user->id === Auth::user()->id &&  $review->contribution_to_knowledge !== null && $review->project_id === $records->id)
     <div class="alert alert-danger">
-        You have reviewed this project. 
+        You have reviewed this project.
     </div>
     @endif
   @endforeach
@@ -75,13 +75,13 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr> 
+                      <tr>
                         <td class="align-middle">1</td>
                         <th class="align-middle">Does the paper contribute to the body of knowledge?</th>
                           <td class="align-middle">
-                            @foreach ($revs as $review) 
+                            @foreach ($revs as $review)
                             @if ($review->user->role === 4 && $review->project_id === $records->id)
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p> 
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p>
                             @endif
                             @endforeach
                           </td>
@@ -89,9 +89,9 @@
                       <tr>
                         <td class="align-middle">2</td>
                         <th class="align-middle">Is this paper technically sound?</th>
-                        <td>@foreach ($revs as $review) 
+                        <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p>
                           @endif
                           @endforeach
                         </td>
@@ -99,9 +99,9 @@
                       <tr>
                         <td class="align-middle">3</td>
                         <th class="align-middle">Is the subject matter presented in a comprehensive manner?</th>
-                        <td>@foreach ($revs as $review) 
+                        <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p>
                           @endif
                           @endforeach
                         </td>
@@ -109,9 +109,9 @@
                       <tr>
                         <td class="align-middle">4</td>
                           <th class="align-middle">Are the references provided applicable and sufficient?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -119,9 +119,9 @@
                       <tr>
                         <td class="align-middle">5</td>
                           <th class="align-middle">Are there references that are not appropriate for the topic being discussed?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -129,9 +129,9 @@
                       <tr>
                         <td class="align-middle">6</td>
                           <th class="align-middle">Is the application comprehensive?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -139,9 +139,9 @@
                       <tr>
                         <td class="align-middle">7</td>
                           <th class="align-middle">Is the grammar and presentation poor? Although this should not be heavily waited.</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -149,9 +149,9 @@
                       <tr>
                         <td class="align-middle">8</td>
                           <th class="align-middle">If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -159,9 +159,9 @@
                       <tr>
                         <td class="align-middle">9</td>
                           <th class="align-middle">Are figures and tables clear and easy to interpret?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -169,9 +169,9 @@
                       <tr>
                         <td class="align-middle">10</td>
                           <th class="align-middle">Are explanations adequate?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -179,9 +179,9 @@
                       <tr>
                         <td class="align-middle">11</td>
                           <th class="align-middle">Are there any technical or methodological errors?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                             @if ($review->user->role === 4 && $review->project_id === $records->id)
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p>
                             @endif
                             @endforeach
                           </td>
@@ -189,9 +189,9 @@
                       <tr>
                         <td class="align-middle">12</td>
                           <th class="align-middle">Other Comments</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -199,16 +199,16 @@
                       <tr>
                         <td class="align-middle">13</td>
                           <th class="align-middle">Review Decision</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p>
                           @endif
                           @endforeach
                           </td>
                       </tr>
                   </tbody>
               </table>
-         
+
         </div>
     </div>
 
@@ -237,7 +237,7 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-          <form method="POST" 
+          <form method="POST"
             @if(auth()->user()->role == 2)
             action="{{ route('store.summary.reviews', $records->id) }}">
             @csrf
@@ -249,7 +249,7 @@
             <div class="form-group">
               <label for="contribution_to_knowledge">1. Does the paper contribute to the body of knowledge?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge !== null && $review->project_id === $records->id)
                       <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea>
                     @endif
@@ -262,12 +262,12 @@
             <div class="form-group">
               <label for="technical_soundness">2.	Is this paper technically sound?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->technical_soundness !== null && $review->project_id === $records->id)
                       <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" readonly>{{ $review->technical_soundness }}</textarea>
                     @endif
                 @endforeach
-              @else 
+              @else
                 <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1"></textarea>
               @endif
             </div>
@@ -275,7 +275,7 @@
             <div class="form-group">
               <label for="comprehensive_subject_matter">3.	Is the subject matter presented in a comprehensive manner?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->comprehensive_subject_matter !== null && $review->project_id === $records->id)
                       <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
                     @endif
@@ -288,25 +288,25 @@
             <div class="form-group">
               <label for="applicable_and_sufficient_references">4. Are the references provided applicable and sufficient?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->applicable_and_sufficient_references !== null && $review->project_id === $records->id)
                       <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1" readonly>{{ $review->applicable_and_sufficient_references }}</textarea>
                     @endif
                 @endforeach
-                @else 
+                @else
                   <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1"></textarea>
                 @endif
             </div>
-            
+
             <div class="form-group">
               <label for="inappropriate_references">5.	Are there references that are not appropriate for the topic being discussed?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->inappropriate_references !== null && $review->project_id === $records->id)
                       <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1" readonly>{{ $review->inappropriate_references }}</textarea>
                     @endif
                 @endforeach
-                @else 
+                @else
                   <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1"></textarea>
                 @endif
             </div>
@@ -314,12 +314,12 @@
             <div class="form-group">
               <label for="comprehensive_application">6.	Is the application comprehensive?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->comprehensive_application !== null && $review->project_id === $records->id)
                       <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1" readonly>{{ $review->comprehensive_application }}</textarea>
                     @endif
                 @endforeach
-                @else 
+                @else
                   <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1"></textarea>
                 @endif
             </div>
@@ -327,12 +327,12 @@
             <div class="form-group">
               <label for="grammar_and_presentation">7.	Is the grammar and presentation poor? Although this should not be heavily waited.</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->grammar_and_presentation !== null && $review->project_id === $records->id)
                       <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1" readonly>{{ $review->grammar_and_presentation }}</textarea>
                     @endif
                 @endforeach
-                @else 
+                @else
                   <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1"></textarea>
                 @endif
             </div>
@@ -340,7 +340,7 @@
             <div class="form-group">
               <label for="assumption_of_reader_knowledge">8.	If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->assumption_of_reader_knowledge !== null && $review->project_id === $records->id)
                       <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1" readonly>{{ $review->assumption_of_reader_knowledge }}</textarea>
                     @endif
@@ -353,12 +353,12 @@
             <div class="form-group">
               <label for="clear_figures_and_tables">9.	Are figures and tables clear and easy to interpret?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->clear_figures_and_tables !== null && $review->project_id === $records->id)
                       <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1" readonly>{{ $review->clear_figures_and_tables }}</textarea>
                     @endif
                 @endforeach
-                @else 
+                @else
                   <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1"></textarea>
                 @endif
             </div>
@@ -366,12 +366,12 @@
             <div class="form-group">
               <label for="adequate_explanations">10.	Are explanations adequate?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->adequate_explanations !== null && $review->project_id === $records->id)
                       <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" readonly>{{ $review->adequate_explanations }}</textarea>
                     @endif
                 @endforeach
-                @else 
+                @else
                   <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1"></textarea>
                 @endif
             </div>
@@ -379,12 +379,12 @@
             <div class="form-group">
               <label for="technical_or_methodological_errors">11.	Are there any technical or methodological errors?</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->technical_or_methodological_errors !== null && $review->project_id === $records->id)
                       <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1" readonly>{{ $review->technical_or_methodological_errors }}</textarea>
                     @endif
                 @endforeach
-                @else 
+                @else
                   <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1"></textarea>
                 @endif
             </div>
@@ -392,7 +392,7 @@
             <div class="form-group">
               <label for="other_rsc">Other Comments</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->other_comments !== null && $review->project_id === $records->id)
                       <textarea id="other_comments" name="other_comments" class="form-control" rows="1" readonly>{{ $review->other_comments }}</textarea>
                     @endif
@@ -400,13 +400,13 @@
                       <textarea id="other_comments" name="other_comments" class="form-control" rows="1"></textarea>
                     @endif
                 @endforeach
-              @endif 
+              @endif
             </div>
 
             <div class="form-group">
                 <label for="review_decision">Review Decision</label>
               @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                     @if ($review->user->id === Auth::user()->id && $review->review_decision !== null && $review->project_id === $records->id)
                       <select class="form-control" id="review_decision" name="review_decision" required @if ($reviewerCommented) disabled @endif>
                           <option value="">Select</option>
@@ -424,7 +424,7 @@
                       </select>
                     @endif
                 @endforeach
-              @endif 
+              @endif
             </div>
             <br>
             <a href="#" class="btn btn-secondary">Cancel</a>
@@ -442,121 +442,121 @@
           <div class="collapse show" id="collapseCardExample1" style="">
               <div class="card-body">
                 <label>1. Does the paper contribute to the body of knowledge?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>2.	Is this paper technically sound?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>3.	Is the subject matter presented in a comprehensive manner?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>4.	Are the references provided applicable and sufficient?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>5. Are there references that are not appropriate for the topic being discussed?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>6. Is the application comprehensive?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>7. Is the grammar and presentation poor? Although this should not be heavily waited.</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>8. If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>9. Are figures and tables clear and easy to interpret?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>10.	Are explanations adequate?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>11.	Are there any technical or methodological errors?</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>12. Other Comments</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p>
                 @endif
                 @endforeach
-                
+
                 <br>
 
                 <label>13. Review Decision</label><br>
-                @foreach ($revs as $review) 
+                @foreach ($revs as $review)
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
-                <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
+                <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p>
                 @endif
                 @endforeach -->
-                
-                
+
+
               <!-- </div>
           </div>
       </div> -->
@@ -643,7 +643,7 @@
           @endif -->
       <!-- </div>
         <div class="card-body"> -->
-          <!-- <form method="POST" 
+          <!-- <form method="POST"
           @if(auth()->user()->role == 2)
           action="{{ route('store.summary.reviews', $records->id) }}">
           @csrf
@@ -655,7 +655,7 @@
           <div class="form-group">
             <label for="contribution_to_knowledge">1. Does the paper contribute to the body of knowledge?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge !== null && $review->project_id === $records->id)
                     <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea>
                   @endif
@@ -663,13 +663,13 @@
                     <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="technical_soundness">2.	Is this paper technically sound?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->technical_soundness !== null && $review->project_id === $records->id)
                     <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" readonly>{{ $review->technical_soundness }}</textarea>
                   @endif
@@ -677,13 +677,13 @@
                     <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="comprehensive_subject_matter">3.	Is the subject matter presented in a comprehensive manner?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->comprehensive_subject_matter !== null && $review->project_id === $records->id)
                     <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
                   @endif
@@ -691,13 +691,13 @@
                     <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="applicable_and_sufficient_references">4. Are the references provided applicable and sufficient?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->applicable_and_sufficient_references !== null && $review->project_id === $records->id)
                     <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1" readonly>{{ $review->applicable_and_sufficient_references }}</textarea>
                   @endif
@@ -705,13 +705,13 @@
                     <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
-          
+
           <div class="form-group">
             <label for="inappropriate_references">5.	Are there references that are not appropriate for the topic being discussed?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->inappropriate_references !== null && $review->project_id === $records->id)
                     <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1" readonly>{{ $review->inappropriate_references }}</textarea>
                   @endif
@@ -719,13 +719,13 @@
                     <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="comprehensive_application">6.	Is the application comprehensive?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->comprehensive_application !== null && $review->project_id === $records->id)
                     <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1" readonly>{{ $review->comprehensive_application }}</textarea>
                   @endif
@@ -733,13 +733,13 @@
                     <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="grammar_and_presentation">7.	Is the grammar and presentation poor? Although this should not be heavily waited.</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->grammar_and_presentation !== null && $review->project_id === $records->id)
                     <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1" readonly>{{ $review->grammar_and_presentation }}</textarea>
                   @endif
@@ -747,13 +747,13 @@
                     <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="assumption_of_reader_knowledge">8.	If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->assumption_of_reader_knowledge !== null && $review->project_id === $records->id)
                     <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1" readonly>{{ $review->assumption_of_reader_knowledge }}</textarea>
                   @endif
@@ -761,13 +761,13 @@
                     <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="clear_figures_and_tables">9.	Are figures and tables clear and easy to interpret?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->clear_figures_and_tables !== null && $review->project_id === $records->id)
                     <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1" readonly>{{ $review->clear_figures_and_tables }}</textarea>
                   @endif
@@ -775,13 +775,13 @@
                     <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="adequate_explanations">10.	Are explanations adequate?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->adequate_explanations !== null && $review->project_id === $records->id)
                     <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" readonly>{{ $review->adequate_explanations }}</textarea>
                   @endif
@@ -789,13 +789,13 @@
                     <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="technical_or_methodological_errors">11.	Are there any technical or methodological errors?</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->technical_or_methodological_errors !== null && $review->project_id === $records->id)
                     <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1" readonly>{{ $review->technical_or_methodological_errors }}</textarea>
                   @endif
@@ -803,13 +803,13 @@
                     <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
             <label for="other_rsc">Other Comments</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->other_comments !== null && $review->project_id === $records->id)
                     <textarea id="other_comments" name="other_comments" class="form-control" rows="1" readonly>{{ $review->other_comments }}</textarea>
                   @endif
@@ -817,13 +817,13 @@
                     <textarea id="other_comments" name="other_comments" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
 
           <div class="form-group">
               <label for="review_decision">Review Decision</label>
             @if($reviewerCommented > 0)
-              @foreach ($revs as $review) 
+              @foreach ($revs as $review)
                   @if ($review->user->id === Auth::user()->id && $review->review_decision !== null && $review->project_id === $records->id)
                     <select class="form-control" id="review_decision" name="review_decision" required @if ($reviewerCommented) disabled @endif>
                         <option value="">Select</option>
@@ -841,7 +841,7 @@
                     </select>
                   @endif
               @endforeach
-            @endif 
+            @endif
           </div>
           <br>
           <a href="#" class="btn btn-secondary">Cancel</a>
@@ -867,13 +867,13 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr> 
+                      <tr>
                         <td class="align-middle">1</td>
                         <th class="align-middle">Does the paper contribute to the body of knowledge?</th>
                           <td class="align-middle">
-                            @foreach ($revs as $review) 
+                            @foreach ($revs as $review)
                             @if ($review->user->role === 4 && $review->project_id === $records->id)
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p> 
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p>
                             @endif
                             @endforeach
                           </td>
@@ -881,9 +881,9 @@
                       <tr>
                         <td class="align-middle">2</td>
                         <th class="align-middle">Is this paper technically sound?</th>
-                        <td>@foreach ($revs as $review) 
+                        <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p>
                           @endif
                           @endforeach
                         </td>
@@ -891,9 +891,9 @@
                       <tr>
                         <td class="align-middle">3</td>
                         <th class="align-middle">Is the subject matter presented in a comprehensive manner?</th>
-                        <td>@foreach ($revs as $review) 
+                        <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p>
                           @endif
                           @endforeach
                         </td>
@@ -901,9 +901,9 @@
                       <tr>
                         <td class="align-middle">4</td>
                           <th class="align-middle">Are the references provided applicable and sufficient?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -911,9 +911,9 @@
                       <tr>
                         <td class="align-middle">5</td>
                           <th class="align-middle">Are there references that are not appropriate for the topic being discussed?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -921,9 +921,9 @@
                       <tr>
                         <td class="align-middle">6</td>
                           <th class="align-middle">Is the application comprehensive?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -931,9 +931,9 @@
                       <tr>
                         <td class="align-middle">7</td>
                           <th class="align-middle">Is the grammar and presentation poor? Although this should not be heavily waited.</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -941,9 +941,9 @@
                       <tr>
                         <td class="align-middle">8</td>
                           <th class="align-middle">If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -951,9 +951,9 @@
                       <tr>
                         <td class="align-middle">9</td>
                           <th class="align-middle">Are figures and tables clear and easy to interpret?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -961,9 +961,9 @@
                       <tr>
                         <td class="align-middle">10</td>
                           <th class="align-middle">Are explanations adequate?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -971,9 +971,9 @@
                       <tr>
                         <td class="align-middle">11</td>
                           <th class="align-middle">Are there any technical or methodological errors?</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                             @if ($review->user->role === 4 && $review->project_id === $records->id)
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p>
                             @endif
                             @endforeach
                           </td>
@@ -981,9 +981,9 @@
                       <tr>
                         <td class="align-middle">12</td>
                           <th class="align-middle">Other Comments</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -991,9 +991,9 @@
                       <tr>
                         <td class="align-middle">13</td>
                           <th class="align-middle">Review Decision</th>
-                          <td>@foreach ($revs as $review) 
+                          <td>@foreach ($revs as $review)
                           @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
+                          <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p>
                           @endif
                           @endforeach
                           </td>
@@ -1008,8 +1008,8 @@
 @endif
 
     @if(Auth::user()->role == 1)
-        
-     
+
+
     <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist">
           <li class="nav-item">
               <a class="nav-link" id="details-btn" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">
@@ -1048,10 +1048,10 @@
           </li>
       </ul>
     @elseif(Auth::user()->role == 2)
-      
-    
+
+
     @elseif(Auth::user()->role == 3)
-    
+
     <!-- <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist"> -->
     <div class="col-md-12">
       <div class="card card-primary card-tabs">
@@ -1117,7 +1117,7 @@
       @endif
 
 <div class="card-body">
-      
+
 <div id="actions-form" class="mt-4" style="display: none;">
   <!-- <div class="container mt-5">
     <div class="card shadow mb-4">
@@ -1213,7 +1213,7 @@
                 {{ $records->researchgroup }}
                 <br>
                 <br>
-                
+
                 <label>Author(s):</label><br>
                 {{ $records->authors }}
                 <p>{{ $data->user->name }}</p>
@@ -1489,7 +1489,7 @@
                 <td>{{ $file->updated_at }}</td>
                 <td>
                 <a href="{{ route('submission-details.files.preview', ['filename' => $file->file_path]) }}" class="btn btn-secondary">
-                    <i class="fas fa-eye"></i> 
+                    <i class="fas fa-eye"></i>
                 </a>
 
                 <a href="{{ route('file.download', ['id' => $file->id]) }}" class="btn btn-primary">
@@ -1558,7 +1558,7 @@
                         <div class="py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1">
                             <i class="fas fa-info-circle fa-2x text-gray-300"></i>
                             <h3 class="m-0 ml-3 font-weight-bold">{{ $records->project_name }}</h3>
-                            
+
                         </div>
                         @if (auth()->user()->role == 1)
                                 <h6 class="m-0 font-weight-bold text-primary text-center">Review Decision</h6>
@@ -1585,66 +1585,66 @@
                         <div class="card-body">
                             <label>1. Does the paper contribute to the body of knowledge?</label><br>
                             <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p>
-                
+
                             <br>
 
                             <label>2.	Is this paper technically sound?</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p>
+
                             <br>
 
                             <label>3.	Is the subject matter presented in a comprehensive manner?</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p>
+
                             <br>
 
                             <label>4.	Are the references provided applicable and sufficient?</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p>
+
                             <br>
 
                             <label>5. Are there references that are not appropriate for the topic being discussed?</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p>
+
                             <br>
 
                             <label>6. Is the application comprehensive?</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p>
+
                             <br>
 
                             <label>7. Is the grammar and presentation poor? Although this should not be heavily waited.</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p>
+
                             <br>
 
                             <label>8. If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p>
+
                             <br>
 
                             <label>9. Are figures and tables clear and easy to interpret?</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p>
+
                             <br>
 
                             <label>10.	Are explanations adequate?</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p>
+
                             <br>
 
                             <label>11.	Are there any technical or methodological errors?</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p>
+
                             <br>
 
                             <label>12. Other Comments</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
-                            
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p>
+
                             <br>
 
                             <label>13. Review Decision</label><br>
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
+                            <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p>
                           </div>
                                 @php
                                     $reviewAvailable = true; // Set the flag to true if a review matches the conditions
@@ -1768,7 +1768,7 @@
 </div>
 
 <script>
- 
+
   function confirmDelete(url) {
       if (confirm('Are you sure you want to delete this record?')) {
       // Create a hidden form and submit it programmatically

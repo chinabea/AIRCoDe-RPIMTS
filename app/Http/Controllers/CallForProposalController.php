@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Exception;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class CallForProposalController extends Controller
 
     public function index()
     {
-        
+
         try {
             // Fetch all records from the model and pass them to the view
             // $items = CallForProposal::all();
@@ -209,7 +210,7 @@ class CallForProposalController extends Controller
             // Delete the item with the provided ID
             $proposals = CallForProposal::findOrFail($id);
             $proposals->delete();
-    
+
             // Redirect to the index or perform other actions
             return redirect()->route('call-for-proposals')->with('success', 'Call for Proposal Successfully Deleted!');
         } catch (Exception $e) {

@@ -21,56 +21,62 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         // \App\Models\User::factory(8)->create();
 
         $users = [
             [
                 'name' => 'China',
                 'email' => 'chibea@my.cspc.edu.ph',
-                'role' => 1, 
+                'role' => 1,
                 'password' => Hash::make('password'),
             ],
             [
                 'name' => 'Jessemri Tabayag',
                 'email' => 'jessemtabayag@gmail.com',
-                'role' => 2, 
+                'role' => 2,
                 'password' => Hash::make('password'),
             ],
             [
-                'name' => 'Louie Molina',
-                'email' => 'loumolina@my.cspc.edu.ph',
-                'role' => 3, 
+                'name' => 'China Bea',
+                'email' => 'ciaeaxyz@gmail.com',
+                'role' => 3,
                 'password' => Hash::make('password'),
             ],
             [
-                'name' => 'Bea',
+                'name' => 'China Bea',
                 'email' => 'biyanachi@gmail.com',
-                'role' => 3, 
+                'role' => 3,
                 'password' => Hash::make('password'),
             ],
             [
                 'name' => 'Mark Louis',
                 'email' => 'mlodavar@my.cspc.edu.ph',
-                'role' => 4, 
+                'role' => 4,
                 'password' => Hash::make('password'),
             ],
             [
                 'name' => 'Louie Molina',
                 'email' => '026ginuie@gmail.com',
-                'role' => 4, 
+                'role' => 4,
                 'password' => Hash::make('password'),
             ],
             [
                 'name' => 'Jessemri Tabayag',
                 'email' => 'jestabayag@my.cspc.edu.ph',
-                'role' => 4, 
+                'role' => 4,
                 'password' => Hash::make('password'),
             ],
             [
                 'name' => 'John Carlo Dacara',
                 'email' => 'jcdacara@my.cspc.edu.ph',
-                'role' => 4, 
+                'role' => 4,
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name' => 'Louie Molina',
+                'email' => 'loumolina@my.cspc.edu.ph',
+                'role' => 4,
                 'password' => Hash::make('password'),
             ],
         ];
@@ -123,17 +129,17 @@ class DatabaseSeeder extends Seeder
                 'end_date' => '2023-08-28',
             ],
         ];
-        
+
 
         foreach ($callForProposalsData as $data) {
             CallForProposal::create($data);
         }
-        
+
         $projectsData = [
             [
                 'tracking_code' => 'T4N5GF94',
                 'user_id' => '3',
-                'call_for_proposal_id' => 1, 
+                'call_for_proposal_id' => 1,
                 'project_name' => 'AI-Enabled Healthcare',
                 'status' => 'Under Evaluation',
                 'research_group' => 'Health Informatics Research Group',
@@ -149,7 +155,7 @@ class DatabaseSeeder extends Seeder
             [
                 'tracking_code' => 'HO69KG4R',
                 'user_id' => '4',
-                'call_for_proposal_id' => '1', 
+                'call_for_proposal_id' => '1',
                 'project_name' => 'AI for Community Health',
                 'status' => 'Draft',
                 'research_group' => 'HealthTech AI Research Group',
@@ -162,12 +168,12 @@ class DatabaseSeeder extends Seeder
                 'resources' => 'We will need access to health data, computational resources, and domain experts.',
                 'references' => '1. Smith, J. et al. (2021). AI in Healthcare: A Review. Journal of Health Informatics.
                     2. Johnson, M. (2020). Predicting Disease Outbreaks with Machine Learning. Proceedings of AI in Healthcare Conference.'
-                
+
             ],
             [
                 'tracking_code' => '03KY9JT7',
                 'user_id' => '3',
-                'call_for_proposal_id' => '1', 
+                'call_for_proposal_id' => '1',
                 'project_name' => 'Community Health Improvement Program',
                 'status' => 'For Revision',
                 'research_group' => 'Health and Wellness',
@@ -183,7 +189,7 @@ class DatabaseSeeder extends Seeder
             [
                 'tracking_code' => 'HS8L3DJX',
                 'user_id' => '4',
-                'call_for_proposal_id' => '4', 
+                'call_for_proposal_id' => '4',
                 'project_name' => ' Sustainable Urban Planning',
                 'status' => 'Draft',
                 'research_group' => 'Urban Development Research Team',
@@ -210,7 +216,7 @@ class DatabaseSeeder extends Seeder
             [
                 'tracking_code' => 'KE70M3HD',
                 'user_id' => '3',
-                'call_for_proposal_id' => '2', 
+                'call_for_proposal_id' => '2',
                 'project_name' => 'Community Garden Project',
                 'status' => 'Approved',
                 'research_group' => 'Environmental Studies',
@@ -226,7 +232,7 @@ class DatabaseSeeder extends Seeder
             [
                 'tracking_code' => 'NRO835DG',
                 'user_id' => '4',
-                'call_for_proposal_id' => '3', 
+                'call_for_proposal_id' => '3',
                 'project_name' => 'Improving Education Access',
                 'status' => 'Deferred',
                 'research_group' => 'Education and Community Development',
@@ -243,7 +249,7 @@ class DatabaseSeeder extends Seeder
             [
                 'tracking_code' => '03MFYELT',
                 'user_id' => '3',
-                'call_for_proposal_id' => '7', 
+                'call_for_proposal_id' => '7',
                 'project_name' => 'Clean Energy Initiative',
                 'status' => 'Disapproved',
                 'research_group' => 'Environmental Sustainability',
@@ -259,7 +265,7 @@ class DatabaseSeeder extends Seeder
             [
                 'tracking_code' => '83MFYE6LJ',
                 'user_id' => '3',
-                'call_for_proposal_id' => '7', 
+                'call_for_proposal_id' => '7',
                 'project_name' => 'Improving Local Education',
                 'status' => 'Under Evaluation',
                 'research_group' => 'Education for All',
@@ -276,7 +282,7 @@ class DatabaseSeeder extends Seeder
             [
                 'tracking_code' => '4GK6FNUI',
                 'user_id' => '3',
-                'call_for_proposal_id' => '7', 
+                'call_for_proposal_id' => '7',
                 'project_name' => 'Community Literacy Program',
                 'status' => 'Draft',
                 'research_group' => 'Education and Social Development',
@@ -288,12 +294,12 @@ class DatabaseSeeder extends Seeder
                 'workplan' => '1. Identify target communities. 2. Develop teaching materials. 3. Organize workshops.',
                 'resources' => 'Funding, volunteers, educational materials.',
                 'references' => '1. UNESCO Education for All Report. 2. Smith, J. (2019). Literacy Programs and Community Development.',
-            
+
             ],
             [
                 'tracking_code' => 'HF63VJR6',
                 'user_id' => '3',
-                'call_for_proposal_id' => '7', 
+                'call_for_proposal_id' => '7',
                 'project_name' => 'Improving Local Education',
                 'status' => 'For Revision',
                 'research_group' => 'Education Research Team',
@@ -305,12 +311,12 @@ class DatabaseSeeder extends Seeder
                 'workplan' => 'The project is scheduled to run for 12 months with several milestones.',
                 'resources' => 'We need funding, research tools, and qualified researchers.',
                 'references' => '1. Local Education Report 2020, 2. Education Improvement Handbook',
-            
+
             ],
             [
                 'tracking_code' => 'MHL80N6G',
                 'user_id' => '3',
-                'call_for_proposal_id' => '7', 
+                'call_for_proposal_id' => '7',
                 'project_name' => 'Environmental Sustainability in Urban Areas',
                 'status' => 'Under Evaluation',
                 'research_group' => 'Sustainability Research Group',
@@ -323,12 +329,12 @@ class DatabaseSeeder extends Seeder
                 'resources' => 'The research team will require access to data, funding, collaboration with local authorities, and the support of urban communities to carry out this project successfully.',
                 'references' => '1. Smith, J. et al. (2022). Sustainable Urban Development. Springer.
                                 2. Green, A. (2021). Urban Sustainability Practices. Oxford University Press.'
-            
+
             ],
             [
                 'tracking_code' => 'HK7KF9NF',
                 'user_id' => '3',
-                'call_for_proposal_id' => '7', 
+                'call_for_proposal_id' => '7',
                 'project_name' => 'Community Green Energy Initiative',
                 'status' => 'Under Evaluation',
                 'research_group' => 'Sustainability Research Team',
@@ -505,10 +511,10 @@ class DatabaseSeeder extends Seeder
                 'project_workplan' => 'The work plan is well-structured and outlines the project-s timeline and milestones effectively.',
                 'project_resources' =>'Provide a clear description of the resources required for the project, including equipment, materials, and funding sources.',
                 'project_references' => 'The list of references is well-cited and relevant to the project. Ensure that all citations follow the appropriate format consistently.',
-                'project_total_budget' =>'Include a detailed breakdown of the total budget, including expenses for each phase of the project.', 
+                'project_total_budget' =>'Include a detailed breakdown of the total budget, including expenses for each phase of the project.',
                 'other_comments' =>'The paper is well-structured and logically organized. The literature review is comprehensive, and the research questions are clearly defined. It would be beneficial to include a brief discussion of potential limitations.',
                 'review_decision' =>'Accepted',
-            
+
             ],
             [
                 'user_id' => 6,
@@ -516,7 +522,7 @@ class DatabaseSeeder extends Seeder
                 'deadline' => '2023-11-10',
                 'contribution_to_knowledge' => 'Yes, the paper makes a valuable contribution to the existing body of knowledge by presenting innovative findings in the field.',
                 'technical_soundness' => 'The paper demonstrates a high level of technical competence and rigor, ensuring the reliability of the presented results.',
-                'comprehensive_subject_matter' => 'The subject matter is presented comprehensively, covering all relevant aspects and providing a clear context for the research.', 
+                'comprehensive_subject_matter' => 'The subject matter is presented comprehensively, covering all relevant aspects and providing a clear context for the research.',
                 'applicable_and_sufficient_references' => 'The references are both applicable and sufficient, supporting the research and providing additional resources for readers.',
                 'inappropriate_references' => 'All references appear to be relevant to the topic, and there are no inappropriate citations.',
                 'comprehensive_application' => 'The application is comprehensive and well-detailed, offering a thorough understanding of how the research can be applied in real-world scenarios.',
@@ -545,7 +551,7 @@ class DatabaseSeeder extends Seeder
                 'deadline' => '2023-11-10',
                 'contribution_to_knowledge' => 'Yes, the paper makes a significant contribution to the existing body of knowledge in the field.',
                 'technical_soundness' => 'Yes, the paper is technically sound and well-researched.',
-                'comprehensive_subject_matter' => 'The subject matter is presented comprehensively, covering all essential aspects.', 
+                'comprehensive_subject_matter' => 'The subject matter is presented comprehensively, covering all essential aspects.',
                 'applicable_and_sufficient_references' => 'The references cited in the paper are relevant and provide a strong foundation for the research.',
                 'inappropriate_references' => 'All references seem appropriate and relevant to the topic being discussed.',
                 'comprehensive_application' => 'The application described in the paper is comprehensive and well-explained.',
@@ -575,7 +581,7 @@ class DatabaseSeeder extends Seeder
                 'deadline' => '2023-11-10',
                 'contribution_to_knowledge' => 'The paper-ss findings and insights add valuable information to the subject matter.',
                 'technical_soundness' => 'The methodology and experiments conducted in the paper are robust and well-executed.',
-                'comprehensive_subject_matter' => 'The paper provides a thorough and well-organized overview of the topic.', 
+                'comprehensive_subject_matter' => 'The paper provides a thorough and well-organized overview of the topic.',
                 'applicable_and_sufficient_references' => 'While the references are generally good, a few more recent sources could be included.',
                 'inappropriate_references' => '',
                 'comprehensive_application' => 'It covers various aspects and potential use cases effectively.',
@@ -607,7 +613,7 @@ class DatabaseSeeder extends Seeder
                 'deadline' => '2023-11-10',
                 'contribution_to_knowledge' => '',
                 'technical_soundness' => '',
-                'comprehensive_subject_matter' => '', 
+                'comprehensive_subject_matter' => '',
                 'applicable_and_sufficient_references' => '',
                 'inappropriate_references' => '',
                 'comprehensive_application' => '',
@@ -639,7 +645,7 @@ class DatabaseSeeder extends Seeder
                 'deadline' => '2023-11-10',
                 'contribution_to_knowledge' => ' The paper makes a significant contribution to the field by providing new insights into project name.',
                 'technical_soundness' => 'The paper demonstrates a high level of technical competence and rigor.',
-                'comprehensive_subject_matter' => 'The subject matter is presented comprehensively, covering all key aspects of [research_project_name].', 
+                'comprehensive_subject_matter' => 'The subject matter is presented comprehensively, covering all key aspects of [research_project_name].',
                 'applicable_and_sufficient_references' => 'The references provided are relevant and sufficient to support the research findings.',
                 'inappropriate_references' => 'All references appear relevant to the topic, and there are no irrelevant citations.',
                 'comprehensive_application' => 'The application of the research is thorough and comprehensive, addressing all key aspects of [research_project_name].',
@@ -671,7 +677,7 @@ class DatabaseSeeder extends Seeder
                 'deadline' => '2023-11-10',
                 'contribution_to_knowledge' => ' The paper makes a significant contribution to the field by providing new insights into project name.',
                 'technical_soundness' => 'The paper demonstrates a high level of technical competence and rigor.',
-                'comprehensive_subject_matter' => 'The subject matter is presented comprehensively, covering all key aspects of [research_project_name].', 
+                'comprehensive_subject_matter' => 'The subject matter is presented comprehensively, covering all key aspects of [research_project_name].',
                 'applicable_and_sufficient_references' => 'The references provided are relevant and sufficient to support the research findings.',
                 'inappropriate_references' => 'All references appear relevant to the topic, and there are no irrelevant citations.',
                 'comprehensive_application' => 'The application of the research is thorough and comprehensive, addressing all key aspects of [research_project_name].',
@@ -744,7 +750,7 @@ class DatabaseSeeder extends Seeder
                 'technical_or_methodological_errors' => 'No technical or methodological errors were identified in the paper; it is well-executed.',
                 'other_comments' => 'The paper is well-structured, and the arguments are logically presented. However, there is a need for more in-depth analysis in certain sections.',
                 'review_decision' => 'Rejected',
-            
+
                 'reseach_project_name' => 'The research project-s title is clear and concise, effectively conveying the scope of the study.',
                 'reseach_project_group' => 'The composition of the research project group is well-balanced, with expertise that aligns with the project-s objectives.',
                 'project_introduction' => 'The introduction provides a good overview of the research project and its significance in the broader context.',
@@ -756,7 +762,7 @@ class DatabaseSeeder extends Seeder
                 'project_resources' => 'The resources required for the project have been adequately identified and budgeted.',
                 'project_references' => 'The list of references is comprehensive and relevant to the research project.',
                 'project_total_budget' => 'The total budget for the research project appears reasonable and well-justified based on the proposed activities and resources.',
-               
+
 
             ],
             [
@@ -765,7 +771,7 @@ class DatabaseSeeder extends Seeder
                 'deadline' => '2023-11-10',
                 'contribution_to_knowledge' => null,
                 'technical_soundness' => null,
-                'comprehensive_subject_matter' => null, 
+                'comprehensive_subject_matter' => null,
                 'applicable_and_sufficient_references' => null,
                 'inappropriate_references' => null,
                 'comprehensive_application' => null,
