@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Project Team</h4>
+                <h4 class="modal-title" id="myModalLabel">Line-Item Budget</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -27,9 +27,11 @@
                         <input type="number" class="form-control" id="unit_price" name="unit_price" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Member</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add LIB</button>
+                </div>
             </form>
-
             </div>
         </div>
     </div>

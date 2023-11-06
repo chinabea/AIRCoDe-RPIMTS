@@ -19,12 +19,12 @@
                   <i class="fas fa-plus"></i> Add Call for Proposals</button>
                 @include('transparency.call-for-proposals.create')
 
-                <table id="example1" class="table table-bordered table-hover text-center table-sm">
+                <table id="example1" class="table table-bordered table-hover table-sm">
                   <thead>
                       <tr>
                           <th>#</th>
-                          <th>Proposal Title</th>
-                          <th>Proposal Description</th>
+                          <th>Title</th>
+                          <th>Description</th>
                           <th>Start Date</th>
                           <th>End Date</th>
                           <th>Status</th>
@@ -37,15 +37,15 @@
                       @foreach($records as $proposal)
                       <tr>
                           <td class="align-middle">{{ $loop->iteration }}</td>
-                          <td class="align-middle">{{ $proposal->proposaltitle }}</td>
-                          <td class="align-middle">{{ $proposal->proposaldescription }}</td>
-                          <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->startdate)->format('F j, Y') }}</td>
-                          <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->enddate)->format('F j, Y') }}</td>
+                          <td class="align-middle">{{ $proposal->title }}</td>
+                          <td class="align-middle">{{ $proposal->description }}</td>
+                          <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->start_date)->format('F j, Y') }}</td>
+                          <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->end_date)->format('F j, Y') }}</td>
                           <td class="align-middle">
                             @php
                                 $currentDate = now();
-                                $startDate = \Carbon\Carbon::parse($proposal->startdate);
-                                $endDate = \Carbon\Carbon::parse($proposal->enddate);
+                                $startDate = \Carbon\Carbon::parse($proposal->start_date);
+                                $endDate = \Carbon\Carbon::parse($proposal->end_date);
 
                                 if ($currentDate >= $startDate && $currentDate <= $endDate) {
                                     echo 'Open';
@@ -59,19 +59,70 @@
                           <td class="align-middle">{{ $proposal->remarks }}</td>
                           <td class="align-middle">
                               <div class="btn-group btn-sm" role="group" aria-label="Basic example">
-                              <!-- <a href="{{ route('transparency.call-for-proposals.show', $proposal->id) }}" type="button" class="btn btn-secondary">
-                                <i class="fas fa-info-circle"></i> 
-                              </a> -->
 
-                              <a href="{{ route('transparency.call-for-proposals.edit', $proposal->id) }}" type="button" class="btn btn-warning">
+                              <a href="{{ route('transparency.call-for-proposals.edit', $proposal->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#editModal{{ $proposal->id }}">
                                 <i class="fas fa-edit"></i> 
                               </a>
+                                      <div class="modal fade" id="editModal{{ $proposal->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $proposal->id }}Label" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModal{{ $proposal->id }}Label">Edit Call for Proposal</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">                            
+                                                  <form action="{{ route('transparency.call-for-proposals.edit', $proposal->id) }}" method="post">
+                                                  @csrf
+                                                  @method('PUT')
+                                                  <div class="form-group">
+                                                      <label for="title">Call for Proposals</label>
+                                                      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Call for Proposals" value="{{$proposal->title}}">
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label for="description">Description</label>
+                                                      <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="{{$proposal->description}}">
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label for="start_date">Start Date</label>
+                                                      <input type="date" class="form-control" id="start_date" name="start_date" value="{{$proposal->start_date}}">
+                                                  </div>
+                                                  @error('start_date')
+                                                  <div class="alert alert-danger">{{ $message }}</div>
+                                                  @enderror
+                                                  <div class="form-group">
+                                                      <label for="end_date">End Date</label>
+                                                      <input type="date" class="form-control" id="end_date" name="end_date" value="{{$proposal->end_date}}">
+                                                  </div>
+                                                  @error('end_date')
+                                                  <div class="alert alert-danger">{{ $message }}</div>
+                                                  @enderror
+                                                  <!-- <div class="form-group">
+                                                      <label for="status">Status</label>
+                                                      <input type="text" class="form-control" id="status" name="status" placeholder="Status" value="{{$proposal->status}}">
+                                                  </div> -->
+                                                  <div class="form-group">
+                                                      <label for="remarks">Remarks</label>
+                                                      <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks" value="{{$proposal->remarks}}">
+                                                  </div>
+                                                  <!-- <div class="form-group">
+                                                      <button type="submit" class="btn btn-warning float-right">Update</button>
+                                                  </div> -->
+
+                                                  <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      <button type="submit" class="btn btn-warning btn-right">Update</button>
+                                                  </div>
+                                              </form>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
 
                               <button class="btn btn-danger" onclick="confirmDelete('{{ route('transparency.call-for-proposals.destroy', $proposal->id) }}')">
                                 <i class="fas fa-trash"></i> 
                               </button>
-
-
                                   <script>
                                       function confirmDelete(url) {
                                           if (confirm('Delete?')) {

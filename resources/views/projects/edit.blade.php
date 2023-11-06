@@ -20,7 +20,7 @@
     </form> -->
 
     <!-- projects/edit.blade.php -->
-@extends('layouts.template')
+<!-- @extends('layouts.template')
 @section('title', 'Edit Project')
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -37,8 +37,6 @@
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                {{-- <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">DataTables</li> --}}
                             </ol>
                         </div>
                     </div>
@@ -60,18 +58,11 @@
                                         enctype="multipart/form-data">
                                         @method('PUT')
                                         @csrf
-                                        <!-- Rest of the form fields and content as in the original create form -->
-
-                                        <!-- Pre-fill the form fields with existing project data -->
                                         <div class="form-group">
                                             <label for="projname">Project Name</label>
                                             <input type="text" id="projname" name="projname" class="form-control"
                                                 value="{{ $project->projname }}">
                                         </div>
-
-                                        <!-- Add other form fields here with their respective values -->
-
-                                        <!-- Submit and Cancel buttons -->
                                         <a href="#" class="btn btn-secondary">Cancel</a>
                                         <input type="submit" value="Update Project" class="btn btn-success float-right">
                                     </form>
@@ -91,4 +82,4 @@
 </body>
 
 </html>
-
+ -->

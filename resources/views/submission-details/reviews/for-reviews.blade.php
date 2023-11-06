@@ -10,7 +10,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-center align-items-center">
               <i class="nav-icon fas fa-book fa-2x"></i>
-                <h4 class="m-0 ml-3 font-weight-bold">DEFERRED</h4>
+                <h4 class="m-0 ml-3 font-weight-bold">FOR REVIEW</h4>
             </div>
 
             <div class="card-body">

@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Project Team</h4>
+                <h4 class="modal-title" id="myModalLabel">Files</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -16,7 +16,10 @@
                         <label for="file">Choose File:</label>
                         <input type="file" class="form-control-file" id="file" name="file" accept=".pdf, .doc, .docx" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Upload File</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Upload File</button>
+                    </div>
                 </form>
             </div>
         </div>

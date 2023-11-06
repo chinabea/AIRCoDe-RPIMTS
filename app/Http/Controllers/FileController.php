@@ -7,14 +7,27 @@ use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
+        
     public function index()
     {
-        return view('submission-details.files');
+        try {
+            // Your logic to retrieve data and perform operations can go here if needed
+            return view('submission-details.files');
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while loading the file index: ' . $e->getMessage());
+        }
     }
 
     public function create()
     {
-        return view('submission-details.files.create');
+        try {
+            // Your logic for creating a new file can go here if needed
+            return view('submission-details.files.create');
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while creating a new file: ' . $e->getMessage());
+        }
     }
     public function store(Request $request)
     {
@@ -42,80 +55,111 @@ class FileController extends Controller
             return redirect()->back()->with('error', 'Error storing file in the database.');
         }
     }
-
+        
     public function previewPDF($filename)
     {
-        $filePath = 'project_files/' . $filename;
+        try {
+            $filePath = 'project_files/' . $filename;
 
-        if (Storage::exists($filePath)) {
-            return view('submission-details.files.preview', ['filePath' => $filePath]);
+            if (Storage::exists($filePath)) {
+                return view('submission-details.files.preview', ['filePath' => $filePath]);
+            }
+
+            return response('File not found.', 404);
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while previewing the PDF: ' . $e->getMessage());
         }
-
-        return response('File not found.', 404);
     }
 
     public function download($id)
     {
-        $file = File::findOrFail($id);
+        try {
+            $file = File::findOrFail($id);
 
-        // Assuming the 'file_name' attribute stores the desired filename in the database
-        $fileName = $file->file_name;
-        $filePath = $file->file_path;
+            // Assuming the 'file_name' attribute stores the desired filename in the database
+            $fileName = $file->file_name;
+            $filePath = $file->file_path;
 
-        return response()->download(storage_path('app/' . $filePath), $fileName);
+            return response()->download(storage_path('app/' . $filePath), $fileName);
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while downloading the file: ' . $e->getMessage());
+        }
     }
 
     public function reupload(Request $request, $id)
     {
-        // Validate the uploaded file
-        $request->validate([
-            'file' => 'required|file|max:10240', // Max file size: 10MB
-        ]);
+        try {
+            // Validate the uploaded file
+            $request->validate([
+                'file' => 'required|file|max:10240', // Max file size: 10MB
+            ]);
 
-        // Find the existing file entry
-        $fileModel = File::where('project_id', $id)->first();
+            // Find the existing file entry
+            $fileModel = File::where('project_id', $id)->first();
 
-        if (!$fileModel) {
-            return redirect()->back()->with('error', 'File not found.');
+            if (!$fileModel) {
+                return redirect()->back()->with('error', 'File not found.');
+            }
+
+            // Delete the existing file from storage
+            Storage::delete($fileModel->file_path);
+
+            // Store the uploaded file
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
+            $filePath = $file->store('project_files');
+
+            // Update the file entry in the database
+            $fileModel->update([
+                'file_name' => $fileName,
+                'file_path' => $filePath,
+            ]);
+
+            return redirect()->back()->with('success', 'File reuploaded successfully.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while reuploading the file: ' . $e->getMessage());
         }
-
-        // Delete the existing file from storage
-        Storage::delete($fileModel->file_path);
-
-        // Store the uploaded file
-        $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
-        $filePath = $file->store('project_files');
-
-        // Update the file entry in the database
-        $fileModel->update([
-            'file_name' => $fileName,
-            'file_path' => $filePath,
-        ]);
-
-        return redirect()->back()->with('success', 'File reuploaded successfully.');
     }
-
 
     public function update(Request $request, $id)
     {
-        $file = File::findOrFail($id);
-        // Update the item properties using the request data
-        $file->update($request->all());
-
-        // return redirect()->route('schedules.show', ['schedule' => $schedule->id])->with('success', 'Schedule updated successfully.');
-
-        return redirect()->route('submission-details.files.index')->with('success', 'File Successfully Updated!');
+        try {
+            // Define validation rules
+            $rules = [
+                'file' => 'required|file|max:10240', // Max file size: 10MB
+                'project_id' => 'required|exists:projects,id', // Validate that the project exists
+            ];
+    
+            // Validate the request data using the defined rules
+            $this->validate($request, $rules);
+    
+            // Find the file with the provided ID
+            $file = File::findOrFail($id);
+    
+            // Update the item properties using the request data
+            $file->update($request->all());
+    
+            // Redirect to the index or show view, or perform other actions
+            return redirect()->route('submission-details.files.index')->with('success', 'File Successfully Updated!');
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
+        }
     }
 
     public function delete($id)
     {
-        // Delete the file and its record from the database
-        $file = File::findOrFail($id);
-        $file->delete();
+        try {
+            // Delete the file and its record from the database
+            $file = File::findOrFail($id);
+            $file->delete();
 
-        return redirect()->back()->with('success', 'File deleted successfully.');
+            return redirect()->back()->with('success', 'File deleted successfully.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while deleting the file: ' . $e->getMessage());
+        }
     }
-
 
 }

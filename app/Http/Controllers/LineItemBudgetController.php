@@ -10,88 +10,110 @@ class LineItemBudgetController extends Controller
 {
     public function index()
     {
-        $lineItemsBudget = LineItemBudget::all();
-        return view('submission-details.line-items-budget.index', compact('lineItemsBudget'));
+        try {
+            $lineItemsBudget = LineItemBudget::all();
+            return view('submission-details.line-items-budget.index', compact('lineItemsBudget'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while fetching line items budgets: ' . $e->getMessage());
+        }
     }
 
     public function create()
     {
         return view('submission-details.line-items-budget.create');
     }
+
     public function store(Request $request)
     {
-        $projId = $request->input('project_id');
-        $requestData = $request->all();
-        $requestData['project_id'] = $projId;
-        $lineItem = LineItemBudget::create($requestData);
+        try {
+            $projId = $request->input('project_id');
+            $requestData = $request->all();
+            $requestData['project_id'] = $projId;
 
-        // Update the total of existing line items
-        $allLineItems = LineItemBudget::where('project_id', $projId)->get();
-        $totalAllLineItems = 0;
-        foreach ($allLineItems as $item) {
-            $totalAllLineItems += $item->quantity * $item->unit_price;
+            // Define validation rules
+            $rules = [
+                'project_id' => 'required|exists:projects,id',
+                // Add more validation rules for other fields here
+            ];
+
+            // Validate the request data
+            $this->validate($request, $rules);
+
+            $lineItem = LineItemBudget::create($requestData);
+
+            // Update the total of existing line items
+            $allLineItems = LineItemBudget::where('project_id', $projId)->get();
+            $totalAllLineItems = 0;
+            foreach ($allLineItems as $item) {
+                $totalAllLineItems += $item->quantity * $item->unit_price;
+            }
+
+            // Update the total in the project (assuming you have a project model)
+            $project = Project::find($projId);
+            $project->total_budget = $totalAllLineItems;
+            $project->save();
+
+            return redirect()->back()->with('success', 'LIB Successfully Added!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while adding a line item budget: ' . $e->getMessage());
         }
-
-        // Update the total in the project (assuming you have a project model)
-        $project = Project::find($projId);
-        $project->total_budget = $totalAllLineItems;
-        $project->save();
-
-        return redirect()->back()->with('success', 'LIB Successfully Added!');
     }
-
-
-    // public function store(Request $request)
-    // {
-    //     $projId = $request->input('project_id');
-    //     $requestData = $request->all();
-    //     $requestData['project_id'] = $projId;
-    //     LineItemBudget::create($requestData);
-
-    //     return redirect()->back()->with('success', 'Data Successfully Added!');
-    // }
-
 
     public function show($id)
     {
-        $lineItemsBudget = LineItemBudget::findOrFail($id);
-        return view('submission-details.line-items-budget.show', compact('lineItemsBudget'));
+        try {
+            $lineItemsBudget = LineItemBudget::findOrFail($id);
+            return view('submission-details.line-items-budget.show', compact('lineItemsBudget'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while fetching line item budget details: ' . $e->getMessage());
+        }
     }
 
     public function edit($id)
     {
-        $lib = LineItemBudget::where('id', $id)->firstOrFail();
-        $projects = $lib->project;
-        return view('submission-details.line-items-budget.edit', compact('lib', 'projects'));
+        try {
+            $lib = LineItemBudget::findOrFail($id);
+            $projects = $lib->project;
+            return view('submission-details.line-items-budget.edit', compact('lib', 'projects'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while editing a line item budget: ' . $e->getMessage());
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $lineItem = LineItemBudget::findOrFail($id);
+        try {
+            $lineItem = LineItemBudget::findOrFail($id);
 
-        $requestData = $request->all();
-        $requestData['total'] = $request->input('quantity') * $request->input('unit_price');
+            $requestData = $request->all();
+            $requestData['total'] = $request->input('quantity') * $request->input('unit_price');
 
-        $lineItem->update($requestData);
+            // Define validation rules
+            $rules = [
+                'project_id' => ['required', 'exists:projects,id', Rule::unique('line_item_budgets')->ignore($id)],
+                // Add more validation rules for other fields here
+            ];
 
-        return redirect()->back()->with('success', 'LIB Successfully Updated!');
+            // Validate the request data
+            $this->validate($request, $rules);
+
+            $lineItem->update($requestData);
+
+            return redirect()->back()->with('success', 'LIB Successfully Updated!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while updating a line item budget: ' . $e->getMessage());
+        }
     }
-
-    // public function update(Request $request, $id)
-    // {
-    //     $lib = LineItemBudget::find($id);
-    //     $lib->name = $request->input('name');
-    //     $lib->quantity = $request->input('quantity');
-    //     $lib->unit_price = $request->input('unit_price');
-    //     $lib->save();
-
-    //     return redirect()->back()->with('success', 'Project team member updated successfully.');
-    // }
 
     public function destroy($id)
     {
-        $lib = LineItemBudget::findOrFail($id);
-        $lib->delete();
-        return redirect()->back()->with('success', 'LIB deleted successfully');
+        try {
+            $lib = LineItemBudget::findOrFail($id);
+            $lib->delete();
+            return redirect()->back()->with('success', 'LIB deleted successfully');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while deleting a line item budget: ' . $e->getMessage());
+        }
     }
+
 }

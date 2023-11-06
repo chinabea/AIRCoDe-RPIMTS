@@ -8,16 +8,17 @@
     <div class="container">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-center align-items-center">
-              <i class="fas fa-file-alt fa-2x text-gray-300"></i>
-                <h1 class="m-0 ml-3 font-weight-bold">PROPOSALS</h1>
+              <!-- <i class="nav-icon fas fa-book fa-2x"></i> -->
+                <h6 class="m-0 ml-3 font-weight-bold">SUBMITTED PROJECTS</h6>
             </div>
 
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-hover table-sm">
+              <table id="example1" class="table table-bordered table-hover table-sm text-center">
                   <thead>
                       <tr>
-                          <th>ID</th>
+                          <th>#</th>
                           <th>Tracking Code</th>
+                          <th>Call for Proposal</th>
                           <th>Title</th>
                           <th>Research Group</th>
                           <th>Date Submitted</th>
@@ -26,17 +27,43 @@
                       </tr>
                   </thead>
                   <tbody>
+                        @if ($projects->count() > 0)
                           @foreach($projects as $record)
                           @if(auth()->user()->role == 1 || auth()->user()->role == 2 || $record->user_id === auth()->user()->id)
                           <tr>
-                              <td class="align-middle">{{ $record->id }}</td>
+                              <td class="align-middle">{{ $loop->iteration }}</td>
                               <td class="align-middle">{{ $record->tracking_code }}</td>
                               <td class="align-middle">
-                                <a href="{{ route('submission-details.show', $record->id) }}">{{ $record->projname }}</a>
+                                    @foreach ($call_for_proposals as $call_for_proposal)
+                                        @if ($call_for_proposal->id === $record->call_for_proposal_id)
+                                            {{ $call_for_proposal->title }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                              <td class="align-middle">
+                                <!-- <a href="{{ route('submission-details.show', $record->id) }}"> -->
+                                    {{ $record->project_name }}
+                                <!-- </a> -->
                               </td>
-                              <td class="align-middle">{{ $record->researchgroup }}</td>
+                              <td class="align-middle">{{ $record->research_group }}</td>
                               <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
-                              <td class="align-middle">{{ $record->status }}</td>
+                              <td class="align-middle">
+                                
+                                @if ($record->status === 'Draft')
+                                    <span class="badge badge-primary">Draft</span>
+                                @elseif ($record->status === 'Under Evaluation')
+                                    <span class="badge badge-info">Under Evaluation</span>
+                                @elseif ($record->status === 'For Revision')
+                                    <span class="badge badge-warning">For Revision</span>
+                                @elseif ($record->status === 'Deferred')
+                                    <span class="badge badge-secondary">Deferred</span>
+                                @elseif ($record->status === 'Approved')
+                                    <span class="badge badge-success">Approved</span>
+                                @elseif ($record->status === 'Disapproved')
+                                    <span class="badge badge-danger">Disapproved</span>
+                                @endif
+                                
+                              </td>
                               <td class="align-middle">
                                   <div class="btn-group align-middle" role="group" aria-label="Basic example">
                                   <a href="{{ route('submission-details.show', $record->id) }}" type="button" class="btn btn-secondary">
@@ -67,6 +94,7 @@
                           </tr>
                           @endif
                           @endforeach
+                          @endif
                   </tbody>
               </table>
             @if(session('success'))
@@ -90,4 +118,9 @@
     </div>
 </div>
 </div>
+
+<a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+</a>
+
 @endsection

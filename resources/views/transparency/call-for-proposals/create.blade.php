@@ -12,35 +12,31 @@
                 <form action="{{ route('transparency.call-for-proposals.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="proposaltitle">Proposal Title</label>
-                        <input type="text" class="form-control" id="proposaltitle" name="proposaltitle" placeholder="Title">
+                        <label for="title">Proposal Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
                     </div>
 
                     <div class="form-group">
-                        <label for="proposaldescription">Description</label>
-                        <input type="text" class="form-control" id="proposaldescription" name="proposaldescription" placeholder="Description">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Description">
                     </div>
 
                     <div class="form-group">
-                        <label for="startdate">Start Date</label>
-                        <input type="date" class="form-control" id="startdate" name="startdate">
+                        <label for="start_date">Start Date</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date">
                     </div>
-                    @error('startdate')
+                    @error('start_date')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
                     <div class="form-group">
-                        <label for="enddate">End Date</label>
-                        <input type="date" class="form-control" id="enddate" name="enddate">
+                        <label for="end_date">End Date</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date">
                     </div>
-                    @error('enddate')
+                    @error('end_date')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
 
-                    <!-- <div class="form-group">
-                        <label for="status">Status</label>
-                        <input type="text" class="form-control" id="status" name="status" placeholder="Status">
-                    </div> -->
                     @error('status')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -49,9 +45,11 @@
                         <label for="remarks">Remarks</label>
                         <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks">
                     </div>
-                    
-                    <!-- <button class="btn btn-seconday"> Cancel</button> -->
-                    <button type="submit" class="btn btn-info btn-right">Submit</button>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info btn-right">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>

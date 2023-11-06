@@ -24,7 +24,7 @@
   @endif
 
   <!-- Tabs -->
-  <!-- <style>
+  <style>
       /* Custom tab colors */
       .nav-tabs .nav-item.show .nav-link,
       .nav-tabs .nav-link.active {
@@ -36,7 +36,7 @@
           background-color: #ffffff; /* Inactive tab color */
           color: #333; /* Text color for inactive tab */
       }
-  </style> -->
+  </style>
 
 @if(Auth::check())
 @if(Auth::user()->role == 1 || Auth::user()->role == 3)
@@ -53,391 +53,13 @@
     @endif
   @endforeach
 
-<!-- <div class="row">
-<div class="col-lg-6"> -->
+<div class="row">
+<div class="col-lg-6">
           @if(auth()->user()->role == 2)
-          <div class="row">
-
-<div class="col-xl-8 col-lg-7">
-
-    <!-- Area Chart -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Research Proposal Reviews</h6>
-        </div>
-        <div class="card-body">
-                <table id="example1" class="table table-bordered table-hover text-left table-sm">
-                  <thead class="text-center">
-                      <tr>
-                          <th>#</th>
-                          <th>SECTIONS</th>
-                          <th>REVIEWS</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr> 
-                        <td class="align-middle">1</td>
-                        <th class="align-middle">Does the paper contribute to the body of knowledge?</th>
-                          <td class="align-middle">
-                            @foreach ($revs as $review) 
-                            @if ($review->user->role === 4 && $review->project_id === $records->id)
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p> 
-                            @endif
-                            @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">2</td>
-                        <th class="align-middle">Is this paper technically sound?</th>
-                        <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
-                          @endif
-                          @endforeach
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">3</td>
-                        <th class="align-middle">Is the subject matter presented in a comprehensive manner?</th>
-                        <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
-                          @endif
-                          @endforeach
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">4</td>
-                          <th class="align-middle">Are the references provided applicable and sufficient?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">5</td>
-                          <th class="align-middle">Are there references that are not appropriate for the topic being discussed?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">6</td>
-                          <th class="align-middle">Is the application comprehensive?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">7</td>
-                          <th class="align-middle">Is the grammar and presentation poor? Although this should not be heavily waited.</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">8</td>
-                          <th class="align-middle">If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">9</td>
-                          <th class="align-middle">Are figures and tables clear and easy to interpret?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">10</td>
-                          <th class="align-middle">Are explanations adequate?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">11</td>
-                          <th class="align-middle">Are there any technical or methodological errors?</th>
-                          <td>@foreach ($revs as $review) 
-                            @if ($review->user->role === 4 && $review->project_id === $records->id)
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
-                            @endif
-                            @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">12</td>
-                          <th class="align-middle">Other Comments</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">13</td>
-                          <th class="align-middle">Review Decision</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
-         
-        </div>
-    </div>
-
-    <!-- Bar Chart -->
-    <!-- <div class="card shadow mb-4">
-    </div> -->
-
-</div>
-
-<!-- Donut Chart -->
-<div class="col-xl-4 col-lg-5">
-    <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
-        <div class="card-header py-3">
-            <!-- <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6> -->
-          @if(auth()->user()->role == 2)
-            <!-- <i class="fas fa-file-signature fa-2x text-gray-300"></i> -->
-            <!-- <h5 class="m-0 ml-3 font-weight-bold">SUMMARIZE REVIEWS</h5> -->
-            <h6 class="m-0 font-weight-bold text-primary">Summarize Review</h6>
-            <input type="hidden" name="project_id" value="{{ $records->id }}">
-          @elseif(auth()->user()->role == 4)
-            <!-- <i class="fas fa-file-signature fa-2x text-gray-300"></i>
-            <h5 class="m-0 ml-3 font-weight-bold">REVIEW</h5> -->
-            <h6 class="m-0 font-weight-bold text-primary">Review</h6>
-          @endif
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <form method="POST" 
-            @if(auth()->user()->role == 2)
-            action="{{ route('store.summary.reviews', $records->id) }}">
-            @csrf
-            <input type="hidden" name="project_id" value="{{ $records->id }}">
-            @elseif(auth()->user()->role == 4)
-            action="{{ route('reviews.storeComments', $records->id) }}">
-            @csrf
-            @endif
-            <div class="form-group">
-              <label for="contribution_to_knowledge">1. Does the paper contribute to the body of knowledge?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge !== null && $review->project_id === $records->id)
-                      <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea>
-                    @endif
-                @endforeach
-              @else
-                  <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1"></textarea>
-              @endif
-            </div>
-
-            <div class="form-group">
-              <label for="technical_soundness">2.	Is this paper technically sound?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->technical_soundness !== null && $review->project_id === $records->id)
-                      <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" readonly>{{ $review->technical_soundness }}</textarea>
-                    @endif
-                @endforeach
-              @else 
-                <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1"></textarea>
-              @endif
-            </div>
-
-            <div class="form-group">
-              <label for="comprehensive_subject_matter">3.	Is the subject matter presented in a comprehensive manner?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->comprehensive_subject_matter !== null && $review->project_id === $records->id)
-                      <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
-                    @endif
-                @endforeach
-                @else
-                  <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1"></textarea>
-                @endif
-            </div>
-
-            <div class="form-group">
-              <label for="applicable_and_sufficient_references">4. Are the references provided applicable and sufficient?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->applicable_and_sufficient_references !== null && $review->project_id === $records->id)
-                      <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1" readonly>{{ $review->applicable_and_sufficient_references }}</textarea>
-                    @endif
-                @endforeach
-                @else 
-                  <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1"></textarea>
-                @endif
-            </div>
-            
-            <div class="form-group">
-              <label for="inappropriate_references">5.	Are there references that are not appropriate for the topic being discussed?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->inappropriate_references !== null && $review->project_id === $records->id)
-                      <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1" readonly>{{ $review->inappropriate_references }}</textarea>
-                    @endif
-                @endforeach
-                @else 
-                  <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1"></textarea>
-                @endif
-            </div>
-
-            <div class="form-group">
-              <label for="comprehensive_application">6.	Is the application comprehensive?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->comprehensive_application !== null && $review->project_id === $records->id)
-                      <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1" readonly>{{ $review->comprehensive_application }}</textarea>
-                    @endif
-                @endforeach
-                @else 
-                  <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1"></textarea>
-                @endif
-            </div>
-
-            <div class="form-group">
-              <label for="grammar_and_presentation">7.	Is the grammar and presentation poor? Although this should not be heavily waited.</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->grammar_and_presentation !== null && $review->project_id === $records->id)
-                      <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1" readonly>{{ $review->grammar_and_presentation }}</textarea>
-                    @endif
-                @endforeach
-                @else 
-                  <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1"></textarea>
-                @endif
-            </div>
-
-            <div class="form-group">
-              <label for="assumption_of_reader_knowledge">8.	If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->assumption_of_reader_knowledge !== null && $review->project_id === $records->id)
-                      <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1" readonly>{{ $review->assumption_of_reader_knowledge }}</textarea>
-                    @endif
-                @endforeach
-                @else
-                  <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1"></textarea>
-                @endif
-            </div>
-
-            <div class="form-group">
-              <label for="clear_figures_and_tables">9.	Are figures and tables clear and easy to interpret?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->clear_figures_and_tables !== null && $review->project_id === $records->id)
-                      <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1" readonly>{{ $review->clear_figures_and_tables }}</textarea>
-                    @endif
-                @endforeach
-                @else 
-                  <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1"></textarea>
-                @endif
-            </div>
-
-            <div class="form-group">
-              <label for="adequate_explanations">10.	Are explanations adequate?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->adequate_explanations !== null && $review->project_id === $records->id)
-                      <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" readonly>{{ $review->adequate_explanations }}</textarea>
-                    @endif
-                @endforeach
-                @else 
-                  <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1"></textarea>
-                @endif
-            </div>
-
-            <div class="form-group">
-              <label for="technical_or_methodological_errors">11.	Are there any technical or methodological errors?</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->technical_or_methodological_errors !== null && $review->project_id === $records->id)
-                      <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1" readonly>{{ $review->technical_or_methodological_errors }}</textarea>
-                    @endif
-                @endforeach
-                @else 
-                  <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1"></textarea>
-                @endif
-            </div>
-
-            <div class="form-group">
-              <label for="other_rsc">Other Comments</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->other_comments !== null && $review->project_id === $records->id)
-                      <textarea id="other_comments" name="other_comments" class="form-control" rows="1" readonly>{{ $review->other_comments }}</textarea>
-                    @endif
-                    @if ($review->user->id === Auth::user()->id && $review->other_comments === null && $review->project_id === $records->id)
-                      <textarea id="other_comments" name="other_comments" class="form-control" rows="1"></textarea>
-                    @endif
-                @endforeach
-              @endif 
-            </div>
-
-            <div class="form-group">
-                <label for="review_decision">Review Decision</label>
-              @if($reviewerCommented > 0)
-                @foreach ($revs as $review) 
-                    @if ($review->user->id === Auth::user()->id && $review->review_decision !== null && $review->project_id === $records->id)
-                      <select class="form-control" id="review_decision" name="review_decision" required @if ($reviewerCommented) disabled @endif>
-                          <option value="">Select</option>
-                          <option value="Accepted" @if ($review->review_decision === 'Accepted') selected @endif>Accepted</option>
-                          <option value="Accepted with Revision" @if ($review->review_decision === 'Accepted with Revision') selected @endif>Accepted with Revision</option>
-                          <option value="Rejected" @if ($review->review_decision === 'Rejected') selected @endif>Rejected</option>
-                      </select>
-                    @endif
-                    @if ($review->user->id === Auth::user()->id && $review->review_decision === null && $review->project_id === $records->id)
-                      <select class="form-control" id="review_decision" name="review_decision" required>
-                          <option value="">Select</option>
-                          <option value="Accepted">Accepted</option>
-                          <option value="Accepted with Revision">Accepted with Revision</option>
-                          <option value="Rejected">Rejected</option>
-                      </select>
-                    @endif
-                @endforeach
-              @endif 
-            </div>
-            <br>
-            <a href="#" class="btn btn-secondary">Cancel</a>
-            <input type="submit" value="Submit Review" class="btn btn-info float-right">
-          </form>
-        </div>
-    </div>
-</div>
-</div>
-      <!-- <div class="card shadow mb-4"> -->
-          <!-- <div href="#collapseCardExample1" class="card-header py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1">
+      <div class="card shadow mb-4">
+          <div href="#collapseCardExample1" class="card-header py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1">
               <i class="fas fa-file-signature fa-2x text-gray-300"></i>
-              <h6 class="m-0 ml-3 font-weight-bold">{{ $records->project_name }}</h6>
+              <h6 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h6>
           </div>
           <div class="collapse show" id="collapseCardExample1" style="">
               <div class="card-body">
@@ -554,17 +176,15 @@
                 @if ($review->user->role === 4 && $review->project_id === $records->id)
                 <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
                 @endif
-                @endforeach -->
-                
-                
-              <!-- </div>
+                @endforeach
+              </div>
           </div>
-      </div> -->
+      </div>
           @else
       <div class="card shadow mb-4">
           <div href="#collapseCardExample" class="card-header py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
               <i class="fas fa-info-circle fa-2x text-gray-300"></i>
-              <h6 class="m-0 ml-3 font-weight-bold">{{ $records->project_name }}</h6>
+              <h6 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h6>
           </div>
           <div class="collapse show" id="collapseCardExample" style="">
               <div class="card-body">
@@ -576,7 +196,7 @@
                 <label>Author(s)</label><br>
                 {{ $records->authors }}
                 <p>{{ $data->user->name }}</p>
-                @foreach ($teamMembers as $member)
+                @foreach ($projMembers as $member)
                     <p>{{ $member->member_name }}</p>
                 @endforeach
 
@@ -629,21 +249,22 @@
       </div>
     </div>
       @endif
+<!-- </div> -->
 
-<!-- <div class="col-lg-6">
+<div class="col-lg-6">
     <div class="card shadow mb-4">
-      <div class="card-header py-3 d-flex justify-content-center align-items-center"> -->
-          <!-- @if(auth()->user()->role == 2)
+      <div class="card-header py-3 d-flex justify-content-center align-items-center">
+          @if(auth()->user()->role == 2)
             <i class="fas fa-file-signature fa-2x text-gray-300"></i>
             <h5 class="m-0 ml-3 font-weight-bold">SUMMARIZE REVIEWS</h5>
           <input type="hidden" name="project_id" value="{{ $records->id }}">
           @else
             <i class="fas fa-file-signature fa-2x text-gray-300"></i>
             <h5 class="m-0 ml-3 font-weight-bold">REVIEW</h5>
-          @endif -->
-      <!-- </div>
-        <div class="card-body"> -->
-          <!-- <form method="POST" 
+          @endif
+      </div>
+        <div class="card-body">
+          <form method="POST" 
           @if(auth()->user()->role == 2)
           action="{{ route('store.summary.reviews', $records->id) }}">
           @csrf
@@ -659,7 +280,7 @@
                   @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge !== null && $review->project_id === $records->id)
                     <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea>
                   @endif
-                  @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge === null && $review->project_id === $records->id)
+                  @if ($review->user->id === Auth::user()->id && $review->project_id === $records->id)
                     <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1"></textarea>
                   @endif
               @endforeach
@@ -685,7 +306,7 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->comprehensive_subject_matter !== null && $review->project_id === $records->id)
-                    <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
+                    <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->comprehensive_subject_matter === null && $review->project_id === $records->id)
                     <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1"></textarea>
@@ -695,7 +316,7 @@
           </div>
 
           <div class="form-group">
-            <label for="applicable_and_sufficient_references">4. Are the references provided applicable and sufficient?</label>
+            <label for="applicable_and_sufficient_references">4.	Are the references provided applicable and sufficient?</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->applicable_and_sufficient_references !== null && $review->project_id === $records->id)
@@ -846,165 +467,11 @@
           <br>
           <a href="#" class="btn btn-secondary">Cancel</a>
           <input type="submit" value="Submit Review" class="btn btn-info float-right">
-        </form> -->
+        </form>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="container mt-3">
-        <h2 class="m-0 font-weight-bold">Call for Proposals</h2>
-        <br>
-    <div class="card shadow mb-4">
-        <div class="card-body">
-        <div class="table-responsive">
-                <table id="example1" class="table table-bordered table-hover text-left table-sm">
-                  <thead class="text-center">
-                      <tr>
-                          <th>#</th>
-                          <th>SECTIONS</th>
-                          <th>REVIEWS</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr> 
-                        <td class="align-middle">1</td>
-                        <th class="align-middle">Does the paper contribute to the body of knowledge?</th>
-                          <td class="align-middle">
-                            @foreach ($revs as $review) 
-                            @if ($review->user->role === 4 && $review->project_id === $records->id)
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p> 
-                            @endif
-                            @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">2</td>
-                        <th class="align-middle">Is this paper technically sound?</th>
-                        <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
-                          @endif
-                          @endforeach
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">3</td>
-                        <th class="align-middle">Is the subject matter presented in a comprehensive manner?</th>
-                        <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
-                          @endif
-                          @endforeach
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">4</td>
-                          <th class="align-middle">Are the references provided applicable and sufficient?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">5</td>
-                          <th class="align-middle">Are there references that are not appropriate for the topic being discussed?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">6</td>
-                          <th class="align-middle">Is the application comprehensive?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">7</td>
-                          <th class="align-middle">Is the grammar and presentation poor? Although this should not be heavily waited.</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">8</td>
-                          <th class="align-middle">If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">9</td>
-                          <th class="align-middle">Are figures and tables clear and easy to interpret?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">10</td>
-                          <th class="align-middle">Are explanations adequate?</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">11</td>
-                          <th class="align-middle">Are there any technical or methodological errors?</th>
-                          <td>@foreach ($revs as $review) 
-                            @if ($review->user->role === 4 && $review->project_id === $records->id)
-                            <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
-                            @endif
-                            @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">12</td>
-                          <th class="align-middle">Other Comments</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle">13</td>
-                          <th class="align-middle">Review Decision</th>
-                          <td>@foreach ($revs as $review) 
-                          @if ($review->user->role === 4 && $review->project_id === $records->id)
-                          <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
-                          @endif
-                          @endforeach
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
-            </div>
-        </div>
-    </div>
-</div>   -->
-
 @endif
 
     @if(Auth::user()->role == 1)
@@ -1012,12 +479,17 @@
      
     <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist">
           <li class="nav-item">
+              <a class="nav-link" id="actions-btn" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="true">
+                  <i class="fas fa-cogs mr-2"></i>Actions
+              </a>
+          </li>
+          <li class="nav-item">
               <a class="nav-link" id="details-btn" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">
                   <i class="fas fa-info-circle mr-2"></i>Details
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" id="tasks-btn" datsa-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">
+              <a class="nav-link" id="tasks-btn" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">
                   <i class="fas fa-tasks mr-2"></i>Tasks
               </a>
           </li>
@@ -1038,106 +510,177 @@
           </li>
           <li class="nav-item">
               <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
-                  <i class="fas fa-users mr-2"></i>Members
+                  <i class="fas fa-users mr-2"></i>Project Members
               </a>
           </li>
+
+          <!-- <li class="nav-item">
+              <a class="nav-link" id="review-btn" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">
+            <i class="fas fa-file-signature mr-2"></i>Review
+              </a>
+          </li> -->
           <li class="nav-item">
               <a class="nav-link" id="reviewer-btn" data-toggle="tab" href="#reviewer" role="tab" aria-controls="reviewer" aria-selected="false">
             <i class="fas fa-user-check mr-2"></i>Reviewer
               </a>
           </li>
+          <!-- <li class="nav-item">
+              <a class="nav-link" id="status-btn" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">
+            <i class="fas fa-tasks mr-2"></i>Status
+              </a>
+          </li> -->
       </ul>
     @elseif(Auth::user()->role == 2)
-      
+        <!-- <div class="text-center">
+        <button id="actions-btn" class="btn btn-primary">
+            <i class="fas fa-cogs mr-2"></i>Actions
+        </button>
+        <button id="details-btn" class="btn btn-primary my-2">
+            <i class="fas fa-info-circle mr-2"></i>Details
+        </button>
+        <button id="tasks-btn" class="btn btn-primary my-2">
+            <i class="fas fa-tasks mr-2"></i>Tasks
+        </button>
+        <button id="lib-btn" class="btn btn-primary my-2">
+            <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
+        </button>
+        <button id="files-btn" class="btn btn-primary my-2">
+            <i class="fas fa-file-alt mr-2"></i>Files
+        </button>
+        <button id="messages-btn" class="btn btn-primary my-2">
+            <i class="fas fa-comments mr-2"></i>Messages
+        </button>
+        <button id="project-team-btn" class="btn btn-primary my-2">
+            <i class="fas fa-users mr-2"></i>Project Team
+        </button>
+        <button id="status-btn" class="btn btn-primary my-2">
+            <i class="fas fa-tasks mr-2"></i>Status
+        </button>
+        <button id="reviewer-btn" class="btn btn-primary my-2">
+            <i class="fas fa-user-check mr-2"></i>Reviewer
+        </button>
+        <div class="text-center">
+          <button id="review-btn" class="btn btn-primary my-2">
+            <i class="fas fa-file-signature mr-2"></i>Review
+          </button>
+        </div>
+      </div> -->
     
     @elseif(Auth::user()->role == 3)
+
+        <!-- <button id="actions-btn" class="btn btn-primary">
+            <i class="fas fa-cogs mr-2"></i>Actions
+        </button>
+        <button id="details-btn" class="btn btn-primary my-2">
+            <i class="fas fa-info-circle mr-2"></i>Details
+        </button>
+        <button id="tasks-btn" class="btn btn-primary my-2">
+            <i class="fas fa-tasks mr-2"></i>Tasks
+        </button>
+        <button id="lib-btn" class="btn btn-primary my-2">
+            <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
+        </button>
+        <button id="files-btn" class="btn btn-primary my-2">
+            <i class="fas fa-file-alt mr-2"></i>Files
+        </button>
+        <button id="messages-btn" class="btn btn-primary my-2">
+            <i class="fas fa-comments mr-2"></i>Messages
+        </button>
+        <button id="project-team-btn" class="btn btn-primary my-2">
+            <i class="fas fa-users mr-2"></i>Project Team
+        </button>
+        <button id="status-btn" class="btn btn-primary my-2">
+            <i class="fas fa-tasks mr-2"></i>Status
+        </button>
+        <button id="reviewer-btn" class="btn btn-primary my-2">
+            <i class="fas fa-user-check mr-2"></i>Reviewer
+        </button>
+          <button id="review-btn" class="btn btn-primary my-2">
+            <i class="fas fa-file-signature mr-2"></i>Review
+          </button> -->
     
-    <!-- <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist"> -->
-    <div class="col-md-12">
-      <div class="card card-primary card-tabs">
-        <div class="card-header p-0">
-          <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
-            <li class="pt-2 px-3"><h3 class="card-title">Submission Details</h3></li>
-            <li class="nav-item text-center">
+    <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist">
+          <li class="nav-item">
               <a class="nav-link" id="actions-btn" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="true">
                   <i class="fas fa-cogs mr-2"></i>Actions
               </a>
-            </li>
-            <li class="nav-item">
+          </li>
+          <li class="nav-item">
               <a class="nav-link" id="details-btn" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">
                   <i class="fas fa-info-circle mr-2"></i>Details
               </a>
-            </li>
-            <li class="nav-item">
+          </li>
+          <li class="nav-item">
               <a class="nav-link" id="tasks-btn" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">
                   <i class="fas fa-tasks mr-2"></i>Tasks
               </a>
-            </li>
-            <li class="nav-item">
+          </li>
+          <li class="nav-item">
               <a class="nav-link" id="lib-btn" data-toggle="tab" href="#lib" role="tab" aria-controls="lib" aria-selected="false">
                   <i class="fas fa-list-alt mr-2"></i>Line-Item Budget
               </a>
-            </li>
-            <li class="nav-item">
+          </li>
+          <li class="nav-item">
               <a class="nav-link" id="files-btn" data-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="false">
                   <i class="fas fa-file-alt mr-2"></i>Files
               </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
-                  <i class="fas fa-users mr-2"></i>Members
-              </a>
-            </li>
-            <li class="nav-item">
+          </li>
+          <li class="nav-item">
               <a class="nav-link" id="messages-btn" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">
                   <i class="fas fa-comments mr-2"></i>Reviews
               </a>
-            </li>
-          </ul>
-        </div>
-        <!-- <div class="card-body"> -->
-          <!-- <div class="tab-content" id="custom-tabs-two-tabContent">
-            <div class="tab-pane fade" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="custom-tabs-two-home-tab">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
-            </div>
-            <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
-                Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
-            </div>
-            <div class="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
-                Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
-            </div>
-            <div class="tab-pane fade active show" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
-                Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
-            </div>
-          </div> -->
-        <!-- </div>
-    </div> -->
-
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
+                  <i class="fas fa-users mr-2"></i>Project Members
+              </a>
+          </li>
+          <!-- <li class="nav-item">
+              <a class="nav-link" id="review-btn" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">
+                <i class="fas fa-file-signature mr-2"></i>Review
+              </a>
+          </li> -->
+          <!-- <li class="nav-item">
+              <a class="nav-link" id="status-btn" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="false">
+                <i class="fas fa-tasks mr-2"></i>Status
+              </a>
+          </li> -->
+          <li class="nav-item">
+              <a class="nav-link" id="reviewer-btn" data-toggle="tab" href="#reviewer" role="tab" aria-controls="reviewer" aria-selected="false">
+                <i class="fas fa-user-check mr-2"></i>Reviewer
+              </a>
+          </li>
+      </ul>
       @endif
       @endif
 
-<div class="card-body">
+
+
       
 <div id="actions-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
+  <div class="container mt-5">
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-center align-items-center">
             <i class="fas fa-cogs fa-2x text-gray-300"></i>
             <h1 class="m-0 ml-3 font-weight-bold">ACTIONS</h1>
         </div>
-        <div class="card-body"> -->
+        <div class="card-body">
         @if (Auth::user()->role == 3 && $records->status === "For Revision")
         <form action="{{ route('projects.edit', $records->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">
-              <label for="project_name" class="form-label">Project Name</label>
-              <input type="text" value="{{ $records->project_name }}" class="form-control" id="project_name" name="project_name">
+              <label for="projname" class="form-label">Project Name</label>
+              <input type="text" value="{{ $records->projname }}" class="form-control" id="projname" name="projname">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Research Group</label>
               <input type="text" value="{{ $records->researchgroup }}" class="form-control" id="researchgroup" name="researchgroup">
             </div>
+            <!-- <div class="mb-3">
+              <label for="" class="form-label">Author(s)</label>
+              <input type="text" value="{{ $records->authors }}" class="form-control" id="authors" name="authors">
+            </div> -->
             <div class="mb-3">
               <label for="" class="form-label">Introduction</label>
               <input type="text" value="{{ $records->introduction }}" class="form-control" id="introduction" name="introduction">
@@ -1178,29 +721,33 @@
               <label for="" class="form-label">References</label>
               <input type="text" value="{{ $records->references }}" class="form-control" id="references" name="references">
             </div>
+            <!-- <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         @else
             <p>You do not have access to edit this project not until the project status is "For Revision."</p>
         @endif
         </div>
-    <!-- </div>
+    </div>
   </div>
-</div> -->
+</div>
 
 
 <div id="details-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
+  <div class="container mt-5">
       <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex justify-content-center align-items-center">
               <i class="fas fa-info-circle fa-2x text-gray-300"></i>
               <h1 class="m-0 ml-3 font-weight-bold">DETAILS</h1>
           </div>
-          <div class="card-body"> -->
+          <div class="card-body">
             <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
             <div style="text-align: justify;">
                 <label>Project Name:</label><br>
-                {{ $records->project_name }}
+                {{ $records->projname }}
                 <br>
                 <br>
 
@@ -1217,7 +764,7 @@
                 <label>Author(s):</label><br>
                 {{ $records->authors }}
                 <p>{{ $data->user->name }}</p>
-                @foreach ($teamMembers as $member)
+                @foreach ($projMembers as $member)
                     <p>{{ $member->member_name }}</p>
                 @endforeach
                 <br>
@@ -1242,6 +789,14 @@
                 {!! $records->proposed_methodology !!}
                 <br><br>
 
+                <!-- <label>Start Date:</label>
+                {{ $records->start_date }}
+                <br><br>
+
+                <label>End Date:</label>
+                {{ $records->end_date }}
+                <br><br> -->
+
                 <label>Work Plan:</label><br>
                 {!! $records->workplan !!}
                 <br>
@@ -1255,25 +810,25 @@
                 <br>
             </div>
           </div>
-      <!-- </div>
+      </div>
   </div>
-</div> -->
+</div>
 
 
 <div id="tasks-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
+  <div class="container mt-5">
       <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex justify-content-center align-items-center">
               <i class="fas fa-tasks fa-2x text-gray-300"></i>
               <h1 class="m-0 ml-3 font-weight-bold">TASKS</h1>
           </div>
-          <div class="card-body"> -->
-            @if (auth()->check() && auth()->user()->role == 3)
-            <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks" data-backdrop="static" data-keyboard="false">Add Task</button>
-            @include('submission-details.tasks.create')
-            @endif
+          <div class="card-body">
+          @if (auth()->check() && auth()->user()->role == 3)
+              <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks" data-backdrop="static" data-keyboard="false">Add Task</button>
+              @include('submission-details.tasks.create')
+          @endif
         <table id="example1" class="table table-hover table-bordered text-center table-sm">
-          <thead>
+          <thead class="table-info">
             <tr>
               <th>#</th>
               <th>Title</th>
@@ -1287,6 +842,7 @@
           </thead>
           <tbody>
             @foreach($tasks as $task)
+            @if($task->user_id === auth()->user()->id)
             <tr>
               <td class="align-middle">{{ $loop->iteration }}.</td>
               <td>{{ $task->title }}</td>
@@ -1311,7 +867,8 @@
                           <form method="post" action="{{ route('submission-details.tasks.update', $task->id) }}" enctype="multipart/form-data">
                               @csrf
                               @method('PUT')
-                              <div class="modal-body text-left">
+                              <div class="modal-body">
+                                  <!-- Input fields for editing -->
                                   <div class="form-group">
                                       <label for="title">Title</label>
                                       <input type="text" name="title" id="title" class="form-control" value="{{ $task->title }}">
@@ -1350,31 +907,45 @@
               <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.tasks.delete', $task->id) }}')">
                 <i class="fas fa-trash"></i>
               </button>
+                    <script>
+                    function confirmDelete(url) {
+                        if (confirm('Are you sure you want to delete this record?')) {
+                        // Create a hidden form and submit it programmatically
+                        var form = document.createElement('form');
+                        form.action = url;
+                        form.method = 'POST';
+                        form.innerHTML = '@csrf @method("delete")';
+                        document.body.appendChild(form);
+                        form.submit();
+                        }
+                    }
+                    </script>
               </td>
             </tr>
+            @endif
         @endforeach
           </tbody>
         </table>
           </div>
-      <!-- </div>
+      </div>
   </div>
-</div> -->
+</div>
 
 
 <div id="lib-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
+  <div class="container mt-5">
       <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex justify-content-center align-items-center">
               <i class="fas fa-list-alt fa-2x text-gray-300"></i>
               <h1 class="m-0 ml-3 font-weight-bold">LINE-ITEM BUDGET</h1>
           </div>
-          <div class="card-body"> -->
+          <div class="card-body">
           @if (auth()->check() && auth()->user()->role == 3)
-          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#lib">Add Line-Item</button>
-          @include('submission-details.line-items-budget.create')
-            @endif
-          <table id="example1" class="table table-hover table-bordered text-center table-sm">
-            <thead>
+            <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#lib">Add Line-Item</button>
+            @include('submission-details.line-items-budget.create')
+          @endif
+          <table id="" class="table table-hover table-bordered text-center table-sm">
+            <thead class="table-info">
               <tr>
                 <th>#</th>
                 <th>Name</th>
@@ -1383,8 +954,9 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
               @foreach($lineItems as $lineItem)
+              @if($lineItem->user_id === auth()->user()->id)
+            <tbody>
               <tr>
                 <td class="align-middle">{{ $loop->iteration }}.</td>
                 <td>{{ $lineItem->name }}</td>
@@ -1407,6 +979,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="modal-body">
+                                    <!-- Input fields for editing -->
                                     @php
                                         $totalAllLineItems = 0;
                                         foreach ($allLineItems as $item) {
@@ -1437,10 +1010,24 @@
                 <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.line-items-budget.destroy', $lineItem->id) }}')">
                   <i class="fas fa-trash"></i>
                 </button>
+                      <script>
+                      function confirmDelete(url) {
+                          if (confirm('Are you sure you want to delete this record?')) {
+                          // Create a hidden form and submit it programmatically
+                          var form = document.createElement('form');
+                          form.action = url;
+                          form.method = 'POST';
+                          form.innerHTML = '@csrf @method("delete")';
+                          document.body.appendChild(form);
+                          form.submit();
+                          }
+                      }
+                      </script>
                 </td>
               </tr>
-          @endforeach
             </tbody>
+            @endif
+          @endforeach
           </table>
           <div class="form-group float-right">
               <label for="edit_total">Total:</label>
@@ -1452,26 +1039,26 @@
               </div>
           </div>
           </div>
-      <!-- </div>
+      </div>
   </div>
-</div> -->
+</div>
 
 
 
 <div id="files-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
+  <div class="container mt-5">
       <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex justify-content-center align-items-center">
               <i class="fas fa-file-alt fa-2x text-gray-300"></i>
               <h1 class="m-0 ml-3 font-weight-bold">FILES</h1>
           </div>
-          <div class="card-body"> -->
+          <div class="card-body">
           @if (auth()->check() && auth()->user()->role == 3)
-        <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#filesModal">Add File</button>
-            @include('submission-details.files.create')
+          <button type="button" class="btn btn-primary my-2" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#filesModal">Add File</button>
+          @include('submission-details.files.create')
           @endif
-          <table id="example1" class="table table-hover table-bordered table-sm text-center">
-            <thead>
+          <table id="example1" class="table table-hover table-bordered table-sm">
+            <thead class="table-info">
               <tr>
                 <th>#</th>
                 <th>Filename</th>
@@ -1481,6 +1068,7 @@
               </tr>
             </thead>
             @foreach($files as $file)
+            @if($file->user_id === auth()->user()->id)
             <tbody>
               <tr>
                 <td class="align-middle">{{ $loop->iteration }}.</td>
@@ -1511,10 +1099,12 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="modal-body">
+                                    <!-- Input fields for editing -->
                                     <div class="form-group">
                                         <label for="edit_file_name">File Name:</label>
                                         <input type="text" class="form-control" id="edit_file_name{{ $file->id }}" name="file_name" value="{{ $file->file_name }}" required>
                                     </div>
+                                    <!-- You can add more fields here if needed -->
                                     <div class="form-group">
                                         <label for="file">Choose File:</label>
                                         <input type="file" class="form-control-file" id="file" name="file" accept=".pdf, .doc, .docx" required>
@@ -1531,24 +1121,38 @@
                 <button class="btn btn-danger" onclick="confirmDelete('{{ route('submission-details.files.delete', $file->id) }}')">
                   <i class="fas fa-trash"></i>
                 </button>
+                  <script>
+                    function confirmDelete(url) {
+                        if (confirm('Are you sure you want to delete this record?')) {
+                        // Create a hidden form and submit it programmatically
+                        var form = document.createElement('form');
+                        form.action = url;
+                        form.method = 'POST';
+                        form.innerHTML = '@csrf @method("delete")';
+                        document.body.appendChild(form);
+                        form.submit();
+                        }
+                    }
+                  </script>
                 </td>
               </tr>
             </tbody>
+            @endif
           @endforeach
           </table>
           </div>
-      <!-- </div>
+      </div>
   </div>
-</div> -->
+</div>
 
 <div id="messages-form" class="mt-4" style="display: none;">
-    <!-- <div class="container mt-5">
+    <div class="container mt-5">
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-center align-items-center">
                 <i class="fas fa-comments fa-2x text-gray-300"></i>
                 <h1 class="m-0 ml-3 font-weight-bold">REVIEWS</h1>
             </div>
-            <div class="card-body"> -->
+            <div class="card-body">
                 @php
                     $reviewAvailable = false; // Initialize a flag
                 @endphp
@@ -1557,18 +1161,21 @@
                     @if ($review->user->role === 2 && $review->project_id === $records->id)
                         <div class="py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1">
                             <i class="fas fa-info-circle fa-2x text-gray-300"></i>
-                            <h3 class="m-0 ml-3 font-weight-bold">{{ $records->project_name }}</h3>
+                            <h3 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h3>
                             
                         </div>
                         @if (auth()->user()->role == 1)
+                                <!-- Review Decision for administrators -->
                                 <h6 class="m-0 font-weight-bold text-primary text-center">Review Decision</h6>
                                 <br>
+                                <!-- Decision form -->
                                 <div class="text-center">
                                     <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="project_id" value="{{ $records->id }}">
                                         <div class="form-group">
+                                            <!-- Buttons for different decisions -->
                                             <button value="Approved" type="submit" id="status" name="status" class="btn btn-info">
                                                 <i class="fas fa-check-circle mr-2"></i>Accepted
                                             </button>
@@ -1656,24 +1263,146 @@
                     <p>Review not available yet!</p>
                 @endif
             </div>
-        <!-- </div>
+        </div>
     </div>
+</div>
+
+<!-- 
+<div id="messages-form" class="mt-4" style="display: none;">
+  <div class="container mt-5">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-comments fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">REVIEWS</h1>
+          </div>
+          <div class="card-body">
+            @php
+                $reviewAvailable = false; // Initialize a flag
+            @endphp
+
+            @foreach ($revs as $review) 
+            @if ($review->user->role === 2 && $review->project_id === $records->id)
+          <div class="py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1"> 
+               <i class="fas fa-info-circle fa-2x text-gray-300"></i>
+              <h3 class="m-0 ml-3 font-weight-bold">{{ $records->projname }}</h3> 
+          </div>
+              <div class="card-body">
+                <label>1. Does the paper contribute to the body of knowledge?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->contribution_to_knowledge }}</p> 
+                
+                <br>
+
+                <label>2.	Is this paper technically sound?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_soundness }}</p> 
+                
+                <br>
+
+                <label>3.	Is the subject matter presented in a comprehensive manner?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_subject_matter }}</p> 
+                
+                <br>
+
+                <label>4.	Are the references provided applicable and sufficient?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->applicable_and_sufficient_references }}</p> 
+                
+                <br>
+
+                <label>5. Are there references that are not appropriate for the topic being discussed?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->inappropriate_references }}</p> 
+                
+                <br>
+
+                <label>6. Is the application comprehensive?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->comprehensive_application }}</p> 
+                
+                <br>
+
+                <label>7. Is the grammar and presentation poor? Although this should not be heavily waited.</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->grammar_and_presentation }}</p> 
+                
+                <br>
+
+                <label>8. If the submission is very technical, is it because the author has assumed too much of the reader’s knowledge?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->assumption_of_reader_knowledge }}</p> 
+                
+                <br>
+
+                <label>9. Are figures and tables clear and easy to interpret?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->clear_figures_and_tables }}</p> 
+                
+                <br>
+
+                <label>10.	Are explanations adequate?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->adequate_explanations }}</p> 
+                
+                <br>
+
+                <label>11.	Are there any technical or methodological errors?</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->technical_or_methodological_errors }}</p> 
+                
+                <br>
+
+                <label>12. Other Comments</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->other_comments }}</p> 
+                
+                <br>
+
+                <label>13. Review Decision</label><br>
+                <p><b>{{ $review->user->name }}:</b> {{ $review->review_decision }}</p> 
+              </div>
+
+
+          @if(auth()->user()->role == 1)
+          <h6 class="m-0 font-weight-bold text-primary">Review Decision</h6>
+          <div class="text-center">
+            <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
+              @csrf
+              @method('PUT')
+              <input type="hidden" name="project_id" value="{{ $records->id }}">
+              <div class="form-group">
+                <button value="Approved" type="submit" id="status" name="status" class="btn btn-info">
+                  <i class="fas fa-check-circle mr-2"></i>Accepted
+                </button>
+                <button value="For Revision" type="submit" id="status" name="status" class="btn btn-warning">
+                  <i class="fas fa-edit mr-2"></i>Accepted with Revision
+                </button>
+                <button value="Disapproved" type="submit" id="status" name="status" class="btn btn-danger">
+                  <i class="fas fa-times-circle mr-2"></i>Rejected
+                </button>
+              </div>
+            </form>
+            <br><br>
+                @php
+                    $reviewAvailable = true; // Set the flag to true if a review matches the conditions
+                @endphp
+            @endif
+          @endif
+          @endforeach
+
+          @if (!$reviewAvailable)
+            <p>Review not available yet!</p>
+          @endif
+
+          </div>
+      </div>
+  </div>
 </div> -->
 
+
 <div id="project-team-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
+  <div class="container mt-5">
       <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex justify-content-center align-items-center">
               <i class="fas fa-users fa-2x text-gray-300"></i>
-              <h1 class="m-0 ml-3 font-weight-bold">MEMBERS</h1>
+              <h1 class="m-0 ml-3 font-weight-bold">PROJECT MEMBERS</h1>
           </div>
-          <div class="card-body"> -->
+          <div class="card-body">
           @if (auth()->check() && auth()->user()->role == 3)
-            <button type="button" class="btn btn-primary my-2" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">Add Member</button>
+            <button type="button" class="btn btn-primary my-2" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">Add Project Members</button>
             @include('submission-details.project-teams.create')
           @endif
-            <table id="example1" class="table table-hover table-bordered table-sm text-center">
-            <thead>
+            <table id="example1" class="table table-hover table-bordered table-sm">
+            <thead class="table-info">
               <tr>
                 <th>#</th>
                 <th>Name</th>
@@ -1682,13 +1411,14 @@
               </tr>
             </thead>
             @foreach($teamMembers as $member)
+            @if($member->user_id === auth()->user()->id)
             <tbody>
               <tr>
                 <td class="align-middle">{{ $loop->iteration }}.</td>
                 <td>{{ $member->member_name }}</td>
                 <td>{{ $member->role }}</td>
                 <td>
-                  <a href="{{ route('submission-details.project-teams.edit', $member->id) }}" type="button" class="btn btn-warning" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#editModal{{ $member->id }}">
+                  <a href="{{ route('submission-details.project-teams.edit', $member->id) }}" type="button" class="btn btn-warning" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#editModal{{ $member->id }}">
                       <i class="fas fa-edit"></i>
                   </a>
                   <div class="modal fade" id="editModal{{ $member->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $member->id }}Label" aria-hidden="true">
@@ -1704,6 +1434,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="modal-body">
+                                    <!-- Input fields for editing -->
                                     <div class="form-group">
                                         <label for="edit_member_name">Name:</label>
                                         <input type="text" class="form-control" id="edit_member_name{{ $member->id }}" name="member_name" value="{{ $member->member_name }}" required>
@@ -1737,49 +1468,118 @@
                 </td>
               </tr>
             </tbody>
+            @endif
           @endforeach
           </table>
           </div>
-      <!-- </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- <div id="status-form" class="mt-4" style="display: none;">
+  <div class="container mt-5">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-tasks fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">STATUS</h1>
+          </div>
+          <div class="card-body">
+            <form action="{{ route('projects.updateStatus', ['id' => $records->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="project_id" value="{{ $records->id }}">
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status" name="status" required>
+                        <option value="New">New</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Under Evaluation">Under Evaluation</option>
+                        <option value="For Revision">For Revision</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Deferred">Deferred</option>
+                        <option value="Disapproved">Disapproved</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Status</button>
+            </form>
+          </div>
+      </div>
   </div>
 </div> -->
 
 
 <div id="reviewer-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
+  <div class="container mt-5">
       <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex justify-content-center align-items-center">
               <i class="fas fa-user-check fa-2x text-gray-300"></i>
               <h1 class="m-0 ml-3 font-weight-bold">REVIEWER</h1>
           </div>
-          <div class="card-body"> -->
+          <div class="card-body">
           <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal" data-backdrop="static" data-keyboard="false">Select Reviewer</button>
               @include('submission-details.reviews.select-reviewer')
 
           </div>
-      <!-- </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- <div id="review-form" class="mt-4" style="display: none;">
+  <div class="container mt-5">
+      <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-file-signature fa-2x text-gray-300"></i>
+              <h1 class="m-0 ml-3 font-weight-bold">REVIEW</h1>
+          </div>
+          <div class="card-body">
+          <div class="card-body pad table-responsive text-left">
+                <div class="col-lg-12">
+                  <div class="card shadow mb-4">
+                      <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">Review Decision</h6>
+                      </div>
+                      <div class="card-body">
+                          <h3>{{ $records->projname }}</h3>
+                          <p>comments</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="text-center">
+                <form action="{{ route('reviews.review-decision.store', ['id' => $records->id]) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="project_id" value="{{ $records->id }}">
+  
+                    <button value="Accepted" type="submit" name="decision" class="btn btn-info">
+                        <i class="fas fa-check-circle mr-2"></i>Accepted
+                    </button>
+                    <button value="Accepted with Revision" type="submit" name="decision" class="btn btn-warning">
+                        <i class="fas fa-edit mr-2"></i>Accepted with Revision
+                    </button>
+                    <button value="Rejected" type="submit" name="decision" class="btn btn-danger">
+                        <i class="fas fa-times-circle mr-2"></i>Rejected
+                    </button>
+                </form>
+                </div>
+          </div>
+      </div>
   </div>
 </div> -->
 
-
-
-
-</div>
-</div>
-
+<!-- </div> -->
 <script>
- 
-  function confirmDelete(url) {
-      if (confirm('Are you sure you want to delete this record?')) {
-      // Create a hidden form and submit it programmatically
-      var form = document.createElement('form');
-      form.action = url;
-      form.method = 'POST';
-      form.innerHTML = '@csrf @method("delete")';
-      document.body.appendChild(form);
-      form.submit();
-      }
+    // auto-expand-textarea.js
+  // Function to automatically resize the textarea based on its content
+  function autoResizeTextarea() {
+  var textarea = document.getElementById('contribution_to_knowledge');
+  textarea.style.height = 'auto'; // Reset the height
+  textarea.style.height = (textarea.scrollHeight) + 'px'; // Set the height to the scrollHeight
   }
 
+  // Run the autoResizeTextarea function when the page loads and whenever the textarea content changes
+  window.addEventListener('load', autoResizeTextarea);
+  document.getElementById('contribution_to_knowledge').addEventListener('input', autoResizeTextarea);
 </script>
 @endsection

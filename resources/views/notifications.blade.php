@@ -1,16 +1,11 @@
 
 @extends('layouts.template') 
-
 @section('content')
-
 <div class="content-wrapper">
   <section class="content-header">
   </section>
-
     <div class="container mt-5">
-
         <h1>Notifications</h1>
-
         <div class="card">
             <div class="card-body">
                 <ul class="list-group">
@@ -28,6 +23,7 @@
                             <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
                         </li>
                     @endforeach
+                </ul>
             </div>
         </div>
     </div>

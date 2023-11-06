@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('access_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('role');
             $table->date('date_of_access');
             $table->time('time_of_access');
             $table->text('purpose_of_access');

@@ -27,8 +27,21 @@ return new class extends Migration
             $table->text('clear_figures_and_tables')->nullable();
             $table->text('adequate_explanations')->nullable();
             $table->text('technical_or_methodological_errors')->nullable();
+
+            $table->text('reseach_project_name')->nullable();
+            $table->text('reseach_project_group')->nullable();
+            $table->text('project_introduction')->nullable();
+            $table->text('project_aims_and_objectives')->nullable();
+            $table->text('project_background')->nullable();
+            $table->text('project_expected_research_contribution')->nullable();
+            $table->text('project_proposed_methodology')->nullable();
+            $table->text('project_workplan')->nullable();
+            $table->text('project_resources')->nullable();
+            $table->text('project_references')->nullable();
+            $table->text('project_total_budget')->nullable();
+
             $table->text('other_comments')->nullable();
-            $table->enum('review_decision', ['Accepted', 'Accepted with Revision', 'Rejected'])->nullable();
+            $table->enum('review_decision', ['Accepted', 'Accepted with Revision', 'Rejected', ''])->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('project_id')->references('id')->on('projects');
             $table->timestamps();

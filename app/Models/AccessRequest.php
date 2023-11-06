@@ -11,7 +11,7 @@ class AccessRequest extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['role','date_of_access','time_of_access','purpose_of_access','date_approved'];
+    public $fillable = ['date_of_access','time_of_access','purpose_of_access','date_approved'];
 
     public function user()
     {

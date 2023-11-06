@@ -40,8 +40,8 @@
 
 html, body {
     height: 100%;
-    background-color: #152733;
-    overflow: hidden;
+    /* background-color: #152733; */
+    /* overflow: hidden; */
 }
 
 
@@ -261,6 +261,16 @@ html, body {
                                     @endif
                                     <br><br>
                                 </div>
+                                @if ($errors->any())
+                                <div class="alert alert-danger mt-3">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+
 
                                 <div class="form-button mt-3">
                                     <button id="submit" type="submit" class="btn btn-info "><i class="fas fa-arrow-right"></i>

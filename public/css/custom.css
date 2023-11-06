@@ -28,26 +28,18 @@
     }
     
     /* Change the dark-themed sidebar background color to blue */
-    .sidebar-dark-primary {
+    /* .sidebar-dark-primary {
         background-color: #022A44 !important;
-    }
+    } */
 
     /* If you want to change the light-themed sidebar as well, use this */
-    .sidebar-light-primary {
+    /* .sidebar-light-primary {
         background-color: #022A44 !important;
-    }
-    .card {
+    } */
+    /* .card {
         background-color: #ffffff !important;
     }
     .content-wrapper {
         background-color: #f3f4f6 !important;
-    }
-    
-    .document {
-        background-color: #fff;
-        border: 1px solid #dcdcdc;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin: 20px;
-    }
-    
+    } */
+

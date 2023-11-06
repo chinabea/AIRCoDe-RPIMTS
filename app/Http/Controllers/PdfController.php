@@ -12,17 +12,21 @@ class PdfController extends Controller
 
     public function generatePDF($data_id)
     {
-        $data = Project::findOrFail($data_id);
-        $projMembers = Member::where('project_id', $data_id)->get();
+        
+        try {
+            $data = Project::findOrFail($data_id);
+            $projMembers = Member::where('project_id', $data_id)->get();
 
-        $pdf = PDF::loadView('exports.report', ['data' => $data, 'projMembers' => $projMembers]);
+            $pdf = PDF::loadView('exports.report', ['data' => $data, 'projMembers' => $projMembers]);
 
-        $filename = Str::slug($data->projname) . '.pdf';
+            $filename = Str::slug($data->projname) . '.pdf';
 
-        return $pdf->download($filename);
+            return $pdf->download($filename);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+
     }
-
-
 
 }
 

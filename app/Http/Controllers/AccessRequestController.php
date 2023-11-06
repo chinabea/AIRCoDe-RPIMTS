@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -10,20 +11,29 @@ use App\Models\AccessRequest;
 
 class AccessRequestController extends Controller
 {
-
     public function index()
     {
-        // Fetch all records from the model and pass them to the view
-        // $items = AccessRequest::all();
-        $records = AccessRequest::orderBy('created_at', 'ASC')->get();
+        try {
+            // Fetch all records from the model and pass them to the view
+            // $items = AccessRequest::all();
+            $records = AccessRequest::orderBy('created_at', 'ASC')->get();
 
-        return view('transparency.access-requests.index', compact('records'));
+            return view('transparency.access-requests.index', compact('records'));
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while fetching access requests: ' . $e->getMessage());
+        }
     }
 
     public function create()
     {
-        // Return the view for creating a new item
-        return view('transparency.access-requests.create');
+        try {
+            // Return the view for creating a new item
+            return view('transparency.access-requests.create');
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return redirect()->route('access-requests')->with('error', 'An error occurred while accessing the create view: ' . $e->getMessage());
+        }
     }
     public function store(Request $request)
     {
@@ -33,14 +43,14 @@ class AccessRequestController extends Controller
 
             // Define validation rules for the incoming request data
             $rules = [
-                'role' => 'required|string',
+                // 'role' => 'required|string',
                 'date_of_access' => 'required|date_format:Y-m-d|after_or_equal:today',
                 'time_of_access' => [
                     'required',
                     'after_or_equal:07:00:00', // After or equal to 7 am
                     'before_or_equal:17:00:00', // Before or equal to 5 pm
                 ],
-                'purposeofaccess' => 'required|string',
+                'purpose_of_access' => 'required|string',
                 'date_approved' => ['nullable', 'date', 'after_or_equal:today'],
             ];
 
@@ -61,10 +71,10 @@ class AccessRequestController extends Controller
             $requestModel->fill($validatedData);
             $requestModel->user_id = $userId;
             $requestModel->save();
-
+            
 
             // Redirect to the index or show view, or perform other actions
-            return redirect()->back()->with('success', 'Access Requests Successfully Submitted!');
+            return redirect()->route('access-requests')->with('success', 'Access Requests Successfully Submitted!');
         } catch (QueryException $e) {
             // If an exception is thrown, it means there was a database error
             // You can handle this error by returning an error response
@@ -72,55 +82,83 @@ class AccessRequestController extends Controller
             $errorMessage = 'Error: Unable to create access-requests. Please try again later.';
             // return view('errors.errorView')->with('error', $errorMessage);
             // Redirect back with the error message
-            return redirect()->back()->with('error', $errorMessage);
+            return redirect()->route('access-requests')->with('error', $errorMessage);
 
         }
     }
 
-
-    // public function store(Request $request)
-    // {
-    //     AccessRequest::create($request->all());
-
-    //     // Redirect to the index or show view, or perform other actions
-    //     return redirect()->route('access-requests')->with('success', 'Data Successfully Added!');
-    // }
-
     public function show($id)
-    {
-        // Retrieve and show the specific item using the provided ID
-        $accessrequests = AccessRequest::findOrFail($id);
-
-        return view('transparency.access-requests.show', compact('accessrequests'));
+    {  
+        try {
+            // Retrieve and show the specific item using the provided ID
+            $accessrequests = AccessRequest::findOrFail($id);
+            
+            return view('transparency.access-requests.show', compact('accessrequests'));
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while fetching the access request: ' . $e->getMessage());
+        }
     }
 
     public function edit($id)
     {
-        // Retrieve and show the specific item for editing
-        $accessrequests = AccessRequest::findOrFail($id);
+        try {
+            // Retrieve and update the specific item
+            $accessRequest = AccessRequest::findOrFail($id);
+            
+            // Perform the necessary updates to the $accessRequest model here.
+            // Example: $accessRequest->update(['field_name' => $new_value]);
 
-        return redirect()->back()->with('success', 'Data Successfully Updated!');
+            return redirect()->back()->with('success', 'Access request Successfully Updated!');
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while editing access request: ' . $e->getMessage());
+        }
     }
 
     public function update(Request $request, $id)
     {
-        // Validate and update the item with the provided ID
-        $accessrequests = AccessRequest::findOrFail($id);
-        // Update the item properties using the request data
-        $accessrequests->update($request->all());
+        try {
+            // Validation rules
+            $rules = [
+                'date_of_access' => 'required|date_format:Y-m-d|after_or_equal:today',
+                'time_of_access' => [
+                    'required',
+                    'after_or_equal:07:00:00', // After or equal to 7 am
+                    'before_or_equal:17:00:00', // Before or equal to 5 pm
+                ],
+                'purpose_of_access' => 'required|string',
+                'date_approved' => ['nullable', 'date', 'after_or_equal:today'],
+            ];
+    
+            $this->validate($request, $rules);
+    
+            // If validation passes, continue with the update
+            $accessrequests = AccessRequest::findOrFail($id);
+            $accessrequests->update($request->all());
 
-        // Redirect to the index or show view, or perform other actions
-        return redirect()->back()->with('success', 'Access Requests Successfully Updated!');
+            // Redirect to the index or show view, or perform other actions
+            return redirect()->back()->with('success', 'Access Requests Successfully Updated!');
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while updating access requests: ' . $e->getMessage());
+        }
     }
 
     public function destroy($id)
     {
-        // Delete the item with the provided ID
-        $accessrequests = AccessRequest::findOrFail($id);
-        $accessrequests->delete();
+        try {
+            // Delete the item with the provided ID
+            $accessrequests = AccessRequest::findOrFail($id);
+            $accessrequests->delete();
 
-        // Redirect to the index or perform other actions
-        return redirect()->route('researcher.home')->with('success', 'Access Requests Successfully Deleted!');
+            // Redirect to the index or perform other actions
+            return redirect()->back()->with('success', 'Access Requests Successfully Updated!');
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while deleting access requests: ' . $e->getMessage());
+        }
     }
+
 
 }

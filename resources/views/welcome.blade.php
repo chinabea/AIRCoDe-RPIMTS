@@ -89,7 +89,7 @@
                         @if($project)
                         <br>
                         <h6 class="text-success font-weight-bold">PROJECT FOUND!</h6>
-                        <p class="text-white font-weight-bold">TITLE: {{ $project->projname }}</p>
+                        <p class="text-white font-weight-bold">TITLE: {{ $project->project_name }}</p>
                         <p class="text-white font-weight-bold">STATUS: {{ $project->status }}</p>
                         @else
                         <br>

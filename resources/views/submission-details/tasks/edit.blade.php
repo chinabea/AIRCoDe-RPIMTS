@@ -54,7 +54,11 @@
                         <label for="end_date">End Date</label>
                         <input type="date" name="end_date" id="end_date" class="form-control" value="{{ $task->end_date ? $task->end_date->format('Y-m-d') : '' }}" >
                     </div>
-                    <button type="submit" class="btn btn-primary">Update task</button>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning btn-right">Update task</button>
+                    </div>
                 </form>
             </div>
           </div>

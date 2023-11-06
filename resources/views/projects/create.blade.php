@@ -19,19 +19,24 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="projname">Project Title</label>
-                        <textarea id="projname" name="projname" class="form-control"></textarea>
+                        <label for="call_for_proposal_id">Select Call for Proposal</label>
+                        <select id="call_for_proposal_id" name="call_for_proposal_id" class="selectpicker form-control" data-live-search="true">
+                            <option value="" disabled selected>Select Call for Proposal</option>
+                            @foreach ($call_for_proposals as $call_for_proposal)
+                            <option value="{{ $call_for_proposal->id }}">{{ $call_for_proposal->title }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="researchgroup">Research Group</label>
-                        <textarea id="researchgroup" name="researchgroup" class="form-control"></textarea>
+                        <label for="project_name">Project Title</label>
+                        <textarea id="project_name" name="project_name" class="form-control"></textarea>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label for="authors">Author(s)</label>
-                        <textarea id="authors" name="authors" class="form-control"></textarea>
-                    </div> -->
+                    <div class="form-group">
+                        <label for="research_group">Research Group</label>
+                        <textarea id="research_group" name="research_group" class="form-control"></textarea>
+                    </div>
 
                     <div class="form-group">
                         <label for="introduction">Introduction</label>
@@ -62,28 +67,6 @@
                         <label for="workplan">Workplan</label>
                         <textarea id="workplan" name="workplan" class="form-control"></textarea>
                     </div>
-            
-                    <!-- <div class="mb-3">
-                        <label for="workplan" class="form-label">Work Plan</label>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <p>Start Month and Year</p>
-                                <input type="month" id="start_month" name="start_month" class="form-control">
-                                <br>
-                                @error('start_month')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <p>End Month and Year</p>
-                                <input type="month" id="end_month" name="end_month" class="form-control">
-                                <br>
-                                @error('end_month')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div> -->
 
                     <div class="form-group">
                         <label for="resources">Resources</label>
@@ -95,7 +78,6 @@
                         <textarea id="references" name="references" class="form-control"></textarea>
                     </div>
                     
-                    <!-- <a href="#" class="btn btn-secondary">Cancel</a> -->
                     <button type="submit" class="btn btn-primary" name="draft_submit">
                         <i class="fas fa-save"></i> Save as Draft
                     </button>
@@ -106,6 +88,23 @@
                         <i class="fas fa-check"></i> Submit Project
                     </button>
                 </form>
+                @if(session('success'))
+                    <script>
+                        toastr.success('{{ session('success') }}');
+                    </script>
+                @elseif(session('delete'))
+                    <script>
+                        toastr.delete('{{ session('delete') }}');
+                    </script>
+                @elseif(session('message'))
+                    <script>
+                        toastr.message('{{ session('message') }}');
+                    </script>
+                @elseif(session('error'))
+                    <script>
+                        toastr.error('{{ session('error') }}');
+                    </script>
+                @endif
             </div>
         </div>
     </div>

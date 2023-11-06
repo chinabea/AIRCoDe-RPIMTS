@@ -12,6 +12,7 @@ class Project extends Model
     public $primaryKey = 'id';
 
     public $fillable = ['tracking_code',
+                        'call_for_proposal_id',
                         'project_name',
                         'status',
                         'research_group',

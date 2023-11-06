@@ -1,41 +1,14 @@
 
 
-//     tinymce.init({
-//       selector: "#authors, #introduction, #aims_and_objectives, #background, #workplan, #expected_research_contribution, #proposed_methodology, #resources, #references",
-//       plugins: "link image code table", // Add "table" to the list of plugins
-//       toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image | code table",
-//       images_upload_url: '/your-image-upload-route', // Replace with your Laravel route to handle image uploads
-//       images_upload_base_path: '/uploads', // Optional: Set the base path for image uploads
-//       height: 200, // Set the height (in pixels) as desired
-//       width: "100%",
-//   });
-
-
-    // $(document).ready(function () {
-    //     $(".accomplish-button").click(function () {
-    //         // Toggle the button status and appearance
-    //         if ($(this).data("status") === "in_progress") {
-    //             $(this).removeClass("btn-warning").addClass("btn-success");
-    //             $(this).html('<i class="fas fa-check"></i> Accomplished');
-    //             $(this).data("status", "accomplished");
-    //         }
-    //         else {
-    //             $(this).removeClass("btn-success").addClass("btn-warning");
-    //             $(this).html('<i class="fas fa-spinner"></i> In Progress');
-    //             $(this).data("status", "in_progress");
-    //         }
-    //     });
-    // });
-
-    // if(session('error'))
-    //     $(document).ready(function () {
-    //         $('#errorModal').modal('show');
-    //     });
-    // endif
-
-
-
-
+  //   tinymce.init({
+  //     selector: "#authors, #introduction, #aims_and_objectives, #background, #workplan, #expected_research_contribution, #proposed_methodology, #resources, #references",
+  //     plugins: "link image code table", // Add "table" to the list of plugins
+  //     toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image | code table",
+  //     images_upload_url: '/your-image-upload-route', // Replace with your Laravel route to handle image uploads
+  //     images_upload_base_path: '/uploads', // Optional: Set the base path for image uploads
+  //     height: 200, // Set the height (in pixels) as desired
+  //     width: "100%",
+  // });
 
   $(document).ready(function() {
     // Button click event handlers
