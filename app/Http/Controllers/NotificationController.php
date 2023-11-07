@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
-use App\Notifications\ProjectNotification;
-use App\Models\User;
+// use Illuminate\Http\RedirectResponse;
+// use Illuminate\Http\Response;
+// use App\Notifications\ProjectNotification;
+// use App\Models\User;
 
 
 class NotificationController extends Controller
@@ -56,19 +56,19 @@ class NotificationController extends Controller
             return view('error')->with('message', 'An error occurred while fetching notifications.');
         }
     }
-    
+
     public function readNotifications()
     {
         try {
             $readNotifications = auth()->user()->readNotifications;
-    
+
             return view('read_notifications', compact('readNotifications'));
         } catch (\Exception $e) {
             // Handle the exception, you can log it or return an error view with a message
             return view('error', ['message' => 'An error occurred while retrieving read notifications.']);
         }
     }
-    
+
 
     public function showResearchProjectSubmission(Request $request, $projectId, $notification)
     {
@@ -103,5 +103,5 @@ class NotificationController extends Controller
             return redirect()->back()->with('error', 'Notification not found');
         }
     }
-    
+
 }

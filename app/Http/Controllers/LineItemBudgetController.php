@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Exception;
 use App\Models\LineItemBudget;
 use App\Models\Project;
 use Illuminate\Http\Request;

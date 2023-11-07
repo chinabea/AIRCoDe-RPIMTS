@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
+use Exception;
 use App\Models\File;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
-        
+
     public function index()
     {
         try {
@@ -55,7 +56,7 @@ class FileController extends Controller
             return redirect()->back()->with('error', 'Error storing file in the database.');
         }
     }
-        
+
     public function previewPDF($filename)
     {
         try {
@@ -131,16 +132,16 @@ class FileController extends Controller
                 'file' => 'required|file|max:10240', // Max file size: 10MB
                 'project_id' => 'required|exists:projects,id', // Validate that the project exists
             ];
-    
+
             // Validate the request data using the defined rules
             $this->validate($request, $rules);
-    
+
             // Find the file with the provided ID
             $file = File::findOrFail($id);
-    
+
             // Update the item properties using the request data
             $file->update($request->all());
-    
+
             // Redirect to the index or show view, or perform other actions
             return redirect()->route('submission-details.files.index')->with('success', 'File Successfully Updated!');
         } catch (Exception $e) {

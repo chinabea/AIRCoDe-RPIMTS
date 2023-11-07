@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Notifications\ProjectNotification;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Auth;
+// use App\Notifications\ProjectNotification;
+// use Illuminate\Support\Facades\Notification;
+// use Illuminate\Support\Facades\Auth;
+use Exception;
 use App\Models\User;
 use App\Models\CallForProposal;
 use App\Models\Project;
 use App\Models\Review;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Ulid\Ulid;
+// use Carbon\Carbon;
+// use Ulid\Ulid;
 // use rorecek\Ulid\Ulid;
 
 
@@ -45,7 +46,7 @@ class DashboardController extends Controller
             $assignedAndReviewedCount = $deadlines->filter(function ($deadline) use ($authenticatedUserId) {
                 return !empty($deadline->contribution_to_knowledge) && $deadline->user_id === $authenticatedUserId;
             })->count();
-            
+
             $staffForReview = $deadlines->filter(function ($deadline) {
                 // Split the contribution_to_knowledge by a comma and count the elements
                 $deadline->project_id && $comments = explode(',', $deadline->contribution_to_knowledge);
@@ -73,7 +74,7 @@ class DashboardController extends Controller
             });
 
             $countOfReviewsWithTwoComments = $staffForReview->count();
-            
+
 
             return view('dashboard', compact('records','allDisapprovedCount','allDeferredCount','allApprovedCount','allForRevisionCount','allUnderEvaluationCount','allUsersCount','allProjectsCount','projectCount','draftCount','underEvaluationCount','underEvaluationCount',
                                     'forRevisionCount','approvedCount','deferredCount','disapprovedCount','exceededDeadlines','countOfUnreviewedProjects',
@@ -98,5 +99,5 @@ class DashboardController extends Controller
         }
 
     }
-    
+
 }

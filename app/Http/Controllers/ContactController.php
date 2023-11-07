@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Mail\Mailable;
 use App\Notifications\ContactMessageNotification;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Notification;
+// use Illuminate\Support\Facades\Auth;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Models\ContactMessage;

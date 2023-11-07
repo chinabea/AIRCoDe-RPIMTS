@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Task;
-use App\Notifications\TaskDeadlineNotification;
+use Exception;
+// use App\Notifications\TaskDeadlineNotification;
 use App\Models\User;
 use App\Models\Member;
-use Illuminate\Support\Facades\Notification;
-use App\Rules\DateNotBeforeToday;
+// use Illuminate\Support\Facades\Notification;
+// use App\Rules\DateNotBeforeToday;
 use Illuminate\Database\QueryException;
 
 class TaskController extends Controller
@@ -144,7 +145,7 @@ class TaskController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
-    
+
 
     public function show($id)
     {

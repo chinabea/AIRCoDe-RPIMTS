@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Exception;
+// use Illuminate\Support\Facades\Validator;
 use App\Models\CallForProposal;
 use App\Models\Project;
 use App\Models\User;
@@ -16,7 +17,7 @@ class ReviewController extends Controller
     {
         try {
             $projects = Project::where('status', 'For Revision')->get();
-            $call_for_proposals = CallForProposal::all(); 
+            $call_for_proposals = CallForProposal::all();
 
             return view('submission-details.reviews.for-reviews', compact('projects', 'call_for_proposals'));
         } catch (Exception $e) {
@@ -154,7 +155,7 @@ class ReviewController extends Controller
 
     public function storeSummaryReview(Request $request)
     {
-        
+
         try {
             // $records = Project::findOrFail($id);
             // dd($request->all());

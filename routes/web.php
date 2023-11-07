@@ -20,6 +20,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\MessageController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -59,7 +60,10 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
     Route::get('/review/review-and-summarize/{id}', [ReviewController::class, 'show'])->name('review.for-review-project');
     Route::get('/review/for-reviews', [ReviewController::class, 'forReviews'])->name('submission-details.reviews.for-reviews');
-
+    // Messages
+    Route::get('compose-message', [MessageController::class, 'compose'])->name('messages.compose-message');
+    Route::get('message', [MessageController::class, 'index']);
+    Route::post('message', [MessageController::class, 'store']);
 });
 
 Route::prefix('staff')->middleware(['auth', 'cache', 'staff'])->group(function (){
@@ -95,7 +99,7 @@ Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(func
 Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(function (){
 
     Route::get('/home', [DashboardController::class, 'countAll'])->name('researcher.home');
-    Route::get('/call-for-proposals/show/{id}', [CallForProposalController::class, 'show'])->name('transparency.call-for-proposals.show'); 
+    Route::get('/call-for-proposals/show/{id}', [CallForProposalController::class, 'show'])->name('transparency.call-for-proposals.show');
     Route::get('/tasks', [TaskController::class, 'index'])->name('submission-details.tasks.index');
     Route::get('task/create', [TaskController::class, 'create'])->name('submission-details.tasks.create');
     Route::post('/task', [TaskController::class, 'store'])->name('submission-details.tasks.store');

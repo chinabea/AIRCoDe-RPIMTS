@@ -569,7 +569,7 @@
           <div class="collapse show" id="collapseCardExample" style="">
               <div class="card-body">
                 <label>Research Group</label><br>
-                {{ $records->researchgroup }}
+                {{ $records->research_group }}
 
                 <br><br>
 
@@ -1136,7 +1136,7 @@
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Research Group</label>
-              <input type="text" value="{{ $records->researchgroup }}" class="form-control" id="researchgroup" name="researchgroup">
+              <input type="text" value="{{ $records->research_group }}" class="form-control" id="researchgroup" name="researchgroup">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Introduction</label>
@@ -1210,7 +1210,7 @@
                 <br>
 
                 <label>Research Group:</label><br>
-                {{ $records->researchgroup }}
+                {{ $records->research_group }}
                 <br>
                 <br>
 
