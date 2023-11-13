@@ -41,7 +41,9 @@
                                     @endforeach
                               </td>
                               <td class="align-middle">
-                                <a href="{{ route('submission-details.show', $project->id) }}">{{ $project->project_name }}</a>
+                                {{-- <a href="{{ route('submission-details.show', $project->id) }}"> --}}
+                                    {{ $project->project_name }}
+                                {{-- </a> --}}
                               </td>
                               <td class="align-middle">{{ $project->research_group }}</td>
                               <td class="align-middle">{{ $project->created_at->format('F j, Y') }}</td>

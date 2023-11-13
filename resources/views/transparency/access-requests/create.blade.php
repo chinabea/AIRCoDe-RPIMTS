@@ -20,15 +20,16 @@
                     @elseif(auth()->user()->role == 3)Researcher
                     @elseif(auth()->user()->role == 4)Reviewer
                     @endif" readonly>
+                    <br>
                     <label for="inputText">Date of access</label>
-                    <input type="date" class="form-control"  id="date_of_access" name="date_of_access" placeholder="Date of access" required>
+                    <input type="date" class="form-control" id="date_of_access" name="date_of_access" placeholder="Date of access" required>
                     <br>
                     @error('date_of_access')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                    
                     <label for="inputText">Time of access</label>
-                    <input type="time" class="form-control"  id="time_of_access" name="time_of_access" placeholder="Time of access" required>
+                    <input type="time" class="form-control" id="time_of_access" name="time_of_access" placeholder="Time of access" required>
+                    <p class="text-xs">Time of Request should start at 8 am until 5 pm only</p>
                     <br>
                     @error('time_of_access')
                     <div class="alert alert-danger">{{ $message }}</div>

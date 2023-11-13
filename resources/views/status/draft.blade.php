@@ -1,6 +1,5 @@
 
 @extends('layouts.template')
-
 @section('content')
 
   <div class="content-wrapper">
@@ -42,18 +41,22 @@
                                     @endforeach
                               </td>
                               <td class="align-middle">
-                                <a href="{{ route('submission-details.show', $project->id) }}">{{ $project->project_name }}</a>
+                                {{-- <a href="{{ route('submission-details.show', $project->id) }}"> --}}
+                                    {{ $project->project_name }}
+                                {{-- </a> --}}
                               </td>
                               <td class="align-middle">{{ $project->research_group }}</td>
                               <td class="align-middle">{{ $project->created_at->format('F j, Y') }}</td>
                               <td class="align-middle"><span class="badge badge-primary text-sm">{{ $project->status }}</span></td>
                               <td class="align-middle">
                                   <div class="btn-group align-middle" role="group" aria-label="Basic example">
+
                                   <a href="{{ route('submission-details.show', $project->id) }}" type="button" class="btn btn-secondary">
-                                  <i class="fas fa-info-circle"></i>
+                                    <i class="fas fa-info-circle"></i>
                                   </a>
-                                  <a href="{{ route('projects.edit', $project->id) }}" type="button" class="btn btn-warning">
-                                  <i class="fas fa-edit"></i>
+
+                                  <a href="{{ route('projects.edit', $project->id) }}" type="button" class="btn btn-warning"> 
+                                    <i class="fas fa-edit"></i>
                                   </a>
 
                                   <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $project->id) }}')">

@@ -15,7 +15,6 @@ use App\Http\Controllers\LineItemBudgetController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\NotificationController;
@@ -61,9 +60,13 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/review/review-and-summarize/{id}', [ReviewController::class, 'show'])->name('review.for-review-project');
     Route::get('/review/for-reviews', [ReviewController::class, 'forReviews'])->name('submission-details.reviews.for-reviews');
     // Messages
-    Route::get('compose-message', [MessageController::class, 'compose'])->name('messages.compose-message');
-    Route::get('message', [MessageController::class, 'index']);
-    Route::post('message', [MessageController::class, 'store']);
+    Route::resource('messages', MessageController::class);
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+    // Route::get('/messages/{{message}}', [MessageController::class, 'show'])->name('messages.show');
+    // Route::put('/messages/{{message}}', [MessageController::class, 'update'])->name('messages.update');
+    // Route::delete('/messages/{{message}}', [MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
 Route::prefix('staff')->middleware(['auth', 'cache', 'staff'])->group(function (){
@@ -143,7 +146,7 @@ Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(
 });
 
 
-Route::prefix('DirectorAndStaff')->middleware(['auth', 'cache', 'directorOrStaff'])->group(function () {
+Route::prefix('directorOrStaff')->middleware(['auth', 'cache', 'directorOrStaff'])->group(function () {
 
     // Call-for-proposals
     Route::get('/call-for-proposals', [CallForProposalController::class, 'index'])->name('call-for-proposals');
@@ -176,18 +179,10 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/status/deferred', [StatusController::class, 'deferred'])->name('status.deferred');
     Route::get('/status/disapproved', [StatusController::class, 'disapproved'])->name('status.disapproved');
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
-    Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
     Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
     Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
 
-    Route::get('/test-error', function () {
-        abort(500);
-    });
-
-    Route::fallback(function () {
-        return response()->view('errors.404', [], 404);
-    });
 
 });
 
@@ -199,3 +194,11 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
 
+
+Route::get('/test-error', function () {
+    abort(500);
+});
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});

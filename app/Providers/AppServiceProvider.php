@@ -23,9 +23,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $revs = Review::all();
-        // $recs = Project::all();
+        $recs = Project::all();
 
-        // view()->share('recs', $recs);
+        view()->share('recs', $recs);
         view()->share('revs', $revs);
     }
 }

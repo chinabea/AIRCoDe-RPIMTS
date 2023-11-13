@@ -1,85 +1,85 @@
+@extends('layouts.template')
 
-    <!-- <form action="{{ route('projects.storeReviewer') }}" method="POST" enctype="multipart/form-data">
+@section('content')
+
+  <div class="content-wrapper">
+    <section class="content-header">
+    </section>
+    <div class="container">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex justify-content-center align-items-center">
+              <!-- <i class="nav-icon fas fa-book fa-2x"></i> -->
+                <h6 class="m-0 ml-3 font-weight-bold">SUBMITTED PROJECTS</h6>
+            </div>
+
+            <div class="card-body">
+<form action="{{ route('projects.edit', $records->id) }}" method="POST">
     @csrf
-        <div class="form-group">
-            <label for="projname">Project Title</label>
-            <input type="text" name="projname" id="projname" class="form-control" readonly>
-        </div>
-
-        <div class="form-group">
-            <label for="reviewers">Project Reviewers</label>
-            <select name="reviewers[]" id="reviewers" class="form-control custom-select" multiple>
-                <option disabled>Select reviewers</option>
-                @foreach ($reviewers as $reviewer)
-                    <option value="{{ $reviewer->id }}" data-project-id="{{ $reviewer->project_id }}">{{ $reviewer->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Create Project</button>
-    </form> -->
-
-    <!-- projects/edit.blade.php -->
-<!-- @extends('layouts.template')
-@section('title', 'Edit Project')
-
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        @include('layouts.topnav')
-        @include('layouts.sidebar')
-
-        <div class="content-wrapper">
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            {{-- <h1>Edit Project</h1> --}}
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card card-primary">
-                                {{-- <div class="card-header">
-                                    <h3 class="card-title">General</h3>
-                                </div> --}}
-                                <div class="card-body">
-                                    <h1>Edit Research Project</h1>
-                                    <p>Please update the following information:</p>
-                                    <form action="{{ route('projects.update', ['project' => $project->id]) }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @method('PUT')
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="projname">Project Name</label>
-                                            <input type="text" id="projname" name="projname" class="form-control"
-                                                value="{{ $project->projname }}">
-                                        </div>
-                                        <a href="#" class="btn btn-secondary">Cancel</a>
-                                        <input type="submit" value="Update Project" class="btn btn-success float-right">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        @include('layouts.footer')
-
-        <aside class="control-sidebar control-sidebar-dark">
-        </aside>
+    @method('PUT')
+    <div class="mb-3">
+      <label for="project_name" class="form-label">Project Name</label>
+      <input type="text" value="{{ $records->project_name }}" class="form-control" id="project_name" name="project_name">
     </div>
-</body>
-
-</html>
- -->
+    <div class="mb-3">
+      <label for="" class="form-label">Research Group</label>
+      <input type="text" value="{{ $records->research_group }}" class="form-control" id="research_group" name="research_group">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Introduction</label>
+      <input type="text" value="{{ $records->introduction }}" class="form-control" id="introduction" name="introduction">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Aims and Objectives</label>
+      <input type="text" value="{{ $records->aims_and_objectives }}" class="form-control" id="aims_and_objectives" name="aims_and_objectives">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Background</label>
+      <input type="text" value="{{ $records->background }}" class="form-control" id="background" name="background">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Expected Research Contribution</label>
+      <input type="text" value="{{ $records->expected_research_contribution }}" class="form-control" id="expected_research_contribution" name="expected_research_contribution">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">The Proposed Methodology</label>
+      <input type="text" value="{{ $records->proposed_methodology }}" class="form-control" id="proposed_methodology" name="proposed_methodology">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Work Plan</label>
+      <input type="text" value="{{ $records->workplan }}" class="form-control" id="workplan" name="workplan" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Resources</label>
+      <input type="text" value="{{ $records->resources }}" class="form-control" id="resources" name="resources">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">References</label>
+      <input type="text" value="{{ $records->references }}" class="form-control" id="references" name="references">
+    </div>
+</div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-warning float-right">Update Proposal</button>
+    </div>
+  </form>
+  @if(session('success'))
+      <script>
+          toastr.success('{{ session('success') }}');
+      </script>
+  @elseif(session('delete'))
+      <script>
+          toastr.delete('{{ session('delete') }}');
+      </script>
+  @elseif(session('message'))
+      <script>
+          toastr.message('{{ session('message') }}');
+      </script>
+  @elseif(session('error'))
+      <script>
+          toastr.error('{{ session('error') }}');
+      </script>
+  @endif
+</div>
+</div>
+</div>
+@endsection

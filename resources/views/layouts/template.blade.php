@@ -43,7 +43,7 @@
 <!-- Bootstrap Select CSS https://cdn.jsdelivr.net/npm//dist/css/bootstrap-select.min.css -->
 <link href="{{ asset('cdn/bootstrap-select@1.13.18.min.css') }}" rel="stylesheet">
 <!-- jQuery https://code.jquery.com/jquery-3.5.1.min.js -->
-<script src="{{ asset('cdn/jquery-3.5.1.min.js') }}"></script> 
+<script src="{{ asset('cdn/jquery-3.5.1.min.js') }}"></script>
 
 <!-- Bootstrap JS https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js -->
 <script src="{{ asset('cdn/bootstrap@4.5.2.min.js') }}"></script>
@@ -59,7 +59,7 @@
 
 </head>
 @php
-    $theme = false; 
+    $theme = false;
 @endphp
 <!-- <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed layout-footer-fixed"> -->
 <body class="hold-transition sidebar-mini {{ $theme ? 'dark-mode' : '' }} layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -69,9 +69,8 @@
         @include('layouts.topnav')
 
         @include('layouts.sidebar')
-        
+
         @yield('content')
-        
 
 
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>

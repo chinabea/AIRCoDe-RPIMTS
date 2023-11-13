@@ -27,7 +27,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                        @if ($projects->count() > 0)
+                        {{-- @if ($projects->count() > 0) --}}
                           @foreach($projects as $record)
                           @if(auth()->user()->role == 1 || auth()->user()->role == 2 || $record->user_id === auth()->user()->id)
                           <tr>
@@ -69,12 +69,12 @@
                                   <a href="{{ route('submission-details.show', $record->id) }}" type="button" class="btn btn-secondary">
                                   <i class="fas fa-info-circle"></i>
                                   </a>
-                                  <a href="{{ route('projects.edit', $record->id) }}" type="button" class="btn btn-warning">
+                                  {{-- <a href="{{ route('projects.edit', $record->id) }}" type="button" class="btn btn-warning">
                                   <i class="fas fa-edit"></i>
-                                  </a>
+                                  </a> --}}
 
                                   <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">
-                                  <i class="fas fa-trash"></i>
+                                  <i class="fas fa-trash"> Archive</i>
                                   </button>
 
                                   <script>
@@ -94,7 +94,7 @@
                           </tr>
                           @endif
                           @endforeach
-                          @endif
+                          {{-- @endif --}}
                   </tbody>
               </table>
             @if(session('success'))
@@ -118,9 +118,4 @@
     </div>
 </div>
 </div>
-
-<a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-</a>
-
 @endsection

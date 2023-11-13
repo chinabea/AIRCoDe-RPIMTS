@@ -1,75 +1,14 @@
-
+{{-- 
 @extends('layouts.template')
 
-@section('content')
+@section('content') --}}
 
-<style>
-    /* Add the following CSS to your stylesheet */
-.card.direct-chat {
-    /* width: 300px; */
-    border-radius: 15px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-.card.direct-chat .card-body {
-    height: 300px; /* Adjust the height as needed */
-    padding: 0;
-    overflow-y: auto;
-}
-
-.card.direct-chat .direct-chat-messages {
-    padding: 15px;
-}
-
-.card.direct-chat .direct-chat-msg {
-    margin-bottom: 15px;
-}
-
-.card.direct-chat .direct-chat-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
-.card.direct-chat .direct-chat-text {
-    background: #007bff; /* Message bubble background color */
-    color: #fff; /* Message text color */
-    border-radius: 10px;
-    padding: 10px;
-    display: inline-block;
-    max-width: 70%; /* Adjust the maximum width as needed */
-}
-
-.card.direct-chat .direct-chat-infos {
-    font-size: 12px;
-}
-
-.card.direct-chat .direct-chat-timestamp {
-    margin-top: 5px;
-}
-
-.card.direct-chat .direct-chat-msg.right .direct-chat-text {
-    background: #f4f4f4; /* Sender's message bubble background color */
-    color: #333; /* Sender's message text color */
-}
-
-.card.direct-chat .direct-chat-msg.right .direct-chat-img {
-    float: right;
-}
-
-.card.direct-chat .card-footer {
-    border-top: none;
-    padding: 10px;
-    /* background: #f4f4f4; */
-}
-
-</style>
-<div class="card direct-chat direct-chat-primary" style="position: fixed; bottom: 20px; right: 20px;">
+<div class="card direct-chat direct-chat-primary" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
     <div class="card-header ui-sortable-handle" style="cursor: move;">
-      <h3 class="card-title">Direct Chat</h3>
+      <h3 class="card-title">Direct Chat </h3>
 
       <div class="card-tools">
-        <span title="3 New Messages" class="badge badge-primary">3</span>
+        <span title="3 New Messages" class="badge badge-primary"> 3</span>
         <button type="button" class="btn btn-tool" data-card-widget="collapse">
           <i class="fas fa-minus"></i>
         </button>
@@ -232,7 +171,7 @@
           <!-- End Contact Item -->
           <li>
             <a href="#">
-              <img class="contacts-list-img" src="dist/img/user8-128x128.jpg" alt="User Avatar">
+              <img class="contacts-list-img" src="{{ asset('dist/img/user8-128x128.jpg') }}" alt="User Avatar">
 
               <div class="contacts-list-info">
                 <span class="contacts-list-name">
@@ -252,16 +191,56 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
-      <form action="#" method="post">
+
+      <form id="message-form">
+        @csrf
         <div class="input-group">
-          <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+          <input type="text" name="message" id="message" placeholder="Type Message ..." class="form-control">
           <span class="input-group-append">
-            <button type="button" class="btn btn-primary">Send</button>
+            <button type="submit" class="btn btn-primary">Send</button>
           </span>
         </div>
       </form>
+      {{-- <form action="{{ route('messages.create') }}" method="post">
+        <div class="input-group">
+          <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+          <span class="input-group-append">
+            <button type="submit" class="btn btn-primary">Send</button>
+          </span>
+        </div>
+      </form> --}}
     </div>
     <!-- /.card-footer-->
   </div>
 
-  @endsection
+  {{-- @endsection --}}
+
+  {{-- @section('scripts') --}}
+  <script>
+      // JavaScript code to handle form submission and real-time chat
+      $(document).ready(function() {
+          // Handle form submission
+          $('#message-form').submit(function(e) {
+              e.preventDefault();
+              var message = $('#message').val();
+              if (message.trim() !== '') {
+                  // Send the message to the server via AJAX
+                  $.ajax({
+                      type: 'POST',
+                      url: '{{ route('messages.store') }}',
+                      data: {
+                          '_token': $('input[name=_token]').val(),
+                          'message': message
+                      },
+                      success: function(data) {
+                          // Clear the input field after successfully sending the message
+                          $('#message').val('');
+                      }
+                  });
+              }
+          });
+  
+          // You may also add real-time chat functionality here
+      });
+  </script>
+  {{-- @endsection --}}

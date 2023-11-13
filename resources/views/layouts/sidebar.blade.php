@@ -439,14 +439,6 @@
               </li>
             <!-- </ul> -->
           </li>
-          <!-- <li class="nav-item">
-            <a href="{{ route('faqs') }}" class="nav-link {{ Route::currentRouteName() == 'access-requests' ? 'active' : '' }}">
-                <i class="nav-icon fas fa-question-circle"></i>
-              <p>
-                FAQs
-              </p>
-            </a>
-          </li> -->
           <li class="nav-item">
             <a href="{{ route('contact') }}" class="nav-link {{ Route::currentRouteName() == 'contact' ? 'active' : '' }}">
               <i class="nav-icon fas fa-address-book"></i>

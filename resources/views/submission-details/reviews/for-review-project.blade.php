@@ -13,7 +13,7 @@
     <!-- Area Chart -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Research Proposal Reviews</h6>
+            <h6 class="m-0 font-weight-bold text-center">Research Reviews</h6>
         </div>
         <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover text-left table-sm">
@@ -177,13 +177,13 @@
           @if(auth()->user()->role == 2)
             <!-- <i class="fas fa-file-signature fa-2x text-gray-300"></i> -->
             <!-- <h5 class="m-0 ml-3 font-weight-bold">SUMMARIZE REVIEWS</h5> -->
-            <h6 class="m-0 font-weight-bold text-primary">Summarize Review</h6>
+            <h6 class="m-0 font-weight-bold text-center">Summarize Review</h6>
             <input type="hidden" name="project_id" value="{{ $records->id }}">
           @else
             <!-- <i class="fas fa-file-signature fa-2x text-gray-300"></i> -->
             <!-- <h5 class="m-0 ml-3 font-weight-bold">REVIEW</h5> -->
             
-            <h6 class="m-0 font-weight-bold text-primary">Review</h6>
+            <h6 class="m-0 font-weight-bold text-center">Review</h6>
           @endif
         </div>
         <!-- Card Body -->
@@ -202,10 +202,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge !== null && $review->project_id === $records->id)
-                    <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea>
+                    <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" readonly>{{ $review->contribution_to_knowledge }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge === null && $review->project_id === $records->id)
-                    <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1"></textarea>
+                    <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -216,10 +216,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->technical_soundness !== null && $review->project_id === $records->id)
-                    <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" readonly>{{ $review->technical_soundness }}</textarea>
+                    <textarea id="technical_soundness" name="technical_soundness" class="form-control" readonly>{{ $review->technical_soundness }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->technical_soundness === null && $review->project_id === $records->id)
-                    <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1"></textarea>
+                    <textarea id="technical_soundness" name="technical_soundness" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -230,10 +230,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->comprehensive_subject_matter !== null && $review->project_id === $records->id)
-                    <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
+                    <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->comprehensive_subject_matter === null && $review->project_id === $records->id)
-                    <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1"></textarea>
+                    <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -244,10 +244,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->applicable_and_sufficient_references !== null && $review->project_id === $records->id)
-                    <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1" readonly>{{ $review->applicable_and_sufficient_references }}</textarea>
+                    <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" readonly>{{ $review->applicable_and_sufficient_references }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->applicable_and_sufficient_references === null && $review->project_id === $records->id)
-                    <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" rows="1"></textarea>
+                    <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -258,10 +258,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->inappropriate_references !== null && $review->project_id === $records->id)
-                    <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1" readonly>{{ $review->inappropriate_references }}</textarea>
+                    <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" readonly>{{ $review->inappropriate_references }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->inappropriate_references === null && $review->project_id === $records->id)
-                    <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1"></textarea>
+                    <textarea id="inappropriate_references" name="inappropriate_references" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -272,10 +272,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->comprehensive_application !== null && $review->project_id === $records->id)
-                    <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1" readonly>{{ $review->comprehensive_application }}</textarea>
+                    <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" readonly>{{ $review->comprehensive_application }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->comprehensive_application === null && $review->project_id === $records->id)
-                    <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1"></textarea>
+                    <textarea id="comprehensive_application" name="comprehensive_application" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -286,10 +286,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->grammar_and_presentation !== null && $review->project_id === $records->id)
-                    <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1" readonly>{{ $review->grammar_and_presentation }}</textarea>
+                    <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" readonly>{{ $review->grammar_and_presentation }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->grammar_and_presentation === null && $review->project_id === $records->id)
-                    <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1"></textarea>
+                    <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -300,10 +300,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->assumption_of_reader_knowledge !== null && $review->project_id === $records->id)
-                    <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1" readonly>{{ $review->assumption_of_reader_knowledge }}</textarea>
+                    <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" readonly>{{ $review->assumption_of_reader_knowledge }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->assumption_of_reader_knowledge === null && $review->project_id === $records->id)
-                    <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control" rows="1"></textarea>
+                    <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -314,10 +314,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->clear_figures_and_tables !== null && $review->project_id === $records->id)
-                    <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1" readonly>{{ $review->clear_figures_and_tables }}</textarea>
+                    <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" readonly>{{ $review->clear_figures_and_tables }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->clear_figures_and_tables === null && $review->project_id === $records->id)
-                    <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1"></textarea>
+                    <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -328,10 +328,10 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->adequate_explanations !== null && $review->project_id === $records->id)
-                    <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" readonly>{{ $review->adequate_explanations }}</textarea>
+                    <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" readonly>{{ $review->adequate_explanations }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->adequate_explanations === null && $review->project_id === $records->id)
-                    <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1"></textarea>
+                    <textarea id="adequate_explanations" name="adequate_explanations" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -342,10 +342,164 @@
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->technical_or_methodological_errors !== null && $review->project_id === $records->id)
-                    <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1" readonly>{{ $review->technical_or_methodological_errors }}</textarea>
+                    <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" readonly>{{ $review->technical_or_methodological_errors }}</textarea>
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->technical_or_methodological_errors === null && $review->project_id === $records->id)
-                    <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control" rows="1"></textarea>
+                    <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="reseach_project_name">Project Name</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->reseach_project_name !== null && $review->project_id === $records->id)
+                    <textarea id="reseach_project_name" name="reseach_project_name" class="form-control" readonly>{{ $review->reseach_project_name }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->reseach_project_name === null && $review->project_id === $records->id)
+                    <textarea id="reseach_project_name" name="reseach_project_name" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="reseach_project_group">Research Group</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->reseach_project_group !== null && $review->project_id === $records->id)
+                    <textarea id="reseach_project_group" name="reseach_project_group" class="form-control" readonly>{{ $review->reseach_project_group }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->reseach_project_group === null && $review->project_id === $records->id)
+                    <textarea id="reseach_project_group" name="reseach_project_group" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="project_introduction">Introduction</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_introduction !== null && $review->project_id === $records->id)
+                    <textarea id="project_introduction" name="project_introduction" class="form-control" readonly>{{ $review->project_introduction }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->project_introduction === null && $review->project_id === $records->id)
+                    <textarea id="project_introduction" name="project_introduction" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="project_aims_and_objectives">Aims and Objectives</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_aims_and_objectives !== null && $review->project_id === $records->id)
+                    <textarea id="project_aims_and_objectives" name="project_aims_and_objectives" class="form-control" readonly>{{ $review->project_aims_and_objectives }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->project_aims_and_objectives === null && $review->project_id === $records->id)
+                    <textarea id="project_aims_and_objectives" name="project_aims_and_objectives" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="project_background">Background</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_background !== null && $review->project_id === $records->id)
+                    <textarea id="project_background" name="project_background" class="form-control" readonly>{{ $review->project_background }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->project_background === null && $review->project_id === $records->id)
+                    <textarea id="project_background" name="project_background" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="project_expected_research_contribution">Expected Research Contribution</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_expected_research_contribution !== null && $review->project_id === $records->id)
+                    <textarea id="project_expected_research_contribution" name="project_expected_research_contribution" class="form-control" readonly>{{ $review->project_expected_research_contribution }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->project_expected_research_contribution === null && $review->project_id === $records->id)
+                    <textarea id="project_expected_research_contribution" name="project_expected_research_contribution" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="project_proposed_methodology">Proposed Methodology</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_proposed_methodology !== null && $review->project_id === $records->id)
+                    <textarea id="project_proposed_methodology" name="project_proposed_methodology" class="form-control" readonly>{{ $review->project_proposed_methodology }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->project_expected_research_contribution === null && $review->project_id === $records->id)
+                    <textarea id="project_proposed_methodology" name="project_proposed_methodology" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="project_workplan">Workplan</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_workplan !== null && $review->project_id === $records->id)
+                    <textarea id="project_workplan" name="project_workplan" class="form-control" readonly>{{ $review->project_workplan }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->project_expected_research_contribution === null && $review->project_id === $records->id)
+                    <textarea id="project_workplan" name="project_workplan" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="project_resources">Resources</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_resources !== null && $review->project_id === $records->id)
+                    <textarea id="project_resources" name="project_resources" class="form-control" readonly>{{ $review->project_resources }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->project_expected_research_contribution === null && $review->project_id === $records->id)
+                    <textarea id="project_resources" name="project_resources" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="project_references">References</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_references !== null && $review->project_id === $records->id)
+                    <textarea id="project_references" name="project_references" class="form-control" readonly>{{ $review->project_references }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->project_references === null && $review->project_id === $records->id)
+                    <textarea id="project_references" name="project_references" class="form-control"></textarea>
+                  @endif
+              @endforeach
+            @endif 
+          </div>
+
+          <div class="form-group">
+            <label for="project_total_budget">References</label>
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->project_total_budget !== null && $review->project_id === $records->id)
+                    <textarea id="project_total_budget" name="project_total_budget" class="form-control" readonly>{{ $review->project_total_budget }}</textarea>
+                  @endif
+                  @if ($review->user->id === Auth::user()->id && $review->project_total_budget === null && $review->project_id === $records->id)
+                    <textarea id="project_total_budget" name="project_total_budget" class="form-control"></textarea>
                   @endif
               @endforeach
             @endif 
@@ -356,10 +510,10 @@
               @if($reviewerCommented > 0)
                 @foreach ($revs as $review) 
                     @if ($review->user->id === Auth::user()->id && $review->other_comments !== null && $review->project_id === $records->id)
-                      <textarea id="other_comments" name="other_comments" class="form-control" rows="1" readonly>{{ $review->other_comments }}</textarea>
+                      <textarea id="other_comments" name="other_comments" class="form-control" readonly>{{ $review->other_comments }}</textarea>
                     @endif
                     @if ($review->user->id === Auth::user()->id && $review->other_comments === null && $review->project_id === $records->id)
-                      <textarea id="other_comments" name="other_comments" class="form-control" rows="1"></textarea>
+                      <textarea id="other_comments" name="other_comments" class="form-control"></textarea>
                     @endif
                 @endforeach
               @endif 
@@ -402,7 +556,6 @@
 </a>
 
 <script>
-  
   // Function to automatically resize the textarea based on its content
   function autoResizeTextarea(event) {
     var textarea = event.target;

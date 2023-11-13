@@ -1,10 +1,11 @@
 @extends('layouts.template')
-
 @section('content')
 
 <div class="content-wrapper">
   <section class="content-header">
   </section>
+  
+  @include('messages.chat-widget')
   @if(session('success'))
       <script>
           toastr.success('{{ session('success') }}');
@@ -37,7 +38,21 @@
           color: #333; /* Text color for inactive tab */
       }
   </style> -->
-
+  <div class="col-md-12">
+    <div class="callout callout-danger">
+      <h6><i class="icon fas fa-exclamation-triangle"></i> Submission of Proposal Deadline!</h6>
+      <div class="breaking-news">
+          <marquee behavior="scroll" direction="left" class="text-warning weight-text-bold">
+              <!-- Add your breaking news here -->
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+              <span>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+              <span>Breaking news item 3.</span>
+              <span>Breaking news item 4.</span>
+          </marquee>
+      </div>
+    </div>
+  </div>
+  
 @if(Auth::check())
 @if(Auth::user()->role == 1 || Auth::user()->role == 3)
 
@@ -63,7 +78,7 @@
     <!-- Area Chart -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Research Proposal Reviews</h6>
+            <h6 class="m-0 font-weight-bold text-primary text-center">Research Reviews</h6>
         </div>
         <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover text-left table-sm">
@@ -232,7 +247,7 @@
           @elseif(auth()->user()->role == 4)
             <!-- <i class="fas fa-file-signature fa-2x text-gray-300"></i>
             <h5 class="m-0 ml-3 font-weight-bold">REVIEW</h5> -->
-            <h6 class="m-0 font-weight-bold text-primary">Review</h6>
+            <h6 class="m-0 font-weight-bold text-primary text-center">Review</h6>
           @endif
         </div>
         <!-- Card Body -->
@@ -1017,6 +1032,11 @@
               </a>
           </li>
           <li class="nav-item">
+              <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
+                  <i class="fas fa-users mr-2"></i>Members
+              </a>
+          </li>
+          <li class="nav-item">
               <a class="nav-link" id="tasks-btn" datsa-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">
                   <i class="fas fa-tasks mr-2"></i>Tasks
               </a>
@@ -1037,11 +1057,6 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
-                  <i class="fas fa-users mr-2"></i>Members
-              </a>
-          </li>
-          <li class="nav-item">
               <a class="nav-link" id="reviewer-btn" data-toggle="tab" href="#reviewer" role="tab" aria-controls="reviewer" aria-selected="false">
             <i class="fas fa-user-check mr-2"></i>Reviewer
               </a>
@@ -1051,8 +1066,6 @@
 
 
     @elseif(Auth::user()->role == 3)
-
-    <!-- <ul class="nav nav-tabs justify-content-center" id="myTabs" role="tablist"> -->
     <div class="col-md-12">
       <div class="card card-primary card-tabs">
         <div class="card-header p-0">
@@ -1066,6 +1079,11 @@
             <li class="nav-item">
               <a class="nav-link" id="details-btn" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">
                   <i class="fas fa-info-circle mr-2"></i>Details
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
+                  <i class="fas fa-users mr-2"></i>Members
               </a>
             </li>
             <li class="nav-item">
@@ -1084,48 +1102,18 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="project-team-btn" data-toggle="tab" href="#project-team" role="tab" aria-controls="project-team" aria-selected="false">
-                  <i class="fas fa-users mr-2"></i>Members
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" id="messages-btn" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">
                   <i class="fas fa-comments mr-2"></i>Reviews
               </a>
             </li>
           </ul>
         </div>
-        <!-- <div class="card-body"> -->
-          <!-- <div class="tab-content" id="custom-tabs-two-tabContent">
-            <div class="tab-pane fade" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="custom-tabs-two-home-tab">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
-            </div>
-            <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
-                Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
-            </div>
-            <div class="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
-                Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
-            </div>
-            <div class="tab-pane fade active show" id="custom-tabs-two-settings" role="tabpanel" aria-labelledby="custom-tabs-two-settings-tab">
-                Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
-            </div>
-          </div> -->
-        <!-- </div>
-    </div> -->
-
       @endif
       @endif
 
 <div class="card-body">
 
 <div id="actions-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex justify-content-center align-items-center">
-            <i class="fas fa-cogs fa-2x text-gray-300"></i>
-            <h1 class="m-0 ml-3 font-weight-bold">ACTIONS</h1>
-        </div>
-        <div class="card-body"> -->
         @if (Auth::user()->role == 3 && $records->status === "For Revision")
         <form action="{{ route('projects.edit', $records->id) }}" method="POST">
             @csrf
@@ -1136,7 +1124,7 @@
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Research Group</label>
-              <input type="text" value="{{ $records->research_group }}" class="form-control" id="researchgroup" name="researchgroup">
+              <input type="text" value="{{ $records->research_group }}" class="form-control" id="research_group" name="research_group">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Introduction</label>
@@ -1163,14 +1151,6 @@
               <input type="text" value="{{ $records->workplan }}" class="form-control" id="workplan" name="workplan" readonly>
             </div>
             <div class="mb-3">
-              <label for="" class="form-label">Start Month</label>
-              <input type="date" value="{{ $records->start_month }}" class="form-control" id="start_month" name="start_month">
-            </div>
-            <div class="mb-3">
-              <label for="" class="form-label">End Month</label>
-              <input type="date" value="{{ $records->end_month }}" class="form-control" id="end_month" name="end_month">
-            </div>
-            <div class="mb-3">
               <label for="" class="form-label">Resources</label>
               <input type="text" value="{{ $records->resources }}" class="form-control" id="resources" name="resources">
             </div>
@@ -1178,25 +1158,14 @@
               <label for="" class="form-label">References</label>
               <input type="text" value="{{ $records->references }}" class="form-control" id="references" name="references">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-warning float-right">Update Proposal</button>
           </form>
         @else
             <p>You do not have access to edit this project not until the project status is "For Revision."</p>
         @endif
         </div>
-    <!-- </div>
-  </div>
-</div> -->
-
 
 <div id="details-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
-      <div class="card shadow mb-4">
-          <div class="card-header py-3 d-flex justify-content-center align-items-center">
-              <i class="fas fa-info-circle fa-2x text-gray-300"></i>
-              <h1 class="m-0 ml-3 font-weight-bold">DETAILS</h1>
-          </div>
-          <div class="card-body"> -->
             <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
             <div style="text-align: justify;">
                 <label>Project Name:</label><br>
@@ -1255,19 +1224,8 @@
                 <br>
             </div>
           </div>
-      <!-- </div>
-  </div>
-</div> -->
-
 
 <div id="tasks-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
-      <div class="card shadow mb-4">
-          <div class="card-header py-3 d-flex justify-content-center align-items-center">
-              <i class="fas fa-tasks fa-2x text-gray-300"></i>
-              <h1 class="m-0 ml-3 font-weight-bold">TASKS</h1>
-          </div>
-          <div class="card-body"> -->
             @if (auth()->check() && auth()->user()->role == 3)
             <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks" data-backdrop="static" data-keyboard="false">Add Task</button>
             @include('submission-details.tasks.create')
@@ -1356,19 +1314,9 @@
           </tbody>
         </table>
           </div>
-      <!-- </div>
-  </div>
-</div> -->
 
 
 <div id="lib-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
-      <div class="card shadow mb-4">
-          <div class="card-header py-3 d-flex justify-content-center align-items-center">
-              <i class="fas fa-list-alt fa-2x text-gray-300"></i>
-              <h1 class="m-0 ml-3 font-weight-bold">LINE-ITEM BUDGET</h1>
-          </div>
-          <div class="card-body"> -->
           @if (auth()->check() && auth()->user()->role == 3)
           <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#lib">Add Line-Item</button>
           @include('submission-details.line-items-budget.create')
@@ -1452,20 +1400,9 @@
               </div>
           </div>
           </div>
-      <!-- </div>
-  </div>
-</div> -->
-
 
 
 <div id="files-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
-      <div class="card shadow mb-4">
-          <div class="card-header py-3 d-flex justify-content-center align-items-center">
-              <i class="fas fa-file-alt fa-2x text-gray-300"></i>
-              <h1 class="m-0 ml-3 font-weight-bold">FILES</h1>
-          </div>
-          <div class="card-body"> -->
           @if (auth()->check() && auth()->user()->role == 3)
         <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#filesModal">Add File</button>
             @include('submission-details.files.create')
@@ -1537,18 +1474,8 @@
           @endforeach
           </table>
           </div>
-      <!-- </div>
-  </div>
-</div> -->
 
 <div id="messages-form" class="mt-4" style="display: none;">
-    <!-- <div class="container mt-5">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex justify-content-center align-items-center">
-                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                <h1 class="m-0 ml-3 font-weight-bold">REVIEWS</h1>
-            </div>
-            <div class="card-body"> -->
                 @php
                     $reviewAvailable = false; // Initialize a flag
                 @endphp
@@ -1656,18 +1583,8 @@
                     <p>Review not available yet!</p>
                 @endif
             </div>
-        <!-- </div>
-    </div>
-</div> -->
 
 <div id="project-team-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
-      <div class="card shadow mb-4">
-          <div class="card-header py-3 d-flex justify-content-center align-items-center">
-              <i class="fas fa-users fa-2x text-gray-300"></i>
-              <h1 class="m-0 ml-3 font-weight-bold">MEMBERS</h1>
-          </div>
-          <div class="card-body"> -->
           @if (auth()->check() && auth()->user()->role == 3)
             <button type="button" class="btn btn-primary my-2" data-toggle="modal"  data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">Add Member</button>
             @include('submission-details.project-teams.create')
@@ -1740,27 +1657,12 @@
           @endforeach
           </table>
           </div>
-      <!-- </div>
-  </div>
-</div> -->
-
 
 <div id="reviewer-form" class="mt-4" style="display: none;">
-  <!-- <div class="container mt-5">
-      <div class="card shadow mb-4">
-          <div class="card-header py-3 d-flex justify-content-center align-items-center">
-              <i class="fas fa-user-check fa-2x text-gray-300"></i>
-              <h1 class="m-0 ml-3 font-weight-bold">REVIEWER</h1>
-          </div>
-          <div class="card-body"> -->
           <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal" data-backdrop="static" data-keyboard="false">Select Reviewer</button>
               @include('submission-details.reviews.select-reviewer')
 
           </div>
-      <!-- </div>
-  </div>
-</div> -->
-
 
 
 
