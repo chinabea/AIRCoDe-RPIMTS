@@ -76,3 +76,11 @@
       $('#review-form, #tasks-form, #details-form, #status-form, #reviewer-form, #files-form, #messages-form, #actions-form, #lib-form, #classifications-form, #project-team-form, #cash-program-form').hide();
     });
   });
+
+  $(document).ready(function() {
+    // Button click event handlers
+    $('#pdf-btn').click(function() {
+      $('#pdf-form').show();
+      $('#pdf-btn').hide();
+    });
+  });

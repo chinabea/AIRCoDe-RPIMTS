@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Project;
 use App\Models\Review;
+use App\Models\Message;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,9 +24,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $revs = Review::all();
+        $mes = Message::all();
         $recs = Project::all();
 
         view()->share('recs', $recs);
         view()->share('revs', $revs);
+        view()->share('mes', $mes);
     }
 }

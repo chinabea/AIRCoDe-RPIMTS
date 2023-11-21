@@ -16,7 +16,7 @@ class DirectorOrStaff
     public function handle(Request $request, Closure $next): Response
     {
         $user = auth()->user();
-        if ($user && ($user->role === '1' || $user->role === '2')) {
+        if ($user && ($user->role === 1 || $user->role === 2)) {
             return $next($request);
         }
         return $next($request);

@@ -10,7 +10,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Request List</h3>
+                <h3 class="card-title"><i class="nav-icon fas fa-key"></i> Access Request</h3>
               </div>
               <div class="card-body">
               <div class="table-responsive">
@@ -19,7 +19,7 @@
                   @include('transparency.access-requests.create')
                 @endif
 
-                <table id="example1" class="table table-bordered text-center table-sm">
+                <table id="example1" class="table table-bordered table-hover text-center">
                     <thead>
                     <tr>
                       <th>#</th>
@@ -48,7 +48,7 @@
                                   @elseif(auth()->user()->role == 4)
                                       Reviewer
                                   @endif
-                                </td> 
+                                </td>
                                 <td class="align-middle">{{ \Carbon\Carbon::parse($requests->date_of_access)->format('F j, Y') }}</td>
                                 <td class="align-middle">{{ \Carbon\Carbon::parse($requests->time_of_access)->format('h:i A') }}</td>
                                 <td class="align-middle">{{ $requests->purpose_of_access }}</td>
@@ -128,14 +128,14 @@
                                                       @error('date_of_access')
                                                       <div class="alert alert-danger">{{ $message }}</div>
                                                       @enderror
-                                          
+
                                                       <label for="inputText">Time of access</label>
                                                       <input type="time" class="form-control"  id="time_of_access" name="time_of_access" value="{{ $requests->time_of_access }}" required>
                                                       <br>
                                                       @error('time_of_access')
                                                       <div class="alert alert-danger">{{ $message }}</div>
                                                       @enderror
-                                          
+
                                                       <label for="">Purpose of Access</label>
                                                       <input type="text" class="form-control" id="purpose_of_access" name="purpose_of_access" value="{{ $requests->purpose_of_access }}" required>
                                                       <br>
@@ -159,22 +159,8 @@
                                             </div>
 
                                         <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('transparency.access-requests.destroy', $requests->id) }}')">
-                                        <i class="fas fa-trash"></i> 
+                                        <i class="fas fa-trash"></i>
                                       </button>
-
-                                        <script>
-                                        function confirmDelete(url) {
-                                            if (confirm('Delete?')) {
-                                            // Create a hidden form and submit it programmatically
-                                            var form = document.createElement('form');
-                                            form.action = url;
-                                            form.method = 'POST';
-                                            form.innerHTML = '@csrf @method("delete")';
-                                            document.body.appendChild(form);
-                                            form.submit();
-                                            }
-                                        }
-                                        </script>
                                     </div>
                                 </td>
                             </tr>

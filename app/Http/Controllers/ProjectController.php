@@ -6,15 +6,16 @@ use Exception;
 // use Illuminate\Support\Facades\Mail;
 // use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
+use App\Models\CallForProposal;
+use App\Models\LineItemBudget;
 use Illuminate\Http\Request;
+use App\Models\Revision;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\Review;
 use App\Models\Member;
-use App\Models\LineItemBudget;
 use App\Models\Task;
 use App\Models\File;
-use App\Models\CallForProposal;
 // use Rorecek\Ulid\Ulid;
 
 class ProjectController extends Controller
@@ -193,33 +194,87 @@ class ProjectController extends Controller
         }
     }
 
+    // public function update(Request $request, $id)
+    // {
+    //     try {
+    //         $records = Project::findOrFail($id);
+
+    //         // Update the project record with the new values from the form
+    //         $records->project_name = $request->input('project_name');
+    //         $records->research_group = $request->input('research_group');
+    //         $records->introduction = $request->input('introduction');
+    //         $records->aims_and_objectives = $request->input('aims_and_objectives');
+    //         $records->background = $request->input('background');
+    //         $records->expected_research_contribution = $request->input('expected_research_contribution');
+    //         $records->proposed_methodology = $request->input('proposed_methodology');
+    //         $records->workplan = $request->input('workplan');
+    //         $records->resources = $request->input('resources');
+    //         $records->references = $request->input('references');
+
+    //         // Save the updated project record
+    //         $records->save();
+
+    //         return redirect()->back()->with('success', 'Reseach Proposal Successfully Deleted!');
+    //     } catch (Exception $e) {
+    //         // Handle the exception, you can log it or return an error response
+    //         return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
+    //     }
+    // }
+
     public function update(Request $request, $id)
     {
         try {
-            $records = Project::findOrFail($id);
+            // Find the original project record
+            $originalProject = Project::findOrFail($id);
 
-            // Update the project record with the new values from the form
-            $records->project_name = $request->input('project_name');
-            $records->research_group = $request->input('research_group');
-            // $records->authors = $request->input('authors');
-            $records->introduction = $request->input('introduction');
-            $records->aims_and_objectives = $request->input('aims_and_objectives');
-            $records->background = $request->input('background');
-            $records->expected_research_contribution = $request->input('expected_research_contribution');
-            $records->proposed_methodology = $request->input('proposed_methodology');
-            // $records->start_month = $request->input('start_month');
-            // $records->end_month = $request->input('end_month');
-            $records->workplan = $request->input('workplan');
-            $records->resources = $request->input('resources');
-            $records->references = $request->input('references');
+            // Get the latest revision for the original project
+            $latestRevision = Revision::where('original_proposal_id', $originalProject->id)
+                ->orderBy('version', 'desc')
+                ->first();
 
-            // Save the updated project record
-            $records->save();
+            // If there is a latest revision, increment the version
+            $version = $latestRevision ? $latestRevision->version + 1 : 1;
 
-            return redirect()->back()->with('success', 'Reseach Proposal Successfully Deleted!');
+            // Save the new revision
+            $revision = new Revision();
+            $revision->original_proposal_id = $originalProject->id;
+            $revision->version = $version;
+            $revision->changes = 'Updated project details'; // You may want to customize this based on the actual changes
+            // Set other fields...
+            $revision->save();
+
+            // Update the original project record with the new values from the form
+            // $originalProject->update([
+            //     'project_name' => $request->input('project_name'),
+            //     'research_group' => $request->input('research_group'),
+            //     'introduction' => $request->input('introduction'),
+            //     'aims_and_objectives' => $request->input('aims_and_objectives'),
+            //     'background' => $request->input('background'),
+            //     'expected_research_contribution' => $request->input('expected_research_contribution'),
+            //     'proposed_methodology' => $request->input('proposed_methodology'),
+            //     'workplan' => $request->input('workplan'),
+            //     'resources' => $request->input('resources'),
+            //     'references' => $request->input('references'),
+            // ]);
+             // Update the project record with the new values from the form
+                    $originalProject->project_name = $request->input('project_name');
+                    $originalProject->research_group = $request->input('research_group');
+                    $originalProject->introduction = $request->input('introduction');
+                    $originalProject->aims_and_objectives = $request->input('aims_and_objectives');
+                    $originalProject->background = $request->input('background');
+                    $originalProject->expected_research_contribution = $request->input('expected_research_contribution');
+                    $originalProject->proposed_methodology = $request->input('proposed_methodology');
+                    $originalProject->workplan = $request->input('workplan');
+                    $originalProject->resources = $request->input('resources');
+                    $originalProject->references = $request->input('references');
+
+                    // Save the updated project record
+                    $originalProject->save();
+
+            return redirect()->back()->with('success', 'Research Proposal Successfully Updated!');
         } catch (Exception $e) {
             // Handle the exception, you can log it or return an error response
-            return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while updating the project: ' . $e->getMessage());
         }
     }
 

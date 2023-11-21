@@ -42,8 +42,8 @@ return new class extends Migration
 
             $table->text('other_comments')->nullable();
             $table->enum('review_decision', ['Accepted', 'Accepted with Revision', 'Rejected', ''])->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }

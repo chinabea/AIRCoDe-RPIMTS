@@ -4,8 +4,8 @@
 <div class="content-wrapper">
   <section class="content-header">
   </section>
-  
-  @include('messages.chat-widget')
+
+  {{-- @include('messages.chat-widget') --}}
   @if(session('success'))
       <script>
           toastr.success('{{ session('success') }}');
@@ -52,7 +52,7 @@
       </div>
     </div>
   </div>
-  
+
 @if(Auth::check())
 @if(Auth::user()->role == 1 || Auth::user()->role == 3)
 
@@ -1037,7 +1037,7 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" id="tasks-btn" datsa-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">
+              <a class="nav-link" id="tasks-btn" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">
                   <i class="fas fa-tasks mr-2"></i>Tasks
               </a>
           </li>
@@ -1166,7 +1166,8 @@
         </div>
 
 <div id="details-form" class="mt-4" style="display: none;">
-            <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-file-pdf fa-sm text-white-50"></i> Export to PDF</a>
+            <a href="{{ route('generate.pdf', ['data_id' => $records->id]) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+
             <div style="text-align: justify;">
                 <label>Project Name:</label><br>
                 {{ $records->project_name }}

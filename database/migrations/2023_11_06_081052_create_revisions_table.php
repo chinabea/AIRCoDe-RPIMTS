@@ -31,10 +31,7 @@ return new class extends Migration
             $table->date('approval_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('original_project_id')
-            ->references('id')
-            ->on('projects')
-            ->onDelete('set null');
+            $table->foreign('original_project_id')->references('id')->on('projects')->onDelete('set null');
         });
     }
 

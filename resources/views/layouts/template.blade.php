@@ -12,6 +12,13 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+
+
 <!-- Ionicons -->
 <link rel="stylesheet" href="{{ asset('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') }}">
 <!-- Tempusdominus Bootstrap 4 -->
@@ -28,10 +35,6 @@
 <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 <!-- summernote -->
 <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 <!-- fullCalendar -->
 <link rel="stylesheet" href="{{ asset('plugins/fullcalendar/main.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/simplemde/simplemde.min.css') }}">
@@ -61,8 +64,9 @@
 @php
     $theme = false;
 @endphp
-<!-- <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed layout-footer-fixed"> -->
-<body class="hold-transition sidebar-mini {{ $theme ? 'dark-mode' : '' }} layout-fixed layout-navbar-fixed layout-footer-fixed">
+{{-- <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed layout-footer-fixed"> --}}
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+{{-- <body class="hold-transition sidebar-mini {{ $theme ? 'dark-mode' : '' }} layout-fixed layout-navbar-fixed layout-footer-fixed"> --}}
 
 
     <div class="wrapper">
@@ -72,20 +76,29 @@
 
         @yield('content')
 
+        @include('layouts.footer')
+
 
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-<script src="{{ asset('dist/js/demo.js') }}"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
 
-<!-- datatables-->
-<script src="{{ asset('datatables/jquery.min.js') }}"></script>
-<script src="{{ asset('datatables/sb-admin-2.min.js') }}"></script>
-<script src="{{ asset('datatables/datatables.min.js') }}"></script>
-<script src="{{ asset('datatables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('datatables/vfs_fonts.js') }}"></script>
-<script src="{{ asset('datatables/datatables-demo.js') }}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<script src="{{ asset('datatables.js') }}"></script>
+
+
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- Summernote -->
 <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
  <!-- CodeMirror -->
@@ -132,6 +145,18 @@
             document.body.classList.add('light-mode');
         }
     </script>
-
+    <script>
+        function confirmDelete(url) {
+            if (confirm('Delete?')) {
+                // Create a hidden form and submit it programmatically
+                var form = document.createElement('form');
+                form.action = url;
+                form.method = 'POST';
+                form.innerHTML = '@csrf @method("delete")';
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
 </body>
 </html>

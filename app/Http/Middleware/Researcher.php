@@ -27,15 +27,15 @@ class Researcher
         }
 
         if($user->role==2){
-            return redirect('/staff');
+            return redirect()->route('staff.home');
         }
 
         if($user->role==1){
-            return redirect('/director');
+            return redirect()->route('director.home');
         }
 
         if($user->role==4){
-            return redirect('/reviewer');
+            return redirect()->route('reviewer.home');
         }
     }
 }

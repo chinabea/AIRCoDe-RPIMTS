@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('quantity');
             $table->decimal('unit_price', 10, 2);
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }

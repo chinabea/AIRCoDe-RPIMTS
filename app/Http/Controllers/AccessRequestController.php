@@ -71,7 +71,7 @@ class AccessRequestController extends Controller
             $requestModel->fill($validatedData);
             $requestModel->user_id = $userId;
             $requestModel->save();
-            
+
 
             // Redirect to the index or show view, or perform other actions
             return redirect()->route('access-requests')->with('success', 'Access Requests Successfully Submitted!');
@@ -88,11 +88,11 @@ class AccessRequestController extends Controller
     }
 
     public function show($id)
-    {  
+    {
         try {
             // Retrieve and show the specific item using the provided ID
             $accessrequests = AccessRequest::findOrFail($id);
-            
+
             return view('transparency.access-requests.show', compact('accessrequests'));
         } catch (Exception $e) {
             // Handle the exception, you can log it for debugging or display an error message to the user.
@@ -105,7 +105,7 @@ class AccessRequestController extends Controller
         try {
             // Retrieve and update the specific item
             $accessRequest = AccessRequest::findOrFail($id);
-            
+
             // Perform the necessary updates to the $accessRequest model here.
             // Example: $accessRequest->update(['field_name' => $new_value]);
 
@@ -130,9 +130,9 @@ class AccessRequestController extends Controller
                 'purpose_of_access' => 'required|string',
                 'date_approved' => ['nullable', 'date', 'after_or_equal:today'],
             ];
-    
+
             $this->validate($request, $rules);
-    
+
             // If validation passes, continue with the update
             $accessrequests = AccessRequest::findOrFail($id);
             $accessrequests->update($request->all());
@@ -153,7 +153,7 @@ class AccessRequestController extends Controller
             $accessrequests->delete();
 
             // Redirect to the index or perform other actions
-            return redirect()->back()->with('success', 'Access Requests Successfully Updated!');
+            return redirect()->back()->with('success', 'Access Requests Successfully Deleted!');
         } catch (Exception $e) {
             // Handle the exception, you can log it for debugging or display an error message to the user.
             return back()->with('error', 'An error occurred while deleting access requests: ' . $e->getMessage());

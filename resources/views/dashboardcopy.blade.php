@@ -3,6 +3,9 @@
 
 @section('content')
 
+@php
+    $role = auth()->user()->role;
+@endphp
 
 @if(session('success'))
     <script>
@@ -21,34 +24,117 @@
         toastr.error('{{ session('error') }}');
     </script>
 @endif
-
-@php
-    $role = auth()->user()->role;
-@endphp
-
 @if($role === 1)
 <div class="content-wrapper">
     <section class="content-header">
     </section>
     <div class="container">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h3 class="h3 mb-0 text-gray-800">Dashboard</h3>
+        <h3 class="h3 mb-0 text-gray-800">Dashboard</h3>
+     <div class="row">
 
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-hourglass-half"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Under Evaluation</span>
+              <span class="info-box-number">{{ $allUnderEvaluationCount }}</span>
+            </div>
+          </div>
         </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-edit"></i></span>
+
+                <div class="info-box-content">
+                <span class="info-box-text">For Revision</span>
+                <span class="info-box-number">{{ $allForRevisionCount }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Approved</span>
+                <span class="info-box-number">{{ $allApprovedCount }}</span>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+            <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-pause-circle"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Deferred</span>
+                <span class="info-box-number">{{ $allDeferredCount }}</span>
+            </div>
+            </div>
+        </div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-times-circle"></i></span>
+
+              <div class="info-box-content">
+              <span class="info-box-text">Disapproved</span>
+              <span class="info-box-number">{{ $allDisapprovedCount }}</span>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+              <span class="info-box-icon bg-maroon elevation-1"><i class="fas fa-users"></i></span>
+
+              <div class="info-box-content">
+              <span class="info-box-text">Users</span>
+              <span class="info-box-number">{{ $allUsersCount }}</span>
+              </div>
+          </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-purple elevation-1"><i class="fas fa-book"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Submitted Projects</span>
+            <span class="info-box-number">
+            {{ $allProjectsCount }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-navy elevation-1"><i class="fas fa-users"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">New Members</span>
+            <span class="info-box-number">2,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="row">
         <div class="col-lg-3 col-6">
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>{{ $allUnderEvaluationCount }}</h3>
+              <h3>150</h3>
 
-              <p>Under Evaluation</p>
+              <p>New Orders</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="{{ route('status.under-evaluation') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -56,14 +142,14 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>{{ $allForRevisionCount }}</h3>
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-              <p>For Revision</p>
+              <p>Bounce Rate</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -71,14 +157,14 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>{{ $allApprovedCount }}</h3>
+              <h3>44</h3>
 
-              <p>Approved</p>
+              <p>User Registrations</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -86,14 +172,14 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>{{ $allDeferredCount }}</h3>
+              <h3>65</h3>
 
-              <p>Deferred</p>
+              <p>Unique Visitors</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

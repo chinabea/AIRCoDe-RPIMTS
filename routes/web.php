@@ -15,11 +15,11 @@ use App\Http\Controllers\LineItemBudgetController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ReportController;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Send;
@@ -44,10 +44,10 @@ Route::get('/', [TrackController::class, 'track'])->name('welcome');
 
 Auth::routes();
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 Route::middleware(['auth', 'cache'])->group(function (){
 
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
     Route::get('/total-users', [UserController::class, 'showTotalUsers']);
     Route::get('/create-users', [UserController::class, 'create'])->name('users.create');
     Route::post('/store-users', [UserController::class, 'store'])->name('users.store');
@@ -59,14 +59,32 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
     Route::get('/review/review-and-summarize/{id}', [ReviewController::class, 'show'])->name('review.for-review-project');
     Route::get('/review/for-reviews', [ReviewController::class, 'forReviews'])->name('submission-details.reviews.for-reviews');
+
+    Route::get('/status/draft', [StatusController::class, 'draft'])->name('status.draft');
+    Route::get('/status/under-evaluation', [StatusController::class, 'underEvaluation'])->name('status.under-evaluation');
+    Route::get('/status/for-revision', [StatusController::class, 'forRevision'])->name('status.for-revision');
+    Route::get('/status/approved', [StatusController::class, 'approved'])->name('status.approved');
+    Route::get('/status/deferred', [StatusController::class, 'deferred'])->name('status.deferred');
+    Route::get('/status/disapproved', [StatusController::class, 'disapproved'])->name('status.disapproved');
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+    Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
+    Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
+
+    // Reports
+    Route::get('/report-options', [ReportController::class, 'reportOptions'])->name('reports.report-options');
+    Route::get('/generate-pdf/{data_id}', [ReportController::class, 'generateProjectReport'])->name('generate.pdf');
+    Route::get('/generate-users-report', [ReportController::class, 'generateUsersReport'])->name('generate.users.report');
+    Route::post('/generate-projects-report', [ReportController::class, 'generateProjectsReport'])->name('generate.projects.report');
+    Route::get('/generate-under-evaluation-report', [ReportController::class, 'generateUnderEvaluationReport'])->name('generate.under-evaluation.report');
+    Route::get('/generate-for-revision-report', [ReportController::class, 'generateForRevisionReport'])->name('generate.for-revision.report');
+    Route::post('/generate-projects-report-xlsx', [ReportController::class, 'projectsReportExcel'])->name('projects.xlsx.report');
+
     // Messages
-    Route::resource('messages', MessageController::class);
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
     Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
-    // Route::get('/messages/{{message}}', [MessageController::class, 'show'])->name('messages.show');
-    // Route::put('/messages/{{message}}', [MessageController::class, 'update'])->name('messages.update');
-    // Route::delete('/messages/{{message}}', [MessageController::class, 'destroy'])->name('messages.destroy');
+    Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
 });
 
 Route::prefix('staff')->middleware(['auth', 'cache', 'staff'])->group(function (){
@@ -91,12 +109,13 @@ Route::prefix('reviewer')->middleware(['auth', 'cache', 'reviewer'])->group(func
 Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(function (){
 
     Route::get('/home', [DashboardController::class, 'countAll'])->name('director.home');
-
     Route::delete('/project/delete/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('/project-teams', [MemberController::class, 'index'])->name('submission-details.project-teams.index');
     Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
     Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
     Route::get('/select-reviewers', [ReviewController::class, 'select'])->name('submission-details.reviews.select');
+    Route::post('/store/project/reviewers', [ReviewController::class, 'store'])->name('store.project.reviewers');
+    Route::get('/reports', [ReportController::class, 'generateReport'])->name('reports');
 });
 
 Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(function (){
@@ -146,7 +165,7 @@ Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(
 });
 
 
-Route::prefix('directorOrStaff')->middleware(['auth', 'cache', 'directorOrStaff'])->group(function () {
+Route::prefix('directorOrStaff')->middleware(['auth', 'directorOrStaff', 'cache'])->group(function () {
 
     // Call-for-proposals
     Route::get('/call-for-proposals', [CallForProposalController::class, 'index'])->name('call-for-proposals');
@@ -160,31 +179,6 @@ Route::prefix('directorOrStaff')->middleware(['auth', 'cache', 'directorOrStaff'
 
 });
 
-
-Route::middleware(['auth', 'cache'])->group(function (){
-
-    // NAGANA NA YAYS!
-    Route::get('/generate-pdf/{data_id}', [PdfController::class, 'generatePDF'])->name('generate.pdf');
-    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
-    Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
-    Route::post('/store/project/reviewers', [ReviewController::class, 'store'])->name('store.project.reviewers');//oks na
-
-    // MOT FUNCTIONAL YET!
-    Route::post('/add-review/{data_id}', [ReviewController::class, 'addReview'])->name('add.review');
-
-    Route::get('/status/draft', [StatusController::class, 'draft'])->name('status.draft');
-    Route::get('/status/under-evaluation', [StatusController::class, 'underEvaluation'])->name('status.under-evaluation');
-    Route::get('/status/for-revision', [StatusController::class, 'forRevision'])->name('status.for-revision');
-    Route::get('/status/approved', [StatusController::class, 'approved'])->name('status.approved');
-    Route::get('/status/deferred', [StatusController::class, 'deferred'])->name('status.deferred');
-    Route::get('/status/disapproved', [StatusController::class, 'disapproved'])->name('status.disapproved');
-    Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
-    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
-    Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
-    Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
-
-
-});
 
 // register
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');

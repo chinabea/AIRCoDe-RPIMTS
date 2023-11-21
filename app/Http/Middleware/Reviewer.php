@@ -27,15 +27,15 @@ class Reviewer
         }
 
         if($user->role==2){
-            return redirect('/home');
+            return redirect()->route('staff.home');
         }
 
         if($user->role==3){
-            return redirect('/home');
+            return redirect()->route('researcher.home');
         }
 
         if($user->role==1){
-            return redirect('/home');
+            return redirect()->route('director.home');
         }
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     use HasFactory;
+    protected $fillable = ['sender_id', 'recipient_id', 'content'];
 
     public function sender()
     {
@@ -18,5 +19,4 @@ class Message extends Model
     {
         return $this->belongsTo(User::class, 'recipient_id');
     }
-
 }

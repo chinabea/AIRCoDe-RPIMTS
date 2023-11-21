@@ -19,6 +19,7 @@
         "rorecek/laravel-ulid": "^2.0",
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-permission": "^5.10",
+        "spatie/simple-excel": "*",
         "tinymce/tinymce": "^6.7"
     },
     "require-dev": {

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->ulid('tracking_code');
             $table->unsignedBigInteger('call_for_proposal_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('version')->default(1);
+            $table->text('changes')->nullable();
             $table->text('project_name');
             $table->enum('status', ['Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved']);
             $table->text('research_group');
@@ -29,12 +31,8 @@ return new class extends Migration
             $table->text('references');
             $table->decimal('total_budget', 10, 2)->default(0.00);
             $table->date('approval_date')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('call_for_proposal_id')->references('id')->on('call_for_proposals');
-            $table->foreign('call_for_proposal_id')
-                  ->references('id')
-                  ->on('call_for_proposals')
-                  ->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('call_for_proposal_id')->references('id')->on('call_for_proposals')->onDelete('cascade');
             $table->timestamps();
         });
     }

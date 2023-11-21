@@ -19,8 +19,8 @@ return new class extends Migration
             $table->timestamp('start_date');
             $table->timestamp('end_date')->nullable();
             $table->unsignedBigInteger('assigned_to');
-            $table->foreign('assigned_to')->references('id')->on('users');
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }

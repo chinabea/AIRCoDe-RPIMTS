@@ -27,15 +27,15 @@ class Director
         }
 
         if($user->role==2){
-            return redirect('/staff');
+            return redirect()->route('staff.home');
         }
 
         if($user->role==3){
-            return redirect('/researcher');
+            return redirect()->route('researcher.home');
         }
 
         if($user->role==4){
-            return redirect('/reviewer');
+            return redirect()->route('reviewer.home');
         }
 
 

@@ -55,27 +55,13 @@
                                     <i class="fas fa-info-circle"></i>
                                   </a>
 
-                                  <a href="{{ route('projects.edit', $project->id) }}" type="button" class="btn btn-warning"> 
+                                  <a href="{{ route('projects.edit', $project->id) }}" type="button" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                   </a>
 
                                   <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $project->id) }}')">
                                   <i class="fas fa-trash"></i>
                                   </button>
-
-                                  <script>
-                                      function confirmDelete(url) {
-                                          if (confirm('Delete?')) {
-                                          // Create a hidden form and submit it programmatically
-                                          var form = document.createElement('form');
-                                          form.action = url;
-                                          form.method = 'POST';
-                                          form.innerHTML = '@csrf @method("delete")';
-                                          document.body.appendChild(form);
-                                          form.submit();
-                                          }
-                                      }
-                                  </script>
                               </td>
                           </tr>
                           @endif

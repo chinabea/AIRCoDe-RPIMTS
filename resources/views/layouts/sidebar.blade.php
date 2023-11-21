@@ -84,7 +84,16 @@
                   <p>Access Request</p>
                 </a>
               </li>
-              <button id="theme-toggle" class="btn btn-primary">Toggle Theme</button>
+              <li class="nav-item">
+                <a href="{{ route('reports') }}" class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-chart-line"></i>
+                  <p> Generate Reports</p>
+                </a>
+              </li>
+              <li class="nav-header">SETTINGS</li>
+              <button id="theme-toggle" class="btn btn-outline-primary btn-block">
+                <i class="fas fa-adjust"></i> Toggle Theme
+              </button>
             </div>
           </aside>
 
@@ -169,7 +178,10 @@
                 <p>Disapproved</p>
             </a>
           </li>
-          <button id="mode-toggle" class="btn btn-light">Toggle Dark Mode</button>
+          <li class="nav-header">SETTINGS</li>
+          <button id="theme-toggle" class="btn btn-outline-primary btn-block">
+            <i class="fas fa-adjust"></i> Toggle Theme
+          </button>
         </li>
       </div>
     </aside>
@@ -456,7 +468,10 @@
               </p>
             </a>
           </li> -->
-      <button id="theme-toggle" class="btn btn-primary"> <i class="nav-icon fas fa-contrast-outline"></i>Toggle Theme</button>
+            <li class="nav-header">SETTINGS</li>
+            <button id="theme-toggle" class="btn btn-outline-primary btn-block">
+            <i class="fas fa-adjust"></i> Toggle Theme
+            </button>
     </div>
 </aside>
 
@@ -498,7 +513,10 @@
       @else
           <p>No items assigned for review</p>
       @endif
-      <button id="theme-toggle" class="btn btn-primary">Toggle Theme</button>
+      <li class="nav-header">SETTINGS</li>
+      <button id="theme-toggle" class="btn btn-outline-primary btn-block">
+        <i class="fas fa-adjust"></i> Toggle Theme
+      </button>
           </ul>
 
         </div>

@@ -1,0 +1,59 @@
+
+.text-center {
+    text-align: center;
+}
+
+body {
+    font-family: "Times New Roman", serif;
+    font-size: 11pt;
+    color: black;
+    /* margin-left: 0.5in;
+    margin-right: 0.5in; */
+    margin-bottom: 0.5in;
+    margin-top: 0.1in;
+    /* margin-left: 2em; Adjust the value as needed */
+}
+
+h1,
+h2 {
+    font-size: 12pt;
+}
+
+h3,
+p {
+    font-size: 11pt;
+    text-align: justify;
+}
+
+.tab {
+    margin-top: 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+
+.custom-paragraph{
+    line-height: 0.2;
+}
+/* public/css/pdf-styles.css */
+

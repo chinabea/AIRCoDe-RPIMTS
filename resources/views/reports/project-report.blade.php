@@ -1,45 +1,72 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PDF Report</title>
     <style>
         .header {
             text-align: center;
         }
-        /* .header img {
-            max-width: 200px; 
-        } */
+
         body {
             font-family: "Times New Roman", serif;
             font-size: 11pt;
             color: black;
-            /* margin-top: 0.5in; */
             margin-left: 0.5in;
             margin-right: 0.5in;
             margin-bottom: 0.3in;
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             font-size: 12pt;
         }
 
-        h3, p {
+        h3,
+        p {
             font-size: 11pt;
             text-align: justify;
         }
+
         .tab {
-            /* margin-left: 2em; Adjust the value as needed */
             margin-top: 0;
+            /* margin-left: 2em; Adjust the value as needed */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .align-middle {
+            vertical-align: middle;
         }
 
     </style>
 </head>
 <body>
-<img id="pdfLogo" src="{{ public_path('dist/img/header.jpg') }}" alt="logo" style="width:100%; margin:0;">
+    <img id="pdfLogo" src="{{ public_path('dist/img/header.jpg') }}" alt="logo" style="width:100%; margin:0;">
     <div>
         <div style="text-align: center;">
-            <!-- <h1>Project Name</h1> -->
-            <h1>{{ $data->projname }}</h1>
+            <br>
+            <h1>{{ $data->project_name }}</h1>
             <br>
         </div>
         <h2>Status</h2>
@@ -47,9 +74,9 @@
         <br>
 
         <h2>Research Group</h2>
-        <p>{{ $data->researchgroup }}</p>
+        <p>{{ $data->research_group }}</p>
         <br>
-        
+
         <h2>Author(s):</h2>
         {{ $data->authors }}
         <p>{{ $data->user->name }}</p>
@@ -82,14 +109,6 @@
         <p>{!! $data->workplan !!}</p>
         <br>
 
-        <!-- <h2>Start Month</h2>
-        <p>{{ $data->start_month }}</p>
-        <br>
-
-        <h2>End Month</h2>
-        <p>{{ $data->end_month }}</p>
-        <br> -->
-
         <h2>Resources</h2>
         <p>{!! $data->resources !!}</p>
         <br>
@@ -99,5 +118,6 @@
         <br>
 
     </div>
+
 </body>
 </html>
