@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\CallForProposal;
 use App\Models\Project;
 use App\Models\Review;
+use App\Models\AccessRequest;
 use Illuminate\Http\Request;
 // use Carbon\Carbon;
 // use Ulid\Ulid;
@@ -21,6 +22,8 @@ class DashboardController extends Controller
     {
         try {
             $authenticatedUserId = auth()->user()->id;
+            $allCallforProposalCount = CallForProposal::count();
+            $allAccessRequestCount = AccessRequest::count();
             $records = CallForProposal::orderBy('created_at', 'ASC')->get();
             $allUsersCount = User::count();
             $allProjectsCount = Project::count();
@@ -76,7 +79,7 @@ class DashboardController extends Controller
             $countOfReviewsWithTwoComments = $staffForReview->count();
 
 
-            return view('dashboard', compact('records','allDisapprovedCount','allDeferredCount','allApprovedCount','allForRevisionCount','allUnderEvaluationCount','allUsersCount','allProjectsCount','projectCount','draftCount','underEvaluationCount','underEvaluationCount',
+            return view('dashboard', compact('allAccessRequestCount','allCallforProposalCount','records','allDisapprovedCount','allDeferredCount','allApprovedCount','allForRevisionCount','allUnderEvaluationCount','allUsersCount','allProjectsCount','projectCount','draftCount','underEvaluationCount','underEvaluationCount',
                                     'forRevisionCount','approvedCount','deferredCount','disapprovedCount','exceededDeadlines','countOfUnreviewedProjects',
                                     'assignedAndReviewedCount','countOfReviewsWithTwoComments'));
         } catch (Exception $e) {

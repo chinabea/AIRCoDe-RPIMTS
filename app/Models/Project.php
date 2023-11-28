@@ -28,6 +28,12 @@ class Project extends Model
                         'approval_date',
                     ];
 
+
+    public function versions()
+    {
+        return $this->hasMany(Version::class, 'call_for_proposal_id');
+    }
+
     public function callForProposal()
     {
         return $this->belongsTo(CallForProposal::class, 'project_id');

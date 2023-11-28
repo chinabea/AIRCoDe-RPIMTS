@@ -15,13 +15,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><i class="fa fa-book"></i> DISAPPROVED</h3>
+                            <h3 class="card-title my-1"><i class="fa fa-book"></i> DISAPPROVED</h3>
+                            <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#disapprovedPdf" data-backdrop="static" data-keyboard="false"> 
+                                <i class="fas fa-file-pdf"></i> Export to PDF</button> 
+                                @include('reports.report-options')
                         </div>
                         <div class="card-body">
-                            <button class="btn bg-navy color-palette float-right btn-sm" onclick="generateReport()">
-                                <i class="fa fa-file-pdf"></i> Generate Report
-                            </button>
-                            <table id="example1" class="table table-bordered table-hover text-center">
+                            <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>
                                         <th>#</th>

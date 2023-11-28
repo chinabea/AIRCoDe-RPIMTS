@@ -63,7 +63,7 @@
                           </div>
                       </div>
                     </form><hr>
-                    <h6 class="text-center m-t-1">Log in using your account on:</h6>
+                    <h6 class="text-center text-white m-t-1">Log in using your account on:</h6>
                     <div class="potentialidplist row p-0">
                         <div class="potentialidp col-sm-12 col-md">
                             <a href="{{ url('login/google') }}" title="Google Mail" class="btn btn-danger m-t-1 w-100 d-flex align-items-center">

@@ -143,7 +143,7 @@ class StatusController extends Controller
         try {
             $projects = Project::where('status', 'Draft')->get();
             $call_for_proposals = CallForProposal::all();
-
+            
             return view('status.draft', compact('projects', 'call_for_proposals'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());

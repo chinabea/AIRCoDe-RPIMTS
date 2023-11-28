@@ -72,12 +72,15 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
 
     // Reports
-    Route::get('/report-options', [ReportController::class, 'reportOptions'])->name('reports.report-options');
+    // Route::get('/report-options', [ReportController::class, 'reportOptions'])->name('reports.report-options');
     Route::get('/generate-pdf/{data_id}', [ReportController::class, 'generateProjectReport'])->name('generate.pdf');
-    Route::get('/generate-users-report', [ReportController::class, 'generateUsersReport'])->name('generate.users.report');
+    Route::post('/generate-users-report', [ReportController::class, 'generateUsersReport'])->name('generate.users.report');
     Route::post('/generate-projects-report', [ReportController::class, 'generateProjectsReport'])->name('generate.projects.report');
-    Route::get('/generate-under-evaluation-report', [ReportController::class, 'generateUnderEvaluationReport'])->name('generate.under-evaluation.report');
-    Route::get('/generate-for-revision-report', [ReportController::class, 'generateForRevisionReport'])->name('generate.for-revision.report');
+    Route::post('/generate-under-evaluation-report', [ReportController::class, 'generateUnderEvaluationReport'])->name('generate.under-evaluation.report');
+    Route::post('/generate-for-revision-report', [ReportController::class, 'generateForRevisionReport'])->name('generate.for-revision.report');
+    Route::post('/generate-deferred-report', [ReportController::class, 'generateDeferredReport'])->name('generate.deferred.report');
+    Route::post('/generate-approved-report', [ReportController::class, 'generateApprovedReport'])->name('generate.approved.report');
+    Route::post('/generate-disapproved-report', [ReportController::class, 'generateDisapprovedReport'])->name('generate.disapproved.report');
     Route::post('/generate-projects-report-xlsx', [ReportController::class, 'projectsReportExcel'])->name('projects.xlsx.report');
 
     // Messages

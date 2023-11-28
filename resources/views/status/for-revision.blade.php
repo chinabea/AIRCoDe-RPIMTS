@@ -15,12 +15,14 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><i class="fa fa-book"></i> For Revision</h3>
-                            <a href="{{ route('generate.for-revision.report') }}" class="btn bg-navy color-palette float-right btn-sm" style="background-color: #022A44;">
-                                <i class="fa fa-download"></i> Generate PDF
-                            </a>
+                            
+                            <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#forRevisionPdf" data-backdrop="static" data-keyboard="false"> 
+                                <i class="fas fa-file-pdf"></i> Export to PDF</button> 
+                                @include('reports.report-options')
+                                    
                         </div>
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-hover text-center">
+                            <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -59,10 +61,13 @@
                                               <a href="{{ route('submission-details.show', $project->id) }}" type="button" class="btn btn-secondary">
                                               <i class="fas fa-info-circle"></i>
                                               </a>
-                                              <a href="{{ route('projects.edit', $project->id) }}" type="button" class="btn btn-warning">
-                                              <i class="fas fa-edit"></i>
-                                              </a>
 
+                                            @if(auth()->user() && auth()->user()->role === 3)
+                                                <a href="{{ route('projects.edit', $project->id) }}" type="button" class="btn btn-warning">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            @endif
+                                            
                                               <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $project->id) }}')">
                                               <i class="fas fa-trash"></i>
                                               </button>

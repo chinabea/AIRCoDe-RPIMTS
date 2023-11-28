@@ -19,7 +19,7 @@
                   @include('transparency.access-requests.create')
                 @endif
 
-                <table id="example1" class="table table-bordered table-hover text-center">
+                <table id="example1" class="table table-bordered table-hover text-center table-sm">
                     <thead>
                     <tr>
                       <th>#</th>

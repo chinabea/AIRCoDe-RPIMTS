@@ -15,8 +15,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><i class="nav-icon fas fa-file-signature"></i> CALL FOR PROPOSALS</h3>
-                        </div>
-                        <div class="card-body">
                             <button type="button" class="btn bg-navy color-palette  float-right btn-sm mx-2" data-toggle="modal" data-target="#CallforProposal" data-backdrop="static" data-keyboard="false">
                               <i class="fas fa-plus"></i> Add Call for Proposals</button>
                             @include('transparency.call-for-proposals.create')
@@ -24,7 +22,9 @@
                             <button class="btn bg-navy color-palette float-right btn-sm" onclick="generateReport()">
                                 <i class="fa fa-file-pdf"></i> Generate Report
                             </button>
-                            <table id="example1" class="table table-bordered table-hover text-center">
+                        </div>
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>
                                         <th>#</th>

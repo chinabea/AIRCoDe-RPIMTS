@@ -33,16 +33,29 @@ class ReportController extends Controller
 
     }
 
-    public function generateUsersReport()
+    public function generateUsersReport(Request $request)
     {
         try {
             $records = User::all();
 
-            $pdf = PDF::loadView('reports.users-report', compact('records'));
+            $page_size = $request->input('page_size', 'letter');
+            $orientation = $request->input('orientation', 'portrait');
+            $file_type = $request->input('file_type', 'pdf');
 
-            return $pdf->download('users-report.pdf');
+            $data = []; 
+
+            $pdf = PDF::loadView('reports.users-report', compact('records'));
+            $pdf->setPaper($page_size, $orientation);
+
+            if ($file_type === 'pdf') {
+                return $pdf->download('users-report.pdf');
+            } elseif ($file_type === 'excel') {
+                // Add logic for Excel export if needed
+                return Excel::download(new ReportController($data), 'report.xlsx');
+        }
+
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Invalid file type selected.');
         }
     }
 
@@ -53,25 +66,20 @@ class ReportController extends Controller
             $records = Project::all();
             $call_for_proposals = CallForProposal::all();
 
-            $pdf = PDF::loadView('reports.projects-report', compact('records','call_for_proposals'));
-
             $page_size = $request->input('page_size', 'letter');
             $orientation = $request->input('orientation', 'portrait');
             $file_type = $request->input('file_type', 'pdf');
 
-            $data = []; // Your report data goes here
-
-            // $pdf = PDF::loadView('reports.projects-report', $data);
+            $data = []; 
+            
             $pdf = PDF::loadView('reports.projects-report', compact('records','call_for_proposals'));
             $pdf->setPaper($page_size, $orientation);
 
             if ($file_type === 'pdf') {
-                return $pdf->download('report.pdf');
+                return $pdf->download('projects-report.pdf');
             } elseif ($file_type === 'excel') {
                 // Add logic for Excel export if needed
                 return Excel::download(new ReportController($data), 'report.xlsx');
-
-            // return $pdf->stream('projects-report.pdf');
         }
 
         } catch (\Exception $e) {
@@ -79,63 +87,193 @@ class ReportController extends Controller
         }
     }
 
-    public function projectsReportExcel(Request $request)
-    {
-        try {
-            // Retrieve data from the models
-            $records = Project::all();
-            $call_for_proposals = CallForProposal::all();
-    
-            // Combine the data into a single array
-            $data = [];
-    
-            foreach ($records as $record) {
-                $data[] = [$record->id, $record->name, /* add other fields as needed */];
-            }
-    
-            foreach ($call_for_proposals as $proposal) {
-                $data[] = [$proposal->id, $proposal->title, /* add other fields as needed */];
-            }
-    
-            // Create a SimpleExcelWriter instance
-            $writer = SimpleExcelWriter::streamDownload('exported_data.xlsx');
-    
-            // Add the data to the Excel file
-            $writer->addRows($data);
-    
-            // Close the writer to finish the export
-            $writer->close();
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Invalid file type.');
-        }
-    }
-
-    public function generateUnderEvaluationReport()
+    public function generateUnderEvaluationReport(Request $request)
     {
         try {
             $records = Project::where('status', 'Under Evaluation')->get();
             $call_for_proposals = CallForProposal::all();
 
-            $pdf = PDF::loadView('reports.under-evaluation-report', compact('records','call_for_proposals'));
+            $page_size = $request->input('page_size', 'letter');
+            $orientation = $request->input('orientation', 'portrait');
+            $file_type = $request->input('file_type', 'pdf');
 
-            return $pdf->download('under-evaluation-report.pdf');
+            $data = []; 
+
+            $pdf = PDF::loadView('reports.under-evaluation-report', compact('records','call_for_proposals'));
+            $pdf->setPaper($page_size, $orientation);
+
+            if ($file_type === 'pdf') {
+                return $pdf->download('under-evaluation-report.pdf');
+            } elseif ($file_type === 'excel') {
+                // Add logic for Excel export if needed
+                return Excel::download(new ReportController($data), 'report.xlsx');
+            }
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
     }
 
-    public function generateForRevisionReport()
+    public function generateForRevisionReport(Request $request)
     {
         try {
             $records = Project::where('status', 'For Revision')->get();
             $call_for_proposals = CallForProposal::all();
 
-            $pdf = PDF::loadView('reports.for-revision-report', compact('records','call_for_proposals'));
+            $page_size = $request->input('page_size', 'letter');
+            $orientation = $request->input('orientation', 'portrait');
+            $file_type = $request->input('file_type', 'pdf');
 
-            return $pdf->download('for-revision-report.pdf');
+            $data = []; 
+
+            $pdf = PDF::loadView('reports.for-revision-report', compact('records','call_for_proposals'));
+            $pdf->setPaper($page_size, $orientation);
+
+            if ($file_type === 'pdf') {
+                return $pdf->download('for-revision-report.pdf');
+            } elseif ($file_type === 'excel') {
+                // Add logic for Excel export if needed
+                return Excel::download(new ReportController($data), 'report.xlsx');
+            }
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function generateDeferredReport(Request $request)
+    {
+        try {
+            $records = Project::where('status', 'Deferred')->get();
+            $call_for_proposals = CallForProposal::all();
+
+            $page_size = $request->input('page_size', 'letter');
+            $orientation = $request->input('orientation', 'portrait');
+            $file_type = $request->input('file_type', 'pdf');
+
+            $data = []; 
+
+            $pdf = PDF::loadView('reports.deferred-report', compact('records','call_for_proposals'));
+            $pdf->setPaper($page_size, $orientation);
+
+            if ($file_type === 'pdf') {
+                return $pdf->download('deferred-report.pdf');
+            } elseif ($file_type === 'excel') {
+                // Add logic for Excel export if needed
+                return Excel::download(new ReportController($data), 'report.xlsx');
+            }
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function generateApprovedReport(Request $request)
+    {
+        try {
+            $records = Project::where('status', 'Approved')->get();
+            $call_for_proposals = CallForProposal::all();
+
+            $page_size = $request->input('page_size', 'letter');
+            $orientation = $request->input('orientation', 'portrait');
+            $file_type = $request->input('file_type', 'pdf');
+
+            $data = []; 
+
+            $pdf = PDF::loadView('reports.approved-report', compact('records','call_for_proposals'));
+            $pdf->setPaper($page_size, $orientation);
+
+            if ($file_type === 'pdf') {
+                return $pdf->download('approved-report.pdf');
+            } elseif ($file_type === 'excel') {
+                // Add logic for Excel export if needed
+                return Excel::download(new ReportController($data), 'report.xlsx');
+            }
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function generateDisapprovedReport(Request $request)
+    {
+        try {
+            $records = Project::where('status', 'Disapproved')->get();
+            $call_for_proposals = CallForProposal::all();
+
+            $page_size = $request->input('page_size', 'letter');
+            $orientation = $request->input('orientation', 'portrait');
+            $file_type = $request->input('file_type', 'pdf');
+
+            $data = []; 
+
+            $pdf = PDF::loadView('reports.disapproved-report', compact('records','call_for_proposals'));
+            $pdf->setPaper($page_size, $orientation);
+
+            if ($file_type === 'pdf') {
+                return $pdf->download('disapproved-report.pdf');
+            } elseif ($file_type === 'excel') {
+                // Add logic for Excel export if needed
+                return Excel::download(new ReportController($data), 'report.xlsx');
+            }
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// public function projectsReportExcel(Request $request)
+// {
+//     try {
+//         // Retrieve data from the models
+//         $records = Project::all();
+//         $call_for_proposals = CallForProposal::all();
+
+//         // Combine the data into a single array
+//         $data = [];
+
+//         foreach ($records as $record) {
+//             $data[] = [$record->id, $record->name, /* add other fields as needed */];
+//         }
+
+//         foreach ($call_for_proposals as $proposal) {
+//             $data[] = [$proposal->id, $proposal->title, /* add other fields as needed */];
+//         }
+
+//         // Create a SimpleExcelWriter instance
+//         $writer = SimpleExcelWriter::streamDownload('exported_data.xlsx');
+
+//         // Add the data to the Excel file
+//         $writer->addRows($data);
+
+//         // Close the writer to finish the export
+//         $writer->close();
+//     } catch (\Exception $e) {
+//         return redirect()->back()->with('error', 'Invalid file type.');
+//     }
+// }

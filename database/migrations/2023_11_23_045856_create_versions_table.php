@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('versions', function (Blueprint $table) {
             $table->id();
+            $table->integer('version_number');
             $table->ulid('tracking_code');
             $table->unsignedBigInteger('call_for_proposal_id');
-            $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('user_id');
             $table->text('project_name');
-            $table->enum('status', ['Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved']);
+            // $table->enum('status', ['Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved']);
             $table->text('research_group');
             $table->text('introduction');
             $table->text('aims_and_objectives');
@@ -27,9 +28,10 @@ return new class extends Migration
             $table->text('workplan');
             $table->text('resources');
             $table->text('references');
-            $table->decimal('total_budget', 10, 2)->default(0.00);
-            $table->date('approval_date')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->decimal('total_budget', 10, 2)->default(0.00);
+            // $table->date('approval_date')->nullable();
+
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('call_for_proposal_id')->references('id')->on('call_for_proposals')->onDelete('cascade');
             $table->timestamps();
         });
@@ -40,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('versions');
     }
 };

@@ -16,6 +16,7 @@ use App\Models\Review;
 use App\Models\Member;
 use App\Models\Task;
 use App\Models\File;
+use App\Models\Version;
 // use Rorecek\Ulid\Ulid;
 
 class ProjectController extends Controller
@@ -153,7 +154,7 @@ class ProjectController extends Controller
             $members = User::where('role', 3)->get();
             $reviewersss = User::where('role', 4)->get();
             $data = Project::findOrFail($id);
-            $records = Project::findOrFail($id);
+            $records = Project::with('versions')->findOrFail($id);
 
             // $reviewerCommented = Review::where('user_id', Auth::user()->id)->get();
             // $comments = Review::findOrFail($id);
@@ -194,89 +195,108 @@ class ProjectController extends Controller
         }
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     try {
-    //         $records = Project::findOrFail($id);
-
-    //         // Update the project record with the new values from the form
-    //         $records->project_name = $request->input('project_name');
-    //         $records->research_group = $request->input('research_group');
-    //         $records->introduction = $request->input('introduction');
-    //         $records->aims_and_objectives = $request->input('aims_and_objectives');
-    //         $records->background = $request->input('background');
-    //         $records->expected_research_contribution = $request->input('expected_research_contribution');
-    //         $records->proposed_methodology = $request->input('proposed_methodology');
-    //         $records->workplan = $request->input('workplan');
-    //         $records->resources = $request->input('resources');
-    //         $records->references = $request->input('references');
-
-    //         // Save the updated project record
-    //         $records->save();
-
-    //         return redirect()->back()->with('success', 'Reseach Proposal Successfully Deleted!');
-    //     } catch (Exception $e) {
-    //         // Handle the exception, you can log it or return an error response
-    //         return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
-    //     }
-    // }
-
     public function update(Request $request, $id)
     {
         try {
-            // Find the original project record
-            $originalProject = Project::findOrFail($id);
+            $record = Project::findOrFail($id);
+            $newVersionNumber = $record->versions()->max('version_number') + 1;
 
-            // Get the latest revision for the original project
-            $latestRevision = Revision::where('original_proposal_id', $originalProject->id)
-                ->orderBy('version', 'desc')
-                ->first();
+            $newVersion = new Version([
+                'version_number' => $newVersionNumber,
+                'tracking_code' => $request->input('tracking_code'),
+                'project_name' => $request->input('project_name'),
+                'research_group' => $request->input('research_group'),
+                'introduction' => $request->input('introduction'),
+                'aims_and_objectives' => $request->input('aims_and_objectives'),
+                'background' => $request->input('background'),
+                'expected_research_contribution' => $request->input('expected_research_contribution'),
+                'proposed_methodology' => $request->input('proposed_methodology'),
+                'workplan' => $request->input('workplan'),
+                'resources' => $request->input('resources'),
+                'references' => $request->input('references'),
+                // 'total_budget' => $request->input('total_budget'),
+            ]);
 
-            // If there is a latest revision, increment the version
-            $version = $latestRevision ? $latestRevision->version + 1 : 1;
+            $record->versions()->save($newVersion);
 
-            // Save the new revision
-            $revision = new Revision();
-            $revision->original_proposal_id = $originalProject->id;
-            $revision->version = $version;
-            $revision->changes = 'Updated project details'; // You may want to customize this based on the actual changes
-            // Set other fields...
-            $revision->save();
+            // Update the project record with the new values from the form
+            $record->project_name = $request->input('project_name');
+            $record->research_group = $request->input('research_group');
+            $record->introduction = $request->input('introduction');
+            $record->aims_and_objectives = $request->input('aims_and_objectives');
+            $record->background = $request->input('background');
+            $record->expected_research_contribution = $request->input('expected_research_contribution');
+            $record->proposed_methodology = $request->input('proposed_methodology');
+            $record->workplan = $request->input('workplan');
+            $record->resources = $request->input('resources');
+            $record->references = $request->input('references');
 
-            // Update the original project record with the new values from the form
-            // $originalProject->update([
-            //     'project_name' => $request->input('project_name'),
-            //     'research_group' => $request->input('research_group'),
-            //     'introduction' => $request->input('introduction'),
-            //     'aims_and_objectives' => $request->input('aims_and_objectives'),
-            //     'background' => $request->input('background'),
-            //     'expected_research_contribution' => $request->input('expected_research_contribution'),
-            //     'proposed_methodology' => $request->input('proposed_methodology'),
-            //     'workplan' => $request->input('workplan'),
-            //     'resources' => $request->input('resources'),
-            //     'references' => $request->input('references'),
-            // ]);
-             // Update the project record with the new values from the form
-                    $originalProject->project_name = $request->input('project_name');
-                    $originalProject->research_group = $request->input('research_group');
-                    $originalProject->introduction = $request->input('introduction');
-                    $originalProject->aims_and_objectives = $request->input('aims_and_objectives');
-                    $originalProject->background = $request->input('background');
-                    $originalProject->expected_research_contribution = $request->input('expected_research_contribution');
-                    $originalProject->proposed_methodology = $request->input('proposed_methodology');
-                    $originalProject->workplan = $request->input('workplan');
-                    $originalProject->resources = $request->input('resources');
-                    $originalProject->references = $request->input('references');
+            // Save the updated project record
+            $record->save();
 
-                    // Save the updated project record
-                    $originalProject->save();
-
-            return redirect()->back()->with('success', 'Research Proposal Successfully Updated!');
+            return redirect()->back()->with('success', 'Reseach Proposal Successfully Deleted!');
         } catch (Exception $e) {
             // Handle the exception, you can log it or return an error response
-            return redirect()->back()->with('error', 'An error occurred while updating the project: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
         }
     }
+
+    // public function update(Request $request, $id)
+    // {
+    //     try {
+    //         // Find the original project record
+    //         $originalProject = Project::findOrFail($id);
+
+    //         // Get the latest revision for the original project
+    //         $latestRevision = Revision::where('original_proposal_id', $originalProject->id)
+    //             ->orderBy('version', 'desc')
+    //             ->first();
+
+    //         // If there is a latest revision, increment the version
+    //         $version = $latestRevision ? $latestRevision->version + 1 : 1;
+
+    //         // Save the new revision
+    //         $revision = new Revision();
+    //         $revision->original_proposal_id = $originalProject->id;
+    //         $revision->version = $version;
+    //         $revision->changes = 'Updated project details'; // You may want to customize this based on the actual changes
+    //         // Set other fields...
+    //         $revision->save();
+
+    //         // Update the original project record with the new values from the form
+    //         // $originalProject->update([
+    //         //     'project_name' => $request->input('project_name'),
+    //         //     'research_group' => $request->input('research_group'),
+    //         //     'introduction' => $request->input('introduction'),
+    //         //     'aims_and_objectives' => $request->input('aims_and_objectives'),
+    //         //     'background' => $request->input('background'),
+    //         //     'expected_research_contribution' => $request->input('expected_research_contribution'),
+    //         //     'proposed_methodology' => $request->input('proposed_methodology'),
+    //         //     'workplan' => $request->input('workplan'),
+    //         //     'resources' => $request->input('resources'),
+    //         //     'references' => $request->input('references'),
+    //         // ]);
+    //          // Update the project record with the new values from the form
+    //                 $originalProject->project_name = $request->input('project_name');
+    //                 $originalProject->research_group = $request->input('research_group');
+    //                 $originalProject->introduction = $request->input('introduction');
+    //                 $originalProject->aims_and_objectives = $request->input('aims_and_objectives');
+    //                 $originalProject->background = $request->input('background');
+    //                 $originalProject->expected_research_contribution = $request->input('expected_research_contribution');
+    //                 $originalProject->proposed_methodology = $request->input('proposed_methodology');
+    //                 $originalProject->workplan = $request->input('workplan');
+    //                 $originalProject->resources = $request->input('resources');
+    //                 $originalProject->references = $request->input('references');
+
+    //                 // Save the updated project record
+    //                 $originalProject->save();
+
+    //         return redirect()->back()->with('success', 'Research Proposal Successfully Updated!');
+    //     } catch (Exception $e) {
+    //         // Handle the exception, you can log it or return an error response
+    //         return redirect()->back()->with('error', 'An error occurred while updating the project: ' . $e->getMessage());
+    //     }
+    // }
 
     public function destroy($id)
     {

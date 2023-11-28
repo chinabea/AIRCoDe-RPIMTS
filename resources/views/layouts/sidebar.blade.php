@@ -178,11 +178,11 @@
                 <p>Disapproved</p>
             </a>
           </li>
-          <li class="nav-header">SETTINGS</li>
+          <!-- <li class="nav-header">SETTINGS</li>
           <button id="theme-toggle" class="btn btn-outline-primary btn-block">
             <i class="fas fa-adjust"></i> Toggle Theme
           </button>
-        </li>
+        </li> -->
       </div>
     </aside>
 
@@ -513,10 +513,10 @@
       @else
           <p>No items assigned for review</p>
       @endif
-      <li class="nav-header">SETTINGS</li>
+      <!-- <li class="nav-header">SETTINGS</li>
       <button id="theme-toggle" class="btn btn-outline-primary btn-block">
         <i class="fas fa-adjust"></i> Toggle Theme
-      </button>
+      </button> -->
           </ul>
 
         </div>

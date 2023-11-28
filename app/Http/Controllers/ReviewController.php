@@ -88,17 +88,29 @@ class ReviewController extends Controller
                 'project_id' => $projectId,
                 'user_id' => $reviewerId,
                 'deadline' => $deadline,
-                'contribution_to_knowledge' => $request->input('contribution_to_knowledge'),
-                'technical_soundness' => $request->input('technical_soundness'),
-                'comprehensive_subject_matter' => $request->input('comprehensive_subject_matter'),
-                'applicable_and_sufficient_references' => $request->input('applicable_and_sufficient_references'),
-                'inappropriate_references' => $request->input('inappropriate_references'),
-                'comprehensive_application' => $request->input('comprehensive_application'),
-                'grammar_and_presentation' => $request->input('grammar_and_presentation'),
-                'assumption_of_reader_knowledge' => $request->input('assumption_of_reader_knowledge'),
-                'clear_figures_and_tables' => $request->input('clear_figures_and_tables'),
-                'adequate_explanations' => $request->input('adequate_explanations'),
-                'technical_or_methodological_errors' => $request->input('technical_or_methodological_errors'),
+                'contribution_to_knowledge_decision' => $request->input('contribution_to_knowledge_decision'),
+                'technical_soundness_decision' => $request->input('technical_soundness_decision'),
+                'comprehensive_subject_matter_decision' => $request->input('comprehensive_subject_matter_decision'),
+                'applicable_and_sufficient_references_decision' => $request->input('applicable_and_sufficient_references_decision'),
+                'inappropriate_references_decision' => $request->input('inappropriate_references_decision'),
+                'comprehensive_application_decision' => $request->input('comprehensive_application_decision'),
+                'grammar_and_presentation_decision' => $request->input('grammar_and_presentation_decision'),
+                'assumption_of_reader_knowledge_decision' => $request->input('assumption_of_reader_knowledge_decision'),
+                'clear_figures_and_tables_decision' => $request->input('clear_figures_and_tables_decision'),
+                'adequate_explanations_decision' => $request->input('adequate_explanations_decision'),
+                'technical_or_methodological_errors_decision' => $request->input('technical_or_methodological_errors_decision'),
+                
+                'contribution_to_knowledge_comments' => $request->input('contribution_to_knowledge_comments'),
+                'technical_soundness_comments' => $request->input('technical_soundness_comments'),
+                'comprehensive_subject_matter_comments' => $request->input('comprehensive_subject_matter_comments'),
+                'applicable_and_sufficient_references_comments' => $request->input('applicable_and_sufficient_references_comments'),
+                'inappropriate_references_comments' => $request->input('inappropriate_references_comments'),
+                'comprehensive_application_comments' => $request->input('comprehensive_application_comments'),
+                'grammar_and_presentation_comments' => $request->input('grammar_and_presentation_comments'),
+                'assumption_of_reader_knowledge_comments' => $request->input('assumption_of_reader_knowledge_comments'),
+                'clear_figures_and_tables_comments' => $request->input('clear_figures_and_tables_comments'),
+                'adequate_explanations_comments' => $request->input('adequate_explanations_comments'),
+                'technical_or_methodological_errors_comments' => $request->input('technical_or_methodological_errors_comments'),
                 'other_comments' => $request->input('other_comments'),
                 'review_decision' => $request->input('review_decision'),
             ]);
@@ -128,17 +140,29 @@ class ReviewController extends Controller
 
                 if ($existingReview) {
                     // Update only the null fields with the values from the request
-                    $existingReview->contribution_to_knowledge = $existingReview->contribution_to_knowledge ?? $request->input('contribution_to_knowledge');
-                    $existingReview->technical_soundness = $existingReview->technical_soundness ?? $request->input('technical_soundness');
-                    $existingReview->comprehensive_subject_matter = $existingReview->comprehensive_subject_matter ?? $request->input('comprehensive_subject_matter');
-                    $existingReview->applicable_and_sufficient_references = $existingReview->applicable_and_sufficient_references ?? $request->input('applicable_and_sufficient_references');
-                    $existingReview->inappropriate_references = $existingReview->inappropriate_references ?? $request->input('inappropriate_references');
-                    $existingReview->comprehensive_application = $existingReview->comprehensive_application ?? $request->input('comprehensive_application');
-                    $existingReview->grammar_and_presentation = $existingReview->grammar_and_presentation ?? $request->input('grammar_and_presentation');
-                    $existingReview->assumption_of_reader_knowledge = $existingReview->assumption_of_reader_knowledge ?? $request->input('assumption_of_reader_knowledge');
-                    $existingReview->clear_figures_and_tables = $existingReview->clear_figures_and_tables ?? $request->input('clear_figures_and_tables');
-                    $existingReview->adequate_explanations = $existingReview->adequate_explanations ?? $request->input('adequate_explanations');
-                    $existingReview->technical_or_methodological_errors = $existingReview->technical_or_methodological_errors ?? $request->input('technical_or_methodological_errors');
+                    $existingReview->contribution_to_knowledge_decision = $existingReview->contribution_to_knowledge_decision ?? $request->input('contribution_to_knowledge_decision');
+                    $existingReview->technical_soundness_decision = $existingReview->technical_soundness_decision ?? $request->input('technical_soundness_decision');
+                    $existingReview->comprehensive_subject_matter_decision = $existingReview->comprehensive_subject_matter_decision ?? $request->input('comprehensive_subject_matter_decision');
+                    $existingReview->applicable_and_sufficient_references_decision = $existingReview->applicable_and_sufficient_references_decision ?? $request->input('applicable_and_sufficient_references_decision');
+                    $existingReview->inappropriate_references_decision = $existingReview->inappropriate_references_decision ?? $request->input('inappropriate_references_decision');
+                    $existingReview->comprehensive_application_decision = $existingReview->comprehensive_application_decision ?? $request->input('comprehensive_application_decision');
+                    $existingReview->grammar_and_presentation_decision = $existingReview->grammar_and_presentation_decision ?? $request->input('grammar_and_presentation');
+                    $existingReview->assumption_of_reader_knowledge_decision = $existingReview->assumption_of_reader_knowledge_decision ?? $request->input('assumption_of_reader_knowledge_decision');
+                    $existingReview->clear_figures_and_tables_decision = $existingReview->clear_figures_and_tables_decision ?? $request->input('clear_figures_and_tables_decision');
+                    $existingReview->adequate_explanations_decision = $existingReview->adequate_explanations_decision ?? $request->input('adequate_explanations_decision');
+                    $existingReview->technical_or_methodological_errors_decision = $existingReview->technical_or_methodological_errors_decision ?? $request->input('technical_or_methodological_errors_decision');
+
+                    $existingReview->contribution_to_knowledge_comments = $existingReview->contribution_to_knowledge_comments ?? $request->input('contribution_to_knowledge_comments');
+                    $existingReview->technical_soundness_comments = $existingReview->technical_soundness_comments ?? $request->input('technical_soundness_comments');
+                    $existingReview->comprehensive_subject_matter_comments = $existingReview->comprehensive_subject_matter_comments ?? $request->input('comprehensive_subject_matter_comments');
+                    $existingReview->applicable_and_sufficient_references_comments = $existingReview->applicable_and_sufficient_references_comments ?? $request->input('applicable_and_sufficient_references_comments');
+                    $existingReview->inappropriate_references_comments = $existingReview->inappropriate_references_comments ?? $request->input('inappropriate_references_comments');
+                    $existingReview->comprehensive_application_comments = $existingReview->comprehensive_application_comments ?? $request->input('comprehensive_application_comments');
+                    $existingReview->grammar_and_presentation_comments = $existingReview->grammar_and_presentation_comments ?? $request->input('grammar_and_presentation_comments');
+                    $existingReview->assumption_of_reader_knowledge_comments = $existingReview->assumption_of_reader_knowledge_comments ?? $request->input('assumption_of_reader_knowledge_comments');
+                    $existingReview->clear_figures_and_tables_comments = $existingReview->clear_figures_and_tables_comments ?? $request->input('clear_figures_and_tables_comments');
+                    $existingReview->adequate_explanations_comments = $existingReview->adequate_explanations_comments ?? $request->input('adequate_explanations_comments');
+                    $existingReview->technical_or_methodological_errors_comments = $existingReview->technical_or_methodological_errors_comments ?? $request->input('technical_or_methodological_errors_comments');
                     $existingReview->other_comments = $existingReview->other_comments ?? $request->input('other_comments');
                     $existingReview->review_decision = $existingReview->review_decision ?? $request->input('review_decision');
 
@@ -173,24 +197,36 @@ class ReviewController extends Controller
             if ($existingComment) {
                 return redirect()
                     ->route('submission-details.show', ['id' => $projectId])
-                    ->with('error', 'You have already summarized comments on this project.');
+                    ->with('error', 'You have already summarized reviews on this project.');
             }
             else {
                 $summary = Review::create([
                 'project_id' => $projectId,
                 'user_id' => $userId,
                 'deadline' => $request->input('deadline') ?? null,
-                'contribution_to_knowledge' => $request->input('contribution_to_knowledge') ?? null,
-                'technical_soundness' => $request->input('technical_soundness') ?? null,
-                'comprehensive_subject_matter' => $request->input('comprehensive_subject_matter') ?? null,
-                'applicable_and_sufficient_references' => $request->input('applicable_and_sufficient_references') ?? null,
-                'inappropriate_references' => $request->input('inappropriate_references') ?? null,
-                'comprehensive_application' => $request->input('comprehensive_application') ?? null,
-                'grammar_and_presentation' => $request->input('grammar_and_presentation') ?? null,
-                'assumption_of_reader_knowledge' => $request->input('assumption_of_reader_knowledge') ?? null,
-                'clear_figures_and_tables' => $request->input('clear_figures_and_tables') ?? null,
-                'adequate_explanations' => $request->input('adequate_explanations') ?? null,
-                'technical_or_methodological_errors' => $request->input('technical_or_methodological_errors') ?? null,
+                'contribution_to_knowledge_decision' => $request->input('contribution_to_knowledge_decision') ?? null,
+                'technical_soundness_decision' => $request->input('technical_soundness_decision') ?? null,
+                'comprehensive_subject_matter_decision' => $request->input('comprehensive_subject_matter_decision') ?? null,
+                'applicable_and_sufficient_references_decision' => $request->input('applicable_and_sufficient_references_decision') ?? null,
+                'inappropriate_references_decision' => $request->input('inappropriate_references_decision') ?? null,
+                'comprehensive_application_decision' => $request->input('comprehensive_application_decision') ?? null,
+                'grammar_and_presentation_decision' => $request->input('grammar_and_presentation_decision') ?? null,
+                'assumption_of_reader_knowledge_decision' => $request->input('assumption_of_reader_knowledge_decision') ?? null,
+                'clear_figures_and_tables_decision' => $request->input('clear_figures_and_tables_decision') ?? null,
+                'adequate_explanations_decision' => $request->input('adequate_explanations_decision') ?? null,
+                'technical_or_methodological_errors_decision' => $request->input('technical_or_methodological_errors_decision') ?? null,
+                
+                'contribution_to_knowledge_comments' => $request->input('contribution_to_knowledge_comments') ?? null,
+                'technical_soundness_comments' => $request->input('technical_soundness_comments') ?? null,
+                'comprehensive_subject_matter_comments' => $request->input('comprehensive_subject_matter_comments') ?? null,
+                'applicable_and_sufficient_references_comments' => $request->input('applicable_and_sufficient_references_comments') ?? null,
+                'inappropriate_references_comments' => $request->input('inappropriate_references_comments') ?? null,
+                'comprehensive_application_comments' => $request->input('comprehensive_application_comments') ?? null,
+                'grammar_and_presentation_comments' => $request->input('grammar_and_presentation_comments') ?? null,
+                'assumption_of_reader_knowledge_comments' => $request->input('assumption_of_reader_knowledge_comments') ?? null,
+                'clear_figures_and_tables_comments' => $request->input('clear_figures_and_tables_comments') ?? null,
+                'adequate_explanations_comments' => $request->input('adequate_explanations_comments') ?? null,
+                'technical_or_methodological_errors_comments' => $request->input('technical_or_methodological_errors_comments') ?? null,
                 'other_comments' => $request->input('other_comments') ?? null,
                 'review_decision' => $request->input('review_decision') ?? null,
             ]);

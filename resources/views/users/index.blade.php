@@ -13,9 +13,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title my-1"><i class="fa fa-users"></i> Users</h3>
-                            <a href="{{ route('generate.users.report') }}" class="btn bg-navy color-palette float-right btn-sm" style="background-color: #022A44;">
-                                <i class="fa fa-download"></i> Generate PDF
-                            </a>
+                            <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#usersPdf" data-backdrop="static" data-keyboard="false"> 
+                                <i class="fas fa-file-pdf"></i> Export to PDF</button>
+                                @include('reports.report-options')
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-hover text-center">
