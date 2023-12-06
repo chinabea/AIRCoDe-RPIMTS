@@ -57,7 +57,7 @@
                         {{ $project->project_name }}
                     {{-- </a> --}}
                     </td>
-                    <td class="align-middle">{{ $project->research_group }}</td>
+                    <td class="align-middle">{!! $project->research_group !!}</td>
                     <td class="align-middle">{{ $project->created_at->format('F j, Y') }}</td>
                     <td class="align-middle"><span class="badge badge-secondary text-sm">{{ $project->status }}</span></td>
                 </tr>

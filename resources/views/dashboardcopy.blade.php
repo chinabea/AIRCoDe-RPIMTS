@@ -7,23 +7,6 @@
     $role = auth()->user()->role;
 @endphp
 
-@if(session('success'))
-    <script>
-        toastr.success('{{ session('success') }}');
-    </script>
-@elseif(session('delete'))
-    <script>
-        toastr.delete('{{ session('delete') }}');
-    </script>
-@elseif(session('message'))
-    <script>
-        toastr.message('{{ session('message') }}');
-    </script>
-@elseif(session('error'))
-    <script>
-        toastr.error('{{ session('error') }}');
-    </script>
-@endif
 @if($role === 1)
 <div class="content-wrapper">
     <section class="content-header">
@@ -943,8 +926,25 @@
         @endif
     @endforeach
 </div>
-
-
-
 @endif
+
+
+@if(session('success'))
+    <script>
+        toastr.success('{{ session('success') }}');
+    </script>
+@elseif(session('delete'))
+    <script>
+        toastr.delete('{{ session('delete') }}');
+    </script>
+@elseif(session('message'))
+    <script>
+        toastr.message('{{ session('message') }}');
+    </script>
+@elseif(session('error'))
+    <script>
+        toastr.error('{{ session('error') }}');
+    </script>
+@endif
+
 @endsection

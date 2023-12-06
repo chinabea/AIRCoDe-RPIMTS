@@ -7,12 +7,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\CallForProposal;
 use App\Models\LineItemBudget;
+use App\Models\AccessRequest;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\Task;
 use App\Models\File;
 use App\Models\Member;
 use App\Models\Review;
+use App\Models\Message;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'China',
+                'name' => 'Quail Lester',
                 'email' => 'chibea@my.cspc.edu.ph',
                 'role' => 1,
                 'password' => Hash::make('password'),
@@ -44,7 +46,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password'),
             ],
             [
-                'name' => 'China Bea',
+                'name' => 'Leigh Boyle',
                 'email' => 'biyanachi@gmail.com',
                 'role' => 3,
                 'password' => Hash::make('password'),
@@ -62,7 +64,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password'),
             ],
             [
-                'name' => 'Jessemri Tabayag',
+                'name' => 'Walker Morrow',
                 'email' => 'jestabayag@my.cspc.edu.ph',
                 'role' => 4,
                 'password' => Hash::make('password'),
@@ -74,7 +76,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('password'),
             ],
             [
-                'name' => 'Louie Molina',
+                'name' => 'Dakota Mccall',
                 'email' => 'loumolina@my.cspc.edu.ph',
                 'role' => 4,
                 'password' => Hash::make('password'),
@@ -932,6 +934,95 @@ class DatabaseSeeder extends Seeder
         foreach ($reviews as $reviewData) {
             Review::create($reviewData);
         }
+
+        $messages = [
+            [
+                'sender_id' => '1',
+                'recipient_id' => '2',
+                'subject' => 'Important Update',
+                'content' => 'I hope this email finds you well. I wanted to touch base regarding our upcoming team retreat. 
+                    Its essential that we discuss the agenda, team-building activities, and accommodation options. 
+                    Please share your thoughts and suggestions. Looking forward to your input!',
+            ],
+            [
+                'sender_id' => '1',
+                'recipient_id' => '4',
+                'subject' => 'Feedback Needed',
+                'content' => 'I trust youre doing great. I wanted to provide a quick update on the project. Weve made 
+                significant progress, and its time to discuss the next steps. Lets schedule a meeting for a detailed review. 
+                Your insights are crucial to our success.',
+            ],
+            [
+                'sender_id' => '2',
+                'recipient_id' => '1',
+                'subject' => 'Follow-Up on Previous Discussion',
+                'content' => 'How about grabbing a coffee next week to catch up? Its been a while since we had a 
+                    chance to chat. Id love to hear what youve been up to. Let me know your availability, and we can set something up.
+                    Cheers,',
+            ],
+            [
+                'sender_id' => '2',
+                'recipient_id' => '1',
+                'subject' => 'Request for Information',
+                'content' => 'I have some exciting news to share with the team. Weve successfully secured a new partnership 
+                that will significantly impact our projects. Join me for a brief meeting tomorrow at 10 AM to discuss 
+                the details and next steps.',
+            ],
+            [
+                'sender_id' => '2',
+                'recipient_id' => '1',
+                'subject' => 'Team Announcement',
+                'content' => 'Get ready for some fun! Were planning a team-building event to strengthen our collaboration
+                 and have a great time together. Mark your calendars for [date] and stay tuned for more details. Lets 
+                 make it a memorable day!',
+            ],
+            [
+                'sender_id' => '1',
+                'recipient_id' => '2',
+                'subject' => 'Project Status',
+                'content' => 'Get ready for some fun! Were planning a team-building event to strengthen our collaboration
+                 and have a great time together. Mark your calendars for [date] and stay tuned for more details. Lets 
+                 make it a memorable day!',
+            ],
+            [
+                'sender_id' => '1',
+                'recipient_id' => '4',
+                'subject' => 'Hello',
+                'content' => '<p>Dear Jessemri Tabayag,</p>
+                              <p>We hope this email finds you well. We wanted to reach out and say thank you for your continued support.</p>
+                              <p>Our team is working hard to provide you with the best services, and we value your feedback. If you have any questions or suggestions, feel free to reply to this email.</p>
+                              <p>Thank you again for choosing our services. We appreciate your business.</p>
+                              <p>Best regards,<br>RPIMTS</p>',
+            ],
+        ];
+
+        foreach ($messages as $messageData) {
+            Message::create($messageData);
+        }
+
+        $accessrequests = [
+            [
+                'user_id' => 1,
+                'date_of_access' => '2023-12-01',
+                'time_of_access' => '08:00:00',
+                'purpose_of_access' => 'Testing access request',
+                'date_approved' => null,
+            ],
+            [
+                'user_id' => 2,
+                'date_of_access' => '2023-12-03',
+                'time_of_access' => '10:30:00',
+                'purpose_of_access' => 'Another access request',
+                'date_approved' => null,
+            ],
+        ];
+
+        foreach ($accessrequests as $accessrequestData) {
+            AccessRequest::create($accessrequestData);
+        }
+
+
+
 
 
     }

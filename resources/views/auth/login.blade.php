@@ -30,20 +30,15 @@
                             @enderror
                         </div>
 
-                        <br>
-
                         <div class="remember-forgot">
-                            {{-- <label>
-                              <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> 
-                              Remember me
-                            </label> --}}
                             @if (Route::has('password.request'))
                                 <a class="" href="{{ route('password.request') }}">
-                                    {{-- {{ __('Forgot Your Password?') }} --}}
-                                    <p class="text-center text-primary">Forgot Your Password?</p>
+                                     <!-- {{ __('Forgot Your Password?') }}  -->
+                                    <p class="text-center text-primary my-2">Forgot Your Password?</p>
                                 </a>
                             @endif
                         </div>
+
                         @if ($errors->any())
                         <div class="alert alert-danger mt-3">
                             <ul>
@@ -57,12 +52,14 @@
                       <div class="potentialidplist row p-0">
                           <div class="potentialidp col-sm-12 col-md">
                             <div class="mx-auto">
-                              <button id="submit" type="submit" class="btn btn-info w-100 text-center">
+                              <button id="submit" type="submit" class="btn btn-info w-100 my-2 text-center">
                                 <i class="fas fa-arrow-right"></i>Login</button>
                             </div>
                           </div>
                       </div>
-                    </form><hr>
+                    </form>
+                    <hr class="white">
+
                     <h6 class="text-center text-white m-t-1">Log in using your account on:</h6>
                     <div class="potentialidplist row p-0">
                         <div class="potentialidp col-sm-12 col-md">

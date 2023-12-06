@@ -19,7 +19,7 @@
                   @include('transparency.access-requests.create')
                 @endif
 
-                <table id="example1" class="table table-bordered table-hover text-center table-sm">
+                <table id="example1" class="table table-bordered table-hover table-sm">
                     <thead>
                     <tr>
                       <th>#</th>
@@ -92,8 +92,10 @@
                                           </div>
                                       </div>
                                   </div>
-
-
+                                  @if(Auth::check() && (Auth::user()->role == 1 || Auth::user()->role == 2))
+                                      <a href="" class="btn btn-success">Approve</a>
+                                      <a href="" class="btn btn-danger">Decline</a>
+                                  @endif 
                                       <!-- Edit -->
                                       <a href="{{ route('transparency.access-requests.edit', $requests->id) }}" type="button" class="btn btn-warning" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#editModal{{ $requests->id }}">
                                           <i class="fas fa-edit"> </i>
@@ -168,23 +170,6 @@
                             @endif
                     </tbody>
                 </table>
-                @if(session('success'))
-                    <script>
-                        toastr.success('{{ session('success') }}');
-                    </script>
-                @elseif(session('delete'))
-                    <script>
-                        toastr.delete('{{ session('delete') }}');
-                    </script>
-                @elseif(session('message'))
-                    <script>
-                        toastr.message('{{ session('message') }}');
-                    </script>
-                @elseif(session('error'))
-                    <script>
-                        toastr.error('{{ session('error') }}');
-                    </script>
-                @endif
                 </div>
               </div>
             </div>
@@ -192,4 +177,23 @@
         </div>
       </section>
 </div>
+
+@if (session('success'))
+    <script>
+        toastr.success('{{ session('success') }}');
+    </script>
+@elseif(session('delete'))
+    <script>
+        toastr.delete('{{ session('delete') }}');
+    </script>
+@elseif(session('message'))
+    <script>
+        toastr.message('{{ session('message') }}');
+    </script>
+@elseif(session('error'))
+    <script>
+        toastr.error('{{ session('error') }}');
+    </script>
+@endif
+
 @endsection

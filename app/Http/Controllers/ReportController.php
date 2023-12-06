@@ -15,6 +15,23 @@ use Exception;
 class ReportController extends Controller
 {
 
+    public function generateRevisionReport($data_id)
+    {
+
+        try {
+            $data = Revision::findOrFail($data_id);
+            $projMembers = Member::where('id', $id)->get();
+            $pdf = PDF::loadView('reports.project-revision', ['data' => $data, 'projMembers' => $projMembers]);
+
+            $filename = Str::slug($data->project_name) . '.pdf';
+
+            return $pdf->download($filename);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+
+    }
+
     public function generateProjectReport($data_id)
     {
 

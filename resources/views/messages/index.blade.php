@@ -1,121 +1,102 @@
-{{--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Messages</title>
-</head>
-<body>
-    <p>Chat Messages</p>
-
-    <form action="{{ route('messages.store') }}" method="post">
-        @csrf
-        <label for="recipient_id">Recipient:</label>
-        <select name="recipient_id" required>
-            @foreach ($users as $user)
-                <option value="{{ $user->id }}">{{ $user->name }}</option>
-            @endforeach
-        </select>
-        <br>
-        <label for="content">Message:</label>
-        <textarea name="content" required></textarea>
-        <br>
-        <button type="submit">Send</button>
-    </form>
-
-    <ul>
-        @foreach ($mymessages as $message)
-        <br>
-                @if ($message->sender->id == auth()->id())
-                    <strong>{{ $message->recipient->name }}</strong> <br>
-                    <strong>You:</strong>
-                @else
-                    <strong>{{ $message->user->name }}:</strong>
-                @endif
-                {{ $message->content }}
-                {{ $message->created_at->diffForHumans()}}
-                <br>
-        @endforeach
-    </ul>
-</body>
-</html>
- --}}
-
-<!-- resources/views/messages/index.blade.php -->
-
-
-
 @extends('layouts.template')
 
 @section('content')
+    <div class="content-wrapper">
+        <section class="content-header">
+        </section>
 
-<div class="content-wrapper">
-  <section class="content-header">
-  </section>
-    <div class="container mt-3">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex justify-content-center align-items-center">
-                <i class="fas fa-file-signature fa-2x text-gray-300"></i>
-                <h1 class="m-0 ml-3 font-weight-bold">Research Project Form</h1>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title my-1"><i class="nav-icon fas fa-comments"></i> Messages</h3>
+                            </div>
+                            <div class="card-body">
+                                <table id="example4" class="table table-hover table-bordered table-sm text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Message</th>
+                                            <th>Date</th>
+                                            <th>Action(s)</th>
+                                        </tr>
+                                    </thead>
+                                        <tbody>
+                                        @foreach ($messages as $message)
+                                            @if ($message->sender->id == auth()->id() || $message->recipient->id == auth()->id())
+                                                @if ($message->sender->id == auth()->id())
+                                                        <tr>
+                                                            <td class="font-weight-bold">{{ $message->sender->name }}</td>
+                                                            <td>{{ $message->content }}</td>
+                                                            <td>{{ $message->created_at->diffForHumans() }}</td>
+                                                            <td>show, delete, reply</td>
+                                                        </tr>
+                                                    @else
+                                                        <tr>
+                                                            <td class="font-weight-bold">{{ $message->sender->name }}</td>
+                                                            <td>{{ $message->content }}</td>
+                                                            <td>{{ $message->created_at->diffForHumans() }}</td>
+                                                            <td>
+                                                                <div class="btn-group align-middle" role="group"
+                                                                    aria-label="Basic example">
+                                                                    <a href="{{ route('messages.show', $message->id) }}"
+                                                                        type="button" class="btn btn-secondary">
+                                                                        <i class="fas fa-info-circle"></i>
+                                                                    </a>
+
+
+                                                                    {{-- MAKE THIS AS ARCHIVE --}}
+                                                                    <button class="btn btn-danger">
+                                                                        <i class="fas fa-trash"> </i>
+                                                                    </button>
+
+                                                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                                        aria-labelledby="dropdownMenuLink">
+                                                                        <div class="dropdown-header">Dropdown Header:</div>
+                                                                        <a class="dropdown-item" href="#">Action</a>
+                                                                        <a class="dropdown-item" href="#">Another action</a>
+                                                                        <div class="dropdown-divider"></div>
+                                                                        <a class="dropdown-item" href="#">Something else
+                                                                            here</a>
+                                                                    </div>
+                                                                    <button type="button" class="btn btn-secondary btn-sm"
+                                                                        data-toggle="dropdown">
+                                                                        <i class="fas fa-ellipsis-h"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-
-
-            @foreach ($mymessages as $message)
-                <br>
-                @if ($message->sender->id == auth()->id())
-                    <strong>To: {{ $message->recipient->name }}</strong> <br>
-                    <strong>You:</strong>
-                @else
-                    <strong>From: {{ $message->sender->name }}</strong> <br>
-                    <strong>{{ $message->user->name }}:</strong>
-                @endif
-                {{ $message->content }}
-                {{ $message->created_at->diffForHumans()}}
-                <br>
-            @endforeach
-
-            <h2>Compose a New Message:</h2>
-            <form action="{{ route('messages.store') }}" method="post">
-                @csrf
-                <label for="recipient_id">Recipient:</label>
-                <select name="recipient_id" required>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
-                <br>
-                <label for="content">Message:</label>
-                <textarea name="content" required></textarea>
-                <br>
-                <button type="submit">Send</button>
-            </form>
-
-
-            </div>
-        </div>
+        </section>
     </div>
-</div>
 
 
-
-@if(session('success'))
-<script>
-    toastr.success('{{ session('success') }}');
-</script>
-@elseif(session('delete'))
-<script>
-    toastr.delete('{{ session('delete') }}');
-</script>
-@elseif(session('message'))
-<script>
-    toastr.message('{{ session('message') }}');
-</script>
-@elseif(session('error'))
-<script>
-    toastr.error('{{ session('error') }}');
-</script>
-@endif
+    @if (session('success'))
+        <script>
+            toastr.success('{{ session('success') }}');
+        </script>
+    @elseif(session('delete'))
+        <script>
+            toastr.delete('{{ session('delete') }}');
+        </script>
+    @elseif(session('message'))
+        <script>
+            toastr.message('{{ session('message') }}');
+        </script>
+    @elseif(session('error'))
+        <script>
+            toastr.error('{{ session('error') }}');
+        </script>
+    @endif
 @endsection
-

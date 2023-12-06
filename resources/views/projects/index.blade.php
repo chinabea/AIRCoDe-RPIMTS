@@ -54,7 +54,7 @@
                                                         {{ $record->project_name }}
                                                         <!-- </a> -->
                                                     </td>
-                                                    <td class="align-middle">{{ $record->research_group }}</td>
+                                                    <td class="align-middle">{!! $record->research_group !!}</td>
                                                     <td class="align-middle">{{ $record->created_at->format('F j, Y') }}
                                                     </td>
                                                     <td class="align-middle">
@@ -74,14 +74,6 @@
                                                         @endif
 
                                                     </td>
-                                                    <!-- <td class="align-middle">
-                                                @foreach ($record->versions as $version)
-                                                <div>
-                                                        <p><i class="fas fa-code-branch"></i>Version: {{ $version->version_number }}</p>
-                                                        <p>{{ $version->project_name }}</p>
-                                                    </div>
-                                                    @endforeach
-                                              </td> -->
                                                     <td class="align-middle">
                                                         <div class="btn-group align-middle" role="group"
                                                             aria-label="Basic example">

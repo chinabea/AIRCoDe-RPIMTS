@@ -5,6 +5,7 @@ use App\Notifications\ResearchProposalSubmissionNotification;
 use Exception;
 // use Illuminate\Support\Facades\Mail;
 // use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CallForProposal;
 use App\Models\LineItemBudget;
@@ -16,11 +17,25 @@ use App\Models\Review;
 use App\Models\Member;
 use App\Models\Task;
 use App\Models\File;
-use App\Models\Version;
 // use Rorecek\Ulid\Ulid;
 
 class ProjectController extends Controller
 {
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation rules
+        ]);
+
+        $image = $request->file('image');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+
+        // Store the image in the 'public/uploads' directory
+        $image->storeAs('public/uploads', $imageName);
+
+        // Return the URL of the stored image
+        return response()->json(['location' => asset('storage/uploads/' . $imageName)]);
+    }
 
     public function index()
     {
@@ -155,6 +170,7 @@ class ProjectController extends Controller
             $reviewersss = User::where('role', 4)->get();
             $data = Project::findOrFail($id);
             $records = Project::with('versions')->findOrFail($id);
+            $revised = Revision::all();
 
             // $reviewerCommented = Review::where('user_id', Auth::user()->id)->get();
             // $comments = Review::findOrFail($id);
@@ -169,7 +185,7 @@ class ProjectController extends Controller
                 $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudget structure
             }
 
-            return view('submission-details.show', compact('id', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
+            return view('submission-details.show', compact('id', 'revised', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
                         'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data',
                         'reviewerCommented'));
         } catch (Exception $e) {
@@ -201,7 +217,7 @@ class ProjectController extends Controller
             $record = Project::findOrFail($id);
             $newVersionNumber = $record->versions()->max('version_number') + 1;
 
-            $newVersion = new Version([
+            $newVersion = new Revision([
                 'version_number' => $newVersionNumber,
                 'tracking_code' => $request->input('tracking_code'),
                 'project_name' => $request->input('project_name'),
@@ -234,7 +250,7 @@ class ProjectController extends Controller
             // Save the updated project record
             $record->save();
 
-            return redirect()->back()->with('success', 'Reseach Proposal Successfully Deleted!');
+            return redirect()->back()->with('success', 'Reseach Proposal Successfully Updated!');
         } catch (Exception $e) {
             // Handle the exception, you can log it or return an error response
             return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());

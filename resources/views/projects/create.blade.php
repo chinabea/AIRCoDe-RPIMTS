@@ -13,7 +13,7 @@
                 <h1 class="m-0 ml-3 font-weight-bold">Research Project Form</h1>
             </div>
             <div class="card-body">
-                <form action="{{ route('projects.store') }}" method="POST"
+                <form action="{{ route('projects.store') }}" method="POST" id="project"
                     enctype="multipart/form-data">
                     {{ method_field('POST') }}
                     @csrf
@@ -46,6 +46,11 @@
                     <div class="form-group">
                         <label for="aims_and_objectives">Aims and Objectives</label>
                         <textarea id="aims_and_objectives" name="aims_and_objectives" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project_image">Project Image</label>
+                        <input type="file" class="form-control" id="project_image" name="project_image">
                     </div>
 
                     <div class="form-group">
@@ -109,5 +114,9 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 @endsection

@@ -76,7 +76,7 @@
                             @else
                                 <strong>{{ $message->sender->name }}</strong> <br>
                             @endif
-                            <small class="contacts-list-date float-right">{{ $message->created_at->diffForHumans()}}</small>
+                            <small class="contacts-list-date float-right">{{ $message->created_at->diffForHumans() }}</small>
                         </span>
                         <span class="contacts-list-msg">
                             @if ($message->sender->id == auth()->id())

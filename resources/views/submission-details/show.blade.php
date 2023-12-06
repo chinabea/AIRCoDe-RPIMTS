@@ -5,7 +5,6 @@
         <section class="content-header">
         </section>
 
-        {{-- @include('messages.chat-widget') --}}
         @if (session('success'))
             <script>
                 toastr.success('{{ session('success') }}');
@@ -23,23 +22,6 @@
                 toastr.error('{{ session('error') }}');
             </script>
         @endif
-
-        <!-- Tabs -->
-        <!-- <style>
-              /* Custom tab colors */
-              .nav-tabs .nav-item.show .nav-link,
-              .nav-tabs .nav-link.active {
-                  background-color: #022A44;
-                  color: #ffffff; /* Text color for active tab */
-              }
-
-              .nav-tabs .nav-link {
-                  background-color: #ffffff; /* Inactive tab color */
-                  color: #333; /* Text color for inactive tab */
-              }
-          </style> -->
-
-          
         @if (Auth::user()->role == 3)
 
         <div class="col-md-12">
@@ -671,7 +653,7 @@
                     <div class="collapse show" id="collapseCardExample" style="">
                         <div class="card-body">
                             <label>Research Group</label><br>
-                            {{ $records->research_group }}
+                            {!! $records->research_group !!}
 
                             <br><br>
 
@@ -851,13 +833,12 @@
                                 </li>
                             </ul>
                         </div>
-    @endif
-    @endif
+                        @endif
+                    @endif
 
 
     <div class="card-body">
         <div id="versions-form" class="mt-4" style="display: none;">
-        <p>uioooooooo</p>
             <table id="example4" class="table table-hover table-bordered table-sm text-center">
                 <thead>
                     <tr>
@@ -867,14 +848,14 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                    <tbody>
+                    @foreach ($revised as $revision)
                         <tr>
-                            <td>1</td>
-                            <td>Title</td>
-                            <td>Date</td>
-                            <td>Actions</td>
+                            <td>{{ $revision->version_number }}</td>
+                            <td>{{ $revision->project_name }}</td>
+                            <td>{{ $revision->created_at }}</td>
+                            <td><a href="{{ route('generate.revision.pdf', ['data_id' => $revision->id]) }}">Export</a></td>
                         </tr>
-                    </tbody>
+                    @endforeach
             </table>
         </div>
 
@@ -896,7 +877,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Research Group</label>
-                        <input type="text" value="{{ $records->research_group }}" class="form-control"
+                        <input type="text" value="{!! $records->research_group !!}" class="form-control"
                             id="research_group" name="research_group">
                     </div>
                     <div class="mb-3">
@@ -928,7 +909,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Work Plan</label>
                         <input type="text" value="{{ $records->workplan }}" class="form-control" id="workplan"
-                            name="workplan" readonly>
+                            name="workplan">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Resources</label>
@@ -969,7 +950,7 @@
                 <br>
 
                 <label>Research Group:</label><br>
-                {{ $records->research_group }}
+                {!! $records->research_group !!}
                 <br>
                 <br>
 
@@ -1019,11 +1000,6 @@
           </div>
       </div>
     </div>
-
-<!-- 
-            <div style="text-align: justify;">
-            </div>
-        </div> -->
 
         <div id="tasks-form" class="mt-4" style="display: none;">
       @if (auth()->check() && auth()->user()->role == 3)
@@ -1144,9 +1120,6 @@
           </div>
       </div>
     </div>
-
-
-      
         <div id="lib-form" class="mt-4" style="display: none;">
             @if (auth()->check() && auth()->user()->role == 3)
                 <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"

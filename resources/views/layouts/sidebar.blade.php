@@ -73,6 +73,12 @@
         </li>
           <li class="nav-header">TRANSPARENCY</li>
               <li class="nav-item">
+                <a href="{{ route('messages.mailbox') }}" class="nav-link">
+                  <i class="nav-icon fas fa-comments"></i>
+                  <p>Messages</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('call-for-proposals') }}" class="nav-link {{ Route::currentRouteName() == 'call-for-proposals' ? 'active' : '' }}">
                   <i class="nav-icon fas fa-file-signature"></i>
                   <p>Call for Proposals</p>
@@ -86,8 +92,8 @@
               </li>
               <li class="nav-item">
                 <a href="{{ route('reports') }}" class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-chart-line"></i>
-                  <p> Generate Reports</p>
+                  <i class="nav-icon fas fa-trash"></i>
+                  <p> Archived</p>
                 </a>
               </li>
               <li class="nav-header">SETTINGS</li>
@@ -108,21 +114,6 @@
 
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- <style>
-          .project-title {
-            font-weight: bold;
-          }
-          .deadline {
-            font-size: 14px;
-            margin-top: 5px;
-          }
-          .history {
-            font-size: 14px;
-            margin-top: 5px;
-          }
-
-          </style> -->
-
 
           <li class="nav-item">
             <a href="{{ route('staff.home') }}" class="nav-link {{ Route::currentRouteName() == 'staff.home' ? 'active' : '' }}">
@@ -130,6 +121,12 @@
               <p>Dashboard</p>
             </a>
           </li>
+              <li class="nav-item">
+                <a href="{{ route('messages.mailbox') }}" class="nav-link">
+                  <i class="nav-icon fas fa-comments"></i>
+                  <p>Messages</p>
+                </a>
+              </li>
 
           <li class="nav-header">MAIN MENU</li>
           <li class="nav-item">
@@ -178,11 +175,17 @@
                 <p>Disapproved</p>
             </a>
           </li>
-          <!-- <li class="nav-header">SETTINGS</li>
+          <li class="nav-item">
+            <a href="{{ route('reports') }}" class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
+              <i class="nav-icon fas fa-trash"></i>
+              <p> Archived</p>
+            </a>
+          </li>
+          <li class="nav-header">SETTINGS</li>
           <button id="theme-toggle" class="btn btn-outline-primary btn-block">
             <i class="fas fa-adjust"></i> Toggle Theme
           </button>
-        </li> -->
+        </li>
       </div>
     </aside>
 
@@ -429,6 +432,12 @@
         </li> --}}
           <li class="nav-header">TRANSPARENCY</li>
           <li class="nav-item">
+              <li class="nav-item">
+                <a href="{{ route('messages.mailbox') }}" class="nav-link">
+                  <i class="nav-icon fas fa-comments"></i>
+                  <p>Messages</p>
+                </a>
+              </li>
             <!-- <a href="#" class="nav-link">
               <i class="nav-icon fas fa-balance-scale"></i>
               <p>
@@ -468,6 +477,13 @@
               </p>
             </a>
           </li> -->
+          
+          <li class="nav-item">
+            <a href="{{ route('reports') }}" class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
+              <i class="nav-icon fas fa-trash"></i>
+              <p> Archived</p>
+            </a>
+          </li>
             <li class="nav-header">SETTINGS</li>
             <button id="theme-toggle" class="btn btn-outline-primary btn-block">
             <i class="fas fa-adjust"></i> Toggle Theme
@@ -491,6 +507,12 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2"><ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
     <li class="nav-header">MAIN MENU</li>
+              <li class="nav-item">
+                <a href="{{ route('messages.mailbox') }}" class="nav-link">
+                  <i class="nav-icon fas fa-comments"></i>
+                  <p>Messages</p>
+                </a>
+              </li>
     <li class="nav-item">
         <a href="{{ route('reviewer.home') }}" class="nav-link {{ Route::currentRouteName() == 'reviewer.home' ? 'active' : '' }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -513,10 +535,16 @@
       @else
           <p>No items assigned for review</p>
       @endif
-      <!-- <li class="nav-header">SETTINGS</li>
+      <li class="nav-item">
+        <a href="{{ route('reports') }}" class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
+          <i class="nav-icon fas fa-trash"></i>
+          <p> Archived</p>
+        </a>
+      </li>
+      <li class="nav-header">SETTINGS</li>
       <button id="theme-toggle" class="btn btn-outline-primary btn-block">
         <i class="fas fa-adjust"></i> Toggle Theme
-      </button> -->
+      </button>
           </ul>
 
         </div>
@@ -527,6 +555,3 @@
 
 @endif
 
-
-
-    <!-- {{ Route::currentRouteName() == 'review.for-review-project' ? 'active' : '' }} -->

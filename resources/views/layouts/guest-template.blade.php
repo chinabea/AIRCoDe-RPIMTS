@@ -174,6 +174,12 @@ html, body {
 .valid-feedback{
    color: #2acc80;
 }
+.white {
+    color: white;
+    background-color: white; /* You may need this to set the background color as well */
+    /* Add any other styles you want to apply */
+}
+
 </style>
 <body>
 

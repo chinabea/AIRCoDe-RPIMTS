@@ -29,7 +29,7 @@
           <span class="badge badge-danger navbar-badge">3</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="{{ route('messages.create') }}" class="dropdown-item">
+          <a href="" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
               <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
@@ -131,15 +131,15 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @if(Auth::user()->role == 4)
-                      Reviewer, {{ Auth::user()->name }}
-                    @elseif(Auth::user()->role == 3)
-                       Researcher, {{ Auth::user()->name }}
+                      Reviewer, {{ Auth::user()->name }} - {{ Auth::user()->email }}
+                    @elseif(Auth::user()->role == 3) 
+                       Researcher, {{ Auth::user()->name }} - {{ Auth::user()->email }}
                     @elseif(Auth::user()->role == 2)
-                        Staff, {{ Auth::user()->name }}
+                        Staff, {{ Auth::user()->name }} - {{ Auth::user()->email }}
                     @elseif(Auth::user()->role == 1)
-                        Director, {{ Auth::user()->name }}
+                        Director, {{ Auth::user()->name }} - {{ Auth::user()->email }}
                     @else
-                        {{ Auth::user()->name }}
+                        {{ Auth::user()->name }} - {{ Auth::user()->email }}
                     @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

@@ -53,6 +53,9 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::post('/store-users', [UserController::class, 'store'])->name('users.store');
     Route::get('/show-users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/edit-users/{id}', [UserController::class, 'edit'])->name('users.edit');
+    
+    
+    
     Route::put('/edit-users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/delete-users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/submission-details/show/{id}', [ProjectController::class, 'show'])->name('submission-details.show');
@@ -73,7 +76,6 @@ Route::middleware(['auth', 'cache'])->group(function (){
 
     // Reports
     // Route::get('/report-options', [ReportController::class, 'reportOptions'])->name('reports.report-options');
-    Route::get('/generate-revision-pdf/{id}', [ReportController::class, 'generateRevisionReport'])->name('generate.revision.pdf');
     Route::get('/generate-pdf/{data_id}', [ReportController::class, 'generateProjectReport'])->name('generate.pdf');
     Route::post('/generate-users-report', [ReportController::class, 'generateUsersReport'])->name('generate.users.report');
     Route::post('/generate-projects-report', [ReportController::class, 'generateProjectsReport'])->name('generate.projects.report');
@@ -85,13 +87,10 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::post('/generate-projects-report-xlsx', [ReportController::class, 'projectsReportExcel'])->name('projects.xlsx.report');
 
     // Messages
-    Route::get('/messages/indexx', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
-    // Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
-    
-    Route::get('/messages', [MessageController::class, 'index'])->name('messages.mailbox');
-    Route::get('/messages-view/{id}', [MessageController::class, 'show'])->name('messages.read-mail');
-    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.compose');
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+    Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
 });
 
 Route::prefix('staff')->middleware(['auth', 'cache', 'staff'])->group(function (){

@@ -58,7 +58,7 @@
                             {{ $record->project_name }}
                             <!-- </a> -->
                         </td>
-                        <td class="align-middle">{{ $record->research_group }}</td>
+                        <td class="align-middle">{!! $record->research_group !!}</td>
                         <td class="align-middle">{{ $record->created_at->format('F j, Y') }}</td>
                         <td class="align-middle">
 
