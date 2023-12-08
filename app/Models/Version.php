@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Revision extends Model
+class Version extends Model
 {
     use HasFactory;
 
     public $primaryKey = 'id';
 
     public $fillable = [
+        'user_id',
         'version_number',
         'tracking_code',
+        'call_for_proposal_id',
         'project_name',
         'research_group',
         'introduction',
@@ -24,7 +26,8 @@ class Revision extends Model
         'workplan',
         'resources',
         'references',
-        // 'total_budget',
+        'total_budget',
+        'approval_date',
     ];
 
     public function callForProposal()
@@ -35,5 +38,10 @@ class Revision extends Model
     public function project()
     {
         return $this->belongsTo(Project::class, 'call_for_proposal_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

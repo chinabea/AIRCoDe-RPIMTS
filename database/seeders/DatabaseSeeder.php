@@ -91,14 +91,14 @@ class DatabaseSeeder extends Seeder
             [
                 'title' => 'AI for Community Health',
                 'description' => 'This call for proposals invites projects aimed at leveraging AI to improve community health outcomes.',
-                'start_date' => '2023-10-29',
-                'end_date' => '2023-11-28',
+                'start_date' => '2023-9-10',
+                'end_date' => '2024-11-28',
             ],
             [
                 'title' => 'Data-Driven Gardening Solutions',
                 'description' => 'This call for proposals seeks innovative projects that use data-driven approaches to improve gardening practices and crop yields.',
-                'start_date' => '2023-10-31',
-                'end_date' => '2023-11-28',
+                'start_date' => '2020-10-31',
+                'end_date' => '2024-11-28',
             ],
             [
                 'title' => 'Empowering Local Communities',

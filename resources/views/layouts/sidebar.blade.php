@@ -97,9 +97,12 @@
                 </a>
               </li>
               <li class="nav-header">SETTINGS</li>
-              <button id="theme-toggle" class="btn btn-outline-primary btn-block">
-                <i class="fas fa-adjust"></i> Toggle Theme
-              </button>
+              <li class="nav-item">
+                <a id="theme-toggle" class="nav-link">
+                  <i class="nav-icon fas fa-adjust"></i>
+                  <p>Toggle Theme</p>
+                </a>
+              </li>
             </div>
           </aside>
 
@@ -182,10 +185,12 @@
             </a>
           </li>
           <li class="nav-header">SETTINGS</li>
-          <button id="theme-toggle" class="btn btn-outline-primary btn-block">
-            <i class="fas fa-adjust"></i> Toggle Theme
-          </button>
-        </li>
+            <li class="nav-item">
+              <a id="theme-toggle" class="nav-link">
+                <i class="nav-icon fas fa-adjust"></i>
+                <p>Toggle Theme</p>
+              </a>
+            </li>
       </div>
     </aside>
 
@@ -507,17 +512,17 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2"><ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
     <li class="nav-header">MAIN MENU</li>
-              <li class="nav-item">
-                <a href="{{ route('messages.mailbox') }}" class="nav-link">
-                  <i class="nav-icon fas fa-comments"></i>
-                  <p>Messages</p>
-                </a>
-              </li>
     <li class="nav-item">
         <a href="{{ route('reviewer.home') }}" class="nav-link {{ Route::currentRouteName() == 'reviewer.home' ? 'active' : '' }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>Dashboard</p>
         </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ route('messages.mailbox') }}" class="nav-link">
+        <i class="nav-icon fas fa-comments"></i>
+        <p>Messages</p>
+      </a>
     </li>
     <li class="nav-header">FOR REVIEW</li>
       @if(!empty($revs))
@@ -542,9 +547,12 @@
         </a>
       </li>
       <li class="nav-header">SETTINGS</li>
-      <button id="theme-toggle" class="btn btn-outline-primary btn-block">
-        <i class="fas fa-adjust"></i> Toggle Theme
-      </button>
+              <li class="nav-item">
+                <a id="theme-toggle" class="nav-link">
+                  <i class="nav-icon fas fa-adjust"></i>
+                  <p>Toggle Theme</p>
+                </a>
+              </li>
           </ul>
 
         </div>

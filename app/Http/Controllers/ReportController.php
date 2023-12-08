@@ -10,18 +10,19 @@ use App\Models\CallForProposal;
 use App\Models\Project;
 use App\Models\Member;
 use App\Models\User;
+use App\Models\Version;
 use Exception;
 
 class ReportController extends Controller
 {
 
-    public function generateRevisionReport($data_id)
+    public function generateRevisionReport($id)
     {
 
         try {
-            $data = Revision::findOrFail($data_id);
+            $data = Version::findOrFail($id);
             $projMembers = Member::where('id', $id)->get();
-            $pdf = PDF::loadView('reports.project-revision', ['data' => $data, 'projMembers' => $projMembers]);
+            $pdf = PDF::loadView('reports.version-report', ['data' => $data, 'projMembers' => $projMembers]);
 
             $filename = Str::slug($data->project_name) . '.pdf';
 

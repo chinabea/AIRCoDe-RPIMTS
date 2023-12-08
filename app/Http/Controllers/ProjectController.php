@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\CallForProposal;
 use App\Models\LineItemBudget;
 use Illuminate\Http\Request;
-use App\Models\Revision;
+use App\Models\Version;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\Review;
@@ -170,10 +170,9 @@ class ProjectController extends Controller
             $reviewersss = User::where('role', 4)->get();
             $data = Project::findOrFail($id);
             $records = Project::with('versions')->findOrFail($id);
-            $revised = Revision::all();
-
-            // $reviewerCommented = Review::where('user_id', Auth::user()->id)->get();
-            // $comments = Review::findOrFail($id);
+            $revised = Version::all();
+            $call_for_proposals = CallForProposal::all();
+            // $cfp = CallForProposal::all();
 
             $reviewerCommented = Review::where('user_id', Auth::user()->id)
             ->where('project_id', $id)
@@ -185,7 +184,7 @@ class ProjectController extends Controller
                 $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudget structure
             }
 
-            return view('submission-details.show', compact('id', 'revised', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
+            return view('submission-details.show', compact('id', 'call_for_proposals', 'revised', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
                         'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data',
                         'reviewerCommented'));
         } catch (Exception $e) {
@@ -195,29 +194,31 @@ class ProjectController extends Controller
 
     }
 
-    public function edit($id)
-    {
-        try {
-            $reviewers = User::where('role', 4)->get();
-            $projects = Project::findOrFail($id);
-            $projectTeam = Member::findOrFail($id);
+    // public function edit($id)
+    // {
+    //     try {
+    //         $reviewers = User::where('role', 4)->get();
+    //         $projects = Project::findOrFail($id);
+    //         $projectTeam = Member::findOrFail($id);
 
-            $records = Project::findOrFail($id);
+    //         $records = Project::findOrFail($id);
 
-            return view('projects.edit', compact('projects', 'reviewers', 'projectTeam', 'records'));
-        } catch (Exception $e) {
-            // Handle the exception, you can log it for debugging or display an error message to the user.
-            return redirect()->back()->with('error', 'An error occurred while editing the project: ' . $e->getMessage());
-        }
-    }
-
+    //         return view('projects.edit', compact('projects', 'reviewers', 'projectTeam', 'records'));
+    //     } catch (Exception $e) {
+    //         // Handle the exception, you can log it for debugging or display an error message to the user.
+    //         return redirect()->back()->with('error', 'An error occurred while editing the project: ' . $e->getMessage());
+    //     }
+    // }
+    
     public function update(Request $request, $id)
     {
         try {
+            $userId = Auth::id();
             $record = Project::findOrFail($id);
             $newVersionNumber = $record->versions()->max('version_number') + 1;
-
-            $newVersion = new Revision([
+    
+            $newVersion = new Version([
+                'user_id' => $userId,
                 'version_number' => $newVersionNumber,
                 'tracking_code' => $request->input('tracking_code'),
                 'project_name' => $request->input('project_name'),
@@ -232,9 +233,9 @@ class ProjectController extends Controller
                 'references' => $request->input('references'),
                 // 'total_budget' => $request->input('total_budget'),
             ]);
-
+    
             $record->versions()->save($newVersion);
-
+    
             // Update the project record with the new values from the form
             $record->project_name = $request->input('project_name');
             $record->research_group = $request->input('research_group');
@@ -246,16 +247,67 @@ class ProjectController extends Controller
             $record->workplan = $request->input('workplan');
             $record->resources = $request->input('resources');
             $record->references = $request->input('references');
-
+    
             // Save the updated project record
             $record->save();
-
-            return redirect()->back()->with('success', 'Reseach Proposal Successfully Updated!');
+    
+            return redirect()->back()->with('success', 'Research Proposal Successfully Updated!');
         } catch (Exception $e) {
             // Handle the exception, you can log it or return an error response
             return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
         }
     }
+    
+
+    // public function update(Request $request, $id)
+    // {
+    //     try{
+    //         dd($request->all());
+    //         $userId = Auth::id();
+    //         $record = Project::findOrFail($id);
+    //         $newVersionNumber = $record->versions()->max('version_number') + 1;
+
+    //         $newVersion = new Version([
+    //             'user_id' => $userId,
+    //             'version_number' => $newVersionNumber,
+    //             'tracking_code' => $request->input('tracking_code'),
+    //             'project_name' => $request->input('project_name'),
+    //             'research_group' => $request->input('research_group'),
+    //             'introduction' => $request->input('introduction'),
+    //             'aims_and_objectives' => $request->input('aims_and_objectives'),
+    //             'background' => $request->input('background'),
+    //             'expected_research_contribution' => $request->input('expected_research_contribution'),
+    //             'proposed_methodology' => $request->input('proposed_methodology'),
+    //             'workplan' => $request->input('workplan'),
+    //             'resources' => $request->input('resources'),
+    //             'references' => $request->input('references'),
+    //             // $table->decimal('total_budget', 10, 2)->default(0.00);
+    //         ]);
+
+    //         $record->versions()->save($newVersion);
+    //         // Update the project record with the new values from the form
+    //         $record->user_id = $request->input('user_id');
+    //         $record->project_name = $request->input('project_name');
+    //         $record->research_group = $request->input('research_group');
+    //         $record->introduction = $request->input('introduction');
+    //         $record->aims_and_objectives = $request->input('aims_and_objectives');
+    //         $record->background = $request->input('background');
+    //         $record->expected_research_contribution = $request->input('expected_research_contribution');
+    //         $record->proposed_methodology = $request->input('proposed_methodology');
+    //         $record->workplan = $request->input('workplan');
+    //         $record->resources = $request->input('resources');
+    //         $record->references = $request->input('references');
+
+    //         // Save the updated project record
+    //         $record->save();
+
+    //         return redirect()->back()->with('success', 'Research Proposal Successfully Updated!');
+    //     } catch (Exception $e) {
+    //         // Handle the exception, you can log it or return an error response
+    //         return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
+    //     }
+    // }
+
 
     // public function update(Request $request, $id)
     // {

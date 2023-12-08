@@ -23,9 +23,13 @@
                         <select id="call_for_proposal_id" name="call_for_proposal_id" class="selectpicker form-control" data-live-search="true">
                             <option value="" disabled selected>Select Call for Proposal</option>
                             @foreach ($call_for_proposals as $call_for_proposal)
-                            <option value="{{ $call_for_proposal->id }}">{{ $call_for_proposal->title }}</option>
+                                @if ($call_for_proposal->start_date <= now() && $call_for_proposal->end_date >= now())
+                                    <option value="{{ $call_for_proposal->id }}">{{ $call_for_proposal->title }}</option>
+                                @endif
                             @endforeach
                         </select>
+                        <small class="text-muted">Reminder: Ensure that the submission of other relevant requirements is completed while the Call for Proposal is open. 
+                            Submission will close when the Call for Proposal status is closed.</small>
                     </div>
 
                     <div class="form-group">

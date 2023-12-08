@@ -145,7 +145,7 @@ Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(
     Route::get('/project/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/project/store', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
-    Route::put('/project/edit/{id}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::put('/project/update/{id}', [ProjectController::class, 'update'])->name('projects.update');
 
     Route::get('/project-teams/create', [MemberController::class, 'create'])->name('submission-details.project-teams.create');
     Route::post('/project-teams/store/{id}', [MemberController::class, 'store'])->name('submission-details.project-teams.store');

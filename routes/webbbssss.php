@@ -65,6 +65,7 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/edit-users/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/edit-users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/delete-users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
     Route::get('/submission-details/show/{id}', [ProjectController::class, 'show'])->name('submission-details.show');
     Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
 
@@ -82,6 +83,8 @@ Route::prefix('reviewer')->middleware(['auth', 'cache', 'reviewer'])->group(func
     Route::get('/home', [DashboardController::class, 'countAll'])->name('reviewer.home');
     Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
     Route::get('/review/create', [ReviewController::class, 'create'])->name('reviews.create');
+    
+    
     Route::post('/review/store', [ReviewController::class, 'store'])->name('reviews.store');
     Route::get('/review/show/{id}', [ReviewController::class, 'show'])->name('reviews.show');
     Route::get('/review/edit/{id}', [ReviewController::class, 'edit'])->name('reviews.edit');

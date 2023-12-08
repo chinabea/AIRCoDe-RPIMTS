@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('revisions', function (Blueprint $table) {
+        Schema::create('versions', function (Blueprint $table) {
             $table->id();
             $table->integer('version_number');
             $table->ulid('tracking_code');
             $table->unsignedBigInteger('call_for_proposal_id');
-            // $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->text('project_name');
             // $table->enum('status', ['Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved']);
             $table->text('research_group');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('workplan');
             $table->text('resources');
             $table->text('references');
-            // $table->decimal('total_budget', 10, 2)->default(0.00);
+            $table->decimal('total_budget', 10, 2)->default(0.00);
             // $table->date('approval_date')->nullable();
 
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -42,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('revisions');
+        Schema::dropIfExists('versions');
     }
 };

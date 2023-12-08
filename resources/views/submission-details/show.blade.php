@@ -26,8 +26,7 @@
 
         <div class="col-md-12">
             <div class="callout callout-info">
-                <h5><i class="fas fa-info"></i> Note:</h5>
-                This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
+            <h5><i class="fas fa-info"></i> Note: <small>This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.</small></h5>
                 <!-- <div class="breaking-news">
                 <marquee behavior="scroll" direction="left" class="text-warning weight-text-bold">
                     <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
@@ -724,6 +723,12 @@
                             <h3 class="card-title">Submission Details</h3>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" id="details-btn" data-toggle="tab" href="#details" role="tab"
+                                aria-controls="details" aria-selected="false">
+                                <i class="fas fa-info-circle mr-2"></i>Details
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" id="reviewer-btn" data-toggle="tab" href="#reviewer" role="tab"
                                 aria-controls="reviewer" aria-selected="false">
                                 <i class="fas fa-user-check mr-2"></i>Reviewer
@@ -733,12 +738,6 @@
                             <a class="nav-link" id="messages-btn" data-toggle="tab" href="#messages" role="tab"
                                 aria-controls="messages" aria-selected="false">
                                 <i class="fas fa-comments mr-2"></i>Reviews
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="details-btn" data-toggle="tab" href="#details" role="tab"
-                                aria-controls="details" aria-selected="false">
-                                <i class="fas fa-info-circle mr-2"></i>Details
                             </a>
                         </li>
                         <li class="nav-item">
@@ -783,16 +782,17 @@
                                 <li class="pt-2 px-3">
                                     <h3 class="card-title">Submission Details</h3>
                                 </li>
-                                <li class="nav-item text-center">
-                                    <a class="nav-link" id="actions-btn" data-toggle="tab" href="#actions"
-                                        role="tab" aria-controls="actions" aria-selected="true">
-                                        <i class="fas fa-cogs mr-2"></i>Actions
-                                    </a>
-                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="details-btn" data-toggle="tab" href="#details"
                                         role="tab" aria-controls="details" aria-selected="false">
                                         <i class="fas fa-info-circle mr-2"></i>Details
+                                    </a>
+                                </li>
+
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" id="actions-btn" data-toggle="tab" href="#actions"
+                                        role="tab" aria-controls="actions" aria-selected="true">
+                                        <i class="fas fa-cogs mr-2"></i>Actions
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -853,7 +853,8 @@
                             <td>{{ $revision->version_number }}</td>
                             <td>{{ $revision->project_name }}</td>
                             <td>{{ $revision->created_at }}</td>
-                            <td><a href="{{ route('generate.revision.pdf', ['data_id' => $revision->id]) }}">Export</a></td>
+                            <td><a href="{{ route('generate.revision.pdf', ['id' => $revision->id]) }}">Export</a></td>
+                            <td><a href="">View</a></td>
                         </tr>
                     @endforeach
             </table>
@@ -861,9 +862,11 @@
 
         <div id="actions-form" class="mt-4" style="display: none;">
             @if (Auth::user()->role == 3 && $records->status === 'For Revision')
-                <form action="{{ route('projects.edit', $records->id) }}" method="POST">
+                <form action="{{ route('projects.edit', $records->id) }}" method="POST" id="updateproject">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="user_id" value="{{ Auth()->user()->id }}">
+
                     <div class="mb-3">
                         <label for="tracking_code" class="form-label">Tracking Code</label>
                         <input type="text" value="{{ $records->tracking_code }}" class="form-control"
@@ -875,51 +878,52 @@
                         <input type="text" value="{{ $records->project_name }}" class="form-control"
                             id="project_name" name="project_name">
                     </div>
+
                     <div class="mb-3">
-                        <label for="" class="form-label">Research Group</label>
-                        <input type="text" value="{!! $records->research_group !!}" class="form-control"
-                            id="research_group" name="research_group">
+                        <label for="research_group" class="form-label">Research Group</label>
+                        <textarea class="form-control" id="research_group" name="research_group">{!! $records->research_group !!}</textarea>
                     </div>
+
                     <div class="mb-3">
                         <label for="" class="form-label">Introduction</label>
-                        <input type="text" value="{{ $records->introduction }}" class="form-control"
-                            id="introduction" name="introduction">
+                        <textarea type="text" class="form-control"
+                            id="introduction" name="introduction">{!! $records->introduction !!}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Aims and Objectives</label>
-                        <input type="text" value="{{ $records->aims_and_objectives }}" class="form-control"
-                            id="aims_and_objectives" name="aims_and_objectives">
+                        <textarea type="text" class="form-control"
+                            id="aims_and_objectives" name="aims_and_objectives">{!! $records->aims_and_objectives !!}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Background</label>
-                        <input type="text" value="{{ $records->background }}" class="form-control" id="background"
-                            name="background">
+                        <textarea type="text" class="form-control" id="background"
+                            name="background">{!! $records->background !!}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Expected Research Contribution</label>
-                        <input type="text" value="{{ $records->expected_research_contribution }}"
+                        <textarea type="text"
                             class="form-control" id="expected_research_contribution"
-                            name="expected_research_contribution">
+                            name="expected_research_contribution">{!! $records->expected_research_contribution !!}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">The Proposed Methodology</label>
-                        <input type="text" value="{{ $records->proposed_methodology }}" class="form-control"
-                            id="proposed_methodology" name="proposed_methodology">
+                        <textarea type="text" class="form-control"
+                            id="proposed_methodology" name="proposed_methodology">{!! $records->proposed_methodology !!}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Work Plan</label>
-                        <input type="text" value="{{ $records->workplan }}" class="form-control" id="workplan"
-                            name="workplan">
+                        <textarea type="text" class="form-control" id="workplan"
+                            name="workplan">{!! $records->workplan !!}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Resources</label>
-                        <input type="text" value="{{ $records->resources }}" class="form-control" id="resources"
-                            name="resources">
+                        <textarea type="text" class="form-control" id="resources"
+                            name="resources">{!! $records->resources !!}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">References</label>
-                        <input type="text" value="{{ $records->references }}" class="form-control" id="references"
-                            name="references">
+                        <textarea type="text" class="form-control" id="references"
+                            name="references">{!! $records->references !!}</textarea>
                     </div>
                     <button type="submit" class="btn btn-warning float-right">Update Proposal</button>
                 </form>
@@ -928,7 +932,7 @@
             @endif
         </div>
 
-        <div id="details-form" class="mt-4" style="display: none;">
+        <div id="details-form" class="mt-4">
       <div class="card">
           <div class="card-header">
               <h3 class="card-title my-2"><i class="fas fa-users"></i> Details</h3>
@@ -939,6 +943,16 @@
 
           </div>
           <div class="card-body">
+            
+                <label>Project Name:</label><br>
+                @foreach ($call_for_proposals as $call_for_proposal)
+                    @if ($call_for_proposal->id === $records->call_for_proposal_id)
+                        {{ $call_for_proposal->title }}
+                    @endif
+                @endforeach
+                <br>
+                <br>
+
                 <label>Project Name:</label><br>
                 {{ $records->project_name }}
                 <br>
@@ -1001,12 +1015,27 @@
       </div>
     </div>
 
-        <div id="tasks-form" class="mt-4" style="display: none;">
-      @if (auth()->check() && auth()->user()->role == 3)
-          <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks" data-backdrop="static"
-              data-keyboard="false">Add Task</button>
-          @include('submission-details.tasks.create')
-      @endif
+    <div id="tasks-form" class="mt-4" style="display: none;">
+    @if (auth()->check() && auth()->user()->role == 3)
+        @foreach ($call_for_proposals as $call_for_proposal)
+            @if ($call_for_proposal->id === $records->call_for_proposal_id)
+
+                @php
+                    // Check if the end date of the Call for Proposal has passed
+                    $isButtonDisabled = now() > $call_for_proposal->end_date;
+                    $isProjectForRevision = $records->status === 'For Revision';
+                @endphp
+
+                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks" 
+                        data-backdrop="static" data-keyboard="false" @if($isButtonDisabled && !$isProjectForRevision) disabled @endif>
+                    Add Task
+                </button>
+
+                @include('submission-details.tasks.create')
+
+            @endif
+        @endforeach
+    @endif
 
       <div class="card">
           <div class="card-header">
@@ -1121,11 +1150,23 @@
       </div>
     </div>
         <div id="lib-form" class="mt-4" style="display: none;">
-            @if (auth()->check() && auth()->user()->role == 3)
-                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"
-                    data-keyboard="false" data-target="#lib">Add Line-Item</button>
-                @include('submission-details.line-items-budget.create')
-            @endif
+        @if (auth()->check() && auth()->user()->role == 3)
+            @foreach ($call_for_proposals as $call_for_proposal)
+                @if ($call_for_proposal->id === $records->call_for_proposal_id)
+
+                    @php
+                        // Check if the end date of the Call for Proposal has passed
+                        $isButtonDisabled = now() > $call_for_proposal->end_date;
+                        $isProjectForRevision = $records->status === 'For Revision';
+                    @endphp
+                    <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"
+                        data-keyboard="false" data-target="#lib" @if($isButtonDisabled && !$isProjectForRevision) disabled @endif>
+                        Add Line-Item
+                    </button>
+                    @include('submission-details.line-items-budget.create')
+                @endif
+            @endforeach
+        @endif
       
       <div class="card">
           <div class="card-header">
@@ -1233,11 +1274,22 @@
 
 
         <div id="files-form" class="mt-4" style="display: none;">
-            @if (auth()->check() && auth()->user()->role == 3)
-                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"
-                    data-keyboard="false" data-target="#filesModal">Add File</button>
-                @include('submission-details.files.create')
-            @endif
+        @if (auth()->check() && auth()->user()->role == 3)
+            @foreach ($call_for_proposals as $call_for_proposal)
+                @if ($call_for_proposal->id === $records->call_for_proposal_id)
+
+                    @php
+                        // Check if the end date of the Call for Proposal has passed
+                        $isButtonDisabled = now() > $call_for_proposal->end_date;
+                        $isProjectForRevision = $records->status === 'For Revision';
+                    @endphp
+                    <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"
+                        data-keyboard="false" data-target="#filesModal" @if($isButtonDisabled && !$isProjectForRevision) disabled @endif>Add File</button>
+                    @include('submission-details.files.create')
+
+                @endif
+            @endforeach
+        @endif
       
       <div class="card">
           <div class="card-header">
@@ -1572,11 +1624,22 @@
         </div>
 
         <div id="project-team-form" class="mt-4" style="display: none;">
-            @if (auth()->check() && auth()->user()->role == 3)
-                <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"
-                    data-keyboard="false" data-target="#ProjectTeam">Add Member</button>
-                @include('submission-details.project-teams.create')
-            @endif
+        @if (auth()->check() && auth()->user()->role == 3)
+            @foreach ($call_for_proposals as $call_for_proposal)
+                @if ($call_for_proposal->id === $records->call_for_proposal_id)
+
+                    @php
+                        // Check if the end date of the Call for Proposal has passed
+                        $isButtonDisabled = now() > $call_for_proposal->end_date;
+                        $isProjectForRevision = $records->status === 'For Revision';
+                    @endphp
+                    <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"
+                        data-keyboard="false" data-target="#ProjectTeam" @if($isButtonDisabled && !$isProjectForRevision) disabled @endif>Add Member</button>
+                    @include('submission-details.project-teams.create')
+                    
+                @endif
+            @endforeach
+        @endif
       
       <div class="card">
           <div class="card-header">
@@ -1701,4 +1764,6 @@
             }
         }
     </script>
+
+
 @endsection

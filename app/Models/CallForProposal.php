@@ -22,4 +22,11 @@ class CallForProposal extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    public function isOpen()
+    {
+        // Assuming 'start_date' and 'end_date' are columns in your database table
+        $now = now();
+        return $this->start_date <= $now && $this->end_date >= $now && $this->status === 'open';
+    }
 }
