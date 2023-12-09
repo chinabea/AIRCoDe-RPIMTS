@@ -46,6 +46,21 @@ class MessageController extends Controller
         return view('messages.mailbox', compact('conversations'))->with('success', 'Message sent successfully!');
     }
 
+    // public function index()
+    // {
+    //     $user = auth()->user();
+    //     $conversations = Message::whereIn('id', function ($query) use ($user) {
+    //         $query->selectRaw('MAX(id) as id')
+    //             ->from('messages')
+    //             ->where('recipient_id', $user->id)
+    //             ->orWhere('sender_id', $user->id)
+    //             ->groupBy(['sender_id', 'recipient_id']);
+    //     })->get();
+
+    //     return view('messages.mailbox', compact('conversations'))->with('success', 'Message sent successfully!');
+    // }
+
+
 
     public function create()
     {
@@ -63,39 +78,87 @@ class MessageController extends Controller
         return view('messages.compose', compact('users','messages','mymessages','allMessages'))->with('success', 'Sent');
     }
 
+    public function reply(Request $request)
+    {
+        try {
+            // Handle the logic for sending a new message
+            $user = auth()->user(); // Get the authenticated user
+
+            // Validate the request
+            $request->validate([
+                'recipient_id' => 'required|exists:users,id',
+                'subject' => 'required',
+                'content' => 'required',
+            ]);
+
+            // Check if the recipient is the same as the authenticated user
+            if ($request->input('recipient_id') == $user->id) {
+                return redirect()->back()->with('error', 'You cannot send a message to yourself.');
+            }
+
+            // Create a new message
+            Message::create([
+                'sender_id' => $user->id,
+                'recipient_id' => $request->input('recipient_id'),
+                'subject' => $request->input('subject'),
+                'content' => $request->input('content'),
+                // Add any other fields as needed
+            ]);
+
+            $conversations = Message::whereIn('id', function ($query) use ($user) {
+                $query->selectRaw('MAX(id)')
+                    ->from('messages')
+                    ->where('recipient_id', $user->id)
+                    ->orWhere('sender_id', $user->id)
+                    ->groupBy(['sender_id', 'recipient_id']);
+            })->orderBy('created_at', 'asc')->get();
+
+            return view('messages.mailbox', compact('conversations'))->with('success', 'Message sent successfully!');
+        } catch (\Exception $e) {
+            // Handle the exception, you might want to log it or display an error page
+            return redirect()->back()->with('error', 'Error occurred: ' . $e->getMessage());
+        }
+    }
+
+
     public function store(Request $request)
     {
-        // Handle the logic for sending a new message
-        $user = auth()->user(); // Get the authenticated user
-        // $messages = Message::where('recipient_id', $user->id)->get();
-        
-        // Validate the request
-        $request->validate([
-            'recipient_id' => 'required|exists:users,id',
-            'subject' => 'required',
-            'content' => 'required',
-        ]);
+        // dd($request->all());
+        try {
+            // Handle the logic for sending a new message
+            $user = auth()->user(); // Get the authenticated user
+            // $messages = Message::where('recipient_id', $user->id)->get();
+            
+            // Validate the request
+            $request->validate([
+                'recipient_id' => 'required|exists:users,id',
+                'subject' => 'required',
+                'content' => 'required',
+            ]);
 
-        // Create a new message
-        Message::create([
-            'sender_id' => $user->id,
-            'recipient_id' => $request->input('recipient_id'),
-            'subject' => $request->input('subject'),
-            'content' => $request->input('content'),
-            // Add any other fields as needed
-        ]);
-        
-        $conversations = Message::whereIn('id', function ($query) use ($user) {
-            $query->selectRaw('MAX(id)')
-                ->from('messages')
-                ->where('recipient_id', $user->id)
-                ->orWhere('sender_id', $user->id)
-                ->groupBy(['sender_id', 'recipient_id']);
-        })->orderBy('created_at', 'asc')->get();
+            // Create a new message
+            Message::create([
+                'sender_id' => $user->id,
+                'recipient_id' => $request->input('recipient_id'),
+                'subject' => $request->input('subject'),
+                'content' => $request->input('content'),
+                // Add any other fields as needed
+            ]);
+            
+            $conversations = Message::whereIn('id', function ($query) use ($user) {
+                $query->selectRaw('MAX(id)')
+                    ->from('messages')
+                    ->where('recipient_id', $user->id)
+                    ->orWhere('sender_id', $user->id)
+                    ->groupBy(['sender_id', 'recipient_id']);
+            })->orderBy('created_at', 'asc')->get();
 
-        // Redirect back with a success message or handle the response as needed
-        return view('messages.mailbox', compact('conversations'))->with('success', 'Message sent successfully!');
-        // return view('messages.mailbox', compact('messages'))->with('success', 'Message Sent');
+            return view('messages.mailbox', compact('conversations'))->with('success', 'Message sent successfully!');
+        } catch (\Exception $e) {
+            // Handle the exception, you might want to log it or display an error page
+            return redirect()->back()->with('error', 'Error occurred: ' . $e->getMessage());
+        }
+
     }
 
     

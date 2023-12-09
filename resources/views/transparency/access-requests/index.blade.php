@@ -15,7 +15,7 @@
               <div class="card-body">
               <div class="table-responsive">
                 @if (auth()->check() && auth()->user()->role == 3)
-                  <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#AccessRequest" data-backdrop="static" data-keyboard="false">Add Access Request</button>
+                  <button type="button" class="btn btn-primary my-1" data-toggle="modal" data-target="#AccessRequest" data-backdrop="static" data-keyboard="false">Add Access Request</button>
                   @include('transparency.access-requests.create')
                 @endif
 
@@ -33,10 +33,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if($records->count() > 0)
+                        @php
+                            $counter = 0;
+                        @endphp
                             @foreach($records as $requests)
+                            @php
+                                $counter++;
+                            @endphp
                             <tr>
-                                <td class="align-middle">{{ $loop->iteration }}</td>
+                                <td class="align-middle">{{ $counter }}</td>
                                 <td class="align-middle">{{ auth()->user()->name }}</td>
                                 <td class="align-middle">
                                   @if(auth()->user()->role == 1)
@@ -84,7 +89,7 @@
                                                       <label for="">Purpose of Access</label>
                                                       <input type="text" class="form-control" id="purpose_of_access" name="purpose_of_access" value="{{ $requests->purpose_of_access }}" readonly>
                                                       <br>
-                                                      <label for="date">Date Approved</label>
+                                                      <label for="date">Status</label>
                                                       <input type="text" class="form-control" id="date_approved" name="date_approved" value="{{ \Carbon\Carbon::parse($requests->date_approved)->format('F j, Y') }}" readonly>
                                                       <br>
                                                   </div>
@@ -93,9 +98,28 @@
                                       </div>
                                   </div>
                                   @if(Auth::check() && (Auth::user()->role == 1 || Auth::user()->role == 2))
-                                      <a href="" class="btn btn-success">Approve</a>
+                                  <a href="#" data-id="" class="btn btn-success approve-btn">Approve</a>
+
+
                                       <a href="" class="btn btn-danger">Decline</a>
                                   @endif 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                       <!-- Edit -->
                                       <a href="{{ route('transparency.access-requests.edit', $requests->id) }}" type="button" class="btn btn-warning" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#editModal{{ $requests->id }}">
                                           <i class="fas fa-edit"> </i>
@@ -167,7 +191,6 @@
                                 </td>
                             </tr>
                             @endforeach
-                            @endif
                     </tbody>
                 </table>
                 </div>

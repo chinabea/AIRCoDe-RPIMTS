@@ -465,14 +465,6 @@
               </li>
             <!-- </ul> -->
           </li>
-          <li class="nav-item">
-            <a href="{{ route('contact') }}" class="nav-link {{ Route::currentRouteName() == 'contact' ? 'active' : '' }}">
-              <i class="nav-icon fas fa-address-book"></i>
-              <p>
-                Contact Us
-              </p>
-            </a>
-          </li>
           <!-- <li class="nav-header">EXTRAS</li>
           <li class="nav-item">
             <a href="{{ route('reviews') }}" class="nav-link {{ Route::currentRouteName() == 'access-requests' ? 'active' : '' }}">
@@ -490,9 +482,12 @@
             </a>
           </li>
             <li class="nav-header">SETTINGS</li>
-            <button id="theme-toggle" class="btn btn-outline-primary btn-block">
-            <i class="fas fa-adjust"></i> Toggle Theme
-            </button>
+              <li class="nav-item">
+                <a id="theme-toggle" class="nav-link">
+                  <i class="nav-icon fas fa-adjust"></i>
+                  <p>Toggle Theme</p>
+                </a>
+              </li>
     </div>
 </aside>
 

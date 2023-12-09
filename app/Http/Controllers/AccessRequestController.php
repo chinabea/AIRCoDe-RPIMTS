@@ -11,6 +11,55 @@ use App\Models\AccessRequest;
 
 class AccessRequestController extends Controller
 {
+
+
+    public function approve(Request $request, $id)
+    {
+        try {
+            // Find the access request by ID
+            $accessRequest = AccessRequest::findOrFail($id);
+    
+            // Update the status based on user input
+            $accessRequest->status = $request->input('status');
+    
+            // Optionally, you can update the approved_at field or perform other necessary logic
+            // $accessRequest->status_at = now();
+    
+            // Save the changes
+            $accessRequest->save();
+    
+            // Optionally, send notifications, update related records, etc.
+    
+            return redirect()->back()->with('success', 'Access request approved successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while approving the access request: ' . $e->getMessage());
+        }
+    }
+
+    public function decline($id)
+    {
+        // try {
+            // Find the access request by ID
+            $accessRequest = AccessRequest::findOrFail($id);
+
+            $accessRequest->status = $request->input('status');
+    
+            // Update the status or perform any necessary logic
+            // $accessRequest->status = 'declined';
+            // $accessRequest->updated_at = now(); // Use the updated_at field
+    
+            // Save the changes
+            $accessRequest->save();
+    
+            // Optionally, send notifications, update related records, etc.
+    
+            return redirect()->back()->with('success', 'Access request declined successfully!');
+        // } catch (\Exception $e) {
+        //     return redirect()->back()->with('error', 'An error occurred while declining the access request: ' . $e->getMessage());
+        // }
+    }
+    
+    
     public function index()
     {
         try {

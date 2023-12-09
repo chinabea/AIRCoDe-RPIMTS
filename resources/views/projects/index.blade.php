@@ -34,12 +34,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @php
+                                        $counter = 0;
+                                    @endphp
                                         @foreach ($projects as $record)
                                             @if (
                                                 (in_array(auth()->user()->role, [1, 2, 4]) && $record->status !== 'Draft') ||
-                                                    $record->user_id === auth()->user()->id)
+                                                    $record->user_id === auth()->user()->id)   
+                                            @php
+                                                $counter++;
+                                            @endphp
                                                 <tr>
-                                                    <td class="align-middle">{{ $loop->iteration }}</td>
+                                                    <td class="align-middle">{{ $counter }}</td>
                                                     <td class="align-middle">{{ $record->tracking_code }}</td>
                                                     <td class="align-middle">
                                                         @foreach ($call_for_proposals as $call_for_proposal)

@@ -1,4 +1,19 @@
+// PREVIEW VERSION
+$(document).ready(function () {
+    // Handle click on preview link
+    $('.preview-version').on('click', function (e) {
+        e.preventDefault();
+        
+        // Extract content from the data attribute
+        var content = $(this).data('content');
 
+        // Set the content in the modal body
+        $('#previewModal .modal-body').html(content);
+
+        // Show the modal
+        $('#previewModal').modal('show');
+    });
+});
 
 // IMAGE SUBMISSION
 $(document).ready(function () {
@@ -46,7 +61,7 @@ $('#content, #research_group, #introduction, #aims_and_objectives, #background, 
 });
 
 // Submit form
-$('#message,#project,#updateproject').submit(function () {
+$('#message,#project,#updateproject,#replyForm').submit(function () {
   // Check if the content is not wrapped
   if (!isContentWrapped) {
       // Wrap content in <p></p> tags for each element separately

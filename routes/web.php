@@ -84,9 +84,14 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::post('/generate-disapproved-report', [ReportController::class, 'generateDisapprovedReport'])->name('generate.disapproved.report');
     Route::post('/generate-projects-report-xlsx', [ReportController::class, 'projectsReportExcel'])->name('projects.xlsx.report');
 
+    Route::post('/access-requests/{id}/approve', [AccessRequestController::class, 'approve'])->name('access-requests.approve');
+    Route::post('/access-requests/{id}/decline', [AccessRequestController::class, 'decline'])->name('access-requests.decline');
+
+
     // Messages
     Route::get('/messages/indexx', [MessageController::class, 'index'])->name('messages.index');
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::post('/messages/reply', [MessageController::class, 'reply'])->name('messages.reply');
     // Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
     
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.mailbox');
@@ -190,10 +195,6 @@ Route::prefix('directorOrStaff')->middleware(['auth', 'directorOrStaff', 'cache'
 // register
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
-Route::get('/contact/create', [ContactController::class, 'create'])->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-Route::get('/contact/{id}', [ContactController::class, 'show'])->name('contact.show');
-Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
 
 
 Route::get('/test-error', function () {

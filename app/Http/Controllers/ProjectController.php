@@ -159,6 +159,9 @@ class ProjectController extends Controller
     public function show($id)
     {
         try {
+            
+            // $data = Version::findOrFail($id);
+            $projMembers = Member::where('id', $id)->get();
             $tasks = Task::where('project_id', $id)->get();
             $teamMembers = Member::where('project_id', $id)->get();
             $allLineItems = LineItemBudget::all();
@@ -170,9 +173,10 @@ class ProjectController extends Controller
             $reviewersss = User::where('role', 4)->get();
             $data = Project::findOrFail($id);
             $records = Project::with('versions')->findOrFail($id);
-            $revised = Version::all();
             $call_for_proposals = CallForProposal::all();
-            // $cfp = CallForProposal::all();
+            $trackingCode = $data->tracking_code;
+            $revised = Version::where('tracking_code', $trackingCode)->get();
+
 
             $reviewerCommented = Review::where('user_id', Auth::user()->id)
             ->where('project_id', $id)
@@ -184,7 +188,7 @@ class ProjectController extends Controller
                 $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudget structure
             }
 
-            return view('submission-details.show', compact('id', 'call_for_proposals', 'revised', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
+            return view('submission-details.show', compact('id', 'projMembers', 'call_for_proposals', 'revised', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
                         'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data',
                         'reviewerCommented'));
         } catch (Exception $e) {
@@ -194,21 +198,21 @@ class ProjectController extends Controller
 
     }
 
-    // public function edit($id)
-    // {
-    //     try {
-    //         $reviewers = User::where('role', 4)->get();
-    //         $projects = Project::findOrFail($id);
-    //         $projectTeam = Member::findOrFail($id);
+    public function edit($id)
+    {
+        try {
+            $reviewers = User::where('role', 4)->get();
+            $projects = Project::findOrFail($id);
+            $projectTeam = Member::findOrFail($id);
 
-    //         $records = Project::findOrFail($id);
+            $records = Project::findOrFail($id);
 
-    //         return view('projects.edit', compact('projects', 'reviewers', 'projectTeam', 'records'));
-    //     } catch (Exception $e) {
-    //         // Handle the exception, you can log it for debugging or display an error message to the user.
-    //         return redirect()->back()->with('error', 'An error occurred while editing the project: ' . $e->getMessage());
-    //     }
-    // }
+            return view('projects.edit', compact('projects', 'reviewers', 'projectTeam', 'records'));
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return redirect()->back()->with('error', 'An error occurred while editing the project: ' . $e->getMessage());
+        }
+    }
     
     public function update(Request $request, $id)
     {

@@ -15,41 +15,42 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
-                 
-                <div class="mailbox-controls d-flex justify-content-center">
-                    <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-                        <i class="far fa-square"></i>
-                    </button>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm">
-                            <i class="far fa-trash-alt"></i>
+
+                    <div class="mailbox-controls d-flex justify-content-center">
+                        <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                            <i class="far fa-square"></i>
                         </button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-reply"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-share"></i>
+                            </button>
+                        </div>
                         <button type="button" class="btn btn-default btn-sm">
-                            <i class="fas fa-reply"></i>
-                        </button>
-                        <button type="button" class="btn btn-default btn-sm">
-                            <i class="fas fa-share"></i>
+                            <i class="fas fa-sync-alt"></i>
                         </button>
                     </div>
-                    <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                </div>
 
                     <div class="card-body table-responsive mailbox-messages">
                         <table id="example5" class="table table-hover table-striped table-bordered">
-                          <thead>
-                              <tr>
-                                  <th class="text-center">Check</th>
-                                  <!-- <th>Star</th> -->
-                                  <th class="text-center">Name</th>
-                                  <th class="text-center">Message</th>
-                                  <!-- <th>Attachment</th> -->
-                                  <th class="text-center">Created</th>
-                              </tr>
-                          </thead>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Check</th>
+                                    <!-- <th>Star</th> -->
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Message</th>
+                                    <!-- <th>Attachment</th> -->
+                                    <th class="text-center">Created</th>
+                                </tr>
+                            </thead>
                             <tbody>
-                                @foreach ($conversations as $message)
+
+                            @foreach ($conversations as $message)
                                     <tr>
                                         <td>
                                             <div class="icheck-primary d-flex justify-content-center">
@@ -88,7 +89,7 @@
                                                 @endif
                                             @endif
                                         </td>
-                                      </tr>
+                                    </tr>
                                 @endforeach
 
                             </tbody>
@@ -99,36 +100,30 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer p-0">
-                <div class="mailbox-controls d-flex justify-content-center">
-    <!-- Check all button -->
-    <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-        <i class="far fa-square"></i>
-    </button>
-    <div class="btn-group">
-        <button type="button" class="btn btn-default btn-sm">
-            <i class="far fa-trash-alt"></i>
-        </button>
-        <button type="button" class="btn btn-default btn-sm">
-            <i class="fas fa-reply"></i>
-        </button>
-        <button type="button" class="btn btn-default btn-sm">
-            <i class="fas fa-share"></i>
-        </button>
-    </div>
-    <button type="button" class="btn btn-default btn-sm">
-        <i class="fas fa-sync-alt"></i>
-    </button>
-</div>
+                    <div class="mailbox-controls d-flex justify-content-center">
+                        <!-- Check all button -->
+                        <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                            <i class="far fa-square"></i>
+                        </button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-reply"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-share"></i>
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-default btn-sm">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
 
                 </div>
             </div>
         </div>
-
-
-
-
-
-
     </div>
 
     @if (session('success'))

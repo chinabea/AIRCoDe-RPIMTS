@@ -1006,14 +1006,16 @@ class DatabaseSeeder extends Seeder
                 'date_of_access' => '2023-12-01',
                 'time_of_access' => '08:00:00',
                 'purpose_of_access' => 'Testing access request',
-                'date_approved' => null,
+                'status' => null,
+                'status_date' => null,
             ],
             [
                 'user_id' => 2,
                 'date_of_access' => '2023-12-03',
                 'time_of_access' => '10:30:00',
                 'purpose_of_access' => 'Another access request',
-                'date_approved' => null,
+                'status' => null,
+                'status_date' => null,
             ],
         ];
 

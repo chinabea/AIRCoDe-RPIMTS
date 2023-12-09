@@ -17,7 +17,8 @@ return new class extends Migration
             $table->date('date_of_access');
             $table->time('time_of_access');
             $table->text('purpose_of_access');
-            $table->date('date_approved')->nullable();
+            $table->text('status')->nullable();
+            $table->date('status_date')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

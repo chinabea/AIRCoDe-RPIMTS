@@ -70,7 +70,7 @@
             <br>
         </div>
         <h2>Status</h2>
-        <p>{{ $data->status }}</p>
+        <p>{{ $records->status }}</p>
         <br>
 
         <h2>Research Group</h2>

@@ -1,4 +1,4 @@
-<footer class="main-footer text-dark">
+<footer class="main-footer">
     <div class="float-right d-none d-sm-block">
       Created by: <b>Team Blacklist</b>
     </div>

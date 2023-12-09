@@ -35,11 +35,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($projects->count() > 0)
+                                    @php
+                                        $counter = 0;
+                                    @endphp
                                 @foreach($projects as $index => $project)
                                       @if(auth()->user()->role == 1 || auth()->user()->role == 2 || $project->user_id === auth()->user()->id)
+                                            @php
+                                                $counter++;
+                                            @endphp
                                       <tr>
-                                          <td class="align-middle">{{ $loop->iteration }}</td>
+                                          <td class="align-middle">{{ $counter }}</td>
                                           <td class="align-middle">{{ $project->tracking_code }}</td>
                                           <td class="align-middle">
                                                 @foreach ($call_for_proposals as $call_for_proposal)
@@ -72,7 +77,6 @@
                                       </tr>
                                       @endif
                                       @endforeach
-                                      @endif
                                 </tbody>
                                 <tfoot>
                                     <tr>

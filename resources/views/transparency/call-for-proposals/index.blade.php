@@ -38,10 +38,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($records->count() > 0)
+                                    @php
+                                        $counter = 0;
+                                    @endphp
                                     @foreach($records as $proposal)
+                                            @php
+                                                $counter++;
+                                            @endphp
                                     <tr>
-                                        <td class="align-middle">{{ $loop->iteration }}</td>
+                                        <td class="align-middle">{{ $counter }}</td>
                                         <td class="align-middle">{{ $proposal->title }}</td>
                                         <td class="align-middle">{{ $proposal->description }}</td>
                                         <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->start_date)->format('F j, Y') }}</td>
@@ -132,7 +137,6 @@
                                         </td>
                                     </tr>
                                     @endforeach
-                                    @endif
                                 </tbody>
                                 <tfoot>
                                     <tr>

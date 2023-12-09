@@ -26,7 +26,8 @@
 
         <div class="col-md-12">
             <div class="callout callout-info">
-            <h5><i class="fas fa-info"></i> Note: <small>This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.</small></h5>
+            <h5><i class="fas fa-info"></i> Note: <small>Submission of other relevant requirements will end after the 
+                closure of Call for Proposal you have proposed the project with.</small></h5>
                 <!-- <div class="breaking-news">
                 <marquee behavior="scroll" direction="left" class="text-warning weight-text-bold">
                     <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
@@ -853,9 +854,19 @@
                             <td>{{ $revision->version_number }}</td>
                             <td>{{ $revision->project_name }}</td>
                             <td>{{ $revision->created_at }}</td>
-                            <td><a href="{{ route('generate.revision.pdf', ['id' => $revision->id]) }}">Export</a></td>
-                            <td><a href="">View</a></td>
+                            <td>
+                                <a href="{{ route('generate.revision.pdf', ['id' => $revision->id]) }}">Export</a>
+                                <button type="button" class="preview-version btn btn-primary" data-bs-toggle="modal" data-target="#Version" 
+                                        data-backdrop="static" data-keyboard="false">
+                                    Preview
+                                </button>
+                                @include('preview.preview-version')
+                            </td>
                         </tr>
+
+
+
+                        
                     @endforeach
             </table>
         </div>
@@ -1056,9 +1067,15 @@
                       </tr>
                   </thead>
                   <tbody>
+                    @php
+                        $counter = 0;
+                    @endphp
                       @foreach ($tasks as $task)
+                        @php
+                            $counter++;
+                        @endphp
                           <tr>
-                              <td>{{ $loop->iteration }}.</td>
+                              <td>{{ $counter }}.</td>
                               <td>{{ $task->title }}</td>
                               <td>{{ $task->description }}</td>
                               <td>{{ $task->created_at }}</td>
@@ -1184,9 +1201,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($lineItems as $lineItem)
+                    @php
+                        $counter = 0;
+                    @endphp
+                    @foreach ($lineItems as $lineItem) 
+                        @php
+                            $counter++;
+                        @endphp
                         <tr>
-                            <td class="align-middle">{{ $loop->iteration }}.</td>
+                            <td class="align-middle">{{ $counter }}.</td>
                             <td>{{ $lineItem->name }}</td>
                             <td>{{ $lineItem->quantity }}</td>
                             <td>{{ $lineItem->unit_price }}</td>
@@ -1306,10 +1329,16 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
+                @php
+                    $counter = 0;
+                @endphp
                 @foreach ($files as $file)
+                    @php
+                        $counter++;
+                    @endphp
                     <tbody>
                         <tr>
-                            <td class="align-middle">{{ $loop->iteration }}.</td>
+                            <td class="align-middle">{{ $counter }}.</td>
                             <td>{{ $file->file_name }}</td>
                             <td>{{ $file->created_at }}</td>
                             <td>{{ $file->updated_at }}</td>
@@ -1655,10 +1684,16 @@
                         <th>Action</th>
                     </tr>
                 </thead>
+                @php
+                    $counter = 0;
+                @endphp
                 @foreach ($teamMembers as $member)
+                    @php
+                        $counter++;
+                    @endphp
                     <tbody>
                         <tr>
-                            <td class="align-middle">{{ $loop->iteration }}.</td>
+                            <td class="align-middle">{{ $counter }}.</td>
                             <td>{{ $member->member_name }}</td>
                             <td>{{ $member->role }}</td>
                             <td>

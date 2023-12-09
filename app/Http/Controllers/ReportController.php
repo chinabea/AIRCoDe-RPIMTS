@@ -22,7 +22,8 @@ class ReportController extends Controller
         try {
             $data = Version::findOrFail($id);
             $projMembers = Member::where('id', $id)->get();
-            $pdf = PDF::loadView('reports.version-report', ['data' => $data, 'projMembers' => $projMembers]);
+            $records = Project::with('versions')->findOrFail($id);
+            $pdf = PDF::loadView('reports.version-report', ['data' => $data, 'projMembers' => $projMembers, 'records' => $records]);
 
             $filename = Str::slug($data->project_name) . '.pdf';
 

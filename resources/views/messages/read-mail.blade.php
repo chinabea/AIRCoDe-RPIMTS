@@ -74,9 +74,40 @@
                         <hr>
                     </div>
                 @endforeach
+                 <div class="card-footer">
+                        <form id="replyForm" action="{{ route('messages.reply') }}" method="POST" class="mt-3" style="display: none;">
+                            @csrf
+                            <input type="hidden" name="recipient_id" value="{{ $message->sender_id }}">
+                            <div class="form-group">
+                                <label for="content">Your Reply:</label>
+                                <input class="form-control" id="subject" name="subject"></input>
+                                <textarea class="form-control" id="content" name="content"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-secondary" name="cancel">Cancel</button>
+                            <button type="submit" class="btn btn-success">Submit Reply</button>
+                        </form>
+
+                        <!-- <form id="replyForm" action="{{ route('messages.store') }}" method="POST" class="mt-3" style="display: none;">
+                            @csrf
+                            <input type="hidden" name="recipient_id" value="{{ $message->sender_id }}">
+                            <div class="form-group">
+                                <label for="content">Your Reply:</label>
+                                <input class="form-control" id="subject" name="subject"></input>
+                                <textarea class="form-control" id="content" name="content"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-secondary" name="cancel">Cancel</button>
+                            <button type="submit" class="btn btn-success" @if($message->sender_id == auth()->user()->id) disabled="disabled" @endif>
+                                @if($message->sender_id == auth()->user()->id) Cannot Reply to Yourself @else Submit Reply @endif
+                            </button>
+                        </form> -->
+
+
+
+                        </div>
+                        
                 <div class="card-footer">
                     <div class="float-right">
-                        <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
+                        <button type="submit" id="showReplyFormBtn" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
                         <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
                     </div>
                     <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
@@ -110,5 +141,13 @@
                 });
             });
         });
+    </script>
+    <script>
+    $(document).ready(function(){
+        $("#showReplyFormBtn").click(function(){
+        $(this).hide(); // Hide the reply button
+        $("#replyForm").show();
+        });
+    });
     </script>
 @endsection
