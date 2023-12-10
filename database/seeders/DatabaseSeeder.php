@@ -937,6 +937,7 @@ class DatabaseSeeder extends Seeder
 
         $messages = [
             [
+                'conversation_number' => '1',
                 'sender_id' => '1',
                 'recipient_id' => '2',
                 'subject' => 'Important Update',
@@ -945,6 +946,7 @@ class DatabaseSeeder extends Seeder
                     Please share your thoughts and suggestions. Looking forward to your input!',
             ],
             [
+                'conversation_number' => '2',
                 'sender_id' => '1',
                 'recipient_id' => '4',
                 'subject' => 'Feedback Needed',
@@ -953,14 +955,15 @@ class DatabaseSeeder extends Seeder
                 Your insights are crucial to our success.',
             ],
             [
+                'conversation_number' => '1',
                 'sender_id' => '2',
                 'recipient_id' => '1',
                 'subject' => 'Follow-Up on Previous Discussion',
                 'content' => 'How about grabbing a coffee next week to catch up? Its been a while since we had a 
-                    chance to chat. Id love to hear what youve been up to. Let me know your availability, and we can set something up.
-                    Cheers,',
+                    chance to chat. Id love to hear what youve been up to. Let me know your availability, and we can set something up.',
             ],
             [
+                'conversation_number' => '1',
                 'sender_id' => '2',
                 'recipient_id' => '1',
                 'subject' => 'Request for Information',
@@ -969,6 +972,7 @@ class DatabaseSeeder extends Seeder
                 the details and next steps.',
             ],
             [
+                'conversation_number' => '1',
                 'sender_id' => '2',
                 'recipient_id' => '1',
                 'subject' => 'Team Announcement',
@@ -977,6 +981,7 @@ class DatabaseSeeder extends Seeder
                  make it a memorable day!',
             ],
             [
+                'conversation_number' => '1',
                 'sender_id' => '1',
                 'recipient_id' => '2',
                 'subject' => 'Project Status',
@@ -985,6 +990,7 @@ class DatabaseSeeder extends Seeder
                  make it a memorable day!',
             ],
             [
+                'conversation_number' => '2',
                 'sender_id' => '1',
                 'recipient_id' => '4',
                 'subject' => 'Hello',

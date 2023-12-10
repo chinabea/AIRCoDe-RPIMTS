@@ -53,11 +53,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="project_image">Project Image</label>
-                        <input type="file" class="form-control" id="project_image" name="project_image">
-                    </div>
-
-                    <div class="form-group">
                         <label for="background">Background</label>
                         <textarea id="background" name="background" class="form-control"></textarea>
                     </div>

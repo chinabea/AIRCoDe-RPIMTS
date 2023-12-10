@@ -31,12 +31,6 @@
                         <div class="form-group">
                             <textarea id="content" name="content" class="form-control" style="height: 300px"></textarea>
                         </div>
-                        <div class="form-group">
-                            <div class="btn btn-default btn-file">
-                                <i class="fas fa-paperclip"></i> Attachment
-                                <input type="file" name="attachment">
-                            </div>
-                            <p class="help-block">Max. 32MB</p>
                         </div>
                         <div class="card-footer">
                             <div class="float-right">

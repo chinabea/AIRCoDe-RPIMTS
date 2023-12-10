@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     use HasFactory;
-    protected $fillable = ['sender_id', 'recipient_id', 'subject', 'content'];
+    protected $fillable = [
+        'conversation_number','sender_id', 'recipient_id', 'subject', 'content'];
 
     public function sender()
     {
@@ -29,5 +30,11 @@ class Message extends Model
                 ->where('recipient_id', $this->sender_id);
         })->latest('created_at')->first();
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'conversation_number', 'conversation_number');
+    }
+    
 
 }

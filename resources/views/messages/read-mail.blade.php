@@ -9,7 +9,7 @@
             <a href="{{ route('messages.mailbox') }}" class="btn btn-primary btn-block mb-3"><i class="fas fa-reply"></i> Back
                 to Inbox</a>
 
-            <div class="card card-primary card-outline">
+            <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Read Mail</h3>
 
@@ -77,7 +77,7 @@
                  <div class="card-footer">
                         <form id="replyForm" action="{{ route('messages.reply') }}" method="POST" class="mt-3" style="display: none;">
                             @csrf
-                            <input type="hidden" name="recipient_id" value="{{ $message->sender_id }}">
+                            <input type="hidden" name="recipient_id" value="{{ $message->recipient_id }}">
                             <div class="form-group">
                                 <label for="content">Your Reply:</label>
                                 <input class="form-control" id="subject" name="subject"></input>
@@ -86,22 +86,6 @@
                             <button type="button" class="btn btn-secondary" name="cancel">Cancel</button>
                             <button type="submit" class="btn btn-success">Submit Reply</button>
                         </form>
-
-                        <!-- <form id="replyForm" action="{{ route('messages.store') }}" method="POST" class="mt-3" style="display: none;">
-                            @csrf
-                            <input type="hidden" name="recipient_id" value="{{ $message->sender_id }}">
-                            <div class="form-group">
-                                <label for="content">Your Reply:</label>
-                                <input class="form-control" id="subject" name="subject"></input>
-                                <textarea class="form-control" id="content" name="content"></textarea>
-                            </div>
-                            <button type="button" class="btn btn-secondary" name="cancel">Cancel</button>
-                            <button type="submit" class="btn btn-success" @if($message->sender_id == auth()->user()->id) disabled="disabled" @endif>
-                                @if($message->sender_id == auth()->user()->id) Cannot Reply to Yourself @else Submit Reply @endif
-                            </button>
-                        </form> -->
-
-
 
                         </div>
                         
@@ -150,4 +134,22 @@
         });
     });
     </script>
+    
+    @if (session('success'))
+        <script>
+            toastr.success('{{ session('success') }}');
+        </script>
+    @elseif(session('delete'))
+        <script>
+            toastr.delete('{{ session('delete') }}');
+        </script>
+    @elseif(session('message'))
+        <script>
+            toastr.message('{{ session('message') }}');
+        </script>
+    @elseif(session('error'))
+        <script>
+            toastr.error('{{ session('error') }}');
+        </script>
+    @endif
 @endsection

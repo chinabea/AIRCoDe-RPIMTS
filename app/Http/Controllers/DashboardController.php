@@ -39,6 +39,7 @@ class DashboardController extends Controller
             $approvedCount = Project::where('status', 'Approved')->where('user_id', $authenticatedUserId)->count();
             $deferredCount = Project::where('status', 'Deferred')->where('user_id', $authenticatedUserId)->count();
             $disapprovedCount = Project::where('status', 'Disapproved')->where('user_id', $authenticatedUserId)->count();
+            $accessRequestCount = AccessRequest::where('user_id', $authenticatedUserId)->count();
 
             $deadlines = Review::all();
             $exceededDeadlines = $deadlines->filter(function ($deadline) use ($authenticatedUserId) {
@@ -79,7 +80,7 @@ class DashboardController extends Controller
             $countOfReviewsWithTwoComments = $staffForReview->count();
 
 
-            return view('dashboard', compact('allAccessRequestCount','allCallforProposalCount','records','allDisapprovedCount','allDeferredCount','allApprovedCount','allForRevisionCount','allUnderEvaluationCount','allUsersCount','allProjectsCount','projectCount','draftCount','underEvaluationCount','underEvaluationCount',
+            return view('dashboard', compact('accessRequestCount','allAccessRequestCount','allCallforProposalCount','records','allDisapprovedCount','allDeferredCount','allApprovedCount','allForRevisionCount','allUnderEvaluationCount','allUsersCount','allProjectsCount','projectCount','draftCount','underEvaluationCount','underEvaluationCount',
                                     'forRevisionCount','approvedCount','deferredCount','disapprovedCount','exceededDeadlines','countOfUnreviewedProjects',
                                     'assignedAndReviewedCount','countOfReviewsWithTwoComments'));
         } catch (Exception $e) {

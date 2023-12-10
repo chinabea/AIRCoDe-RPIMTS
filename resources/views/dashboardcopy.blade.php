@@ -644,14 +644,12 @@
 
                 <div class="info-box-content">
                 <span class="info-box-text">Access Request</span>
-                <span class="info-box-number">{{ $disapprovedCount }}</span>
+                <span class="info-box-number">{{ $accessRequestCount }}</span>
                 </div>
             </div>
         </div>
-
-</div>
-
-<div class="container">
+      </div>
+      <div class="container">
         <h2 class="h3 mb-0 text-gray-800">Call for Proposals</h2>
         <br>
     <div class="card shadow mb-4">

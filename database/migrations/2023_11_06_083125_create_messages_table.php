@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            // $table->integer('conversation_number'); 
+            $table->integer('conversation_number');
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('recipient_id');
             $table->text('subject');
