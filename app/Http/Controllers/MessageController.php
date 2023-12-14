@@ -333,7 +333,7 @@ class MessageController extends Controller
     public function store(Request $request)
     {
       
-        dd($request->all());
+        // dd($request->all());
         try {
             $user = auth()->user();
     

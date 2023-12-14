@@ -34,12 +34,13 @@ return [
     'notifications' => [
         'default' => 'database',
     ],
-    
+
     'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_REDIRECT'),
+        'client_id' => env('GOOGLE_CLIENT_ID', '685700285805-4lm3fn6bfa6cdjblr3jroalv38elkpic.apps.googleusercontent.com'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET', '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'),
+        'redirect' => env('GOOGLE_REDIRECT_URI', 'https://rpimts.wuaze.com/login/google/callback'),
     ],
+    
     
     
 

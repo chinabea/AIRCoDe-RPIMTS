@@ -177,6 +177,7 @@ class ProjectController extends Controller
             $trackingCode = $data->tracking_code;
             $revised = Version::where('tracking_code', $trackingCode)->get();
 
+            $assignedReviewers = Review::where('project_id', $id)->with('reviewer')->get();
 
             $reviewerCommented = Review::where('user_id', Auth::user()->id)
             ->where('project_id', $id)
@@ -190,7 +191,7 @@ class ProjectController extends Controller
 
             return view('submission-details.show', compact('id', 'projMembers', 'call_for_proposals', 'revised', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
                         'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data',
-                        'reviewerCommented'));
+                        'reviewerCommented', 'assignedReviewers'));
         } catch (Exception $e) {
             // Handle the exception, you can log it for debugging or display an error message to the user.
             return redirect()->back()->with('error', 'An error occurred while showing the project: ' . $e->getMessage());

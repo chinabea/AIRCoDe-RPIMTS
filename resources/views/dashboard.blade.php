@@ -28,486 +28,413 @@
 
 @if($role === 1)
 <div class="content-wrapper">
-    <section class="content-header">
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-purple">
+              <div class="inner">
+                <h3>{{ $allProjectsCount }}</h3>
+
+                <p>Submitted Projects</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <a href="{{ route('projects') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{ $allUnderEvaluationCount }}</h3>
+
+                <p>Under Evaluation</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-hourglass-half nav-icon"></i>
+              </div>
+              <a href="{{ route('status.under-evaluation') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ $allForRevisionCount }}</h3>
+
+                <p>For Revision</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-edit nav-icon"></i>
+              </div>
+              <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>{{ $allDeferredCount }}</h3>
+
+                <p>Deferred</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-pause-circle nav-icon"></i>
+              </div>
+              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ $allApprovedCount }}</h3>
+
+                <p>Approved</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{ $allDisapprovedCount }}</h3>
+
+                <p>Disapproved</p>
+              </div>
+              <div class="icon">
+                <i class="far fa-times-circle nav-icon"></i>
+              </div>
+              <a href="{{ route('status.disapproved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-orange">
+              <div class="inner">
+                <h3>{{ $allCallforProposalCount }}</h3>
+
+                <p>Call for Proposals NA</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-edit nav-icon"></i>
+              </div>
+              <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-pink">
+              <div class="inner">
+                <h3>{{ $allAccessRequestCount }}</h3>
+
+                <p>Access Requests</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fas fa-key"></i>
+              </div>
+              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-purple">
+              <div class="inner">
+                <h3>{{ $allUsersCount }}</h3>
+
+                <p>Users</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <a href="{{ route('users') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-    <div class="container">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h3 class="h3 mb-0 text-gray-800">Dashboard</h3>
-
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-        </div>
-    <div class="row">
-        <div class="col-lg-3 col-6">
-          <div class="small-box bg-purple color-palette">
-            <div class="inner">
-              <h3>{{ $allProjectsCount }}</h3>
-
-              <p>Submitted Projects</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-book"></i>
-            </div>
-            <a href="{{ route('status.under-evaluation') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <div class="col-lg-3 col-6">
-          <div class="small-box bg-info">
-            <div class="inner">
-              <h3>{{ $allUnderEvaluationCount }}</h3>
-
-              <p>Under Evaluation</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-hourglass-half nav-icon"></i>
-            </div>
-            <a href="{{ route('status.under-evaluation') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h3>{{ $allForRevisionCount }}</h3>
-
-              <p>For Revision</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-edit nav-icon"></i>
-            </div>
-            <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-secondary">
-            <div class="inner">
-              <h3>{{ $allDeferredCount }}</h3>
-
-              <p>Deferred</p>
-            </div>
-            <div class="icon">
-              <i class="far fa-pause-circle nav-icon"></i>
-            </div>
-            <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-          <div class="inner">
-            <h3>{{ $allApprovedCount }}</h3>
-
-            <p>Approved</p>
-          </div>
-          <div class="icon">
-            <i class="far fa-check-circle nav-icon"></i>
-          </div>
-          <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-          <div class="inner">
-            <h3>{{ $allDisapprovedCount }}</h3>
-
-            <p>Disapproved</p>
-          </div>
-          <div class="icon">
-            <i class="far fa-times-circle nav-icon"></i>
-          </div>
-          <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-orange color-palette">
-          <div class="inner">
-            <h3>{{ $allCallforProposalCount }}</h3>
-
-            <p>Call for Proposals</p>
-          </div>
-          <div class="icon">
-            <i class="nav-icon fas fa-file-signature"></i>
-          </div>
-          <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-pink color-palette">
-          <div class="inner">
-            <h3>{{ $allAccessRequestCount }}</h3>
-
-            <p>Access Requests</p>
-          </div>
-          <div class="icon">
-            <i class="nav-icon fas fa-key"></i>
-          </div>
-          <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-    </div>
-
-    </div>
-    </div>
+  </div>
 
 @elseif($role === 2)
+
 <div class="content-wrapper">
-    <section class="content-header">
-    </section>
-    <div class="container">
-        <h3 class="h3 mb-0 text-gray-800">Dashboard</h3>
-        <br>
-     <div class="row">
-
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-maroon elevation-1"><i class="fas fa-users"></i></span>
-
-                <div class="info-box-content">
-                <span class="info-box-text">Users</span>
-                <span class="info-box-number">{{ $allUsersCount }}</span>
-                </div>
-            </div>
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            </ol>
+          </div>
         </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-              <span class="info-box-icon bg-purple elevation-1"><i class="fas fa-book"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Submitted Projects</span>
-                <span class="info-box-number">
-                {{ $allProjectsCount }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-hourglass-half"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Under Evaluation</span>
-                <span class="info-box-number">{{ $allUnderEvaluationCount }}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="clearfix hidden-md-up"></div>
-
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-edit"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">For Review Summary</span>
-                <span class="info-box-number">{{ $countOfReviewsWithTwoComments }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Approved</span>
-                <span class="info-box-number">{{ $allApprovedCount }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-              <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-pause-circle"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Deferred</span>
-                <span class="info-box-number">
-                {{ $allDeferredCount }}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- fix for small devices only -->
-          <div class="clearfix hidden-md-up"></div>
-
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-times-circle"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Disapproved</span>
-                <span class="info-box-number">{{ $allDisapprovedCount }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-navy elevation-1"><i class="fas fa-users"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
-              </div>
-            </div>
-          </div>
+      </div>
     </div>
-    <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title">Monthly Recap Report</h5>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-purple">
+              <div class="inner">
+                <h3>{{ $allProjectsCount }}</h3>
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                      <i class="fas fa-wrench"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                      <a href="#" class="dropdown-item">Action</a>
-                      <a href="#" class="dropdown-item">Another action</a>
-                      <a href="#" class="dropdown-item">Something else here</a>
-                      <a class="dropdown-divider"></a>
-                      <a href="#" class="dropdown-item">Separated link</a>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
+                <p>Submitted Projects</p>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-8">
-                    <p class="text-center">
-                      <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                    </p>
-
-                    <div class="chart">
-                      <!-- Sales Chart Canvas -->
-                      <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
-                    </div>
-                    <!-- /.chart-responsive -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-md-4">
-                    <p class="text-center">
-                      <strong>Goal Completion</strong>
-                    </p>
-
-                    <div class="progress-group">
-                      Add Products to Cart
-                      <span class="float-right"><b>160</b>/200</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-primary" style="width: 80%"></div>
-                      </div>
-                    </div>
-                    <!-- /.progress-group -->
-
-                    <div class="progress-group">
-                      Complete Purchase
-                      <span class="float-right"><b>310</b>/400</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-danger" style="width: 75%"></div>
-                      </div>
-                    </div>
-
-                    <!-- /.progress-group -->
-                    <div class="progress-group">
-                      <span class="progress-text">Visit Premium Page</span>
-                      <span class="float-right"><b>480</b>/800</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-success" style="width: 60%"></div>
-                      </div>
-                    </div>
-
-                    <!-- /.progress-group -->
-                    <div class="progress-group">
-                      Send Inquiries
-                      <span class="float-right"><b>250</b>/500</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-warning" style="width: 50%"></div>
-                      </div>
-                    </div>
-                    <!-- /.progress-group -->
-                  </div>
-                  <!-- /.col -->
-                </div>
-                <!-- /.row -->
+              <div class="icon">
+                <i class="fas fa-book"></i>
               </div>
-              <!-- ./card-body -->
-              <div class="card-footer">
-                <div class="row">
-                  <div class="col-sm-3 col-6">
-                    <div class="description-block border-right">
-                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                      <h5 class="description-header">$35,210.43</h5>
-                      <span class="description-text">TOTAL REVENUE</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-sm-3 col-6">
-                    <div class="description-block border-right">
-                      <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                      <h5 class="description-header">$10,390.90</h5>
-                      <span class="description-text">TOTAL COST</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-sm-3 col-6">
-                    <div class="description-block border-right">
-                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                      <h5 class="description-header">$24,813.53</h5>
-                      <span class="description-text">TOTAL PROFIT</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-sm-3 col-6">
-                    <div class="description-block">
-                      <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
-                      <h5 class="description-header">1200</h5>
-                      <span class="description-text">GOAL COMPLETIONS</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                </div>
-                <!-- /.row -->
-              </div>
-              <!-- /.card-footer -->
+              <a href="{{ route('projects') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
-        </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{ $allUnderEvaluationCount }}</h3>
 
+                <p>Under Evaluation</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-hourglass-half nav-icon"></i>
+              </div>
+              <a href="{{ route('status.under-evaluation') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ $countOfReviewsWithTwoComments }}</h3>
+
+                <p>For Review Summary</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-edit nav-icon"></i>
+              </div>
+              <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>{{ $allDeferredCount }}</h3>
+
+                <p>Deferred</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-pause-circle nav-icon"></i>
+              </div>
+              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ $allApprovedCount }}</h3>
+
+                <p>Approved</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{ $allDisapprovedCount }}</h3>
+
+                <p>Disapproved</p>
+              </div>
+              <div class="icon">
+                <i class="far fa-times-circle nav-icon"></i>
+              </div>
+              <a href="{{ route('status.disapproved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-pink">
+              <div class="inner">
+                <h3>{{ $allAccessRequestCount }}</h3>
+
+                <p>Access Requests</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fas fa-key"></i>
+              </div>
+              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-fuchsia">
+              <div class="inner">
+                <h3>{{ $allUsersCount }}</h3>
+
+                <p>Users</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <a href="{{ route('users') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
 @elseif($role === 3)
 
+
 <div class="content-wrapper">
-    <section class="content-header">
-    </section>
-    <div class="container">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h3 class="h3 mb-0 text-gray-800">Dashboard</h3>
-
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            </ol>
+          </div>
         </div>
-     <div class="row">
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-                <span class="info-box-icon bg-purple elevation-1"><i class="fas fa-book"></i></span>
+      </div>
+    </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-purple">
+              <div class="inner">
+                <h3>{{ $projectCount }}</h3>
 
-                <div class="info-box-content">
-                <span class="info-box-text">Submitted Projects</span>
-                <span class="info-box-number">
-                {{ $projectCount }}
-                </span>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-                <span class="info-box-icon bg-maroon elevation-1"><i class="fas fa-file-alt"></i></span>
-
-                <div class="info-box-content">
-                <span class="info-box-text">Draft</span>
-                <span class="info-box-number">
-                {{ $draftCount }}
-                </span>
-                </div>
-            </div>
-        </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-hourglass-half"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Under Evaluation</span>
-                <span class="info-box-number">{{ $underEvaluationCount }}</span>
+                <p>Submitted Projects</p>
               </div>
+              <div class="icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <a href="{{ route('projects') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-maroon">
+              <div class="inner">
+                <h3>{{ $draftCount }}</h3>
 
-        <div class="clearfix hidden-md-up"></div>
-
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-edit"></i></span>
-
-                <div class="info-box-content">
-                <span class="info-box-text">For Revision</span>
-                <span class="info-box-number">{{ $forRevisionCount }}</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Approved</span>
-                <span class="info-box-number">{{ $approvedCount }}</span>
+                <p>Draft NA</p>
               </div>
+              <div class="icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <a href="{{ route('projects') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-                <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-pause-circle"></i></span>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{ $underEvaluationCount }}</h3>
 
-                <div class="info-box-content">
-                <span class="info-box-text">Deferred</span>
-                <span class="info-box-number">
-                {{ $deferredCount }}
-                </span>
-                </div>
+                <p>Under Evaluation</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-hourglass-half nav-icon"></i>
+              </div>
+              <a href="{{ route('status.under-evaluation') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ $forRevisionCount }}</h3>
 
-        <!-- fix for small devices only -->
-        <div class="clearfix hidden-md-up"></div>
-
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-times-circle"></i></span>
-
-                <div class="info-box-content">
-                <span class="info-box-text">Disapproved</span>
-                <span class="info-box-number">{{ $disapprovedCount }}</span>
-                </div>
+                <p>For Revision</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-edit nav-icon"></i>
+              </div>
+              <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ $approvedCount }}</h3>
 
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-navy elevation-1"><i class="fas fa-times-circle"></i></span>
-
-                <div class="info-box-content">
-                <span class="info-box-text">Access Request</span>
-                <span class="info-box-number">{{ $disapprovedCount }}</span>
-                </div>
+                <p>Approved</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{ $disapprovedCount }}</h3>
+
+                <p>Disapproved</p>
+              </div>
+              <div class="icon">
+                <i class="far fa-times-circle nav-icon"></i>
+              </div>
+              <a href="{{ route('status.disapproved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-pink">
+              <div class="inner">
+                <h3>{{ $allAccessRequestCount }}</h3>
+
+                <p>Access Requests NA</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fas fa-key"></i>
+              </div>
+              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-fuchsia">
+              <div class="inner">
+                <h3>{{ $allUsersCount }}</h3>
+
+                <p>Users</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <a href="{{ route('users') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
         </div>
-
-</div>
-
-<div class="container">
-        <h2 class="h3 mb-0 text-gray-800">Call for Proposals</h2>
-        <br>
-    <div class="card shadow mb-4">
-        <div class="card-body">
-        <div class="table-responsive">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                Call for Proposals
+              </div>
+              <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover text-center table-sm">
                   <thead>
                       <tr>
@@ -521,44 +448,202 @@
                       </tr>
                   </thead>
                   <tbody>
-                        @if($records->count() > 0)
-                        @foreach($records as $proposal)
-                        <tr>
-                        <td class="align-middle">{{ $loop->iteration }}</td>
-                        <td class="align-middle">{{ $proposal->title }}</td>
-                        <td class="align-middle">{{ $proposal->description }}</td>
-                        <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->start_date)->format('F j, Y') }}</td>
-                        <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->end_date)->format('F j, Y') }}</td>
-                        <td class="align-middle">
-                            @php
-                                $currentDate = now();
-                                $startDate = \Carbon\Carbon::parse($proposal->start_date);
-                                $endDate = \Carbon\Carbon::parse($proposal->end_date);
-
-                                if ($currentDate >= $startDate && $currentDate <= $endDate) {
-                                    echo 'Open';
-                                } elseif ($currentDate < $startDate) {
-                                    echo 'Opening Soon';
-                                } else {
-                                    echo 'Closed';
-                                }
-                            @endphp
-                        </td>
-                        <td class="align-middle">{{ $proposal->remarks }}</td>
-                        </tr>
-                        @endforeach
-                        @endif
+                      @if ($records->count() > 0)
+                          @foreach ($records as $proposal)
+                              <tr>
+                                  <td class="align-middle">{{ $loop->iteration }}</td>
+                                  <td class="align-middle">{{ $proposal->title }}</td>
+                                  <td class="align-middle">{{ $proposal->description }}</td>
+                                  <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->start_date)->format('F j, Y') }}</td>
+                                  <td class="align-middle">{{ \Carbon\Carbon::parse($proposal->end_date)->format('F j, Y') }}</td>
+                                  <td class="align-middle">
+                                      @php
+                                          $currentDate = now();
+                                          $startDate = \Carbon\Carbon::parse($proposal->start_date);
+                                          $endDate = \Carbon\Carbon::parse($proposal->end_date);
+                                          
+                                          if ($currentDate >= $startDate && $currentDate <= $endDate) {
+                                              echo 'Open';
+                                          } elseif ($currentDate < $startDate) {
+                                              echo 'Opening Soon';
+                                          } else {
+                                              echo 'Closed';
+                                          }
+                                      @endphp
+                                  </td>
+                                  <td class="align-middle">{{ $proposal->remarks }}</td>
+                              </tr>
+                          @endforeach
+                      @endif
                   </tbody>
-              </table>
+                </table>
+              </div>
             </div>
+          </div>
         </div>
     </div>
+  </section>
 </div>
 
 
-
 @elseif($role === 4)
+
 <div class="content-wrapper">
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-purple">
+              <div class="inner">
+                <h3>{{ $allProjectsCount }}</h3>
+
+                <p>Submitted Projects</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <a href="{{ route('projects') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{ $allUnderEvaluationCount }}</h3>
+
+                <p>Under Evaluation</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-hourglass-half nav-icon"></i>
+              </div>
+              <a href="{{ route('status.under-evaluation') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ $countOfReviewsWithTwoComments }}</h3>
+
+                <p>For Review Summary</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-edit nav-icon"></i>
+              </div>
+              <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>{{ $allDeferredCount }}</h3>
+
+                <p>Deferred</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-pause-circle nav-icon"></i>
+              </div>
+              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ $allApprovedCount }}</h3>
+
+                <p>Approved</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{ $allDisapprovedCount }}</h3>
+
+                <p>Disapproved</p>
+              </div>
+              <div class="icon">
+                <i class="far fa-times-circle nav-icon"></i>
+              </div>
+              <a href="{{ route('status.disapproved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-pink">
+              <div class="inner">
+                <h3>{{ $allAccessRequestCount }}</h3>
+
+                <p>Access Requests</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fas fa-key"></i>
+              </div>
+              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-fuchsia">
+              <div class="inner">
+                <h3>{{ $allUsersCount }}</h3>
+
+                <p>Users</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <a href="{{ route('users') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="content-wrapper">
     <section class="content-header">
     </section>
     <div class="container">
@@ -586,29 +671,6 @@
             </div>
           </div>
 
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
-                <span class="info-box-number">
-                  10
-                  <small>%</small>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
-              </div>
-            </div>
-          </div>
 
           <div class="clearfix hidden-md-up"></div>
 
@@ -641,7 +703,7 @@
             </div>
         @endif
     @endforeach
-</div>
+</div> -->
 
 
 

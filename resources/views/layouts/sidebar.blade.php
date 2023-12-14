@@ -41,7 +41,7 @@
                         class="nav-link {{ Route::currentRouteName() == 'projects' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
-                            Submitted Projects
+                            Projects
                         </p>
                     </a>
                 </li>
@@ -102,13 +102,13 @@
                         <p>Access Request</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('reports') }}"
                         class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-trash"></i>
                         <p> Archived</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-header">SETTINGS</li>
                 <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">
@@ -141,12 +141,6 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('messages.mailbox') }}" class="nav-link">
-                        <i class="nav-icon fas fa-comments"></i>
-                        <p>Messages</p>
-                    </a>
-                </li>
 
                 <li class="nav-header">MAIN MENU</li>
                 <li class="nav-item">
@@ -163,7 +157,7 @@
                         class="nav-link {{ Route::currentRouteName() == 'projects' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
-                            Submitted Projects
+                            Projects
                         </p>
                     </a>
                 </li>
@@ -202,11 +196,18 @@
                         <p>Disapproved</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('reports') }}"
                         class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-trash"></i>
                         <p> Archived</p>
+                    </a>
+                </li> -->
+                <li class="nav-header">TRANSPARENCY</li>
+                <li class="nav-item">
+                    <a href="{{ route('messages.mailbox') }}" class="nav-link">
+                        <i class="nav-icon fas fa-comments"></i>
+                        <p>Messages</p>
                     </a>
                 </li>
                 <li class="nav-header">SETTINGS</li>
@@ -257,7 +258,7 @@
                     <a href="{{ route('projects') }}"
                         class="nav-link {{ Route::currentRouteName() == 'projects' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
-                        <p>Submitted Projects</p>
+                        <p>Projects</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -325,13 +326,13 @@
                     </a>
                 </li>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('reports') }}"
                         class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-trash"></i>
                         <p> Archived</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-header">SETTINGS</li>
                 <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">
@@ -395,13 +396,13 @@
                     <p> Reviewed Projects</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="{{ route('reports') }}"
                     class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-trash"></i>
                     <p> Archived Projects</p>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-header">TRANSPARENCY</li>
             <li class="nav-item">
                 <a href="{{ route('messages.mailbox') }}" class="nav-link">

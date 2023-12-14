@@ -591,13 +591,17 @@
                                         <label for="other_rsc">Other Comments</label>
                                         @if ($reviewerCommented > 0)
                                             @foreach ($revs as $review)
-                                                @if ($review->user->id === Auth::user()->id && $review->other_comments !== null && $review->project_id === $records->id)
-                                                    <textarea id="other_comments" name="other_comments" class="form-control" rows="1" readonly>{{ $review->other_comments }}</textarea>
-                                                @endif
-                                                @if ($review->user->id === Auth::user()->id && $review->other_comments === null && $review->project_id === $records->id)
-                                                    <textarea id="other_comments" name="other_comments" class="form-control" rows="1"></textarea>
+                                                @if (
+                                                    $review->user->id === Auth::user()->id &&
+                                                        $review->other_comments !== null &&
+                                                        $review->project_id === $records->id)
+                                                    <textarea id="other_comments" name="other_comments" class="form-control"
+                                                        rows="1" readonly>{{ $review->other_comments }}</textarea>
                                                 @endif
                                             @endforeach
+                                        @else
+                                            <textarea id="other_comments" name="other_comments" class="form-control"
+                                                rows="1"></textarea>
                                         @endif
                                     </div>
 
@@ -605,7 +609,11 @@
                                         <label for="review_decision">Review Decision</label>
                                         @if ($reviewerCommented > 0)
                                             @foreach ($revs as $review)
-                                                @if ($review->user->id === Auth::user()->id && $review->review_decision !== null && $review->project_id === $records->id)
+                                                @if (
+                                                    $review->user->id === Auth::user()->id &&
+                                                        $review->review_decision !== null &&
+                                                        $review->project_id === $records->id)
+                                                        
                                                     <select class="form-control" id="review_decision"
                                                         name="review_decision" required
                                                         @if ($reviewerCommented) disabled @endif>
@@ -621,17 +629,16 @@
                                                         </option>
                                                     </select>
                                                 @endif
-                                                @if ($review->user->id === Auth::user()->id && $review->review_decision === null && $review->project_id === $records->id)
-                                                    <select class="form-control" id="review_decision"
-                                                        name="review_decision" required>
-                                                        <option value="">Select</option>
-                                                        <option value="Accepted">Accepted</option>
-                                                        <option value="Accepted with Revision">Accepted with Revision
-                                                        </option>
-                                                        <option value="Rejected">Rejected</option>
-                                                    </select>
-                                                @endif
                                             @endforeach
+                                        @else
+                                            <select class="form-control" id="review_decision"
+                                                name="review_decision" required>
+                                                <option value="">Select</option>
+                                                <option value="Accepted">Accepted</option>
+                                                <option value="Accepted with Revision">Accepted with Revision
+                                                </option>
+                                                <option value="Rejected">Rejected</option>
+                                            </select>
                                         @endif
                                     </div>
                                     <br>
@@ -849,6 +856,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
+                <tbody>
                     @foreach ($revised as $revision)
                         <tr>
                             <td>{{ $revision->version_number }}</td>
@@ -863,17 +871,14 @@
                                 @include('preview.preview-version')
                             </td>
                         </tr>
-
-
-
-                        
+                </tbody> 
                     @endforeach
             </table>
         </div>
 
         <div id="actions-form" class="mt-4" style="display: none;">
             @if (Auth::user()->role == 3 && $records->status === 'For Revision')
-                <form action="{{ route('projects.edit', $records->id) }}" method="POST" id="updateproject">
+                <form action="{{ route('projects.update', $records->id) }}" method="POST" id="updateproject">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="user_id" value="{{ Auth()->user()->id }}">
@@ -943,7 +948,7 @@
             @endif
         </div>
 
-        <div id="details-form" class="mt-4">
+        <div id="details-form" class="mt-4" style="display: none;">
       <div class="card">
           <div class="card-header">
               <h3 class="card-title my-2"><i class="fas fa-users"></i> Details</h3>
@@ -1777,8 +1782,23 @@
             <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#ReviewerModal"
                 data-backdrop="static" data-keyboard="false">Select Reviewer</button>
             @include('submission-details.reviews.select-reviewer')
-
         </div>
+        <table id="example4" class="table table-hover table-bordered table-sm text-center">
+            <thead>
+                <tr>
+                    <th>Project Title</th>
+                    <th>Reviewer</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($assignedReviewers as $review)
+                    <tr>
+                        <td>Title</td>
+                        <td>{{ $review->reviewer->name }}</td>
+                    </tr>
+            </tbody> 
+                @endforeach
+        </table>
 
     </div>
     </div>
@@ -1799,6 +1819,7 @@
             }
         }
     </script>
+    
 
 
 @endsection

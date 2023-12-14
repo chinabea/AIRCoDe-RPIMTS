@@ -28,7 +28,7 @@
                       <th>Date of Access</th>
                       <th>Time of Access</th>
                       <th>Purpose of Access</th>
-                      <th>Date Approved</th>
+                      <th>Status</th>
                       <th>Action(s)</th>
                     </tr>
                     </thead>
@@ -57,7 +57,7 @@
                                 <td class="align-middle">{{ \Carbon\Carbon::parse($requests->date_of_access)->format('F j, Y') }}</td>
                                 <td class="align-middle">{{ \Carbon\Carbon::parse($requests->time_of_access)->format('h:i A') }}</td>
                                 <td class="align-middle">{{ $requests->purpose_of_access }}</td>
-                                <td class="align-middle">{{ $requests->date_approved }}</td>
+                                <td class="align-middle">{{ $requests->status }}</td>
                                 <td class="align-middle">
 
                                   <div class="modal fade" id="AccessRequestShow{{ $requests->id }}" tabindex="-1" role="dialog" aria-labelledby="AccessRequestShow{{ $requests->id }}Label" aria-hidden="true">
@@ -98,17 +98,10 @@
                                       </div>
                                   </div>
                                   @if(Auth::check() && (Auth::user()->role == 1 || Auth::user()->role == 2))
-                                  <a href="#" data-id="" class="btn btn-success approve-btn">Approve</a>
+                                  <!-- <a href="#" data-id="{{ $requests->id }}" class="btn btn-success approve-btn">Approve</a>
+                                  <a href="#" data-id="{{ $requests->id }}" class="btn btn-danger decline-btn">Decline</a> -->
 
-
-                                      <a href="" class="btn btn-danger">Decline</a>
                                   @endif 
-
-
-
-
-
-
 
 
 
@@ -166,12 +159,12 @@
                                                       <input type="text" class="form-control" id="purpose_of_access" name="purpose_of_access" value="{{ $requests->purpose_of_access }}" required>
                                                       <br>
                                                       @if(Auth::user()->role == 1 || Auth::user()->role == 2)
-                                                      <label for="date">Date Approved</label>
-                                                      <input type="date" class="form-control" id="date_approved" name="date_approved" value="{{ $requests->date_approved }}">
+                                                      <label for="text">Status</label>
+                                                      <input type="text" class="form-control" id="status" name="status" value="{{ $requests->status }}">
                                                       <br>
-                                                      @error('date_approved')
+                                                      <!-- @error('date_approved')
                                                       <div class="alert alert-danger">{{ $message }}</div>
-                                                      @enderror
+                                                      @enderror -->
                                                       @endif
 
                                                       <div class="modal-footer">
@@ -218,5 +211,50 @@
         toastr.error('{{ session('error') }}');
     </script>
 @endif
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.approve-btn').click(function (e) {
+            e.preventDefault();
+            var accessRequestId = $(this).data('id');
+
+            if (confirm('Are you sure you want to approve this access request?')) {
+                $.post('/access-request/' + accessRequestId + '/approve', function (data) {
+                    alert(data.message);
+                    // Optionally, you can update the UI or redirect to another page
+                });
+            }
+        });
+
+        $('.decline-btn').click(function (e) {
+            e.preventDefault();
+            var accessRequestId = $(this).data('id');
+
+            if (confirm('Are you sure you want to decline this access request?')) {
+                $.post('/access-request/' + accessRequestId + '/decline', function (data) {
+                    alert(data.message);
+                    // Optionally, you can update the UI or redirect to another page
+                });
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @endsection

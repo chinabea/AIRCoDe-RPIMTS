@@ -57,6 +57,12 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::delete('/delete-users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/submission-details/show/{id}', [ProjectController::class, 'show'])->name('submission-details.show');
     Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
+    // Route::get('/access-requests/addStatus', [AccessRequestController::class, 'addStatus'])->name('access-requests.addStatus');
+    // Route::post('/access-request/{id}/approve', [AccessRequestController::class, 'approve'])->name('access-request.approve');
+    // Route::post('/access-request/{id}/decline', [AccessRequestController::class, 'decline'])->name('access-request.decline');
+    Route::get('/access-request/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.access-requests.edit');
+    Route::put('/access-request/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.access-requests.update');
+
     Route::get('/review/review-and-summarize/{id}', [ReviewController::class, 'show'])->name('review.for-review-project');
     Route::get('/review/for-reviews', [ReviewController::class, 'forReviews'])->name('submission-details.reviews.for-reviews');
 
@@ -146,8 +152,6 @@ Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(
     Route::get('/access-request/create', [AccessRequestController::class, 'create'])->name('transparency.access-requests.create');
     Route::post('/access-request/store', [AccessRequestController::class, 'store'])->name('transparency.access-requests.store');
     Route::get('/access-request/show/{id}', [AccessRequestController::class, 'show'])->name('transparency.access-requests.show');
-    Route::get('/access-request/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.access-requests.edit');
-    Route::put('/access-request/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.access-requests.update');
 
     Route::get('/project/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/project/store', [ProjectController::class, 'store'])->name('projects.store');
