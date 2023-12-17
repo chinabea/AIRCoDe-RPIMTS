@@ -356,7 +356,6 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
             data-accordion="false">
-            <li class="nav-header">MAIN MENU</li>
             <li class="nav-item">
                 <a href="{{ route('reviewer.home') }}"
                     class="nav-link {{ Route::currentRouteName() == 'reviewer.home' ? 'active' : '' }}">
@@ -364,7 +363,7 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-header">FOR REVIEW</li>
+            <!-- <li class="nav-header">FOR REVIEW</li>
             @if (!empty($revs))
                 @foreach ($revs as $rev)
                     @if ($rev->user_id === Auth::user()->id)
@@ -380,20 +379,20 @@
                 @endforeach
             @else
                 <p>No items assigned for review</p>
-            @endif
+            @endif -->
             <li class="nav-header">MAIN MENU</li>
             <li class="nav-item">
                 <a href="{{ route('reports') }}"
                     class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-edit"></i>
-                    <p> For Review Projects</p>
+                    <p> For Review</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('reports') }}"
                     class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-check-circle"></i>
-                    <p> Reviewed Projects</p>
+                    <p> Reviewed</p>
                 </a>
             </li>
             <!-- <li class="nav-item">

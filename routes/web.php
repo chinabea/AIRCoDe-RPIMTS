@@ -63,6 +63,7 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/access-request/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.access-requests.edit');
     Route::put('/access-request/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.access-requests.update');
 
+    Route::get('/review.for-review-projects', [ReviewController::class, 'assignedToReview'])->name('review.for-review-projects');
     Route::get('/review/review-and-summarize/{id}', [ReviewController::class, 'show'])->name('review.for-review-project');
     Route::get('/review/for-reviews', [ReviewController::class, 'forReviews'])->name('submission-details.reviews.for-reviews');
 

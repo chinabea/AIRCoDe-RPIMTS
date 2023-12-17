@@ -243,6 +243,14 @@ class ProjectController extends Controller
     
             // Update the project record with the new values from the form
             $record->project_name = $request->input('project_name');
+            if ($request->has('draft_submit')) {
+                // Set the project status as 'draft'
+                $record->status = 'draft';
+            } else {
+                // Set the project status as 'under evaluation' for the regular submission
+                $record->status = 'under evaluation';
+
+            }
             $record->research_group = $request->input('research_group');
             $record->introduction = $request->input('introduction');
             $record->aims_and_objectives = $request->input('aims_and_objectives');

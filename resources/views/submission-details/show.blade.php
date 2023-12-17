@@ -871,8 +871,8 @@
                                 @include('preview.preview-version')
                             </td>
                         </tr>
-                </tbody> 
                     @endforeach
+                </tbody> 
             </table>
         </div>
 

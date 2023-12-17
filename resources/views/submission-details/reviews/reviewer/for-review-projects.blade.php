@@ -23,16 +23,16 @@
                                         <tr>
                                             <th class="align-middle">#</th>
                                             <th class="align-middle">Reviewer</th>
-                                            <th class="align-middle">Title</th>
-                                            <th class="align-middle">Review Date</th>
-                                            <th class="align-middle">Actions</th>
+                                            <th class="align-middle">Project</th>
+                                            <th class="align-middle">Deadline</th>
+                                            <th class="align-middle">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @php
                                         $counter = 0;
                                     @endphp
-                                        @foreach ($projects as $record)
+                                        @foreach ($reviewers as $record)
                                             @if (
                                                 (in_array(auth()->user()->role, [1, 2, 4]) && $record->status !== 'Draft') ||
                                                     $record->user_id === auth()->user()->id)   
@@ -40,11 +40,11 @@
                                                 $counter++;
                                             @endphp
                                                 <tr>
-                                                    <td>Name</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>#</td>
+                                                    <td>Reviewer</td>
+                                                    <td>Project</td>
+                                                    <td>Deadline</td>
+                                                    <td>Status</td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -53,9 +53,9 @@
                                         <tr>
                                             <th class="align-middle">#</th>
                                             <th class="align-middle">Reviewer</th>
-                                            <th class="align-middle">Title</th>
-                                            <th class="align-middle">Review Date</th>
-                                            <th class="align-middle">Actions</th>
+                                            <th class="align-middle">Project</th>
+                                            <th class="align-middle">Deadline</th>
+                                            <th class="align-middle">Status</th>
                                         </tr>
                                     </tfoot>
                                 </table>

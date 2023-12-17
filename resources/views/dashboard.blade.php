@@ -506,205 +506,57 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-purple">
-              <div class="inner">
-                <h3>{{ $allProjectsCount }}</h3>
-
-                <p>Submitted Projects</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-book"></i>
-              </div>
-              <a href="{{ route('projects') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ $allUnderEvaluationCount }}</h3>
-
-                <p>Under Evaluation</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-hourglass-half nav-icon"></i>
-              </div>
-              <a href="{{ route('status.under-evaluation') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-6 col-12">
             <div class="small-box bg-warning">
               <div class="inner">
                 <h3>{{ $countOfReviewsWithTwoComments }}</h3>
 
-                <p>For Review Summary</p>
+                <p>For Review</p>
               </div>
               <div class="icon">
                 <i class="fas fa-edit nav-icon"></i>
               </div>
-              <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('review.for-review-projects') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-primary">
-              <div class="inner">
-                <h3>{{ $allDeferredCount }}</h3>
-
-                <p>Deferred</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-pause-circle nav-icon"></i>
-              </div>
-              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-6 col-12">
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>{{ $allApprovedCount }}</h3>
+                <h3>{{ $assignedAndReviewedCount }}</h3>
 
-                <p>Approved</p>
+                <p>Reviewed</p>
               </div>
               <div class="icon">
-                <i class="fas fa-book"></i>
+                <i class="nav-icon fas fa-check-circle"></i>
               </div>
               <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>{{ $allDisapprovedCount }}</h3>
-
-                <p>Disapproved</p>
-              </div>
-              <div class="icon">
-                <i class="far fa-times-circle nav-icon"></i>
-              </div>
-              <a href="{{ route('status.disapproved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+        </div>
+        <div class="card card-default">
+          <div class="card-header">
+              <h3 class="card-title">
+                  <i class="fas fa-bullhorn"></i>
+                  Review Deadline
+              </h3>
           </div>
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-pink">
-              <div class="inner">
-                <h3>{{ $allAccessRequestCount }}</h3>
 
-                <p>Access Requests</p>
+          <div class="card-body">
+              <div class="callout callout-danger">
+                <b>Please make a review to the projects!</b><br><hr>
+                @foreach($exceededDeadlines as $deadline)
+                @if(Auth::check() && Auth::user()->id === $deadline->user_id)
+                <p class="item blinking-alert alert-link">{{ $deadline->project->project_name }}
+                  - {{ \Carbon\Carbon::parse($deadline->deadline)->format('F j, Y') }}
+                </p>
+                @endif
+                @endforeach
               </div>
-              <div class="icon">
-                <i class="nav-icon fas fa-key"></i>
-              </div>
-              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-fuchsia">
-              <div class="inner">
-                <h3>{{ $allUsersCount }}</h3>
-
-                <p>Users</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-users"></i>
-              </div>
-              <a href="{{ route('users') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
           </div>
         </div>
       </div>
     </section>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="content-wrapper">
-    <section class="content-header">
-    </section>
-    <div class="container">
-        <h3 class="h3 mb-0 text-gray-800">Dashboard</h3>
-        <br>
-     <div class="row">
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-edit"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">For Review</span>
-                <span class="info-box-number">{{ $countOfUnreviewedProjects }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Reviewed</span>
-                <span class="info-box-number">{{ $assignedAndReviewedCount }}</span>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="clearfix hidden-md-up"></div>
-
-    </div>
-
-
-<div class="container">
-    <h2 class="h3 mb-0 text-gray-800">Review Exceeded Deadlines</h2>
-    <br>
-    @foreach($exceededDeadlines as $deadline)
-        @if(Auth::check() && Auth::user()->id === $deadline->user_id)
-            <div class="card shadow mb-4">
-                <div class="collapse show" id="collapseCardExample1">
-                    <div class="card-body">
-                        <div class="item blinking-alert alert-link">
-                            <div class="deadline-item">
-                                <div class="deadline-info">
-                                    <div class="py-3 d-flex justify-content-center align-items-center" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample1">
-                                        <i class="fas fa-info-circle fa-3x"></i>
-                                        <h5 class="deadline-detail m-0 ml-3 font-weight-bold" style="text-decoration: none;">{{ $deadline->project->project_name }}</h5>
-                                    </div>
-                                    <div class="deadline-detail font-weight-bold d-flex justify-content-center align-items-center">
-                                        Deadline: {{ \Carbon\Carbon::parse($deadline->deadline)->format('F j, Y') }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-    @endforeach
-</div> -->
-
 
 
 @endif

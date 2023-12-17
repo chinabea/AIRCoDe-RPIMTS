@@ -13,6 +13,20 @@ use App\Models\Review;
 class ReviewController extends Controller
 {
 
+    public function assignedToReview()
+    {
+        try {
+            $id = Auth::id(); // Or however you get the user ID
+
+            $reviewers = Review::where('user_id', $id)->get();
+
+            return view('submission-details.reviews.reviewer.for-review-projects', ['reviewers' => $reviewers]);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
+
     public function forReviews()
     {
         try {
