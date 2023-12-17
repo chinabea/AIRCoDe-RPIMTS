@@ -1,9 +1,4 @@
 
-
-
-<!-- <nav class="main-header navbar navbar-expand text-dark @if($theme === 'light') navbar-white navbar-light @elseif($theme === 'dark') navbar-dark @endif shadow"> -->
-
-  {{-- <nav class="main-header navbar navbar-expand navbar-dark"> --}}
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav ">
       <li class="nav-item ">
@@ -85,11 +80,11 @@
                     @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <!-- <a class="dropdown-item" href="#">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
+                </a> -->
+                <!-- <div class="dropdown-divider"></div> -->
                 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout

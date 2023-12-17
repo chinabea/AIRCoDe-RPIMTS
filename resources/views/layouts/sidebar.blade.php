@@ -59,13 +59,13 @@
                         <p>For Revision</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('status.deferred') }}"
                         class="nav-link {{ Route::currentRouteName() == 'status.deferred' ? 'active' : '' }}">
                         <i class="far fa-pause-circle nav-icon"></i>
                         <p>Deferred</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="{{ route('status.approved') }}"
                         class="nav-link {{ Route::currentRouteName() == 'status.approved' ? 'active' : '' }}">
@@ -175,13 +175,13 @@
                         <p>For Review Summary</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('status.deferred') }}"
                         class="nav-link {{ Route::currentRouteName() == 'status.deferred' ? 'active' : '' }}">
                         <i class="far fa-pause-circle nav-icon"></i>
                         <p>Deferred</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="{{ route('status.approved') }}"
                         class="nav-link {{ Route::currentRouteName() == 'status.approved' ? 'active' : '' }}">
@@ -282,13 +282,13 @@
                         <p>For Revision</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('status.deferred') }}"
                         class="nav-link {{ Route::currentRouteName() == 'status.deferred' ? 'active' : '' }}">
                         <i class="far fa-pause-circle nav-icon"></i>
                         <p>Deferred</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="{{ route('status.approved') }}"
                         class="nav-link {{ Route::currentRouteName() == 'status.approved' ? 'active' : '' }}">
