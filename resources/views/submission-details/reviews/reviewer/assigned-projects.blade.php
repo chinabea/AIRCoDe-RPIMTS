@@ -11,10 +11,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title my-1"><i class="fa fa-book"></i> Submitted Projects</h3>
+                                <h3 class="card-title my-1"><i class="fa fa-book"></i> For Review Projects</h3>
 
-                                <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false"> 
-                                    <i class="fas fa-file-pdf"></i> Export to PDF</button> 
+                                <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false">
+                                    <i class="fas fa-file-pdf"></i> Export to PDF</button>
                                     @include('reports.report-options')
                             </div>
                             <div class="card-body">
@@ -23,39 +23,45 @@
                                         <tr>
                                             <th class="align-middle">#</th>
                                             <th class="align-middle">Reviewer</th>
-                                            <th class="align-middle">Title</th>
-                                            <th class="align-middle">Review Date</th>
-                                            <th class="align-middle">Actions</th>
+                                            <th class="align-middle">Project</th>
+                                            <th class="align-middle">Deadline</th>
+                                            <th class="align-middle">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @php
                                         $counter = 0;
                                     @endphp
-                                        @foreach ($projects as $record)
-                                            @if (
+                                        @foreach ($reviewers as $record)
+                                            {{-- @if (
                                                 (in_array(auth()->user()->role, [1, 2, 4]) && $record->status !== 'Draft') ||
-                                                    $record->user_id === auth()->user()->id)   
+                                                    $record->user_id === auth()->user()->id) --}}
                                             @php
                                                 $counter++;
                                             @endphp
                                                 <tr>
-                                                    <td>Name</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{$counter}}</td>
+                                                    <td>{{$record->user->name}}</td>
+                                                    <td><a href="{{ route('review.for-review-project', $record->id) }}">{{$record->project->project_name}}</a></td>
+                                                    <td>{{$record->deadline}}</td>
+                                                    <td>
+                                                        @if ($record->contribution_to_knowledge_decision)
+                                                            <span class="badge badge-success">Reviewed</span>
+                                                        @else
+                                                            <span class="badge badge-danger">For Review</span>
+                                                        @endif
+                                                    </td>
                                                 </tr>
-                                            @endif
+                                            {{-- @endif --}}
                                         @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th class="align-middle">#</th>
                                             <th class="align-middle">Reviewer</th>
-                                            <th class="align-middle">Title</th>
-                                            <th class="align-middle">Review Date</th>
-                                            <th class="align-middle">Actions</th>
+                                            <th class="align-middle">Project</th>
+                                            <th class="align-middle">Deadline</th>
+                                            <th class="align-middle">Status</th>
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -13,6 +13,32 @@ use App\Models\Review;
 class ReviewController extends Controller
 {
 
+    public function index()
+    {
+        try {
+            $id = Auth::id(); // Or however you get the user ID
+
+            $reviewers = Review::where('user_id', $id)->get();
+
+            return view('submission-details.reviews.reviewer.assigned-projects', ['reviewers' => $reviewers]);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
+    public function reviewed()
+    {
+        try {
+            $id = Auth::id(); // Or however you get the user ID
+
+            $reviewers = Review::where('user_id', $id)->get();
+
+            return view('submission-details.reviews.reviewer.reviewed', ['reviewers' => $reviewers]);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
     public function assignedToReview()
     {
         try {
@@ -20,7 +46,7 @@ class ReviewController extends Controller
 
             $reviewers = Review::where('user_id', $id)->get();
 
-            return view('submission-details.reviews.reviewer.for-review-projects', ['reviewers' => $reviewers]);
+            return view('submission-details.reviews.reviewer.for-review', ['reviewers' => $reviewers]);
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -113,7 +139,7 @@ class ReviewController extends Controller
                 'clear_figures_and_tables_decision' => $request->input('clear_figures_and_tables_decision'),
                 'adequate_explanations_decision' => $request->input('adequate_explanations_decision'),
                 'technical_or_methodological_errors_decision' => $request->input('technical_or_methodological_errors_decision'),
-                
+
                 'contribution_to_knowledge_comments' => $request->input('contribution_to_knowledge_comments'),
                 'technical_soundness_comments' => $request->input('technical_soundness_comments'),
                 'comprehensive_subject_matter_comments' => $request->input('comprehensive_subject_matter_comments'),
@@ -229,7 +255,7 @@ class ReviewController extends Controller
                 'clear_figures_and_tables_decision' => $request->input('clear_figures_and_tables_decision') ?? null,
                 'adequate_explanations_decision' => $request->input('adequate_explanations_decision') ?? null,
                 'technical_or_methodological_errors_decision' => $request->input('technical_or_methodological_errors_decision') ?? null,
-                
+
                 'contribution_to_knowledge_comments' => $request->input('contribution_to_knowledge_comments') ?? null,
                 'technical_soundness_comments' => $request->input('technical_soundness_comments') ?? null,
                 'comprehensive_subject_matter_comments' => $request->input('comprehensive_subject_matter_comments') ?? null,

@@ -382,15 +382,22 @@
             @endif -->
             <li class="nav-header">MAIN MENU</li>
             <li class="nav-item">
-                <a href="{{ route('reports') }}"
-                    class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
+                <a href="{{ route('for.reviews') }}"
+                    class="nav-link {{ Route::currentRouteName() == 'for.reviews' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p> Assigned Projects</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('for-review') }}"
+                    class="nav-link {{ Route::currentRouteName() == 'for-review' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-edit"></i>
                     <p> For Review</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('reports') }}"
-                    class="nav-link {{ Route::currentRouteName() == 'reports' ? 'active' : '' }}">
+                <a href="{{ route('reviewed') }}"
+                    class="nav-link {{ Route::currentRouteName() == 'reviewed' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-check-circle"></i>
                     <p> Reviewed</p>
                 </a>

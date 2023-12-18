@@ -21,6 +21,8 @@ class DashboardController extends Controller
     public function countAll()
     {
         try {
+
+            $reviewers = Review::where('user_id')->get();
             $authenticatedUserId = auth()->user()->id;
             $allCallforProposalCount = CallForProposal::count();
             $allAccessRequestCount = AccessRequest::count();

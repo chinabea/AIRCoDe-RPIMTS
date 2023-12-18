@@ -11,10 +11,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title my-1"><i class="fa fa-book"></i> Submitted Projects</h3>
+                                <h3 class="card-title my-1"><i class="fa fa-book"></i> For Review Projects</h3>
 
-                                <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false"> 
-                                    <i class="fas fa-file-pdf"></i> Export to PDF</button> 
+                                <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false">
+                                    <i class="fas fa-file-pdf"></i> Export to PDF</button>
                                     @include('reports.report-options')
                             </div>
                             <div class="card-body">
@@ -29,25 +29,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @php
-                                        $counter = 0;
-                                    @endphp
-                                        @foreach ($reviewers as $record)
-                                            @if (
-                                                (in_array(auth()->user()->role, [1, 2, 4]) && $record->status !== 'Draft') ||
-                                                    $record->user_id === auth()->user()->id)   
-                                            @php
-                                                $counter++;
-                                            @endphp
-                                                <tr>
-                                                    <td>#</td>
-                                                    <td>Reviewer</td>
-                                                    <td>Project</td>
-                                                    <td>Deadline</td>
-                                                    <td>Status</td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
+                                        @php
+                                            $counter = 0;
+                                        @endphp
+                                            @foreach ($reviewers as $record)
+                                                @if (
+                                                    (in_array(auth()->user()->role, [1, 2, 4]) && $record->status !== 'Draft') ||
+                                                        $record->user_id === auth()->user()->id)
+                                                @php
+                                                    $counter++;
+                                                @endphp
+                                                @if ($record->contribution_to_knowledge_decision)
+                                                    <tr>
+                                                        <td>{{$counter}}</td>
+                                                        <td>{{$record->user->name}}</td>
+                                                        <td><a href="{{ route('review.for-review-project', $record->id) }}">{{$record->project->project_name}}</a></td>
+                                                        <td>{{$record->deadline}}</td>
+                                                        <td><span class="badge badge-success">Reviewed</span></td>
+                                                    </tr>
+                                                @endif
+                                                @endif
+                                            @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>

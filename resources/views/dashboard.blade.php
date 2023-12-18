@@ -461,7 +461,7 @@
                                           $currentDate = now();
                                           $startDate = \Carbon\Carbon::parse($proposal->start_date);
                                           $endDate = \Carbon\Carbon::parse($proposal->end_date);
-                                          
+
                                           if ($currentDate >= $startDate && $currentDate <= $endDate) {
                                               echo 'Open';
                                           } elseif ($currentDate < $startDate) {
@@ -545,11 +545,15 @@
               <div class="callout callout-danger">
                 <b>Please make a review to the projects!</b><br><hr>
                 @foreach($exceededDeadlines as $deadline)
-                @if(Auth::check() && Auth::user()->id === $deadline->user_id)
-                <p class="item blinking-alert alert-link">{{ $deadline->project->project_name }}
-                  - {{ \Carbon\Carbon::parse($deadline->deadline)->format('F j, Y') }}
-                </p>
-                @endif
+                    @if(Auth::check() && Auth::user()->id === $deadline->user_id)
+                        @if(\Carbon\Carbon::parse($deadline->deadline)->isPast() && $deadline->contribution_to_knowledge_decision === null)
+                            <p class="item blinking-alert alert-link">
+                                {{-- <a href="{{ route('review.for-review-project', $record->id) }}">{{$record->project->project_name}}</a> --}}
+                                {{ $deadline->project->project_name }} -
+                                {{ \Carbon\Carbon::parse($deadline->deadline)->format('F j, Y') }}
+                            </p>
+                        @endif
+                    @endif
                 @endforeach
               </div>
           </div>

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->text('project_name');
             $table->ulid('tracking_code');
             $table->unsignedBigInteger('call_for_proposal_id');
             $table->unsignedBigInteger('user_id');
-            $table->text('project_name');
             $table->enum('status', ['Draft', 'Under Evaluation', 'For Revision', 'Approved', 'Deferred', 'Disapproved']);
             $table->text('research_group');
             $table->text('introduction');

@@ -63,7 +63,9 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/access-request/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.access-requests.edit');
     Route::put('/access-request/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.access-requests.update');
 
-    Route::get('/review.for-review-projects', [ReviewController::class, 'assignedToReview'])->name('review.for-review-projects');
+    Route::get('/for-reviews', [ReviewController::class, 'index'])->name('for.reviews');
+    Route::get('/reviewed-projects', [ReviewController::class, 'reviewed'])->name('reviewed');
+    Route::get('/review.for-review-projects', [ReviewController::class, 'assignedToReview'])->name('for-review');
     Route::get('/review/review-and-summarize/{id}', [ReviewController::class, 'show'])->name('review.for-review-project');
     Route::get('/review/for-reviews', [ReviewController::class, 'forReviews'])->name('submission-details.reviews.for-reviews');
 
@@ -102,7 +104,7 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::post('/messages/delete-selected', [MessageController::class, 'deleteSelected'])->name('messages.deleteSelected');
 
     // Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
-    
+
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.mailbox');
     Route::get('/messages-view/{id}', [MessageController::class, 'show'])->name('messages.read-mail');
     Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.compose');
