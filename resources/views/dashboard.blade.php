@@ -509,7 +509,7 @@
           <div class="col-lg-6 col-12">
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>{{ $countOfReviewsWithTwoComments }}</h3>
+                <h3>{{ $countToReviews }}</h3> 
 
                 <p>For Review</p>
               </div>
@@ -522,7 +522,7 @@
           <div class="col-lg-6 col-12">
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>{{ $assignedAndReviewedCount }}</h3>
+                <h3>{{ $countCommentedReviews }}</h3>
 
                 <p>Reviewed</p>
               </div>

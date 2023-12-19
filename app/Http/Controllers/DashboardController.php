@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 // use Carbon\Carbon;
 // use Ulid\Ulid;
 // use rorecek\Ulid\Ulid;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class DashboardController extends Controller
@@ -22,7 +24,22 @@ class DashboardController extends Controller
     {
         try {
 
-            $reviewers = Review::where('user_id')->get();
+            // $countreview = Review::where('contribution_to_knowledge_decision', 'Under Evaluation')->count();
+            // $countReviewWithValue = Review::whereNotNull('contribution_to_knowledge_decision')
+            // $reviewers = Review::where('user_id', $id)->get();
+            // ->where('contribution_to_knowledge_decision', '<>', '')
+            // ->count();
+
+            // $countReviewWithValue = Review::where('user_id')->get();
+            $countCommentedReviews = Review::where('user_id', Auth::user()->id)
+            ->whereNotNull('contribution_to_knowledge_comments')
+            ->count();
+            $countToReviews = Review::where('user_id', Auth::user()->id)
+            ->whereNull('contribution_to_knowledge_comments')
+            ->count();
+
+
+
             $authenticatedUserId = auth()->user()->id;
             $allCallforProposalCount = CallForProposal::count();
             $allAccessRequestCount = AccessRequest::count();
@@ -84,7 +101,7 @@ class DashboardController extends Controller
 
             return view('dashboard', compact('accessRequestCount','allAccessRequestCount','allCallforProposalCount','records','allDisapprovedCount','allDeferredCount','allApprovedCount','allForRevisionCount','allUnderEvaluationCount','allUsersCount','allProjectsCount','projectCount','draftCount','underEvaluationCount','underEvaluationCount',
                                     'forRevisionCount','approvedCount','deferredCount','disapprovedCount','exceededDeadlines','countOfUnreviewedProjects',
-                                    'assignedAndReviewedCount','countOfReviewsWithTwoComments'));
+                                    'assignedAndReviewedCount','countOfReviewsWithTwoComments','countCommentedReviews','countToReviews'));
         } catch (Exception $e) {
             // Handle the exception, you can log it for debugging or display an error message to the user.
             return back()->with('error', 'An error occurred while counting data: ' . $e->getMessage());
