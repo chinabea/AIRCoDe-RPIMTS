@@ -77,8 +77,13 @@ class ReviewController extends Controller
             ->where('project_id', $id)
             ->count();
 
+            
+        $irev = Review::where('user_id', Auth::user()->id)
+        ->where('project_id', $id)
+        ->get();
 
-            return view('submission-details.reviews.for-review-project', compact('id', 'records', 'reviewers', 'toreview','reviewersss',
+
+            return view('submission-details.reviews.for-review-project', compact('id', 'records', 'reviewers', 'toreview','reviewersss','irev',
                         'reviewerCommented'))->with('success', 'Review already added!');
         } catch (Exception $e) {
             // Handle the exception, you can log it for debugging or display an error message to the user.

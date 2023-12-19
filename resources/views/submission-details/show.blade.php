@@ -402,11 +402,41 @@
                                                         $review->user->id === Auth::user()->id &&
                                                             $review->contribution_to_knowledge !== null &&
                                                             $review->project_id === $records->id)
-                                                        <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea>
+                                                        <!-- <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1" readonly>{{ $review->contribution_to_knowledge }}</textarea> -->
+                                                        
+                                                        <div class="form-group">
+                                                            <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="contribution_to_knowledge_decision" id="contribution_to_knowledge_decision" value="Yes" disabled {{ $irev->contribution_to_knowledge_decision == 'Yes' ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="contribution_to_knowledge_decision">Yes</label>
+                                                            </div>
+
+                                                            <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="contribution_to_knowledge_decision" id="contribution_to_knowledge_decision" value="No" disabled {{ $irev->contribution_to_knowledge_decision == 'No' ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="contribution_to_knowledge_decision">No</label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                            <textarea id="contribution_to_knowledge_comments" name="contribution_to_knowledge_comments" class="form-control" placeholder="Other Comments" readonly>{{ $irev->contribution_to_knowledge_comments }}</textarea>
+                                                            </div>
+                                                        </div> 
                                                     @endif
                                                 @endforeach
                                             @else
-                                                <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1"></textarea>
+                                                <!-- <textarea id="contribution_to_knowledge" name="contribution_to_knowledge" class="form-control" rows="1"></textarea> -->
+                                                
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="contribution_to_knowledge_decision" id="contribution_to_knowledge_decision" value="Yes">
+                                                    <label class="form-check-label" for="contribution_to_knowledge_decision">Yes</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="contribution_to_knowledge_decision" id="contribution_to_knowledge_decision" value="No">
+                                                    <label class="form-check-label" for="contribution_to_knowledge_decision">No</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                    <textarea id="contribution_to_knowledge_comments" name="contribution_to_knowledge_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                                    </div>
+                                                </div> 
                                             @endif
                                     </div>
 
@@ -418,11 +448,41 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->technical_soundness !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" readonly>{{ $review->technical_soundness }}</textarea>
+                                                    <!-- <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1" readonly>{{ $review->technical_soundness }}</textarea> -->
+                                                    
+                                                <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="technical_soundness_decision" id="technical_soundness_decision" value="Yes" disabled {{ $review->technical_soundness_decision == 'Yes' ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="technical_soundness_decision">Yes</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="technical_soundness_decision" id="technical_soundness_decision" value="No" disabled {{ $review->technical_soundness_decision == 'No' ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="technical_soundness_decision">No</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                    <textarea id="technical_soundness_comments" name="technical_soundness_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->technical_soundness_comments }}</textarea>
+                                                    </div>
+                                                </div> 
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1"></textarea>
+                                            <!-- <textarea id="technical_soundness" name="technical_soundness" class="form-control" rows="1"></textarea> -->
+                                            
+                                            <div class="form-group">
+                                                <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="technical_soundness_decision" id="technical_soundness_decision" value="Yes">
+                                                <label class="form-check-label" for="technical_soundness_decision">Yes</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="technical_soundness_decision" id="technical_soundness_decision" value="No">
+                                                <label class="form-check-label" for="technical_soundness_decision">No</label>
+                                                </div>
+                                                <div class="form-group">
+                                                <textarea id="technical_soundness_comments" name="technical_soundness_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                                </div>
+                                            </div> 
                                         @endif
                                     </div>
 
@@ -435,11 +495,39 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->comprehensive_subject_matter !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" readonly>{{ $review->comprehensive_subject_matter }}</textarea>
+                                                    <!-- <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" readonly>{{ $review->comprehensive_subject_matter }}</textarea> -->
+                                                    <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="comprehensive_subject_matter_decision" id="comprehensive_subject_matter_decision" value="Yes" disabled {{ $review->comprehensive_subject_matter_decision == 'Yes' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="comprehensive_subject_matter_decision">Yes</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="comprehensive_subject_matter_decision" id="comprehensive_subject_matter_decision" value="No" disabled {{ $review->comprehensive_subject_matter_decision == 'No' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="comprehensive_subject_matter_decision">No</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea id="comprehensive_subject_matter_comments" name="comprehensive_subject_matter_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->comprehensive_subject_matter_comments }}</textarea>
+                                                    </div>
+                                                    </div> 
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1"></textarea>
+                                            <!-- <textarea id="comprehensive_subject_matter" name="comprehensive_subject_matter" class="form-control" rows="1"></textarea> -->
+                                            <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="comprehensive_subject_matter_decision" id="comprehensive_subject_matter_decision" value="Yes">
+                                                <label class="form-check-label" for="comprehensive_subject_matter_decision">Yes</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="comprehensive_subject_matter_decision" id="comprehensive_subject_matter_decision" value="No">
+                                                <label class="form-check-label" for="comprehensive_subject_matter_decision">No</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="comprehensive_subject_matter_comments" name="comprehensive_subject_matter_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                            </div>
+                                            </div> 
                                         @endif
                                     </div>
 
@@ -452,13 +540,43 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->applicable_and_sufficient_references !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control"
-                                                        rows="1" readonly>{{ $review->applicable_and_sufficient_references }}</textarea>
+                                                    <!-- <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control" -->
+                                                        <!-- rows="1" readonly>{{ $review->applicable_and_sufficient_references }}</textarea> -->
+                                                        
+                                                    <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="applicable_and_sufficient_references_decision" id="applicable_and_sufficient_references_decision" value="Yes" disabled {{ $review->applicable_and_sufficient_references_decision == 'Yes' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="applicable_and_sufficient_references_decision">Yes</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="applicable_and_sufficient_references_decision" id="applicable_and_sufficient_references_decision" value="No" disabled {{ $review->applicable_and_sufficient_references_decision == 'No' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="applicable_and_sufficient_references_decision">No</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea id="applicable_and_sufficient_references_comments" name="applicable_and_sufficient_references_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->applicable_and_sufficient_references_comments }}</textarea>
+                                                    </div>
+                                                    </div> 
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control"
-                                                rows="1"></textarea>
+                                            <!-- <textarea id="applicable_and_sufficient_references" name="applicable_and_sufficient_references" class="form-control"
+                                                rows="1"></textarea> -->
+                                                <div class="form-group">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="applicable_and_sufficient_references_decision" id="applicable_and_sufficient_references_decision" value="Yes">
+                                                    <label class="form-check-label" for="applicable_and_sufficient_references_decision">Yes</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="applicable_and_sufficient_references_decision" id="applicable_and_sufficient_references_decision" value="No">
+                                                    <label class="form-check-label" for="applicable_and_sufficient_references_decision">No</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea id="applicable_and_sufficient_references_comments" name="applicable_and_sufficient_references_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                                </div>
+                                                </div> 
+
                                         @endif
                                     </div>
 
@@ -471,12 +589,41 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->inappropriate_references !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1"
-                                                        readonly>{{ $review->inappropriate_references }}</textarea>
+                                                    <!-- <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1"
+                                                        readonly>{{ $review->inappropriate_references }}</textarea> -->
+                                                          <div class="form-group">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inappropriate_references_decision" id="inappropriate_references_decision" value="Yes" disabled {{ $review->inappropriate_references_decision == 'Yes' ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="inappropriate_references_decision">Yes</label>
+                                                        </div>
+
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inappropriate_references_decision" id="inappropriate_references_decision" value="No" disabled {{ $review->inappropriate_references_decision == 'No' ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="inappropriate_references_decision">No</label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <textarea id="inappropriate_references_comments" name="inappropriate_references_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->inappropriate_references_comments }}</textarea>
+                                                        </div>
+                                                        </div> 
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1"></textarea>
+                                            <!-- <textarea id="inappropriate_references" name="inappropriate_references" class="form-control" rows="1"></textarea> -->
+                                             
+                                            <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inappropriate_references_decision" id="inappropriate_references_decision" value="Yes">
+                                                <label class="form-check-label" for="inappropriate_references_decision">Yes</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inappropriate_references_decision" id="inappropriate_references_decision" value="No">
+                                                <label class="form-check-label" for="inappropriate_references_decision">No</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="inappropriate_references_comments" name="inappropriate_references_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                            </div>
+                                            </div> 
                                         @endif
                                     </div>
 
@@ -488,12 +635,43 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->comprehensive_application !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1"
-                                                        readonly>{{ $review->comprehensive_application }}</textarea>
+                                                    <!-- <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1"
+                                                        readonly>{{ $review->comprehensive_application }}</textarea> -->
+                                                        
+                                                <div class="form-group">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="comprehensive_application_decision" id="comprehensive_application_decision" value="Yes" disabled {{ $review->comprehensive_application_decision == 'Yes' ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="comprehensive_application_decision">Yes</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="comprehensive_application_decision" id="comprehensive_application_decision" value="No" disabled {{ $review->comprehensive_application_decision == 'No' ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="comprehensive_application_decision">No</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea id="comprehensive_application_comments" name="comprehensive_application_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->comprehensive_application_comments }}</textarea>
+                                                </div>
+                                                </div> 
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1"></textarea>
+                                            <!-- <textarea id="comprehensive_application" name="comprehensive_application" class="form-control" rows="1"></textarea> -->
+                                            
+                                        <div class="form-group">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="comprehensive_application_decision" id="comprehensive_application_decision" value="Yes">
+                                            <label class="form-check-label" for="comprehensive_application_decision">Yes</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="comprehensive_application_decision" id="comprehensive_application_decision" value="No">
+                                            <label class="form-check-label" for="comprehensive_application_decision">No</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea id="comprehensive_application_comments" name="comprehensive_application_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                        </div>
+                                        </div> 
+
                                         @endif
                                     </div>
 
@@ -506,12 +684,42 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->grammar_and_presentation !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1"
-                                                        readonly>{{ $review->grammar_and_presentation }}</textarea>
+                                                    <!-- <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1"
+                                                        readonly>{{ $review->grammar_and_presentation }}</textarea> -->
+                                                        
+                                                    <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="grammar_and_presentation_decision" id="grammar_and_presentation_decision" value="Yes" disabled {{ $review->grammar_and_presentation_decision == 'Yes' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="grammar_and_presentation_decision">Yes</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="grammar_and_presentation_decision" id="grammar_and_presentation_decision" value="No" disabled {{ $review->grammar_and_presentation_decision == 'No' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="grammar_and_presentation_decision">No</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea id="grammar_and_presentation_comments" name="grammar_and_presentation_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->grammar_and_presentation_comments }}</textarea>
+                                                    </div>
+                                                    </div> 
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1"></textarea>
+                                            <!-- <textarea id="grammar_and_presentation" name="grammar_and_presentation" class="form-control" rows="1"></textarea> -->
+                                            
+                                            <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="grammar_and_presentation_decision" id="grammar_and_presentation_decision" value="Yes">
+                                                <label class="form-check-label" for="grammar_and_presentation_decision">Yes</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="grammar_and_presentation_decision" id="grammar_and_presentation_decision" value="No">
+                                                <label class="form-check-label" for="grammar_and_presentation_decision">No</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="grammar_and_presentation_comments" name="grammar_and_presentation_comments" class="form-control" placeholder="Other Comments"> </textarea>
+                                            </div>
+                                            </div> 
                                         @endif
                                     </div>
 
@@ -524,13 +732,43 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->assumption_of_reader_knowledge !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control"
-                                                        rows="1" readonly>{{ $review->assumption_of_reader_knowledge }}</textarea>
+                                                    <!-- <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control"
+                                                        rows="1" readonly>{{ $review->assumption_of_reader_knowledge }}</textarea> -->
+                                                        
+                                                    <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="assumption_of_reader_knowledge_decision" id="assumption_of_reader_knowledge_decision" value="Yes" disabled {{ $review->assumption_of_reader_knowledge_decision == 'Yes' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="assumption_of_reader_knowledge_decision">Yes</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="assumption_of_reader_knowledge_decision" id="assumption_of_reader_knowledge_decision" value="No" disabled {{ $review->assumption_of_reader_knowledge_decision == 'No' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="assumption_of_reader_knowledge_decision">No</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea id="assumption_of_reader_knowledge_comments" name="assumption_of_reader_knowledge_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->assumption_of_reader_knowledge_comments }}</textarea>
+                                                    </div>
+                                                    </div> 
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control"
-                                                rows="1"></textarea>
+                                            <!-- <textarea id="assumption_of_reader_knowledge" name="assumption_of_reader_knowledge" class="form-control"
+                                                rows="1"></textarea> -->
+                                                
+                                            <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="assumption_of_reader_knowledge_decision" id="assumption_of_reader_knowledge_decision" value="Yes">
+                                                <label class="form-check-label" for="assumption_of_reader_knowledge_decision">Yes</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="assumption_of_reader_knowledge_decision" id="assumption_of_reader_knowledge_decision" value="No">
+                                                <label class="form-check-label" for="assumption_of_reader_knowledge_decision">No</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="assumption_of_reader_knowledge_comments" name="assumption_of_reader_knowledge_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                            </div>
+                                            </div> 
                                         @endif
                                     </div>
 
@@ -543,12 +781,43 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->clear_figures_and_tables !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1"
-                                                        readonly>{{ $review->clear_figures_and_tables }}</textarea>
+                                                    <!-- <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1"
+                                                        readonly>{{ $review->clear_figures_and_tables }}</textarea> -->
+                                                        
+                                                    <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="clear_figures_and_tables_decision" id="clear_figures_and_tables_decision" value="Yes" disabled {{ $review->clear_figures_and_tables_decision == 'Yes' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="clear_figures_and_tables_decision">Yes</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="clear_figures_and_tables_decision" id="clear_figures_and_tables_decision" value="No" disabled {{ $review->clear_figures_and_tables_decision == 'No' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="clear_figures_and_tables_decision">No</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea id="clear_figures_and_tables_comments" name="clear_figures_and_tables_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->clear_figures_and_tables_comments }}</textarea>
+                                                    </div>
+                                                    </div> 
+
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1"></textarea>
+                                            <!-- <textarea id="clear_figures_and_tables" name="clear_figures_and_tables" class="form-control" rows="1"></textarea> -->
+                                            
+                                            <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="clear_figures_and_tables_decision" id="clear_figures_and_tables_decision" value="Yes">
+                                                <label class="form-check-label" for="clear_figures_and_tables_decision">Yes</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="clear_figures_and_tables_decision" id="clear_figures_and_tables_decision" value="No">
+                                                <label class="form-check-label" for="clear_figures_and_tables_decision">No</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="clear_figures_and_tables_comments" name="clear_figures_and_tables_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                            </div>
+                                            </div> 
                                         @endif
                                     </div>
 
@@ -560,11 +829,41 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->adequate_explanations !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" readonly>{{ $review->adequate_explanations }}</textarea>
+                                                    <!-- <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1" readonly>{{ $review->adequate_explanations }}</textarea> -->
+                                                    
+                                                    <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="adequate_explanations_decision" id="adequate_explanations_decision" value="Yes" disabled {{ $review->adequate_explanations_decision == 'Yes' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="adequate_explanations_decision">Yes</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="adequate_explanations_decision" id="adequate_explanations_decision" value="No" disabled {{ $review->adequate_explanations_decision == 'No' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="adequate_explanations_decision">No</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea id="adequate_explanations_comments" name="adequate_explanations_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->adequate_explanations_comments }}</textarea>
+                                                    </div>
+                                                    </div> 
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1"></textarea>
+                                            <!-- <textarea id="adequate_explanations" name="adequate_explanations" class="form-control" rows="1"></textarea> -->
+                                            
+                                            <div class="form-group">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="adequate_explanations_decision" id="adequate_explanations_decision" value="Yes">
+                                                <label class="form-check-label" for="adequate_explanations_decision">Yes</label>
+                                            </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="adequate_explanations_decision" id="adequate_explanations_decision" value="No">
+                                                <label class="form-check-label" for="adequate_explanations_decision">No</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea id="adequate_explanations_comments" name="adequate_explanations_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                            </div>
+                                            </div> 
                                         @endif
                                     </div>
 
@@ -577,15 +876,99 @@
                                                     $review->user->id === Auth::user()->id &&
                                                         $review->technical_or_methodological_errors !== null &&
                                                         $review->project_id === $records->id)
-                                                    <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control"
-                                                        rows="1" readonly>{{ $review->technical_or_methodological_errors }}</textarea>
+                                                    <!-- <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control"
+                                                        rows="1" readonly>{{ $review->technical_or_methodological_errors }}</textarea> -->
+                                                        
+                                                    <div class="form-group">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="technical_or_methodological_errors_decision" id="technical_or_methodological_errors_decision" value="Yes" disabled {{ $review->technical_or_methodological_errors_decision == 'Yes' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="technical_or_methodological_errors_decision">Yes</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="technical_or_methodological_errors_decision" id="technical_or_methodological_errors_decision" value="No" disabled {{ $review->technical_or_methodological_errors_decision == 'No' ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="technical_or_methodological_errors_decision">No</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea id="technical_or_methodological_errors_comments" name="technical_or_methodological_errors_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->technical_or_methodological_errors_comments }}</textarea>
+                                                    </div>
+                                                    </div> 
                                                 @endif
                                             @endforeach
                                         @else
-                                            <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control"
-                                                rows="1"></textarea>
+                                            <!-- <textarea id="technical_or_methodological_errors" name="technical_or_methodological_errors" class="form-control"
+                                                rows="1"></textarea> -->
+                                                
+                                        <div class="form-group">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="technical_or_methodological_errors_decision" id="technical_or_methodological_errors_decision" value="Yes">
+                                            <label class="form-check-label" for="technical_or_methodological_errors_decision">Yes</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="technical_or_methodological_errors_decision" id="technical_or_methodological_errors_decision" value="No">
+                                            <label class="form-check-label" for="technical_or_methodological_errors_decision">No</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea id="technical_or_methodological_errors_comments" name="technical_or_methodological_errors_comments" class="form-control" placeholder="Other Comments"></textarea>
+                                        </div>
+                                        </div> 
                                         @endif
                                     </div>
+
+<div class="form-group">
+    <label for="other_rsc">Project Name</label>
+    @if ($reviewerCommented > 0)
+        @foreach ($revs as $review)
+            @if (
+                $review->user->id === Auth::user()->id &&
+                    $review->reseach_project_name !== null &&
+                    $review->project_id === $records->id)
+                <textarea id="reseach_project_name" name="reseach_project_name" class="form-control"
+                    rows="1" readonly>{{ $review->reseach_project_name }}</textarea>
+            @endif
+        @endforeach
+    @else
+        <textarea id="reseach_project_name" name="reseach_project_name" class="form-control"
+            rows="1"></textarea>
+    @endif
+</div>
+
+<div class="form-group">
+    <label for="other_rsc">Research Group</label>
+    @if ($reviewerCommented > 0)
+        @foreach ($revs as $review)
+            @if (
+                $review->user->id === Auth::user()->id &&
+                    $review->reseach_project_group !== null &&
+                    $review->project_id === $records->id)
+                <textarea id="reseach_project_group" name="reseach_project_group" class="form-control"
+                    rows="1" readonly>{{ $review->reseach_project_group }}</textarea>
+            @endif
+        @endforeach
+    @else
+        <textarea id="reseach_project_group" name="reseach_project_group" class="form-control"
+            rows="1"></textarea>
+    @endif
+</div>
+
+<div class="form-group">
+    <label for="other_rsc">Introduction</label>
+    @if ($reviewerCommented > 0)
+        @foreach ($revs as $review)
+            @if (
+                $review->user->id === Auth::user()->id &&
+                    $review->project_introduction !== null &&
+                    $review->project_id === $records->id)
+                <textarea id="project_introduction" name="project_introduction" class="form-control"
+                    rows="1" readonly>{{ $review->project_introduction }}</textarea>
+            @endif
+        @endforeach
+    @else
+        <textarea id="project_introduction" name="project_introduction" class="form-control"
+            rows="1"></textarea>
+    @endif
+</div>
 
                                     <div class="form-group">
                                         <label for="other_rsc">Other Comments</label>
