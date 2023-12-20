@@ -19,6 +19,7 @@
                     </div>
                 </div>
                 @foreach ($conversations as $message)
+
                     <div class="card-body p-0">
                         <div class="mailbox-read-info">
                             <div class="row">

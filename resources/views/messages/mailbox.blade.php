@@ -62,11 +62,9 @@
                                         <!-- <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td> -->
                                         <td>
                                             <a href="{{ route('messages.read-mail', ['id' => $message->id]) }}">
-                                                @if ($message->sender->id == auth()->id())
-                                                    To: {{ $message->recipient->name }}
-                                                @else
-                                                    {{ $message->sender->name }}
-                                                @endif
+
+                                                 {{ $message->sender->name }}
+
                                             </a>
                                         </td>
                                         <td class="mailbox-subject">

@@ -42,7 +42,7 @@
                                                 <tr>
                                                     <td>{{$counter}}</td>
                                                     <td>{{$record->user->name}}</td>
-                                                    <td><a href="{{ route('review.for-review-project', $record->id) }}">{{$record->project->project_name}}</a></td>
+                                                    <td><a href="{{ route('review.for-review-project', ['id' => $record->project_id]) }}">{{ $record->project->project_name }}</a></td>
                                                     <td>{{$record->deadline}}</td>
                                                     <td>
                                                         @if ($record->contribution_to_knowledge_decision)

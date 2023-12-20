@@ -81,7 +81,6 @@ class MessageController extends Controller
                 $query->selectRaw('MAX(id)')
                     ->from('messages')
                     ->where('recipient_id', $user->id)
-                    ->orWhere('sender_id', $user->id)
                     ->groupBy(['sender_id', 'recipient_id']);
             })->orderBy('created_at', 'asc')->get();
 
@@ -180,7 +179,6 @@ class MessageController extends Controller
                 'subject' => 'required',
                 'content' => 'required',
             ]);
-
             // Check if the recipient is the same as the authenticated user
             if ($request->input('recipient_id') == $user->id) {
                 return redirect()->back()->with('error', 'You cannot send a message to yourself.');

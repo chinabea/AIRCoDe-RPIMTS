@@ -215,6 +215,62 @@ class ProjectController extends Controller
         }
     }
     
+    public function updateDraft(Request $request, $id)
+    {
+        try {
+            $userId = Auth::id();
+            $record = Project::findOrFail($id);
+            $newVersionNumber = $record->versions()->max('version_number') + 1;
+    
+            $newVersion = new Version([
+                'user_id' => $userId,
+                'version_number' => $newVersionNumber,
+                'tracking_code' => $request->input('tracking_code'),
+                'project_name' => $request->input('project_name'),
+                'research_group' => $request->input('research_group'),
+                'introduction' => $request->input('introduction'),
+                'aims_and_objectives' => $request->input('aims_and_objectives'),
+                'background' => $request->input('background'),
+                'expected_research_contribution' => $request->input('expected_research_contribution'),
+                'proposed_methodology' => $request->input('proposed_methodology'),
+                'workplan' => $request->input('workplan'),
+                'resources' => $request->input('resources'),
+                'references' => $request->input('references'),
+                // 'total_budget' => $request->input('total_budget'),
+            ]);
+    
+            $record->versions()->save($newVersion);
+    
+            // Update the project record with the new values from the form
+            $record->project_name = $request->input('project_name');
+            if ($request->has('draft_submit')) {
+                // Set the project status as 'draft'
+                $record->status = 'draft';
+            } else {
+                // Set the project status as 'under evaluation' for the regular submission
+                $record->status = 'under evaluation';
+
+            }
+            $record->research_group = $request->input('research_group');
+            $record->introduction = $request->input('introduction');
+            $record->aims_and_objectives = $request->input('aims_and_objectives');
+            $record->background = $request->input('background');
+            $record->expected_research_contribution = $request->input('expected_research_contribution');
+            $record->proposed_methodology = $request->input('proposed_methodology');
+            $record->workplan = $request->input('workplan');
+            $record->resources = $request->input('resources');
+            $record->references = $request->input('references');
+    
+            // Save the updated project record
+            $record->save();
+    
+            return redirect()->back()->with('success', 'Research Proposal Successfully Updated!');
+        } catch (Exception $e) {
+            // Handle the exception, you can log it or return an error response
+            return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
+        }
+    }
+    
     public function update(Request $request, $id)
     {
         try {
