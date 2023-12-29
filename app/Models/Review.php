@@ -64,11 +64,6 @@ class Review extends Model
         return $this->belongsTo(Project::class, 'project_id'); 
     }
 
-    // public function reviewDecision()
-    // {
-    //     return $this->hasOne(ReviewDecision::class, 'review_id');
-    // }
-
     public function reviewer()
     {
         return $this->belongsTo(User::class, 'user_id');

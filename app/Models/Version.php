@@ -35,13 +35,14 @@ class Version extends Model
         return $this->belongsTo(CallForProposal::class, 'call_for_proposal_id');
     }
 
-    public function project()
-    {
-        return $this->belongsTo(Project::class, 'call_for_proposal_id');
-    }
+    // public function project()
+    // {
+    //     return $this->belongsTo(Project::class, 'call_for_proposal_id');
+    // }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
 }

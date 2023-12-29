@@ -78,7 +78,9 @@
                  <div class="card-footer">
                         <form id="replyForm" action="{{ route('messages.reply') }}" method="POST" class="mt-3" style="display: none;">
                             @csrf
-                            <input type="hidden" name="recipient_id" value="{{ $message->recipient_id }}">
+                            <input type="hidden" name="recipient_id" value="{{ $message->id }}">
+                            <input type="hidden" name="sender_id" value="{{ auth()->user()->id }}">
+
                             <div class="form-group">
                                 <label for="content">Your Reply:</label>
                                 <input class="form-control" id="subject" name="subject"></input>

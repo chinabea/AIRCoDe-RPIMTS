@@ -77,7 +77,7 @@ class TaskController extends Controller
                 // Send the notification to the user
                 // Notification::send($user, new TaskDeadlineNotification($task));
             }
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Task Added');
 
         } catch (QueryException $e) {
         // If an exception is thrown, it means there was a database error

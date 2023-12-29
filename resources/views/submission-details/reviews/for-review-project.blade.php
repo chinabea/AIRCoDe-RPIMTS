@@ -7,16 +7,13 @@
                             
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->technical_soundness_decision !== null && $review->project_id === $records->id)
-  <div class="alert alert-danger alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-
-                  <h6><i class="icon fas fa-exclamation-triangle"></i> Alert! You have already commented on this project!</h6>
-                  
+                  <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h6><i class="icon fas fa-exclamation-triangle"></i> Alert! You have already commented on this project!</h6>
                   </div>
-
                   @endif
-                            @endforeach
-  </section>
+                  @endforeach
+                </section>
   
 
 <div class="row">
@@ -27,7 +24,7 @@
     <!-- Area Chart -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-center">Research Reviews</h6>
+            <h6 class="m-0 font-weight-bold text-center">{{ $records->project_name }}</h6>
         </div>
         <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover text-left table-sm">
@@ -323,28 +320,28 @@
             @endif
           <div class="form-group">
             <label for="contribution_to_knowledge_decision">1. Does the paper contribute to the body of knowledge?</label>
-            
-            @foreach ($revs as $irev) 
-                  @if ($irev->user->id === Auth::user()->id && $irev->contribution_to_knowledge_decision !==null && $irev->project_id === $records->id)
+            @if($reviewerCommented > 0)
+              @foreach ($revs as $review) 
+                  @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge_decision !== null && $review->project_id === $records->id)
 
                   <div class="form-group">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="contribution_to_knowledge_decision" id="contribution_to_knowledge_decision" value="Yes" disabled {{ $irev->contribution_to_knowledge_decision == 'Yes' ? 'checked' : '' }}>
+                      <input class="form-check-input" type="radio" name="contribution_to_knowledge_decision" id="contribution_to_knowledge_decision" value="Yes" disabled {{ $review->contribution_to_knowledge_decision == 'Yes' ? 'checked' : '' }}>
                       <label class="form-check-label" for="contribution_to_knowledge_decision">Yes</label>
                     </div>
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="contribution_to_knowledge_decision" id="contribution_to_knowledge_decision" value="No" disabled {{ $irev->contribution_to_knowledge_decision == 'No' ? 'checked' : '' }}>
+                      <input class="form-check-input" type="radio" name="contribution_to_knowledge_decision" id="contribution_to_knowledge_decision" value="No" disabled {{ $review->contribution_to_knowledge_decision == 'No' ? 'checked' : '' }}>
                       <label class="form-check-label" for="contribution_to_knowledge_decision">No</label>
                     </div>
                     <div class="form-group">
-                      <textarea id="contribution_to_knowledge_comments" name="contribution_to_knowledge_comments" class="form-control" placeholder="Other Comments" readonly>{{ $irev->contribution_to_knowledge_comments }}</textarea>
+                      <textarea id="contribution_to_knowledge_comments" name="contribution_to_knowledge_comments" class="form-control" placeholder="Other Comments" readonly>{{ $review->contribution_to_knowledge_comments }}</textarea>
                     </div>
                   </div> 
 
                   @endif
-                  @if ($irev->contribution_to_knowledge_comments === null && $irev->project_id === $records->id)
-
+                  @if ($review->user->id === Auth::user()->id && $review->contribution_to_knowledge_decision === null && $review->project_id === $records->id)
+                  
                   <div class="form-group">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="contribution_to_knowledge_decision" id="contribution_to_knowledge_decision" value="Yes">
@@ -359,8 +356,10 @@
                       <textarea id="contribution_to_knowledge_comments" name="contribution_to_knowledge_comments" class="form-control" placeholder="Other Comments"></textarea>
                     </div>
                   </div> 
+
                   @endif
-                  @endforeach
+              @endforeach
+            @endif 
 
           </div>
 
@@ -585,7 +584,7 @@
           </div>
 
           <div class="form-group">
-            <label for="grammar_and_presentation_decision">7.	Is the grammar and presentation poor? Although this should not be heavily waited.</label>
+            <label for="assumption_of_reader_knowledge_decision">7.	Is the grammar and presentation poor? Although this should not be heavily waited.</label>
             @if($reviewerCommented > 0)
               @foreach ($revs as $review) 
                   @if ($review->user->id === Auth::user()->id && $review->grammar_and_presentation_decision !== null && $review->project_id === $records->id)
@@ -607,7 +606,7 @@
 
                   @endif
                   @if ($review->user->id === Auth::user()->id && $review->grammar_and_presentation_decision === null && $review->project_id === $records->id)
-
+                    
                     <div class="form-group">
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="grammar_and_presentation_decision" id="grammar_and_presentation_decision" value="Yes">
@@ -619,10 +618,10 @@
                         <label class="form-check-label" for="grammar_and_presentation_decision">No</label>
                       </div>
                       <div class="form-group">
-                        <textarea id="grammar_and_presentation_comments" name="grammar_and_presentation_comments" class="form-control" placeholder="Other Comments"> </textarea>
+                        <textarea id="grammar_and_presentation_comments" name="grammar_and_presentation_comments" class="form-control" placeholder="Other Comments"></textarea>
                       </div>
                     </div> 
-                    
+
                   @endif
               @endforeach
             @endif 
@@ -1023,4 +1022,22 @@
     });
   });
 </script>
+
+@if (session('success'))
+    <script>
+        toastr.success('{{ session('success') }}');
+    </script>
+@elseif(session('delete'))
+    <script>
+        toastr.delete('{{ session('delete') }}');
+    </script>
+@elseif(session('message'))
+    <script>
+        toastr.message('{{ session('message') }}');
+    </script>
+@elseif(session('error'))
+    <script>
+        toastr.error('{{ session('error') }}');
+    </script>
+@endif
 @endsection

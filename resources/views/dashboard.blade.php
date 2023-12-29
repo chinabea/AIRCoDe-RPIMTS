@@ -84,21 +84,6 @@
               <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- <div class="col-lg-3 col-6">
-            <div class="small-box bg-primary">
-              <div class="inner">
-                <h3>{{ $allDeferredCount }}</h3>
-
-                <p>Deferred</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-pause-circle nav-icon"></i>
-              </div>
-              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div> -->
-        </div>
-        <div class="row">
           <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
               <div class="inner">
@@ -112,6 +97,8 @@
               <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+        </div>
+        <div class="row">
           <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
               <div class="inner">
@@ -130,12 +117,12 @@
               <div class="inner">
                 <h3>{{ $allCallforProposalCount }}</h3>
 
-                <p>Call for Proposals NA</p>
+                <p>Call for Proposals</p>
               </div>
               <div class="icon">
                 <i class="fas fa-edit nav-icon"></i>
               </div>
-              <a href="{{ route('status.for-revision') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('call-for-proposals') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -148,7 +135,7 @@
               <div class="icon">
                 <i class="nav-icon fas fa-key"></i>
               </div>
-              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('access-requests') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -257,6 +244,19 @@
             </div>
           </div>
           <div class="col-lg-3 col-6">
+            <div class="small-box bg-orange">
+              <div class="inner">
+                <h3>{{ $allCallforProposalCount }}</h3>
+
+                <p>Call for Proposals</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-edit nav-icon"></i>
+              </div>
+              <a href="{{ route('call-for-proposals') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
             <div class="small-box bg-pink">
               <div class="inner">
                 <h3>{{ $allAccessRequestCount }}</h3>
@@ -270,7 +270,7 @@
             </div>
           </div>
           <div class="col-lg-3 col-6">
-            <div class="small-box bg-fuchsia">
+            <div class="small-box bg-purple">
               <div class="inner">
                 <h3>{{ $allUsersCount }}</h3>
 
@@ -326,12 +326,12 @@
               <div class="inner">
                 <h3>{{ $draftCount }}</h3>
 
-                <p>Draft NA</p>
+                <p>Draft</p>
               </div>
               <div class="icon">
                 <i class="fas fa-book"></i>
               </div>
-              <a href="{{ route('projects') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('status.draft') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -389,29 +389,29 @@
             </div>
           </div>
           <div class="col-lg-3 col-6">
+            <div class="small-box bg-orange">
+              <div class="inner">
+                <h3>{{ $allCallforProposalCount }}</h3>
+
+                <p>Call for Proposals</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-edit nav-icon"></i>
+              </div>
+              <a href="{{ route('call-for-proposals') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
             <div class="small-box bg-pink">
               <div class="inner">
                 <h3>{{ $allAccessRequestCount }}</h3>
 
-                <p>Access Requests NA</p>
+                <p>Access Requests</p>
               </div>
               <div class="icon">
                 <i class="nav-icon fas fa-key"></i>
               </div>
-              <a href="{{ route('status.deferred') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-fuchsia">
-              <div class="inner">
-                <h3>{{ $allUsersCount }}</h3>
-
-                <p>Users</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-users"></i>
-              </div>
-              <a href="{{ route('users') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('access-requests') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>
@@ -520,24 +520,25 @@
             </div>
           </div>
         </div>
-        <div class="card card-default">
+        <!-- <div class="card card-default">
           <div class="card-header">
               <h3 class="card-title">
                   <i class="fas fa-bullhorn"></i>
                   Review Deadline
               </h3>
-          </div>
+          </div> -->
 
+          <div class="card">
           <div class="card-body">
               <div class="callout callout-danger">
-                <b>Please make a review to the projects!</b><br><hr>
+                <b>
+                  <i class="fas fa-bullhorn"></i> Deadline Ends: Please make a review!</b><br><hr>
                 @foreach($exceededDeadlines as $deadline)
                     @if(Auth::check() && Auth::user()->id === $deadline->user_id)
                         @if(\Carbon\Carbon::parse($deadline->deadline)->isPast() && $deadline->contribution_to_knowledge_decision === null)
                             <p class="item blinking-alert alert-link">
-                                {{-- <a href="{{ route('review.for-review-project', $record->id) }}">{{$record->project->project_name}}</a> --}}
-                                {{ $deadline->project->project_name }} -
-                                {{ \Carbon\Carbon::parse($deadline->deadline)->format('F j, Y') }}
+                              <a class="text-danger" href="{{ route('review.for-review-project', ['id' => $deadline->project_id]) }}">{{$deadline->project->project_name}}</a> -
+                              {{ \Carbon\Carbon::parse($deadline->deadline)->format('F j, Y') }}
                             </p>
                         @endif
                     @endif

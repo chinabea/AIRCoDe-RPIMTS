@@ -33,9 +33,9 @@
                                     @endif
                                 @endforeach
                             </select>
-                            <small class="text-muted">Reminder: Ensure that the submission of other relevant
+                            <!-- <small class="text-muted">Reminder: Ensure that the submission of other relevant
                                 requirements is completed while the Call for Proposal is open.
-                                Submission will close when the Call for Proposal status is closed.</small>
+                                Submission will close when the Call for Proposal status is closed.</small> -->
                         </div>
 
                         <div class="form-group">

@@ -21,15 +21,31 @@ class Message extends Model
         return $this->belongsTo(User::class, 'recipient_id');
     }
     
+    // public function latestMessage()
+    // {
+    //     return Message::where(function ($query) {
+    //         $query->where('sender_id', $this->sender_id)
+    //             ->where('recipient_id', $this->recipient_id)
+    //             ->orWhere('sender_id', $this->recipient_id)
+    //             ->where('recipient_id', $this->sender_id);
+    //     })->latest('created_at')->first();
+    // }
+    // public function latestMessage()
+    // {
+    //     return Message::where(function ($query) {
+    //         $query->where('sender_id', $this->sender_id)
+    //             ->where('recipient_id', $this->recipient_id)
+    //             ->orWhere('sender_id', $this->recipient_id)
+    //             ->where('recipient_id', $this->sender_id);
+    //     })->latest('created_at')->first();
+    // }
     public function latestMessage()
     {
-        return Message::where(function ($query) {
-            $query->where('sender_id', $this->sender_id)
-                ->where('recipient_id', $this->recipient_id)
-                ->orWhere('sender_id', $this->recipient_id)
-                ->where('recipient_id', $this->sender_id);
-        })->latest('created_at')->first();
+        return $this->hasOne(Message::class, 'conversation_number', 'conversation_number')
+            ->latest('created_at');
     }
+
+
 
     public function messages()
     {

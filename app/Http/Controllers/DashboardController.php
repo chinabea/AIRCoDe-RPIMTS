@@ -37,9 +37,7 @@ class DashboardController extends Controller
             $countToReviews = Review::where('user_id', Auth::user()->id)
             ->whereNull('contribution_to_knowledge_comments')
             ->count();
-
-
-
+            
             $authenticatedUserId = auth()->user()->id;
             $allCallforProposalCount = CallForProposal::count();
             $allAccessRequestCount = AccessRequest::count();

@@ -33,12 +33,6 @@ class Task extends Model
     {
         return $this->belongsTo(Member::class, 'assigned_to');
     }
-
-    // public function assignedTo()
-    // {
-    //     return $this->hasMany(ProjectTeamModel::class, 'assigned_to');
-    // }
-    
     public function user()
     {
         return $this->belongsTo(User::class);

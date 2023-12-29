@@ -32,7 +32,8 @@ return new class extends Migration
             // $table->date('approval_date')->nullable();
 
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('call_for_proposal_id')->references('id')->on('call_for_proposals')->onDelete('cascade');
+            // $table->foreign('call_for_proposal_id')->references('id')->on('call_for_proposals')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

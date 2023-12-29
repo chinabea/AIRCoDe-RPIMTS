@@ -77,10 +77,15 @@ class ReviewController extends Controller
             ->where('project_id', $id)
             ->count();
 
-            
-        $irev = Review::where('user_id', Auth::user()->id)
-        ->where('project_id', $id)
-        ->get();
+            // $assignedReviewersCount = Review::where('project_id', $id)->count();
+            // $reviewerCommented = Review::where('project_id', $id)
+            //     ->whereNotNull('technical_or_methodological_errors_decision')
+            //     ->count();
+
+
+            $irev = Review::where('user_id', Auth::user()->id)
+            ->where('project_id', $id)
+            ->get();
 
 
             return view('submission-details.reviews.for-review-project', compact('id', 'records', 'reviewers', 'toreview','reviewersss','irev',
@@ -156,6 +161,18 @@ class ReviewController extends Controller
                 'clear_figures_and_tables_comments' => $request->input('clear_figures_and_tables_comments'),
                 'adequate_explanations_comments' => $request->input('adequate_explanations_comments'),
                 'technical_or_methodological_errors_comments' => $request->input('technical_or_methodological_errors_comments'),
+
+                'reseach_project_name' => $request->input('reseach_project_name') ?? null,
+                'reseach_project_group' => $request->input('reseach_project_group') ?? null,
+                'project_introduction' => $request->input('project_introduction') ?? null,
+                'project_aims_and_objectives' => $request->input('project_aims_and_objectives') ?? null,
+                'project_expected_research_contribution' => $request->input('project_expected_research_contribution') ?? null,
+                'project_proposed_methodology' => $request->input('project_proposed_methodology') ?? null,
+                'project_workplan' => $request->input('project_workplan') ?? null,
+                'project_resources' => $request->input('project_resources') ?? null,
+                'project_references' => $request->input('project_references') ?? null,
+                'project_total_budget' => $request->input('project_total_budget') ?? null,
+                
                 'other_comments' => $request->input('other_comments'),
                 'review_decision' => $request->input('review_decision'),
             ]);
@@ -191,7 +208,7 @@ class ReviewController extends Controller
                     $existingReview->applicable_and_sufficient_references_decision = $existingReview->applicable_and_sufficient_references_decision ?? $request->input('applicable_and_sufficient_references_decision');
                     $existingReview->inappropriate_references_decision = $existingReview->inappropriate_references_decision ?? $request->input('inappropriate_references_decision');
                     $existingReview->comprehensive_application_decision = $existingReview->comprehensive_application_decision ?? $request->input('comprehensive_application_decision');
-                    $existingReview->grammar_and_presentation_decision = $existingReview->grammar_and_presentation_decision ?? $request->input('grammar_and_presentation');
+                    $existingReview->grammar_and_presentation_decision = $existingReview->grammar_and_presentation_decision ?? $request->input('grammar_and_presentation_decision');
                     $existingReview->assumption_of_reader_knowledge_decision = $existingReview->assumption_of_reader_knowledge_decision ?? $request->input('assumption_of_reader_knowledge_decision');
                     $existingReview->clear_figures_and_tables_decision = $existingReview->clear_figures_and_tables_decision ?? $request->input('clear_figures_and_tables_decision');
                     $existingReview->adequate_explanations_decision = $existingReview->adequate_explanations_decision ?? $request->input('adequate_explanations_decision');
@@ -208,15 +225,28 @@ class ReviewController extends Controller
                     $existingReview->clear_figures_and_tables_comments = $existingReview->clear_figures_and_tables_comments ?? $request->input('clear_figures_and_tables_comments');
                     $existingReview->adequate_explanations_comments = $existingReview->adequate_explanations_comments ?? $request->input('adequate_explanations_comments');
                     $existingReview->technical_or_methodological_errors_comments = $existingReview->technical_or_methodological_errors_comments ?? $request->input('technical_or_methodological_errors_comments');
+
+                    $existingReview->reseach_project_name = $existingReview->reseach_project_name ?? $request->input('reseach_project_name');
+                    $existingReview->reseach_project_group = $existingReview->reseach_project_group ?? $request->input('reseach_project_group');
+                    $existingReview->project_introduction = $existingReview->project_introduction ?? $request->input('project_introduction');
+                    $existingReview->project_aims_and_objectives = $existingReview->project_aims_and_objectives ?? $request->input('project_aims_and_objectives');
+                    $existingReview->project_background = $existingReview->project_background ?? $request->input('project_background');
+                    $existingReview->project_expected_research_contribution = $existingReview->project_expected_research_contribution ?? $request->input('project_expected_research_contribution');
+                    $existingReview->project_proposed_methodology = $existingReview->project_proposed_methodology ?? $request->input('project_proposed_methodology');
+                    $existingReview->project_workplan = $existingReview->project_workplan ?? $request->input('project_workplan');
+                    $existingReview->project_resources = $existingReview->project_resources ?? $request->input('project_resources');
+                    $existingReview->project_references = $existingReview->project_references ?? $request->input('project_references');
+                    $existingReview->project_total_budget = $existingReview->project_total_budget ?? $request->input('project_total_budget');
+
                     $existingReview->other_comments = $existingReview->other_comments ?? $request->input('other_comments');
                     $existingReview->review_decision = $existingReview->review_decision ?? $request->input('review_decision');
-
 
                     $existingReview->save();
                 }
             }
 
-            return redirect()->route('reviewer.home')->with('success', 'Review Successfully Added!');
+            // return redirect()->route('reviewer.home')->with('success', 'Review Successfully Added!');
+            return redirect()->back()->with('success', 'Review Successfully Added!');
             } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -272,6 +302,30 @@ class ReviewController extends Controller
                 'clear_figures_and_tables_comments' => $request->input('clear_figures_and_tables_comments') ?? null,
                 'adequate_explanations_comments' => $request->input('adequate_explanations_comments') ?? null,
                 'technical_or_methodological_errors_comments' => $request->input('technical_or_methodological_errors_comments') ?? null,
+
+                'reseach_project_name' => $request->input('reseach_project_name') ?? null,
+                'reseach_project_group' => $request->input('reseach_project_group') ?? null,
+                'project_introduction' => $request->input('project_introduction') ?? null,
+                'project_aims_and_objectives' => $request->input('project_aims_and_objectives') ?? null,
+                'project_background' => $request->input('project_background') ?? null,
+                'project_expected_research_contribution' => $request->input('project_expected_research_contribution') ?? null,
+                'project_proposed_methodology' => $request->input('project_proposed_methodology') ?? null,
+                'project_workplan' => $request->input('project_workplan') ?? null,
+                'project_resources' => $request->input('project_resources') ?? null,
+                'project_references' => $request->input('project_references') ?? null,
+                'project_total_budget' => $request->input('project_total_budget') ?? null,
+
+                // 'reseach_project_name' => $request->input('reseach_project_name') ?? null,
+                // 'reseach_project_group' => $request->input('reseach_project_group') ?? null,
+                // 'project_introduction' => $request->input('project_introduction') ?? null,
+                // 'project_aims_and_objectives' => $request->input('project_aims_and_objectives') ?? null,
+                // 'project_expected_research_contribution' => $request->input('project_expected_research_contribution') ?? null,
+                // 'project_proposed_methodology' => $request->input('project_proposed_methodology') ?? null,
+                // 'project_workplan' => $request->input('project_workplan') ?? null,
+                // 'project_resources' => $request->input('project_resources') ?? null,
+                // 'project_references' => $request->input('project_references') ?? null,
+                // 'project_total_budget' => $request->input('project_total_budget') ?? null,
+
                 'other_comments' => $request->input('other_comments') ?? null,
                 'review_decision' => $request->input('review_decision') ?? null,
             ]);

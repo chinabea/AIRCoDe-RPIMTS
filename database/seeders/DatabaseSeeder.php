@@ -1077,6 +1077,7 @@ class DatabaseSeeder extends Seeder
                 'content' => 'I hope this email finds you well. I wanted to touch base regarding our upcoming team retreat.
                     Its essential that we discuss the agenda, team-building activities, and accommodation options.
                     Please share your thoughts and suggestions. Looking forward to your input!',
+                'created_at' => '2023-1-10',
             ],
             [
                 'conversation_number' => '2',
@@ -1086,6 +1087,7 @@ class DatabaseSeeder extends Seeder
                 'content' => 'I trust youre doing great. I wanted to provide a quick update on the project. Weve made
                 significant progress, and its time to discuss the next steps. Lets schedule a meeting for a detailed review.
                 Your insights are crucial to our success.',
+                'created_at' => '2023-1-11',
             ],
             [
                 'conversation_number' => '1',
@@ -1094,7 +1096,8 @@ class DatabaseSeeder extends Seeder
                 'subject' => 'Follow-Up on Previous Discussion',
                 'content' => 'How about grabbing a coffee next week to catch up? Its been a while since we had a
                     chance to chat. Id love to hear what youve been up to. Let me know your availability, and we can set something up.',
-            ],
+                'created_at' => '2023-1-12',
+                ],
             [
                 'conversation_number' => '1',
                 'sender_id' => '2',
@@ -1103,6 +1106,7 @@ class DatabaseSeeder extends Seeder
                 'content' => 'I have some exciting news to share with the team. Weve successfully secured a new partnership
                 that will significantly impact our projects. Join me for a brief meeting tomorrow at 10 AM to discuss
                 the details and next steps.',
+                'created_at' => '2023-1-13',
             ],
             [
                 'conversation_number' => '1',
@@ -1112,6 +1116,7 @@ class DatabaseSeeder extends Seeder
                 'content' => 'Get ready for some fun! Were planning a team-building event to strengthen our collaboration
                  and have a great time together. Mark your calendars for [date] and stay tuned for more details. Lets
                  make it a memorable day!',
+                 'created_at' => '2023-1-14',
             ],
             [
                 'conversation_number' => '1',
@@ -1121,6 +1126,7 @@ class DatabaseSeeder extends Seeder
                 'content' => 'Get ready for some fun! Were planning a team-building event to strengthen our collaboration
                  and have a great time together. Mark your calendars for [date] and stay tuned for more details. Lets
                  make it a memorable day!',
+                 'created_at' => '2023-1-15',
             ],
             [
                 'conversation_number' => '2',
@@ -1132,6 +1138,7 @@ class DatabaseSeeder extends Seeder
                               <p>Our team is working hard to provide you with the best services, and we value your feedback. If you have any questions or suggestions, feel free to reply to this email.</p>
                               <p>Thank you again for choosing our services. We appreciate your business.</p>
                               <p>Best regards,<br>RPIMTS</p>',
+                              'created_at' => '2023-1-16',
             ],
         ];
 

@@ -87,22 +87,22 @@
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="form-group">
-                                                                    <label for="title">Call for Proposals</label>
+                                                                    <label for="title" class="float-left">Call for Proposals</label>
                                                                     <input type="text" class="form-control" id="title" name="title" placeholder="Enter Call for Proposals" value="{{$proposal->title}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="description">Description</label>
+                                                                    <label for="description" class="float-left">Description</label>
                                                                     <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="{{$proposal->description}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="start_date">Start Date</label>
+                                                                    <label for="start_date" class="float-left">Start Date</label>
                                                                     <input type="date" class="form-control" id="start_date" name="start_date" value="{{$proposal->start_date}}">
                                                                 </div>
                                                                 @error('start_date')
                                                                 <div class="alert alert-danger">{{ $message }}</div>
                                                                 @enderror
                                                                 <div class="form-group">
-                                                                    <label for="end_date">End Date</label>
+                                                                    <label for="end_date" class="float-left">End Date</label>
                                                                     <input type="date" class="form-control" id="end_date" name="end_date" value="{{$proposal->end_date}}">
                                                                 </div>
                                                                 @error('end_date')
@@ -113,7 +113,7 @@
                                                                     <input type="text" class="form-control" id="status" name="status" placeholder="Status" value="{{$proposal->status}}">
                                                                 </div> -->
                                                                 <div class="form-group">
-                                                                    <label for="remarks">Remarks</label>
+                                                                    <label for="remarks" class="float-left">Remarks</label>
                                                                     <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks" value="{{$proposal->remarks}}">
                                                                 </div>
                                                                 <!-- <div class="form-group">

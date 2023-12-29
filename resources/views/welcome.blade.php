@@ -31,7 +31,7 @@
                       @endif
 
                       @if (!is_null($approvalDate))
-                      <p>>DATE: {{\Carbon\Carbon::parse($approvalDate)->format('F j, Y') }}</p>
+                      <p class="text-white">DATE APPROVED: {{\Carbon\Carbon::parse($approvalDate)->format('F j, Y') }}</p>
                       @endif
                   </div>
                   @endif

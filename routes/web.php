@@ -57,9 +57,6 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::delete('/delete-users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/submission-details/show/{id}', [ProjectController::class, 'show'])->name('submission-details.show');
     Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
-    // Route::get('/access-requests/addStatus', [AccessRequestController::class, 'addStatus'])->name('access-requests.addStatus');
-    // Route::post('/access-request/{id}/approve', [AccessRequestController::class, 'approve'])->name('access-request.approve');
-    // Route::post('/access-request/{id}/decline', [AccessRequestController::class, 'decline'])->name('access-request.decline');
     Route::get('/access-request/edit/{id}', [AccessRequestController::class, 'edit'])->name('transparency.access-requests.edit');
     Route::put('/access-request/edit/{id}', [AccessRequestController::class, 'update'])->name('transparency.access-requests.update');
 
@@ -103,8 +100,6 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::post('/messages/reply', [MessageController::class, 'reply'])->name('messages.reply');
     Route::post('/messages/delete-selected', [MessageController::class, 'deleteSelected'])->name('messages.deleteSelected');
 
-    // Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
-
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.mailbox');
     Route::get('/messages-view/{id}', [MessageController::class, 'show'])->name('messages.read-mail');
     Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.compose');
@@ -146,7 +141,7 @@ Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(
     Route::get('/home', [DashboardController::class, 'countAll'])->name('researcher.home');
     Route::get('/call-for-proposals/show/{id}', [CallForProposalController::class, 'show'])->name('transparency.call-for-proposals.show');
     Route::get('/tasks', [TaskController::class, 'index'])->name('submission-details.tasks.index');
-    Route::get('task/create', [TaskController::class, 'create'])->name('submission-details.tasks.create');
+    Route::get('/task/create', [TaskController::class, 'create'])->name('submission-details.tasks.create');
     Route::post('/task', [TaskController::class, 'store'])->name('submission-details.tasks.store');
     Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('submission-details.tasks.edit');
     Route::put('/task/{id}/edit', [TaskController::class, 'update'])->name('submission-details.tasks.update');

@@ -45,7 +45,9 @@ class ProjectController extends Controller
             $reviewers = User::whereIn('id', Review::pluck('user_id'))->get();
             $call_for_proposals = CallForProposal::all();
 
-            return view('projects.index', compact('projects', 'reviewers', 'call_for_proposals'));
+            // return view('projects.index', compact('projects', 'reviewers', 'call_for_proposals')->with('success', 'Research Proposal Successfully Submmitted!');
+            return view('projects.index', compact('projects', 'reviewers', 'call_for_proposals'))->with('success', 'Research Proposal Successfully Submitted!');
+
         } catch (Exception $e) {
             // Handle the exception, you can log it for debugging or display an error message to the user.
             return redirect()->back()->with('error', 'An error occurred while fetching project data: ' . $e->getMessage());
@@ -60,7 +62,8 @@ class ProjectController extends Controller
             $users = User::all();
             $call_for_proposals = CallForProposal::all();
 
-            return view('projects.create', ['call_for_proposals' => $call_for_proposals]);
+            return view('projects.create', ['call_for_proposals' => $call_for_proposals])->with('success', 'Research Proposal Successfully Submmitted!');
+            // return redirect()->route('submission-details.show')->with('success', 'Research Proposal Successfully Submmitted!');
         } catch (Exception $e) {
             // Handle the exception, you can log it for debugging or display an error message to the user.
             return redirect()->route('projects.create')->with('error', 'An error occurred while creating the project: ' . $e->getMessage());
@@ -149,7 +152,7 @@ class ProjectController extends Controller
                 $researcher->notify(new ResearchProposalSubmissionNotification($projects->id, $trackingCode, $createdAt, $userId, $researcherMail, $projectTitle, $projects));
             }
 
-            return redirect()->route('projects')->with('success', 'Research Proposal Successfully Submmitted!');
+            return redirect()->route('submission-details.show')->with('success', 'Research Proposal Successfully Submmitted!');
         } catch (Exception $e) {
         // Handle the exception here, you can log it or return an error response
         return redirect()->route('projects')->with('error', 'An error occurred while submitting the research proposal: ' . $e->getMessage());
@@ -273,6 +276,7 @@ class ProjectController extends Controller
     
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         try {
             $userId = Auth::id();
             $record = Project::findOrFail($id);
@@ -282,6 +286,7 @@ class ProjectController extends Controller
                 'user_id' => $userId,
                 'version_number' => $newVersionNumber,
                 'tracking_code' => $request->input('tracking_code'),
+                'call_for_proposal_id' => $request->input('call_for_proposal_id'),
                 'project_name' => $request->input('project_name'),
                 'research_group' => $request->input('research_group'),
                 'introduction' => $request->input('introduction'),
@@ -299,14 +304,6 @@ class ProjectController extends Controller
     
             // Update the project record with the new values from the form
             $record->project_name = $request->input('project_name');
-            if ($request->has('draft_submit')) {
-                // Set the project status as 'draft'
-                $record->status = 'draft';
-            } else {
-                // Set the project status as 'under evaluation' for the regular submission
-                $record->status = 'under evaluation';
-
-            }
             $record->research_group = $request->input('research_group');
             $record->introduction = $request->input('introduction');
             $record->aims_and_objectives = $request->input('aims_and_objectives');
