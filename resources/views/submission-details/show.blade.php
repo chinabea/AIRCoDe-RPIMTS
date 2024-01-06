@@ -1608,7 +1608,7 @@
                 @endphp
 
                 <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks"
-                        data-backdrop="static" data-keyboard="false" @if($isButtonDisabled && !$isProjectForRevision) disabled @endif>
+                        data-backdrop="static" data-keyboard="false" @if($isButtonDisabled && !$isProjectForRevision) class="d-none" @endif>
                     Add Task
                 </button>
 
@@ -1748,7 +1748,7 @@
                         $isProjectForRevision = $records->status === 'For Revision';
                     @endphp
                     <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"
-                        data-keyboard="false" data-target="#lib" @if($isButtonDisabled && !$isProjectForRevision) disabled @endif>
+                        data-keyboard="false" data-target="#lib" @if($isButtonDisabled && !$isProjectForRevision) class="d-none" @endif>
                         Add Line-Item
                     </button>
                     @include('submission-details.line-items-budget.create')
@@ -1878,7 +1878,7 @@
                         $isProjectForRevision = $records->status === 'For Revision';
                     @endphp
                     <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"
-                        data-keyboard="false" data-target="#filesModal" @if($isButtonDisabled && !$isProjectForRevision) disabled @endif>Add File</button>
+                        data-keyboard="false" data-target="#filesModal" @if($isButtonDisabled && !$isProjectForRevision) class="d-none" @endif>Add File</button>
                     @include('submission-details.files.create')
 
                 @endif
@@ -2235,7 +2235,7 @@
                         $isProjectForRevision = $records->status === 'For Revision';
                     @endphp
                     <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static"
-                        data-keyboard="false" data-target="#ProjectTeam" @if($isButtonDisabled && !$isProjectForRevision) disabled @endif>Add Member</button>
+                        data-keyboard="false" data-target="#ProjectTeam" @if($isButtonDisabled && !$isProjectForRevision) class="d-none" @endif>Add Member</button>
                     @include('submission-details.project-teams.create')
 
                 @endif
