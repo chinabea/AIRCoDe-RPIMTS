@@ -1648,11 +1648,11 @@
                               <td>{{ $counter }}.</td>
                               <td>{{ $task->title }}</td>
                               <td>{{ $task->description }}</td>
-                              <td>{{ $task->created_at }}</td>
-                              <td>{{ $task->end_date }}</td>
+                              <td>{{ $task->created_at->format('F j, Y') }} </td>
+                              <td>{{ $task->end_date->format('F j, Y') }}</td>
                               <td>{{ $task->assignedTo->member_name }}</td>
 
-                              <td>{{ $task->updated_at }}</td>
+                              <td>{{ $task->updated_at->format('F j, Y') }}</td>
                               <td>
                                   <a href="{{ route('submission-details.tasks.edit', $task->id) }}" type="button"
                                       class="btn btn-warning" data-toggle="modal" data-backdrop="static"
@@ -1911,8 +1911,8 @@
                         <tr>
                             <td class="align-middle">{{ $counter }}.</td>
                             <td>{{ $file->file_name }}</td>
-                            <td>{{ $file->created_at }}</td>
-                            <td>{{ $file->updated_at }}</td>
+                            <td>{{ $file->created_at->format('F j, Y') }}</td>
+                            <td>{{ $file->updated_at->format('F j, Y') }}</td>
                             <td>
                                 <a href="{{ route('submission-details.files.preview', ['filename' => $file->file_path]) }}"
                                     class="btn btn-secondary">
