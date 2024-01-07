@@ -151,8 +151,58 @@ class ProjectController extends Controller
 
                 $researcher->notify(new ResearchProposalSubmissionNotification($projects->id, $trackingCode, $createdAt, $userId, $researcherMail, $projectTitle, $projects));
             }
+            
+            $projMembers = Member::where('id', $projects->id)->get();
+            $tasks = Task::where('project_id', $projects->id)->get();
+            $teamMembers = Member::where('project_id', $projects->id)->get();
+            $allLineItems = LineItemBudget::all();
+            $lineItems = LineItemBudget::where('project_id', $projects->id)->get();
+            $files = File::where('project_id', $projects->id)->get();
+            $reviewers = Review::where('user_id', $projects->id)->get();
+            $toreview = Review::where('project_id', $projects->id)->get()->first();
+            $members = User::where('role', 3)->get();
+            $reviewersss = User::where('role', 4)->get();
+            $data = Project::findOrFail($projects->id);
+            $records = Project::with('versions')->findOrFail($projects->id);
+            $call_for_proposals = CallForProposal::all();
+            $trackingCode = $data->tracking_code;
+            $revised = Version::where('tracking_code', $trackingCode)->get();
 
-            return redirect()->route('submission-details.show')->with('success', 'Research Proposal Successfully Submmitted!');
+            $assignedReviewers = Review::where('project_id', $projects->id)->with('reviewer')->get();
+
+            $reviewerCommented = Review::where('user_id', Auth::user()->id)
+            ->where('project_id', $projects->id)
+            ->count();
+
+            // Calculate the total of all line items
+            $totalAllLineItems = 0;
+            foreach ($lineItems as $item) {
+                $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudget structure
+            }
+
+            return redirect()
+            ->route('submission-details.show', ['id' => $projects->id])
+            ->with([
+                'success' => 'Research Proposal Successfully Submitted!',
+                'id' => $projects->id,  // Add other variables as needed
+                'projMembers' => $projMembers,
+                'call_for_proposals' => $call_for_proposals,
+                'revised' => $revised,
+                'records' => $records,
+                'reviewers' => $reviewers,
+                'toreview' => $toreview,
+                'reviewersss' => $reviewersss,
+                'teamMembers' => $teamMembers,
+                'lineItems' => $lineItems,
+                'allLineItems' => $allLineItems,
+                'files' => $files,
+                'totalAllLineItems' => $totalAllLineItems,
+                'members' => $members,
+                'tasks' => $tasks,
+                'data' => $data,
+                'reviewerCommented' => $reviewerCommented,
+                'assignedReviewers' => $assignedReviewers,
+            ]);
         } catch (Exception $e) {
         // Handle the exception here, you can log it or return an error response
         return redirect()->route('projects')->with('error', 'An error occurred while submitting the research proposal: ' . $e->getMessage());
@@ -195,6 +245,8 @@ class ProjectController extends Controller
             return view('submission-details.show', compact('id', 'projMembers', 'call_for_proposals', 'revised', 'records', 'reviewers', 'toreview','reviewersss', 'teamMembers',
                         'lineItems', 'allLineItems', 'files', 'totalAllLineItems', 'members', 'tasks', 'data',
                         'reviewerCommented', 'assignedReviewers'));
+            
+    
         } catch (Exception $e) {
             // Handle the exception, you can log it for debugging or display an error message to the user.
             return redirect()->back()->with('error', 'An error occurred while showing the project: ' . $e->getMessage());

@@ -18,6 +18,35 @@
                                     @include('reports.report-options')
                             </div>
                             <div class="card-body">
+                            <form action="" method="post">
+    @csrf
+    <div class="form-group">
+        <label for="year">Select Year:</label>
+        <select class="form-control" id="year" name="year">
+            @php
+                $currentYear = date('Y');
+            @endphp
+            @for ($i = $currentYear; $i >= $currentYear - 10; $i--)
+                <option value="{{ $i }}">{{ $i }}</option>
+            @endfor
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="start_date">Start Date:</label>
+        <input type="date" class="form-control" id="start_date" name="start_date">
+    </div>
+
+    <div class="form-group">
+        <label for="end_date">End Date:</label>
+        <input type="date" class="form-control" id="end_date" name="end_date">
+    </div>
+
+    <button type="submit" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">
+        Add Member
+    </button>
+</form>
+
                                 <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                     <thead>
                                         <tr>
