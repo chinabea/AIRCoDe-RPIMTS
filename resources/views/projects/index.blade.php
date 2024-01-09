@@ -13,39 +13,60 @@
                             <div class="card-header">
                                 <h3 class="card-title my-1"><i class="fa fa-book"></i> Submitted Projects</h3>
 
+                                <!-- <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false"> 
+                                    <i class="fas fa-file-pdf"></i> Export to PDF</button> 
+                                    @include('reports.report-options') -->
+                            </div>
+                            <div class="card-body">
+                            <form action="{{ route('generate.projects.report') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="year">Select Year:</label>
+                                    <select class="form-control" id="year" name="year">
+                                        @php
+                                            $currentYear = date('Y');
+                                        @endphp
+                                        @for ($i = $currentYear; $i >= $currentYear - 10; $i--)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="start_date">Start Date:</label>
+                                    <input type="date" class="form-control" id="start_date" name="start_date">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="end_date">End Date:</label>
+                                    <input type="date" class="form-control" id="end_date" name="end_date">
+                                </div>
+
+                                <input type="hidden" id="selectedStartDate" name="selected_start_date" value="">
+                                <input type="hidden" id="selectedEndDate" name="selected_end_date" value="">
+
                                 <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false"> 
                                     <i class="fas fa-file-pdf"></i> Export to PDF</button> 
                                     @include('reports.report-options')
-                            </div>
-                            <div class="card-body">
-                            <form action="" method="post">
-    @csrf
-    <div class="form-group">
-        <label for="year">Select Year:</label>
-        <select class="form-control" id="year" name="year">
-            @php
-                $currentYear = date('Y');
-            @endphp
-            @for ($i = $currentYear; $i >= $currentYear - 10; $i--)
-                <option value="{{ $i }}">{{ $i }}</option>
-            @endfor
-        </select>
-    </div>
+                                    
+                                <script>
+                                    // Update hidden inputs with selected date range before opening the modal
+                                    $('#projectsPdf').on('show.bs.modal', function (event) {
+                                        var startDate = $('#start_date').val();
+                                        var endDate = $('#end_date').val();
 
-    <div class="form-group">
-        <label for="start_date">Start Date:</label>
-        <input type="date" class="form-control" id="start_date" name="start_date">
-    </div>
-
-    <div class="form-group">
-        <label for="end_date">End Date:</label>
-        <input type="date" class="form-control" id="end_date" name="end_date">
-    </div>
-
-    <button type="submit" class="btn btn-primary my-2" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">
-        Add Member
-    </button>
-</form>
+                                        $('#selectedStartDate').val(startDate);
+                                        $('#selectedEndDate').val(endDate);
+                                    });
+                                </script>
+                                
+                                <!-- <button type="submit" class="btn btn-success btn-sm">
+                                    Generate PDF
+                                </button> -->
+                            </form>
+                                <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">
+                                    Add Member
+                                </button>
 
                                 <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                     <thead>
