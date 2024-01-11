@@ -23,7 +23,7 @@
     <div class="text-center">
         <br><header>SUBMITTED PROJECTS</header>
     </div>
-
+    
     <table id="example1" class="table table-bordered table-hover text-center">
         <thead>
             <tr>
@@ -38,9 +38,10 @@
             </tr>
         </thead>
         <tbody>
+            
             @foreach ($records as $record)
                 @if (
-                    (in_array(auth()->user()->role, [1, 2, 4]) && $record->status !== 'Draft') ||
+                    (in_array(auth()->user()->role, [1, 2, 4]) && $record->status !== 'Draft') ||q
                         $record->user_id === auth()->user()->id)
                     <tr>
                         <td class="align-middle">{{ $loop->iteration }}</td>

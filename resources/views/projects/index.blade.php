@@ -13,9 +13,9 @@
                             <div class="card-header">
                                 <h3 class="card-title my-1"><i class="fa fa-book"></i> Submitted Projects</h3>
 
-                                <!-- <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false"> 
+                                <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false"> 
                                     <i class="fas fa-file-pdf"></i> Export to PDF</button> 
-                                    @include('reports.report-options') -->
+                                    @include('reports.report-options')
                             </div>
                             <div class="card-body">
                             <form action="{{ route('generate.projects.report') }}" method="post">
@@ -42,14 +42,15 @@
                                     <input type="date" class="form-control" id="end_date" name="end_date">
                                 </div>
 
-                                <input type="hidden" id="selectedStartDate" name="selected_start_date" value="">
-                                <input type="hidden" id="selectedEndDate" name="selected_end_date" value="">
+                                <!-- <input type="hidden" id="selectedStartDate" name="selected_start_date" value="">
+                                <input type="hidden" id="selectedEndDate" name="selected_end_date" value=""> -->
 
                                 <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false"> 
                                     <i class="fas fa-file-pdf"></i> Export to PDF</button> 
                                     @include('reports.report-options')
+                                    <br>
                                     
-                                <script>
+                                <!-- <script>
                                     // Update hidden inputs with selected date range before opening the modal
                                     $('#projectsPdf').on('show.bs.modal', function (event) {
                                         var startDate = $('#start_date').val();
@@ -58,15 +59,15 @@
                                         $('#selectedStartDate').val(startDate);
                                         $('#selectedEndDate').val(endDate);
                                     });
-                                </script>
+                                </script> -->
                                 
                                 <!-- <button type="submit" class="btn btn-success btn-sm">
                                     Generate PDF
                                 </button> -->
                             </form>
-                                <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">
-                                    Add Member
-                                </button>
+                                <!-- <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">
+                                    Add Proposal
+                                </button> -->
 
                                 <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                     <thead>
@@ -146,13 +147,13 @@
                                                             </button>
 
                                                             <!-- <button class="btn btn-primary" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">
-                                                    <i class="fas fa-eye"> </i>
-                                                </button> -->
+                                                                <i class="fas fa-eye"> </i>
+                                                            </button> -->
 
 
                                                             <!-- <a href="#" class="btn btn-secondary btn-sm">
-                                                    <i class="fas fa-ellipsis-h"></i>
-                                                </a> -->
+                                                                <i class="fas fa-ellipsis-h"></i>
+                                                            </a> -->
 
 
                                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"

@@ -34,14 +34,9 @@ class ReportController extends Controller
 
     }
 
-    public function generateProjectReport(Request $request, $data_id)
     {
 
         try {
-            
-            $selectedStartDate = $request->input('selected_start_date');
-            $selectedEndDate = $request->input('selected_end_date');
-            
             $data = Project::findOrFail($data_id);
             $projMembers = Member::where('project_id', $data_id)->get();
 
