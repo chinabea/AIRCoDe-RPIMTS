@@ -34,6 +34,7 @@ class ReportController extends Controller
 
     }
 
+    public function generateProjectReport($data_id)
     {
 
         try {
