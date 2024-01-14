@@ -44,7 +44,7 @@ Route::get('/', [TrackController::class, 'track'])->name('welcome');
 
 Auth::routes();
 
-Route::middleware(['auth', 'cache'])->group(function (){
+Route::middleware(['auth', 'cache'])->group(function (){ 
 
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
@@ -93,7 +93,6 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::post('/access-requests/{id}/approve', [AccessRequestController::class, 'approve'])->name('access-requests.approve');
     Route::post('/access-requests/{id}/decline', [AccessRequestController::class, 'decline'])->name('access-requests.decline');
 
-
     // Messages
     Route::get('/messages/indexx', [MessageController::class, 'index'])->name('messages.index');
     Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
@@ -103,15 +102,15 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.mailbox');
     Route::get('/messages-view/{id}', [MessageController::class, 'show'])->name('messages.read-mail');
     Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.compose');
-});
+}); 
 
-Route::prefix('staff')->middleware(['auth', 'cache', 'staff'])->group(function (){
+Route::prefix('staff')->middleware(['auth', 'cache', 'staff'])->group(function (){ 
     Route::get('/home', [DashboardController::class, 'countAll'])->name('staff.home');
     Route::post('/project/summary/reviews', [ReviewController::class, 'storeSummaryReview'])->name('store.summary.reviews');
 
-});
+}); 
 
-Route::prefix('reviewer')->middleware(['auth', 'cache', 'reviewer'])->group(function (){
+Route::prefix('reviewer')->middleware(['auth', 'cache', 'reviewer'])->group(function (){ 
 
     Route::get('/home', [DashboardController::class, 'countAll'])->name('reviewer.home');
     Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews');
@@ -122,9 +121,9 @@ Route::prefix('reviewer')->middleware(['auth', 'cache', 'reviewer'])->group(func
     Route::put('/review/edit/{id}', [ReviewController::class, 'update'])->name('reviews.update');
     Route::delete('/review/delete/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
     Route::post('/review/storeComments/{id}', [ReviewController::class, 'storeComments'])->name('reviews.storeComments');
-});
+}); 
 
-Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(function (){
+Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(function (){ 
 
     Route::get('/home', [DashboardController::class, 'countAll'])->name('director.home');
     Route::delete('/project/delete/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
@@ -134,9 +133,9 @@ Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(func
     Route::get('/select-reviewers', [ReviewController::class, 'select'])->name('submission-details.reviews.select');
     Route::post('/store/project/reviewers', [ReviewController::class, 'store'])->name('store.project.reviewers');
     Route::get('/reports', [ReportController::class, 'generateReport'])->name('reports');
-});
+}); 
 
-Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(function (){
+Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(function (){ 
 
     Route::get('/home', [DashboardController::class, 'countAll'])->name('researcher.home');
     Route::get('/call-for-proposals/show/{id}', [CallForProposalController::class, 'show'])->name('transparency.call-for-proposals.show');
@@ -178,10 +177,10 @@ Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(
     Route::get('/pdf/preview/{filename}', [FileController::class, 'previewPDF'])->name('submission-details.files.preview');
     Route::get('/download/{id}', [FileController::class, 'download'])->name('file.download');
     Route::get('/status/edit', [StatusController::class, 'update'])->name('projects.editstatus');
-});
+}); 
 
 
-Route::prefix('directorOrStaff')->middleware(['auth', 'directorOrStaff', 'cache'])->group(function () {
+Route::prefix('directorOrStaff')->middleware(['auth', 'directorOrStaff', 'cache'])->group(function () { 
 
     // Call-for-proposals
     Route::get('/call-for-proposals', [CallForProposalController::class, 'index'])->name('call-for-proposals');

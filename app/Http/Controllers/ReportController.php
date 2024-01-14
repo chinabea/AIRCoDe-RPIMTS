@@ -38,6 +38,7 @@ class ReportController extends Controller
     {
 
         try {
+            
             $data = Project::findOrFail($data_id);
             $projMembers = Member::where('project_id', $data_id)->get();
 
@@ -81,6 +82,8 @@ class ReportController extends Controller
     public function generateProjectsReport(Request $request)
     {
         try {
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
 
             $records = Project::all();
             $call_for_proposals = CallForProposal::all();

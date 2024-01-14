@@ -41,16 +41,13 @@
                                     <label for="end_date">End Date:</label>
                                     <input type="date" class="form-control" id="end_date" name="end_date">
                                 </div>
-
-                                <!-- <input type="hidden" id="selectedStartDate" name="selected_start_date" value="">
-                                <input type="hidden" id="selectedEndDate" name="selected_end_date" value=""> -->
-
+                                
                                 <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#projectsPdf" data-backdrop="static" data-keyboard="false"> 
                                     <i class="fas fa-file-pdf"></i> Export to PDF</button> 
                                     @include('reports.report-options')
                                     <br>
                                     
-                                <!-- <script>
+                                <script>
                                     // Update hidden inputs with selected date range before opening the modal
                                     $('#projectsPdf').on('show.bs.modal', function (event) {
                                         var startDate = $('#start_date').val();
@@ -59,11 +56,8 @@
                                         $('#selectedStartDate').val(startDate);
                                         $('#selectedEndDate').val(endDate);
                                     });
-                                </script> -->
+                                </script>
                                 
-                                <!-- <button type="submit" class="btn btn-success btn-sm">
-                                    Generate PDF
-                                </button> -->
                             </form>
                                 <!-- <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">
                                     Add Proposal

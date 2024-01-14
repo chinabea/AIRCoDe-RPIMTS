@@ -16,11 +16,79 @@
                         <div class="card-header">
                             <h3 class="card-title my-1"><i class="fa fa-book"></i> Under Evaluation</h3>
                             
-                            <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#underEvaluationPdf" data-backdrop="static" data-keyboard="false"> 
-                                    <i class="fas fa-file-pdf"></i> Export to PDF</button> 
+                            <!-- <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#underEvaluationPdf" data-backdrop="static" data-keyboard="false"> 
+                                    <i class="fas fa-file-pdf"></i> Export to PDF</button>  -->
                                     @include('reports.report-options')
                         </div>
                         <div class="card-body">
+                        <form action="{{ route('generate.under-evaluation.report') }}" method="post">
+    @csrf
+
+    <label for="start_date">Start Date:</label>
+    <input type="date" name="start_date" id="start_date" required>
+
+    <label for="end_date">End Date:</label>
+    <input type="date" name="end_date" id="end_date" required>
+
+    <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#underEvaluationPdfModal" data-backdrop="static" data-keyboard="false"> 
+        <i class="fas fa-file-pdf"></i> Export to PDF
+    </button>
+
+    <br>
+
+    <!-- Hidden inputs for selected date range -->
+    <input type="hidden" name="selected_start_date" id="selectedStartDate">
+    <input type="hidden" name="selected_end_date" id="selectedEndDate">
+
+    <!-- Modal -->
+    <div class="modal fade" id="underEvaluationPdfModal" tabindex="-1" role="dialog" aria-labelledby="underEvaluationPdfLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Modal content goes here -->
+
+                <!-- Modal header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="underEvaluationPdfLabel">Report Options</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="{{ route('generate.under-evaluation.report') }}" method="post">
+                        @csrf
+
+                        <label class="form-group" for="page_size">Page Size:</label>
+                        <select class="form-control" name="page_size" id="page_size">
+                            <option value="" disabled selected>Select Size</option>
+                            <option value="letter">Letter</option>
+                            <option value="a4">A4</option>
+                            <option value="legal">Legal</option>
+                        </select>
+
+                        <label class="form-group" for="orientation">Orientation:</label>
+                        <select class="form-control" name="orientation" id="orientation">
+                            <option value="" disabled selected>Select Orientation</option>
+                            <option value="portrait">Portrait</option>
+                            <option value="landscape">Landscape</option>
+                        </select>
+                        
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn bg-navy color-palette float-right" style="background-color: #022A44;">
+                                <i class="fas fa-file-pdf"></i> Export to PDF
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>
