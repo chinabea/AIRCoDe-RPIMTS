@@ -40,9 +40,8 @@
         <tbody>
             
             @foreach ($records as $record)
-                @if (
-                    (in_array(auth()->user()->role, [1, 2, 4]) && $record->status !== 'Draft') ||q
-                        $record->user_id === auth()->user()->id)
+            @if ((in_array(auth()->user()->role, [1, 2, 4]) && $record->status !== 'Draft') ||
+                $record->user_id === auth()->user()->id)
                     <tr>
                         <td class="align-middle">{{ $loop->iteration }}</td>
                         <td class="align-middle">{{ $record->tracking_code }}</td>

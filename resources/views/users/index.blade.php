@@ -13,8 +13,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title my-1"><i class="fa fa-users"></i> Users</h3>
-                            <!-- <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#usersPdf" data-backdrop="static" data-keyboard="false"> 
-                                <i class="fas fa-file-pdf"></i> Export to PDF</button> -->
+                            <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#usersPdf" data-backdrop="static" data-keyboard="false"> 
+                                <i class="fas fa-file-pdf"></i> Export to PDF</button>
                                 @include('reports.report-options')
                         </div>
                         <div class="card-body">

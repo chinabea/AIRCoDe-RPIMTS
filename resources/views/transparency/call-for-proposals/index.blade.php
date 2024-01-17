@@ -14,16 +14,32 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><i class="nav-icon fas fa-file-signature"></i> CALL FOR PROPOSALS</h3>
+                            <h3 class="card-title"><i class="nav-icon fas fa-file-signature"></i> Call for Proposals</h3>
                             <button type="button" class="btn bg-navy color-palette  float-right btn-sm mx-2" data-toggle="modal" data-target="#CallforProposal" data-backdrop="static" data-keyboard="false">
                               <i class="fas fa-plus"></i> Add Call for Proposals</button>
                             @include('transparency.call-for-proposals.create')
-
-                            <button class="btn bg-navy color-palette float-right btn-sm" onclick="generateReport()">
-                                <i class="fa fa-file-pdf"></i> Generate Report
-                            </button>
                         </div>
                         <div class="card-body">
+                            <!-- <form action="{{ route('generate.call-for-proposals.report') }}" method="post" id="exportForm">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Date:</label>
+                                        <input type="date" class="form-control" name="start_date" id="start_date">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>To</label>
+                                        <input type="date" class="form-control" name="end_date" id="end_date">
+                                    </div>
+                                    <div class="col-lg-6 mt-4">
+                                        <label></label>
+                                        <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i></button>
+                                        <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i></button>
+                                        <button type="submit" class="btn bg-navy color-palette"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr> -->
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>

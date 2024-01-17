@@ -163,6 +163,61 @@
             }
         }
     </script>
+    <script>
+        $(document).ready(function() {
+            $("#generate_pdf").on("click", function() {
+                // Submit the form directly when the "Generate PDF" button is clicked
+                $("#exportForm").submit();
+            });
+
+            $("#btn_search").on("click", function() {
+                // Get the values of start_date and end_date
+                var startDate = $("#start_date").val();
+                var endDate = $("#end_date").val();
+
+                // Check if dates are empty
+                if (startDate === "" || endDate === "") {
+                    alert("Please enter Date 'From' and 'To' before submit");
+                } else {
+                    // Clear existing data
+                    $('#load_data').empty();
+
+                    // Display loading message
+                    let loader = $('<tr><td colspan="6"><center>Searching....</center></td></tr>');
+                    loader.appendTo('#load_data');
+
+                    // Make AJAX request to Laravel controller
+                    $.ajax({
+                        url: "{{ route('search.projects') }}",
+                        type: "GET",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            start_date: startDate,
+                            end_date: endDate
+                        },
+                        success: function(data) {
+                            // Handle the success response
+                            console.log("Search success:", data);
+
+                            // Update the search results section with the received data
+                            $("#load_data").html(data.html);
+                        },
+                        error: function(error) {
+                            // Handle errors if any
+                            console.error("Search error:", error);
+                        }
+                    });
+                }
+            });
+            
+
+            $('#reset').on('click', function(){
+                // Reload the page on reset button click
+                location.reload();
+            });
+        });
+    </script>
+
 
 
 

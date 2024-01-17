@@ -63,8 +63,8 @@
                 <form action="{{ route('generate.projects.report') }}" method="post">
                     @csrf
                     
-                    <input type="hidden" name="selected_start_date" value="{{ old('selected_start_date') }}">
-                    <input type="hidden" name="selected_end_date" value="{{ old('selected_end_date') }}">
+    <input type="hidden" name="start_date" id="start_date" value="{{ old('start_date') }}">
+    <input type="hidden" name="end_date" id="end_date" value="{{ old('end_date') }}">
 
                     <label class="form-group" for="page_size">Page Size:</label>
                     <select class="form-control" name="page_size" id="page_size">

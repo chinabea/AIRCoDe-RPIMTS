@@ -10,66 +10,131 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title my-1"><i class="fa fa-book"></i> Submitted Projects</h3>
+                        <!-- <div class="card-header"> -->
+                            <!-- <h3 class="card-title my-1"><i class="fa fa-book"></i> Submitted Projects</h3> -->
 
-                            {{-- <button type="button" class="btn bg-navy color-palette float-right btn-sm"
+                            <!-- <button type="button" class="btn bg-navy color-palette float-right btn-sm"
                                 data-toggle="modal" data-target="#projectsPdf" data-backdrop="static"
                                 data-keyboard="false">
-                                <i class="fas fa-file-pdf"></i> Export to PDF</button> --}}
+                                <i class="fas fa-file-pdf"></i> Export to PDF</button>  -->
 
                             @include('reports.report-options')
-                        </div>
+                        <!-- </div> -->
                         <div class="card-body">
-                            <form action="{{ route('generate.projects.report') }}" method="post">
+                            <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Submitted Projects</b></h3> <br><br>
+                            <!-- <form action="{{ route('generate.projects.report') }}" method="post" id="exportForm">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="year">Select Year:</label>
-                                    <select class="form-control" id="year" name="year">
-                                        @php
-                                        $currentYear = date('Y');
-                                        @endphp
-                                        @for ($i = $currentYear; $i >= $currentYear - 10; $i--)
-                                        <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Date:</label>
+                                        <input type="date" class="form-control" name="start_date" id="start_date">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>To</label>
+                                        <input type="date" class="form-control" name="end_date" id="end_date">
+                                    </div>
+                                    <div class="col-lg-6 mt-4">
+                                        <label></label>
+                                        <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i></button>
+                                        <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i></button>
+                                        <button type="submit" class="btn bg-navy color-palette"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="start_date">Start Date:</label>
-                                    <input type="date" class="form-control" id="start_date" name="start_date">
+                            </form> -->
+                            <!-- <form action="{{ route('generate.projects.report') }}" method="post" id="exportForm">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <p>Filter By:</p>
+                                        <select class="form-control form-control-sm" name="filter_type" id="filter_type">
+                                            <option value="year">Year</option>
+                                            <option value="date">Date Range</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3" id="yearFilter">
+                                        <p>Year:</p>
+                                        <select class="form-control form-control-sm" name="year" id="year">
+                                            @for ($i = date('Y'); $i >= 2000; $i--)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3" id="dateFilter" style="display: none;">
+                                        <p>Start Date:</p>
+                                        <input type="date" class="form-control form-control-sm" name="start_date" id="start_date">
+                                        <p>To</p>
+                                        <input type="date" class="form-control form-control-sm" name="end_date" id="end_date">
+                                    </div>
+                                    <div class="col-lg-6 mt-4">
+                                        <label></label>
+                                        <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i></button>
+                                        <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i></button>
+                                        <button type="submit" class="btn bg-navy color-palette"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="end_date">End Date:</label>
-                                    <input type="date" class="form-control" id="end_date" name="end_date">
+                            </form> -->
+                            <form action="{{ route('generate.projects.report') }}" method="post" id="exportForm">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <p for="filter_type">Filter By:</p>
+                                            <select class="form-control" name="filter_type" id="filter_type">
+                                                <option value="year">Year</option>
+                                                <option value="date">Date Range</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2" id="yearFilter">
+                                        <div class="form-group">
+                                            <p for="year">Year:</p>
+                                            <select class="form-control" name="year" id="year">
+                                                @for ($i = date('Y'); $i >= 2000; $i--)
+                                                    <option value="{{ $i }}">{{ $i }}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" id="dateFilter" style="display: none;">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <p for="start_date">Start Date:</p>
+                                                <input type="date" class="form-control" name="start_date" id="start_date">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p for="end_date">To:</p>
+                                                <input type="date" class="form-control" name="end_date" id="end_date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mt-5">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-sm btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button>
+                                            <button type="button" id="reset" class="btn btn-sm btn-warning"><i class="fa fa-sync"></i> Reset</button>
+                                            <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <button type="button" class="btn bg-navy color-palette float-right btn-sm"
-                                    data-toggle="modal" data-target="#projectsPdf" data-backdrop="static"
-                                    data-keyboard="false">
-                                    <i class="fas fa-file-pdf"></i> Export to PDF</button>
-                                @include('reports.report-options')
-                                <br>
-
-                                <script>
-                                    // Update hidden inputs with selected date range before opening the modal
-                                        $('#projectsPdf').on('show.bs.modal', function (event) {
-                                            var startDate = $('#start_date').val();
-                                            var endDate = $('#end_date').val();
-                                        
-                                            $('#selectedStartDate').val(startDate);
-                                            $('#selectedEndDate').val(endDate);
-                                        
-                                            // Submit the correct form
-                                            $('#pdfExportForm').submit();
-                                        });
-                                </script>
                             </form>
-                            <!-- <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam">
-                                    Add Proposal
-                                </button> -->
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    var filterType = document.getElementById('filter_type');
+                                    var yearFilter = document.getElementById('yearFilter');
+                                    var dateFilter = document.getElementById('dateFilter');
 
+                                    filterType.addEventListener('change', function () {
+                                        if (filterType.value === 'year') {
+                                            yearFilter.style.display = 'block';
+                                            dateFilter.style.display = 'none';
+                                        } else {
+                                            yearFilter.style.display = 'none';
+                                            dateFilter.style.display = 'block';
+                                        }
+                                    });
+                                });
+                            </script>
+                            
+                            <hr>
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>
@@ -81,7 +146,6 @@
                                         <th class="align-middle">Research Group</th>
                                         <th class="align-middle">Date Submitted</th>
                                         <th class="align-middle">Status</th>
-                                        <!-- <th class="align-middle">Versions</th> -->
                                         <th class="align-middle">Actions</th>
                                     </tr>
                                 </thead>
@@ -156,7 +220,7 @@
                                                             </a> -->
 
 
-                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                     aria-labelledby="dropdownMenuLink">
                                                     <div class="dropdown-header">Dropdown Header:</div>
                                                     <a class="dropdown-item" href="#">Action</a>
@@ -168,7 +232,7 @@
                                                 <button type="button" class="btn btn-secondary btn-sm"
                                                     data-toggle="dropdown">
                                                     <i class="fas fa-ellipsis-h"></i>
-                                                </button>
+                                                </button> -->
 
 
                                             </div>
@@ -220,4 +284,5 @@
     toastr.error('{{ session('error') }}');
 </script>
 @endif
+
 @endsection
