@@ -25,22 +25,63 @@
                             <form action="{{ route('generate.for-revision.report') }}" method="post" id="exportForm">
                                 @csrf
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <label>Date:</label>
-                                        <input type="date" class="form-control" name="start_date" id="start_date">
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <p for="filter_type">Filter By:</p>
+                                            <select class="form-control" name="filter_type" id="filter_type">
+                                                <option value="year">Year</option>
+                                                <option value="date">Date Range</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <label>To</label>
-                                        <input type="date" class="form-control" name="end_date" id="end_date">
+                                    <div class="col-lg-2" id="yearFilter">
+                                        <div class="form-group">
+                                            <p for="year">Year:</p>
+                                            <select class="form-control" name="year" id="year">
+                                                @for ($i = date('Y'); $i >= 2000; $i--)
+                                                    <option value="{{ $i }}">{{ $i }}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6 mt-4">
-                                        <label></label>
-                                        <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i></button>
-                                        <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i></button>
-                                        <button type="submit" class="btn bg-navy color-palette"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                    <div class="col-lg-4" id="dateFilter" style="display: none;">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <p for="start_date">Start Date:</p>
+                                                <input type="date" class="form-control" name="start_date" id="start_date">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p for="end_date">To:</p>
+                                                <input type="date" class="form-control" name="end_date" id="end_date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 mt-5">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-sm btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button>
+                                            <button type="button" id="reset" class="btn btn-sm btn-warning"><i class="fa fa-sync"></i> Reset</button>
+                                            <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    var filterType = document.getElementById('filter_type');
+                                    var yearFilter = document.getElementById('yearFilter');
+                                    var dateFilter = document.getElementById('dateFilter');
+
+                                    filterType.addEventListener('change', function () {
+                                        if (filterType.value === 'year') {
+                                            yearFilter.style.display = 'block';
+                                            dateFilter.style.display = 'none';
+                                        } else {
+                                            yearFilter.style.display = 'none';
+                                            dateFilter.style.display = 'block';
+                                        }
+                                    });
+                                });
+                            </script>
                             <hr>
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>

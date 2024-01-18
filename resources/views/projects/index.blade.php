@@ -133,8 +133,7 @@
                                     });
                                 });
                             </script>
-                            
-                            <hr>
+                            <!-- <hr> -->
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>

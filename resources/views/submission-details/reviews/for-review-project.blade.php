@@ -9,7 +9,7 @@
                   @if ($review->user->id === Auth::user()->id && $review->technical_soundness_decision !== null && $review->project_id === $records->id)
                   <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h6><i class="icon fas fa-exclamation-triangle"></i> Alert! You have already commented on this project!</h6>
+                    <h6><i class="icon fas fa-exclamation-triangle"></i> Alert! You have commented on this project!</h6>
                   </div>
                   @endif
                   @endforeach
