@@ -5,7 +5,7 @@
         <section class="content-header">
         </section>
         <div class="col-md-12">
-            <a href="{{ route('messages.mailbox') }}" class="btn btn-primary btn-block mb-3"><i class="fas fa-reply"></i> Back
+            <a href="{{ route('messages.mailbox') }}" class="btn btn-info btn-block mb-3"><i class="fas fa-reply"></i> Back
                 to Inbox</a>
 
             <div class="card card-outline">
@@ -34,8 +34,8 @@
                         </div>
                         <div class="card-footer">
                             <div class="float-right">
-                                <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i>
-                                    Draft</button>
+                                <!-- <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i>
+                                    Draft</button> -->
                                 <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
                             </div>
                             <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>

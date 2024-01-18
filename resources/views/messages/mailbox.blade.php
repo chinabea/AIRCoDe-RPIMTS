@@ -6,7 +6,7 @@
         </section>
 
         <div class="col-md-12">
-            <a href="{{ route('messages.compose') }}" class="btn btn-primary btn-block mb-3">
+            <a href="{{ route('messages.compose') }}" class="btn btn-info btn-block mb-3">
                 <i class="fas fa-edit nav-icon"></i> Compose
             </a>
             <div class="card">

@@ -34,18 +34,18 @@
                                         title="Delete">
                                         <i class="far fa-trash-alt"></i>
                                     </button>
-                                    <button type="button" class="btn btn-default btn-sm" data-container="body"
+                                    <!-- <button type="button" class="btn btn-default btn-sm" data-container="body"
                                         title="Reply">
                                         <i class="fas fa-reply"></i>
                                     </button>
                                     <button type="button" class="btn btn-default btn-sm" data-container="body"
                                         title="Forward">
                                         <i class="fas fa-share"></i>
-                                    </button>
+                                    </button> -->
                                 </div>
-                                <button type="button" class="btn btn-default btn-sm" title="Print">
+                                <!-- <button type="button" class="btn btn-default btn-sm" title="Print">
                                     <i class="fas fa-print"></i>
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                     </div>
@@ -95,13 +95,13 @@
             </div>
 
             <div class="card-footer">
-                <div class="float-right">
+                <!-- <div class="float-right">
                     <button type="submit" id="showReplyFormBtn" class="btn btn-default"><i class="fas fa-reply"></i>
                         Reply</button>
                     <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
                 </div>
                 <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
-                <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
+                <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button> -->
             </div>
         </div>
     </div>
