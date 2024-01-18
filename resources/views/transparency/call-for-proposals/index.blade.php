@@ -20,26 +20,6 @@
                             @include('transparency.call-for-proposals.create')
                         </div>
                         <div class="card-body">
-                            <!-- <form action="{{ route('generate.call-for-proposals.report') }}" method="post" id="exportForm">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <label>Date:</label>
-                                        <input type="date" class="form-control" name="start_date" id="start_date">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <label>To</label>
-                                        <input type="date" class="form-control" name="end_date" id="end_date">
-                                    </div>
-                                    <div class="col-lg-6 mt-4">
-                                        <label></label>
-                                        <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i></button>
-                                        <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i></button>
-                                        <button type="submit" class="btn bg-navy color-palette"><i class="fa fa-file-pdf"></i> Generate PDF</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <hr> -->
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>
