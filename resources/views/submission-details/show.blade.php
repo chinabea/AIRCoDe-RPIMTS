@@ -1668,16 +1668,20 @@
                                     <tr>
                                         <td>{{ $revision->version_number }}</td>
                                         <td>{{ $revision->project_name }}</td>
-                                        <td>{{ $revision->created_at }}</td>
+                                        <td>{{ $revision->created_at->format('F j, Y') }}</td>
                                         <td>
-                                            <a
-                                                href="{{ route('generate.revision.pdf', ['id' => $revision->id]) }}">Export</a>
-                                            <button type="button" class="preview-version btn btn-primary"
+                                            <button type="button" class="preview-version btn btn-sm btn-warning"
                                                 data-bs-toggle="modal" data-target="#Version" data-backdrop="static"
                                                 data-keyboard="false">
-                                                Preview
+                                                <i class="fas fa-eye"></i>
                                             </button>
                                             @include('preview.preview-version')
+
+                                            <a href="{{ route('generate.revision.pdf', ['id' => $revision->id]) }}"
+                                                class="btn btn-sm btn-info">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                            
                                         </td>
                                     </tr>
                                     @endforeach
@@ -1704,7 +1708,7 @@
                                     <label for="call_for_proposal_id">Select Call for Proposal</label>
                                     <select id="call_for_proposal_id" name="call_for_proposal_id"
                                         class="selectpicker form-control" data-live-search="true">
-                                        <option value="" disabled selected>Select Call for Proposal</option>
+                                        <option value="{{ $records->title }}" disabled selected>Select Call for Proposal</option>
                                         @foreach ($call_for_proposals as $call_for_proposal)
                                         @if ($call_for_proposal->start_date <= now() && $call_for_proposal->end_date >=
                                             now())
@@ -1992,7 +1996,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-danger"
+                                                    <button class="btn btn-sm btn-danger"
                                                         onclick="confirmDelete('{{ route('submission-details.tasks.delete', $task->id) }}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
@@ -2126,7 +2130,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-danger"
+                                                    <button class="btn btn-sm btn-danger"
                                                         onclick="confirmDelete('{{ route('submission-details.line-items-budget.destroy', $lineItem->id) }}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
@@ -2207,7 +2211,7 @@
                                                     </a> --}}
 
                                                     <a href="{{ route('file.download', ['id' => $file->id]) }}"
-                                                        class="btn btn-primary">
+                                                        class="btn btn-sm btn-info">
                                                         <i class="fas fa-download"></i>
                                                     </a>
                                                     {{-- <a
@@ -2264,7 +2268,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-danger"
+                                                    <button class="btn btn-sm btn-danger"
                                                         onclick="confirmDelete('{{ route('submission-details.files.delete', $file->id) }}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
@@ -2312,7 +2316,7 @@
                                             <i class="fas fa-edit mr-2"></i>Accepted with Revision
                                         </button>
                                         <button value="Disapproved" type="submit" id="status" name="status"
-                                            class="btn btn-danger">
+                                            class="btn btn-sm btn-danger">
                                             <i class="fas fa-times-circle mr-2"></i>Rejected
                                         </button>
                                     </div>
@@ -2669,7 +2673,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-danger"
+                                                    <button class="btn btn-sm btn-danger"
                                                         onclick="confirmDelete('{{ route('submission-details.project-teams.destroy', $member->id) }}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
