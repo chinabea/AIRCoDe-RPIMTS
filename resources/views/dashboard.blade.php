@@ -36,7 +36,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+              <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
             </ol>
           </div>
         </div>
@@ -167,7 +167,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+              <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
             </ol>
           </div>
         </div>
@@ -299,7 +299,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+              <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
             </ol>
           </div>
         </div>
@@ -484,7 +484,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+              <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm bg-navy color-palette shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
             </ol>
           </div>
         </div>
