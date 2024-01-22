@@ -116,24 +116,6 @@
                                     </div>
                                 </div>
                             </form>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    var filterType = document.getElementById('filter_type');
-                                    var yearFilter = document.getElementById('yearFilter');
-                                    var dateFilter = document.getElementById('dateFilter');
-
-                                    filterType.addEventListener('change', function () {
-                                        if (filterType.value === 'year') {
-                                            yearFilter.style.display = 'block';
-                                            dateFilter.style.display = 'none';
-                                        } else {
-                                            yearFilter.style.display = 'none';
-                                            dateFilter.style.display = 'block';
-                                        }
-                                    });
-                                });
-                            </script>
-                            <!-- <hr> -->
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>

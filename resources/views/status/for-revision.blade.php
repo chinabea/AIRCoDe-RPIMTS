@@ -13,15 +13,15 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa fa-book"></i> For Revision</h3>
+                        <!-- <div class="card-header"> -->
                             
                             <!-- <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#forRevisionPdf" data-backdrop="static" data-keyboard="false"> 
                                 <i class="fas fa-file-pdf"></i> Export to PDF</button>  -->
                                 @include('reports.report-options')
                                     
-                        </div>
+                        <!-- </div> -->
                         <div class="card-body">
+                            <h3 class="card-title"><i class="fa fa-book"></i> For Revision</h3><br><br>
                             <form action="{{ route('generate.for-revision.report') }}" method="post" id="exportForm">
                                 @csrf
                                 <div class="row">
@@ -65,24 +65,6 @@
                                     </div>
                                 </div>
                             </form>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    var filterType = document.getElementById('filter_type');
-                                    var yearFilter = document.getElementById('yearFilter');
-                                    var dateFilter = document.getElementById('dateFilter');
-
-                                    filterType.addEventListener('change', function () {
-                                        if (filterType.value === 'year') {
-                                            yearFilter.style.display = 'block';
-                                            dateFilter.style.display = 'none';
-                                        } else {
-                                            yearFilter.style.display = 'none';
-                                            dateFilter.style.display = 'block';
-                                        }
-                                    });
-                                });
-                            </script>
-                            <hr>
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>
