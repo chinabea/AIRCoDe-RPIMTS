@@ -78,10 +78,7 @@ Route::middleware(['auth', 'cache'])->group(function (){
     Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
 
     Route::get('/search-projects', [ReportController::class, 'searchProjects'])->name('search.projects');
-
-    // Reports
-    // Route::get('/report-options', [ReportController::class, 'reportOptions'])->name('reports.report-options');
-    // Route::post('/generate-call-for-proposals-report', [ReportController::class, 'generateCallforProposalsReport'])->name('generate.call-for-proposals.report');
+    
     Route::get('/generate-revision-pdf/{id}', [ReportController::class, 'generateRevisionReport'])->name('generate.revision.pdf');
     Route::get('/generate-pdf/{data_id}', [ReportController::class, 'generateProjectReport'])->name('generate.pdf');
     Route::post('/generate-users-report', [ReportController::class, 'generateUsersReport'])->name('generate.users.report');
