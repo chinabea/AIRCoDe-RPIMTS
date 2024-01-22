@@ -112,7 +112,9 @@ class ResearchProposalSubmissionNotification extends Notification
         if ($notifiable instanceof User && $notifiable->isDirector()) {
             // Admin notification content
             return new DatabaseMessage([
-                'message' => 'A new research project has been submitted by ' . $this->projects->user_id . ', with the title "' . $this->projects->projname . '".',
+                'message' => 'A New Research Project Submitted.' 
+                // . $this->projects->user_id . ', with the title "' . $this->projects->projname . '".'
+                ,
                 // 'icon' => 'fa-solid fa-circle-check fa-lg text-white',
                 'icon' => 'fas fa-file-alt mr-2',
                 'action_url' => route('submission-details.show', [
