@@ -170,14 +170,22 @@
                 $("#exportForm").submit();
             });
 
-            $("#btn_search").on("click", function() {
-                // Get the values of start_date and end_date
+            $('#reset').on('click', function(){
+                // Reload the page on reset button click
+                location.reload();
+
+            });$("#btn_search").on("click", function() {
+                // Get the values of filter_type, start_date, end_date, and year
+                var filterType = $("#filter_type").val();
                 var startDate = $("#start_date").val();
                 var endDate = $("#end_date").val();
+                var year = $("#year").val();
 
                 // Check if dates are empty
-                if (startDate === "" || endDate === "") {
+                if (filterType === "date" && (startDate === "" || endDate === "")) {
                     alert("Please enter Date 'From' and 'To' before submit");
+                } else if (filterType === "year" && year === "") {
+                    alert("Please select a Year before submit");
                 } else {
                     // Clear existing data
                     $('#load_data').empty();
@@ -192,8 +200,10 @@
                         type: "GET",
                         data: {
                             _token: "{{ csrf_token() }}",
+                            filter_type: filterType,
                             start_date: startDate,
-                            end_date: endDate
+                            end_date: endDate,
+                            year: year
                         },
                         success: function(data) {
                             // Handle the success response
@@ -209,17 +219,26 @@
                     });
                 }
             });
-            
 
-            $('#reset').on('click', function(){
-                // Reload the page on reset button click
-                location.reload();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var filterType = document.getElementById('filter_type');
+            var yearFilter = document.getElementById('yearFilter');
+            var dateFilter = document.getElementById('dateFilter');
+
+            filterType.addEventListener('change', function () {
+                if (filterType.value === 'year') {
+                    yearFilter.style.display = 'block';
+                    dateFilter.style.display = 'none';
+                } else {
+                    yearFilter.style.display = 'none';
+                    dateFilter.style.display = 'block';
+                }
             });
         });
     </script>
-
-
-
-
+    
 </body>
 </html>
