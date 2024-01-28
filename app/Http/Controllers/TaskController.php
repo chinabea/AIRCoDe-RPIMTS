@@ -21,18 +21,7 @@ class TaskController extends Controller
     {
         $this->task = $task;
     }
-    //     public function index()
-    //     {
-    //         $tasks = Task::all();
-    //         return view('submission-details.tasks.index', compact('tasks'));
-    //     }
-
-    //     public function create()
-    //     {
-    //         $tasks = Task::all();
-    //         $teamMembers = Member::all();
-    //         return view('submission-details.tasks.create', compact('tasks', 'teamMembers'));
-    //     }
+    
 
     public function store(Request $request)
     {
@@ -89,42 +78,6 @@ class TaskController extends Controller
         }
     }
 
-    //     public function show($id)
-    //     {
-    //         // Retrieve and show the specific item using the provided ID
-    //         $tasks = Task::findOrFail($id);
-
-    //         return view('tasks.show', compact('members'));
-    //     }
-    //     public function edit($id)
-    //     {
-    //         $task = Task::findOrFail($id);
-    //         // $members = User::all();
-    //         $members = User::where('role', 3)->get();
-    //         return view('submission-details.tasks.edit', compact('task', 'members'));
-    //     }
-
-    //     public function update(Request $request, $id)
-    //     {
-    //         $task = Task::findOrFail($id);
-    //         // Update the item properties using the request data
-    //         $task->update($request->all());
-
-    //         // return redirect()->route('schedules.show', ['schedule' => $schedule->id])->with('success', 'Schedule updated successfully.');
-
-    //         return redirect()->route('submission-details.tasks.index')->with('success', 'Task Successfully Updated!');
-    //     }
-
-
-    //     public function destroy($id)
-    //     {
-    //         $task = Task::findOrFail($id);
-    //         $task->delete();
-
-    //         return redirect()->route('submission-details.tasks.index')->with('success', 'Task deleted successfully.');
-    //     }
-
-
     public function index()
     {
         try {
@@ -159,34 +112,35 @@ class TaskController extends Controller
 
     public function edit($id)
     {
-        // try {
-        $task = Task::findOrFail($id);
-        $members = User::where('role', 3)->get();
-        return view('submission-details.tasks.edit', compact('task', 'members'));
-        // } catch (Exception $e) {
-        //     return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-        // }
+        try {
+            $task = Task::findOrFail($id);
+            $members = User::where('role', 3)->get();
+            return view('submission-details.tasks.edit', compact('task', 'members'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
     }
 
     public function update(Request $request, $id)
     {
-        // try {
-        $task = Task::findOrFail($id);
-        $task->update($request->all());
-        return redirect()->route('submission-details.tasks.index')->with('success', 'Task Successfully Updated!');
-        // } catch (Exception $e) {
-        //     return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-        // }
+        try {
+            $task = Task::findOrFail($id);
+            $task->update($request->all());
+            return redirect()->back()->with('success', 'Task Successfully Updated!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
     }
 
     public function destroy($id)
     {
         try {
             $task = Task::findOrFail($id);
-            $task->delete();
-            return redirect()->route('submission-details.tasks.index')->with('success', 'Task deleted successfully.');
+            $task->delete(); 
+            return redirect()->back()->with('success', 'Task deleted successfully.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
+
     }
 }

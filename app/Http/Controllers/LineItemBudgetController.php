@@ -5,6 +5,7 @@ use Exception;
 use App\Models\LineItemBudget;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Models\Rule;
 
 class LineItemBudgetController extends Controller
 {
@@ -84,21 +85,12 @@ class LineItemBudgetController extends Controller
     {
         try {
             $lineItem = LineItemBudget::findOrFail($id);
-
+    
             $requestData = $request->all();
             $requestData['total'] = $request->input('quantity') * $request->input('unit_price');
-
-            // Define validation rules
-            $rules = [
-                'project_id' => ['required', 'exists:projects,id', Rule::unique('line_item_budgets')->ignore($id)],
-                // Add more validation rules for other fields here
-            ];
-
-            // Validate the request data
-            $this->validate($request, $rules);
-
+    
             $lineItem->update($requestData);
-
+    
             return redirect()->back()->with('success', 'LIB Successfully Updated!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while updating a line item budget: ' . $e->getMessage());
