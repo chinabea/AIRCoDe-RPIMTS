@@ -1871,10 +1871,9 @@
                             $isProjectForRevision = $records->status === 'For Revision';
                             @endphp
 
-                            <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#Tasks"
+                            <button type="button" class="btn btn-sm btn-info my-2" data-toggle="modal" data-target="#Tasks"
                                 data-backdrop="static" data-keyboard="false" @if($isButtonDisabled &&
-                                !$isProjectForRevision) class="d-none" @endif>
-                                Add Task
+                                !$isProjectForRevision) class="d-none" @endif><i class="fas fa-plus"></i> Add Task
                             </button>
 
                             @include('submission-details.tasks.create')
@@ -1919,21 +1918,21 @@
 
                                                 <td>{{ $task->updated_at->format('F j, Y') }}</td>
                                                 <td>
-                                                    {{-- <a
+                                                    <a
                                                         href="{{ route('submission-details.tasks.edit', $task->id) }}"
-                                                        type="button" class="btn btn-warning" data-toggle="modal"
+                                                        type="button" class="btn btn-sm btn-warning" data-toggle="modal"
                                                         data-backdrop="static" data-keyboard="false"
-                                                        data-target="#editModal{{ $task->id }}">
+                                                        data-target="#editTaskModal{{ $task->id }}">
                                                         <i class="fas fa-edit"></i>
-                                                    </a> --}}
-                                                    <div class="modal fade" id="editModal{{ $task->id }}" tabindex="-1"
-                                                        role="dialog" aria-labelledby="editModal{{ $task->id }}Label"
+                                                    </a> 
+                                                    <div class="modal fade" id="editTaskModal{{ $task->id }}" tabindex="-1"
+                                                        role="dialog" aria-labelledby="editTaskModal{{ $task->id }}Label"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title"
-                                                                        id="editModal{{ $task->id }}Label">Edit
+                                                                        id="editTaskModal{{ $task->id }}Label">Edit
                                                                         Task
                                                                     </h5>
                                                                     <button type="button" class="close"
@@ -2020,10 +2019,9 @@
                             $isButtonDisabled = now() > $call_for_proposal->end_date;
                             $isProjectForRevision = $records->status === 'For Revision';
                             @endphp
-                            <button type="button" class="btn btn-primary my-2" data-toggle="modal"
+                            <button type="button" class="btn btn-sm btn-info my-2" data-toggle="modal"
                                 data-backdrop="static" data-keyboard="false" data-target="#lib" @if($isButtonDisabled &&
-                                !$isProjectForRevision) class="d-none" @endif>
-                                Add Line-Item
+                                !$isProjectForRevision) class="d-none" @endif><i class="fas fa-plus"></i> Add Line-Item
                             </button>
                             @include('submission-details.line-items-budget.create')
                             @endif
@@ -2059,22 +2057,23 @@
                                                 <td>{{ $lineItem->quantity }}</td>
                                                 <td>{{ $lineItem->unit_price }}</td>
                                                 <td>
-                                                    {{-- <a
+                                                    <a
                                                         href="{{ route('submission-details.line-items-budget.edit', $lineItem->id) }}"
-                                                        type="button" class="btn btn-warning" data-toggle="modal"
+                                                        type="button" class="btn btn-sm btn-warning" data-toggle="modal"
                                                         data-backdrop="static" data-keyboard="false"
-                                                        data-target="#editModal{{ $lineItem->id }}">
+                                                        data-target="#editLIBModal{{ $lineItem->id }}">
                                                         <i class="fas fa-edit"></i>
-                                                    </a> --}}
-                                                    <div class="modal fade" id="editModal{{ $lineItem->id }}"
+                                                    </a> 
+                                                    
+                                                    <div class="modal fade" id="editLIBModal{{ $lineItem->id }}"
                                                         tabindex="-1" role="dialog"
-                                                        aria-labelledby="editModal{{ $lineItem->id }}Label"
+                                                        aria-labelledby="editLIBModal{{ $lineItem->id }}Label"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title"
-                                                                        id="editModal{{ $lineItem->id }}Label">Edit
+                                                                        id="editLIBModal{{ $lineItem->id }}Label">Edit
                                                                         Line-Item Budget</h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
@@ -2086,7 +2085,7 @@
                                                                     enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
-                                                                    <div class="modal-body">
+                                                                    <div class="modal-body text-left">
                                                                         @php
                                                                         $totalAllLineItems = 0;
                                                                         foreach ($allLineItems as $item) {
@@ -2166,9 +2165,9 @@
                             $isButtonDisabled = now() > $call_for_proposal->end_date;
                             $isProjectForRevision = $records->status === 'For Revision';
                             @endphp
-                            <button type="button" class="btn btn-primary my-2" data-toggle="modal"
+                            <button type="button" class="btn btn-sm btn-info my-2" data-toggle="modal"
                                 data-backdrop="static" data-keyboard="false" data-target="#filesModal"
-                                @if($isButtonDisabled && !$isProjectForRevision) class="d-none" @endif>Add File</button>
+                                @if($isButtonDisabled && !$isProjectForRevision) class="d-none" @endif><i class="fas fa-plus"></i> Add File</button>
                             @include('submission-details.files.create')
 
                             @endif
@@ -2180,7 +2179,7 @@
                                     <h3 class="card-title"><i class="fas fa-file-alt"></i> Files</h3>
                                 </div>
                                 <div class="card-body">
-                                    <table id="example4" class="table table-hover table-bordered table-sm text-center">
+                                    <table id="example6" class="table table-hover table-bordered table-sm text-center">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -2241,7 +2240,7 @@
                                                                     enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
-                                                                    <div class="modal-body">
+                                                                    <div class="modal-body text-left">
                                                                         <div class="form-group">
                                                                             <label for="edit_file_name">File
                                                                                 Name:</label>
@@ -2550,10 +2549,9 @@
                             $isButtonDisabled = now() > $call_for_proposal->end_date;
                             $isProjectForRevision = $records->status === 'For Revision';
                             @endphp
-                            <button type="button" class="btn btn-primary my-2" data-toggle="modal"
+                            <button type="button" class="btn btn-sm btn-info my-2" data-toggle="modal"
                                 data-backdrop="static" data-keyboard="false" data-target="#ProjectTeam"
-                                @if($isButtonDisabled && !$isProjectForRevision) class="d-none" @endif>Add
-                                Member</button>
+                                @if($isButtonDisabled && !$isProjectForRevision) class="d-none" @endif><i class="fas fa-plus"></i> Add Team Member</button>
                             @include('submission-details.project-teams.create')
 
                             @endif
@@ -2587,22 +2585,23 @@
                                                 <td>{{ $member->member_name }}</td>
                                                 <td>{{ $member->role }}</td>
                                                 <td>
-                                                    {{-- <a
+                                                    <a
                                                         href="{{ route('submission-details.project-teams.edit', $member->id) }}"
-                                                        type="button" class="btn btn-warning" data-toggle="modal"
+                                                        type="button" class="btn btn-sm btn-warning" data-toggle="modal"
                                                         data-backdrop="static" data-keyboard="false"
-                                                        data-target="#editModal{{ $member->id }}">
+                                                        data-target="#editMemberModal{{ $member->id }}">
                                                         <i class="fas fa-edit"></i>
-                                                    </a> --}}
-                                                    <div class="modal fade" id="editModal{{ $member->id }}"
+                                                    </a>
+                                                    
+                                                    <div class="modal fade" id="editMemberModal{{ $member->id }}"
                                                         tabindex="-1" role="dialog"
-                                                        aria-labelledby="editModal{{ $member->id }}Label"
+                                                        aria-labelledby="editMemberModal{{ $member->id }}Label"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title"
-                                                                        id="editModal{{ $member->id }}Label">Edit
+                                                                        id="editMemberModal{{ $member->id }}Label">Edit
                                                                         Project Team Member</h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
@@ -2614,7 +2613,7 @@
                                                                     enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
-                                                                    <div class="modal-body">
+                                                                    <div class="modal-body text-left">
                                                                         <div class="form-group">
                                                                             <label for="edit_member_name">Name:</label>
                                                                             <input type="text" class="form-control"
