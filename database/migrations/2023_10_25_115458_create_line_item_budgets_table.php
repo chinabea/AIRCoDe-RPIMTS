@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('project_id');
             $table->string('name');
-            $table->integer('quantity');
+            $table->bigInteger('quantity');
             $table->decimal('unit_price', 10, 2);
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->timestamps();
