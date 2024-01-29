@@ -112,10 +112,10 @@ class ProjectController extends Controller
             $projects->project_name = $request->project_name;
             if ($request->has('draft_submit')) {
                 // Set the project status as 'draft'
-                $projects->status = 'draft';
+                $projects->status = 'Draft';
             } else {
                 // Set the project status as 'under evaluation' for the regular submission
-                $projects->status = 'under evaluation';
+                $projects->status = 'Under evaluation';
 
             }
             $projects->user_id = $userId;
@@ -132,8 +132,6 @@ class ProjectController extends Controller
             $projects->references = $request->references;
 
             $projects->save();
-
-            // Attach selected "Call for Proposals" to the project
 
             $researcher = User::find($userId);
             $researcherMail = $researcher->email;
@@ -179,30 +177,35 @@ class ProjectController extends Controller
             foreach ($lineItems as $item) {
                 $totalAllLineItems += $item->amount; // Adjust this based on your LineItemBudget structure
             }
+            
+            if ($projects->status === 'Draft') {
+                return redirect()->route('status.draft')->with('success', 'Research Draft Successfully!');
+            } elseif ($projects->status === 'Under Evaluation') {
+                return redirect()
+                ->route('submission-details.show', ['id' => $projects->id])
+                ->with([
+                    'success' => 'Research Proposal Successfully Submitted!',
+                    'id' => $projects->id,  // Add other variables as needed
+                    'projMembers' => $projMembers,
+                    'call_for_proposals' => $call_for_proposals,
+                    'revised' => $revised,
+                    'records' => $records,
+                    'reviewers' => $reviewers,
+                    'toreview' => $toreview,
+                    'reviewersss' => $reviewersss,
+                    'teamMembers' => $teamMembers,
+                    'lineItems' => $lineItems,
+                    'allLineItems' => $allLineItems,
+                    'files' => $files,
+                    'totalAllLineItems' => $totalAllLineItems,
+                    'members' => $members,
+                    'tasks' => $tasks,
+                    'data' => $data,
+                    'reviewerCommented' => $reviewerCommented,
+                    'assignedReviewers' => $assignedReviewers,
+                ]);
+            }
 
-            return redirect()
-            ->route('submission-details.show', ['id' => $projects->id])
-            ->with([
-                'success' => 'Research Proposal Successfully Submitted!',
-                'id' => $projects->id,  // Add other variables as needed
-                'projMembers' => $projMembers,
-                'call_for_proposals' => $call_for_proposals,
-                'revised' => $revised,
-                'records' => $records,
-                'reviewers' => $reviewers,
-                'toreview' => $toreview,
-                'reviewersss' => $reviewersss,
-                'teamMembers' => $teamMembers,
-                'lineItems' => $lineItems,
-                'allLineItems' => $allLineItems,
-                'files' => $files,
-                'totalAllLineItems' => $totalAllLineItems,
-                'members' => $members,
-                'tasks' => $tasks,
-                'data' => $data,
-                'reviewerCommented' => $reviewerCommented,
-                'assignedReviewers' => $assignedReviewers,
-            ]);
         } catch (Exception $e) {
         // Handle the exception here, you can log it or return an error response
         return redirect()->route('projects')->with('error', 'An error occurred while submitting the research proposal: ' . $e->getMessage());
@@ -269,41 +272,37 @@ class ProjectController extends Controller
             return redirect()->back()->with('error', 'An error occurred while editing the project: ' . $e->getMessage());
         }
     }
+
+    public function editDraft($id)
+    {
+        try {
+            $reviewers = User::where('role', 4)->get();
+            $projects = Project::findOrFail($id);
+            // $projectTeam = Member::findOrFail($id);
+
+            $records = Project::findOrFail($id);
+
+            return view('projects.edit', compact('projects', 'reviewers','records'));
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return redirect()->back()->with('error', 'An error occurred while editing the project: ' . $e->getMessage());
+        }
+    }
     
     public function updateDraft(Request $request, $id)
     {
         try {
             $userId = Auth::id();
             $record = Project::findOrFail($id);
-            $newVersionNumber = $record->versions()->max('version_number') + 1;
-    
-            $newVersion = new Version([
-                'user_id' => $userId,
-                'version_number' => $newVersionNumber,
-                'tracking_code' => $request->input('tracking_code'),
-                'project_name' => $request->input('project_name'),
-                'research_group' => $request->input('research_group'),
-                'introduction' => $request->input('introduction'),
-                'aims_and_objectives' => $request->input('aims_and_objectives'),
-                'background' => $request->input('background'),
-                'expected_research_contribution' => $request->input('expected_research_contribution'),
-                'proposed_methodology' => $request->input('proposed_methodology'),
-                'workplan' => $request->input('workplan'),
-                'resources' => $request->input('resources'),
-                'references' => $request->input('references'),
-                // 'total_budget' => $request->input('total_budget'),
-            ]);
-    
-            $record->versions()->save($newVersion);
     
             // Update the project record with the new values from the form
             $record->project_name = $request->input('project_name');
             if ($request->has('draft_submit')) {
                 // Set the project status as 'draft'
-                $record->status = 'draft';
+                $record->status = 'Draft';
             } else {
                 // Set the project status as 'under evaluation' for the regular submission
-                $record->status = 'under evaluation';
+                $record->status = 'Under Evaluation';
 
             }
             $record->research_group = $request->input('research_group');
@@ -318,8 +317,13 @@ class ProjectController extends Controller
     
             // Save the updated project record
             $record->save();
+
+            if ($record->status === 'Draft') {
+                return redirect()->route('status.draft')->with('success', 'Research Draft Successfully!');
+            } elseif ($record->status === 'Under Evaluation') {
+                    return redirect()->route('submission-details.show', ['id' => $record->id])->with(['success' => 'Research Proposal Successfully Submitted!','id' => $record->id,]);
+            }
     
-            return redirect()->back()->with('success', 'Research Proposal Successfully Updated!');
         } catch (Exception $e) {
             // Handle the exception, you can log it or return an error response
             return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
@@ -375,121 +379,13 @@ class ProjectController extends Controller
             return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
         }
     }
-    
-
-    // public function update(Request $request, $id)
-    // {
-    //     try{
-    //         dd($request->all());
-    //         $userId = Auth::id();
-    //         $record = Project::findOrFail($id);
-    //         $newVersionNumber = $record->versions()->max('version_number') + 1;
-
-    //         $newVersion = new Version([
-    //             'user_id' => $userId,
-    //             'version_number' => $newVersionNumber,
-    //             'tracking_code' => $request->input('tracking_code'),
-    //             'project_name' => $request->input('project_name'),
-    //             'research_group' => $request->input('research_group'),
-    //             'introduction' => $request->input('introduction'),
-    //             'aims_and_objectives' => $request->input('aims_and_objectives'),
-    //             'background' => $request->input('background'),
-    //             'expected_research_contribution' => $request->input('expected_research_contribution'),
-    //             'proposed_methodology' => $request->input('proposed_methodology'),
-    //             'workplan' => $request->input('workplan'),
-    //             'resources' => $request->input('resources'),
-    //             'references' => $request->input('references'),
-    //             // $table->decimal('total_budget', 10, 2)->default(0.00);
-    //         ]);
-
-    //         $record->versions()->save($newVersion);
-    //         // Update the project record with the new values from the form
-    //         $record->user_id = $request->input('user_id');
-    //         $record->project_name = $request->input('project_name');
-    //         $record->research_group = $request->input('research_group');
-    //         $record->introduction = $request->input('introduction');
-    //         $record->aims_and_objectives = $request->input('aims_and_objectives');
-    //         $record->background = $request->input('background');
-    //         $record->expected_research_contribution = $request->input('expected_research_contribution');
-    //         $record->proposed_methodology = $request->input('proposed_methodology');
-    //         $record->workplan = $request->input('workplan');
-    //         $record->resources = $request->input('resources');
-    //         $record->references = $request->input('references');
-
-    //         // Save the updated project record
-    //         $record->save();
-
-    //         return redirect()->back()->with('success', 'Research Proposal Successfully Updated!');
-    //     } catch (Exception $e) {
-    //         // Handle the exception, you can log it or return an error response
-    //         return redirect()->back()->with('error', 'An error occurred while updating the file: ' . $e->getMessage());
-    //     }
-    // }
-
-
-    // public function update(Request $request, $id)
-    // {
-    //     try {
-    //         // Find the original project record
-    //         $originalProject = Project::findOrFail($id);
-
-    //         // Get the latest revision for the original project
-    //         $latestRevision = Revision::where('original_proposal_id', $originalProject->id)
-    //             ->orderBy('version', 'desc')
-    //             ->first();
-
-    //         // If there is a latest revision, increment the version
-    //         $version = $latestRevision ? $latestRevision->version + 1 : 1;
-
-    //         // Save the new revision
-    //         $revision = new Revision();
-    //         $revision->original_proposal_id = $originalProject->id;
-    //         $revision->version = $version;
-    //         $revision->changes = 'Updated project details'; // You may want to customize this based on the actual changes
-    //         // Set other fields...
-    //         $revision->save();
-
-    //         // Update the original project record with the new values from the form
-    //         // $originalProject->update([
-    //         //     'project_name' => $request->input('project_name'),
-    //         //     'research_group' => $request->input('research_group'),
-    //         //     'introduction' => $request->input('introduction'),
-    //         //     'aims_and_objectives' => $request->input('aims_and_objectives'),
-    //         //     'background' => $request->input('background'),
-    //         //     'expected_research_contribution' => $request->input('expected_research_contribution'),
-    //         //     'proposed_methodology' => $request->input('proposed_methodology'),
-    //         //     'workplan' => $request->input('workplan'),
-    //         //     'resources' => $request->input('resources'),
-    //         //     'references' => $request->input('references'),
-    //         // ]);
-    //          // Update the project record with the new values from the form
-    //                 $originalProject->project_name = $request->input('project_name');
-    //                 $originalProject->research_group = $request->input('research_group');
-    //                 $originalProject->introduction = $request->input('introduction');
-    //                 $originalProject->aims_and_objectives = $request->input('aims_and_objectives');
-    //                 $originalProject->background = $request->input('background');
-    //                 $originalProject->expected_research_contribution = $request->input('expected_research_contribution');
-    //                 $originalProject->proposed_methodology = $request->input('proposed_methodology');
-    //                 $originalProject->workplan = $request->input('workplan');
-    //                 $originalProject->resources = $request->input('resources');
-    //                 $originalProject->references = $request->input('references');
-
-    //                 // Save the updated project record
-    //                 $originalProject->save();
-
-    //         return redirect()->back()->with('success', 'Research Proposal Successfully Updated!');
-    //     } catch (Exception $e) {
-    //         // Handle the exception, you can log it or return an error response
-    //         return redirect()->back()->with('error', 'An error occurred while updating the project: ' . $e->getMessage());
-    //     }
-    // }
 
     public function destroy($id)
     {
         try {
             $projects = Project::findOrFail($id);
             $projects->delete();
-            return redirect()->route('projects')->with('success', 'Reseach Proposal Successfully Deleted!');
+            return redirect()->back()->with('success', 'Reseach Proposal Successfully Deleted!');
         } catch (Exception $e) {
             // Handle the exception, you can log it or return an error response
             return redirect()->route('projects')->with('error', 'An error occurred while deleting the Reseach Proposal: ' . $e->getMessage());
