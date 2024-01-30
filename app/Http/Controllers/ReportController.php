@@ -48,7 +48,7 @@ class ReportController extends Controller
             return response()->json(['html' => $html]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
-        }
+        } 
     }
 
     public function generateRevisionReport($id)
