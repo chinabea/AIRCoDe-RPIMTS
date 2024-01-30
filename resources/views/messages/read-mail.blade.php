@@ -6,7 +6,7 @@
     </section>
 
     <div class="col-md-12">
-        <a href="{{ route('messages.mailbox') }}" class="btn btn-primary btn-block mb-3"><i class="fas fa-reply"></i>
+        <a href="{{ route('messages.mailbox') }}" class="btn btn-info btn-block mb-3"><i class="fas fa-reply"></i>
             Back
             to Inbox</a>
 
@@ -67,10 +67,10 @@
                         {!! $message->content !!}
                     </div>
 
-                    <button class="toggle-message-content btn btn-link" style="padding: 10px;"
+                    <!-- <button class="toggle-message-content btn btn-link" style="padding: 10px;"
                         data-message-id="{{ $message->id }}">
                         Show More
-                    </button>
+                    </button> -->
                 </div>
 
                 <hr>
@@ -108,7 +108,7 @@
 </div>
 
 
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
             var toggleButtons = document.querySelectorAll('.toggle-message-content');
 
@@ -131,7 +131,7 @@
                 });
             });
         });
-</script>
+</script> -->
 <script>
     $(document).ready(function(){
         $("#showReplyFormBtn").click(function(){

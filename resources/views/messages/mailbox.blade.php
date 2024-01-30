@@ -12,9 +12,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Inbox</h3>
-                    <!-- /.card-tools -->
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body p-0">
 
                     <div class="mailbox-controls float-left">
@@ -42,9 +40,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- @foreach ($conversations as $message) -->
+                                @foreach ($conversations as $message)
                                 @if ($latestMessage = $message->messages()->latest()->first())
-                                    <tr>
+                                    <tr class="clickable-row" data-href="{{ route('messages.read-mail', ['id' => $message->max_id]) }}">
                                         <td>
                                             <div class="icheck-primary d-flex justify-content-center">
                                                 <label for="check{{ $loop->iteration }}"></label>
@@ -53,20 +51,13 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="{{ route('messages.read-mail', ['id' => $message->max_id]) }}">
                                                 <div class="conversation">
-                                                    <!-- <h3>Conversation ID: {{ $message->conversation_number }}</h3> -->
-                                                    <!-- <strong>{{ $latestMessage->sender->name }}</strong> -->
-                                                    
                                                     @if ($latestMessage->sender->id == auth()->id())
-                                                        <!-- To:  -->
                                                         <strong>{{ $latestMessage->recipient->name }}</strong>
                                                     @else
-                                                        <!-- From:  -->
                                                         <strong>{{ $latestMessage->sender->name }}</strong>
                                                     @endif
                                                 </div>
-                                            </a>
                                         </td>
 
                                         <td class="mailbox-subject">
@@ -92,7 +83,7 @@
                                         </td>
                                     </tr>
                                     @endif
-                                <!-- @endforeach -->
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
