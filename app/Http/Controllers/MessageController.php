@@ -50,19 +50,6 @@ class MessageController extends Controller
             // Retrieve messages from the database and display them in the inbox view
             $user = auth()->user(); // Get the authenticated user
 
-            // Fetch the last message of each conversation with the same sender and recipient
-            // $conversations = Message::whereIn('id', function ($query) use ($user) {
-            //     $query->selectRaw('MAX(id)')
-            //         ->from('messages')
-            //         ->where('recipient_id', $user->id)
-            //         ->groupBy(['sender_id', 'recipient_id']);
-            // })->orderBy('created_at', 'asc')->get();
-
-            // $conversations = Message::where('sender_id', $user->id)
-            //     ->orWhere('recipient_id', $user->id)
-            //     ->with('messages')
-            //     ->get();
-
             $conversations = Message::select('conversation_number', DB::raw('MAX(id) as max_id'))
                 ->whereIn('id', function ($query) use ($user) {
                     $query->selectRaw('MAX(id)')
@@ -77,7 +64,7 @@ class MessageController extends Controller
                     );
                 })
                 ->groupBy('conversation_number')
-                ->orderBy('created_at', 'asc')
+                ->orderBy('created_at', 'desc')
                 ->get();
 
             return view('messages.mailbox', compact('conversations'))->with('success', 'Message sent successfully!');
