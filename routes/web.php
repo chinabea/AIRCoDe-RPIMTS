@@ -45,12 +45,13 @@ Route::get('/', [TrackController::class, 'track'])->name('welcome');
 Auth::routes();
 
 Route::middleware(['auth', 'cache'])->group(function (){ 
-
+    
+    Route::delete('/project/delete/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
     Route::get('/total-users', [UserController::class, 'showTotalUsers']);
     Route::get('/create-users', [UserController::class, 'create'])->name('users.create');
-    Route::post('/store-users', [UserController::class, 'store'])->name('users.store');
+    Route::post('/store-users', [UserController::class, 'store'])->name('users.store'); 
     Route::get('/show-users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/edit-users/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/edit-users/{id}', [UserController::class, 'update'])->name('users.update');
@@ -126,7 +127,6 @@ Route::prefix('reviewer')->middleware(['auth', 'cache', 'reviewer'])->group(func
 Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(function (){ 
 
     Route::get('/home', [DashboardController::class, 'countAll'])->name('director.home');
-    Route::delete('/project/delete/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('/project-teams', [MemberController::class, 'index'])->name('submission-details.project-teams.index');
     Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
     Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
@@ -153,6 +153,8 @@ Route::prefix('researcher')->middleware(['auth', 'cache', 'researcher'])->group(
     Route::get('/project/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/project/store', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::get('/project/editDraft/{id}', [ProjectController::class, 'editDraft'])->name('project.editDraft');
+    Route::put('/project/updateDraft/{id}', [ProjectController::class, 'updateDraft'])->name('project.updateDraft');
     Route::put('/project/update/{id}', [ProjectController::class, 'update'])->name('projects.update');
 
     Route::get('/project-teams/create', [MemberController::class, 'create'])->name('submission-details.project-teams.create');
@@ -193,7 +195,6 @@ Route::prefix('directorOrStaff')->middleware(['auth', 'directorOrStaff', 'cache'
     Route::get('/users', [UserController::class, 'index'])->name('users');
 
 });
-
 
 // register
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
