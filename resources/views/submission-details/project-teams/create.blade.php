@@ -19,7 +19,8 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="role">Role</label>
-                            <select class="form-control" id="role" name="role" required>
+                            <input type="text" class="form-control" id="role" name="role" required>
+                            <!-- <select class="form-control" id="role" name="role" required>
                                 <option disabled selected>Select Role</option>
                                 <option>Project Leader</option>
                                 <option>Database Designer</option>
@@ -27,7 +28,7 @@
                                 <option>UI Designer</option>
                                 <option>Quality Assurance</option>
                                 <option>Document Writer</option>
-                            </select>
+                            </select> -->
                         </div>
                     </div>
                     

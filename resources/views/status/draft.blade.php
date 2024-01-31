@@ -16,9 +16,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><i class="fa fa-book"></i> Draft</h3>
-                            <a href="{{ route('generate.for-revision.report') }}" class="btn bg-navy color-palette float-right btn-sm" style="background-color: #022A44;">
+                            <!-- <a href="{{ route('generate.for-revision.report') }}" class="btn bg-navy color-palette float-right btn-sm" style="background-color: #022A44;">
                                 <i class="fa fa-download"></i> Generate PDF
-                            </a>
+                            </a> -->
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-hover table-sm text-center">
@@ -44,7 +44,7 @@
                                         @php
                                             $counter++;
                                         @endphp
-                                        <tr>
+                                        <tr class="clickable-row" data-href="{{ route('submission-details.show', $project->id) }}">
                                             <td class="align-middle">{{ $counter }}</td>
                                             <td class="align-middle">{{ $project->tracking_code }}</td>
                                             <td class="align-middle">
@@ -69,13 +69,15 @@
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
 
-                                                <a href="{{ route('projects.edit', $project->id) }}" type="button" class="btn btn-warning">
+                                                <a href="{{ route('project.editDraft', $project->id) }}" type="button" class="btn btn-warning">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-
-                                                <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $project->id) }}')">
-                                                <i class="fas fa-trash"></i>
-                                                </button>
+                                                
+                                                @if (Auth::user()->role == 3)
+                                                    <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $project->id) }}')">
+                                                    <i class="fas fa-trash"></i>
+                                                    </button>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endif

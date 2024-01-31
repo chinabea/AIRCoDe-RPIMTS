@@ -15,9 +15,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><i class="nav-icon fas fa-file-signature"></i> Call for Proposals</h3>
+                            @if (Auth::user()->role==1)
                             <button type="button" class="btn bg-navy color-palette  float-right btn-sm mx-2" data-toggle="modal" data-target="#CallforProposal" data-backdrop="static" data-keyboard="false">
                               <i class="fas fa-plus"></i> Add Call for Proposals</button>
                             @include('transparency.call-for-proposals.create')
+                            @endif
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
@@ -30,7 +32,9 @@
                                         <th>End Date</th>
                                         <th>Status</th>
                                         <th>Remarks</th>
+                                        @if(Auth::user()->role==1)
                                         <th>Action(s)</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,6 +67,7 @@
                                           @endphp
                                         </td>
                                         <td class="align-middle">{{ $proposal->remarks }}</td>
+                                        @if(Auth::user()->role==1)
                                         <td class="align-middle">
                                             <div class="btn-group btn-sm" role="group" aria-label="Basic example">
 
@@ -131,6 +136,7 @@
                                             </button>
                                             </div>
                                         </td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -143,7 +149,9 @@
                                         <th>End Date</th>
                                         <th>Status</th>
                                         <th>Remarks</th>
+                                        @if(Auth::user()->role==1)
                                         <th>Action(s)</th>
+                                        @endif
                                     </tr>
                                 </tfoot>
                             </table>

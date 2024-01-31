@@ -15,7 +15,7 @@
               <div class="card-body">
               <div class="table-responsive">
                 @if (auth()->check() && auth()->user()->role == 3)
-                  <button type="button" class="btn btn-primary my-1" data-toggle="modal" data-target="#AccessRequest" data-backdrop="static" data-keyboard="false">Add Access Request</button>
+                  <button type="button" class="btn btn-sm btn-info my-1" data-toggle="modal" data-target="#AccessRequest" data-backdrop="static" data-keyboard="false"><i class="fas fa-plus"></i> Add Access Request</button>
                   @include('transparency.access-requests.create')
                 @endif
 
@@ -114,7 +114,7 @@
 
 
                                       <!-- Edit -->
-                                      <a href="{{ route('transparency.access-requests.edit', $requests->id) }}" type="button" class="btn btn-warning" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#editModal{{ $requests->id }}">
+                                      <a href="{{ route('transparency.access-requests.edit', $requests->id) }}" type="button" class="btn btn-sm btn-warning" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#editModal{{ $requests->id }}">
                                           <i class="fas fa-edit"> </i>
                                       </a>
                                       <div class="modal fade" id="editModal{{ $requests->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $requests->id }}Label" aria-hidden="true">
@@ -177,7 +177,7 @@
                                               </div>
                                             </div>
 
-                                        <button class="btn btn-danger m-0" onclick="confirmDelete('{{ route('transparency.access-requests.destroy', $requests->id) }}')">
+                                        <button class="btn btn-sm btn-danger m-0" onclick="confirmDelete('{{ route('transparency.access-requests.destroy', $requests->id) }}')">
                                         <i class="fas fa-trash"></i>
                                       </button>
                                     </div>

@@ -27,15 +27,8 @@
     <div class="col-md-12">
         <div class="callout callout-info">
             <h5><i class="fas fa-info"></i> Note: <small>Submission of other relevant requirements will end after the
-                    closure of Call for Proposal you have proposed the project with.</small></h5>
-            <!-- <div class="breaking-news">
-                <marquee behavior="scroll" direction="left" class="text-warning weight-text-bold">
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                    <span>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
-                    <span>Breaking news item 3.</span>
-                    <span>Breaking news item 4.</span>
-                </marquee>
-            </div> -->
+                closure of Call for Proposal you have proposed the project with.</small>
+            </h5>
         </div>
     </div>
     @endif
@@ -57,7 +50,7 @@
         @endforeach
 
         <!-- <div class="row">
-                        <div class="col-lg-6"> -->
+        <div class="col-lg-6"> -->
         @if (auth()->user()->role == 2)
         @php
         $assignedReviewersCount = 0;
@@ -91,8 +84,6 @@
                         <p>Total Assigned Reviewers: {{ $assignedReviewersCount }}</p>
                         <p>Reviewed Reviewers: {{ $reviewedReviewersCount }}</p>
                         <p>Remaining Reviewers: {{ $remainingReviewersCount }}</p> -->
-
-
         <div class="row">
 
             <div class="col-xl-8 col-lg-7">
@@ -411,12 +402,9 @@
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
-
             </div>
-
             <!-- Donut Chart -->
             <div class="col-xl-4 col-lg-5">
                 <div class="card shadow mb-4">
@@ -1423,22 +1411,7 @@
                                         </option>
                                     </select>
                                     @endif
-                                    @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                    @endforeach  
                                     @else
                                     <select class="form-control" id="review_decision" name="review_decision" required>
                                         <option value="">Select</option>
@@ -1671,7 +1644,7 @@
                                         <td>{{ $revision->created_at->format('F j, Y') }}</td>
                                         <td>
                                             <button type="button" class="preview-version btn btn-sm btn-warning"
-                                                data-bs-toggle="modal" data-target="#Version" data-backdrop="static"
+                                                data-toggle="modal" data-target="#Version" data-backdrop="static"
                                                 data-keyboard="false">
                                                 <i class="fas fa-eye"></i>
                                             </button>
@@ -1704,20 +1677,6 @@
                                         id="tracking_code" name="tracking_code" readonly>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="call_for_proposal_id">Select Call for Proposal</label>
-                                    <select id="call_for_proposal_id" name="call_for_proposal_id"
-                                        class="selectpicker form-control" data-live-search="true">
-                                        <option value="{{ $records->title }}" disabled selected>Select Call for Proposal</option>
-                                        @foreach ($call_for_proposals as $call_for_proposal)
-                                        @if ($call_for_proposal->start_date <= now() && $call_for_proposal->end_date >=
-                                            now())
-                                            <option value="{{ $call_for_proposal->id }}">{{ $call_for_proposal->title }}
-                                            </option>
-                                            @endif
-                                            @endforeach
-                                    </select>
-                                </div>
 
                                 <div class="mb-3">
                                     <label for="project_name" class="form-label">Project Name</label>
@@ -2616,49 +2575,20 @@
                                                                     <div class="modal-body text-left">
                                                                         <div class="form-group">
                                                                             <label for="edit_member_name">Name:</label>
-                                                                            <input type="text" class="form-control"
-                                                                                id="edit_member_name{{ $member->id }}"
-                                                                                name="member_name"
-                                                                                value="{{ $member->member_name }}"
-                                                                                required>
+                                                                            <input type="text" class="form-control" id="edit_member_name{{ $member->id }}" name="member_name" value="{{ $member->member_name }}" required>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="edit_role">Role:</label>
-                                                                            <select class="form-control"
-                                                                                id="edit_role{{ $member->id }}"
-                                                                                name="role" required>
+                                                                            <input type="text" class="form-control" id="role" name="role" value="{{ $member->role }}" required>
+                                                                            <!-- <select class="form-control" id="edit_role{{ $member->id }}" name="role" required>
                                                                                 <option disabled>Select Role</option>
-                                                                                <option{{ $member->role === 'Project
-                                                                                    Leader' ? ' selected' : '' }}>
-                                                                                    Project Leader</option>
-                                                                                    <option{{ $member->role ===
-                                                                                        'Database Designer' ? '
-                                                                                        selected' : '' }}>
-                                                                                        Database Designer</option>
-                                                                                        <option{{ $member->role ===
-                                                                                            'Network Designer' ? '
-                                                                                            selected' : '' }}>
-                                                                                            Network Designer</option>
-                                                                                            <option{{ $member->role ===
-                                                                                                'UI Designer' ? '
-                                                                                                selected' : '' }}>
-                                                                                                UI Designer</option>
-                                                                                                <option{{ $member->role
-                                                                                                    === 'Quality
-                                                                                                    Assurance' ? '
-                                                                                                    selected' : '' }}>
-                                                                                                    Quality Assurance
-                                                                                                    </option>
-                                                                                                    <option{{ $member->
-                                                                                                        role ===
-                                                                                                        'Document
-                                                                                                        Writer' ? '
-                                                                                                        selected' : ''
-                                                                                                        }}>
-                                                                                                        Document Writer
-                                                                                                        </option>
-
-                                                                            </select>
+                                                                                <option{{ $member->role === 'Project Leader' ? ' selected' : '' }}> Project Leader</option>
+                                                                                <option{{ $member->role === 'Database Designer' ? ' selected' : '' }}> Database Designer</option>
+                                                                                <option{{ $member->role === 'Network Designer' ? ' selected' : '' }}> Network Designer</option>
+                                                                                <option{{ $member->role === 'UI Designer' ? ' selected' : '' }}> UI Designer</option>
+                                                                                <option{{ $member->role === 'Quality Assurance' ? ' selected' : '' }}> Quality Assurance </option>
+                                                                                <option{{ $member-> role === 'Document Writer' ? ' selected' : '' }}> Document Writer </option>
+                                                                            </select> -->
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -2718,7 +2648,6 @@
                             </tbody>
                             @endforeach
                         </table>
-
                     </div>
                 </div>
             </div>
@@ -2739,6 +2668,4 @@
         }
     </script>
 
-
-
-    @endsection
+@endsection

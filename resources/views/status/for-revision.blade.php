@@ -29,6 +29,7 @@
                                         <div class="form-group">
                                             <p for="filter_type">Filter By:</p>
                                             <select class="form-control" name="filter_type" id="filter_type">
+                                                <option>Select</option>
                                                 <option value="year">Year</option>
                                                 <option value="date">Date Range</option>
                                             </select>
@@ -38,6 +39,7 @@
                                         <div class="form-group">
                                             <p for="year">Year:</p>
                                             <select class="form-control" name="year" id="year">
+                                                    <option>Year</option>
                                                 @for ($i = date('Y'); $i >= 2000; $i--)
                                                     <option value="{{ $i }}">{{ $i }}</option>
                                                 @endfor
@@ -58,7 +60,7 @@
                                     </div>
                                     <div class="col-lg-4 mt-5">
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-sm btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button>
+                                            <!-- <button type="button" class="btn btn-sm btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button> -->
                                             <button type="button" id="reset" class="btn btn-sm btn-warning"><i class="fa fa-sync"></i> Reset</button>
                                             <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
                                         </div>
@@ -75,7 +77,9 @@
                                         <th>Research Group</th>
                                         <th>Date Submitted</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        @if (Auth::user()->role == 1)
+                                        <th class="align-middle">Actions</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,7 +91,7 @@
                                             @php
                                                 $counter++;
                                             @endphp
-                                      <tr>
+                                        <tr class="clickable-row" data-href="{{ route('submission-details.show', $project->id) }}">
                                           <td class="align-middle">{{ $counter }}</td>
                                           <td class="align-middle">{{ $project->tracking_code }}</td>
                                           <td class="align-middle">
@@ -105,22 +109,14 @@
                                           <td class="align-middle">{!! $project->research_group !!}</td>
                                           <td class="align-middle">{{ $project->created_at->format('F j, Y') }}</td>
                                           <td class="align-middle"><span class="badge badge-warning text-sm">{{ $project->status }}</span></td>
+                                          @if (Auth::user()->role == 1)
                                           <td class="align-middle">
                                               <div class="btn-group align-middle" role="group" aria-label="Basic example">
-                                              <a href="{{ route('submission-details.show', $project->id) }}" type="button" class="btn btn-secondary">
-                                              <i class="fas fa-info-circle"></i>
-                                              </a>
-
-                                            @if(auth()->user() && auth()->user()->role === 3)
-                                                <a href="{{ route('projects.edit', $project->id) }}" type="button" class="btn btn-warning">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                            @endif
-                                            
-                                              <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $project->id) }}')">
-                                              <i class="fas fa-trash"></i>
-                                              </button>
+                                                <button class="btn btn-danger" onclick="confirmDelete('{{ route('projects.destroy', $project->id) }}')">
+                                                <i class="fas fa-trash"></i>
+                                                </button>
                                           </td>
+                                            @endif
                                       </tr>
                                       @endif
                                       @endforeach
@@ -134,7 +130,9 @@
                                         <th>Research Group</th>
                                         <th>Date Submitted</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        @if (Auth::user()->role == 1)
+                                        <th class="align-middle">Actions</th>
+                                        @endif
                                     </tr>
                                 </tfoot>
                             </table>

@@ -10,69 +10,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <!-- <div class="card-header"> -->
-                            <!-- <h3 class="card-title my-1"><i class="fa fa-book"></i> Submitted Projects</h3> -->
-
-                            <!-- <button type="button" class="btn bg-navy color-palette float-right btn-sm"
-                                data-toggle="modal" data-target="#projectsPdf" data-backdrop="static"
-                                data-keyboard="false">
-                                <i class="fas fa-file-pdf"></i> Export to PDF</button>  -->
-
                             @include('reports.report-options')
-                        <!-- </div> -->
                         <div class="card-body">
                             <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Submitted Projects</b></h3> <br><br>
-                            <!-- <form action="{{ route('generate.projects.report') }}" method="post" id="exportForm">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <label>Date:</label>
-                                        <input type="date" class="form-control" name="start_date" id="start_date">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <label>To</label>
-                                        <input type="date" class="form-control" name="end_date" id="end_date">
-                                    </div>
-                                    <div class="col-lg-6 mt-4">
-                                        <label></label>
-                                        <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i></button>
-                                        <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i></button>
-                                        <button type="submit" class="btn bg-navy color-palette"><i class="fa fa-file-pdf"></i> Generate PDF</button>
-                                    </div>
-                                </div>
-                            </form> -->
-                            <!-- <form action="{{ route('generate.projects.report') }}" method="post" id="exportForm">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p>Filter By:</p>
-                                        <select class="form-control form-control-sm" name="filter_type" id="filter_type">
-                                            <option value="year">Year</option>
-                                            <option value="date">Date Range</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3" id="yearFilter">
-                                        <p>Year:</p>
-                                        <select class="form-control form-control-sm" name="year" id="year">
-                                            @for ($i = date('Y'); $i >= 2000; $i--)
-                                                <option value="{{ $i }}">{{ $i }}</option>
-                                            @endfor
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3" id="dateFilter" style="display: none;">
-                                        <p>Start Date:</p>
-                                        <input type="date" class="form-control form-control-sm" name="start_date" id="start_date">
-                                        <p>To</p>
-                                        <input type="date" class="form-control form-control-sm" name="end_date" id="end_date">
-                                    </div>
-                                    <div class="col-lg-6 mt-4">
-                                        <label></label>
-                                        <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i></button>
-                                        <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i></button>
-                                        <button type="submit" class="btn bg-navy color-palette"><i class="fa fa-file-pdf"></i> Generate PDF</button>
-                                    </div>
-                                </div>
-                            </form> -->
                             <form action="{{ route('generate.projects.report') }}" method="post" id="exportForm">
                                 @csrf
                                 <div class="row">
@@ -80,6 +20,7 @@
                                         <div class="form-group">
                                             <p for="filter_type">Filter By:</p>
                                             <select class="form-control" name="filter_type" id="filter_type">
+                                                <option>Select</option>
                                                 <option value="year">Year</option>
                                                 <option value="date">Date Range</option>
                                             </select>
@@ -89,6 +30,7 @@
                                         <div class="form-group">
                                             <p for="year">Year:</p>
                                             <select class="form-control" name="year" id="year">
+                                                    <option>Year</option>
                                                 @for ($i = date('Y'); $i >= 2000; $i--)
                                                     <option value="{{ $i }}">{{ $i }}</option>
                                                 @endfor
@@ -109,7 +51,7 @@
                                     </div>
                                     <div class="col-lg-4 mt-5">
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-sm btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button>
+                                            <!-- <button type="button" class="btn btn-sm btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button> -->
                                             <button type="button" id="reset" class="btn btn-sm btn-warning"><i class="fa fa-sync"></i> Reset</button>
                                             <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
                                         </div>
@@ -127,7 +69,9 @@
                                         <th class="align-middle">Research Group</th>
                                         <th class="align-middle">Date Submitted</th>
                                         <th class="align-middle">Status</th>
+                                        @if (Auth::user()->role == 1)
                                         <th class="align-middle">Actions</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -141,7 +85,7 @@
                                     @php
                                     $counter++;
                                     @endphp
-                                    <tr>
+                                    <tr class="clickable-row" data-href="{{ route('submission-details.show', $record->id) }}">
                                         <td class="align-middle">{{ $counter }}</td>
                                         <td class="align-middle">{{ $record->tracking_code }}</td>
                                         <td class="align-middle">
@@ -152,11 +96,7 @@
                                             @endforeach
                                         </td>
                                         <td class="align-middle">{{ $record->user->name }}</td>
-                                        <td class="align-middle">
-                                            <!-- <a href="{{ route('submission-details.show', $record->id) }}"> -->
-                                            {{ $record->project_name }}
-                                            <!-- </a> -->
-                                        </td>
+                                        <td class="align-middle">{{ $record->project_name }}</td>
                                         <td class="align-middle">{!! $record->research_group !!}</td>
                                         <td class="align-middle">{{ $record->created_at->format('F j, Y') }}
                                         </td>
@@ -177,49 +117,16 @@
                                             @endif
 
                                         </td>
+                                        @if (Auth::user()->role == 1)
                                         <td class="align-middle">
                                             <div class="btn-group align-middle" role="group" aria-label="Basic example">
-                                                <a href="{{ route('submission-details.show', $record->id) }}"
-                                                    type="button" class="btn btn-secondary">
-                                                    <i class="fas fa-info-circle"></i>
-                                                </a>
-
-
-                                                {{-- MAKE THIS AS ARCHIVE --}}
-                                                <button class="btn btn-danger"
-                                                    onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">
-                                                    <i class="fas fa-trash"> </i>
-                                                </button>
-
-                                                <!-- <button class="btn btn-primary" onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">
-                                                                <i class="fas fa-eye"> </i>
-                                                            </button> -->
-
-
-                                                <!-- <a href="#" class="btn btn-secondary btn-sm">
-                                                                <i class="fas fa-ellipsis-h"></i>
-                                                            </a> -->
-
-
-                                                <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                    aria-labelledby="dropdownMenuLink">
-                                                    <div class="dropdown-header">Dropdown Header:</div>
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Something else
-                                                        here</a>
-                                                </div>
-                                                <button type="button" class="btn btn-secondary btn-sm"
-                                                    data-toggle="dropdown">
-                                                    <i class="fas fa-ellipsis-h"></i>
-                                                </button> -->
-
-
+                                                    <button class="btn btn-danger"
+                                                        onclick="confirmDelete('{{ route('projects.destroy', $record->id) }}')">
+                                                        <i class="fas fa-trash"> </i>
+                                                    </button>
                                             </div>
-
-
                                         </td>
+                                        @endif
                                     </tr>
                                     @endif
                                     @endforeach
@@ -234,8 +141,9 @@
                                         <th class="align-middle">Research Group</th>
                                         <th class="align-middle">Date Submitted</th>
                                         <th class="align-middle">Status</th>
-                                        <!-- <th class="align-middle">Versions</th> -->
+                                        @if (Auth::user()->role == 1)
                                         <th class="align-middle">Actions</th>
+                                        @endif
                                     </tr>
                                 </tfoot>
                             </table>
