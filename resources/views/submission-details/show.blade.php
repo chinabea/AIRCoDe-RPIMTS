@@ -2274,7 +2274,7 @@
                                             <i class="fas fa-edit mr-2"></i>Accepted with Revision
                                         </button>
                                         <button value="Disapproved" type="submit" id="status" name="status"
-                                            class="btn btn-sm btn-danger">
+                                            class="btn btn-danger">
                                             <i class="fas fa-times-circle mr-2"></i>Rejected
                                         </button>
                                     </div>

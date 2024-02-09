@@ -210,6 +210,13 @@
                         <p>Messages</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('access-requests') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'access-requests' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-key"></i>
+                        <p>Access Request</p>
+                    </a>
+                </li>
                 <li class="nav-header">SETTINGS</li>
                 <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">

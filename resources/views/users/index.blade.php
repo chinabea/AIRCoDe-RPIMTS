@@ -50,10 +50,10 @@
                                         </td>
                                         <td class="align-middle">
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <a href="{{ route('users.show', $user->id) }}" type="button"
+                                                <!-- <a href="{{ route('users.show', $user->id) }}" type="button"
                                                     class="btn btn-secondary">
                                                     <i class="fas fa-info-circle"></i>
-                                                </a>
+                                                </a> -->
                                                 <a href="{{ route('users.edit', $user->id) }}" type="button"
                                                     class="btn btn-warning">
                                                     <i class="fas fa-edit"></i>

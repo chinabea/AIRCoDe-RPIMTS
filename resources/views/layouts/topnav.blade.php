@@ -68,15 +68,20 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @if(Auth::user()->role == 4)
-                      Reviewer, {{ Auth::user()->name }} - {{ Auth::user()->email }}
+                      Reviewer, {{ Auth::user()->name }} 
+                      <!-- - {{ Auth::user()->email }} -->
                     @elseif(Auth::user()->role == 3) 
-                       Researcher, {{ Auth::user()->name }} - {{ Auth::user()->email }}
+                       Researcher, {{ Auth::user()->name }} 
+                       <!-- - {{ Auth::user()->email }} -->
                     @elseif(Auth::user()->role == 2)
-                        Staff, {{ Auth::user()->name }} - {{ Auth::user()->email }}
+                        Staff, {{ Auth::user()->name }} 
+                        <!-- - {{ Auth::user()->email }} -->
                     @elseif(Auth::user()->role == 1)
-                        Director, {{ Auth::user()->name }} - {{ Auth::user()->email }}
+                        Director, {{ Auth::user()->name }} 
+                        <!-- - {{ Auth::user()->email }} -->
                     @else
-                        {{ Auth::user()->name }} - {{ Auth::user()->email }}
+                        {{ Auth::user()->name }} 
+                        <!-- - {{ Auth::user()->email }} -->
                     @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
