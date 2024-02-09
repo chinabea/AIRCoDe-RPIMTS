@@ -520,36 +520,25 @@
             </div>
           </div>
         </div>
-        <!-- <div class="card card-default">
-          <div class="card-header">
-              <h3 class="card-title">
-                  <i class="fas fa-bullhorn"></i>
-                  Review Deadline
-              </h3>
-          </div> -->
 
-          <div class="card">
-          <div class="card-body">
-              <div class="callout callout-danger">
-                <b>
-                  <i class="fas fa-bullhorn"></i> Deadline Ends: Please make a review!</b><br><hr>
-                @foreach($exceededDeadlines as $deadline)
-                    @if(Auth::check() && Auth::user()->id === $deadline->user_id)
-                        @if(\Carbon\Carbon::parse($deadline->deadline)->isPast() && $deadline->contribution_to_knowledge_decision === null)
-                            <p class="item blinking-alert alert-link">
-                              <a class="text-danger" href="{{ route('review.for-review-project', ['id' => $deadline->project_id]) }}">{{$deadline->project->project_name}}</a> -
-                              {{ \Carbon\Carbon::parse($deadline->deadline)->format('F j, Y') }}
-                            </p>
-                        @endif
-                    @endif
-                @endforeach
-              </div>
+            <div class="callout callout-danger">
+              <b><i class="fas fa-bullhorn"></i> Deadline Ends: Please make a review!</b><br><hr>
+              @foreach($exceededDeadlines as $deadline)
+                @if(Auth::check() && Auth::user()->id === $deadline->user_id)
+                  @if(\Carbon\Carbon::parse($deadline->deadline)->isPast() && $deadline->contribution_to_knowledge_decision === null)
+                    <p class="item blinking-alert alert-link">
+                      <a class="text-danger" href="{{ route('review.for-review-project', ['id' => $deadline->project_id]) }}" style="text-decoration: none; color: inherit;">
+                        {{$deadline->project->project_name}}</a> -
+                      {{ \Carbon\Carbon::parse($deadline->deadline)->format('F j, Y') }}
+                    </p>
+                  @endif
+                @endif
+              @endforeach
+            </div>
           </div>
-        </div>
       </div>
     </section>
   </div>
-
 
 @endif
 @endsection
