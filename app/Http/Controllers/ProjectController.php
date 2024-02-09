@@ -115,7 +115,7 @@ class ProjectController extends Controller
                 $projects->status = 'Draft';
             } else {
                 // Set the project status as 'under evaluation' for the regular submission
-                $projects->status = 'Under evaluation';
+                $projects->status = 'Under Evaluation';
 
             }
             $projects->user_id = $userId;
