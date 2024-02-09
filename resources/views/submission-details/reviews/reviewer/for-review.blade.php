@@ -43,9 +43,9 @@
                                                     <tr>
                                                         <td>{{$counter}}</td>
                                                         <td>{{$record->user->name}}</td>
-                                                        <td><a href="{{ route('review.for-review-project', $record->id) }}">{{$record->project->project_name}}</a></td>
+                                                        <td><a href="{{ route('review.for-review-project', ['id' => $record->project_id]) }}">{{$record->project->project_name}}</a></td>
                                                         <td>{{$record->deadline}}</td>
-                                                        <td><span class="badge badge-danger">For Review</span></td>
+                                                        <td><span class="badge badge-danger">For Review</span></td> 
                                                     </tr>
                                                     @endif
                                                 @endif
