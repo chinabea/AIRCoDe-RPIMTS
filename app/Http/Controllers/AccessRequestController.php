@@ -226,7 +226,7 @@ class AccessRequestController extends Controller
             //     'date_approved' => ['nullable', 'date', 'after_or_equal:today'],
             // ];
 
-            $this->validate($request, $rules);
+            // $this->validate($request, $rules);
 
             // If validation passes, update only the "date_approved" field
             $accessRequest = AccessRequest::findOrFail($id);
