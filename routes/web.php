@@ -93,6 +93,7 @@ Route::middleware(['auth', 'cache'])->group(function (){
 
     Route::post('/access-requests/{id}/approve', [AccessRequestController::class, 'approve'])->name('access-requests.approve');
     Route::post('/access-requests/{id}/decline', [AccessRequestController::class, 'decline'])->name('access-requests.decline');
+    Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
 
     // Messages
     Route::get('/messages/indexx', [MessageController::class, 'index'])->name('messages.index');
@@ -128,7 +129,6 @@ Route::prefix('director')->middleware(['auth', 'cache', 'director'])->group(func
 
     Route::get('/home', [DashboardController::class, 'countAll'])->name('director.home');
     Route::get('/project-teams', [MemberController::class, 'index'])->name('submission-details.project-teams.index');
-    Route::delete('/access-request/delete/{id}', [AccessRequestController::class, 'destroy'])->name('transparency.access-requests.destroy');
     Route::put('/reviews/review-decision/{id}', [ReviewController::class, 'reviewDecision'])->name('reviews.review-decision.store');
     Route::get('/select-reviewers', [ReviewController::class, 'select'])->name('submission-details.reviews.select');
     Route::post('/store/project/reviewers', [ReviewController::class, 'store'])->name('store.project.reviewers');
@@ -192,6 +192,9 @@ Route::prefix('directorOrStaff')->middleware(['auth', 'directorOrStaff', 'cache'
     Route::put('/call-for-proposals/edit/{id}', [CallForProposalController::class, 'update'])->name('transparency.call-for-proposals.update');
     Route::delete('/call-for-proposals/delete/{id}', [CallForProposalController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
     Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
+    Route::put('/access-requests/{id}', [AccessRequestController::class, 'approve'])->name('requests.approve');
+
+
     Route::get('/users', [UserController::class, 'index'])->name('users');
 
 });
