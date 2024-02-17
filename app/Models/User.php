@@ -69,6 +69,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Project::class, 'project_reviewers', 'reviewer_id', 'project_id');
     }
+
     public function aprojects()
     {
         return $this->hasMany(ProjectsModel::class);
@@ -85,6 +86,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(ReviewDecisionModel::class);
     }
+
     public function reviews()
     {
         return $this->hasMany(ReviewModel::class);
@@ -93,6 +95,11 @@ class User extends Authenticatable
     public function submittedProjects()
     {
         return $this->hasMany(ProjectsModel::class, 'user_id');
+    }
+
+    public function accessRequest()
+    {
+        return $this->hasMany(AccessRequest::class);
     }
     
     // public function projects()
