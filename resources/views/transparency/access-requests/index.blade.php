@@ -19,7 +19,7 @@
                   @include('transparency.access-requests.create')
                 @endif
 
-                <table id="example1" class="table table-bordered table-hover table-sm">
+                <table id="example1" class="table table-bordered table-hover table-sm text-center">
                     <thead>
                     <tr>
                       <th>#</th>
@@ -37,20 +37,21 @@
                             $counter = 0;
                         @endphp
                             @foreach($records as $requests)
+                            @if(auth()->user()->role == 1 || auth()->user()->role == 2 || $requests->user_id === auth()->user()->id)  
                             @php
                                 $counter++;
                             @endphp
                             <tr>
                                 <td class="align-middle">{{ $counter }}</td>
-                                <td class="align-middle">{{ auth()->user()->name }}</td>
+                                <td class="align-middle">{{ $requests->user->name }}</td> 
                                 <td class="align-middle">
-                                  @if(auth()->user()->role == 1)
+                                  @if( $requests->user->role == 1 )
                                       Director
-                                  @elseif(auth()->user()->role == 2)
+                                  @elseif( $requests->user->role == 2 )
                                       Staff
-                                  @elseif(auth()->user()->role == 3)
+                                  @elseif( $requests->user->role == 3 )
                                       Researcher
-                                  @elseif(auth()->user()->role == 4)
+                                  @elseif( $requests->user->role == 4 )
                                       Reviewer
                                   @endif
                                 </td>
@@ -103,23 +104,13 @@
 
                                   @endif 
 
-
-
-
-
-
-
-
-
-
-
                                       <!-- Edit -->
                                       <a href="{{ route('transparency.access-requests.edit', $requests->id) }}" type="button" class="btn btn-sm btn-warning" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#editModal{{ $requests->id }}">
                                           <i class="fas fa-edit"> </i>
                                       </a>
                                       <div class="modal fade" id="editModal{{ $requests->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal{{ $requests->id }}Label" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
+                                            <div class="modal-content text-left">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="editModal{{ $requests->id }}Label">Edit Request</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -141,6 +132,7 @@
                                                         @endif" readonly>
 
                                                       <br>
+                                                      @if( $requests->user_id === auth()->user()->id)  
                                                       <label for="inputText">Date of access</label>
                                                       <input type="date" class="form-control"  id="date_of_access" name="date_of_access" value="{{ $requests->date_of_access }}" required>
                                                       <br>
@@ -158,6 +150,7 @@
                                                       <label for="">Purpose of Access</label>
                                                       <input type="text" class="form-control" id="purpose_of_access" name="purpose_of_access" value="{{ $requests->purpose_of_access }}" required>
                                                       <br>
+                                                      @endif
                                                       @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                                                       <label for="text">Status</label>
                                                       <input type="text" class="form-control" id="status" name="status" value="{{ $requests->status }}">
@@ -176,13 +169,19 @@
                                                 </div>
                                               </div>
                                             </div>
-
                                         <button class="btn btn-sm btn-danger m-0" onclick="confirmDelete('{{ route('transparency.access-requests.destroy', $requests->id) }}')">
-                                        <i class="fas fa-trash"></i>
-                                      </button>
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        <form method="POST" action="{{ route('requests.approve', ['id' => $requests->id]) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="approved">
+                                            <button type="submit">Approve</button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
+                            @endif
                             @endforeach
                     </tbody>
                 </table>
