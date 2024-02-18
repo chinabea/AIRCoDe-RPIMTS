@@ -112,7 +112,7 @@ class ResearchProposalSubmissionNotification extends Notification
         if ($notifiable instanceof User && $notifiable->isDirector()) {
             // Admin notification content
             return new DatabaseMessage([
-                'message' => 'A New Research Project Submitted.' 
+                'message' => 'A New Research Proposal has been Submitted.' 
                 // . $this->projects->user_id . ', with the title "' . $this->projects->projname . '".'
                 ,
                 // 'icon' => 'fa-solid fa-circle-check fa-lg text-white',
@@ -128,8 +128,8 @@ class ResearchProposalSubmissionNotification extends Notification
         } if ($notifiable instanceof User && $notifiable->isResearcher()) {
             // User notification content
             return [
-                'message' => 'Research Submitted Successfully.',
-                'icon' => 'fas fa-check mr-2 mx-auto',
+                'message' => 'A New Research Proposal has been Submitted.',
+                'icon' => 'fas fa-envelope fa-sm',
                 // fa-solid fa-circle-check fa-lg text-white
                 'action_url' => route('submission-details.show', [
                     'id' => $this->projectId,
