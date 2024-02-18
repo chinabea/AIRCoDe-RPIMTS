@@ -192,8 +192,8 @@ Route::prefix('directorOrStaff')->middleware(['auth', 'directorOrStaff', 'cache'
     Route::put('/call-for-proposals/edit/{id}', [CallForProposalController::class, 'update'])->name('transparency.call-for-proposals.update');
     Route::delete('/call-for-proposals/delete/{id}', [CallForProposalController::class, 'destroy'])->name('transparency.call-for-proposals.destroy');
     Route::put('/projects/{id}/update-status', [StatusController::class, 'updateStatus'])->name('projects.updateStatus');
-    Route::put('/access-requests/{id}', [AccessRequestController::class, 'approve'])->name('requests.approve');
-
+    Route::put('/requests/{id}/approved', [AccessRequestController::class, 'approved'])->name('requests.approved');
+    Route::put('/requests/{id}/disapproved', [AccessRequestController::class, 'disapproved'])->name('requests.disapproved');
 
     Route::get('/users', [UserController::class, 'index'])->name('users');
 
