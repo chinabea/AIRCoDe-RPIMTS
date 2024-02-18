@@ -12,7 +12,16 @@ use App\Models\AccessRequest;
 class AccessRequestController extends Controller
 {   
 
-    public function approve(Request $request, $id)
+    public function disapproved(Request $request, $id)
+    {
+        $accessRequest = AccessRequest::findOrFail($id);
+        $accessRequest->update(['status' => $request->status]);
+    
+        return redirect()->back()->with('success', 'Status updated successfully.');
+    }
+    
+
+    public function approved(Request $request, $id)
     {
         $accessRequest = AccessRequest::findOrFail($id);
         $accessRequest->update(['status' => $request->status]);
