@@ -35,7 +35,7 @@
                                     <div class="form-group">
                                         <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required>
                                             <option value="">Role</option>
-                                            <option value="1">Director</option>
+                                            <!-- <option value="1">Director</option> -->
                                             <option value="2">Staff</option>
                                             <option value="3">Researcher</option>
                                             <option value="4">Reviewer</option>
