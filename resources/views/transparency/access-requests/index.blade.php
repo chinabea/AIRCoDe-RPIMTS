@@ -105,6 +105,7 @@
                                   @endif 
 
                                       <!-- Edit -->
+                                      @if( $requests->user_id === auth()->user()->id)  
                                       <a href="{{ route('transparency.access-requests.edit', $requests->id) }}" type="button" class="btn btn-sm btn-warning" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#editModal{{ $requests->id }}">
                                           <i class="fas fa-edit"> </i>
                                       </a>
@@ -131,8 +132,7 @@
                                                         @elseif(auth()->user()->role == 4)Reviewer
                                                         @endif" readonly>
 
-                                                      <br>
-                                                      @if( $requests->user_id === auth()->user()->id)  
+                                                      <br> 
                                                       <label for="inputText">Date of access</label>
                                                       <input type="date" class="form-control"  id="date_of_access" name="date_of_access" value="{{ $requests->date_of_access }}" required>
                                                       <br>
@@ -150,14 +150,10 @@
                                                       <label for="">Purpose of Access</label>
                                                       <input type="text" class="form-control" id="purpose_of_access" name="purpose_of_access" value="{{ $requests->purpose_of_access }}" required>
                                                       <br>
-                                                      @endif
                                                       @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                                                       <label for="text">Status</label>
                                                       <input type="text" class="form-control" id="status" name="status" value="{{ $requests->status }}">
                                                       <br>
-                                                      <!-- @error('date_approved')
-                                                      <div class="alert alert-danger">{{ $message }}</div>
-                                                      @enderror -->
                                                       @endif
 
                                                       <div class="modal-footer">
@@ -169,15 +165,46 @@
                                                 </div>
                                               </div>
                                             </div>
+                                            @endif
                                         <button class="btn btn-sm btn-danger m-0" onclick="confirmDelete('{{ route('transparency.access-requests.destroy', $requests->id) }}')">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                        <form method="POST" action="{{ route('requests.approve', ['id' => $requests->id]) }}">
+
+                                        <a href="{{ route('requests.approved', ['id' => $requests->id]) }}" class="btn btn-sm btn-info" onclick="event.preventDefault(); document.getElementById('approve-form-{{ $requests->id }}').submit();">
+                                            <i class="fas fa-check-circle"></i>
+                                        </a>
+
+                                        <form id="approve-form-{{ $requests->id }}" action="{{ route('requests.approved', ['id' => $requests->id]) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="Approved">
+                                        </form>
+
+                                        <a href="{{ route('requests.disapproved', ['id' => $requests->id]) }}" class="btn btn-sm btn-secondary" onclick="event.preventDefault(); document.getElementById('disapprove-form-{{ $requests->id }}').submit();">
+                                            <i class="fas fa-times-circle"></i>
+                                        </a>
+
+                                        <form id="disapprove-form-{{ $requests->id }}" action="{{ route('requests.disapproved', ['id' => $requests->id]) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="Disapproved">
+                                        </form>
+                                        <!-- <form method="POST" action="{{ route('requests.approved', ['id' => $requests->id]) }}">
                                             @csrf
                                             @method('PUT')
                                             <input type="hidden" name="status" value="approved">
-                                            <button type="submit">Approve</button>
+                                            <button class="btn btn-sm btn-info">
+                                                <i class="fas fa-times-circle"></i>
+                                            </button>
                                         </form>
+                                        <form method="POST" action="{{ route('requests.disapproved', ['id' => $requests->id]) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="disapproved">
+                                            <button class="btn btn-sm btn-secondary">
+                                                <i class="fas fa-times-circle"></i>
+                                            </button>
+                                        </form> -->
                                     </div>
                                 </td>
                             </tr>
