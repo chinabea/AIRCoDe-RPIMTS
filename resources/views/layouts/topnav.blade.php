@@ -18,7 +18,6 @@
 
     <ul class="navbar-nav ml-auto">
 
-
       <li class="nav-item dropdown">
         <a class="nav-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{{ route('notifications') }}">
           <i class="far fa-bell"></i>
@@ -26,28 +25,80 @@
               <span class="badge badge-warning navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
           @endif
         </a>
+        
+        <style>
+        .icon-circle {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        </style>
+
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         @if(auth()->check())
-          <a href="{{ route('notifications') }}" class="dropdown-item dropdown-header btn">Notifications ({{ auth()->user()->unreadNotifications->count() }})</a>
+          <a href="{{ route('notifications') }}" class="dropdown-item dropdown-header btn bg-navy">Notifications ({{ auth()->user()->unreadNotifications->count() }})</a>
         @endif
         <div class="dropdown-divider"></div>
         <div style="max-height: 300px; overflow-y: auto;">
+        
+          <!-- Message Start -->
+          <!-- <a href="#" class="dropdown-item">
+            <div class="media">
+            <span class="mr-3 my-2 icon-circle bg-info d-flex justify-content-center align-items-center">
+                <i class="fas fa-envelope fa-sm"></i>
+            </span>
+              <div class="media-body">
+                <p class="text-sm text-muted"> December 22, 2001</p>
+                <p class="text-sm text-bold">A monthly report is ready to is download!</p>
+              </div>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div> -->
+          <!-- Message End -->
+
         @if (Auth::check())
-        @foreach (Auth()->user()->notifications->sortByDesc('created_at') as $notification)
-        <a href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}" class="dropdown-item">
-          <i class="{{ $notification->data['icon'] }}"></i> {{ $notification->data['message'] }}
-          <span class="float-right text-muted text-xs">{{ $notification->created_at->diffForHumans() }}</span>
+        @foreach (Auth::user()->unreadNotifications as $notification)
+        <!-- Message Start -->
+        <a class="dropdown-item bg-light" href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}">
+          <div class="media">
+          <span class="mr-3 icon-circle bg-info d-flex justify-content-center align-items-center">
+              <i class="{{ $notification->data['icon'] }}"></i> 
+          </span>
+            <div class="media-body">
+              <p class="text-sm text-bold"><i class="fas fa-clock"></i> {{ $notification->created_at->diffForHumans() }}</p>
+              <p class="text-sm text-bold">{{ $notification->data['message'] }}</p>
+            </div>
+          </div>
         </a>
         <div class="dropdown-divider"></div>
+        <!-- Message End -->
         @endforeach
         @foreach (Auth::user()->readNotifications as $notification)
-        <a href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}" class="dropdown-item read-notification">
+        <a href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}" class="dropdown-item bg-light ">
+          <div class="media">
+          <span class="mr-3 my-2 icon-circle bg-info d-flex justify-content-center align-items-center">
+              <i class="{{ $notification->data['icon'] }}"></i> 
+          </span>
+            <div class="media-body">
+              <p class="text-sm text-muted"><i class="fas fa-clock"></i> {{ $notification->created_at->diffForHumans() }}</p>
+              <p class="text-sm">{{ $notification->data['message'] }}</p>
+            </div>
+          </div>
+        </a>
+        <div class="dropdown-divider"></div>
+
+
+        <!-- <a href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}" class="dropdown-item read-notification">
           <i class="{{ $notification->data['icon'] }}"></i> {{ $notification->data['message'] }}
           <span class="float-right text-muted text-xs">{{ $notification->created_at->diffForHumans() }}</span>
         </a>
-        <div class="dropdown-divider"></div>
+        <div class="dropdown-divider"></div> -->
         @endforeach
         @endif
+
+
       </div>
       <div class="dropdown-divider" style="margin-top: 8px; margin-bottom: 8px;"></div>
       <form method="POST" action="{{ route('mark-all-as-read') }}">
