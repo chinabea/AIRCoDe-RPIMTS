@@ -13,51 +13,111 @@
                             @include('reports.report-options')
                         <div class="card-body">
                             <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Submitted Projects</b></h3> <br><br>
-                            <form action="{{ route('generate.projects.report') }}" method="post" id="exportForm">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="form-group">
-                                            <p for="filter_type">Filter By:</p>
-                                            <select class="form-control" name="filter_type" id="filter_type">
-                                                <option>Select</option>
-                                                <option value="year">Year</option>
-                                                <option value="date">Date Range</option>
-                                            </select>
-                                        </div>
+
+
+
+
+                        <!-- <div class="row">
+                            {{-- START OF FILTER --}}
+                            <div class="col-lg-3">
+                                <label>Course:</label>
+                                <select class="form-select" id="course" name="course">
+                                    <option disabled selected>Select Course</option>
+
+                                    <option value="">All</option>
+
+                                    <option disabled>College of Arts and Science</option>
+                                    <option value="ABE" {{ request('course') == 'ABE' ? 'selected' : '' }}>ABE</option>
+                                    <option value="BSM" {{ request('course') == 'BSM' ? 'selected' : '' }}>BSM</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <label>Particular Request/s:</label>
+                                <select class="form-select" id="particular_request" name="particular_request">
+                                    <option disabled selected>Select a Request</option>
+
+                                    <option value="">All</option>
+
+                                    <option value="Official Transcript of Records"
+                                        {{ request('particular_request') == 'Official Transcript of Records' ? 'selected' : '' }}>
+                                        Official Transcript of Records</option>
+                                </select>
+                            </div> -->
+                            <!-- {{-- END OF FILTER --}}
+                            <div class="col-lg-3">
+                                <label>Date:</label>
+                                <input type="text" class="form-control" placeholder="Start" id="date1"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-lg-3">
+                                <label>To</label>
+                                <input type="text" class="form-control" placeholder="End" id="date2"
+                                    autocomplete="off" />
+                            </div>
+                            <div class="col-lg-6 mt-4">
+                                <label></label>
+                                <button type="button" class="btn btn-primary" id="btn_search"><i
+                                        class="fa fa-search"></i></button>
+                                <button type="button" id="reset" class="btn btn-warning"><i
+                                        class="fa fa-sync"></i></button>
+                                <button type="button" id="generate_pdf" class="btn btn-success"><i
+                                        class="fa fa-file-pdf"></i> Generate PDF</button>
+                            </div>
+                        </div> -->
+                        <form action="{{ route('generate.projects.report') }}" method="post" id="exportForm">
+                            @csrf
+                            <div class="row align-items-center">
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label>Filter by:</label>
+                                        <select class="form-control" name="filter_type" id="filter_type">
+                                            <option>Select</option>
+                                            <option value="year">Year</option>
+                                            <option value="date">Date Range</option>
+                                        </select>
                                     </div>
-                                    <div class="col-lg-2" id="yearFilter">
-                                        <div class="form-group">
-                                            <p for="year">Year:</p>
-                                            <select class="form-control" name="year" id="year">
-                                                    <option>Year</option>
-                                                @for ($i = date('Y'); $i >= 2000; $i--)
-                                                    <option value="{{ $i }}">{{ $i }}</option>
-                                                @endfor
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="col-lg-2" id="yearFilter">
+                                    <div class="form-group">
+                                        <label for="year">Year:</label>
+                                        <select class="form-control" name="year" id="year">
+                                                <option>Year</option>
+                                            @for ($i = date('Y'); $i >= 2000; $i--)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
                                     </div>
-                                    <div class="col-lg-4" id="dateFilter" style="display: none;">
-                                        <div class="form-group row">
-                                            <div class="col-md-6">
-                                                <p for="start_date">Start Date:</p>
-                                                <input type="date" class="form-control" name="start_date" id="start_date">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p for="end_date">To:</p>
-                                                <input type="date" class="form-control" name="end_date" id="end_date">
-                                            </div>
+                                </div>
+                                <div class="col-lg-4" id="dateFilter" style="display: none;">
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="start_date">Start Date:</label>
+                                            <input type="date" class="form-control" name="start_date" id="start_date">
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 mt-5">
-                                        <div class="form-group">
-                                            <!-- <button type="button" class="btn btn-sm btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button> -->
-                                            <button type="button" id="reset" class="btn btn-sm btn-warning"><i class="fa fa-sync"></i> Reset</button>
-                                            <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                        <div class="col-md-6">
+                                            <label for="end_date">To:</label>
+                                            <input type="date" class="form-control" name="end_date" id="end_date">
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Actions</label>
+                                        <div>
+                                            <!-- <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i> </button> -->
+                                            <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i> </button>
+                                            <button type="submit" class="btn btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+
+
+
+
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>
@@ -173,5 +233,6 @@
     toastr.error('{{ session('error') }}');
 </script>
 @endif
+
 
 @endsection

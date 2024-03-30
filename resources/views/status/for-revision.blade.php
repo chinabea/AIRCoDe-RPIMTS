@@ -22,51 +22,54 @@
                         <!-- </div> -->
                         <div class="card-body">
                             <h3 class="card-title"><i class="fa fa-book"></i> For Revision</h3><br><br>
-                            <form action="{{ route('generate.for-revision.report') }}" method="post" id="exportForm">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="form-group">
-                                            <p for="filter_type">Filter By:</p>
-                                            <select class="form-control" name="filter_type" id="filter_type">
-                                                <option>Select</option>
-                                                <option value="year">Year</option>
-                                                <option value="date">Date Range</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2" id="yearFilter">
-                                        <div class="form-group">
-                                            <p for="year">Year:</p>
-                                            <select class="form-control" name="year" id="year">
-                                                    <option>Year</option>
-                                                @for ($i = date('Y'); $i >= 2000; $i--)
-                                                    <option value="{{ $i }}">{{ $i }}</option>
-                                                @endfor
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4" id="dateFilter" style="display: none;">
-                                        <div class="form-group row">
-                                            <div class="col-md-6">
-                                                <p for="start_date">Start Date:</p>
-                                                <input type="date" class="form-control" name="start_date" id="start_date">
+                                <form action="{{ route('generate.for-revision.report') }}" method="post" id="exportForm">
+                                        @csrf
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label>Filter by:</label>
+                                                    <select class="form-control" name="filter_type" id="filter_type">
+                                                        <option>Select</option>
+                                                        <option value="year">Year</option>
+                                                        <option value="date">Date Range</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p for="end_date">To:</p>
-                                                <input type="date" class="form-control" name="end_date" id="end_date">
+                                            <div class="col-lg-2" id="yearFilter">
+                                                <div class="form-group">
+                                                    <label for="year">Year:</label>
+                                                    <select class="form-control" name="year" id="year">
+                                                            <option>Year</option>
+                                                        @for ($i = date('Y'); $i >= 2000; $i--)
+                                                            <option value="{{ $i }}">{{ $i }}</option>
+                                                        @endfor
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4" id="dateFilter" style="display: none;">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <label for="start_date">Start Date:</label>
+                                                        <input type="date" class="form-control" name="start_date" id="start_date">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="end_date">To:</label>
+                                                        <input type="date" class="form-control" name="end_date" id="end_date">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Actions</label>
+                                                    <div>
+                                                        <!-- <button type="button" class="btn btn-primary" id="btn_search"><i class="fa fa-search"></i> </button> -->
+                                                        <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i> </button>
+                                                        <button type="submit" class="btn btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 mt-5">
-                                        <div class="form-group">
-                                            <!-- <button type="button" class="btn btn-sm btn-primary" id="btn_search"><i class="fa fa-search"></i> Search</button> -->
-                                            <button type="button" id="reset" class="btn btn-sm btn-warning"><i class="fa fa-sync"></i> Reset</button>
-                                            <button type="submit" class="btn btn-sm btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                    </form>
                             <table id="example1" class="table table-bordered table-hover text-center table-sm">
                                 <thead>
                                     <tr>
