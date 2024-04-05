@@ -173,52 +173,6 @@
                 location.reload();
 
             });
-            
-            // $("#btn_search").on("click", function() {
-            //     // Get the values of filter_type, start_date, end_date, and year
-            //     var filterType = $("#filter_type").val();
-            //     var startDate = $("#start_date").val();
-            //     var endDate = $("#end_date").val();
-            //     var year = $("#year").val();
-
-            //     // Check if dates are empty
-            //     if (filterType === "date" && (startDate === "" || endDate === "")) {
-            //         alert("Please enter Date 'From' and 'To' before submit");
-            //     } else if (filterType === "year" && year === "") {
-            //         alert("Please select a Year before submit");
-            //     } else {
-            //         // Clear existing data
-            //         $('#load_data').empty();
-
-            //         // Display loading message
-            //         let loader = $('<tr><td colspan="6"><center>Searching....</center></td></tr>');
-            //         loader.appendTo('#load_data');
-
-            //         // Make AJAX request to Laravel controller
-            //         $.ajax({
-            //             url: "{{ route('search.projects') }}",
-            //             type: "GET",
-            //             data: {
-            //                 _token: "{{ csrf_token() }}",
-            //                 filter_type: filterType,
-            //                 start_date: startDate,
-            //                 end_date: endDate,
-            //                 year: year
-            //             },
-            //             success: function(data) {
-            //                 // Handle the success response
-            //                 console.log("Search success:", data);
-
-            //                 // Update the search results section with the received data
-            //                 $("#load_data").html(data.html);
-            //             },
-            //             error: function(error) {
-            //                 // Handle errors if any
-            //                 console.error("Search error:", error);
-            //             }
-            //         });
-            //     }
-            // });
 
         });
     </script>
@@ -241,14 +195,33 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            $('tbody').on('click', 'tr.clickable-row', function () {
-                var url = $(this).data('href');
-                if (url) {
-                    window.location = url;
+            var isTextSelected = false;
+
+            $('body').on('mousedown', function (event) {
+                isTextSelected = false;
+            });
+
+            $('body').on('mouseup', function (event) {
+                isTextSelected = (window.getSelection().toString() !== '');
+            });
+
+            $('tbody').on('click', 'tr.clickable-row', function (event) {
+                // Check if the event target is not an input field to avoid handling clicks on inputs
+                if (!$(event.target).is('input')) {
+                    // Prevent right-click default behavior
+                    if (event.button === 2 || isTextSelected) {
+                        event.preventDefault();
+                        return;
+                    }
+                    
+                    var url = $(this).data('href');
+                    if (url) {
+                        window.location = url;
+                    }
                 }
             });
         });
     </script>
-        
+    
 </body>
 </html>
