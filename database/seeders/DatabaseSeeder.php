@@ -24,8 +24,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        // \App\Models\User::factory(8)->create();
-
         $users = [
             [
                 'name' => 'Quail Lester',
@@ -236,7 +234,7 @@ class DatabaseSeeder extends Seeder
                 'user_id' => '4',
                 'call_for_proposal_id' => '3',
                 'project_name' => 'Improving Education Access',
-                'status' => 'Deferred',
+                'status' => 'Disapproved',
                 'research_group' => 'Education and Community Development',
                 'introduction' => 'This research aims to improve access to quality education in underserved communities.',
                 'aims_and_objectives' => 'The primary objective is to increase literacy rates and enhance educational opportunities for children in remote areas.',
@@ -1148,7 +1146,7 @@ class DatabaseSeeder extends Seeder
 
         $accessrequests = [
             [
-                'user_id' => 1,
+                'user_id' => 3,
                 'date_of_access' => '2023-12-01',
                 'time_of_access' => '08:00:00',
                 'purpose_of_access' => 'Testing access request',
@@ -1168,9 +1166,6 @@ class DatabaseSeeder extends Seeder
         foreach ($accessrequests as $accessrequestData) {
             AccessRequest::create($accessrequestData);
         }
-
-
-
 
 
     }
