@@ -166,29 +166,26 @@
                                               </div>
                                             </div>
                                             @endif
-                                        <button class="btn btn-sm btn-danger m-0" onclick="confirmDelete('{{ route('transparency.access-requests.destroy', $requests->id) }}')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
 
                                         <a href="{{ route('requests.approved', ['id' => $requests->id]) }}" class="btn btn-sm btn-info" onclick="event.preventDefault(); document.getElementById('approve-form-{{ $requests->id }}').submit();">
                                             <i class="fas fa-check-circle"></i>
                                         </a>
-
                                         <form id="approve-form-{{ $requests->id }}" action="{{ route('requests.approved', ['id' => $requests->id]) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('PUT')
                                             <input type="hidden" name="status" value="Approved">
                                         </form>
-
                                         <a href="{{ route('requests.disapproved', ['id' => $requests->id]) }}" class="btn btn-sm btn-secondary" onclick="event.preventDefault(); document.getElementById('disapprove-form-{{ $requests->id }}').submit();">
                                             <i class="fas fa-times-circle"></i>
                                         </a>
-
                                         <form id="disapprove-form-{{ $requests->id }}" action="{{ route('requests.disapproved', ['id' => $requests->id]) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('PUT')
                                             <input type="hidden" name="status" value="Disapproved">
                                         </form>
+                                        <button class="btn btn-sm btn-danger m-0" onclick="confirmDelete('{{ route('transparency.access-requests.destroy', $requests->id) }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                         <!-- <form method="POST" action="{{ route('requests.approved', ['id' => $requests->id]) }}">
                                             @csrf
                                             @method('PUT')
