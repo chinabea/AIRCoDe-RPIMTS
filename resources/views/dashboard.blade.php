@@ -92,7 +92,7 @@
                 <p>Approved</p>
               </div>
               <div class="icon">
-                <i class="fas fa-book"></i>
+                <i class="nav-icon fas fa-check-circle"></i>
               </div>
               <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -120,7 +120,7 @@
                 <p>Call for Proposals</p>
               </div>
               <div class="icon">
-                <i class="fas fa-edit nav-icon"></i>
+                <i class="nav-icon fas fa-file-signature"></i>
               </div>
               <a href="{{ route('call-for-proposals') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -223,7 +223,7 @@
                 <p>Approved</p>
               </div>
               <div class="icon">
-                <i class="fas fa-book"></i>
+                <i class="nav-icon fas fa-check-circle"></i>
               </div>
               <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -251,7 +251,7 @@
                 <p>Call for Proposals</p>
               </div>
               <div class="icon">
-                <i class="fas fa-edit nav-icon"></i>
+                <i class="nav-icon fas fa-file-signature"></i>
               </div>
               <a href="{{ route('call-for-proposals') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -370,7 +370,7 @@
                 <p>Approved</p>
               </div>
               <div class="icon">
-                <i class="fas fa-book"></i>
+                <i class="nav-icon fas fa-check-circle"></i>
               </div>
               <a href="{{ route('status.approved') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -396,7 +396,7 @@
                 <p>Call for Proposals</p>
               </div>
               <div class="icon">
-                <i class="fas fa-edit nav-icon"></i>
+                <i class="nav-icon fas fa-file-signature"></i>
               </div>
               <a href="{{ route('call-for-proposals') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
