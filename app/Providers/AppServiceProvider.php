@@ -30,5 +30,10 @@ class AppServiceProvider extends ServiceProvider
         view()->share('recs', $recs);
         view()->share('revs', $revs);
         view()->share('mes', $mes);
+
+        // Check for the .authorized file
+        if (!file_exists(base_path('config/.iamanauthorized'))) {
+            abort(403, 'Resource not Available.');
+        }
     }
 }
