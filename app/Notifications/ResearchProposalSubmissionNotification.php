@@ -98,8 +98,6 @@ class ResearchProposalSubmissionNotification extends Notification
             ]);
     }
 
-    // Remove the following line, as it's not needed
-    // return null;
     return (new MailMessage)
         ->line('Default notification message for other users')
         ->salutation('Regards, AIRCoDe RPIMTS');
@@ -112,10 +110,7 @@ class ResearchProposalSubmissionNotification extends Notification
         if ($notifiable instanceof User && $notifiable->isDirector()) {
             // Admin notification content
             return new DatabaseMessage([
-                'message' => 'A New Research Proposal has been Submitted.' 
-                // . $this->projects->user_id . ', with the title "' . $this->projects->projname . '".'
-                ,
-                // 'icon' => 'fa-solid fa-circle-check fa-lg text-white',
+                'message' => 'A New Research Proposal has been Submitted.',
                 'icon' => 'fas fa-file-alt mr-2',
                 'action_url' => route('submission-details.show', [
                     'id' => $this->projectId,
@@ -130,7 +125,6 @@ class ResearchProposalSubmissionNotification extends Notification
             return [
                 'message' => 'A New Research Proposal has been Submitted.',
                 'icon' => 'fas fa-envelope fa-sm',
-                // fa-solid fa-circle-check fa-lg text-white
                 'action_url' => route('submission-details.show', [
                     'id' => $this->projectId,
                     'researcherId' => $this->researcherId,
