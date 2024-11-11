@@ -2620,8 +2620,8 @@
 
                         <div id="reviewer-form" class="mt-4" style="display: none;">
                             <button type="button" class="btn btn-primary my-2" data-toggle="modal"
-                                data-target="#ReviewerModal" data-backdrop="static" data-keyboard="false">Select
-                                Reviewer</button>
+                                data-target="#ReviewerModal" data-backdrop="static" data-keyboard="false">
+                                Select Reviewer</button>
                             @include('submission-details.reviews.select-reviewer')
                         </div>
                         <table id="example4" class="table table-hover table-bordered table-sm text-center">

@@ -46,7 +46,7 @@
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('js/tinymce/skins/ui/oxide/skin.min.css') }}">
 
-<!-- Bootstrap Select CSS https://cdn.jsdelivr.net/npm//dist/css/bootstrap-select.min.css -->
+<!-- Bootstrap Select CSS https://cdn.jsdelivr.net/npm/dist/css/bootstrap-select.min.css -->
 <link href="{{ asset('cdn/bootstrap-select@1.13.18.min.css') }}" rel="stylesheet">
 <!-- jQuery https://code.jquery.com/jquery-3.5.1.min.js -->
 <script src="{{ asset('cdn/jquery-3.5.1.min.js') }}"></script>
